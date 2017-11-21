@@ -1,0 +1,369 @@
+@layout('layouts/master')
+ <link href="/assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/plugins/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/plugins/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/plugins/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/plugins/datatables/dataTables.colVis.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/plugins/datatables/fixedColumns.dataTables.min.css" rel="stylesheet" type="text/css"/>
+@section('scripts')
+        <script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="/assets/plugins/datatables/dataTables.bootstrap.js"></script>
+        <script src="/assets/js/dist/Persona/lista.min.js"></script>
+        <script src="/assets/plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.min.js"></script>
+        <!-- Jquery Ui js -->
+        <script src="/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+         <script src="/assets/plugins/jquery.stepy/jquery.stepy.min.js" type="text/javascript"></script>
+
+         <script src="/assets/plugins/moment/moment.js"></script>
+         <script src="/assets/plugins/timepicker/bootstrap-timepicker.js"></script>
+         <script src="/assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+         <script src="/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+         <script src="/assets/plugins/clockpicker/js/bootstrap-clockpicker.min.js"></script>
+         <script src="/assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+        <!--wizard initialization-->
+       
+
+        <script>
+            $(document).ready(
+                ()=>{
+                    jQuery('#date-range').datepicker({
+                        toggleActive: true  
+                    });
+                    $('.tooltip-hover').tooltipster();
+
+                     $("#procesos").sortable({
+                            connectWith: ".taskList",
+                            placeholder: 'task-placeholder',
+                            forcePlaceholderSize: true,
+                            update: function (event, ui) {
+
+                                var todo = $("#procesos").sortable("toArray");
+                            }
+                     }).disableSelection();
+                    
+                    $.fn.stepy.defaults.legend = false;
+                    $.fn.stepy.defaults.transition = 'fade';
+                    $.fn.stepy.defaults.duration = 200;
+                    $.fn.stepy.defaults.backLabel = '<i class="mdi mdi-arrow-left-bold"></i> Atrás';
+                    $.fn.stepy.defaults.nextLabel = 'Siguiente <i class="mdi mdi-arrow-right-bold"></i>';
+                    $.fn.stepy.defaults.submit = 'Crear';
+                    
+                    $("#wizard-clickable").stepy({
+                        next: function(index) {
+                            console.log('Going to step: ' + index);
+                        },
+                        back: function(index) {
+                            console.log('Returning to step: ' + index);
+                        },
+                        finish: function() {
+                            console.log('Submit canceled.');
+                            return false;
+                        }
+                    });
+                    $('.stepy-navigator').find('.button-next').addClass('btn btn-primary waves-effect waves-light');
+                    $('.stepy-step').find('.button-back').addClass('btn btn-default waves-effect pull-left');
+                }
+            );
+        </script>
+@endsection
+@section('content')
+<div class="row">
+        <div class="col-sm-12">
+            <div class="card-box">
+            <button type="button" class="pull-right btn btn-default btn-sm waves-effect waves-light"  data-toggle="modal" data-target="#proceso-modal">Nuevo Proceso</button>
+                <h4 class="m-t-0 header-title">
+                    <b>Procesos activos</b>
+                </h4>
+                    <p class="text-muted font-14 m-b-30">
+                        Procesos de acreditación activos.
+                    </p>
+                      
+                                    <ul class="sortable-list taskList list-unstyled" id="procesos">
+                                     @each(proceso in procesos)
+                                        <li class="{{proceso.class}}" id="task{{proceso.id}}">
+                                            
+                                            <h3><b>{{ proceso.nombre }}</b></h3>
+                                            <div class="clearfix"></div>
+                                            {{proceso.descripcion}}
+                                            <div class="m-t-20">
+                                                <p class="pull-right m-b-0 m-t-10">
+                                                    <button type="button" class="btn btn-icon btn-primary btn-xs waves-effect btn-default tooltip-hover" onclick="window.location.href='/Acreditacion/Evaluacion/index'" title="Evaluar" data-toggle="modal" data-target="#actividades-modal"> <i class="fa fa-files-o"></i> </button>
+                                                    <button type="button" class="btn btn-icon btn-primary btn-xs waves-effect btn-default tooltip-hover" title="Editar Proceso" data-toggle="modal" data-target="#instrumentos-modal"> <i class="fa fa-pencil"></i> </button>
+                                                    <button type="button" class="btn btn-icon btn-primary btn-xs waves-effect btn-default tooltip-hover" onclick="window.location.href='/Persona/PerfilCargo/index'" title="Perfiles" data-toggle="modal" data-target="#actividades-modal"> <i class="fa fa-first-order"></i> </button>
+                                                    <button type="button" class="btn btn-icon btn-danger btn-xs waves-effect btn-default tooltip-hover" title="Eliminar Proceso"> <i class="fa fa-trash-o"></i> </button>
+                                                    
+                                                </p>
+                                                <p class="m-b-0"><a href="" class="text-muted"><img src="/assets/images/acreditacion/procesos/{{proceso.image}}"  class="thumb-sm img-circle m-r-10"> <span class="font-bold font-secondary"></span></a> </p>
+                                            </div>
+                                        </li>
+                                    @endeach
+                                    
+                                    
+                                        
+                                       
+                                    </ul>
+                                
+                         
+                    
+            </div> 
+        </div>
+    </div>
+
+        <div id="instrumentos-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="full-width-modalLabel" aria-hidden="true" style="display: none;">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <div class="modal-body p-t-0">
+
+                                        <div class="p-10 task-detail">
+                                            <div class="dropdown pull-right">
+                                                <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
+                                                    <i class="zmdi zmdi-more-vert"></i>
+                                                </a>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li><a href="#">Action</a></li>
+                                                    <li><a href="#">Another action</a></li>
+                                                    <li><a href="#">Something else here</a></li>
+                                                    <li class="divider"></li>
+                                                    <li><a href="#">Separated link</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="media m-t-0 m-b-20">
+                                                <div class="media-left">
+                                                    <a href="#"> <img class="media-object img-circle" alt="64x64" src="/assets/images/users/avatar-2.jpg" style="width: 48px; height: 48px;"> </a>
+                                                </div>
+                                                <div class="media-body">
+
+                                                    <h4 class="media-heading m-b-5">Michael Zenaty</h4>
+                                                    <span class="label label-danger">Urgent</span>
+                                                </div>
+                                            </div>
+
+                                            <h4 class="font-600 m-b-20">Code HTML email template for welcome email</h4>
+
+                                            <p class="text-muted">
+                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates, illo, iste
+                                                itaque voluptas corrupti ratione reprehenderit magni similique? Tempore, quos
+                                                delectus asperiores libero voluptas quod perferendis! Voluptate, quod illo
+                                                rerum? Lorem ipsum dolor sit amet.
+                                            </p>
+
+                                            <ul class="list-inline task-dates m-b-0 m-t-20">
+                                                <li>
+                                                    <h5 class="font-600 m-b-5">Start Date</h5>
+                                                    <p> 22 March 2017 <small class="text-muted">1:00 PM</small></p>
+                                                </li>
+
+                                                <li>
+                                                    <h5 class="font-600 m-b-5">Due Date</h5>
+                                                    <p> 17 April 2017 <small class="text-muted">12:00 PM</small></p>
+                                                </li>
+                                            </ul>
+                                            <div class="clearfix"></div>
+
+                                            <div class="task-tags m-t-20">
+                                                <h5 class="font-600">Tags</h5>
+                                                <input type="text" value="Amsterdam,Washington,Sydney" data-role="tagsinput" placeholder="add tags"/>
+                                            </div>
+
+                                            <div class="assign-team m-t-30">
+                                                <h5 class="font-600 m-b-5">Followers</h5>
+                                                <div>
+                                                    <a href="#"> <img class="img-circle thumb-sm" alt="64x64" src="/assets/images/users/avatar-2.jpg"> </a>
+                                                    <a href="#"> <img class="img-circle thumb-sm" alt="64x64" src="/assets/images/users/avatar-3.jpg"> </a>
+                                                    <a href="#"> <img class="img-circle thumb-sm" alt="64x64" src="/assets/images/users/avatar-5.jpg"> </a>
+                                                    <a href="#"> <img class="img-circle thumb-sm" alt="64x64" src="/assets/images/users/avatar-8.jpg"> </a>
+                                                </div>
+                                            </div>
+
+                                            <div class="attached-files m-t-30">
+                                                <h5 class="font-600">Attached Files </h5>
+                                                <div class="files-list">
+                                                    <div class="file-box">
+                                                        <a href=""><img src="/assets/images/attached-files/img-1.jpg" class="img-responsive img-thumbnail" alt="attached-img"></a>
+                                                        <p class="font-13 m-b-5 text-muted"><small>File one</small></p>
+                                                    </div>
+                                                    <div class="file-box">
+                                                        <a href=""><img src="/assets/images/attached-files/img-2.jpg" class="img-responsive img-thumbnail" alt="attached-img"></a>
+                                                        <p class="font-13 m-b-5 text-muted"><small>Attached-2</small></p>
+                                                    </div>
+                                                    <div class="file-box">
+                                                        <a href=""><img src="/assets/images/attached-files/img-3.png" class="img-responsive img-thumbnail" alt="attached-img"></a>
+                                                        <p class="font-13 m-b-5 text-muted"><small>Dribbble shot</small></p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-success waves-effect waves-light">Save Changes</button>
+                                        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancel</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->
+        
+
+        <!--MODAL NUEVA COMPETENCIA-->
+         <div id="proceso-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="full-width-modalLabel" aria-hidden="true" style="display: none;">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                   
+                                    <div class="modal-body p-t-0">
+                                        <br />
+                                         <div class="row">
+                            <div class="col-md-12">
+                                <div class="card-box">
+                                    <h4 class="m-t-0 header-title">Nuevo Proceso</h4>
+                                    <p class="text-muted m-b-30 font-13">
+                                        Nuevo Proceso
+                                    </p>
+
+                                    <form id="wizard-clickable">
+                                        <fieldset title="1">
+                                            <legend>Información Básica</legend>
+
+                                            <div class="row m-t-20">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="phonenumber1">Nombre</label>
+                                                        <input type="text" class="form-control" id="phonenumber1" placeholder="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                            <label for="phonenumber1"></label>
+                                                        <div class="checkbox">
+                                                            <input id="checkbox0" type="checkbox">
+                                                            <label for="checkbox0">
+                                                                Continuo
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row m-t-20">
+                                                <div class="col-sm-12">
+                                                        <div class="form-group">
+                                                                <label>Rango de Fechas del Proceso</label>
+                                                                <div>
+                                                                    <div class="input-daterange input-group" id="date-range">
+                                                                        <input type="text" class="form-control" name="start" />
+                                                                        <span class="input-group-addon bg-custom text-white b-0">al</span>
+                                                                        <input type="text" class="form-control" name="end" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+
+                                        <!--<fieldset title="2">
+                                            <legend>Actividades Clave</legend>
+
+                                            <div class="row m-t-20">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="phonenumber1">Actividad</label>
+                                                    <textarea class="form-control" rows="5" id="aboutme1"></textarea>
+                                                        <button type="button" class="btn btn-icon waves-effect waves-light btn-success"><i class="fa fa-plus-circle"></i><span>Agregar</span></button>
+                                                    </div>
+                                                </div>
+                                            <div class="col-sm-6">
+                                                <div class="clearfix"></div>
+                                                <ul class="sortable-list taskList list-unstyled" id="actividades">
+                                                    <li class="task-info" id="actividad1">
+                                                            <div class="clearfix"></div>
+                                                            akhdahjdajhksdhjagdjhagdjhasg
+                                                            <div class="m-t-20">
+                                                                <p class="pull-right m-b-0 m-t-10">
+                                                                    <button type="button" class="btn btn-icon btn-danger btn-xs waves-effect btn-default tooltip-hover" title="Eliminar actividad"> <i class="fa fa-trash-o"></i> </button>
+                                                                    
+                                                                </p>
+                                                                <p class="m-b-0"><a href="" class="text-muted"><img src="" alt="task-user" class="thumb-sm img-circle m-r-10"> <span class="font-bold font-secondary"></span></a> </p>
+                                                            </div>
+                                                        </li>
+                                                </ul>
+                                                </div>
+                                               
+                                            </div>
+                                        </fieldset>
+
+                                        <fieldset title="3">
+                                            <legend>Criterios</legend>
+
+                                            <div class="row m-t-20">
+                                                <div class="col-sm-6">
+
+                                                    <div class="form-group">
+                                                        <label>Facebook</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="mdi mdi-facebook"></i></span>
+                                                            <input type="text" class="form-control" placeholder="Facebook url">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Linkdin</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="mdi mdi-linkedin"></i></span>
+                                                            <input type="text" class="form-control" placeholder="Linkdin url">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Instagram</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="mdi mdi-instagram"></i></span>
+                                                            <input type="text" class="form-control" placeholder="Instagram url">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Twitter</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="mdi mdi-twitter"></i></span>
+                                                            <input type="text" class="form-control" placeholder="Twitter url">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Skype</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="mdi mdi-skype"></i></span>
+                                                            <input type="text" class="form-control" placeholder="Skype url">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Pinterest</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="mdi mdi-pinterest"></i></span>
+                                                            <input type="text" class="form-control" placeholder="Pinterest url">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>-->
+
+                                        <button type="submit" class="btn btn-primary stepy-finish">Crear</button>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                                    </div>
+                                   
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->
+        <!--FIN MODAL NUEVA COMPETENCIA-->
+
+@endsection
