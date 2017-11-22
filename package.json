@@ -8,7 +8,7 @@
     "start": "webpack && nodemon --watch app --watch bootstrap --watch config --watch .env --watch client -x",
     "test": "node ace test",
     "build": "webpack",
-    "webpack":"webpack && nodemon --watch app --watch bootstrap --watch config --watch .env --watch client -x"
+    "webpack": "webpack && nodemon --watch app --watch bootstrap --watch config --watch .env --watch client -x"
   },
   "keywords": [
     "adonisjs",
