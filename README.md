@@ -30,7 +30,7 @@ npm install -g @adonisjs/cli
 
 Para iniciar el proyecto ejecutar 
 ```bash
-npm install -g @adonisjs/cli
+npm start
 ```
 
 #Archivo .env
