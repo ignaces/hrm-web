@@ -41,7 +41,8 @@
     "gulp-less": "^3.3.2",
     "nodemon": "^1.11.0",
     "standard": "^10.0.1",
-    "webpack": "^3.8.1"
+    "webpack": "^3.8.1",
+    "webpack-stream": "^4.0.0"
   },
   "autoload": {
     "App": "./app"

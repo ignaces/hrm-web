@@ -1,11 +1,11 @@
 /*
 Template Name: Adminox Dashboard
-Author: CoderThemes
+Author: CoderThemess
 Email: coderthemes@gmail.com
 File: Menu
 
 */
-/* Metis Menu css */
+/* Metis Menu css d*/
 .metismenu .arrow {
   float: right;
   line-height: 1.42857;
@@ -50,7 +50,7 @@ File: Menu
   background-color: #29303a;
 }
 .navbar-default {
-  background-color: #64c5b1;
+  background-color: #fc841b;
   border-radius: 0;
   border: none;
   margin-bottom: 0;
@@ -73,7 +73,7 @@ File: Menu
   display: none;
 }
 .logo span span {
-  color: #64c5b1;
+  color: #fc841b;
 }
 .user-box a.user-link {
   padding-top: 17px !important;
@@ -118,7 +118,7 @@ File: Menu
   top: 70px;
 }
 .side-menu .waves-effect .waves-ripple {
-  background-color: rgba(100, 197, 177, 0.4);
+  background-color: rgba(252, 132, 27, 0.4);
 }
 .enlarged .side-menu {
   position: absolute;
@@ -137,7 +137,7 @@ File: Menu
   display: inline-block;
   height: 70px;
   width: 60px;
-  background-color: #64c5b1;
+  background-color: #fc841b;
   font-size: 16px;
 }
 #sidebar-menu > ul > li > a {
@@ -374,7 +374,7 @@ File: Menu
 .enlarged #wrapper .topbar .topbar-left .logo i {
   display: block;
   line-height: 70px;
-  color: #64c5b1 !important;
+  color: #fc841b !important;
 }
 .enlarged #wrapper #sidebar-menu > ul > li:hover > a.open :after {
   display: none;
@@ -403,13 +403,13 @@ File: Menu
 }
 .app-search .form-control,
 .app-search .form-control:focus {
-  border: 1px solid #43b39c;
+  border: 1px solid #e16b03;
   font-size: 13px;
   height: 34px;
   color: #ffffff;
   padding: 7px 40px 7px 20px;
   margin: 19px 15px 0 5px;
-  background: #43b39c;
+  background: #e16b03;
   box-shadow: none;
   border-radius: 30px;
   width: 190px;
@@ -544,7 +544,7 @@ body.enlarged.bg-transparent {
   display: block;
 }
 .megamenu-list li a:hover {
-  color: #64c5b1;
+  color: #fc841b;
 }
 .megamenu-list li a i {
   width: 20px;
