@@ -5,10 +5,10 @@
   "description": "The fullstack application boilerplate for Adonisjs",
   "main": "server.js",
   "scripts": {
-    "start": "webpack && nodemon --watch app --watch bootstrap --watch config --watch .env --watch client -x",
+    "start": "gulp",
     "test": "node ace test",
     "build": "webpack",
-    "webpack":"webpack && nodemon --watch app --watch bootstrap --watch config --watch .env --watch client -x"
+    "webpack": "webpack && nodemon --watch app --watch bootstrap --watch config --watch .env --watch client -x"
   },
   "keywords": [
     "adonisjs",
@@ -37,6 +37,8 @@
     "youch": "^2.0.4"
   },
   "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-less": "^3.3.2",
     "nodemon": "^1.11.0",
     "standard": "^10.0.1",
     "webpack": "^3.8.1"
