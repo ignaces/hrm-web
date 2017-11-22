@@ -2,10 +2,14 @@ var webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
-  entry: './client/src/Users/users.js',
+  entry: {
+      Users:['./client/src/Users/users.js'],
+      Ficha:['./client/src/Ficha/persona.js'],
+      Persona:['./client/src/Persona/lista.js']
+    },
   output: {
-    filename: 'users.min.js',
-    path: path.resolve(__dirname, 'public/assets/js/dist/Users')
+    filename: '[name].min.js',
+    path: path.join(__dirname, 'public/assets/js/dist/')
   },plugins: [
     new webpack.optimize.UglifyJsPlugin({
       include: /\.min\.js$/,
@@ -13,7 +17,7 @@ module.exports = {
     })
   ]
 };
-module.exports = {
+/*module.exports = {
   entry: './client/src/Ficha/persona.js',
   output: {
     filename: 'ficha.min.js',
@@ -37,3 +41,4 @@ module.exports = {
     })
   ]
 };
+*/
