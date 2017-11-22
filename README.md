@@ -1,31 +1,34 @@
-# Adonis fullstack application
+# HRM
 
-This is the fullstack boilerplate for AdonisJs, it comes pre-configured with.
+## Instalacion
 
-1. Bodyparser
-2. Session
-3. Authentication
-4. Web security middleware
-5. CORS
-6. Edge template engine
-7. Lucid ORM
-8. Migrations and seeds
-
-## Setup
-
-Use the adonis command to install the blueprint
-
+### Instalar NVM
 ```bash
-adonis new yardstick
+wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash
+```
+### Instalar NODE 8.9.1
+```bash
+nvm install v8.9.1
+```
+### Verificar que npm este al menos en la version v5.5.1
+```bash
+npm -v
+```
+### Clonar repositorio
+```bash
+git clone https://github.com/Enovum/hrm.git
 ```
 
-or manually clone the repo and then run `npm install`.
+Hacer una copia del archivo .env.example y guardarlo como .env
 
+Entrar en la carpeta del proyecto y ejecutar los siguientes comandos
 
-### Migrations
+```bash
+npm install --save-dev webpack
+npm install -g @adonisjs/cli
+```
 
-Run the following command to run startup migrations.
-
-```js
-adonis migration:run
+Para iniciar el proyecto ejecutar 
+```bash
+npm install -g @adonisjs/cli
 ```
