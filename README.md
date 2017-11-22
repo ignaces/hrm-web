@@ -33,7 +33,7 @@ Para iniciar el proyecto ejecutar
 npm start
 ```
 
-#Archivo .env
+# Archivo .env
 HOST=127.0.0.1
 PORT=3335
 NODE_ENV=development
