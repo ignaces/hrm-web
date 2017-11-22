@@ -1,0 +1,41 @@
+/Users/andres/git/fch/erp/sgd/node_modules/@adonisjs/ignitor/src/Ignitor/index.js:307
+  async _bootProviders () {
+        ^^^^^^^^^^^^^^
+
+SyntaxError: Unexpected identifier
+    at createScript (vm.js:56:10)
+    at Object.runInThisContext (vm.js:97:10)
+    at Module._compile (module.js:542:28)
+    at Object.Module._extensions..js (module.js:579:10)
+    at Module.load (module.js:487:32)
+    at tryModuleLoad (module.js:446:12)
+    at Function.Module._load (module.js:438:3)
+    at Module.require (module.js:497:17)
+    at require (internal/module.js:20:19)
+    at Object.<anonymous> (/Users/andres/git/fch/erp/sgd/node_modules/@adonisjs/ignitor/index.js:13:17)
+/Users/andres/git/fch/erp/sgd/node_modules/@adonisjs/ignitor/src/Ignitor/index.js:307
+  async _bootProviders () {
+        ^^^^^^^^^^^^^^
+
+SyntaxError: Unexpected identifier
+    at createScript (vm.js:56:10)
+    at Object.runInThisContext (vm.js:97:10)
+    at Module._compile (module.js:542:28)
+    at Object.Module._extensions..js (module.js:579:10)
+    at Module.load (module.js:487:32)
+    at tryModuleLoad (module.js:446:12)
+    at Function.Module._load (module.js:438:3)
+    at Module.require (module.js:497:17)
+    at require (internal/module.js:20:19)
+    at Object.<anonymous> (/Users/andres/git/fch/erp/sgd/node_modules/@adonisjs/ignitor/index.js:13:17)
+2017-11-22T15:37:34.753Z - [32minfo[39m: [32mserving app on http://127.0.0.1:3335[39m
+2017-11-22T15:39:40.917Z - [32minfo[39m: [32mserving app on http://127.0.0.1:3335[39m
+2017-11-22T15:45:27.212Z - [32minfo[39m: [32mserving app on http://127.0.0.1:3335[39m
+2017-11-22T15:51:11.349Z - [32minfo[39m: [32mserving app on http://127.0.0.1:3335[39m
+2017-11-22T15:53:04.787Z - [32minfo[39m: [32mserving app on http://127.0.0.1:3335[39m
+2017-11-22T16:58:22.886Z - [32minfo[39m: [32mserving app on http://127.0.0.1:3335[39m
+2017-11-22T17:02:05.117Z - [32minfo[39m: [32mserving app on http://127.0.0.1:3335[39m
+2017-11-22T17:18:44.668Z - [32minfo[39m: [32mserving app on http://127.0.0.1:3335[39m
+2017-11-22T17:39:47.899Z - [32minfo[39m: [32mserving app on http://127.0.0.1:3335[39m
+2017-11-22T17:48:47.498Z - [32minfo[39m: [32mserving app on http://127.0.0.1:3335[39m
+2017-11-22T17:52:25.403Z - [32minfo[39m: [32mserving app on http://127.0.0.1:3335[39m
