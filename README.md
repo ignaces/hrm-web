@@ -1,6 +1,6 @@
 # HRM
 
-##I nstalacion
+## Instalacion
 
 ### Instalar NVM
 ```bash
