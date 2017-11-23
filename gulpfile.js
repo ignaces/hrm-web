@@ -9,7 +9,6 @@ gulp.task('default', ['server', 'watch']);
 
 gulp.task('server', shell.task([
     'adonis serve --dev',
-    'echo world'
   ]));
 
 gulp.task('deployLess', function() {
@@ -27,10 +26,30 @@ gulp.task('deployLess', function() {
             ]
         )
     .pipe(less())
-    .pipe(gulp.dest('./public/styles/default/assets/css/'));
+    .pipe(gulp.dest('./public/themes/default/assets/css/'));
 });
+gulp.task('deployLessH', function() {
+    return gulp.src(
+            [
+                './public/themes/horizontal/assets/less/components.less',
+                './public/themes/horizontal/assets/less/core.less',
+                './public/themes/horizontal/assets/less/icons.less',
+                './public/themes/horizontal/assets/less/menu_light_sm.less',
+                './public/themes/horizontal/assets/less/menu_light.less',
+                './public/themes/horizontal/assets/less/menu_sm.less',
+                './public/themes/horizontal/assets/less/menu.less',
+                './public/themes/horizontal/assets/less/pages.less',
+                './public/themes/horizontal/assets/less/responsive.less'
+            ]
+        )
+    .pipe(less())
+    .pipe(gulp.dest('./public/themes/horizontal/assets/css/'));
+});
+
+
 gulp.task('watch', function(){
-  gulp.watch('./public/styles/default/assets/less/*.less', ['deployLess']);
+  gulp.watch('./public/themes/default/assets/less/*.less', ['deployLess']);
+  gulp.watch('./public/themes/horizontal/assets/less/*.less', ['deployLessH']);
   gulp.watch('./client/src/*/*.js', ['webpack']);
 
 });

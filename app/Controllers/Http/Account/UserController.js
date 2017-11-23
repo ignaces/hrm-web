@@ -2,11 +2,11 @@
 
 class UserController {
     
-      async login ({ view,request, auth }) {
+      async login ({ view,request, auth ,response}) {
         const { username, password } = request.all()
         await auth.attempt(username, password)
     
-        return view.render('welcome')
+        return response.redirect('/')
       }
       async logout ({ view,request, auth }) {
         

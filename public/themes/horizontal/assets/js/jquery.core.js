@@ -209,7 +209,7 @@ function($) {
         this.initPeityCharts(),
         this.initKnob(),
         this.initCircliful(),
-        this.initCounterUp(),
+        //this.initCounterUp(),
         //creating portles
         $.Portlet.init();
     },

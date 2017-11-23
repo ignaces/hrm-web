@@ -22,6 +22,16 @@ Route.on('/').render('welcome').middleware('auth')
 
 Route.get('/game', 'Game/Guess.render').middleware('auth')
 
+
+Route.get('users/:id', 'Account/UserController.profile').middleware('auth')
+
+Route.get('/login', 'Account/UserController.loginView')
+
+Route.post('/login', 'Account/UserController.login')
+
+Route.get('/logout', 'Account/UserController.logout')
+
+
 Route.any('/:module/:controller/:action',  ({view ,request, response,params}) => {
   
     const module = params.module
@@ -41,13 +51,5 @@ Route.any('/:module/:controller/:action',  ({view ,request, response,params}) =>
     
 }).middleware(['auth','role'])
 
-
-Route.get('users/:id', 'Account/UserController.profile').middleware('auth')
-
-Route.get('/login', 'Account/UserController.loginView')
-
-Route.post('/login', 'Account/UserController.login')
-
-Route.get('/logout', 'Account/UserController.logout')
 
   
