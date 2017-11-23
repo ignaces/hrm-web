@@ -15,22 +15,22 @@ gulp.task('server', shell.task([
 gulp.task('deployLess', function() {
     return gulp.src(
             [
-                './public/assets/less/components.less',
-                './public/assets/less/core.less',
-                './public/assets/less/icons.less',
-                './public/assets/less/menu_light_sm.less',
-                './public/assets/less/menu_light.less',
-                './public/assets/less/menu_sm.less',
-                './public/assets/less/menu.less',
-                './public/assets/less/pages.less',
-                './public/assets/less/responsive.less'
+                './public/themes/default/assets/less/components.less',
+                './public/themes/default/assets/less/core.less',
+                './public/themes/default/assets/less/icons.less',
+                './public/themes/default/assets/less/menu_light_sm.less',
+                './public/themes/default/assets/less/menu_light.less',
+                './public/themes/default/assets/less/menu_sm.less',
+                './public/themes/default/assets/less/menu.less',
+                './public/themes/default/assets/less/pages.less',
+                './public/themes/default/assets/less/responsive.less'
             ]
         )
     .pipe(less())
-    .pipe(gulp.dest('./public/assets/styles/'));
+    .pipe(gulp.dest('./public/styles/default/assets/css/'));
 });
 gulp.task('watch', function(){
-  gulp.watch('./public/assets/less/*.less', ['deployLess']);
+  gulp.watch('./public/styles/default/assets/less/*.less', ['deployLess']);
   gulp.watch('./client/src/*/*.js', ['webpack']);
 
 });

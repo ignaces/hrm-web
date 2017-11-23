@@ -60,3 +60,11 @@ const aliases = {
 const commands = []
 
 module.exports = { providers, aceProviders, aliases, commands }
+
+const edge = require('edge.js')
+
+edge.global('theme', function () {
+  const Env = use('Env')
+  var theme = Env.get('STYLE', 'default')
+  return theme;
+})

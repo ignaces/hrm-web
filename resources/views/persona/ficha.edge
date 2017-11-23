@@ -1,28 +1,18 @@
-@layout('layouts/master')
+ @layout('layouts/horizontal')
+
+
+
 @section('scripts')
   <script src="/assets/js/dist/Ficha.min.js"></script>
 @endsection
+
 @section('content')
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="page-title-box">
-                                    <h4 class="page-title">Profile</h4>
-                                    <ol class="breadcrumb p-0 m-0">
-                                        <li>
-                                            <a href="#">Adminox</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Extras</a>
-                                        </li>
-                                        <li class="active">
-                                            Profile
-                                        </li>
-                                    </ol>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end row -->
+
+@!component('components.breadcrumb',title="Perfil", pages= [
+            {nombre:"Persona",activa:false},
+            {nombre:"Perfil",activa:true}
+            ])
+                        
 
 
                         <div class="row">

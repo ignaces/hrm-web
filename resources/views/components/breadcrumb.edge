@@ -1,3 +1,4 @@
+@if(theme()=="default")
 <div class="row">
         <div class="col-xs-12">
             <div class="page-title-box">
@@ -18,3 +19,29 @@
             </div>
         </div>
     </div>
+@endif
+
+@if(theme()=="horizontal")
+<div class="row">
+        <div class="col-sm-12">
+            <div class="page-title-box">
+            <div class="btn-group pull-right">
+            
+                <ol class="breadcrumb hide-phone p-0 m-0">
+                    @each(page in pages )
+                    @if(page.activa== true)
+                    <li class="active">
+                    @else
+                    <li>      
+                    @endif
+                        <a href="#">{{ page.nombre }}</a>
+                    </li>
+                    @endeach
+                    
+                </ol>
+                </div>
+                <h4 class="page-title">{{ title }}</h4>
+            </div>
+        </div>
+    </div>
+@endif
