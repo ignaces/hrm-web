@@ -26,6 +26,8 @@ Entrar en la carpeta del proyecto y ejecutar los siguientes comandos
 ```bash
 npm install --save-dev webpack
 npm install -g @adonisjs/cli
+npm install gulp-cli -g
+npm install gulp -D
 ```
 
 Para iniciar el proyecto ejecutar 
