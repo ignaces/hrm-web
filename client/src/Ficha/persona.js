@@ -1,12 +1,12 @@
 import _ from 'lodash';
 $(document).ready(function(){
 
-    console.log("cambio");
+    console.log("funk");
 });
 var xx = "HOLA WEBHPACK!!";
 
-var hola = 2;
-//asss
+var hola = 5;
+//assskk
 
 
 

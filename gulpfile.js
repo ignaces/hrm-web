@@ -3,16 +3,15 @@ var child = require('child_process');
 var fs = require('fs');
 var less = require('gulp-less'); 
 var webpack = require('webpack-stream');
-
-
+var browserSync = require('browser-sync').create();
+const shell = require('gulp-shell')
 gulp.task('default', ['server', 'watch']);
 
-gulp.task('server', function() {
-  var server = child.spawn('node', ['server.js']);
-  var log = fs.createWriteStream('server.log', {flags: 'a'});
-  server.stdout.pipe(log);
-  server.stderr.pipe(log);
-});
+gulp.task('server', shell.task([
+    'adonis serve --dev',
+    'echo world'
+  ]));
+
 gulp.task('deployLess', function() {
     return gulp.src(
             [
