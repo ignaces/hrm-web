@@ -18,12 +18,12 @@ const Helpers = use('Helpers')
 const {ioc} = require('@adonisjs/fold')
 var util = require('util')
 
-Route.on('/').render('welcome').middleware('auth')
+Route.on('/').render('welcome').middleware('autenticacion')
 
 Route.get('/game', 'Game/Guess.render').middleware('auth')
 
 
-Route.get('users/:id', 'Account/UserController.profile').middleware('auth')
+Route.get('users/:id', 'Account/UserController.profile').middleware('autenticacion')
 
 Route.get('/login', 'Account/UserController.loginView')
 
@@ -49,7 +49,7 @@ Route.any('/:module/:controller/:action',  ({view ,request, response,params}) =>
     
     return controllerInstance.method.apply(controllerInstance.instance,[{view,request,response}])
     
-}).middleware(['auth','role'])
+}).middleware(['autenticacion'])
 
 
   

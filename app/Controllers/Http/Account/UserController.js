@@ -1,5 +1,5 @@
 'use strict'
-
+const got = use('got')
 class UserController {
     
       async login ({ view,request, auth ,response}) {
@@ -11,7 +11,7 @@ class UserController {
       async logout ({ view,request, auth }) {
         
         await auth.logout()
-    
+    //
         return view.render('account/login')
       }
 
@@ -25,6 +25,16 @@ class UserController {
           return 'You cannot   else\'s profile'
         }
         return auth.user
+      }
+
+      async list({view,request,response}){
+        const Env = use('Env')
+        var server = Env.get('API_SERVER', 'development')
+        const result = await got.get(`http://${server}/Core/Users/find?nombre=`,{json:true})
+        
+        const usuarios = result.body
+        
+        return view.render('account/users',{usuarios:usuarios})
       }
 
 }

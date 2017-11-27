@@ -31,6 +31,8 @@ class Personas {
         { nombre:"Jermayne Devereaux" } ,
         { nombre:"Lysimachus Ritz" } ,
         { nombre:"Hidi Asbury"}];
+
+        
         yield response.sendView('persona/lista',  {personas:personas});
     }
 }
