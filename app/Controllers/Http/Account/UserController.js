@@ -1,5 +1,5 @@
 'use strict'
-
+const got = use('got')
 class UserController {
     
       async login ({ view,request, auth ,response}) {
@@ -30,9 +30,11 @@ class UserController {
       async list({view,request,response}){
         const Env = use('Env')
         var server = Env.get('API_SERVER', 'development')
-        const result = await got.get(`http://${server}/Users/Users/index`);
-
-        return view.render('users/list',result)
+        const result = await got.get(`http://${server}/Core/Users/find?nombre=`,{json:true})
+        
+        const usuarios = result.body
+        
+        return view.render('account/users',{usuarios:usuarios})
       }
 
 }
