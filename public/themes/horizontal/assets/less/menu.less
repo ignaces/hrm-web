@@ -19,6 +19,8 @@ File: Menu
   position:relative;
   min-height:1px;
   float:left;
+  //padding-left: 5px;
+  //padding-right: 5px;
 }
 
 .menu-col-xs-1{
@@ -161,6 +163,7 @@ File: Menu
 
     .logo-main{
       .menu-col-xs-2;
+      padding-top: 6px;
     }
   
     #navigation{
@@ -183,7 +186,7 @@ File: Menu
       font-family: @font-secondary;
       font-weight: 700;
       letter-spacing: 1px;
-      line-height: 60px;
+      line-height: 63px;
       text-transform: uppercase;
 
       
@@ -262,8 +265,8 @@ File: Menu
   .navbar-toggle {
     border: 0;
     position: relative;
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 55px;
     padding: 0;
     margin: 0;
     cursor: pointer;
@@ -532,6 +535,11 @@ File: Menu
   .navigation-menu > li > a > span {
     display: inline;
   }
+
+  .logo-main {
+    .menu-col-xs-3 !important;
+  }
+
   .menu-extras{
     .menu-col-xs-9 !important;
 
@@ -551,7 +559,7 @@ File: Menu
     font-family: @font-secondary;
     font-weight: 700;
     letter-spacing: 1px;
-    line-height: 60px;
+    line-height: 63px;
     text-transform: uppercase;
   }
   //TEST
@@ -656,18 +664,6 @@ File: Menu
   }
 }
 
-@media (max-width: 670px) {
-  .navigation-menu > li > a {
-    padding-left: 7px !important;
-    padding-right: 7px !important;
-    padding-top: 30px !important;
-  }
-
-  .menu-extras{
-    .menu-col-xs-9;
-  }
-
-}
  
 @media (min-width: 768px) {
   
