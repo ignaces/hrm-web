@@ -4,8 +4,10 @@ const got = use('got')
 
 class Proceso {
      index  ({ view,request, response }) {
-        
-        
+        var texto ="hola";
+        var salida=`aqui ${texto} texto`
+
+        console.log(salida)
         var procesos = [{
                     id:1,
                     nombre:"Acreditación 2018",

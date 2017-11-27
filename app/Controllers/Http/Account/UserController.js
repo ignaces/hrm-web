@@ -11,7 +11,7 @@ class UserController {
       async logout ({ view,request, auth }) {
         
         await auth.logout()
-    
+    //
         return view.render('account/login')
       }
 

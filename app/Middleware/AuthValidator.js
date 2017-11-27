@@ -14,7 +14,7 @@ class AuthValidator {
       response.redirect('/login');
     }
     //var uu = await request.session.get('roles');
-    
+
     await next()
   }
 }
