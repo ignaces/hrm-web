@@ -4,8 +4,8 @@ const got = use('got')
 
 class Proceso {
      index  ({ view,request, response }) {
-        const Env = use('Env')
-        var server = Env.get('API_SERVER', 'development')
+        
+        
         var procesos = [{
                     id:1,
                     nombre:"Acreditación 2018",

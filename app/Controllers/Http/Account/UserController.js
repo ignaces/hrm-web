@@ -27,5 +27,13 @@ class UserController {
         return auth.user
       }
 
+      async list({view,request,response}){
+        const Env = use('Env')
+        var server = Env.get('API_SERVER', 'development')
+        const result = await got.get(`http://${server}/Users/Users/index`);
+
+        return view.render('users/list',result)
+      }
+
 }
 module.exports = UserController
