@@ -30,7 +30,14 @@ class UserController {
       async list({view,request,response}){
         const Env = use('Env')
         var server = Env.get('API_SERVER', 'development')
-        const result = await got.get(`http://${server}/Core/Users/find?nombre=`,{json:true})
+
+        const result = await got(`${server}/Core/Users/find`,
+        {
+          
+          json:true,
+          query:{nombre:"a"}
+          
+        })
         
         const usuarios = result.body
         
