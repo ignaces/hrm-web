@@ -31,7 +31,7 @@ class UserController {
         const Env = use('Env')
         var server = Env.get('API_SERVER', 'development')
 
-        const result = await got(`${server}/Core/Users/find`,
+        const result = await got(`${server}/Core/Users/d`,
         {
           
           json:true,
