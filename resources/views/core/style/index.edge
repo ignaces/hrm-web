@@ -1,0 +1,49 @@
+@layout('layouts/horizontal')
+<link href="/assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet">
+@section('scripts')
+        
+<script src="/assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+         <script>
+            $(document).ready(
+                ()=>{
+
+                    $('.tooltip-hover').tooltipster();
+                    $('.colorpicker-default').colorpicker({
+                        format: 'hex'
+                    });
+                    $('.colorpicker-rgba').colorpicker();
+                }
+            );
+        </script>
+@endsection
+@section('content')
+
+ @!component('components.breadcrumb',title="Estilos", pages= [
+            {nombre:"Administración",activa:false},
+            {nombre:"Estilos",activa:true}
+            ])
+    <div class="row">
+     
+        <div class="col-lg-6">
+                                <div class="card-box">
+                                    <h4 class="header-title m-t-0">Colores</h4>
+                                    <p class="text-muted font-14 m-b-25">
+                                        Cambia los colores de la plataforma
+                                    </p>
+
+                                    <form action="#">
+                                        
+                                            @each(estilo in estilos)
+                                                <div class="form-group">
+                                                    <label>{{estilo.nombre}} {{ estilo.tipo }}</label>
+                                                    <input type="text" id="{{ estilo.nombre }}" name="{{ estilo.nombre }}" class="colorpicker-default form-control" value="{{ estilo.valor }}">
+                                                </div>
+                                            @endeach
+                                        
+                                    </form>
+                                </div> <!-- end card-box -->
+                            </div> 
+    </div>
+
+        
+@endsection

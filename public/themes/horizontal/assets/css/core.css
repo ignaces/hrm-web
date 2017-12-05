@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Karla:700|Nunito+Sans:600,700');
+/**/
 /*
 Template Name: Adminox Dashboard
 Author: CoderThemes
@@ -412,7 +413,7 @@ a:focus {
 }
 /* Background colors */
 .bg-custom {
-  background-color: #64c5b1 !important;
+  background-color: #000004 !important;
 }
 .bg-primary {
   background-color: #4489e4 !important;
@@ -449,7 +450,7 @@ a:focus {
 }
 /* Text colors */
 .text-custom {
-  color: #64c5b1 !important;
+  color: #000004 !important;
 }
 .text-white {
   color: #ffffff !important;
@@ -494,7 +495,7 @@ a:focus {
   color: #313a46 !important;
 }
 .label-default {
-  background-color: #64c5b1;
+  background-color: #000004;
 }
 .label-primary {
   background-color: #4489e4;
@@ -528,7 +529,7 @@ a:focus {
   text-transform: uppercase;
   padding: 3px 5px;
   margin-top: 1px;
-  background-color: #64c5b1;
+  background-color: #000004;
   font-family: 'Nunito Sans', sans-serif;
 }
 .badge-xs {
@@ -609,8 +610,8 @@ a:focus {
 .pagination > .active > span:hover,
 .pagination > .active > a:focus,
 .pagination > .active > span:focus {
-  background-color: #64c5b1;
-  border-color: #64c5b1;
+  background-color: #000004;
+  border-color: #000004;
 }
 .pager li > a,
 .pager li > span {
@@ -622,8 +623,8 @@ a:focus {
 .list-group-item.active,
 .list-group-item.active:focus,
 .list-group-item.active:hover {
-  background-color: #64c5b1;
-  border-color: #64c5b1;
+  background-color: #000004;
+  border-color: #000004;
 }
 .list-group-item.active .list-group-item-text,
 .list-group-item.active:focus .list-group-item-text,
@@ -719,7 +720,7 @@ a:focus {
   background-color: rgba(255, 255, 255, 0.4);
 }
 .waves-effect.waves-custom .waves-ripple {
-  background-color: rgba(100, 197, 177, 0.4);
+  background-color: rgba(0, 0, 4, 0.4);
 }
 .waves-effect.waves-primary .waves-ripple {
   background-color: rgba(68, 137, 228, 0.4);
