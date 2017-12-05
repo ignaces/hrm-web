@@ -63,12 +63,11 @@
 @endsection
 @section('content')
 
-  {% from 'macros.breadcrumb' import breadcrumb %}
-    {{ breadcrumb('Competencias del Perfil', [
+   @!component('components.breadcrumb',title='Competencias del Perfil', pages=[
             {nombre:"Administración",activa:false},
             {nombre:"Perfiles",activa:false},
             {nombre:"Competencias",activa:true}
-            ]) }}
+            ])
     <div class="row">
         <div class="col-sm-12">
             <div class="card-box">
