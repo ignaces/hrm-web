@@ -16,12 +16,15 @@ class Style {
                 
                 currentArea=item.substring(7,item.length)
                 
-            }else{
+            }
+            else
+            {
                 
                 var endVar = item.search(':')
                 var endVal = item.search(';')
                 var nombre = item.substring(0,endVar)
                 var valor  = item.substring(endVar+1,endVal).trim() 
+                
                 estilo.push({
                     tipo:currentArea,
                     nombre:nombre,

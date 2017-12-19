@@ -21,7 +21,9 @@ var util = require('util')
 Route.on('/').render('welcome').middleware('autenticacion')
 
 Route.get('/game', 'Game/Guess.render').middleware('auth')
+Route.get('/medirRedes/:codigo', 'Redes/Medicion.medir')
 
+Route.post('/finRedes', 'Redes/Medicion.save')
 
 Route.get('users/:id', 'Account/UserController.profile').middleware('autenticacion')
 

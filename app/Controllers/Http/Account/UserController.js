@@ -8,6 +8,7 @@ class UserController {
     
         return response.redirect('/')
       }
+      
       async logout ({ view,request, auth }) {
         
         await auth.logout()
