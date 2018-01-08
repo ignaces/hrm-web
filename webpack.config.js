@@ -5,7 +5,8 @@ module.exports = {
   entry: {
       Users:['./client/src/Users/users.js'],
       Ficha:['./client/src/Ficha/persona.js'],
-      Persona:['./client/src/Persona/lista.js']
+      Persona:['./client/src/Persona/lista.js'],
+      Instrumento:['./client/src/Instrumento/instrumento.js']
     },
   output: {
     filename: '[name].min.js',
