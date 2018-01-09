@@ -413,7 +413,7 @@ a:focus {
 }
 /* Background colors */
 .bg-custom {
-  background-color: #000004 !important;
+  background-color: #99cc00 !important;
 }
 .bg-primary {
   background-color: #4489e4 !important;
@@ -422,7 +422,7 @@ a:focus {
   background-color: #32c861 !important;
 }
 .bg-info {
-  background-color: #34d3eb !important;
+  background-color: #00ad8c !important;
 }
 .bg-warning {
   background-color: #ffa91c !important;
@@ -450,7 +450,7 @@ a:focus {
 }
 /* Text colors */
 .text-custom {
-  color: #000004 !important;
+  color: #99cc00 !important;
 }
 .text-white {
   color: #ffffff !important;
@@ -471,7 +471,7 @@ a:focus {
   color: #32c861 !important;
 }
 .text-info {
-  color: #34d3eb !important;
+  color: #00ad8c !important;
 }
 .text-inverse {
   color: #36404c !important;
@@ -495,7 +495,7 @@ a:focus {
   color: #313a46 !important;
 }
 .label-default {
-  background-color: #000004;
+  background-color: #99cc00;
 }
 .label-primary {
   background-color: #4489e4;
@@ -504,7 +504,7 @@ a:focus {
   background-color: #32c861;
 }
 .label-info {
-  background-color: #34d3eb;
+  background-color: #00ad8c;
 }
 .label-warning {
   background-color: #ffa91c;
@@ -529,7 +529,7 @@ a:focus {
   text-transform: uppercase;
   padding: 3px 5px;
   margin-top: 1px;
-  background-color: #000004;
+  background-color: #99cc00;
   font-family: 'Nunito Sans', sans-serif;
 }
 .badge-xs {
@@ -553,7 +553,7 @@ a:focus {
   background-color: #32c861;
 }
 .badge-info {
-  background-color: #34d3eb;
+  background-color: #00ad8c;
 }
 .badge-warning {
   background-color: #ffa91c;
@@ -610,8 +610,8 @@ a:focus {
 .pagination > .active > span:hover,
 .pagination > .active > a:focus,
 .pagination > .active > span:focus {
-  background-color: #000004;
-  border-color: #000004;
+  background-color: #99cc00;
+  border-color: #99cc00;
 }
 .pager li > a,
 .pager li > span {
@@ -623,8 +623,8 @@ a:focus {
 .list-group-item.active,
 .list-group-item.active:focus,
 .list-group-item.active:hover {
-  background-color: #000004;
-  border-color: #000004;
+  background-color: #99cc00;
+  border-color: #99cc00;
 }
 .list-group-item.active .list-group-item-text,
 .list-group-item.active:focus .list-group-item-text,
@@ -720,7 +720,7 @@ a:focus {
   background-color: rgba(255, 255, 255, 0.4);
 }
 .waves-effect.waves-custom .waves-ripple {
-  background-color: rgba(0, 0, 4, 0.4);
+  background-color: rgba(153, 204, 0, 0.4);
 }
 .waves-effect.waves-primary .waves-ripple {
   background-color: rgba(68, 137, 228, 0.4);
@@ -729,7 +729,7 @@ a:focus {
   background-color: rgba(50, 200, 97, 0.4);
 }
 .waves-effect.waves-info .waves-ripple {
-  background-color: rgba(52, 211, 235, 0.4);
+  background-color: rgba(0, 173, 140, 0.4);
 }
 .waves-effect.waves-warning .waves-ripple {
   background-color: rgba(255, 169, 28, 0.4);

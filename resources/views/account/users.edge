@@ -51,11 +51,9 @@
                           </thead>
                           <tbody>
                                 @each(usuario in usuarios)
-                                    <tr>
-                                    <td>{{ usuario.username }}</td>
-                                    <td>{{ usuario.email }}</td>
-                                    
-                                    </tr>
+                                     @!component('components.preguntaSimple',title="Perfiles", pages= [
+                                        
+                                    ])
                                 @endeach
                                 
                           </tbody>

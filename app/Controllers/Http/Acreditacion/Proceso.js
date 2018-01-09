@@ -25,6 +25,21 @@ class Proceso {
         
         return view.render('acreditacion/proceso/list',  {procesos});
     }
+
+    async colaboradores ({view,request, response}) {
+        const Env = use('Env')
+
+        var server = Env.get('API_SERVER', 'development')
+        
+        const result = await got(`${server}/Acreditacion/Proceso/getPersonas`,
+        {
+            json:true,
+            query:{"idProceso":"9d212163-f0e6-11e7-bf12-bc764e100f2b"}
+        })
+        
+        var personas = result.body;
+        return view.render('acreditacion/proceso/colaboradores',  {personas:personas});
+    }
 }
 
 module.exports = Proceso

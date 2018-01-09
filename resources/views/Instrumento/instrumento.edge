@@ -1,0 +1,53 @@
+@layout('layouts/horizontal')
+
+
+@section('scripts')
+    <script src="/assets/js/dist/Instrumento.min.js"></script>
+    <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+@endsection
+
+@section('pluginsCss')
+    <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+@endsection
+  
+
+@section('content')
+
+    @!component('components.breadcrumb',title="Instrumento", pages= [
+        {nombre:"Instrumento",activa:false},
+        {nombre:"Instrumento",activa:true}
+    ])
+            
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-border panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{instrumento.nombre}}</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                    
+                        @each(pregunta in instrumento.preguntas)
+                            @if(pregunta.tipoPregunta == "ALT")
+                                @!component('components.Evaluacion.preguntaSimple', pregunta=pregunta)
+                            @else
+                            @endif     
+                        @endeach
+
+                    </div><!--<div class="row">-->    
+
+                    <div class="row">
+                        <div class="col-lg-12" style="text-align:center;">
+                            <button type="button" id="instrumento_btn_guardar" class="btn btn-info waves-effect waves-light"> <i class="fa fa-save m-r-5"></i> <span>Guardar</span> </button>
+                            <button type="button" id="instrumento_btn_finalizar" class="btn btn-success waves-effect waves-light"> <i class="fa fa-check m-r-5"></i> <span>Finalizar</span> </button>
+                        </div>
+                    </div>
+                    
+                </div><!--<div class="panel-body">-->
+            </div><!--<div class="panel panel-border panel-primary">-->
+        </div><!--<div class="col-lg-12">-->
+        
+        
+    </div><!--<div class="row">-->
+
+@endsection

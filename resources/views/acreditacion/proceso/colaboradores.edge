@@ -1,0 +1,73 @@
+@layout('layouts/horizontal')
+
+
+@section('scripts')
+    <script src="/assets/js/dist/Instrumento.min.js"></script>
+    <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+@endsection
+
+@section('pluginsCss')
+    <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+@endsection
+  
+
+@section('content')
+
+    @!component('components.breadcrumb',title="Colaboradores", pages= [
+        {nombre:"Instrumento",activa:false},
+        {nombre:"Instrumento",activa:true}
+    ])
+            
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-border panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title"></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                    
+                        <table class="table table-responsive">
+
+                                <thead>
+                                <tr>
+                                    <th>Identificador</th>
+                                    <th>Nombre</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    @each(persona in personas)
+                                    <tr>
+                                        <td>{{persona.identificador}}</td>
+                                        <td>{{persona.nombres}} {{persona.apellidoPaterno}} {{persona.apellidoMaterno}}</td>
+                                        <td> 
+                                            <div style="text-align:right;">
+                                                @each(tipoInstrumento in persona.tiposInstrumentos)
+                                                    <button type="button" idPersonaProceso="{{persona.idPersonaProceso}}" class="btn btn-info waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{tipoInstrumento.nombre}}"> <span>{{tipoInstrumento.codigoInterno}}</span> </button>
+                                                @endeach
+                                                </div>
+                                        </td>
+                                        
+                                    </tr>
+                                    @endeach
+                                
+                                </tbody>
+                            </table>
+                   
+                            
+                      
+                    
+
+                    </div><!--<div class="row">-->    
+
+                    
+                    
+                </div><!--<div class="panel-body">-->
+            </div><!--<div class="panel panel-border panel-primary">-->
+        </div><!--<div class="col-lg-12">-->
+        
+        
+    </div><!--<div class="row">-->
+
+@endsection

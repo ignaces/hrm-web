@@ -104,14 +104,14 @@ File: Menu
   min-height: 62px;
 }
 #topnav .has-submenu.active a {
-  color: #000004;
+  color: #99cc00;
   background-color: rgba(255, 255, 255, 0.1) !important;
 }
 #topnav .has-submenu.active a i {
-  color: #000004;
+  color: #99cc00;
 }
 #topnav .has-submenu.active .submenu li.active > a {
-  color: #000004;
+  color: #99cc00;
 }
 #topnav .app-search {
   position: relative;
@@ -318,13 +318,13 @@ File: Menu
   padding-right: 20px;
 }
 #topnav .navigation-menu > li > a:hover {
-  color: #000004;
+  color: #99cc00;
 }
 #topnav .navigation-menu > li > a:focus {
-  color: #000004;
+  color: #99cc00;
 }
 #topnav .navigation-menu > li > a:active {
-  color: #000004;
+  color: #99cc00;
 }
 #topnav .navigation-menu > li > a i {
   font-size: 18px;
@@ -359,10 +359,10 @@ File: Menu
     margin-right: 10px;
   }
   #topnav .navigation-menu > li:hover a {
-    color: #000004;
+    color: #99cc00;
   }
   #topnav .navigation-menu > li:hover a i {
-    color: #000004;
+    color: #99cc00;
   }
   #topnav .navigation-menu > li .submenu {
     position: absolute;
@@ -425,7 +425,7 @@ File: Menu
     transition: all .35s ease;
   }
   #topnav .navigation-menu > li .submenu li a:hover {
-    color: #000004;
+    color: #99cc00;
   }
   #topnav #topnav .navigation-menu > li.has-submenu:hover > .submenu {
     visibility: visible;
@@ -532,7 +532,7 @@ File: Menu
     color: #313a46;
   }
   #topnav .navigation-menu > li .submenu li a:hover {
-    color: #000004;
+    color: #99cc00;
   }
   #topnav .navigation-menu > li .submenu li.has-submenu > a:after {
     content: "\54";
@@ -564,7 +564,7 @@ File: Menu
     color: #313a46;
   }
   #topnav .navigation-menu > li.has-submenu.open > a {
-    color: #000004;
+    color: #99cc00;
   }
   #topnav .navbar-header {
     float: left;
@@ -627,7 +627,7 @@ File: Menu
   color: #98a6ad;
 }
 .footer ul li a:hover {
-  color: #000004;
+  color: #99cc00;
 }
 /* Notification */
 .user-list .user-list-item {

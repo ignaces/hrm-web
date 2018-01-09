@@ -3,6 +3,7 @@
 const got = use('got')
 
 class Evaluacion {
+
     * index (request, response) {
         const Env = use('Env')
         var server = Env.get('API_SERVER', 'development')
