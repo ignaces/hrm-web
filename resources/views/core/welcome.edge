@@ -8,42 +8,11 @@
 
 
     <div class="col-md-3">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <div class="card-box ribbon-box">
-
-                    <div class="ribbon ribbon-custom">Mi Perfil</div>
-
-                    <div class="clearfix"></div>
-                    
-                    <div class="member-card">
-                            
-
-                            <div class="thumb-lg member-thumb m-b-5 mx-auto" style="margin: 0 auto;">
-                                        <img src="/assets/images/icons/businesswoman.svg" class="img-circle img-thumbnail" alt="colaborador/a">
-                            </div>
-                            <div class="">
-                                <h5 class="m-b-">JUANITA INES VEGA</h5>
-                                <p class="text-muted font-12">COORDINADOR CAJA CENTRO MEDICO</p>
-                            </div>                      
-                                                                
-                         </div>
-                           
-
-                       
-
-                        
-
-                       
-
-                </div>
-            </div>
-        </div>
         
 
-
-      
-
+ <div class="row">
+                @!component('components.Usuario.cajausuario',user = user.usuario.username,cargo=cargo,genero=genero,imgUser=imageUser)
+        </div>
 
     </div>
     <!-- END Columna Izquierda -->
@@ -59,7 +28,7 @@
                         <img class="card-img-top img-fluid" src="/assets/images/empresa/enelfondo.jpg" alt="Card image cap" style="width: 100% !important;">
                         <div class="card-block text-center">
                             <h4 class="card-title">Plataforma Gestión del Desarrollo de Personas</h4>
-                            
+                         
                         </div>
                     </div>
 
