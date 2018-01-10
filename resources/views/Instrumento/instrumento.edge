@@ -25,15 +25,16 @@
                     <h3 class="panel-title">{{instrumento.nombre}}</h3>
                 </div>
                 <div class="panel-body">
-                    <div class="row">
-                    
+                    <div class="row question">
+                        
                         @each(pregunta in instrumento.preguntas)
                             @if(pregunta.tipoPregunta == "ALT")
-                                @!component('components.Evaluacion.preguntaSimple', pregunta=pregunta)
+
+                                @!component('components.Evaluacion.preguntaDicotomica', pregunta=pregunta)
                             @else
                             @endif     
                         @endeach
-
+                        @!component('components.Evaluacion.css.preguntaDicotomica')
                     </div><!--<div class="row">-->    
 
                     <div class="row">
