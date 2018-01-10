@@ -1,12 +1,27 @@
 @layout('layouts/horizontal')
 
+@section('scripts')
+        <script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+
+         <!--C3 Chart-->
+        <script type="text/javascript" src="/assets/plugins/d3/d3.min.js"></script>
+        <script type="text/javascript" src="/assets/plugins/c3/c3.min.js"></script>
+
+        <!--Echart Chart-->
+        <script type="text/javascript" src="/assets/plugins/echart/echarts-all.js"></script>
+        <!-- <script type="text/javascript" src="/assets/plugins/a.js"></script> -->
+   
+
+
+@endsection  
+
 @section('content')
 
 
                         <div class="row">
 
                             <div class="col-lg-3 col-md-6">
-                                 @!component('components.Core.cardbox',icon = "mdi mdi-account",titulo="N° Evaluados",dato="10",pie=".")
+                                 @!component('components.Core.cardbox',icon = "mdi mdi-account-multiple",titulo="N° Evaluados",dato="10",pie=".")
                             </div><!-- end col -->
 
                             <div class="col-lg-3 col-md-6">
@@ -18,27 +33,38 @@
                             </div><!-- end col -->
 
                             <div class="col-lg-3 col-md-6">
-                                @!component('components.Core.cardbox',icon = "mdi mdi-check-all",titulo="% de Acreditados",dato="50 %",pie=".")
+                               @!component('components.Core.cardbox',icon = "mdi mdi-check-all",titulo="% de Acreditados",dato="50 %",pie=".")
+                                </div>
+                        </div>
+
                             </div><!-- end col -->
 
                         </div>
                         <!-- end row -->
 
-
-                        
-
-
-
 <div class="row">
 
-                            <div class="col-lg-6">
-                                 @!component('components.Reportes.graficopie',titulo="% de Avance",porcentaje="20",titulo1="Evaluados",dato1="10",titulo2="Finalizados",dato2="2")
+                            <div class="col-lg-4">
+                                 @!component('components.Reportes.graficopie',titulo="% de Avance",porcentaje="20",titulo1="Evaluados",dato1="10",titulo2="Finalizados",dato2="2",nombre="piechart1")
                             </div>
 
 
-                            <div class="col-lg-6">
-                                 @!component('components.Reportes.graficopie',titulo="% de Acreditados",porcentaje="50",titulo1="Finalizados",dato1="2",titulo2="Acreditados",dato2="1")
+                            <div class="col-lg-4">
+                                 @!component('components.Reportes.graficopie',titulo="% de Acreditados",porcentaje="50",titulo1="Finalizados",dato1="2",titulo2="Acreditados",dato2="1",nombre="piechart2")
                             </div>
+                             <div class="col-lg-4">
+                                <div class="card-box">
+                                <h4 class="text-dark header-title m-t-0 m-b-30">Descargas</h4>
+<hr/>
+                                <button type="button" class="btn btn-warning waves-effect waves-light"> <i class="fa fa-pie-chart m-r-5"></i> <span>Excel Avance</span> </button>
+                                <button type="button" class="btn btn-warning waves-effect waves-light"> <i class="fa  fa-sellsy m-r-5"></i> <span>Excel Resultados Finales</span> </button>
+                                <br/>
+                                <br/>
+                                <button type="button" class="btn btn-warning waves-effect waves-light"> <i class="fa fa-archive m-r-5"></i> <span>Excel Detalle SOT</span> </button>
+                                <button type="button" class="btn btn-warning waves-effect waves-light"> <i class="fa  fa-archive m-r-5"></i> <span>Excel Detalle EIC</span> </button>
+                                <button type="button" class="btn btn-warning waves-effect waves-light"> <i class="fa  fa-archive m-r-5"></i> <span>Excel Detalle TCO</span> </button>
+                            </div>
+                             </div>
 
                         </div>
                                                 <div class="row">
