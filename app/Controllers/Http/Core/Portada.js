@@ -3,7 +3,7 @@
 const got = use('got')
 
 class Portada {
-     welcome  ({ view,request, response,auth }) {
+     welcome  ({ view,request, response, auth }) {
         
         console.log(auth.user.username)
         var user={usuario:auth.user}
@@ -13,14 +13,8 @@ class Portada {
         if (genero=="F"){
             imageUser="/assets/images/icons/businesswoman.svg"
         }
-
-       
-
-        
         return view.render('core/welcome',  {user,cargo,genero,imageUser});
-    }
-
-    
+    }   
 }
 
 module.exports = Portada
