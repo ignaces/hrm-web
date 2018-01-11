@@ -2,7 +2,7 @@
 
 class AuthValidator {
   async handle ({ auth,view ,request,response}, next) {
-    console.log(request)
+    console.log(request.hostname())
     try {
       
       const isLoggedIn = await auth.check()
