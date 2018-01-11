@@ -7,14 +7,18 @@ class Instrumento {
         const Env = use('Env')
 
         var server = Env.get('API_SERVER', 'development')
+        var idProcesoPersona = request.input("idProcesoPersona")
+        var codigo = request.input("codigo")
+        
+        console.log(idProcesoPersona)
 
         const facsimiles = await got(`${server}/Evaluacion/Instrumento/getFacsimilesPersona`,
         {
             json:true,
             query:{
                 "idCliente":"asdasdsad",
-                "idProcesoPersona":"576647a0-f0eb-11e7-bf12-bc764e100f2b",
-                "codigoInstrumento":"TCO"
+                "idProcesoPersona":idProcesoPersona,
+                "codigoInstrumento":codigo
                 }
         })
         

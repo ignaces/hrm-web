@@ -8,10 +8,20 @@ $(document).ready(function(){
         var idPregunta = arr[1];
         var idAlternativa = arr[2];
 
-        console.log("idPregunta: " + idPregunta);
-        console.log("idAlternativa: " + idAlternativa);
+        
     });
+    $( ".bInstrumento" ).click(function() {
+        var id = $( this ).attr('id');
+        var arr = id.split("_");
+        var idPersonaProceso = arr[1];
+        var codigo = arr[2];
+        
+        $('<form id="formInstrumento" action="/Instrumento/Instrumento/index"></form>').appendTo('body')
 
+        $(`<input type="hidden" id="idPersonaProceso" name="idPersonaProceso" value="${idPersonaProceso}" />`)
+        $(`<input type="hidden" id="codigo" name="codigo" value="${codigo}" />`)
+        $('#formInstrumento').submit()
+    });
     $( "#instrumento_btn_guardar" ).click(function() {
         swal(
             'Guardado',

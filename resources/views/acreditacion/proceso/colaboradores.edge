@@ -44,7 +44,7 @@
                                         <td> 
                                             <div style="text-align:right;">
                                                 @each(tipoInstrumento in persona.tiposInstrumentos)
-                                                    <button type="button" idPersonaProceso="{{persona.idPersonaProceso}}" class="btn btn-info waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{tipoInstrumento.nombre}}"> <span>{{tipoInstrumento.codigoInterno}}</span> </button>
+                                                    <button type="button" id="{{tipoInstrumento.idPersonaProceso}}_{{tipoInstrumento.codigoInterno}}" class="btn btn-info waves-effect waves-light bInstrumento" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{tipoInstrumento.nombre}}"> <span>{{tipoInstrumento.codigoInterno}}</span> </button>
                                                 @endeach
                                                 </div>
                                         </td>
