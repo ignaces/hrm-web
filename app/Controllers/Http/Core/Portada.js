@@ -6,7 +6,7 @@ class Portada {
      welcome  ({ view,request, response, auth }) {
         
         //console.log(auth.user.username)
-        console.log(auth.user.id)
+        //console.log(auth.user.id)
 
         var user={usuario:auth.user}
         var cargo="Evaluador FCH"
