@@ -1,0 +1,82 @@
+@layout('layouts/horizontal')
+
+@section('content')
+
+
+<div class="row" >
+    <!-- Columna Izquierda -->
+
+
+    <div class="col-md-3">
+        
+
+ <div class="row">
+                @!component('components.Usuario.cajausuario',user = user.usuario.username,cargo=cargo,genero=genero,imgUser=imageUser)
+        </div>
+
+    </div>
+    <!-- END Columna Izquierda -->
+    <!-- Centro -->
+    <div class="col-md-6">
+        <div class="row">
+            <div class="ol-md-12">
+                <div class="col-sm-12 col-lg-12 col-xs-12">
+
+                    <!-- Simple card -->
+                    <div class="card m-b-20">
+
+                        <img class="card-img-top img-fluid" src="/assets/images/empresa/enelfondo.jpg" alt="Card image cap" style="width: 100% !important;">
+                        <div class="card-block text-center">
+                            <h4 class="card-title">Plataforma Gestión del Desarrollo de Personas</h4>
+                         
+                        </div>
+                    </div>
+
+                </div><!-- end col -->
+            </div>
+        </div>
+
+        <div class="row">
+                @!component('components.Acreditacion.cajaAcreditacion',titulo = "Acreditación", idProceso="1",nombreProceso="Acreditación Enel 2017")
+        </div>     
+        
+    </div>
+    <!-- END Centro -->
+    <!-- Columna Derecha -->
+    <div class="col-md-3">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="card-box ribbon-box">
+
+                    <div class="ribbon ribbon-custom">Herramientas</div>
+
+                    <div class="clearfix"></div>
+                    <div class="inbox-widget">
+                        
+                        <a class="btn btn-info btn-rounded btn-block" href="/Documentos"><i class="mdi mdi-library-books"></i> <span>Documentos</span> </a>
+
+                        <a class="btn btn-info btn-rounded btn-block" href="#" onclick="calendario();">
+                            <i class="mdi mdi-calendar-clock"></i> <span>Calendario</span>
+                        </a>
+                        <a class="btn btn-info btn-rounded btn-block" href="/files/FAQ.pdf" target="_blank"><i class="mdi mdi-help-circle"></i> <span>Preguntas Frecuentes</span> </a>
+                        
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+
+            </div>
+        </div>
+
+    </div>
+    <!-- END Columna Derecha -->
+</div>
+
+@endsection

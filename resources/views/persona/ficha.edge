@@ -8,16 +8,13 @@
 
 @section('content')
 
-@!component('components.breadcrumb',title="Perfil", pages= [
-            {nombre:"Persona",activa:false},
-            {nombre:"Perfil",activa:true}
-            ])
+
                         
 
 
                         <div class="row">
                             <div class="col-sm-12">
-                                <div class="profile-bg-picture" style="background-image:url('/assets/images/bg-profile.jpg')">
+                                <div class="profile-bg-picture" style="background-image:url('/assets/images/empresa/enelfondo.jpg')">
                                     <span class="picture-bg-overlay"></span><!-- overlay -->
                                 </div>
                                 <!-- meta -->
@@ -31,13 +28,7 @@
                                                 <p class="text-muted m-b-0"><small>{{persona.contratista}}</small></p>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
-                                            <div class="text-right">
-                                                <button type="button" class="btn btn-success waves-effect waves-light">
-                                                    <i class="mdi mdi-account-settings-variant m-r-5"></i> Editar Perfil
-                                                </button>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                                 <!--/ meta -->
@@ -50,56 +41,18 @@
                                 <!-- Personal-Information -->
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
-                                        <h3 class="panel-title">Personal Information</h3>
+                                        <h3 class="panel-title">Información Personal</h3>
                                     </div>
                                     <div class="panel-body">
-                                        <p class="text-muted font-13">
-                                            Hye, I’m Johnathan Doe residing in this beautiful world. I create websites and mobile apps with great UX and UI design. I have done work with big companies like Nokia, Google and Yahoo. Meet me or Contact me for any queries. One Extra line for filling space. Fill as many you want.
-                                        </p>
-
-                                        <hr/>
 
                                         <div class="text-left">
-                                            <p class="text-muted font-13"><strong>Full Name :</strong> <span class="m-l-15">Johnathan Deo</span></p>
-
-                                            <p class="text-muted font-13"><strong>Mobile :</strong><span class="m-l-15">(+12) 123 1234 567</span></p>
-
                                             <p class="text-muted font-13"><strong>Email :</strong> <span class="m-l-15">coderthemes@gmail.com</span></p>
 
-                                            <p class="text-muted font-13"><strong>Location :</strong> <span class="m-l-15">USA</span></p>
 
-                                            <p class="text-muted font-13"><strong>Languages :</strong>
-                                                <span class="m-l-5">
-                                                    <span class="flag-icon flag-icon-us m-r-5 m-t-0" title="us"></span>
-                                                    <span>English</span>
-                                                </span>
-                                                <span class="m-l-5">
-                                                    <span class="flag-icon flag-icon-de m-r-5" title="de"></span>
-                                                    <span>German</span>
-                                                </span>
-                                                <span class="m-l-5">
-                                                    <span class="flag-icon flag-icon-es m-r-5" title="es"></span>
-                                                    <span>Spanish</span>
-                                                </span>
-                                                <span class="m-l-5">
-                                                    <span class="flag-icon flag-icon-fr m-r-5" title="fr"></span>
-                                                    <span>French</span>
-                                                </span>
-                                            </p>
 
                                         </div>
 
-                                        <ul class="social-links list-inline m-t-20 m-b-0">
-                                            <li>
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a>
-                                            </li>
-                                            <li>
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a>
-                                            </li>
-                                            <li>
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a>
-                                            </li>
-                                        </ul>
+                                       
                                     </div>
                                 </div>
                                 <!-- Personal-Information -->
@@ -209,41 +162,7 @@
                                 <!-- end row -->
 
 
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title">Experience</h3>
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="">
-                                            <h5 class="text-custom m-b-5">Lead designer / Developer</h5>
-                                            <p class="m-b-0">websitename.com</p>
-                                            <p><b>2010-2015</b></p>
-
-                                            <p class="text-muted font-13 m-b-0">Lorem Ipsum is simply dummy text
-                                                of the printing and typesetting industry. Lorem Ipsum has
-                                                been the industry's standard dummy text ever since the
-                                                1500s, when an unknown printer took a galley of type and
-                                                scrambled it to make a type specimen book.
-                                            </p>
-                                        </div>
-
-                                        <hr>
-
-                                        <div class="">
-                                            <h5 class="text-custom m-b-5">Senior Graphic Designer</h5>
-                                            <p class="m-b-0">coderthemes.com</p>
-                                            <p><b>2007-2009</b></p>
-
-                                            <p class="text-muted font-13">Lorem Ipsum is simply dummy text
-                                                of the printing and typesetting industry. Lorem Ipsum has
-                                                been the industry's standard dummy text ever since the
-                                                1500s, when an unknown printer took a galley of type and
-                                                scrambled it to make a type specimen book.
-                                            </p>
-                                        </div>
-
-                                    </div>
-                                </div>
+                                
 
                                 <div class="card-box">
                                     <div class="table-responsive">

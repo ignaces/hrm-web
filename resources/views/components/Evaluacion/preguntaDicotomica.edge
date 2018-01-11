@@ -1,0 +1,18 @@
+
+    <div class="row" >
+
+        <div class="col-lg-8" style="height:100%;">
+            <b>{{{pregunta.enunciado}}}</b>
+        </div>
+        <div class="col-lg-4">
+            <div class="button-wrap">
+                @each(alternativa in pregunta.alternativas)
+                    <input class="hidden radio-label option-button" type="radio" name="rd_{{pregunta.idPreguntaFacsimil}}" id="rd_{{pregunta.idPreguntaFacsimil}}_{{alternativa.id}}"/>
+                    <label class="button-label" for="rd_{{pregunta.idPreguntaFacsimil}}_{{alternativa.id}}">
+                        <span>SI</span>
+                    </label>                         
+                @endeach  
+            </div>
+        </div>
+    </div>
+<!--<div class="col-lg-12">-->

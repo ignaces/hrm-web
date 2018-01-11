@@ -8,22 +8,20 @@ class Instrumento {
 
         var server = Env.get('API_SERVER', 'development')
 
-        const facsimiles = await got(`${server}/Evaluacion/Instrumento/getFacsimiles`,
+        const facsimiles = await got(`${server}/Evaluacion/Instrumento/getFacsimilesPersona`,
         {
             json:true,
             query:{
                 "idCliente":"asdasdsad",
                 "idProcesoPersona":"576647a0-f0eb-11e7-bf12-bc764e100f2b",
                 "codigoInstrumento":"TCO"
-            }
+                }
         })
         
-        const result = await got(`${server}/Evaluacion/Instrumento/getFacsimilesPersona`,
+        const result = await got(`${server}/Evaluacion/Instrumento/getFacsimil`,
         {
             json:true,
-            query:{
-                idCliente:"asdasdasdasd",
-                    idProcesoPersona}
+            query:{"idFacsimil":"595299cc-ef15-11e7-80ab-a7d2274a0124"}
         })
        
         var persona = {
