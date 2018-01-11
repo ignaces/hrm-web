@@ -570,12 +570,12 @@ jQuery(function($) {
   
       //Pie Chart
       c3.generate({
-        bindto: '#pie-chart1',
+        bindto: '#piechart1',
         data: {
           columns: [
-            ['Done', 46],
-            ['Due', 24],
-            ['Hold', 30]
+            ['No Iniciado', 7],
+            ['En Proceso', 1],
+            ['Finalizado', 2]
           ],
           type : 'pie'
         },
@@ -590,17 +590,16 @@ jQuery(function($) {
       });
       //Pie Chart
       c3.generate({
-        bindto: '#pie-chart2',
+        bindto: '#piechart2',
         data: {
           columns: [
-            ['Done', 46],
-            ['Due', 24],
-            ['Hold', 30]
+            ['Acreditados', 1],
+            ['No Acreditados', 1]
           ],
           type : 'pie'
         },
         color: {
-          pattern: ["#dddddd", "#64c5b1", "#e68900"]
+          pattern: ["#64c5b1", "#e68900"]
         },
         pie: {
           label: {
