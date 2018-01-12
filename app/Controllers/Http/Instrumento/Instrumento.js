@@ -33,7 +33,7 @@ class Instrumento {
         };
         
         var instrumento = result.body;
-        return view.render('instrumento/instrumento',  {persona:persona,instrumento:instrumento});
+        return view.render('Instrumento/instrumento',  {persona:persona,instrumento:instrumento});
     }
      historia ({view,request,response}){
          const Env = use('Env')
