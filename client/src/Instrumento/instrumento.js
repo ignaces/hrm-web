@@ -83,4 +83,6 @@ $(document).ready(function(){
           });
     });
 
+    $('.table-responsive').DataTable();
+
 }); 
