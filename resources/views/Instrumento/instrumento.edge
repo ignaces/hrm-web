@@ -26,14 +26,36 @@
                 </div>
                 <div class="panel-body">
                     <div class="row question">
-                        
-                        @each(pregunta in instrumento.preguntas)
-                            @if(pregunta.tipoPregunta == "ALT")
+                        @if(instrumento.tipoInstrumento=="TCO")
+                            @each(pregunta in instrumento.preguntas)
+                                @if(pregunta.tipoPregunta == "ALT")
 
-                                @!component('components.Evaluacion.preguntaSimple', pregunta=pregunta)
-                            @else
-                            @endif     
-                        @endeach
+                                    @!component('components.Evaluacion.preguntaSimple', pregunta=pregunta)
+                                @else
+                                @endif     
+                            @endeach
+                        @endif
+                        @if(instrumento.tipoInstrumento=="SOT")
+                            @each(competencia in instrumento.competencias)
+                                @each(actividadClave in competencia.actividadesClave)
+
+                                    @!component('components.Evaluacion.preguntaDicotomica', actividadClave=actividadClave)
+                                @endeach
+
+                                    
+                                
+                            @endeach
+                        @endif
+                        @if(instrumento.tipoInstrumento=="EIC")
+                            @each(pregunta in instrumento.preguntas)
+                                @if(pregunta.tipoPregunta == "ALT")
+
+                                    @!component('components.Evaluacion.preguntaSimple', pregunta=pregunta)
+                                @else
+                                @endif     
+                            @endeach
+                        @endif
+                        
                         
                     </div><!--<div class="row">-->    
 

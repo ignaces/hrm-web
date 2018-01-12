@@ -11,8 +11,10 @@ class Instrumento {
         var idOpinante = all.idOpinante
         var codigo = all.codigo
         
+        idOpinante='c1c4590c-f72c-11e7-bf12-bc764e100f2b'
+        codigo='SOT'
         
-        console.log(idProcesoPersona)
+        
         const result = await got(`${server}/Evaluacion/Instrumento/getInstrumento`,
         {
             json:true,
