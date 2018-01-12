@@ -13,13 +13,11 @@ $(document).ready(function(){
     $( ".bInstrumento" ).click(function() {
         var id = $( this ).attr('id');
         var arr = id.split("_");
-        var idPersonaProceso = arr[1];
-        var codigo = arr[2];
+        var idPersonaProceso = arr[0];
+        var codigo = arr[1];
+        $("#idPersonaProceso").val(idPersonaProceso)
+        $("#codigo").val(codigo)
         
-        $('<form id="formInstrumento" action="/Instrumento/Instrumento/index"></form>').appendTo('body')
-
-        $(`<input type="hidden" id="idPersonaProceso" name="idPersonaProceso" value="${idPersonaProceso}" />`)
-        $(`<input type="hidden" id="codigo" name="codigo" value="${codigo}" />`)
         $('#formInstrumento').submit()
     });
     $( "#instrumento_btn_guardar" ).click(function() {

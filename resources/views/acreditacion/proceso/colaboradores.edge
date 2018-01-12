@@ -2,7 +2,7 @@
 
 
 @section('scripts')
-    <script src="/assets/js/dist/Instrumento.min.js"></script>
+    <script src="/assets/js/dist/Instrumento.min.js?v4"></script>
     <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
 @endsection
 
@@ -17,7 +17,14 @@
         {nombre:"Instrumento",activa:false},
         {nombre:"Instrumento",activa:true}
     ])
-            
+    <form id="formInstrumento" method="POST" action="/Instrumento/Instrumento/index">
+    {{ csrfField() }}
+    <input type="hidden" id="idPersonaProceso" name="idPersonaProceso"  />
+    <input type="hidden" id="codigo" name="codigo"  />
+    </form>
+
+        
+  
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-border panel-primary">
