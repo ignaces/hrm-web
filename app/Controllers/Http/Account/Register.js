@@ -1,15 +1,16 @@
-const User = use('App/Model/User')
+const User = use('App/Models/User')
 const Hash = use('Hash')
 
 class Register{
     index({view,request}){
         return view.render('account/register');
       }
-    async doRegister(request, response) {
+    async doRegister({view,request, response}) {
         const user = new User()
         user.username = request.input('name')
         user.email = request.input('email')
         user.password = request.input('password')
+        console.log(user)
         
         await user.save()
 
@@ -17,7 +18,7 @@ class Register{
             success: 'Registration Successful! Now go ahead and login'
         }
 
-        response.sendView('register', { registerMessage : registerMessage })
+        return view.render('account/login',  {persona:persona,instrumento:instrumento});
     }
 }
-module.exports = UserController
+module.exports = Register
