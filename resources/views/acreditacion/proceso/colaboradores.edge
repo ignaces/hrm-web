@@ -24,57 +24,63 @@
     </form>
 
         
-  
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="panel panel-border panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title"></h3>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                    
-                        <table class="table table-responsive">
+    @each(tipo in tipoOpinante.tipoOpinante)
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-border panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            @if(tipo.codigo == "AUTO")
+                                Autoevaluación
+                            @else
+                                Colaboradores
+                            @endif
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                        
+                            <table class="table table-responsive">
 
-                                <thead>
-                                <tr>
-                                    <th>Identificador</th>
-                                    <th>Nombre</th>
-                                    <th></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    @each(persona in personas)
+                                    <thead>
                                     <tr>
-                                        <td>{{persona.identificador}}</td>
-                                        <td>{{persona.nombres}} {{persona.apellidoPaterno}} {{persona.apellidoMaterno}}</td>
-                                        <td> 
-                                            <div style="text-align:right;">
-                                                @each(tipoInstrumento in persona.tiposInstrumentos)
-                                                    <button type="button" id="{{tipoInstrumento.idPersonaProceso}}_{{tipoInstrumento.codigoInterno}}" class="btn btn-info waves-effect waves-light bInstrumento" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{tipoInstrumento.nombre}}"> <span>{{tipoInstrumento.codigoInterno}}</span> </button>
-                                                @endeach
-                                                </div>
-                                        </td>
-                                        
+                                        <th>Identificador</th>
+                                        <th>Nombre</th>
+                                        <th></th>
                                     </tr>
-                                    @endeach
+                                    </thead>
+                                    <tbody>
+                                        @each(persona in tipo.personas)
+                                        <tr>
+                                            <td>{{persona.identificador}}</td>
+                                            <td>{{persona.nombres}} {{persona.apellidoPaterno}} {{persona.apellidoMaterno}}</td>
+                                            <td> 
+                                                <div style="text-align:right;">
+                                                    @each(instrumento in persona.instrumentos)
+                                                        <button type="button" id="{{instrumento.idOpinante}}_{{instrumento.codigoTipoInstrumento}}" class="btn btn-info waves-effect waves-light bInstrumento" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{instrumento.codigoTipoInstrumento}}"> <span>{{instrumento.codigoTipoInstrumento}}</span> </button>
+                                                    @endeach
+                                                    </div>
+                                            </td>
+                                            
+                                        </tr>
+                                        @endeach
+                                    
+                                    </tbody>
+                                </table>
+                    
                                 
-                                </tbody>
-                            </table>
-                   
-                            
-                      
-                    
+                        
+                        
 
-                    </div><!--<div class="row">-->    
+                        </div><!--<div class="row">-->    
 
-                    
-                    
-                </div><!--<div class="panel-body">-->
-            </div><!--<div class="panel panel-border panel-primary">-->
-        </div><!--<div class="col-lg-12">-->
-        
-        
-    </div><!--<div class="row">-->
-
+                        
+                        
+                    </div><!--<div class="panel-body">-->
+                </div><!--<div class="panel panel-border panel-primary">-->
+            </div><!--<div class="col-lg-12">-->
+            
+            
+        </div><!--<div class="row">-->
+    @endeach
 @endsection
