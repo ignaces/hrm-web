@@ -31,14 +31,18 @@ class Proceso {
 
         var server = Env.get('API_SERVER', 'development')
         
-        const result = await got(`${server}/Acreditacion/Proceso/getPersonas`,
+        const result = await got(`${server}/Acreditacion/Proceso/getPersonasEvaluaciones`,
         {
             json:true,
-            query:{"idProceso":"9d212163-f0e6-11e7-bf12-bc764e100f2b"}
+            query:{
+                "idProceso":"9d212163-f0e6-11e7-bf12-bc764e100f2b",
+                "idPersona":"DA4A8847-401A-515A-01DE-A30525BFA4E5"
+            }
         })
         
-        var personas = result.body;
-        return view.render('acreditacion/proceso/colaboradores',  {personas:personas});
+        var personas = result.body.data;
+        
+        return view.render('acreditacion/proceso/colaboradores',  {tipoOpinante:personas});
     }
 }
 
