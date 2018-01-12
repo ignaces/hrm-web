@@ -13,9 +13,9 @@ $(document).ready(function(){
     $( ".bInstrumento" ).click(function() {
         var id = $( this ).attr('id');
         var arr = id.split("_");
-        var idPersonaProceso = arr[0];
+        var idOpinante = arr[0];
         var codigo = arr[1];
-        $("#idPersonaProceso").val(idPersonaProceso)
+        $("#idOpinante").val(idOpinante)
         $("#codigo").val(codigo)
         
         $('#formInstrumento').submit()
