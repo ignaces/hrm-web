@@ -1,0 +1,94 @@
+@layout('layouts/horizontal')
+
+@section('scripts')
+        <script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+
+         <!--C3 Chart-->
+        <script type="text/javascript" src="/assets/plugins/d3/d3.min.js"></script>
+        <script type="text/javascript" src="/assets/plugins/c3/c3.min.js"></script>
+
+        <!--Echart Chart-->
+        <script type="text/javascript" src="/assets/plugins/echart/echarts-all.js"></script>
+         <script type="text/javascript" src="/assets/plugins/a.js"></script>
+   
+
+
+@endsection  
+
+@section('content')
+ <div class="row">
+    <div class="col-lg-6 col-md-12">
+        <div class="portlet">
+            <div class="portlet-heading bg-primary">
+                <h3 class="portlet-title">
+                    Empresa
+                </h3>
+                <div class="clearfix"></div>
+            </div>
+            <div id="bg-primary" class="panel-collapse collapse in">
+                <div class="portlet-body">
+                    <button type="button" class="btn btn-primary btn-rounded w-md waves-effect waves-light">Configuración</button>
+                    <button type="button" class="btn btn-primary btn-rounded w-md waves-effect waves-light">Sitio</button>
+                    <button type="button" class="btn btn-primary btn-rounded w-md waves-effect waves-light">Cargos</button>
+                    <button type="button" class="btn btn-primary btn-rounded w-md waves-effect waves-light">Clasificaciones</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6 col-md-12">
+         <div class="portlet">
+            <div class="portlet-heading bg-primary">
+                <h3 class="portlet-title">
+                    Usuarios
+                </h3>
+                <div class="clearfix"></div>
+            </div>
+            <div id="bg-primary" class="panel-collapse collapse in">
+                <div class="portlet-body">
+                    <button type="button" class="btn btn-primary btn-rounded w-md waves-effect waves-light">Nuevo Usuario</button>
+                    <button type="button" class="btn btn-primary btn-rounded w-md waves-effect waves-light">Usuarios</button>
+                    <button type="button" class="btn btn-primary btn-rounded w-md waves-effect waves-light">Roles</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ <div class="row">
+    <div class="col-lg-6 col-md-12">
+        <div class="portlet">
+            <div class="portlet-heading bg-primary">
+                <h3 class="portlet-title">
+                    Modelo Competencias
+                </h3>
+                <div class="clearfix"></div>
+            </div>
+            <div id="bg-primary" class="panel-collapse collapse in">
+                <div class="portlet-body">
+                    <button type="button" class="btn btn-primary btn-rounded w-md waves-effect waves-light">Nuevo Modelo</button>
+                    <button type="button" class="btn btn-primary btn-rounded w-md waves-effect waves-light">Modelos</button>
+                    <button type="button" class="btn btn-primary btn-rounded w-md waves-effect waves-light">Perfiles</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6 col-md-12">
+         <div class="portlet">
+            <div class="portlet-heading bg-primary">
+                <h3 class="portlet-title">
+                    Módulos
+                </h3>
+                <div class="clearfix"></div>
+            </div>
+            <div id="bg-primary" class="panel-collapse collapse in">
+                <div class="portlet-body">
+                    <button type="button" class="btn btn-primary btn-rounded w-md waves-effect waves-light">Agregar Módulo</button>
+                    <hr/>
+                    <button type="button" class="btn btn-primary btn-rounded w-md waves-effect waves-light">Acreditación de Competencias</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection  
