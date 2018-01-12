@@ -2,7 +2,7 @@
     <div class="portlet">
         <div class="portlet-heading bg-primary">
             <h3 class="portlet-title">
-                {{{criterio.nombre}}}
+                {{{data.criterio.nombre}}}
             </h3>
             <div class="portlet-widgets"> 
             </div>
@@ -18,14 +18,19 @@
                         
                         <div class="row">
                            <div class="button-wrap">
-                                @each(escala in criterio.escala)
+                                @each(escala in data.criterio.escala)
                                 <div class="col-lg-3">
-                                    <input class="hidden radio-label option-button" type="radio" name="rd_{{criterio.id}}" id="rd_{{criterio.id}}_{{escala.id}}"/>
-                                    <label class="button-label" style="height:200px" for="rd_{{criterio.id}}_{{escala.id}}">
+                                    @if(escala.estaSeleccionada==1)
+                                        <input checked class="hidden radio-label option-button r_alternativa" type="radio" name="rd_{{data.criterio.id}}" id="rd_{{data.criterio.id}}_{{escala.id}}_{{escala.requiereJustificacion}}_{{data.idOpinante}}"/>
+                                        
+                                        @else
+                                        <input class="hidden radio-label option-button r_alternativa" type="radio" name="rd_{{data.criterio.id}}" id="rd_{{data.criterio.id}}_{{escala.id}}_{{escala.requiereJustificacion}}_{{data.idOpinante}}"/>
+                                        @endif
+                                    <label class="button-label" style="height:200px" for="rd_{{data.criterio.id}}_{{escala.id}}_{{escala.requiereJustificacion}}_{{data.idOpinante}}">
                                         <span>{{escala.indicador}}</span>
                                     </label>                         
                                 </div>
-                                
+                    
                                 @endeach  
                             </div>
                         </div>
