@@ -38,22 +38,28 @@
                         @if(instrumento.tipoInstrumento=="SOT")
                             @each(competencia in instrumento.competencias)
                                 @each(actividadClave in competencia.actividadesClave)
-
-                                    @!component('components.Evaluacion.preguntaDicotomica', actividadClave=actividadClave)
+                                    @each(criterio in actividadClave.criterios)
+                                    @!component('components.Evaluacion.preguntaDicotomica', criterio=criterio)
+                                    
+                                    @endeach
+                                    
                                 @endeach
 
                                     
                                 
                             @endeach
+                            @!component('components.Evaluacion.css.preguntaDicotomica')
                         @endif
                         @if(instrumento.tipoInstrumento=="EIC")
-                            @each(pregunta in instrumento.preguntas)
-                                @if(pregunta.tipoPregunta == "ALT")
-
-                                    @!component('components.Evaluacion.preguntaSimple', pregunta=pregunta)
-                                @else
-                                @endif     
+                           @each(competencia in instrumento.competencias)
+                                @each(actividadClave in competencia.actividadesClave)
+                                    @each(criterio in actividadClave.criterios)
+                                    @!component('components.Evaluacion.preguntaLickert', criterio=criterio)
+                                    
+                                    @endeach
+                                @endeach
                             @endeach
+                            @!component('components.Evaluacion.css.preguntaDicotomica')
                         @endif
                         
                         

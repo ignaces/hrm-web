@@ -2,14 +2,14 @@
     <div class="row" >
 
         <div class="col-lg-8" style="height:100%;">
-            <b>{{{pregunta.enunciado}}}</b>
+            <b>{{{criterio.nombre}}}</b>
         </div>
         <div class="col-lg-4">
             <div class="button-wrap">
-                @each(alternativa in pregunta.alternativas)
-                    <input class="hidden radio-label option-button" type="radio" name="rd_{{pregunta.idPreguntaFacsimil}}" id="rd_{{pregunta.idPreguntaFacsimil}}_{{alternativa.id}}"/>
-                    <label class="button-label" for="rd_{{pregunta.idPreguntaFacsimil}}_{{alternativa.id}}">
-                        <span>SI</span>
+                @each(escala in criterio.escala)
+                    <input class="hidden radio-label option-button" type="radio" name="rd_{{criterio.id}}" id="rd_{{criterio.id}}_{{escala.id}}"/>
+                    <label class="button-label" for="rd_{{criterio.id}}_{{escala.id}}">
+                        <span>{{escala.nombre}}</span>
                     </label>                         
                 @endeach  
             </div>
