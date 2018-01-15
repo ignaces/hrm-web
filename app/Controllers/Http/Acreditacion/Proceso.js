@@ -26,10 +26,13 @@ class Proceso {
         return view.render('acreditacion/proceso/list',  {procesos});
     }
 
-    async colaboradores ({view,request, response}) {
+    async colaboradores ({view,request, response, auth}) {
         const Env = use('Env')
 
         var server = Env.get('API_SERVER', 'development')
+
+        //var user={usuario:auth.user.id}
+        console.log(auth.user.id);
         
         const result = await got(`${server}/Acreditacion/Proceso/getPersonasEvaluaciones`,
         {

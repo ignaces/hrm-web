@@ -36,7 +36,7 @@ Route.post('/login', 'Account/UserController.login')
 Route.get('/logout', 'Account/UserController.logout')
 
 
-Route.any('/:module/:controller/:action',  ({view ,request, response,params}) => {
+Route.any('/:module/:controller/:action',  ({view ,request, response,params,auth}) => {
   
     const module = params.module
     
@@ -51,7 +51,7 @@ Route.any('/:module/:controller/:action',  ({view ,request, response,params}) =>
     
     const controllerInstance = ioc.makeFunc(url)
     
-    return controllerInstance.method.apply(controllerInstance.instance,[{view,request,response}])
+    return controllerInstance.method.apply(controllerInstance.instance,[{view,request,response,params,auth}])
     
 }).middleware(['autenticacion'])
 
