@@ -2,7 +2,7 @@
 
 
 @section('scripts')
-    <script src="/assets/js/dist/Instrumento.min.js?v4"></script>
+    <script src="/assets/js/dist/Instrumento.min.js?v9876"></script>
     <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
 @endsection
 
@@ -30,22 +30,15 @@
                             @each(pregunta in instrumento.preguntas)
                                 @if(pregunta.tipoPregunta == "ALT")
 
-                                    @!component('components.Evaluacion.preguntaSimple', pregunta=pregunta)
+                                    @!component('components.Evaluacion.preguntaSimple', data={idOpinante:idOpinante,pregunta:pregunta})
                                 @else
                                 @endif     
                             @endeach
                         @endif
                         @if(instrumento.tipoInstrumento=="SOT")
                             @each(competencia in instrumento.competencias)
-                                @each(actividadClave in competencia.actividadesClave)
-                                    @each(criterio in actividadClave.criterios)
-                                    @!component('components.Evaluacion.preguntaDicotomica', criterio=criterio)
-                                    
-                                    @endeach
-                                    
-                                @endeach
-
-                                    
+                                
+                                    @!component('components.Evaluacion.preguntaDicotomica',data={idOpinante:idOpinante,competencia:competencia})
                                 
                             @endeach
                             @!component('components.Evaluacion.css.preguntaDicotomica')
@@ -54,7 +47,7 @@
                            @each(competencia in instrumento.competencias)
                                 @each(actividadClave in competencia.actividadesClave)
                                     @each(criterio in actividadClave.criterios)
-                                    @!component('components.Evaluacion.preguntaLickert', criterio=criterio)
+                                    @!component('components.Evaluacion.preguntaLickert', data={idOpinante:idOpinante,criterio:criterio})
                                     
                                     @endeach
                                 @endeach

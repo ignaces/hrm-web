@@ -1,18 +1,69 @@
 
-    <div class="row" >
+    
 
-        <div class="col-lg-8" style="height:100%;">
-            <b>{{{criterio.nombre}}}</b>
-        </div>
-        <div class="col-lg-4">
-            <div class="button-wrap">
-                @each(escala in criterio.escala)
-                    <input class="hidden radio-label option-button" type="radio" name="rd_{{criterio.id}}" id="rd_{{criterio.id}}_{{escala.id}}"/>
-                    <label class="button-label" for="rd_{{criterio.id}}_{{escala.id}}">
-                        <span>{{escala.nombre}}</span>
-                    </label>                         
-                @endeach  
-            </div>
-        </div>
-    </div>
+        
+          <div class="col-lg-12">
+                <div class="portlet">
+                    <div class="portlet-heading bg-primary">
+                        <h3 class="portlet-title">
+                            {{{data.competencia.nombre}}}
+                        </h3>
+                        <div class="portlet-widgets"> </div>
+                        <div class="clearfix"></div>
+                    </div><!--<div class="portlet-heading bg-primary">-->
+                @each(actividadClave in data.competencia.actividadesClave)
+                  
+                <div id="bg-default" class="panel-collapse collapse in">
+                    <div class="portlet-body">
+                        <div class="panel panel-border panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                        {{{actividadClave.nombre}}}
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                
+                                
+                                    @each(criterio in actividadClave.criterios)
+                            <div class="row" >
+                                <div class="col-lg-8" style="height:100%;">
+                                        <b>{{{criterio.nombre}}}</b>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="col-lg-6 button-wrap">
+                                        @each(escala in criterio.escala)
+                                        
+                                            @if(escala.estaSeleccionada==1)
+                                                <input checked class="hidden radio-label option-button r_alternativa" type="radio" name="rd_{{escala.idCriterio}}" id="rd_{{escala.idCriterio}}_{{escala.id}}_{{escala.requiereJustificacion}}_{{data.idOpinante}}"/>
+                                            @else
+                                                <input class="hidden radio-label option-button r_alternativa" type="radio" name="rd_{{escala.idCriterio}}" id="rd_{{escala.idCriterio}}_{{escala.id}}_{{escala.requiereJustificacion}}_{{data.idOpinante}}"/>
+                                            @endif
+                                            
+                                            <label class="button-label" for="rd_{{escala.idCriterio}}_{{escala.id}}_{{escala.requiereJustificacion}}_{{data.idOpinante}}">
+                                                <span>{{escala.nombre}}</span>
+                                            </label>      
+                                                
+                                        @endeach
+                                    </div>
+                                        <div class="col-lg-6 form-group">
+                                            <textarea class="form-control" rows="2" style="display:none" placeholder="Debe ingresar justificación" name="txt_{{criterio.id}}" id="txt_{{criterio.id}}"></textarea>
+                                        </div>
+                                </div>
+                            </div>
+                        @endeach
+                              
+                            </div><!--<div class="panel-body">-->
+                        </div>
+                        
+                 </div>     
+                </div>  
+                @endeach
+                 
+                 </div><!--<div class="portlet">-->
+</div><!--<div class="col-lg-12">-->
+               
+          
+        
+        
+    
 <!--<div class="col-lg-12">-->
