@@ -14,13 +14,13 @@
          @!section('pluginsCss')
     
         
-        <link href="/themes/{{theme()}}/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="/themes/{{theme()}}/assets/css/core.css" rel="stylesheet" type="text/css" />
-        <link href="/themes/{{theme()}}/assets/css/components.css" rel="stylesheet" type="text/css" />
-        <link href="/themes/{{theme()}}/assets/css/icons.css" rel="stylesheet" type="text/css" />
-        <link href="/themes/{{theme()}}/assets/css/pages.css" rel="stylesheet" type="text/css" />
-        <link href="/themes/{{theme()}}/assets/css/menu.css" rel="stylesheet" type="text/css" />
-        <link href="/themes/{{theme()}}/assets/css/responsive.css" rel="stylesheet" type="text/css" />
+        <link href="{{theme(request.hostname())}}/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="{{theme(request.hostname())}}/assets/css/core.css" rel="stylesheet" type="text/css" />
+        <link href="{{theme(request.hostname())}}/assets/css/components.css" rel="stylesheet" type="text/css" />
+        <link href="{{theme(request.hostname())}}/assets/css/icons.css" rel="stylesheet" type="text/css" />
+        <link href="{{theme(request.hostname())}}/assets/css/pages.css" rel="stylesheet" type="text/css" />
+        <link href="{{theme(request.hostname())}}/assets/css/menu.css" rel="stylesheet" type="text/css" />
+        <link href="{{theme(request.hostname())}}/assets/css/responsive.css" rel="stylesheet" type="text/css" />
         <link href="/assets/plugins/tooltipster/tooltipster.bundle.min.css" rel="stylesheet" type="text/css" />        
         
   </head>

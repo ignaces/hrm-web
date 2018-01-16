@@ -63,8 +63,20 @@ module.exports = { providers, aceProviders, aliases, commands }
 
 const edge = require('edge.js')
 
-edge.global('theme', function () {
+edge.global('theme', function (hostname) {
   const Env = use('Env')
-  var theme = Env.get('STYLE', 'default')
+
+  var theme = Env.get('STYLE', 'default');
+
+  //hostname="enel.enovum.cl"
+  
+  if(hostname=="localhost"){
+    theme = `/themes/${theme}` 
+  }else{
+    var company = hostname.split(".")[0]
+    theme = `http://hrmassets.enovum.cl/${company}`
+  }
+  
+  
   return theme;
 })
