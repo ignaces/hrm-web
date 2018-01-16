@@ -10,7 +10,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
         <!-- App favicon -->
-        <link rel="shortcut icon" href="/assets/images/logo_sm.png">
+        <link rel="shortcut icon" href="{{theme(request.hostname())}}/assets/images/logo_sm.png">
          @!section('pluginsCss')
     
         
@@ -51,10 +51,10 @@
                         <!--</a>-->
                         <!-- Image Logo -->
                         <a href="/" class="logo">
-                            <img src="/assets/images/empresa/logoempresa.png" alt="" height="63">
+                            <img src="{{theme(request.hostname())}}/assets/images/empresa/logoempresa.png" alt="" height="63">
                         </a>
                         <a href="/" class="logo-min">
-                            <img src="/assets/images/empresa/logoempresa.png" alt="" height="63">
+                            <img src="{{theme(request.hostname())}}/assets/images/empresa/logoempresa.png" alt="" height="63">
                         </a>
 
                     </div>
@@ -149,7 +149,7 @@
                 </div> <!-- content -->
 
                 <footer class="footer text-left">
-                      <img src="/assets/images/innovum_logo.png" alt="" height="50">
+                      <img src="{{theme(request.hostname())}}/assets/images/innovum_logo.png" alt="" height="50">
                        2018 © 
                 </footer>
 
