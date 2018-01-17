@@ -23,7 +23,7 @@ class Proceso {
                 }
         ];
         
-        return view.render('acreditacion/proceso/list',  {procesos});
+        return view.render('acreditacion/proceso/list',  {procesos:procesos});
     }
 
     async colaboradores ({view,request, response, auth, session}) {
@@ -44,7 +44,7 @@ class Proceso {
                 "idPersona": idPersona
             }
         })
-        
+        console.log("proceso->",request.hostname())
         var personas = result.body.data;
         
         return view.render('acreditacion/proceso/colaboradores',  {tipoOpinante:personas});

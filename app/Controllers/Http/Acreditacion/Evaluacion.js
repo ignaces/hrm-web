@@ -4,7 +4,7 @@ const got = use('got')
 
 class Evaluacion {
 
-    * index (request, response) {
+    index ({view,request, response}) {
         const Env = use('Env')
         var server = Env.get('API_SERVER', 'development')
         var personas = [{ nombre:"Pierce Caviness", idEstado:1,Perfil:"MANTENEDOR SENIOR"},
@@ -33,8 +33,9 @@ class Evaluacion {
         { nombre:"Lysimachus Ritz", idEstado:1,Perfil:"MANTENEDOR SENIOR"},
         { nombre:"Hidi Asbury",idEstado:3,Perfil:"OPERADOR TERRENO SX"}];
     
-        yield response.sendView('acreditacion/evaluacion/evaluados',  {personas:personas});
+        return view.render('acreditacion/evaluacion/evaluados',  {personas:personas});
     }
+    
     
 }
 

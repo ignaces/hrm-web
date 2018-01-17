@@ -3,7 +3,7 @@
 const got = use('got')
 
 class Portada {
-     welcome  ({ view,request, response, auth, session }) {
+     async welcome  ({ view,request, response, auth, session }) {
         
         //console.log(auth.user.username)
         var idPersona = session.get('idPersona', 'fall')

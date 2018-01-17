@@ -50,7 +50,7 @@ Route.any('/:module/:controller/:action',  ({view ,request, response,params,auth
     const url = `${controllerPath}/${controller}.${action}`
     
     const controllerInstance = ioc.makeFunc(url)
-    
+    console.log("routes->",request.hostname())
     return controllerInstance.method.apply(controllerInstance.instance,[{view,request,response,params,auth, session}])
     
 }).middleware(['autenticacion'])
