@@ -10,7 +10,7 @@ class Register{
         user.username = request.input('name')
         user.email = request.input('email')
         user.password = request.input('password')
-        console.log(user)
+        
         
         await user.save()
 
