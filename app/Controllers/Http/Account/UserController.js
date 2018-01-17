@@ -2,11 +2,13 @@
 const got = use('got')
 class UserController {
     
-      async login ({ view,request, auth ,response}) {
+      async login ({ view,request, auth ,response, session}) {
         const { username, password } = request.all()
         await auth.attempt(username, password)
         
         const Env = use('Env')
+
+        //onsole.log(session);
 
         var server = Env.get('API_SERVER', 'development')
         
@@ -18,8 +20,9 @@ class UserController {
                 "idUser":auth.user.id
             }
         })
-
+        //console.log(obIdPersona.body.data[0].idPersona);
         session.put('idPersona', obIdPersona.body.data[0].idPersona)
+        //console.log(session.get('idPersona', 'fallbackName'))
 
         return response.redirect('/')
       }

@@ -26,30 +26,22 @@ class Proceso {
         return view.render('acreditacion/proceso/list',  {procesos});
     }
 
-    async colaboradores ({view,request, response, auth}) {
+    async colaboradores ({view,request, response, auth, session}) {
+        
+        
         const Env = use('Env')
+
+        var idPersona = session.get('idPersona', 'fall')
 
         var server = Env.get('API_SERVER', 'development')
         
-        var obIdPersona = await got(`${server}/Persona/Persona/getIdPersona`,
-        {
-            json:true,
-            query:{
-                "hostname":"9d212163-f0e6-11e7-bf12-bc764e100f2b",
-                "idUser":auth.user.id
-            }
-        })
-
-
-
-        console.log(obIdPersona.body.data[0].idPersona);
         
         const result = await got(`${server}/Acreditacion/Proceso/getPersonasEvaluaciones`,
         {
             json:true,
             query:{
                 "idProceso":"9d212163-f0e6-11e7-bf12-bc764e100f2b",
-                "idPersona":"DA4A8847-401A-515A-01DE-A30525BFA4E5"
+                "idPersona": idPersona
             }
         })
         

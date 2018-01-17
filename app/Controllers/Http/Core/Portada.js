@@ -3,10 +3,10 @@
 const got = use('got')
 
 class Portada {
-     welcome  ({ view,request, response, auth }) {
+     welcome  ({ view,request, response, auth, session }) {
         
         //console.log(auth.user.username)
-        console.log(auth.user)
+        var idPersona = session.get('idPersona', 'fall')
 
         var user={usuario:auth.user}
         var cargo="Evaluador FCH"
