@@ -30,9 +30,19 @@ class Proceso {
         const Env = use('Env')
 
         var server = Env.get('API_SERVER', 'development')
+        
+        var obIdPersona = await got(`${server}/Persona/Persona/getIdPersona`,
+        {
+            json:true,
+            query:{
+                "hostname":"9d212163-f0e6-11e7-bf12-bc764e100f2b",
+                "idUser":auth.user.id
+            }
+        })
 
-        //var user={usuario:auth.user.id}
-        console.log(auth.user.id);
+
+
+        console.log(obIdPersona.body.data[0].idPersona);
         
         const result = await got(`${server}/Acreditacion/Proceso/getPersonasEvaluaciones`,
         {

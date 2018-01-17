@@ -4,7 +4,7 @@ $(document).ready(function(){
     $( ".r_alternativa" ).click(function() {
         
         var id = $( this ).attr('id');
-        
+        console.log("3");
         var arr = id.split("_");
         var idPregunta = arr[1];
         var idAlternativa = arr[2];
