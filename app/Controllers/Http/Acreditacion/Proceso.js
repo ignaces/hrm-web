@@ -25,7 +25,6 @@ class Proceso {
                     descripcion:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed molestie, ipsum et ullamcorper viverra, purus quam aliquam dolor, vel lacinia lectus odio porta risus. Aenean tincidunt pharetra iaculis. Pellentesque id mi magna. Ut commodo nisl in leo rutrum molestie. Nullam sed purus porta, finibus elit id, feugiat ex. Cras interdum porttitor dui vitae convallis. Mauris id magna ut turpis imperdiet auctor eget a diam."
                 }
         ];
-        
         return view.render('acreditacion/proceso/list',  {procesos:procesos});
     }
 >>>>>>> 8df3ce19bd10bd2a72068d2f90bcae087c45c17d
