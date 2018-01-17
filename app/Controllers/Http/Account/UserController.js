@@ -5,7 +5,22 @@ class UserController {
       async login ({ view,request, auth ,response}) {
         const { username, password } = request.all()
         await auth.attempt(username, password)
-    
+        
+        const Env = use('Env')
+
+        var server = Env.get('API_SERVER', 'development')
+        
+        var obIdPersona = await got(`${server}/Persona/Persona/getIdPersona`,
+        {
+            json:true,
+            query:{
+                "hostname":"9d212163-f0e6-11e7-bf12-bc764e100f2b",
+                "idUser":auth.user.id
+            }
+        })
+
+        session.put('idPersona', obIdPersona.body.data[0].idPersona)
+
         return response.redirect('/')
       }
       
