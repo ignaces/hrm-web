@@ -4,8 +4,6 @@ const got = use('got')
 
 class Personas {
     * index (request, response) {
-        const Env = use('Env')
-        var server = Env.get('API_SERVER', 'development')
         var personas = [{ nombre:"Pierce Caviness" } ,
         { nombre:"Norberta Stagg" } ,
         { nombre:"Wim Bonar" } ,

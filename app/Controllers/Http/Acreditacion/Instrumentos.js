@@ -4,8 +4,7 @@ const got = use('got')
 
 class Instrumentos {
     * index (request, response) {
-        const Env = use('Env')
-        var server = Env.get('API_SERVER', 'development')
+        
         var instrumentos = [
                 { nombre:"Set de Observaciones En Terreno (SOT)", idEstado:1,
                 class:"task-info",
@@ -25,8 +24,7 @@ class Instrumentos {
     }
     * competenciasInstrumento (request,response){
 
-        const Env = use('Env')
-        var server = Env.get('API_SERVER', 'development')
+       
         var competencias = [
         { id:1,nombre:"Competencia 1",class:"task-success",image:"funcional.png",descripcion:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed molestie, ipsum et ullamcorper viverra, purus quam aliquam dolor, vel lacinia lectus odio porta risus. Aenean tincidunt pharetra iaculis. Pellentesque id mi magna. Ut commodo nisl in leo rutrum molestie. Nullam sed purus porta, finibus elit id, feugiat ex. Cras interdum porttitor dui vitae convallis. Mauris id magna ut turpis imperdiet auctor eget a diam.", tipo:"Funcional",idTipo:1 } ,
         { id:2,nombre:"Competencia 2",class:"task-info",image:"conductual.png",descripcion:"Aenean nec orci aliquet, imperdiet leo nec, ultricies neque. Donec cursus a tellus vitae condimentum. Donec accumsan hendrerit elementum. Nullam placerat ante vel felis lobortis, in commodo lectus luctus. Pellentesque rutrum, est nec varius vulputate, sem nisi efficitur dolor, non porta lorem purus sit amet justo. Praesent non felis suscipit, accumsan mi ut, tempus eros. Duis venenatis volutpat nunc eu elementum. Curabitur tempor sodales leo, a cursus nisl. Suspendisse id ipsum sed nunc fringilla eleifend ac id sapien.", tipo:"Conductual",idTipo:2 } ,

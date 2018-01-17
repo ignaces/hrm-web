@@ -5,8 +5,7 @@ const got = use('got')
 class Evaluacion {
 
     index ({view,request, response}) {
-        const Env = use('Env')
-        var server = Env.get('API_SERVER', 'development')
+       
         var personas = [{ nombre:"Pierce Caviness", idEstado:1,Perfil:"MANTENEDOR SENIOR"},
         { nombre:"Norberta Stagg", idEstado:3,Perfil:"OPERADOR TERRENO SX",Perfil:"MANTENEDOR SENIOR"},
         { nombre:"Wim Bonar", idEstado:2,Perfil:"ELÉCTRICO ÁREA HÚMEDA/ELÉCTRICO ÁREA SECA/ELÉCTRICO ÁREA RIPIO"},

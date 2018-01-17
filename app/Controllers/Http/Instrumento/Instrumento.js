@@ -1,31 +1,19 @@
 'use strict'
-
-const got = use('got')
+const data = use('App/Utils/Data')
 
 class Instrumento {
      async index ({view,request, response}) {
-        const Env = use('Env')
 
-        var server = Env.get('API_SERVER', 'development')
         const all = request.all();
         var idOpinante = all.idOpinante
         var codigo = all.codigo
         
-        /*
-            idOpinante='c1c4590c-f72c-11e7-bf12-bc764e100f2b'
-            codigo='SOT'
-        */
-        const result = await got(`${server}/Evaluacion/Instrumento/getInstrumento`,
-        {
-            json:true,
-            query:{
-                "hostname":request.hostname(),
-                "idOpinante":idOpinante,
-                "tipoInstrumento":codigo
-                }
-        })
-        
-        
+        var obj = {
+            "idOpinante":idOpinante,
+            "tipoInstrumento":codigo
+        };
+        var result = await data.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumento',obj);
+
        
         var persona = {
             nombre:"Juan Alberto Gonzales Olivares",
@@ -47,28 +35,19 @@ class Instrumento {
         var idAlternativa = request.input("idAlternativa")
         var justificacion = request.input("justificacion")
         
-        const Env = use('Env')
+        var obj = {
+            "idOpinante":idOpinante,
+            "idPregunta":idPregunta,
+            "idAlternativa":idAlternativa,
+            "justificacion":justificacion,
+            };
+        var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/putRespuesta',obj);
 
-        
-        var server = Env.get('API_SERVER', 'development')
-        const result = await got(`${server}/Acreditacion/Proceso/putRespuesta`,
-        {
-            json:true,
-            query:{
-                "hostname":request.hostname(),
-                "idOpinante":idOpinante,
-                "idPregunta":idPregunta,
-                "idAlternativa":idAlternativa,
-                "justificacion":justificacion,
-                }
-        })
         return {mensaje:"OK"}
     }
     
     historia ({view,request,response}){
-         const Env = use('Env')
-         
-         var server = Env.get('API_SERVER', 'development')
+        
          
          var historial = [{
              descripcion:""
@@ -76,9 +55,7 @@ class Instrumento {
         return view.render('persona/historia',  {historial:historial}); 
     }
     historia2 ({view,request,response}){
-        const Env = use('Env')
-        
-        var server = Env.get('API_SERVER', 'development')
+     
         
         var historial = [{
             descripcion:""

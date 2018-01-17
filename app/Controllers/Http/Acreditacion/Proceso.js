@@ -1,29 +1,19 @@
 'use strict'
 
-const got = use('got')
+const data = use('App/Utils/Data')
 
 class Proceso {
     
 
     async colaboradores ({view,request, response, auth, session}) {
         
-        
-        const Env = use('Env')
+        var idPersona = session.get('idPersona', 'fail')
 
-        var idPersona = session.get('idPersona', 'fall')
-
-        var server = Env.get('API_SERVER', 'development')
-        
-        
-        const result = await got(`${server}/Acreditacion/Proceso/getPersonasEvaluaciones`,
-        {
-            json:true,
-            query:{
-                "idProceso":"9d212163-f0e6-11e7-bf12-bc764e100f2b",
-                "idPersona": idPersona
-            }
-        })
-        console.log("proceso->",request.hostname())
+        var obj = {
+            "idProceso":"9d212163-f0e6-11e7-bf12-bc764e100f2b",
+            "idPersona": idPersona
+        };
+        var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getPersonasEvaluaciones',obj);
         var personas = result.body.data;
         
         return view.render('acreditacion/proceso/colaboradores',  {tipoOpinante:personas});
