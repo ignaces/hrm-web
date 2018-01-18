@@ -18,7 +18,7 @@ module.exports = {
             json:true,
             query:obj
         })
-        console.log(obj)
+        //console.log(obj)
         return result;
     }
 
