@@ -20,5 +20,30 @@ class Register{
 
         return view.render('account/login',  {persona:persona,instrumento:instrumento});
     }
+    async doRegisterPersonas({view,request, response}) {
+        
+        
+
+        const personas = request.all();
+
+        for(var item in personas){
+            const user = new User()
+            const persona=personas[item];
+            console.log(persona)
+            user.username = persona.identificador;
+            user.email = persona.email;
+            user.password = persona.password;
+            
+            
+            await user.save()
+        }
+        
+
+  /*      var registerMessage = {
+            success: 'Registration Successful! Now go ahead and login'
+        }
+*/
+        response.json("");
+    }
 }
 module.exports = Register
