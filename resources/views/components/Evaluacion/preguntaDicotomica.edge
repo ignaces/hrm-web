@@ -31,23 +31,34 @@
                                                 @each(escala in criterio.escala)
                                                 
                                                     @if(escala.estaSeleccionada==1)
-                                                        <input checked  class="hidden radio-label option-button r_alternativa" type="radio" name="rd_{{escala.idCriterio}}" id="rd_{{escala.idCriterio}}_{{escala.id}}_{{escala.requiereJustificacion}}_{{data.idOpinante}}"/>
+                                                        <input checked  class="hidden radio-label option-button r_alternativa" type="radio" name="rd_{{$parent.criterio.id}}" id="rd_{{$parent.criterio.id}}_{{escala.id}}_{{escala.requiereJustificacion}}_{{data.idOpinante}}"/>
                                                     @else
-                                                        <input          class="hidden radio-label option-button r_alternativa" type="radio" name="rd_{{escala.idCriterio}}" id="rd_{{escala.idCriterio}}_{{escala.id}}_{{escala.requiereJustificacion}}_{{data.idOpinante}}"/>
+                                                        <input          class="hidden radio-label option-button r_alternativa" type="radio" name="rd_{{$parent.criterio.id}}" id="rd_{{$parent.criterio.id}}_{{escala.id}}_{{escala.requiereJustificacion}}_{{data.idOpinante}}"/>
                                                     @endif
                                                     
-                                                    <label class="button-label" for="rd_{{escala.idCriterio}}_{{escala.id}}_{{escala.requiereJustificacion}}_{{data.idOpinante}}">
+                                                    <label class="button-label" for="rd_{{$parent.criterio.id}}_{{escala.id}}_{{escala.requiereJustificacion}}_{{data.idOpinante}}">
                                                         <span>{{escala.nombre}}</span>
-                                                    </label>      
+                                                    </label> 
+
+                                                    @if(escala.requiereJustificacion==1)
+                                                        @if(escala.estaSeleccionada ==1)
+                                                            <div class="col-lg-12 form-group">
+                                                                <textarea class="form-control txt_justificacion" placeholder="Debe ingresar justificación" idAlternativa="{{escala.id}}" name="txt_{{$parent.criterio.id}}_{{data.idOpinante}}" id="txt_{{$parent.criterio.id}}_{{data.idOpinante}}">{{escala.justificacion}}</textarea>
+                                                            </div> 
+                                                        @else
+                                                            <div class="col-lg-12 form-group">
+                                                                <textarea class="form-control txt_justificacion" style="display:none" placeholder="Debe ingresar justificación" idAlternativa="" name="txt_{{$parent.criterio.id}}_{{data.idOpinante}}" id="txt_{{$parent.criterio.id}}_{{data.idOpinante}}"></textarea>
+                                                            </div> 
+                                                        @endif
+                                                    @endif
+                                                        
                                                 @endeach
                                             </div>
                                             
                                         </div>
 
                                     </div>
-                                    <div class="col-lg-12 form-group">
-                                        <textarea class="form-control" style="display:none" placeholder="Debe ingresar justificación" name="txt_{{criterio.id}}" id="txt_{{criterio.id}}"></textarea>
-                                    </div>
+                                    
 
                                 </div>
                             @endeach

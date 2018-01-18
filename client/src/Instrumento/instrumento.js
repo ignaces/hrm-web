@@ -4,23 +4,47 @@ $(document).ready(function(){
     $( ".r_alternativa" ).click(function() {
         
         var id = $( this ).attr('id');
-        console.log("3");
+        
         var arr = id.split("_");
         var idPregunta = arr[1];
         var idAlternativa = arr[2];
         var requiereJustificacion = arr[3]*1;
         var idOpinante =arr[4]; 
         var justificacion = "";
+        var txtJustificacion = "#txt_"+idPregunta+"_"+idOpinante;
+
         if(requiereJustificacion==1){
-            $("#txt_"+idPregunta).show();
+            $(txtJustificacion).show();
+            $(txtJustificacion).attr("idAlternativa", idAlternativa);
         }else{
-            $("#txt_"+idPregunta).hide();
+            $(txtJustificacion).val("");
+            $(txtJustificacion).hide();
         }
 
-        if($("#txt_"+idPregunta).val()){
-            justificacion=$("#txt_"+idPregunta).val()
+        if($(txtJustificacion).val()){
+            justificacion=$(txtJustificacion).val()
         }
+       
+        putRespuesta(idOpinante, idPregunta, idAlternativa, justificacion);
+    });
+
+    $( ".txt_justificacion" ).focusout(function() {  
+        var id = $( this ).attr('id');
+        var idAlternativa = $( this ).attr('idAlternativa');
         
+        var arr = id.split("_");
+        var idPregunta = arr[1];
+        var idOpinante =arr[2]; 
+        var justificacion = "";
+        
+        if($("#txt_"+idPregunta+"_"+idOpinante).val()){
+            justificacion=$("#txt_"+idPregunta+"_"+idOpinante).val()
+        }
+       
+        putRespuesta(idOpinante, idPregunta, idAlternativa, justificacion);
+    });
+
+    var putRespuesta = function(idOpinante, idPregunta, idAlternativa, justificacion){
         var obj = { 
             idOpinante:idOpinante,
             idPregunta:idPregunta,
@@ -28,20 +52,21 @@ $(document).ready(function(){
             justificacion:justificacion
          };
         
-    $.ajax({
-        type: "GET",
-        url: "/Instrumento/Instrumento/putRespuesta",
-        contentType: "application/json; charset=utf-8",
-        data: obj,
-        dataType: "json",
-        success: function (msg) {
-        
-        }
-    });
+        $.ajax({
+            type: "GET",
+            url: "/Instrumento/Instrumento/putRespuesta",
+            contentType: "application/json; charset=utf-8",
+            data: obj,
+            dataType: "json", 
+            success: function (msg) {
+            
+            }
+        });
+    };
         
 
 
-    });
+
     $( ".bInstrumento" ).click(function() {
         var id = $( this ).attr('id');
         var arr = id.split("_");
