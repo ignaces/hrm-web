@@ -10,9 +10,14 @@ class UserController {
         var obj = {
           "idUser":auth.user.id
         };
-        var result = await data.execApi(request.hostname(),'/Persona/Persona/getIdPersona',obj);
         
-        session.put('idPersona', result.body.data[0].idPersona)
+        if(auth.user.is_admin!=1){
+          var result = await data.execApi(request.hostname(),'/Persona/Persona/getIdPersona',obj);
+        
+          session.put('idPersona', result.body.data[0].idPersona)
+
+        }
+        
 
 
         return response.redirect('/')
