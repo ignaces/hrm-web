@@ -28,8 +28,6 @@ class Instrumento {
     
     async putRespuesta({request,response}){
 
-        
-
         var idOpinante = request.input("idOpinante")
         var idPregunta = request.input("idPregunta")
         var idAlternativa = request.input("idAlternativa")
@@ -44,7 +42,7 @@ class Instrumento {
         var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/putRespuesta',obj);
 
         return {mensaje:"OK"}
-    }
+    } 
     
     historia ({view,request,response}){
         

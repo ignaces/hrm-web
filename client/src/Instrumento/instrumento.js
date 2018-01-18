@@ -4,7 +4,7 @@ $(document).ready(function(){
     $( ".r_alternativa" ).click(function() {
         
         var id = $( this ).attr('id');
-        console.log("3");
+        
         var arr = id.split("_");
         var idPregunta = arr[1];
         var idAlternativa = arr[2];
@@ -14,13 +14,42 @@ $(document).ready(function(){
         if(requiereJustificacion==1){
             $("#txt_"+idPregunta).show();
         }else{
+            $("#txt_"+idPregunta).val("");
             $("#txt_"+idPregunta).hide();
         }
 
         if($("#txt_"+idPregunta).val()){
             justificacion=$("#txt_"+idPregunta).val()
         }
+       
+        putRespuesta(idOpinante, idPregunta, idAlternativa, justificacion);
+    });
+
+    $( ".txt_justificacion" ).focusout(function() {
         
+        var id = $( this ).attr('id');
+        
+        var arr = id.split("_");
+        var idPregunta = arr[1];
+        var idAlternativa = arr[2];
+        var requiereJustificacion = arr[3]*1;
+        var idOpinante =arr[4]; 
+        var justificacion = "";
+        if(requiereJustificacion==1){
+            $("#txt_"+idPregunta).show();
+        }else{
+            $("#txt_"+idPregunta).val("");
+            $("#txt_"+idPregunta).hide();
+        }
+
+        if($("#txt_"+idPregunta).val()){
+            justificacion=$("#txt_"+idPregunta).val()
+        }
+       
+        
+    });
+
+    var putRespuesta = function(idOpinante, idPregunta, idAlternativa, justificacion){
         var obj = { 
             idOpinante:idOpinante,
             idPregunta:idPregunta,
@@ -28,20 +57,21 @@ $(document).ready(function(){
             justificacion:justificacion
          };
         
-    $.ajax({
-        type: "GET",
-        url: "/Instrumento/Instrumento/putRespuesta",
-        contentType: "application/json; charset=utf-8",
-        data: obj,
-        dataType: "json",
-        success: function (msg) {
-        
-        }
-    });
+        $.ajax({
+            type: "GET",
+            url: "/Instrumento/Instrumento/putRespuesta",
+            contentType: "application/json; charset=utf-8",
+            data: obj,
+            dataType: "json", 
+            success: function (msg) {
+            
+            }
+        });
+    };
         
 
 
-    });
+
     $( ".bInstrumento" ).click(function() {
         var id = $( this ).attr('id');
         var arr = id.split("_");
