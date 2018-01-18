@@ -43,11 +43,11 @@
                                                     @if(escala.requiereJustificacion==1)
                                                         @if(escala.estaSeleccionada ==1)
                                                             <div class="col-lg-12 form-group">
-                                                                <textarea class="form-control txt_justificacion" placeholder="Debe ingresar justificación" name="txt_{{$parent.criterio.id}}" id="txt_{{$parent.criterio.id}}">{{escala.justificacion}}</textarea>
+                                                                <textarea class="form-control txt_justificacion" placeholder="Debe ingresar justificación" idAlternativa="{{escala.id}}" name="txt_{{$parent.criterio.id}}_{{data.idOpinante}}" id="txt_{{$parent.criterio.id}}_{{data.idOpinante}}">{{escala.justificacion}}</textarea>
                                                             </div> 
                                                         @else
                                                             <div class="col-lg-12 form-group">
-                                                                <textarea class="form-control txt_justificacion" style="display:none" placeholder="Debe ingresar justificación" name="txt_{{$parent.criterio.id}}" id="txt_{{$parent.criterio.id}}"></textarea>
+                                                                <textarea class="form-control txt_justificacion" style="display:none" placeholder="Debe ingresar justificación" idAlternativa="" name="txt_{{$parent.criterio.id}}_{{data.idOpinante}}" id="txt_{{$parent.criterio.id}}_{{data.idOpinante}}"></textarea>
                                                             </div> 
                                                         @endif
                                                     @endif
