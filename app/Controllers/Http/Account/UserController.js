@@ -1,28 +1,19 @@
 'use strict'
 const got = use('got')
+const data = use('App/Utils/Data')
 class UserController {
     
       async login ({ view,request, auth ,response, session}) {
         const { username, password } = request.all()
         await auth.attempt(username, password)
-        
-        const Env = use('Env')
 
-        //onsole.log(session);
-
-        var server = Env.get('API_SERVER', 'development')
+        var obj = {
+          "idUser":auth.user.id
+        };
+        var result = await data.execApi(request.hostname(),'/Persona/Persona/getIdPersona',obj);
         
-        var obIdPersona = await got(`${server}/Persona/Persona/getIdPersona`,
-        {
-            json:true,
-            query:{
-                "hostname":"9d212163-f0e6-11e7-bf12-bc764e100f2b",
-                "idUser":auth.user.id
-            }
-        })
-        //console.log(obIdPersona.body.data[0].idPersona);
-        session.put('idPersona', obIdPersona.body.data[0].idPersona)
-        //console.log(session.get('idPersona', 'fallbackName'))
+        session.put('idPersona', result.body.data[0].idPersona)
+
 
         return response.redirect('/')
       }
