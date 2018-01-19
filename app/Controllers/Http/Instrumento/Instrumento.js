@@ -43,6 +43,18 @@ class Instrumento {
 
         return {mensaje:"OK"}
     } 
+
+    async cerrarInstrumento({request,response}){
+
+        var idOpinante = request.input("idOpinante")
+        
+        var obj = {
+            "idOpinante":idOpinante
+            };
+        var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/cerrarEvaluacion',obj);
+
+        return {mensaje:"OK"}
+    } 
     
     historia ({view,request,response}){
         
