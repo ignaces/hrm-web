@@ -21,7 +21,8 @@ var util = require('util')
 //Route.on('/').render('welcome').middleware('autenticacion')
 
 Route.get('/', 'Core/Portada.welcome').middleware('autenticacion')
-
+Route.get('/login/google', 'Account/ExternalLogin.redirect')
+Route.get('/google/callback', 'Account/ExternalLogin.callback')
 Route.get('/game', 'Game/Guess.render').middleware('auth')
 Route.get('/medirRedes/:codigo', 'Redes/Medicion.medir')
 
