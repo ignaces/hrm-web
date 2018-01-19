@@ -88,6 +88,35 @@ $(document).ready(function(){
     });
 
     $( "#instrumento_btn_finalizar" ).click(function() {
+        
+        var checked;
+        $(".pr_pregunta").each(function () {
+            checked = false;
+            var idPregunta = $(this).prop('id');
+           
+            $("input[name='rd_"+idPregunta+"']").each(function () {
+                
+                if ($(this).prop('checked')) {
+                   
+                    checked = true
+                }
+               
+            });
+            
+            if (!checked) {
+                return false;
+            }
+        });
+
+        if (!checked) {
+            swal(
+                'No has terminado',
+                'Debes responder todas las preguntas antes de poder finalizar.',
+                'warning'
+            );
+            return false;
+        }
+        
         swal({
             title: '¿Esta seguro de finalizar?',
             text: "No podra volver a editar la evaluación",
@@ -99,11 +128,25 @@ $(document).ready(function(){
             cancelButtonText: 'Cancelar'
           }).then(function(result)  {
             if (result) {
-                swal(
-                    'Finalizado',
-                    'Evaluación finalizado correctamente.',
-                    'success'
-                );
+                
+                var obj = { 
+                    idOpinante:$("#idOpinante").val()
+                 };
+                
+                $.ajax({
+                    type: "GET",
+                    url: "/Instrumento/Instrumento/cerrarInstrumento",
+                    contentType: "application/json; charset=utf-8",
+                    data: obj,
+                    dataType: "json", 
+                    success: function (msg) {
+                        swal(
+                            'Finalizado',
+                            'Evaluación finalizado correctamente.',
+                            'success'
+                        );
+                    }
+                });
             }
           });
     });

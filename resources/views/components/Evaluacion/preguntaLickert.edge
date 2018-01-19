@@ -18,14 +18,14 @@
                         
                         <div class="row">
                            <div class="button-wrap">
+                                <input type="hidden" class="pr_pregunta" id="{{data.criterio.id}}" />
                                 @each(escala in data.criterio.escala)
                                 <div class="col-lg-3">
                                     @if(escala.estaSeleccionada==1)
                                         <input checked class="hidden radio-label option-button r_alternativa" type="radio" name="rd_{{data.criterio.id}}" id="rd_{{data.criterio.id}}_{{escala.id}}_{{escala.requiereJustificacion}}_{{data.idOpinante}}"/>
-                                        
-                                        @else
+                                    @else
                                         <input class="hidden radio-label option-button r_alternativa" type="radio" name="rd_{{data.criterio.id}}" id="rd_{{data.criterio.id}}_{{escala.id}}_{{escala.requiereJustificacion}}_{{data.idOpinante}}"/>
-                                        @endif
+                                    @endif
                                     <label class="button-label" style="height:200px" for="rd_{{data.criterio.id}}_{{escala.id}}_{{escala.requiereJustificacion}}_{{data.idOpinante}}">
                                         <span>{{escala.indicador}}</span>
                                     </label>                         
