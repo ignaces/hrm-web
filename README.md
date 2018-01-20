@@ -56,7 +56,7 @@ git clone https://github.com/Enovum/hrm.git
 Hacer una copia del archivo .env.example y guardarlo como .env con el siguiente contenido:
 
 ```bash
-HOST=127.0.0.1  
+HOST=localhost
 PORT=3335  
 NODE_ENV=development  
 APP_URL=http://${HOST}:${PORT}  
@@ -67,9 +67,10 @@ DB_HOST=192.168.3.18
 DB_PORT=  
 DB_USER=root  
 DB_PASSWORD=Qwerty123  
-DB_DATABASE=KH  
+DB_DATABASE=hrmapp  
 API_SERVER=localhost:3334  
-SESSION_DRIVER=cookie  
+SESSION_DRIVER=cookie
+STYLE=horizontal    
 ```
 
 ### Dependencias
@@ -80,6 +81,7 @@ npm install --save-dev webpack
 npm install -g @adonisjs/cli
 npm install gulp-cli -g
 npm install gulp -D
+npm install
 ```
 
 Para iniciar el proyecto ejecutar 
