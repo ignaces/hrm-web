@@ -1,5 +1,6 @@
 'use strict'
 const got = use('got')
+const data = use('App/Utils/Data')
 class Medicion {
     
     async medir({view,request,response,params}){
@@ -17,15 +18,9 @@ class Medicion {
       }
 
       async save({view,request,response}){
-        const Env = use('Env')
-        var server = Env.get('API_SERVER', 'development')
-        const rPreguntas = await got(`${server}/Redes/Instrumento/save`,
-        {
-          
-          json:true,
-          body:request.all()
-          
-        })
+        
+        
+        const rPreguntas = await data.execApi(request.hostname(),'/Redes/Instrumento/save',request.all());
         
         return view.render('redes/fin')
       }
