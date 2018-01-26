@@ -1,11 +1,25 @@
 'use strict'
 const got = use('got')
+const data = use('App/Utils/Data')
 class UserController {
     
-      async login ({ view,request, auth ,response}) {
+      async login ({ view,request, auth ,response, session}) {
         const { username, password } = request.all()
         await auth.attempt(username, password)
-    
+
+        var obj = {
+          "idUser":auth.user.id
+        };
+        
+        if(auth.user.is_admin!=1){
+          var result = await data.execApi(request.hostname(),'/Persona/Persona/getIdPersona',obj);
+        
+          session.put('idPersona', result.body.data[0].idPersona)
+
+        }
+        
+
+
         return response.redirect('/')
       }
       

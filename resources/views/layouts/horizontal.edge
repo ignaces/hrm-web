@@ -10,17 +10,17 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
         <!-- App favicon -->
-        <link rel="shortcut icon" href="/assets/images/logo_sm.png">
+        <link rel="shortcut icon" href="{{theme(request.hostname())}}/assets/images/logo_sm.png">
          @!section('pluginsCss')
     
         
-        <link href="/themes/{{theme()}}/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="/themes/{{theme()}}/assets/css/core.css" rel="stylesheet" type="text/css" />
-        <link href="/themes/{{theme()}}/assets/css/components.css" rel="stylesheet" type="text/css" />
-        <link href="/themes/{{theme()}}/assets/css/icons.css" rel="stylesheet" type="text/css" />
-        <link href="/themes/{{theme()}}/assets/css/pages.css" rel="stylesheet" type="text/css" />
-        <link href="/themes/{{theme()}}/assets/css/menu.css" rel="stylesheet" type="text/css" />
-        <link href="/themes/{{theme()}}/assets/css/responsive.css" rel="stylesheet" type="text/css" />
+        <link href="{{theme(request.hostname())}}/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="{{theme(request.hostname())}}/assets/css/core.css" rel="stylesheet" type="text/css" />
+        <link href="{{theme(request.hostname())}}/assets/css/components.css" rel="stylesheet" type="text/css" />
+        <link href="{{theme(request.hostname())}}/assets/css/icons.css" rel="stylesheet" type="text/css" />
+        <link href="{{theme(request.hostname())}}/assets/css/pages.css" rel="stylesheet" type="text/css" />
+        <link href="{{theme(request.hostname())}}/assets/css/menu.css" rel="stylesheet" type="text/css" />
+        <link href="{{theme(request.hostname())}}/assets/css/responsive.css" rel="stylesheet" type="text/css" />
         <link href="/assets/plugins/tooltipster/tooltipster.bundle.min.css" rel="stylesheet" type="text/css" />        
         
   </head>
@@ -51,10 +51,10 @@
                         <!--</a>-->
                         <!-- Image Logo -->
                         <a href="/" class="logo">
-                            <img src="/assets/images/empresa/logoempresa.png" alt="" height="63">
+                            <img src="{{theme(request.hostname())}}/assets/images/empresa/logoempresa.png" alt="" height="63">
                         </a>
                         <a href="/" class="logo-min">
-                            <img src="/assets/images/empresa/logoempresa.png" alt="" height="63">
+                            <img src="{{theme(request.hostname())}}/assets/images/empresa/logo_sm.png" alt="" height="63">
                         </a>
 
                     </div>
@@ -69,10 +69,10 @@
                                
                             </li>
 
-                            <li class="has-submenu">
+                            <!--<li class="has-submenu">
                                 <a href="/Administracion/administracion/administrador"><i class="fi-briefcase"></i><span>Administrador</span></a>
                                 
-                            </li>
+                            </li>-->
 
                             
 
@@ -149,7 +149,7 @@
                 </div> <!-- content -->
 
                 <footer class="footer text-left">
-                      <img src="/assets/images/innovum_logo.png" alt="" height="50">
+                      <img src="{{theme(request.hostname())}}/assets/images/innovum_logo.png" alt="" height="50">
                        2018 © 
                 </footer>
 

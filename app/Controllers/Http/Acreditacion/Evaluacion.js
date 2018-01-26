@@ -4,9 +4,8 @@ const got = use('got')
 
 class Evaluacion {
 
-    * index (request, response) {
-        const Env = use('Env')
-        var server = Env.get('API_SERVER', 'development')
+    index ({view,request, response}) {
+       
         var personas = [{ nombre:"Pierce Caviness", idEstado:1,Perfil:"MANTENEDOR SENIOR"},
         { nombre:"Norberta Stagg", idEstado:3,Perfil:"OPERADOR TERRENO SX",Perfil:"MANTENEDOR SENIOR"},
         { nombre:"Wim Bonar", idEstado:2,Perfil:"ELÉCTRICO ÁREA HÚMEDA/ELÉCTRICO ÁREA SECA/ELÉCTRICO ÁREA RIPIO"},
@@ -33,8 +32,9 @@ class Evaluacion {
         { nombre:"Lysimachus Ritz", idEstado:1,Perfil:"MANTENEDOR SENIOR"},
         { nombre:"Hidi Asbury",idEstado:3,Perfil:"OPERADOR TERRENO SX"}];
     
-        yield response.sendView('acreditacion/evaluacion/evaluados',  {personas:personas});
+        return view.render('acreditacion/evaluacion/evaluados',  {personas:personas});
     }
+    
     
 }
 

@@ -18,6 +18,7 @@
   "private": true,
   "dependencies": {
     "@adonisjs/ace": "^4.0.7",
+    "@adonisjs/ally": "^2.0.2",
     "@adonisjs/auth": "^2.0.10",
     "@adonisjs/bodyparser": "^1.0.8",
     "@adonisjs/cors": "^1.0.2",
@@ -42,7 +43,7 @@
     "gulp-shell": "^0.6.3",
     "nodemon": "^1.11.0",
     "standard": "^10.0.1",
-    "webpack": "^3.8.1",
+    "webpack": "^3.10.0",
     "webpack-stream": "^4.0.0"
   },
   "autoload": {

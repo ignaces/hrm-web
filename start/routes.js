@@ -21,7 +21,8 @@ var util = require('util')
 //Route.on('/').render('welcome').middleware('autenticacion')
 
 Route.get('/', 'Core/Portada.welcome').middleware('autenticacion')
-
+Route.get('/login/google', 'Account/ExternalLogin.redirect')
+Route.get('/google/callback', 'Account/ExternalLogin.callback')
 Route.get('/game', 'Game/Guess.render').middleware('auth')
 Route.get('/medirRedes/:codigo', 'Redes/Medicion.medir')
 
@@ -36,7 +37,7 @@ Route.post('/login', 'Account/UserController.login')
 Route.get('/logout', 'Account/UserController.logout')
 
 
-Route.any('/:module/:controller/:action',  ({view ,request, response,params,auth}) => {
+Route.any('/:module/:controller/:action',  ({view ,request, response,params,auth, session}) => {
   
     const module = params.module
     
@@ -50,8 +51,8 @@ Route.any('/:module/:controller/:action',  ({view ,request, response,params,auth
     const url = `${controllerPath}/${controller}.${action}`
     
     const controllerInstance = ioc.makeFunc(url)
-    
-    return controllerInstance.method.apply(controllerInstance.instance,[{view,request,response,params,auth}])
+   
+    return controllerInstance.method.apply(controllerInstance.instance,[{view,request,response,params,auth, session}])
     
 }).middleware(['autenticacion'])
 

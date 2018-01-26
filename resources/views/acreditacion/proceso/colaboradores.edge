@@ -61,7 +61,12 @@
                                             <td> 
                                                 <div style="text-align:right;">
                                                     @each(instrumento in persona.instrumentos)
-                                                        <button type="button" id="{{instrumento.idOpinante}}_{{instrumento.codigoTipoInstrumento}}" class="btn btn-info waves-effect waves-light bInstrumento" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{instrumento.codigoTipoInstrumento}}"> <span>{{instrumento.codigoTipoInstrumento}}</span> </button>
+                                                        @if(instrumento.codigoEstado=="FINALIZADO")
+                                                            <button type="button" id="{{instrumento.idOpinante}}_{{instrumento.codigoTipoInstrumento}}" class="btn btn-info waves-effect waves-light disabled" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{instrumento.nombreEstado}}"> <span>{{instrumento.codigoTipoInstrumento}}</span> </button>
+                                                        @else
+                                                            <button type="button" id="{{instrumento.idOpinante}}_{{instrumento.codigoTipoInstrumento}}" class="btn btn-info waves-effect waves-light bInstrumento" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{instrumento.nombreEstado}}"> <span>{{instrumento.codigoTipoInstrumento}}</span> </button>
+                                                        @endif
+                                                        
                                                     @endeach
                                                     </div>
                                             </td>
