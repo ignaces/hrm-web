@@ -9,7 +9,7 @@ class Mailgun {
 
    async statsDownload ({view,request, response}) {
     var obj = {
-        tag:"redsalud_inicio",
+        tag:"TBK_InicioMetas_2018",
         event:"failed"
     };
     var result = await data.execApi(request.hostname(),'/Mail/Mailgun/stats',obj);  
@@ -52,8 +52,6 @@ class Mailgun {
             Helpers.tmpPath('emailStats.xlsx'),
             'emailStats.xlsx'
         )
-
-  //return await readFile('uploads/out.xlsx')
  
 }
 
