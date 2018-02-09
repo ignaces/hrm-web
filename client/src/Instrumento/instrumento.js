@@ -72,8 +72,11 @@ $(document).ready(function(){
         var arr = id.split("_");
         var idOpinante = arr[0];
         var codigo = arr[1];
+        var idPersona = arr[2];
+
         $("#idOpinante").val(idOpinante)
         $("#codigo").val(codigo)
+        $("#idPersona").val(idPersona)
         
         $('#formInstrumento').submit()
     });
