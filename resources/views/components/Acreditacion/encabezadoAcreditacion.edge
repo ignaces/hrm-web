@@ -1,26 +1,34 @@
 <div class="panel panel-border panel-primary">
                 <div class="panel-heading">
-                    <h3 class="panel-title">{{titulo}}</h3>
+                   <h3 class="panel-title">Titulo</h3>
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-3"><h5>Nombre</h5></div>
-                        <div class="col-md-3">{{nombre}}</div>
-                        <div class="col-md-3"><h5>Servicio</h5></div>
-                        <div class="col-md-3">{{CLA1}}</div>
+                        <div class="col-md-3"><h5>Nombres</h5></div>
+                        <div class="col-md-3">{{data.clasificacion.nombres}}</div>
+                        <div class="col-md-3"><h5>RUT</h5></div>
+                        <div class="col-md-3">{{data.clasificacion.identificador}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3"><h5>Rut</h5></div>
-                        <div class="col-md-3">{{identificador}}</div>
-                        <div class="col-md-3"><h5>Empresa Mandante</h5></div>
-                        <div class="col-md-3">{{CLA2}}</div>
+                        <div class="col-md-3"><h5>Apellido Materno</h5></div>
+                        <div class="col-md-3">{{data.clasificacion.apellidoMaterno}}</div>
+                        <div class="col-md-3"><h5>Apellido Paterno</h5></div>
+                        <div class="col-md-3">{{data.clasificacion.apellidoPaterno}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3"><h5>Perfil</h5></div>
-                        <div class="col-md-3">{{Perfil}}</div>
-                        <div class="col-md-3"><h5>Empresa Contratista</h5></div>
-                        <div class="col-md-3">{{CLA3}}</div>
+                        <div class="col-md-3"><h5>Email</h5></div>
+                        <div class="col-md-3">{{data.clasificacion.email}}</div>
+                        <div class="col-md-3"><h5></h5></div>
+                        <div class="col-md-3"></div>
                     </div>
-                    
-                </div><!--<div class="panel-body">-->
-            </div><!--<div class="panel panel-border panel-primary">-->
+                @each(clasificacion in data.clasificacion.clasificaciones)
+                <div class="row">
+                        <div class="col-md-3"><h5>{{clasificacion.nombre}}</h5></div>
+                        <div class="col-md-3">{{clasificacion.valor}}</div>
+                       
+                    </div>
+                @endeach            
+
+                </div> <!--<div class="panel-body">-->
+            </div> <!--<div class="panel panel-border panel-primary">-->
+          
