@@ -1,0 +1,77 @@
+@layout('layouts/horizontal')
+
+
+@section('scripts')
+    <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+    <script src="/assets/plugins/tinymce/tinymce.min.js"></script>
+    <script>
+     $(document).ready(function () {
+                if($("#elm1").length > 0){
+                    tinymce.init({
+                        selector: "textarea#elm1",
+                        height: 500,
+                        theme: "modern",
+                        plugins: 'print code preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern',
+                        toolbar1: 'formatselect | fontselect | fontsizeselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
+                        toolbar2:'mybutton',
+                        fontsize_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt',
+                        image_advtab: true,
+                        templates: [
+                            { title: 'Test template 1', content: 'Test 1' },
+                            { title: 'Test template 2', content: 'Test 2' }
+                        ],
+                        content_css: [
+                            '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+                            '//www.tinymce.com/css/codepen.min.css'
+                        ],
+                         setup: function (editor) {
+                            editor.addButton('mybutton', {
+                                            type: 'listbox',
+                                            text: 'Persona',
+                                            icon: false,
+                                            onselect: function (e) {
+                                                editor.insertContent(this.value());
+                                            },
+                                            values: [
+                                                { text: 'RUT', value: '#{RutPersona}' },
+                                                { text: 'Nombre', value: '#{Nombres}' },
+                                                { text: 'Apellido Paterno', value: '#{ApellidoPaterno}' },
+                                                { text: 'Apellido Materno', value: '#{ApellidoMaterno}' }
+                                            ],
+                                            onPostRender: function () {
+                                                // Select the second item by default
+                                                this.value('&nbsp;<em>Some italic text!</em>');
+                                            }
+                            });
+                        }
+                        });
+                }
+            });
+
+    </script>
+@endsection
+
+@section('pluginsCss')
+    <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+@endsection
+  
+
+@section('content')
+
+    @!component('components.breadcrumb',title="Instrumento", pages= [
+        {nombre:"Instrumento",activa:false},
+        {nombre:"Instrumento",activa:true}
+    ])
+      <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-box">
+                            <h4 class="m-b-30 m-t-0 header-title">Example</h4>
+                            <form method="post">
+                                <textarea id="elm1" name="area"></textarea>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+@endsection

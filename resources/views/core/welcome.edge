@@ -25,7 +25,7 @@
                     <!-- Simple card -->
                     <div class="card m-b-20">
 
-                        <img class="card-img-top img-fluid" src="/assets/images/empresa/enelfondo.jpg" alt="Card image cap" style="width: 100% !important;">
+                        <img class="card-img-top img-fluid" src="{{theme(request.hostname())}}/assets/images/empresa/fondo.jpg" alt="Card image cap" style="width: 100% !important;">
                         <div class="card-block text-center">
                             <h4 class="card-title">Plataforma Gestión del Desarrollo de Personas</h4>
                          
@@ -37,7 +37,7 @@
         </div>
 
         <div class="row">
-                @!component('components.Acreditacion.cajaAcreditacion',titulo = "Acreditación", idProceso="1",nombreProceso="Acreditación Enel 2017")
+                @!component('components.Acreditacion.cajaAcreditacion',titulo = "Acreditación", procesos=procesos)
         </div>     
         
     </div>
