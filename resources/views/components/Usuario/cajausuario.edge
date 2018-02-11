@@ -5,12 +5,12 @@
         <div class="member-card">
                 <div class="thumb-lg member-thumb m-b-5 mx-auto" style="margin: 0 auto;">
               
-                  <img src='{{imgUser}}' class="img-circle img-thumbnail" alt="colaborador/a">
+                  <img src='{{persona.imageUser}}' class="img-circle img-thumbnail" alt="colaborador/a">
               
                 </div>
                 <div class="">
-                    <h5 class="m-b-">{{user}}</h5>
-                    <p class="text-muted font-12">{{cargo}}</p>
+                    <h5 class="m-b-">{{persona.nombres}} {{persona.apellidoPaterno}} {{persona.apellidoMaterno}}</h5>
+                    <p class="text-muted font-12">{{persona.cargo}}</p>
                 </div>                                               
         </div>
     </div>
