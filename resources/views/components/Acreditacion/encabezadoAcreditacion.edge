@@ -21,14 +21,12 @@
                         <div class="col-md-3"><h5></h5></div>
                         <div class="col-md-3"></div>
                     </div>
-                
+                 @each(clasificacion in data.clasificacion.clasificaciones)
                 <div class="row">
-                @each(clasificacion in data.clasificacion.clasificaciones)
                         <div class="col-md-3"><h5>{{clasificacion.nombre}}</h5></div>
-                        <div class="col-md-3">{{clasificacion.valor}}</div>
-                @endeach                   
+                        <div class="col-md-3">{{clasificacion.valor}}</div>               
                     </div>
-                
+                @endeach 
 
                 </div> <!--<div class="panel-body">-->
             </div> <!--<div class="panel panel-border panel-primary">-->
