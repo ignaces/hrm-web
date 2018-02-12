@@ -135,7 +135,7 @@ $(document).ready(function(){
                 var obj = { 
                     idOpinante:$("#idOpinante").val()
                  };
-                
+
                 $.ajax({
                     type: "GET",
                     url: "/Instrumento/Instrumento/cerrarInstrumento",
@@ -143,11 +143,15 @@ $(document).ready(function(){
                     data: obj,
                     dataType: "json", 
                     success: function (msg) {
-                        swal(
-                            'Finalizado',
-                            'Evaluación finalizado correctamente.',
-                            'success'
-                        );
+                        swal({
+                            title:'Finalizado',
+                            text:'Evaluación finalizado correctamente.',
+                            type:'success'
+                        }).then(function(result){
+                            $('#frmVolver').submit();
+                        });
+
+
                     }
                 });
             }
