@@ -72,8 +72,11 @@ $(document).ready(function(){
         var arr = id.split("_");
         var idOpinante = arr[0];
         var codigo = arr[1];
+        var idPersona = arr[2];
+
         $("#idOpinante").val(idOpinante)
         $("#codigo").val(codigo)
+        $("#idPersona").val(idPersona)
         
         $('#formInstrumento').submit()
     });
@@ -132,7 +135,7 @@ $(document).ready(function(){
                 var obj = { 
                     idOpinante:$("#idOpinante").val()
                  };
-                
+
                 $.ajax({
                     type: "GET",
                     url: "/Instrumento/Instrumento/cerrarInstrumento",
@@ -140,11 +143,15 @@ $(document).ready(function(){
                     data: obj,
                     dataType: "json", 
                     success: function (msg) {
-                        swal(
-                            'Finalizado',
-                            'Evaluación finalizado correctamente.',
-                            'success'
-                        );
+                        swal({
+                            title:'Finalizado',
+                            text:'Evaluación finalizado correctamente.',
+                            type:'success'
+                        }).then(function(result){
+                            $('#frmVolver').submit();
+                        });
+
+
                     }
                 });
             }

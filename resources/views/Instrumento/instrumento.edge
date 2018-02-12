@@ -15,14 +15,22 @@
 
 <input type="hidden" id="idOpinante" value="{{idOpinante}}" />
 
+
     @!component('components.breadcrumb',title="Instrumento", pages= [
         {nombre:"Instrumento",activa:false},
         {nombre:"Instrumento",activa:true}
     ])
      <div class"row">
-      @!component('components.Acreditacion.encabezadoAcreditacion',titulo = "IDENTIFICACIÓN", nombre="Carlos Herrera Sazo Espina",identificador="11489730-2",Perfil="Maestro Empalme BT PMT",CLA1="Proyectos y Medidas Técnicas",CLA2="Chilectra",CLA3="CAM")
-     </div> 
-        
+      <!--@!component('components.Acreditacion.encabezadoAcreditacion',titulo = "IDENTIFICACIÓN", nombre="diego",identificador="11489730-2",Perfil="Maestro Empalme BT PMT",CLA1="Proyectos y Medidas Técnicas",CLA2="Chilectra",CLA3="CAM")--> 
+
+    @!component('components.Acreditacion.encabezadoAcreditacion',titulo="Datos del Evaluado", data={
+          
+          clasificacion:clasificacion
+           
+        })
+
+
+     </div>       
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-border panel-primary">
@@ -69,6 +77,11 @@
                             <button type="button" id="instrumento_btn_finalizar" class="btn btn-success waves-effect waves-light"> <i class="fa fa-check m-r-5"></i> <span>Finalizar</span> </button>
                         </div>
                     </div>
+
+                    <form id="frmVolver" method="POST" action="/Acreditacion/Proceso/colaboradores">
+                        {{ csrfField() }}
+                        <input type="hidden" id="proceso" name="proceso" value="{{idProceso}}" />
+                    </form>
                     
                 </div><!--<div class="panel-body">-->
             </div><!--<div class="panel panel-border panel-primary">-->
