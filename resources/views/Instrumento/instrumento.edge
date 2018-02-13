@@ -77,6 +77,11 @@
                             <button type="button" id="instrumento_btn_finalizar" class="btn btn-success waves-effect waves-light"> <i class="fa fa-check m-r-5"></i> <span>Finalizar</span> </button>
                         </div>
                     </div>
+
+                    <form id="frmVolver" method="POST" action="/Acreditacion/Proceso/colaboradores">
+                        {{ csrfField() }}
+                        <input type="hidden" id="proceso" name="proceso" value="{{idProceso}}" />
+                    </form>
                     
                 </div><!--<div class="panel-body">-->
             </div><!--<div class="panel panel-border panel-primary">-->
