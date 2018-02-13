@@ -12,9 +12,19 @@ class UserController {
         };
         
         if(auth.user.is_admin!=1){
-          var result = await data.execApi(request.hostname(),'/Persona/Persona/getIdPersona',obj);
+          var rPersona = await data.execApi(request.hostname(),'/Persona/Persona/getPersonaByIdUser',{idUser:auth.user.id});
+          var persona = rPersona.body.data;
+          //var result = await data.execApi(request.hostname(),'/Persona/Persona/getIdPersona',obj);
+          persona.cargo="Evaluador"
+
         
-          session.put('idPersona', result.body.data[0].idPersona)
+          persona.imageUser="/assets/images/icons/businessman.svg"
+          if (persona.codigoGenero=="F"){
+            persona.imageUser="/assets/images/icons/businesswoman.svg"
+          }
+
+          session.put('personaLogueada',persona);
+          session.put('idPersona', persona.id)
 
         }
         

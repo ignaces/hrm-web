@@ -1,27 +1,61 @@
 <div class="col-md-12">
     <div class="portlet">
         <div class="portlet-heading bg-custom">
-            <h5 class="portlet-title">{{titulo}}</h5>
+            <h5 class="portlet-title"> {{titulo}}</h5>
             <div class="clearfix"></div>
         </div>
         <div id="bg-default" class="panel-collapse collapse in show">
             <div class="portlet-body">
-                <div class="card-box widget-box-three">
+             @each(proceso in procesos)
+             <div class="card-box widget-box-three">
                     <div class="bg-icon pull-left">
                         <img class="rounded-circle" src="/assets/images/modulos/acreditacion.png" style="width: 100%; min-height: 100%;" title="ede">
                     </div>
-                <div class="pull-right">
-                <a class="btn btn-info btn-rounded" href="/Acreditacion/Proceso/colaboradores"><i class="fa fa-chevron-circle-right"></i> Ingresar</a>
+                    <div class="pull-right">
+                        <a class="btn btn-info btn-rounded" href="/Acreditacion/Proceso/colaboradores?proceso={{proceso.idProceso}}"><i class="fa fa-chevron-circle-right"></i> Ingresar</a>
+                    </div>
+                    <div class="text-left">
+                        <h5 class="m-b-10"><span data-plugin="counterup">{{proceso.nombreProceso}}</span></h5>
+                        <p class="m-t-5 font-14">&nbsp;</p>
+                        <div class="progress progress-md">
+                            <div class="progress-bar progress-bar-warning" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="text-left">
-                <h5 class="m-b-10"><span data-plugin="counterup">{{nombreProceso}}</span></h5>
-                <p class="m-t-5 font-14">&nbsp;</p>
-                <div class="progress progress-md">
-                <div class="progress-bar progress-bar-warning" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
-                </div>
-                </div>
-                </div>
+             @endeach
+      
+
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="portlet">
+        <div class="portlet-heading bg-custom">
+            <h5 class="portlet-title"> {{titulo2}}</h5>
+            <div class="clearfix"></div>
+        </div>
+        <div id="bg-default" class="panel-collapse collapse in show">
+            <div class="portlet-body">
+             @each(talentoss in talentos)
+             <div class="card-box widget-box-three">
+                    <div class="bg-icon pull-left">
+                        <img class="rounded-circle" src="/assets/images/modulos/acreditacion.png" style="width: 100%; min-height: 100%;" title="ede">
+                    </div>
+                    <div class="pull-right">
+                        <a class="btn btn-info btn-rounded" href="/Talento/Talento/colaboradoresTalento"><i class="fa fa-chevron-circle-right"></i> Ingresar</a>
+                    </div>
+                    <div class="text-left">
+                        <h5 class="m-b-10"><span data-plugin="counterup">{{talentoss.nombreTalento}}</span></h5>
+                        <p class="m-t-5 font-14">&nbsp;</p>
+                        <div class="progress progress-md">
+                            <div class="progress-bar progress-bar-warning" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                        </div>
+                    </div>
+                </div>
+              @endeach 
+              </div>
         </div>
     </div>
 </div>

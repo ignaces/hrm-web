@@ -1,0 +1,45 @@
+@layout('layouts/horizontal')
+
+
+@section('scripts')
+    <script src="/assets/js/dist/Instrumento.min.js?v22s"></script>
+    <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+@endsection
+
+@section('pluginsCss')
+    <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+@endsection
+  
+
+@section('content')
+
+<input type="hidden" id="idOpinante" value="{{idOpinante}}" />
+
+
+    @!component('components.breadcrumb',title="WIDGET")
+     <div class"row">
+      <!--@!component('components.Acreditacion.encabezadoAcreditacion',titulo = "IDENTIFICACIÓN", nombre="diego",identificador="11489730-2",Perfil="Maestro Empalme BT PMT",CLA1="Proyectos y Medidas Técnicas",CLA2="Chilectra",CLA3="CAM")--> 
+
+
+     </div>       
+    <div class="row">
+    <div class="col-lg-4">
+                                <div class="panel panel-color panel-success">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Colaboradores</h3>
+                                        <p class="panel-sub-title text-muted"></p>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p>
+                                            <img src="assets/images/small/img-1.jpg" alt="img" height="80" class="pull-left img-rounded m-r-10">
+                                          Numero de Colaboradores.
+                                          <div class="pull-right">
+                        <a class="btn btn-info btn-rounded" href="/Talento/Talento/colaboradoresTalento2"><i class="fa fa-chevron-circle-right"></i> Ingresar</a>
+                    </div>
+                                          </p>
+                                    </div>
+                                </div>
+                            </div>
+    </div><!--<div class="row">-->
+
+@endsection
