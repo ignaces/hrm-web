@@ -43,7 +43,7 @@
     "gulp-shell": "^0.6.3",
     "nodemon": "^1.11.0",
     "standard": "^10.0.1",
-    "webpack": "^3.10.0",
+    "webpack": "^3.11.0",
     "webpack-stream": "^4.0.0"
   },
   "autoload": {
