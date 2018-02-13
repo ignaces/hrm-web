@@ -9,6 +9,9 @@ class Proceso {
         
         var idPersona = session.get('idPersona', 'fail')
         var idProceso = request.input("proceso")
+
+        session.put('idProceso',idProceso);
+
         var obj = {
             "idProceso":idProceso,
             "idPersona": idPersona

@@ -2,10 +2,10 @@
 const data = use('App/Utils/Data')
 
 class Instrumento {
-     async index ({view,request, response}) {
+     async index ({view,request, response, session}) {
 
         const all = request.all();
-
+        var idProceso = session.get('idProceso', 'fail')
        
         var idOpinante = all.idOpinante
         var codigo = all.codigo
@@ -63,7 +63,7 @@ class Instrumento {
         
        
         //return view.render('Instrumento/instrumento',  {persona:persona,instrumento:instrumento,idOpinante:idOpinante});
-        return view.render('Instrumento/instrumento',  {clasificacion:clasificacion,instrumento:instrumento,idOpinante:idOpinante});
+        return view.render('Instrumento/instrumento',  {idProceso:idProceso,clasificacion:clasificacion,instrumento:instrumento,idOpinante:idOpinante});
     }
     
    

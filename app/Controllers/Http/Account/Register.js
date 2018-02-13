@@ -24,12 +24,12 @@ class Register{
         
         
 
-        const personas = request.all();
+        const personas = request.input("personas");
 
         for(var item in personas){
             const user = new User()
             const persona=personas[item];
-            console.log(persona)
+            
             user.username = persona.identificador;
             user.email = persona.email;
             user.password = persona.password;

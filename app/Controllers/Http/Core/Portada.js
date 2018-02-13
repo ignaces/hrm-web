@@ -9,6 +9,7 @@ class Portada {
         var idPersona = session.get('idPersona', 'fall')
         var obj = {
             "idProceso":""
+        
         };
 
         var objTalento = {
@@ -24,14 +25,10 @@ class Portada {
        
 
         var user={usuario:auth.user}
-        var cargo="Evaluador FCH"
-        var genero="F"
-        var imageUser="/assets/images/icons/businessman.svg"
-        if (genero=="F"){
-            imageUser="/assets/images/icons/businesswoman.svg"
-        }
         
-        return view.render('core/welcome',  {user,cargo,genero,imageUser,procesos,talentos});
+        var persona = session.get('personaLogueada')
+
+        return view.render('core/welcome',  {user,procesos,persona});
     }   
 }
 
