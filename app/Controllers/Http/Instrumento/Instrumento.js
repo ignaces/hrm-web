@@ -14,6 +14,7 @@ class Instrumento {
             "idOpinante":idOpinante,
             "tipoInstrumento":codigo
         };
+        console.log(all);
         var result = await data.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumento',obj);
 
         
