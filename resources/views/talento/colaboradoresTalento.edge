@@ -13,19 +13,13 @@
 
 @section('content')
 
-<input type="hidden" id="idOpinante" value="{{idOpinante}}" />
 
+@!component('components.Acreditacion.talentoColaboradores',titulo="Colaboradores", data={
+          
+          personas:personas
+           
+        })
 
-    @!component('components.breadcrumb',title="Colaboradores")
-     <div class"row">
-      <!--@!component('components.Acreditacion.encabezadoAcreditacion',titulo = "IDENTIFICACIÓN", nombre="diego",identificador="11489730-2",Perfil="Maestro Empalme BT PMT",CLA1="Proyectos y Medidas Técnicas",CLA2="Chilectra",CLA3="CAM")--> 
-
-
-     </div>       
-    <div class="row">
-    <div class="col-lg-4">
-     
-                            </div>
-    </div><!--<div class="row">-->
+   
 
 @endsection

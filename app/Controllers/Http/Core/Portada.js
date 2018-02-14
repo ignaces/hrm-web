@@ -7,13 +7,16 @@ class Portada {
         
 
         var idPersona = session.get('idPersona', 'fall')
+        var all =  session.get('personaLogueada')
+        var idOpinante = all.id
+
         var obj = {
             "idProceso":""
         
         };
 
         var objTalento = {
-            "idTalento":"6b4071d1-0ff1-11e8-bf12-bc764e100f2b"
+            "idOpinante": idOpinante
         };
 
         var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getProcesos',obj);
@@ -21,14 +24,21 @@ class Portada {
 
         var procesos = result.body.data.procesos;
         var talentos = resultadoTalento.body;
+
+        //var totalColaboradores = talentos.Total;
+        //session.put('Total', talentos.Total)
+        //console.log(TotalCount);
+        //console.log(talentos.Total);
+        
         
        
 
         var user={usuario:auth.user}
         
         var persona = session.get('personaLogueada')
+       
 
-        return view.render('core/welcome',  {user,procesos,persona});
+        return view.render('core/welcome',  {user,procesos,persona,talentos});
     }   
 }
 

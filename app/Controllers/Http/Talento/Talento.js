@@ -6,6 +6,9 @@ class Talento {
     
 
     async colaboradoresTalento ({view,request, response, auth, session}) {
+        
+         //var TotalCount = session.get('Total', totalColaboradores)
+       
         /*
         var idPersona = session.get('idPersona', 'fail')
         var idTalento = request.input("talento")
@@ -23,26 +26,26 @@ class Talento {
     async colaboradoresTalento2 ({view,request, response, auth, session}) {
         
         var idPersona = session.get('idPersona', 'fail')
-        var idOpinante = request.input("idOpinante");
+        var all =  session.get('personaLogueada')
+        var idOpinante = all.id
+        
+        //var idOpinante = request.input("idOpinante");
+
         //var idTalento = request.input("talento")
         var obj = {
             //"idTalento":idTalento,
-            "idPersona": idPersona
+            "idOpinante": idOpinante
         };
         
         var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getPersonaTalentos',obj);
-        var personas = result.body.data;
-        console.log(idOpinante);
-        
-        return view.render('talento/colaboradoresTalento' /*,  {personas:personas}*/);
-        
-    }
-
-    async widget({request,response}){
+        var personas = result.body;
        
-        return view.render('talento/colaboradores');
-
+        
+        return view.render('talento/colaboradoresTalento' ,  {personas:personas});
+        
     }
+
+    
 
     
 
