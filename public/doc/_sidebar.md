@@ -3,7 +3,8 @@
 
  * [Instalación](/)
  * [Convenciones](/convenciones.md)
- * [Editores](/Editores.md)
+ * [Editores](/editores.md)
+
 * Módulos
 
  * [Acreditación](/modulos/acreditacion/)

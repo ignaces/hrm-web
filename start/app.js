@@ -58,7 +58,7 @@ const aliases = {
 | Here you store ace commands for your package
 |
 */
-const commands = []
+const commands = ["App/Commands/Controller","App/Commands/Vista"]
 
 module.exports = { providers, aceProviders, aliases, commands }
 
