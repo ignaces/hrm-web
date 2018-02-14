@@ -1,0 +1,2 @@
+<!-- docs/guide.md -->
+*fff

@@ -22,45 +22,51 @@
                                      
                             @each(criterio in actividadClave.criterios)
                                 <div class="row">
-                                    <div class="col-lg-9" style="height:100%;">
+                                    <div class="col-md-9" style="height:100%; margin-top: 10px;">
                                         <b>{{{criterio.nombre}}}</b>
                                     </div>
-                                    <div class="col-lg-3">
-                                        <div class="row">
-                                            <div class="col-lg-12 button-wrap">
-                                                <input type="hidden" class="pr_pregunta" id="{{criterio.id}}" />    
-                                                @each(escala in criterio.escala)
+                                    
+                                            <input type="hidden" class="pr_pregunta" id="{{criterio.id}}" />    
                                                 
-                                                    @if(escala.estaSeleccionada==1)
-                                                        <input checked  class="hidden radio-label option-button r_alternativa" type="radio" name="rd_{{$parent.criterio.id}}" id="rd_{{$parent.criterio.id}}_{{escala.id}}_{{escala.requiereJustificacion}}_{{data.idOpinante}}"/>
-                                                    @else
-                                                        <input          class="hidden radio-label option-button r_alternativa" type="radio" name="rd_{{$parent.criterio.id}}" id="rd_{{$parent.criterio.id}}_{{escala.id}}_{{escala.requiereJustificacion}}_{{data.idOpinante}}"/>
+                                            @each(escala in criterio.escala)
+                                                    @if($loop.first==true)
+                                                        <div class="col-md-3">
+                                                        <div class="row">
+                                                        <div class="col-md-12 button-wrap">
                                                     @endif
+                                                            
+                                                            @if(escala.estaSeleccionada==1)
+                                                                <input checked  class="hidden radio-label option-button r_alternativa" type="radio" name="rd_{{$parent.criterio.id}}" id="rd_{{$parent.criterio.id}}_{{escala.id}}_{{escala.requiereJustificacion}}_{{data.idOpinante}}"/>
+                                                            @else
+                                                                <input          class="hidden radio-label option-button r_alternativa" type="radio" name="rd_{{$parent.criterio.id}}" id="rd_{{$parent.criterio.id}}_{{escala.id}}_{{escala.requiereJustificacion}}_{{data.idOpinante}}"/>
+                                                            @endif
+                                                            
+                                                            <label class="button-label" for="rd_{{$parent.criterio.id}}_{{escala.id}}_{{escala.requiereJustificacion}}_{{data.idOpinante}}">
+                                                                <span>{{escala.nombre}}</span>
+                                                            </label>
                                                     
-                                                    <label class="button-label" for="rd_{{$parent.criterio.id}}_{{escala.id}}_{{escala.requiereJustificacion}}_{{data.idOpinante}}">
-                                                        <span>{{escala.nombre}}</span>
-                                                    </label> 
+                                                    @if($loop.last==true)
+                                                        </div>
+                                                        </div>
+                                                        </div>
+                                                    @endif
 
                                                     @if(escala.requiereJustificacion==1)
-                                                        @if(escala.estaSeleccionada ==1)
-                                                            <div class="col-lg-12 form-group">
-                                                                <textarea class="form-control txt_justificacion" placeholder="Debe ingresar justificación" idAlternativa="{{escala.id}}" name="txt_{{$parent.criterio.id}}_{{data.idOpinante}}" id="txt_{{$parent.criterio.id}}_{{data.idOpinante}}">{{escala.justificacion}}</textarea>
+                                                        <div class="col-md-12">
+                                                            <div class="row">
+                                                                @if(escala.estaSeleccionada==1)
+                                                                    <div class="col-lg-12 form-group">
+                                                                        <textarea class="form-control txt_justificacion" placeholder="Debe ingresar justificación" idAlternativa="{{escala.id}}" name="txt_{{$parent.criterio.id}}_{{data.idOpinante}}" id="txt_{{$parent.criterio.id}}_{{data.idOpinante}}">{{escala.justificacion}}</textarea>
+                                                                    </div> 
+                                                                @else
+                                                                    <div class="col-lg-12 form-group">
+                                                                        <textarea class="form-control txt_justificacion" style="display:none" placeholder="Debe ingresar justificación" idAlternativa="" name="txt_{{$parent.criterio.id}}_{{data.idOpinante}}" id="txt_{{$parent.criterio.id}}_{{data.idOpinante}}"></textarea>
+                                                                    </div> 
+                                                                @endif
                                                             </div> 
-                                                        @else
-                                                            <div class="col-lg-12 form-group">
-                                                                <textarea class="form-control txt_justificacion" style="display:none" placeholder="Debe ingresar justificación" idAlternativa="" name="txt_{{$parent.criterio.id}}_{{data.idOpinante}}" id="txt_{{$parent.criterio.id}}_{{data.idOpinante}}"></textarea>
-                                                            </div> 
-                                                        @endif
+                                                        </div>
                                                     @endif
-                                                        
-                                                @endeach
-                                            </div>
-                                            
-                                        </div>
-
-                                    </div>
-                                    
-
+                                            @endeach
                                 </div>
                             @endeach
                               
