@@ -1,4 +1,5 @@
 import _ from 'lodash';
+//holi
 $(document).ready(function(){
     
     $( ".r_alternativa" ).click(function() {
@@ -19,6 +20,7 @@ $(document).ready(function(){
         }else{
             $(txtJustificacion).val("");
             $(txtJustificacion).hide();
+            $(txtJustificacion).attr("idAlternativa", "");
         }
 
         if($(txtJustificacion).val()){
@@ -63,9 +65,6 @@ $(document).ready(function(){
             }
         });
     };
-        
-
-
 
     $( ".bInstrumento" ).click(function() {
         var id = $( this ).attr('id');
@@ -93,6 +92,8 @@ $(document).ready(function(){
     $( "#instrumento_btn_finalizar" ).click(function() {
         
         var checked;
+        var vacios = true;
+
         $(".pr_pregunta").each(function () {
             checked = false;
             var idPregunta = $(this).prop('id');
@@ -120,6 +121,33 @@ $(document).ready(function(){
             return false;
         }
         
+        $(".r_alternativa").each(function() {
+        
+            var id = $( this ).prop('id');
+            
+            var arr = id.split("_");
+            var idPregunta = arr[1];
+            var idAlternativa = arr[2];
+            var requiereJustificacion = parseInt(arr[3]);
+            var idOpinante =arr[4]; 
+            var justificacion = "";
+            var txtJustificacion = "#txt_"+idPregunta+"_"+idOpinante;
+            
+            if($(txtJustificacion).attr('idAlternativa') != "" && $(txtJustificacion).val() == ""){
+                vacios = false;
+            }    
+            
+        });
+        
+        if (vacios==false) {
+            swal(
+                'No has terminado',
+                'Debes ingresar un comentario a todas las preguntas que requieran justificacion para poder finalizar.',
+                'warning'
+            );
+            return false;
+        }
+
         swal({
             title: '¿Esta seguro de finalizar?',
             text: "No podra volver a editar la evaluación",
