@@ -17,10 +17,10 @@ class Portada {
         };
 
         var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getProcesos',obj);
-        var resultadoTalento = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getTalentos',objTalento);
+       // var resultadoTalento = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getTalentos',objTalento);
 
         var procesos = result.body.data.procesos;
-        var talentos = resultadoTalento.body;
+       // var talentos = resultadoTalento.body;
         
        
 
