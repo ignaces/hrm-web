@@ -20,11 +20,12 @@ class Portada {
         };
 
         var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getProcesos',obj);
-       // var resultadoTalento = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getTalentos',objTalento);
+        var resultadoTalento = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getTalentos',objTalento);
 
         var procesos = result.body.data.procesos;
-       // var talentos = resultadoTalento.body;
-        
+        var talentos = resultadoTalento.body;
+        //var rstl = session.put('totalCol',talentos.Total)
+        //console.log(rstl);
        
 
         var user={usuario:auth.user}
