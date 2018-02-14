@@ -5,7 +5,7 @@
     class Modulo {
          async index  ({ view,request, response, auth, session }) {
           
-          return view.render('core/index',  {});
+          return view.render('core/modulos/index',  {});
         
         }   
       }
