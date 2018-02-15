@@ -32,8 +32,8 @@ class Portada {
         
         var persona = session.get('personaLogueada')
        
-
-        return view.render('core/welcome',  {user,procesos,persona});
+        var menu = session.get('usuario_roles_menu');
+        return view.render('core/welcome',  {user,procesos,persona,menu});
     }   
 }
 

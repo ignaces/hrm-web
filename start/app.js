@@ -82,3 +82,4 @@ edge.global('theme', function (hostname) {
   
   return theme;
 })
+

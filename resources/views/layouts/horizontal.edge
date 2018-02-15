@@ -63,12 +63,13 @@
                     <div id="navigation">
                         <!-- Navigation Menu-->
                         <ul class="navigation-menu">
-
+                            @loggedIn
+                             
                             <li class="has-submenu">
                                 <a href="/"><i class="fi-air-play"></i><span>Inicio</span></a>
-                               
                             </li>
-
+                            @include('partials/menu')
+                             @endloggedIn
                             <!--<li class="has-submenu">
                                 <a href="/Administracion/administracion/administrador"><i class="fi-briefcase"></i><span>Administrador</span></a>
                                 
@@ -100,7 +101,7 @@
                             </li>-->
 
                             
-                             @loggedIn
+                            @loggedIn
                              <li class="dropdown navbar-c-items">
                                 <a href="" class="dropdown-toggle waves-effect profile" data-toggle="dropdown" aria-expanded="true"><img src="/assets/images/users/maestro.png" alt="user-img" class="img-circle"> </a>
                                 <ul class="dropdown-menu dropdown-menu-right arrow-dropdown-menu arrow-menu-right user-list notify-list">
