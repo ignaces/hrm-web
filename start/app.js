@@ -68,11 +68,11 @@ edge.global('theme', function (hostname) {
   const Env = use('Env')
 
   var theme = Env.get('STYLE', 'default');
-
+  var hostalias = Env.get('HOSTALIAS', 'localhost');
   //hostname="enel.enovum.cl"
   
   
-  if(hostname=="localhost"){
+  if(hostname==hostalias){
     theme = `/themes/${theme}` 
   }else{
     var company = hostname.split(".")[0]
