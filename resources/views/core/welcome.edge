@@ -1,6 +1,11 @@
 @layout('layouts/horizontal')
 
+@section('scripts')
+    <script src="/assets/js/dist/Talento.min.js"></script>
+@endsection
+
 @section('content')
+    
 
 
 <div class="row" >
@@ -37,7 +42,7 @@
         </div>
 
         <div class="row">
-                @!component('components.Acreditacion.cajaAcreditacion',titulo = "Acreditación",titulo2 = "Talentos", procesos=procesos, talentos=talentos)
+                @!component('components.Acreditacion.cajaAcreditacion',titulo = "Acreditación",titulo2 = "Talentos", procesos=procesos, talentos=talentos,condicion=condicion)
         </div>     
         
     </div>
@@ -78,5 +83,7 @@
     </div>
     <!-- END Columna Derecha -->
 </div>
+
+
 
 @endsection

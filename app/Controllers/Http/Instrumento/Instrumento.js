@@ -17,35 +17,7 @@ class Instrumento {
         console.log(all);
         var result = await data.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumento',obj);
 
-        
-       /*
-        var persona = {
-            titulo:"IDENTIFICACIÓN",
-            nombre:"Juan",
-            apellidoP:"Rivas",
-            apellidoM:"Palma",
-            rut:"18493148-3",
-            cargo:"Contratista",
-            perfilCargo:"Encargado",
-
-               clasificacion :  [{
-                  nombre:"Clasificación 1",
-                  valor:"x1x1",
-                  
-              },
-              {
-                nombre:"Clasificación 2",
-                valor:"x2x2"
-            },
-        {
-            nombre:"Clasificación 3",
-                valor:"x3x3"
-
-        }]    
-        };
-        */
        
-
         var instrumento = result.body;
         
 

@@ -2,7 +2,7 @@
 
 
 @section('scripts')
-    <script src="/assets/js/dist/Instrumento.min.js?v22s"></script>
+    
     <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
 @endsection
 
@@ -12,6 +12,24 @@
   
 
 @section('content')
-   @!component('components.Acreditacion.resultadoColaboradores',titulo="Widget", data={ total:total })
         
+            <div class"row">
+       
+   @!component('components.Talento.resultadoColaboradores',titulo="Widget", data={ total:total })
+        
+        
+   @!component('components.Talento.resultadoNineBox')
+        
+        
+   @!component('components.Talento.organigrama')
+      
+    
+        </div>
+
+       
+
+
+
+            
+
 @endsection

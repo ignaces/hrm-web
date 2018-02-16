@@ -15,9 +15,9 @@ class Talento {
             "idTalentoProceso":idTalentoProceso,
             "idOpinante":idOpinante
         };
-        var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getFindTalentoProceso',obj);
+        var result = await data.execApi(request.hostname(),'/Talento/Talento/getFindTalentoProceso',obj);
         var total = result.body;
-        console.log(total)
+        
         
         return view.render('talento/colaboradores' ,  {total:total});
         
@@ -29,15 +29,15 @@ class Talento {
         var all =  session.get('personaLogueada')
         var idOpinante = all.id
         
-        //var idOpinante = request.input("idOpinante");
+        var idTalentoProceso = request.input("talento");
 
         //var idTalento = request.input("talento")
         var obj = {
-            //"idTalento":idTalento,
-            "idOpinante": idOpinante
+            "idTalentoProceso":idTalentoProceso,
+            "idOpinante":idOpinante
         };
         
-        var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getPersonaTalentos',obj);
+        var result = await data.execApi(request.hostname(),'/Talento/Talento/getPersonaTalentos',obj);
         var personas = result.body;
        
         
