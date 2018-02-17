@@ -44,8 +44,8 @@ class Vista extends Command {
 
 @endsection`
     
-              console.log(Helpers.appRoot(`resources/views/${modulo}/${vista}.edge`))
-    fs.writeFile(Helpers.appRoot(`resources/views/${modulo}/${vista}.edge`), texto, function(err) {
+              //console.log(Helpers.appRoot(`resources/views/${modulo.toLowerCase()}/${vista}.edge`))
+    fs.writeFile(Helpers.appRoot(`resources/views/${modulo.toLowerCase()}/${vista}.edge`), texto, function(err) {
       if(err) {
           return console.log(err);
       }

@@ -1,0 +1,39 @@
+@layout('layouts/horizontal')
+@section('scripts')
+<script>
+$(document).ready(function(){
+    $("#btnConectar").click(function(){
+        var obj = {
+                ssid:$("#ssid").val(),
+                password:$("#password").val()
+            }
+       $.ajax({
+            type: "GET",
+            url: "/Core/Network/connect",
+            contentType: "application/json; charset=utf-8",
+            data: obj,
+            dataType: "json", 
+            success: function (msg) {
+                console.log(msg)
+            }
+        });
+    });
+});
+</script>
+@endsection
+
+@section('pluginsCss')
+
+@endsection
+
+
+@section('content')
+    <select id="ssid"  class="form-control">
+    @each(red in network.redes)
+        <option value="{{red.ssid}}">{{red.ssid}}</option>
+    @endeach
+    </select>
+    <label>Contraseña:</label>
+    <input type="text" id="password" />
+    <button id="btnConectar">Conectar</button>
+@endsection
