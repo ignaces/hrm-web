@@ -1,29 +1,12 @@
 @layout('layouts/horizontal')
 @section('scripts')
-<script>
-$(document).ready(function(){
-    $("#btnConectar").click(function(){
-        var obj = {
-                ssid:$("#ssid").val(),
-                password:$("#password").val()
-            }
-       $.ajax({
-            type: "GET",
-            url: "/Core/Network/connect",
-            contentType: "application/json; charset=utf-8",
-            data: obj,
-            dataType: "json", 
-            success: function (msg) {
-                console.log(msg)
-            }
-        });
-    });
-});
-</script>
+<script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+<script src="/assets/js/dist/CoreNetwork.min.js?v24s"></script>
 @endsection
 
 @section('pluginsCss')
-
+ <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+ <link href="/assets/plugins/spinkit/spinkit.css" rel="stylesheet" />
 @endsection
 
 
@@ -33,6 +16,7 @@ $(document).ready(function(){
         <option value="{{red.ssid}}">{{red.ssid}}</option>
     @endeach
     </select>
+    <button id="btnScan">Refrescar Lista</button>
     <label>Contraseña:</label>
     <input type="text" id="password" />
     <button id="btnConectar">Conectar</button>

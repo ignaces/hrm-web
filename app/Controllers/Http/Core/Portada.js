@@ -8,17 +8,17 @@ class Portada {
 
         var idPersona = session.get('idPersona', 'fall')
         var all =  session.get('personaLogueada')
-        var idOpinante = all.id
+        //var idOpinante = all.id
 
         var obj = {
             "idProceso":""
         
         };
 
-        var objTalento = {
+        /*var objTalento = {
             "idOpinante": idOpinante
         };
-
+*/
         var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getProcesos',obj);
         //var resultadoTalento = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getTalentos',objTalento);
 
