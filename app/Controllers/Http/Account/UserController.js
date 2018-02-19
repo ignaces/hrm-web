@@ -11,9 +11,11 @@ class UserController {
           "idUser":auth.user.id
         };
         
+        //console.log(auth.user.is_admin);
         if(auth.user.is_admin!=1){
           var rPersona = await data.execApi(request.hostname(),'/Persona/Persona/getPersonaByIdUser',{idUser:auth.user.id});
           var persona = rPersona.body.data;
+          
           //var result = await data.execApi(request.hostname(),'/Persona/Persona/getIdPersona',obj);
           persona.cargo="Evaluador"
 
@@ -22,9 +24,22 @@ class UserController {
           if (persona.codigoGenero=="F"){
             persona.imageUser="/assets/images/icons/businesswoman.svg"
           }
-
+          
+          //var traerLog = session.put('personaLogueada',persona); 
+          
           session.put('personaLogueada',persona);
           session.put('idPersona', persona.id)
+          try{
+            var rUsuario = await data.execApi(request.hostname(),'/Core/Users/getMenuUser',{idUser:auth.user.id});
+            var usuario = rUsuario.body.data;
+            session.put('usuario_roles_menu',usuario);
+
+            
+
+          }catch(err){
+            console.log(err)
+          }
+          
 
         }
         

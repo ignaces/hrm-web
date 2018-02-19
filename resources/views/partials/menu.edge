@@ -1,0 +1,6 @@
+@each(pagina in request.session.get('usuario_roles_menu').menu)
+    
+    <li class="has-submenu">
+        <a href="/{{pagina.modulo}}/{{pagina.controller}}/{{pagina.accion}}"><i class="{{pagina.iconClass}}"></i><span>{{pagina.label}}</span></a>
+    </li>
+@endeach

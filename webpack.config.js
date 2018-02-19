@@ -6,6 +6,7 @@ module.exports = {
       Users:['./client/src/Users/users.js'],
       Ficha:['./client/src/Ficha/persona.js'],
       Persona:['./client/src/Persona/lista.js'],
+      CoreNetwork:['./client/src/Core/network.js'],
       Instrumento:['./client/src/Instrumento/instrumento.js']
     },
   output: {

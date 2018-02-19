@@ -1,0 +1,70 @@
+
+
+@layout('layouts/horizontal')
+
+
+@section('scripts')
+    <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+    <script src="http://198.61.165.55:8080/jasperserver-pro/client/visualize.js"></script>
+    <script>
+        $(document).ready(function(){
+            visualize({
+                auth:{
+                    name:"jasperadmin",
+                    password:"Qwerty123_",
+                    organization:"Root"
+                }
+            },
+               function(v){
+                   v("#container").report({
+                       resource:"/public/Samples/Reports/01._Geographic_Results_by_Segment_Report",
+                       error:handleError
+                   });
+
+                   function handleError(err){
+                       alert(err.message);
+                   }
+               }
+               );
+        });
+            
+        
+    </script>
+
+@endsection
+
+@section('pluginsCss')
+    <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+@endsection
+  
+
+@section('content')
+
+<input type="hidden" id="idOpinante" value="{{idOpinante}}" />
+
+
+    @!component('components.breadcrumb',title="Instrumento", pages= [
+        {nombre:"Instrumento",activa:false},
+        {nombre:"Instrumento",activa:true}
+    ])
+    
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-border panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Gráfico</h3>
+                </div>
+                <div class="panel-body">
+                <div class="row">
+                    <div id="container"></div>
+                </div>
+                
+                    
+                </div><!--<div class="panel-body">-->
+            </div><!--<div class="panel panel-border panel-primary">-->
+        </div><!--<div class="col-lg-12">-->
+        
+        
+    </div><!--<div class="row">-->
+
+@endsection

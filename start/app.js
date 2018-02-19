@@ -58,7 +58,7 @@ const aliases = {
 | Here you store ace commands for your package
 |
 */
-const commands = []
+const commands = ["App/Commands/Controller","App/Commands/Vista"]
 
 module.exports = { providers, aceProviders, aliases, commands }
 
@@ -68,11 +68,11 @@ edge.global('theme', function (hostname) {
   const Env = use('Env')
 
   var theme = Env.get('STYLE', 'default');
-
+  var hostalias = Env.get('HOSTALIAS', 'localhost');
   //hostname="enel.enovum.cl"
   
   
-  if(hostname=="localhost"){
+  if(hostname==hostalias){
     theme = `/themes/${theme}` 
   }else{
     var company = hostname.split(".")[0]
@@ -82,3 +82,4 @@ edge.global('theme', function (hostname) {
   
   return theme;
 })
+
