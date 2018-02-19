@@ -72,7 +72,7 @@
         async getStatus({view,request, response, auth, session}){
           var wait = ms => new Promise((r, j)=>setTimeout(r, ms))
           await  wifi.init({
-            iface : 'mac' // network interface, choose a random wifi interface if set to null
+            iface : null // network interface, choose a random wifi interface if set to null
           });
           var conecciones = "";
           await wifi.getCurrentConnections(function(err, currentConnections) {
