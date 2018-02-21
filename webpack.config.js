@@ -7,7 +7,9 @@ module.exports = {
       Ficha:['./client/src/Ficha/persona.js'],
       Persona:['./client/src/Persona/lista.js'],
       CoreNetwork:['./client/src/Core/network.js'],
-      Instrumento:['./client/src/Instrumento/instrumento.js']
+      Instrumento:['./client/src/Instrumento/instrumento.js'],
+      listaNotificacion:['./client/src/Mail/listaNotificacion.js'],
+      configNotificacion:['./client/src/Mail/notificacion.js']
     },
   output: {
     filename: '[name].min.js',

@@ -74,13 +74,18 @@
           await  wifi.init({
             iface : null // network interface, choose a random wifi interface if set to null
           });
-          var conecciones = "";
+          var coneccion = "";
           await wifi.getCurrentConnections(function(err, currentConnections) {
             if (err) {
                 console.log(err);
             }
             
-            conecciones = currentConnections;
+            for(var c in currentConnections){
+              if(currentConnections[c].ssid!="HRMPi"){
+                coneccion = currentConnections[c];
+              }
+            }
+            
             /*
             // you may have several connections
             [
@@ -100,7 +105,7 @@
             */
           });
           await wait(2000)
-          return conecciones;
+          return coneccion;
         }
       }
       
