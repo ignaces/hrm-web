@@ -20,7 +20,7 @@
                     var xhr, formData;
                         xhr = new XMLHttpRequest();
                         xhr.withCredentials = false;
-                        xhr.open('POST', 'http://hrmassets.enovum.clFiles/File/upload');
+                        xhr.open('POST', 'http://hrmassets.enovum.cl/Files/File/upload');
                         xhr.onload = function() {
                         var json;
 
