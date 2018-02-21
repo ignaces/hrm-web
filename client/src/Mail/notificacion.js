@@ -13,7 +13,7 @@
             theme: "modern",
             plugins: 'print code preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern',
             toolbar1: 'formatselect | fontselect | fontsizeselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
-            toolbar2:'mybutton',
+            toolbar2:'listPersona',
             fontsize_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt',
             image_advtab: true,
             images_upload_handler: function (blobInfo, success, failure) {
@@ -77,5 +77,71 @@ $(document).ready(function () {
      * 
      */
     initTiny();
+
+    $("#btnSend").click(function(){
+        var tag = $("#tag").val();
+        var to = $("#emailTo").val();
+        var subject = $("#subject").val();
+        var csrf = $('input[name=_csrf]').val();
+        var body= tinyMCE.activeEditor.getContent();
+        var obj = {
+            tag:tag,
+            to:to,
+            subject:subject,
+            body:body,
+            _csrf:csrf
+        };
+        $.ajax({
+            type: "POST",
+            url: "/Mail/Mailgun/sendEmail",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(obj),
+            dataType: "json", 
+            success: function (msg) {
+               
+                alert(msg);
+             
+            }
+        }); 
+    });
+
+    $("#btnCreate").click(function(){
+        var tag = $("#tag").val();
+        var to = $("#emailTo").val();
+        var subject = $("#subject").val();
+        var mask = $("#mask").val();
+        var cliente = $("#idCliente").val();
+        var nombre = $("#nombre").val();
+        var csrf = $('input[name=_csrf]').val();
+        var body= tinyMCE.activeEditor.getContent();
+        var obj = {
+            tag:tag,
+            to:to,
+            subject:subject,
+            body:body,
+            _csrf:csrf,
+            mask:mask,
+            idCliente:cliente,
+            nombre:nombre
+        };
+        $.ajax({
+            type: "POST",
+            url: "/Mail/Notificaciones/addNotificacion",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(obj),
+            dataType: "json", 
+            success: function (msg) {
+               
+                swal({
+                    title:'Exito',
+                    text:'Notificación creada correctamente.',
+                    type:'success'
+                }).then(function(result){
+                    window.location = "/Mail/Notificaciones/list";
+                });
+             
+            }
+        }); 
+    });
     
 });

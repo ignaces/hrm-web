@@ -4,8 +4,10 @@ const data = use('App/Utils/Data')
 class Notificaciones {
 
     async create ({view,request, response}) {
-    
-        return view.render('mail/nuevaNotificacion',  {mail:""});
+        var obj={};
+        var result = await data.execApi(request.hostname(),'/Core/Administracion/getClientes',obj);  
+        
+        return view.render('mail/nuevaNotificacion',  {clientes:result.body.data});
     }
 
     async list ({view,request, response}) {
@@ -37,6 +39,38 @@ class Notificaciones {
         var result = await data.execApi(request.hostname(),'/Mail/Notificaciones/getNotificaciones',obj);  
 
         return{notificaciones:result.body};
+    }
+
+    async addNotificacion({view,request, response}) {
+       
+        var tag = request.input("tag");
+        var to = request.input("to");
+        var subject = request.input("subject");
+        var body = request.input("body");
+        var mask = request.input("mask");
+        var nombre = request.input("nombre");
+        var idCliente = request.input("idCliente");
+        var obj = {
+            tag:tag,
+            to:to,
+            subject:subject,
+            body:body,
+            nombre:nombre,
+            mask:mask,
+            idCliente:idCliente
+        };
+        try{
+
+            var result = await data.execApiPost(request.hostname(),'/Mail/Notificaciones/create',obj);  
+
+            return{mensaje:"ok"} 
+        }catch(err){
+            return{mensaje:err}
+        }
+        
+
+
+
     }
 
 

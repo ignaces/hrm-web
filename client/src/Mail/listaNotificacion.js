@@ -16,7 +16,8 @@ var getNotificaciones  = function(){
                 { "title": "Notificación", "targets": 1 },
                 { "title": "Asunto", "targets": 2 },
                 { "title": "Mascara", "targets": 3 },
-                { "title": "Tag", "targets": 4 }
+                { "title": "Tag", "targets": 4 },
+                { "title": "", "targets": 5 ,"width":"200px"}
               ],
             columns: [
                 {data : "nombre"},
@@ -26,9 +27,12 @@ var getNotificaciones  = function(){
                 {data : "tag"},   
                 {data : "id",
                 render: function ( data, type, full, meta ) {
-                        return '<a href="/Mail/Notificaciones/edit?idNotificacion='+data+'">Ver</a>';
+                        var ver = '<a href="/Mail/Notificaciones/edit?idNotificacion='+data+'">Ver</a>';
+                        var rebotados = '<a href="/Mail/Mailgun/statsDownload?tag='+full.tag+'&event=failed">Rebotados</a>';
+                        var estados = '<a href="/Mail/Mailgun/statsDownload?tag='+full.tag+'">Todos los Estados</a>';
+                        return ver + " | " + rebotados +" | " +estados;
                     }
-                }       
+                }     
             ],
         });
         }
