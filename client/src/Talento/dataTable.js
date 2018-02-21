@@ -3,12 +3,11 @@ $(document).ready(function() {
     $('#example').DataTable( {
         dom: 'Bfrtip',
         buttons: [
-            'excelFlash',
-            'excel'
-            //'copyHtml5',
-            //'excelHtml5',
-            //'csvHtml5',
-            //'pdfHtml5'
+            
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
         ]
     } );
 });

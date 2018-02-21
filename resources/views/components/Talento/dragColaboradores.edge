@@ -1,0 +1,132 @@
+ <div class="row">
+                            <div class="col-md-3">
+                                <div class="card-box">
+                                   
+                                    <h4 class="text-dark header-title m-t-0">Colaboradores</h4>
+                                    <p class="text-muted m-b-30 font-13">
+                                      Total de Colaboradores por evaluar.
+                                    </p>
+
+                                    <ul class="sortable-list taskList list-unstyled ui-sortable" id="upcoming">
+                                     @each(talentos in personas)
+                                        <li class="task-warning ui-sortable-handle" style="" value="{{talentos.procesoOpinante}}">
+                                            
+                                            
+                                            {{talentos.Cargo}}
+                                            <div class="clearfix"></div>
+                                            <div class="m-t-20">
+                                                <p class="pull-right m-b-0 m-t-4">
+                                                    <button type="button" class="btn btn-warning waves-effect waves-light"> <i class="fa fa-rocket m-r-5"></i> <span>Ficha</span> </button>
+                                                </p>
+                                                <p class="m-b-0"><a href="" class="text-muted"><img src="/assets/images/icons/businessman.svg" alt="task-user" class="thumb-sm img-circle m-r-10"> <span class="font-bold font-secondary">{{talentos.Colaborador}} {{talentos.apellidoPaterno}} {{talentos.apellidoMaterno}}</span></a> </p>
+                                            </div>
+                                        </li>
+                                        @endeach
+                                        </ul>
+                                </div>
+                            </div>
+            
+            
+             <div class="col-md-9">
+					<div class="row">
+                             <div class="col-md-3">
+                                <div class="card-box ribbon-box">
+                                 <div class="ribbon ribbon-{{cuadrante1.colorCuadrante}}">{{cuadrante1.nombreCuadrante}}</div>
+                                    
+
+                                    <ul class="sortable-list taskList list-unstyled ui-sortable" id="completed" value="{{cuadrante1.idCuadrante}}">
+                                        
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card-box ribbon-box">
+                                 <div class="ribbon ribbon-{{cuadrante2.colorCuadrante}}">{{cuadrante2.nombreCuadrante}}</div>
+
+                                    <ul class="sortable-list taskList list-unstyled ui-sortable" id="completed" value="{{cuadrante2.idCuadrante}}">
+                                        
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+
+                        
+
+                        <div class="col-md-3">
+                                <div class="card-box ribbon-box">
+                                 <div class="ribbon ribbon-{{cuadrante3.colorCuadrante}}">{{cuadrante3.nombreCuadrante}}</div>
+
+                                    <ul class="sortable-list taskList list-unstyled ui-sortable" id="completed" value="{{cuadrante3.idCuadrante}}">
+                                        
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+						</div>
+						<div class="row">
+                        <div class="col-md-3">
+                                <div class="card-box ribbon-box">
+                                 <div class="ribbon ribbon-{{cuadrante4.colorCuadrante}}">{{cuadrante4.nombreCuadrante}}</div>
+                                    
+                                    <ul class="sortable-list taskList list-unstyled ui-sortable" id="inprogress" value="{{cuadrante4.idCuadrante}}">
+                                       
+                                    </ul>
+                                </div>
+                            </div>
+                        
+                        <div class="col-md-3">
+                                 <div class="card-box ribbon-box">
+                                 <div class="ribbon ribbon-{{cuadrante5.colorCuadrante}}">{{cuadrante5.nombreCuadrante}}</div>
+                                   
+                                    <ul class="sortable-list taskList list-unstyled ui-sortable" id="inprogress" value="{{cuadrante5.idCuadrante}}">
+                                       
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                 <div class="card-box ribbon-box">
+                                 <div class="ribbon ribbon-{{cuadrante6.colorCuadrante}}">{{cuadrante6.nombreCuadrante}}</div>
+                                   
+                                    <ul class="sortable-list taskList list-unstyled ui-sortable" id="inprogress" value="{{cuadrante6.idCuadrante}}">
+                                       
+                                    </ul>
+                                </div>
+                            </div>
+							</div>
+							<div class="row">
+                            <div class="col-md-3">
+                                <div class="card-box ribbon-box">
+                                 <div class="ribbon ribbon-{{cuadrante7.colorCuadrante}}">{{cuadrante7.nombreCuadrante}}</div>
+                                   
+                                    <ul class="sortable-list taskList list-unstyled ui-sortable" id="inprogress" value="{{cuadrante7.idCuadrante}}">
+                                       
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                 <div class="card-box ribbon-box">
+                                 <div class="ribbon ribbon-{{cuadrante8.colorCuadrante}}">{{cuadrante8.nombreCuadrante}}</div>
+                                    
+                                    <ul class="sortable-list taskList list-unstyled ui-sortable" id="inprogress" value="{{cuadrante8.idCuadrante}}">
+                                       
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="card-box ribbon-box">
+                                 <div class="ribbon ribbon-{{cuadrante9.colorCuadrante}}">{{cuadrante9.nombreCuadrante}}</div>
+                                   
+
+                                    <ul class="sortable-list taskList list-unstyled ui-sortable" id="inprogress" value="{{cuadrante9.idCuadrante}}">
+                                       
+                                    </ul>
+                                </div>
+                            </div>
+							</div>
+                           
+                           </div>
+                     </div>
+                      </div>

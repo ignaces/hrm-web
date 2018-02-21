@@ -29,7 +29,7 @@
         </div>
     </div>
 </div>
-
+@each(procesoTalento in talentos)
     <div id="condition">
 <div class="col-md-12">
     <div class="portlet">
@@ -47,10 +47,10 @@
                         <img class="rounded-circle" src="/assets/images/modulos/acreditacion.png" style="width: 100%; min-height: 100%;" title="ede">
                     </div>
                     <div class="pull-right">
-                        <a class="btn btn-info btn-rounded" href="/Talento/Talento/colaboradoresTalento?talento={{talentos.id}}"><i class="fa fa-chevron-circle-right"></i> Ingresar</a>
+                        <a class="btn btn-info btn-rounded" href="/Talento/Talento/colaboradoresTalento?talento={{procesoTalento.id}}"><i class="fa fa-chevron-circle-right"></i> Ingresar</a>
                     </div>
                     <div class="text-left">
-                        <h5 class="m-b-10"><span data-plugin="counterup">{{talentos.nombre}} </span></h5>
+                        <h5 class="m-b-10"><span data-plugin="counterup">{{procesoTalento.nombre}} </span></h5>
                        
                         <p class="m-t-5 font-14">&nbsp;</p>
                         <div class="progress progress-md">
@@ -64,3 +64,4 @@
     </div>
 </div>
 </div>
+@endeach

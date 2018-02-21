@@ -1,0 +1,28 @@
+@layout('layouts/horizontal')
+
+
+  
+
+@section('scripts')
+    <script src="/assets/plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.min.js"></script>
+    <script src="/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="/assets/js/jquery.core.js"></script>
+    <script src="/assets/js/jquery.app.js"></script>
+    <script src="/assets/js/dist/drag.min.js"></script>
+@endsection
+
+@section('pluginsCss')
+    <link href="/assets/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+@endsection
+
+
+@section('content')
+   @!component('components.Talento.dragColaboradores', {personas:personas,cuadrante1:cuadrante1,cuadrante2:cuadrante2,cuadrante3:cuadrante3,cuadrante4:cuadrante4,cuadrante5:cuadrante5,cuadrante6:cuadrante6,cuadrante7:cuadrante7,cuadrante8:cuadrante8,cuadrante9:cuadrante9})
+@endsection
+
+
+
+
+
+

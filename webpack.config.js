@@ -8,7 +8,8 @@ module.exports = {
       Persona:['./client/src/Persona/lista.js'],
       Instrumento:['./client/src/Instrumento/instrumento.js'],
       Talento:['./client/src/Talento/talento.js'],
-      dataTable:['./client/src/Talento/dataTable.js']
+      dataTable:['./client/src/Talento/dataTable.js'],
+      drag:['./client/src/Talento/drag.js']
     },
   output: {
     filename: '[name].min.js',
