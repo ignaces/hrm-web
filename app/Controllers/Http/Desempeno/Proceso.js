@@ -72,7 +72,7 @@ class Proceso {
                     etapa:"Creación de Metas",
                     imagen:"/assets/images/ede/creacionmetas.png",
                     color:"bg-aqua-active",
-                    link:"/desempeno/Metas/MetasCreacion/creacion",
+                    link:"/Desempeno/MetasCreacion/creacion",
                     estado:"1"   
                 },
                 {
