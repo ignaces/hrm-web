@@ -17,28 +17,22 @@
             fontsize_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt',
             image_advtab: true,
             images_upload_handler: function (blobInfo, success, failure) {
-                    var xhr, formData;
-                        xhr = new XMLHttpRequest();
-                        xhr.withCredentials = false;
-                        xhr.open('POST', 'http://hrmassets.enovum.cl/Files/File/upload');
-                        xhr.onload = function() {
-                        var json;
-
-                        if (xhr.status != 200) {
-                            failure('HTTP Error: ' + xhr.status);
-                            return;
-                        }
-                        json = JSON.parse(xhr.responseText);
-
-                        if (!json || typeof json.location != 'string') {
-                            failure('Invalid JSON: ' + xhr.responseText);
-                            return;
-                        }
-                        success(json.location);
-                        };
-                        formData = new FormData();
+                    
+                        var formData = new FormData();
                         formData.append('file', blobInfo.blob(), blobInfo.filename());
-                        xhr.send(formData);
+                        $.ajax({
+                            type: "POST",
+                            url: "http://hrmassets.enovum.cl/Files/File/upload",
+                            contentType: "application/json; charset=utf-8",
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success: function (msg) {
+                               
+                                success(msg.location);
+                             
+                            }
+                        }); 
             },
             templates: [
                 { title: 'Test template 1', content: 'Test 1' },
@@ -99,7 +93,11 @@ $(document).ready(function () {
             dataType: "json", 
             success: function (msg) {
                
-                alert(msg);
+                swal({
+                    title:'Exito',
+                    text:'Notificación de prueba enviada correctamente.',
+                    type:'success'
+                })
              
             }
         }); 
