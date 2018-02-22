@@ -87,14 +87,31 @@ class Talento {
        var cuadrante7 = cuadrantes[6];
         var cuadrante8 = cuadrantes[7];
        var cuadrante9 = cuadrantes[8];
+
+
+       var all2 =  session.get('personaLogueada')
+       var idOpinante2 = all2.id
+       
+       var idTalentoProceso2 = request.input("talento");
+
+       //var idTalento = request.input("talento")
+       var obj = {
+           "idTalentoProceso":idTalentoProceso2,
+           "idOpinante":idOpinante2
+       };
+
+       var result = await data.execApi(request.hostname(),'/Talento/Talento/colaboradoresEvaluados',obj);
+       var colaboradoresEva = result.body;
         
     
 
-        return view.render('talento/nineBoxColaboradores', {personas:personas,cuadrante1:cuadrante1,cuadrante2:cuadrante2,cuadrante3:cuadrante3,cuadrante4:cuadrante4,cuadrante5:cuadrante5,cuadrante6:cuadrante6,cuadrante7:cuadrante7,cuadrante8:cuadrante8,cuadrante9:cuadrante9});
+        return view.render('talento/nineBoxColaboradores', {personas:personas,cuadrante1:cuadrante1,cuadrante2:cuadrante2,cuadrante3:cuadrante3,cuadrante4:cuadrante4,cuadrante5:cuadrante5,cuadrante6:cuadrante6,cuadrante7:cuadrante7,cuadrante8:cuadrante8,cuadrante9:cuadrante9,colaboradoresEva:colaboradoresEva});
         
     }
 
     async colaboradoresEvaluados({view,request, response, auth, session}) {
+        
+        /*
         var all =  session.get('personaLogueada')
         var idOpinante = all.id
         
@@ -106,8 +123,9 @@ class Talento {
             "idOpinante":idOpinante
         };
 
-        var result = await data.execApi(request.hostname(),'/Talento/Talento/colaboradoresSinCuadrante',obj);
-        var personas = result.body;
+        var result = await data.execApi(request.hostname(),'/Talento/Talento/colaboradoresEvaluados',obj);
+        var colaboradoresEva = result.body;
+        */
 
     }
 
