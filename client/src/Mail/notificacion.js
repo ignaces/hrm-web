@@ -1,7 +1,62 @@
 /**
  * Configuracion de tinymci para notificaciones y upload de imagenes
  */
+// Variable to store your files
+var files;
+ 
+// Grab the files and set them to our variable
+ var prepareUpload =function(event)
+ {
+     files = event.target.files;
+ }
+ var uploadFile = function()
+{
+  
 
+    //  START A LOADING SPINNER HERE
+
+    // Create a formdata object and add the files
+    var data = new FormData();
+    $.each(files, function(key, value)
+    {
+        
+        data.append("file", value,value.name);
+    });
+    data.append("_csrf",$('input[name=_csrf]').val());
+    data.append("idNotificacion",$('#idNotificacion').val());
+    
+    $.ajax({
+        url: '/Mail/Notificaciones/loadFile',
+        type: 'POST',
+        contentType: "application/json; charset=utf-8",
+        data: data,
+        processData: false,
+        contentType: false,
+        success: function(data, textStatus, jqXHR)
+        {
+            if(typeof data.error === 'undefined')
+            {
+                // Success so call function to process the form
+                swal({
+                    title:'Exito',
+                    text:'Notificaciónes enviadas.',
+                    type:'success'
+                })
+            }
+            else
+            {
+                // Handle errors here
+                console.log('ERRORS: ' + data.error);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown)
+        {
+            // Handle errors here
+            console.log('ERRORS: ' + textStatus);
+            // STOP LOADING SPINNER
+        }
+    });
+}
  var initTiny = function(){
      /**
       * TODO recibir obj botones y crearlos dinamicamente en seccion setup
@@ -51,10 +106,12 @@
                                     editor.insertContent(this.value());
                                 },
                                 values: [
-                                    { text: 'RUT', value: '#{RutPersona}' },
+                                    { text: 'Identificador', value: '#{Identificador}' },
                                     { text: 'Nombre', value: '#{Nombres}' },
                                     { text: 'Apellido Paterno', value: '#{ApellidoPaterno}' },
-                                    { text: 'Apellido Materno', value: '#{ApellidoMaterno}' }
+                                    { text: 'Apellido Materno', value: '#{ApellidoMaterno}' },
+                                    { text: 'Contraseña', value: '#{Password}' },
+                                    { text: 'Usuario', value: '#{UserName}' }
                                 ],
                                 onPostRender: function () {
                                     this.value('&nbsp;<em>Some italic text!</em>');
@@ -71,7 +128,15 @@ $(document).ready(function () {
      * 
      */
     initTiny();
+    $(":file").filestyle({input: false});
 
+    $("#btnUpload").click(function(){
+        uploadFile();
+    });
+    // Add events
+    $('#fExcel').on('change', prepareUpload);
+
+   
     $("#btnSend").click(function(){
         var tag = $("#tag").val();
         var to = $("#emailTo").val();
