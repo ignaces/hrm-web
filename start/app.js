@@ -19,7 +19,8 @@ const providers = [
   '@adonisjs/shield/providers/ShieldProvider',
   '@adonisjs/session/providers/SessionProvider',
   '@adonisjs/auth/providers/AuthProvider',
-  '@adonisjs/ally/providers/AllyProvider'
+  '@adonisjs/ally/providers/AllyProvider',
+  '@adonisjs/redis/providers/RedisProvider'
 ]
 
 /*
@@ -68,11 +69,11 @@ edge.global('theme', function (hostname) {
   const Env = use('Env')
 
   var theme = Env.get('STYLE', 'default');
-
+  var hostalias = Env.get('HOSTALIAS', 'localhost');
   //hostname="enel.enovum.cl"
   
   
-  if(hostname=="localhost"){
+  if(hostname==hostalias){
     theme = `/themes/${theme}` 
   }else{
     var company = hostname.split(".")[0]
@@ -82,3 +83,4 @@ edge.global('theme', function (hostname) {
   
   return theme;
 })
+

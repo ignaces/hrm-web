@@ -21,7 +21,8 @@ class Vista extends Command {
     
     const modulo = await this
     .choice('Selecciona el Módulo',modulos)
-
+    const contenedor = await this
+    .ask('Nombre del contenedor de la Vista','')
     const vista = await this
     .ask('Nombre de la Vista')
 
@@ -44,13 +45,23 @@ class Vista extends Command {
 
 @endsection`
     
-              console.log(Helpers.appRoot(`resources/views/${modulo}/${vista}.edge`))
+              //console.log(Helpers.appRoot(`resources/views/${modulo.toLowerCase()}/${vista}.edge`))
+    modulo = modulo.charAt(0).toLowerCase();
+    contenedor = contenedor.charAt(0).toLowerCase();
+    var path = Helpers.appRoot(`resources/views/${modulo}/${contenedor}`)
+    if(contenedor!=''){
+      vista = `${contenedor}/${vista}`;
+    }
+
+    if (!fs.existsSync(path)){
+      fs.mkdirSync(path);
+    }
     fs.writeFile(Helpers.appRoot(`resources/views/${modulo}/${vista}.edge`), texto, function(err) {
       if(err) {
           return console.log(err);
       }
   
-      context.info(`Se creó ${modulo}/${vista}`)
+      context.info(`Se creó la vista correctamente`)
     }); 
   }
 }

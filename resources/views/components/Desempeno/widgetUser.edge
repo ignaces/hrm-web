@@ -1,0 +1,19 @@
+
+<div class="box box-widget widget-user-2">
+    @each(user in datos.user)
+    <div class="widget-user-header bg-warning">
+        <div class="widget-user-image">
+            <img class="img-circle" src="/assets/images/users/{{user.avatar}}" alt="Imagen">
+        </div>
+        <h3 class="widget-user-username text-white">{{user.nombre}}</h3>
+        <h5 class="widget-user-desc  text-white">{{user.cargo}}</h5>
+    </div>
+     @endeach
+    <div class="box-footer no-padding">
+        <ul class="nav nav-stacked">
+         @each(menu in datos.menu)
+        <li><a href="{{menu.link}}">{{menu.nombre}}</a></li>
+         @endeach
+        </ul>
+    </div>
+</div>

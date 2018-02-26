@@ -29,6 +29,16 @@ class UserController {
           
           session.put('personaLogueada',persona);
           session.put('idPersona', persona.id)
+          try{
+            var rUsuario = await data.execApi(request.hostname(),'/Core/Users/getMenuUser',{idUser:auth.user.id});
+            var usuario = rUsuario.body.data;
+            session.put('usuario_roles_menu',usuario);
+
+            
+
+          }catch(err){
+            console.log(err)
+          }
           
 
         }
