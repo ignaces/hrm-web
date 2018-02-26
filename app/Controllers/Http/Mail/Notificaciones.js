@@ -74,6 +74,40 @@ class Notificaciones {
 
 
     }
+
+    async saveNotificacion({view,request, response}) {
+       
+        var tag = request.input("tag");
+        var to = request.input("to");
+        var subject = request.input("subject");
+        var body = request.input("body");
+        var mask = request.input("mask");
+        var nombre = request.input("nombre");
+        var idNotificacion = request.input("idNotificacion");
+        var idCliente = request.input("idCliente");
+        var obj = {
+            tag:tag,
+            to:to,
+            subject:subject,
+            body:body,
+            nombre:nombre,
+            mask:mask,
+            idCliente:idCliente,
+            idNotificacion:idNotificacion
+        };
+        try{
+
+            var result = await data.execApiPost(request.hostname(),'/Mail/Notificaciones/save',obj);  
+
+            return{mensaje:"ok"} 
+        }catch(err){
+            return{mensaje:err}
+        }
+        
+
+
+
+    }
     async loadFile({view,request,response}){
         const file = request.file("file");
         const idNotificacion = request.input("idNotificacion")
@@ -91,7 +125,7 @@ class Notificaciones {
         var correos = XLSX.utils.sheet_to_json(worksheet)
         var notificacion = {
             idNotificacion: idNotificacion,
-            correos:correos
+            correos: correos
         }
         const errores = Enumerable.from(correos).select(function(err){
             return err;

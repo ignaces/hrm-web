@@ -168,6 +168,47 @@ $(document).ready(function () {
         }); 
     });
 
+    $("#btnSave").click(function(){
+        var tag = $("#tag").val();
+        var to = $("#emailTo").val();
+        var subject = $("#subject").val();
+        var mask = $("#mask").val();
+        var idNotificacion = $('#idNotificacion').val();
+        var nombre = $("#nombre").val();
+        var csrf = $('input[name=_csrf]').val();
+        var body= tinyMCE.activeEditor.getContent();
+        var cliente = $("#idCliente").val();
+        
+        var obj = {
+            tag:tag,
+            to:to,
+            subject:subject,
+            body:body,
+            _csrf:csrf,
+            mask:mask,
+            idNotificacion:idNotificacion,
+            idCliente:cliente,
+            nombre:nombre
+        };
+        
+        $.ajax({
+            type: "POST",
+            url: "/Mail/Notificaciones/saveNotificacion",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(obj),
+            dataType: "json", 
+            success: function (msg) {
+               
+                swal({
+                    title:'Exito',
+                    text:'Notificación guardada correctamente.',
+                    type:'success'
+                });
+             
+            }
+        }); 
+    });
+
     $("#btnCreate").click(function(){
         var tag = $("#tag").val();
         var to = $("#emailTo").val();
