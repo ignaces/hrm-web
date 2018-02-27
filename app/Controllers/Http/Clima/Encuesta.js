@@ -9,8 +9,6 @@ class Encuesta {
             idCliente:""
         };
         
-        
-        
         return view.render('encuesta/index',  {});
     }
 }

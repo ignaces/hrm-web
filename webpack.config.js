@@ -11,7 +11,8 @@ module.exports = {
       CoreNetwork:['./client/src/Core/network.js'],
       Instrumento:['./client/src/Instrumento/instrumento.js'],
       listaNotificacion:['./client/src/Mail/listaNotificacion.js'],
-      configNotificacion:['./client/src/Mail/notificacion.js']
+      configNotificacion:['./client/src/Mail/notificacion.js'],
+      ingresoEncuesta:['./client/src/Encuesta/ingreso.js']
     },
   output: {
     filename: '[name].min.js',
