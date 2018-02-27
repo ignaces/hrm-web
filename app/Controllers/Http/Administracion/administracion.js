@@ -10,7 +10,7 @@ class Administracion {
 
       
         return view.render('administracion/administrador');
-    }   
+    }
 }
 
 module.exports = Administracion
