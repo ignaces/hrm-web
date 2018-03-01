@@ -113,16 +113,18 @@
                         </div> <!-- end card-box -->
                     </div><!-- end col -->
                 </div>
-
-                @each(pregunta in dimension.preguntas)
-                        @if(pregunta.codigoDespliegue=="preguntaLickertGrilla")
-                            @!component('components.Evaluacion.preguntaLickertGrilla',data={idEncuestaPersona:idEncuestaPersona,pregunta:pregunta})
-                        @endif
-                        
-                        @if(pregunta.codigoDespliegue=="preguntaAbierta")
-                            @!component('components.Evaluacion.preguntaAbierta',data={idEncuestaPersona:idEncuestaPersona,pregunta:pregunta})
-                        @endif
+                @each(pagina in dimension.paginas)
+                    @each(pregunta in pagina.preguntas)
+                            @if(pregunta.codigoDespliegue=="preguntaLickertGrilla")
+                                @!component('components.Evaluacion.preguntaLickertGrilla',data={idEncuestaPersona:idEncuestaPersona,pregunta:pregunta})
+                            @endif
+                            
+                            @if(pregunta.codigoDespliegue=="preguntaAbierta")
+                                @!component('components.Evaluacion.preguntaAbierta',data={idEncuestaPersona:idEncuestaPersona,pregunta:pregunta})
+                            @endif
+                    @endeach
                 @endeach
+               
             @endeach
             
  <div class="row">
