@@ -1,0 +1,127 @@
+@layout('layouts/nomenu')
+
+
+@section('scripts')
+    <script src="/assets/js/dist/Instrumento.min.js?v24s"></script>
+    <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+    <script src="/assets/plugins/transit/jquery.transit.min.js"></script>
+    <script>
+        /*$(document).ready(function(){
+            $("#p2").transition({ x: 800000 });
+            $("#instrumento_btn_siguiente").click(function(){
+                $("#p1").transition({ x: -20000});
+                $("#p1").hide("fast");
+                       $("#p2").show("fast");
+                $("#p2").transition({ x: 0 });
+            });
+        });*/
+    </script>
+@endsection
+
+@section('pluginsCss')
+    <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    
+    <style>
+.button-label {
+  display: inline-block;
+  padding: 1em 2em;
+  margin: 0.5em;
+  cursor: pointer;
+  color: #292929;
+  border-radius: 0.25em;
+  background: #efefef;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0 -3px 0 rgba(0, 0, 0, 0.22);
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.button-label h1 {
+  font-size: 1em;
+  font-family: "Lato", sans-serif;
+}
+.button-label:hover {
+  background: #d6d6d6;
+  color: #101010;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0 -3px 0 rgba(0, 0, 0, 0.32);
+}
+.button-label:active {
+  -webkit-transform: translateY(2px);
+          transform: translateY(2px);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0px -1px 0 rgba(0, 0, 0, 0.22);
+}
+@media (max-width: 40em) {
+  .button-label {
+    
+  }
+
+
+}
+
+.option-button:checked + .button-label {
+  background: #ffa500;
+  color: #ffffff;
+}
+.option-button:checked + .button-label:hover {
+  background: #ff6500;
+  color: #ffffff;
+}
+
+.question > .row:nth-child(odd){
+  background: #e6e6e6;
+}
+
+
+    </style>
+@endsection
+  
+
+@section('content')
+
+<input type="hidden" id="idOpinante" value="{{idOpinante}}" />
+
+
+    @!component('components.breadcrumb',title=instrumento.nombre, pages= [
+        {nombre:"Instrumento",activa:false},
+        {nombre:"Instrumento",activa:true}
+    ])
+            @each(dimension in instrumento.dimensiones)
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-box">
+                            <h4 class="m-t-0 header-title"><b>{{dimension.nombre}}</b></h4>
+                            <div class="row">
+                                {{{dimension.descripcion}}}
+                            </div>
+                            <!-- end row -->
+
+                        </div> <!-- end card-box -->
+                    </div><!-- end col -->
+                </div>
+
+                @each(pregunta in dimension.preguntas)
+                        @if(pregunta.codigoDespliegue=="preguntaLickertGrilla")
+                            @!component('components.Evaluacion.preguntaLickertGrilla',data={idEncuestaPersona:idEncuestaPersona,pregunta:pregunta})
+                        @endif
+                        
+                        @if(pregunta.codigoDespliegue=="preguntaAbierta")
+                            @!component('components.Evaluacion.preguntaAbierta',data={idEncuestaPersona:idEncuestaPersona,pregunta:pregunta})
+                        @endif
+                @endeach
+            @endeach
+            
+ <div class="row">
+                        <div class="col-lg-12" style="text-align:center;">
+                            <button type="button" id="instrumento_btn_siguiente" class="btn btn-info waves-effect waves-light"> <i class="fa fa-save m-r-5"></i> <span>Siguiente</span> </button>
+                            <button type="button" id="instrumento_btn_finalizar" class="btn btn-success waves-effect waves-light"> <i class="fa fa-check m-r-5"></i> <span>Finalizar</span> </button>
+                        </div>
+                    </div>
+
+                    <form id="frmVolver" method="POST" action="/Acreditacion/Proceso/colaboradores">
+                        {{ csrfField() }}
+                        <input type="hidden" id="proceso" name="proceso" value="{{idProceso}}" />
+                    </form>
+                    </div>
+@endsection

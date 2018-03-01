@@ -9,7 +9,7 @@ class Encuesta {
             idCliente:""
         };
         
-        return view.render('encuesta/index',  {});
+        return view.render('encuesta/index',  {idEncuestaAplicacion:"f7216ef8-1c03-11e8-bf12-bc764e100f2b"});
     }
 }
 module.exports = Encuesta 

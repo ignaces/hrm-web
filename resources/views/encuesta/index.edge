@@ -28,7 +28,7 @@
 
 
     <body class="bg-accpunt-pages">
-
+    
         <!-- HOME -->
         <section>
             <div class="container">
@@ -48,8 +48,9 @@
                                         <h5 class="text-uppercase font-bold m-b-5 m-t-50">Ingresa el código de la encuesta</h5>
                                     </div>
                                     <div class="account-content">
-                                        <form class="form-horizontal" role="form" method="POST" action="/login">
+                                        <form class="form-horizontal" role="form" method="POST" action="/Encuesta/Encuesta/intro">
                                          {{ csrfField() }}
+                                         <input type="hidden" id="idEncuestaAplicacion" name="idEncuestaAplicacion" value="{{idEncuestaAplicacion}}" />
                                             <div class="form-group m-b-200">
                                                 <div class="col-xs-12">
                                                     <label for="emailaddress">Código</label>

@@ -84,3 +84,9 @@ edge.global('theme', function (hostname) {
   return theme;
 })
 
+edge.global('componente', function (modulo,componente) {
+  
+  var ruta = `${modulo}.${componente}`;
+  
+  return ruta;
+})
