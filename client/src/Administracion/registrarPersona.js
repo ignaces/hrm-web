@@ -27,7 +27,7 @@ $(function () {
             usuario:$("#creaUsuario").prop("checked")
          };
 
-        console.log(obj);
+        //console.log(obj);
         
         $.ajax({
             type: "GET",
@@ -37,11 +37,15 @@ $(function () {
             dataType: "json", 
             success: function (msg) {
                 //console.log(msg);
-                swal(
-                    'Creación de Personas',
-                    msg[0].texto,
-                    msg[0].tipoMensaje
-                );
+                swal({
+                    title: 'Registrar Persona',
+                    html: "<img src='https://vignette.wikia.nocookie.net/locuras-extremas/images/2/26/Exito.gif/revision/latest?cb=20140217143923&path-prefix=es' width='100%'> ",
+                    type: "success",
+                    confirmButtonText: "Aceptar",
+                }).then( function (result){
+                    
+                    location.href = "/Administracion/acreditacion/personas?idProceso="+$("#idProceso").val();
+                })
             }
         });
         

@@ -9,7 +9,7 @@ class Administracion {
         //console.log(auth.user.id)
 
       
-        return view.render('administracion/administrador');
+        return view.render('/administracion/administrador');
     }
 }
 
