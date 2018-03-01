@@ -8,6 +8,7 @@ module.exports = {
       Persona:['./client/src/Persona/lista.js'],
       Menu:['./client/src/Administracion/menu.js'],
       RegistrarPersona:['./client/src/Administracion/registrarPersona.js'],
+      PersonasProceso:['./client/src/Acreditacion/personas.js'],
       CoreNetwork:['./client/src/Core/network.js'],
       Instrumento:['./client/src/Instrumento/instrumento.js'],
       listaNotificacion:['./client/src/Mail/listaNotificacion.js'],
