@@ -79,6 +79,11 @@
     padding-left: 10px;padding-right: 10px; float:left;position:relative;min-height:1px;
 }
 
+@media (max-width: 992px) {
+    .col-dinamico{
+        width:100% !important;
+    }
+}
 
     </style>
 @endsection
@@ -100,6 +105,8 @@
                             <h4 class="m-t-0 header-title"><b>{{dimension.nombre}}</b></h4>
                             <div class="row">
                                 {{{dimension.descripcion}}}
+
+                               
                             </div>
                             <!-- end row -->
 
