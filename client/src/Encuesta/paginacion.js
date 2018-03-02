@@ -1,10 +1,15 @@
 $(document).ready(function(){
    $("#btnSiguiente").click(function(){
     var activa;
+    
     $("#btnAnterior").show();
+    
     $(".paginaActiva").each(function(i,obj){
         activa=obj;
-   });
+    });
+    var hActivo = $(".headerActivo").eq(0);
+    var dimension = hActivo.attr('id').split("_")[1];
+    
    // $(".paginaActiva").transition({ y: '-40000px' },10000,'ease');
    
        $(".pagina").each(function(i,obj){
@@ -12,6 +17,13 @@ $(document).ready(function(){
                 var domElement = $(".pagina").eq(i+1);
                 $(".paginaActiva").hide();
                 $(".paginaActiva").removeClass('paginaActiva');
+               var dimensionNew = domElement.attr('id').split("_")[1];
+               if(dimension!=dimensionNew){
+                   hActivo.hide();
+                   hActivo.removeClass('headerActivo');
+                   $("#H_"+dimensionNew).addClass('headerActivo');
+                   $("#H_"+dimensionNew).show();
+               }
                domElement.show();
                domElement.addClass('paginaActiva');
               // domElement.transition({ y: '0px' },10000,'ease');
@@ -21,20 +33,30 @@ $(document).ready(function(){
                return;
             }
        });
+       window.scrollTo(0, 0);
    });
 
-   $("#btnAnterior").click(function(){
+$("#btnAnterior").click(function(){
     $("#btnSiguiente").show();
     var activa;
     $(".paginaActiva").each(function(i,obj){
         activa=obj;
    });
+   var hActivo = $(".headerActivo").eq(0);
+    var dimension = hActivo.attr('id').split("_")[1];
    // $(".paginaActiva").transition({ y: '-40000px' });
        $(".pagina").each(function(i,obj){
             if(obj==activa){
                 var domElement = $(".pagina").eq(i-1);
                 $(".paginaActiva").hide();
                  $(".paginaActiva").removeClass('paginaActiva');
+                 var dimensionNew = domElement.attr('id').split("_")[1];
+                    if(dimension!=dimensionNew){
+                        hActivo.hide();
+                        hActivo.removeClass('headerActivo');
+                        $("#H_"+dimensionNew).addClass('headerActivo');
+                        $("#H_"+dimensionNew).show();
+                    }
                  domElement.addClass('paginaActiva');
                  domElement.show();
                  if(i-1<1){
@@ -45,5 +67,6 @@ $(document).ready(function(){
                return;
             }
        });
+       window.scrollTo(0, 0);
    });
 });
