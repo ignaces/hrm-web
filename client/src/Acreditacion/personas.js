@@ -26,7 +26,7 @@ $(document).ready(function () {
         {
             swal(
                 {   title: "Error",
-                    html: "Debes seleccionar al menos a una persona para incluir en el proceso <br><br> <img src='https://78.media.tumblr.com/5f51bee9370341c5b89d63d9f7639ad2/tumblr_inline_osmoae9I7V1so41lp_540.gif' width='100%'>", 
+                    html: "Debes seleccionar al menos a una persona para incluir en el proceso.", 
                     type: "error"
                 });
         return false;
@@ -37,7 +37,7 @@ $(document).ready(function () {
         {
             swal(
                     {   title: "Error",
-                        html: "Debes seleccionar un perfil <br><br> <img src='https://78.media.tumblr.com/5f51bee9370341c5b89d63d9f7639ad2/tumblr_inline_osmoae9I7V1so41lp_540.gif' width='100%'>", 
+                        html: "Debes seleccionar un perfil. width='100%'>", 
                         type: "error"
                     });
             return false;
@@ -54,7 +54,7 @@ $(document).ready(function () {
 
         swal({
             title: 'Incluir Personas',
-            html: "¿Agregar las personas seleccionadas al proceso? <br><br> <img src='https://i.imgur.com/36DVbRG.gif' width='100%'> ",
+            html: "¿Agregar las personas seleccionadas al proceso? ",
             type: "warning",
             showCancelButton: true,
             cancelButtonColor: "#d33",
@@ -87,7 +87,7 @@ $(document).ready(function () {
                     //console.log(msg);
                     swal({
                         title: 'Incluir Personas',
-                        html: "<img src='https://vignette.wikia.nocookie.net/locuras-extremas/images/2/26/Exito.gif/revision/latest?cb=20140217143923&path-prefix=es' width='100%'> ",
+                        html: "Personas incluidas al proceso. Presione Aceptar para Continuar.",
                         type: "success",
                         confirmButtonText: "Aceptar",
                     }).then( function (result){

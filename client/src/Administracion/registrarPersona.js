@@ -12,42 +12,97 @@ $(function () {
         $('.alert-warning').toggleClass('hidden', ok);
     })
     
-    .on('form:submit', function () {
+    .on('form:submit', function (e) {
         //alert("aaaa");
         //return false; // Don't submit form for this demo
-
+        var objEmail = { 
+            email:$("#email").val()
+        };
+       
+        //console.log($("#email").val().length);
         
-        var obj = { 
-            identificador: $("#identificador").val(),
-            email:$("#email").val(),
-            nombres:$("#nombres").val(),
-            ap_pat:$("#ap_pat").val(),
-            ap_mat:$("#ap_mat").val(),
-            genero:$("#registroGenero").val(),
-            usuario:$("#creaUsuario").prop("checked")
-         };
+        if($("#creaUsuario").prop("checked") == true && $("#email").val().length == 0)
+        {
+            swal({
+                title: 'Error',
+                text: "Debes ingresar un email válido cuando seleccionas la opción 'Habilitar Login'.",
+                type: "error",
+                confirmButtonText: 'Aceptar'
+            });
 
-        //console.log(obj);
+            return false;
+        } 
         
-        $.ajax({
-            type: "GET",
-            url: "/administracion/persona/doRegisterPersona",
-            contentType: "application/json; charset=utf-8",
-            data: obj,
-            dataType: "json", 
-            success: function (msg) {
-                //console.log(msg);
-                swal({
-                    title: 'Registrar Persona',
-                    html: "<img src='https://vignette.wikia.nocookie.net/locuras-extremas/images/2/26/Exito.gif/revision/latest?cb=20140217143923&path-prefix=es' width='100%'> ",
-                    type: "success",
-                    confirmButtonText: "Aceptar",
-                }).then( function (result){
+        var existe = 0;
+
+        if($("#creaUsuario").prop("checked") == true)
+        {
+            $.ajax({
+                type: "GET",
+                url: "/administracion/persona/userExiste",
+                contentType: "application/json; charset=utf-8",
+                data: objEmail,
+                dataType: "json", 
+                async: false,
+                success: function (msg) {
+                    //console.log(msg);
                     
-                    location.href = "/Administracion/acreditacion/personas?idProceso="+$("#idProceso").val();
-                })
-            }
-        });
+                    if(msg.data[0].existe > 0)
+                    {
+                        swal({
+                                title: 'Error',
+                                text: "El email que estás intentando registrar ya existe.",
+                                type: "error",
+                                confirmButtonText: 'Aceptar',
+                        });
+
+                        existe = 1;
+                        return false;
+                    }
+                }
+            });
+        } 
+
+        if(existe==0)
+        {
+            var obj = { 
+                identificador: $("#identificador").val(),
+                email:$("#email").val(),
+                nombres:$("#nombres").val(),
+                ap_pat:$("#ap_pat").val(),
+                ap_mat:$("#ap_mat").val(),
+                genero:$("#registroGenero").val(),
+                usuario:$("#creaUsuario").prop("checked")
+            };
+
+            $.ajax({
+                type: "GET",
+                url: "/administracion/persona/doRegisterPersona",
+                contentType: "application/json; charset=utf-8",
+                data: obj,
+                dataType: "json", 
+                success: function (msg) {
+                    //console.log(msg);
+
+                    var tipoMensaje = msg[0].tipoMensaje;
+
+                    swal({
+                        title: 'Creación de Personas',
+                        text: msg[0].texto,
+                        type: tipoMensaje,
+                        confirmButtonText: 'Aceptar',
+                    }).then( function(result) {
+                        
+                        if(tipoMensaje == "success")
+                        {
+                            location.href = "/administracion/persona/registrarPersona";
+                        }
+                    });
+                }
+            });
+        }
+        
+        return false;
         
         //$("#formRegistroPersona").submit();
         

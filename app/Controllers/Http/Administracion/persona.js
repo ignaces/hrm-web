@@ -17,10 +17,12 @@ const data = use('App/Utils/Data')
             return view.render('administracion/persona/registrarPersona', {comboGenero:comboGenero.data} );
         }
 
+
+
         async doRegisterPersona  ({ view,request, response, session }) {
         
             //console.log(auth.user.username)
-            console.log(request.all());
+            //console.log(request.all());
             var identificador = request.input("identificador");
             var nombres = request.input("nombres");
             var ap_pat = request.input("ap_pat");
@@ -60,7 +62,17 @@ const data = use('App/Utils/Data')
 
             response.json(respuesta.estado, respuesta.data);
         }
+
+        async userExiste({ request, response, session }) {
+        
+            var emailPre   = request.input("email");
+            var obj     = { email: emailPre };
+            //console.log(obj);
+
+            var resultado   = await data.execApiPost(request.hostname(),'/Usuario/Usuario/getUsuarioByEmail',obj);
+            //console.log(resultado.body);
+            response.json(resultado.body);
+        }
     }
-    
       
     module.exports = Persona
