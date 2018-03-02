@@ -39,6 +39,9 @@
           instrumento.pp='components.Evaluacion.preguntaLickertGrilla';
           return view.render('encuesta/instrumento',  {idEncuestaPersona:idEncuestaPersona,instrumento:instrumento});
         }
+        async fin({view,request, response, auth, session}){
+          return view.render('encuesta/fin',  {});
+        }
       }
       
     module.exports = Encuesta

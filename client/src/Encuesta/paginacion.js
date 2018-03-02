@@ -29,6 +29,7 @@ $(document).ready(function(){
               // domElement.transition({ y: '0px' },10000,'ease');
               if($(".pagina").length-1==i+1){
                 $("#btnSiguiente").hide();
+                $("#instrumento_btn_finalizar").show();
               }
                return;
             }

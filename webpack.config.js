@@ -14,7 +14,7 @@ module.exports = {
       listaNotificacion:['./client/src/Mail/listaNotificacion.js'],
       configNotificacion:['./client/src/Mail/notificacion.js'],
       ingresoEncuesta:['./client/src/Encuesta/ingreso.js'],
-      paginacionEncuesta:['./client/src/Encuesta/paginacion.js']
+      instrumentoEncuesta:['./client/src/Encuesta/paginacion.js','./client/src/Encuesta/instrumento.js']
     },
   output: {
     filename: '[name].min.js',

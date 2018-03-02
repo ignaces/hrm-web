@@ -3,8 +3,7 @@
 
 @section('scripts')
     <script src="/assets/plugins/transit/jquery.transit.min.js"></script>
-    <script src="/assets/js/dist/Instrumento.min.js?v24s"></script>
-    <script src="/assets/js/dist/paginacionEncuesta.min.js?v24s"></script>
+    <script src="/assets/js/dist/instrumentoEncuesta.min.js?v24s"></script>
     <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
     
     <script>
@@ -129,10 +128,10 @@
                                 <div class="row">
                                     @each(pregunta in pagina.preguntas)
                                             @if(pregunta.codigoDespliegue=="preguntaLickertGrilla")
-                                                @!component('components.Evaluacion.preguntaLickertGrilla',data={idEncuestaPersona:idEncuestaPersona,pregunta:pregunta})
+                                                @!component('components.Evaluacion.preguntaLickertGrilla',data={pagina:$parent.pagina.idPagina,idEncuestaPersona:idEncuestaPersona,pregunta:pregunta})
                                             @endif
                                             @if(pregunta.codigoDespliegue=="preguntaAbierta")
-                                                @!component('components.Evaluacion.preguntaAbierta',data={idEncuestaPersona:idEncuestaPersona,pregunta:pregunta})
+                                                @!component('components.Evaluacion.preguntaAbierta',data={pagina:$parent.pagina.idPagina,idEncuestaPersona:idEncuestaPersona,pregunta:pregunta})
                                             @endif
                                     @endeach
                             </div>
@@ -168,10 +167,10 @@
                                 <div class="row">
                                     @each(pregunta in pagina.preguntas)
                                             @if(pregunta.codigoDespliegue=="preguntaLickertGrilla")
-                                                @!component('components.Evaluacion.preguntaLickertGrilla',data={idEncuestaPersona:idEncuestaPersona,pregunta:pregunta})
+                                                @!component('components.Evaluacion.preguntaLickertGrilla',data={pagina:$parent.pagina.idPagina,idEncuestaPersona:idEncuestaPersona,pregunta:pregunta})
                                             @endif
                                             @if(pregunta.codigoDespliegue=="preguntaAbierta")
-                                                @!component('components.Evaluacion.preguntaAbierta',data={idEncuestaPersona:idEncuestaPersona,pregunta:pregunta})
+                                                @!component('components.Evaluacion.preguntaAbierta',data={pagina:$parent.pagina.idPagina,idEncuestaPersona:idEncuestaPersona,pregunta:pregunta})
                                             @endif
                                     @endeach
                             </div>
@@ -190,13 +189,10 @@
         <div class="col-lg-12" style="text-align:center;">
             <button type="button" id="btnAnterior" class="btn btn-info waves-effect waves-light" style="display:none"> <i class="fa fa-arrow-left m-r-5"></i> <span>Anterior</span> </button>
             <button type="button" id="btnSiguiente" class="btn btn-info waves-effect waves-light"> <span>Siguiente</span> <i class="fa fa-arrow-right m-r-5"></i> </button>
-          <!--  <button type="button" id="instrumento_btn_finalizar" class="btn btn-success waves-effect waves-light"> <i class="fa fa-check m-r-5"></i> <span>Finalizar</span> </button>-->
+            <button style="display:none" type="button" id="instrumento_btn_finalizar" class="btn btn-success waves-effect waves-light"> <i class="fa fa-check m-r-5"></i> <span>Finalizar</span> </button>
         </div>
     </div>
-
-    <form id="frmVolver" method="POST" action="/Acreditacion/Proceso/colaboradores">
-        {{ csrfField() }}
-        <input type="hidden" id="proceso" name="proceso" value="{{idProceso}}" />
-    </form>
+    <input type="hidden" id="idEncuestaPersona" name="idEncuestaPersona" value="{{idEncuestaPersona}}"/>
     </div>
+    <form id="frmVolver" action="/Encuesta/Encuesta/fin"></form>
 @endsection
