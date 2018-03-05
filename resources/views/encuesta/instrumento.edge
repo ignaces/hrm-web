@@ -172,6 +172,9 @@
                                             @if(pregunta.codigoDespliegue=="preguntaAbierta")
                                                 @!component('components.Evaluacion.preguntaAbierta',data={pagina:$parent.pagina.idPagina,idEncuestaPersona:idEncuestaPersona,pregunta:pregunta})
                                             @endif
+                                            @if(pregunta.codigoDespliegue=="preguntaAlternativaVertical")
+                                                @!component('components.Evaluacion.preguntaAlternativaVertical',data={pagina:$parent.pagina.idPagina,idEncuestaPersona:idEncuestaPersona,pregunta:pregunta})
+                                            @endif
                                     @endeach
                             </div>
                                 <!-- end row -->
