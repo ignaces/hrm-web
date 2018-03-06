@@ -44,6 +44,7 @@ Route.get('/Encuesta/Encuesta/instrumento','Encuesta/Encuesta.instrumento')
 Route.post('/Encuesta/Encuesta/instrumento','Encuesta/Encuesta.instrumento')
 Route.get('/Encuesta/Instrumento/putRespuesta','Encuesta/Instrumento.putRespuesta')
 Route.get('/Encuesta/Instrumento/cerrarInstrumento','Encuesta/Instrumento.cerrarInstrumento')
+Route.get('/Encuesta/Instrumento/fin','Encuesta/Instrumento.fin')
 
 Route.any('/:module/:controller/:action',  ({view ,request, response,params,auth, session}) => {
   
