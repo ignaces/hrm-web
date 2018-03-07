@@ -7,28 +7,48 @@ $(document).ready(function(){
     $(".paginaActiva").each(function(i,obj){
         activa=obj;
     });
-    checked = false;
+    checked = true;
     $(".paginaActiva").find(".pr_pregunta").each(function (index) {
         
-        console.log("ss")
         var idPregunta = $(this).prop('id');
-        checked=false;
+       
+        var respondida=false;
         $("input[name='rd_"+idPregunta+"']").each(function () {
             
             if ($(this).prop('checked')) {
                
-                checked = true;
+                respondida =true;
                 
-            }else{
-                checked=false;
-                return false;
             }
            
         });
+
+        if(respondida==false){
+            checked=false;
+        }
         
         
     });
-    if (!checked) {
+    var vacios=true;
+    $(".paginaActiva").find(".txt_pregunta").each(function() {
+        
+        var id = $( this ).prop('id');
+        
+        var arr = id.split("_");
+        var idPregunta = arr[1];
+        var idAlternativa = arr[2];
+        var requiereJustificacion = parseInt(arr[3]);
+        var idOpinante =arr[4]; 
+        var justificacion = "";
+        var txtJustificacion = "#txt_"+idPregunta;
+        
+        if($(txtJustificacion).val() == ""){
+            vacios = false;
+        }    
+        
+    });
+  
+    if (!checked || !vacios) {
         
         swal(
             'No has terminado',

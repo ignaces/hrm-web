@@ -12,7 +12,7 @@ $(document).ready(function(){
         var requiereJustificacion = arr[3]*1;
         var idOpinante =arr[4]; 
         var justificacion = "";
-        var txtJustificacion = "#txt_"+idPregunta+"_"+idOpinante;
+        var txtJustificacion = "#txt_"+idPregunta;
 
         if(requiereJustificacion==1){
             $(txtJustificacion).show();
@@ -39,8 +39,8 @@ $(document).ready(function(){
         var idOpinante =arr[2]; 
         var justificacion = "";
         
-        if($("#txt_"+idPregunta+"_"+idOpinante).val()){
-            justificacion=$("#txt_"+idPregunta+"_"+idOpinante).val()
+        if($("#txt_"+idPregunta).val()){
+            justificacion=$("#txt_"+idPregunta).val()
         }
        
         putRespuesta(idOpinante, idPregunta, idAlternativa, justificacion);
