@@ -19,6 +19,9 @@ $(document).ready(function(){
                
                 checked = true;
                 
+            }else{
+                checked=false;
+                return false;
             }
            
         });
