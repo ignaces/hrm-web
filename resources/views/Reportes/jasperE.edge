@@ -1,0 +1,48 @@
+
+
+@layout('layouts/horizontal')
+
+@section('scripts')
+    <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+    <script src="http://reportes.enovum.cl/jasperserver-pro/client/visualize.js"></script>
+    
+
+@endsection
+
+@section('pluginsCss')
+    <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+@endsection
+  
+
+@section('content')
+
+<input type="hidden" id="idOpinante" value="{{idOpinante}}" />
+
+
+    @!component('components.breadcrumb',title="Instrumento", pages= [
+        {nombre:"Instrumento",activa:false},
+        {nombre:"Instrumento",activa:true}
+    ])
+    
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-border panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Reporte</h3>
+                </div>
+                <div class="panel-body">
+                <div class="row">
+                    <div id="container">
+                    <iframe  style="border: 0; width: 100%; height: 600px" src="http://reportes.enovum.cl/jasperserver-pro/flow.html?_flowId=viewReportFlow&standAlone=true&ParentFolderUri=%2Ftemp%2FReportes_FCHILE%2Freportes%2FClima&reportUnit=%2Ftemp%2FReportes_FCHILE%2Freportes%2FClima%2F1_rpt_resultados_generales&j_organization=Root&j_username=jasperadmin&j_password=Qwerty123_&decorate=no"></iframe>
+                    </div>
+                </div>
+                
+                    
+                </div><!--<div class="panel-body">-->
+            </div><!--<div class="panel panel-border panel-primary">-->
+        </div><!--<div class="col-lg-12">-->
+        
+        
+    </div><!--<div class="row">-->
+
+@endsection
