@@ -62,7 +62,6 @@ $(document).ready(function(){
             dataType: "json", 
             success: function (msg) {
                 $.toast({
-                    heading: 'Bien!',
                     text: 'Respuesta guardada correctamente.',
                     position: 'top-right',
                     loaderBg: '#5ba035',
