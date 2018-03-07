@@ -2,11 +2,39 @@ $(document).ready(function(){
    $("#btnSiguiente").click(function(){
     var activa;
     
-    $("#btnAnterior").show();
+   
     
     $(".paginaActiva").each(function(i,obj){
         activa=obj;
     });
+    checked = false;
+    $(".paginaActiva").find(".pr_pregunta").each(function (index) {
+        
+        console.log("ss")
+        var idPregunta = $(this).prop('id');
+        checked=false;
+        $("input[name='rd_"+idPregunta+"']").each(function () {
+            
+            if ($(this).prop('checked')) {
+               
+                checked = true;
+                
+            }
+           
+        });
+        
+        
+    });
+    if (!checked) {
+        
+        swal(
+            'No has terminado',
+            'Debes responder todas las preguntas antes de poder continuar.',
+            'warning'
+        );
+        return false;
+    }
+    $("#btnAnterior").show();
     var hActivo = $(".headerActivo").eq(0);
     var dimension = hActivo.attr('id').split("_")[1];
     

@@ -61,7 +61,15 @@ $(document).ready(function(){
             data: obj,
             dataType: "json", 
             success: function (msg) {
-            
+                $.toast({
+                    heading: 'Bien!',
+                    text: 'Respuesta guardada correctamente.',
+                    position: 'top-right',
+                    loaderBg: '#5ba035',
+                    icon: 'success',
+                    hideAfter: 3000,
+                    stack: 1
+                });
             }
         });
     };
@@ -110,7 +118,7 @@ $(document).ready(function(){
                 $(".c_pregunta").each(function(i,obj){
                    var pregunta = $(".c_pregunta").eq(i).attr("id");
                    var pagina = pregunta.split("|")[0];
-                    console.log(pagina);
+                    
                 });
                 return false;
             }
