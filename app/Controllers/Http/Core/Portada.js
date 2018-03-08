@@ -12,7 +12,7 @@ class Portada {
 
         var obj = {
             "idProceso":""
-        
+            
         };
 
         /*var objTalento = {

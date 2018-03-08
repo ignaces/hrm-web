@@ -6,12 +6,31 @@ const Helpers = use('Helpers')
 const fs = use('fs')
 const readFile = Helpers.promisify(fs.readFile)
 class Mailgun {
-
+   async sendEmail ({view,request, response}) {
+       
+        var tag = request.input("tag");
+        var to = request.input("to");
+        var subject = request.input("subject");
+        var body = request.input("body");
+        var obj = {
+            tag:tag,
+            to:to,
+            subject:subject,
+            body:body
+        };
+        
+    var result = await data.execApiPost(request.hostname(),'/Mail/Mailgun/send',obj);  
+   }
    async statsDownload ({view,request, response}) {
+    
+    var tag = request.input("tag")
+    var event = request.input("event")
     var obj = {
-        tag:"TBK_InicioMetas_2018",
-        event:"failed"
+        tag:tag
     };
+    if(event){
+        obj.event=event;
+    }
     var result = await data.execApi(request.hostname(),'/Mail/Mailgun/stats',obj);  
     
     
@@ -28,6 +47,8 @@ class Mailgun {
                 ["Email", "Asunto","Estado", "Fecha"] 
             ];
             for(var evento in eventos){
+                console.log(new Date(eventos[evento].timestamp*1000))
+                
                 var fila = [
                     eventos[evento].recipient,
                     eventos[evento].message.headers.subject,

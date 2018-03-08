@@ -1,0 +1,10 @@
+            <select class="form-control select2" id="{{data.id}}" 
+                @if(data.requerido) 
+                    required
+                @endif
+            >
+                <option value="0">--Seleccione--</option>
+                @each(item in data.comboGenero)
+                    <option value="{{item.codigo}}">{{item.nombre}}</option>
+                @endeach
+            </select>

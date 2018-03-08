@@ -14,7 +14,7 @@ class Instrumento {
             "idOpinante":idOpinante,
             "tipoInstrumento":codigo
         };
-        console.log(all);
+        
         var result = await data.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumento',obj);
 
         
@@ -82,6 +82,7 @@ class Instrumento {
             "idAlternativa":idAlternativa,
             "justificacion":justificacion,
             };
+            
         var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/putRespuesta',obj);
 
         return {mensaje:"OK"}

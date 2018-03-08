@@ -19,7 +19,8 @@ const providers = [
   '@adonisjs/shield/providers/ShieldProvider',
   '@adonisjs/session/providers/SessionProvider',
   '@adonisjs/auth/providers/AuthProvider',
-  '@adonisjs/ally/providers/AllyProvider'
+  '@adonisjs/ally/providers/AllyProvider',
+  '@adonisjs/redis/providers/RedisProvider'
 ]
 
 /*
@@ -83,3 +84,9 @@ edge.global('theme', function (hostname) {
   return theme;
 })
 
+edge.global('componente', function (modulo,componente) {
+  
+  var ruta = `${modulo}.${componente}`;
+  
+  return ruta;
+})
