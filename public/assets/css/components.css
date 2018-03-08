@@ -2935,6 +2935,7 @@ table.dataTable thead th.sorting_desc:after {
 .table-colored-bordered.table-bordered-purple thead th {
   background-color: #5553ce;
 }
+
 /* Table full colored */
 .table-colored-full {
   color: #ffffff;
