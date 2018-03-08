@@ -39,7 +39,7 @@ class Acreditacion {
         var obj = {
             "idPersonaProceso":idPersonaProceso
         };
-        
+        console.log(obj)
         var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getPersonaProceso',obj);
 
         var personaProceso = result.body.data.personaProceso[0];
@@ -53,15 +53,12 @@ class Acreditacion {
         var personas = result.body.data.procesos;
         
         
-        console.log(personas);
         return view.render('/administracion/modulos/acreditacion/evaluadoProceso', {persona: personaProceso, instrumentos: instrumentosProceso, evaluaciones: evaluacionesProceso, personasProceso: personas});
     }
 
     async personas ({ view,request, response, auth }) {
         
         var idProceso = request.input("idProceso")
-
-        //session.put('idProceso',idProceso);
 
         var obj = {
             "idProceso":idProceso
@@ -76,7 +73,7 @@ class Acreditacion {
         var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getPerfilesProceso',obj);
         var perfilesProceso = result.body.data.perfiles;
         
-        //console.log(personas);
+        
         return view.render('/administracion/modulos/acreditacion/personas', {personas, idProceso, personasFueraDelProceso, perfilesProceso});
     }
 
@@ -91,7 +88,7 @@ class Acreditacion {
             idPerfil: idPerfil, 
             personas: personas
         };
-        console.log(obj);
+        
         var result = await data.execApiPost(request.hostname(),'/Acreditacion/Proceso/addPersonaProceso',obj);
         //console.log(result);
     }
