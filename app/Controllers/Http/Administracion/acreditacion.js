@@ -2,7 +2,7 @@
 const data = use('App/Utils/Data')
 
 class Acreditacion {
-     async acreditacion  ({ view,request, response, auth }) {
+    async acreditacion  ({ view,request, response, auth }) {
         
         //console.log(auth.user.username)
         //console.log(auth.user.id)
@@ -25,6 +25,36 @@ class Acreditacion {
         var procesosInactivos = result.body.data.procesos;
         //console.log(procesosInactivos);
         return view.render('/administracion/modulos/acreditacion/acreditacion', {procesosActivos, procesosInactivos});
+    }
+
+    async evaluadoProceso  ({ view, request, response, auth }) {
+        
+        const Env = use('Env')
+        
+        var server = Env.get('API_SERVER', 'development')
+        
+        var idPersonaProceso = request.input("id");
+        var idProceso = request.input("idProc");
+        
+        var obj = {
+            "idPersonaProceso":idPersonaProceso
+        };
+        
+        var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getPersonaProceso',obj);
+
+        var personaProceso = result.body.data.personaProceso[0];
+        var instrumentosProceso = result.body.data.instrumentosProceso;
+        var evaluacionesProceso = result.body.data.instrumentosProcesoEvaluado;
+        
+        obj = {
+            "idProceso":idProceso
+        };
+        var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getPersonas',obj);
+        var personas = result.body.data.procesos;
+        
+        
+        console.log(personas);
+        return view.render('/administracion/modulos/acreditacion/evaluadoProceso', {persona: personaProceso, instrumentos: instrumentosProceso, evaluaciones: evaluacionesProceso, personasProceso: personas});
     }
 
     async personas ({ view,request, response, auth }) {
@@ -63,6 +93,20 @@ class Acreditacion {
         };
         console.log(obj);
         var result = await data.execApiPost(request.hostname(),'/Acreditacion/Proceso/addPersonaProceso',obj);
+        //console.log(result);
+    }
+
+    async setOpinanteEvaluado({request, response, auth})
+    {
+        var idPersona = request.input("idPersona");
+        var idDndOpinante = request.input("idDndOpinante");
+        
+        var obj = {
+            idPersona: idPersona,
+            idDndOpinante: idDndOpinante
+        };
+        //console.log(obj);
+        var result = await data.execApiPost(request.hostname(),'/Acreditacion/Proceso/setOpinanteEvaluado',obj);
         //console.log(result);
     }
 }

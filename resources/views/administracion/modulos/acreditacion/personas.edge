@@ -44,14 +44,16 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        @each(persona in personas)
+                                        @each(persona in personasProceso)
                                         <tr>
                                         
                                             
                                             <td>{{persona.identificador}}</td>
                                             <td>{{persona.nombres}} {{persona.apellidoPaterno}} {{persona.apellidoMaterno}}</td>
                                             <td> 
-                                                N/D
+                                                <a href="evaluadoProceso?id={{persona.idPersonaProceso}}&idProc={{idProceso}}">
+                                                Ver
+                                                </a>
                                             </td>
                                             
                                         </tr>
