@@ -1,0 +1,82 @@
+ 
+ @if(lista.length > 0)
+ <div class="portlet">
+        <div class="portlet-heading ">
+            <h3 class="portlet-title text-warning">
+                {{titulo}}
+            </h3>
+            <div class="portlet-widgets">
+            
+                <a data-toggle="collapse" data-parent="#accordion1" href="#{{id}}"><i class="mdi mdi-minus"></i></a>
+            
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div id="{{id}}" class="panel-collapse collapse in">
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-12">
+
+
+                        <div class="table-responsive">
+                            <table class="table table-colored-bordered table-hover" style="border: 2px solid #44515c">
+                                <thead style="background-color: #44515c">
+                                    <tr>
+                                        <th>Colaborador/a</th>
+                                        <th>Número de Metas</th>
+                                        <th>Estado</th>
+                                        <th>Informe</th>
+                                        <th>Acciones</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @each(persona in lista)
+                                    <tr>
+                                        <td>
+                                            <div class="row text-center">
+                                                <div class="col-md-3">
+                                                    <img src="/assets/images/users/{{persona.foto}}" alt="imagen" title="imagen" class="img-circle thumb-sm" />  
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <h5 class="m-b-0 m-t-0">{{persona.nombres}} {{persona.apellidoPaterno}} {{persona.apellidoMaterno}}</h5>
+                                                    <p class="m-b-0"><small>{{persona.cargo}}</small></p>
+                                                </div>									 
+                                            </div>
+                                        </td>
+                                        <td>
+                                            
+                                            @if(persona.numeroMetas=="0")
+                                                Sin Metas Creadas
+                                            @else
+                                                {{persona.numeroMetas}} Metas
+                                            @endif
+                                        
+                                        </td>
+                                        <td>
+                                            <div class="label label-{{persona.colorEstado}}"> <i class="{{persona.iconoEstado}}"></i> {{persona.textoEstado}}</div>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn {{persona.colorInforme}} btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="{{persona.iconoInforme}}"></i> {{persona.textoInforme}}</button>
+                                        </td>
+                                        <td>
+                                            @if(persona.linkAccion=="")
+                                                <button type="button" class="btn {{persona.colorAccion}} btn-xs btn-rounded btn-bordered waves-effect w-md"><i class="{{persona.iconoAccion}}"></i> {{persona.textoAccion}}</button>
+                                            @else
+                                                <a href="{{persona.linkAccion}}?idProcesoEtapa={{persona.idEdeProcesoEtapa}}&idColaborador={{persona.idPersona}}" class="btn {{persona.colorAccion}} btn-xs btn-rounded btn-bordered waves-effect w-md"><i class="{{persona.iconoAccion}}"></i> {{persona.textoAccion}}</a>
+                                            @endif
+                                            
+                                            
+                                        </td>
+                                    </tr>
+                                @endeach
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     @endif

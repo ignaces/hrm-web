@@ -1,19 +1,19 @@
 
-@each(etapa in datos.etapas)
+@each(etapa in datos)
 <div class="col-md-2">
-    @if(etapa.estado=="1")
-    <a href="{{etapa.link}}">
+    @if(etapa.codigo=="1")
+    <a href="{{etapa.linkUser}}?idProcesoEtapa={{etapa.idEtapa}}">
     @endif
-    <div class="box box-widget widget-user">
+    <div class="box box-widget widget-user">    
         <div class="widget-user-header {{etapa.color}}">
-        <div class="text-center text-white"><p>{{etapa.etapa}}</p></div>
+        <div class="text-center text-white"><p>{{etapa.nombreEtapa}}</p></div>
         </div>
         <div class="widget-user-image">
-        <img class="img-circle" src={{etapa.imagen}} alt="User Avatar">
+        <img class="img-circle" src="/assets/images/ede/{{etapa.imgActiva}}" alt="Imagen Etapa">
         </div>
     </div>
-    @if(etapa.estado=="1")
+    @if(etapa.codigo=="1")
     </a>
-    @endif
+    @endif  
 </div>
  @endeach
