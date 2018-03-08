@@ -79,7 +79,7 @@ $(document).ready(function () {
 
             $.ajax({
                 type: "GET",
-                url: "/administracion/acreditacion/addPersonaProceso",
+                url: "/Administracion/acreditacion/addPersonaProceso",
                 contentType: "application/json; charset=utf-8",
                 data: obj,
                 dataType: "json", 
