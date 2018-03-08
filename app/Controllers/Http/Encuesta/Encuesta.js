@@ -5,7 +5,7 @@
     class Encuesta {
          async index  ({ view,request, response, auth, session }) {
           
-          return view.render('encuesta/index',  {});
+          return view.render('encuesta/index',  {mensaje:""});
         
         } 
         async intro  ({ view,request, response, auth, session }) {
@@ -17,11 +17,14 @@
           }
           var result =  await data.execApi(request.hostname(),'/Encuesta/Medicion/validarCodigo',obj);
           var validacion = result.body;
-          
+         
           if(validacion.continua){
             return view.render('encuesta/intro',  {encuestaPersona:validacion.encuestaPersona});
           }else{
-            return view.render('encuesta/index',  {idEncuestaAplicacion:idEncuestaAplicacion,validacion:validacion});
+            var mensaje= validacion.mensaje;
+            
+            
+            return view.render('encuesta/index',  {idEncuestaAplicacion:idEncuestaAplicacion,mensaje:mensaje});
           }
           
         }
@@ -38,6 +41,9 @@
           instrumento = result.body;
           instrumento.pp='components.Evaluacion.preguntaLickertGrilla';
           return view.render('encuesta/instrumento',  {idEncuestaPersona:idEncuestaPersona,instrumento:instrumento});
+        }
+        async fin({view,request, response, auth, session}){
+          return view.render('encuesta/fin',  {});
         }
       }
       

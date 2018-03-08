@@ -56,14 +56,14 @@
 
 <div class="row" >
     <div class="col-md-3">
-        @!component('components.desempeno.widgetuser',datos=data)
+        @!component('components.desempeno.widgetuser',datos=data,datamenu=datosMenu,persona=PersonaEde)
     </div>
     <div class="col-md-9">
         <div class="row">
             <div class="portlet">
                 <div class="portlet-heading bg-warning">
                     <h3 class="portlet-title">
-                        Proceso de Desempeño 2018
+                        {{datosProceso.nombre}}
                     </h3>   
                     <div class="portlet-widgets">
                     
@@ -78,7 +78,7 @@
                            
                         </div>
                         <div class="row">
-                                @!component('components.desempeno.widgetetapa',datos=data)
+                                @!component('components.desempeno.widgetetapa',datos=etapasProceso,idProceso=idProceso)
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 'use strict'
 
-const data = use('App/Utils/Data')
+const api = use('App/Utils/Data')
 
 class Proceso {
     
@@ -8,114 +8,52 @@ class Proceso {
     async portada ({view,request, response, auth, session}) {
         
         var idPersona = session.get('idPersona', 'fail')
-        var idProceso = request.input("proceso")
-
+        var idProceso = request.input("idProceso")
+        //console.log(request.all());
         session.put('idProceso',idProceso);
 
-        var obj = {
+        //Datos Proceso
+        var objDatosProceso = {
             "idProceso":idProceso,
-            "idPersona": idPersona
+            idEstado:""
         };
-       // var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getPersonasEvaluaciones',obj);
-       //  var personas = result.body.data;
+        var resultProceso =await api.execApi(request.hostname(),'/Desempeno/Proceso/getProcesos',objDatosProceso);
+        var datosProceso =resultProceso.body.data[0];
+
+        session.put('dataProceso',datosProceso)
+        //console.log(datosProceso);
+
+        //Etapas Proceso
+        var objEtapasProceso = {
+            "idProceso":idProceso,
+            "idProcesoEtapa":""
+        };
+        var resultEtapasProceso=await api.execApi(request.hostname(),'/Desempeno/Proceso/getEtapasProceso',objEtapasProceso);
+        var etapasProceso =resultEtapasProceso.body.data;
+
+        //Menu Contextual
+        var objMenuContextual = {
+            "idProceso":idProceso,
+            idEstado:"1"
+        };
+        var resultMenu =await api.execApi(request.hostname(),'/Desempeno/Proceso/getMenuUsuario',objMenuContextual);
+        var datosMenu =resultMenu.body.data;
+
+        //Datos Persona
+        var user={usuario:auth.user}
+        var persona = session.get('personaLogueada')
+
+        var objdatosPersona = {
+            "idProceso":idProceso,
+            "idPersona":idPersona
+        };
+
+        var resultPersonaEde =await api.execApi(request.hostname(),'/Desempeno/Proceso/getProcesoPersona',objdatosPersona);
+        var PersonaEde =resultPersonaEde.body.data;
+        //console.log(PersonaEde)
+
+        //GRAFICOS DUMMIES
         var data={
-            user:[
-                {
-                    id:"1",
-                    nombre:"John Doe",
-                    cargo:"Gerente de Recursos Humanos",
-                    perfil:"Directivo",
-                    avatar:"avatar-1.jpg",
-                    genero:"M"
-                }
-            ],
-            menu:[
-                {
-                    id:"1",
-                    nombre:"Proceso de Desempeño",
-                    link:"#"
-                },
-                {
-                    id:"2",
-                    nombre:"Mis Metas",
-                    link:"#"
-                },
-                {
-                    id:"3",
-                    nombre:"Mi Equipo",
-                    link:"#"
-                },
-                {
-                    id:"4",
-                    nombre:"Mis Informes",
-                    link:"#"
-                },
-                {
-                    id:"5",
-                    nombre:"Mis Planes",
-                    link:"#"
-                },
-                {
-                    id:"6",
-                    nombre:"Ayuda",
-                    link:"#"
-                },
-                {
-                    id:"7",
-                    nombre:"Volver",
-                    link:"http://localhost:3335/"
-                },
-            ],
-            etapas:[
-                {
-                    id:"1",
-                    etapa:"Creación de Metas",
-                    imagen:"/assets/images/ede/creacionmetas.png",
-                    color:"bg-aqua-active",
-                    link:"/Desempeno/MetasCreacion/creacion",
-                    estado:"1"   
-                },
-                {
-                    id:"2",
-                    etapa:"Midyear",
-                    imagen:"/assets/images/ede/midyear.png",
-                    color:"bg-gray-active",
-                    link:"",
-                    estado:"o"   
-                },
-                {
-                    id:"3",
-                    etapa:"Selección de Opinantes",
-                    imagen:"/assets/images/ede/seleccionopinante.png",
-                    color:"bg-blue-active",
-                    link:"",
-                    estado:"0"   
-                },
-                {
-                    id:"4",
-                    etapa:"Evaluación de Desempeño",
-                    imagen:"/assets/images/ede/ede.png",
-                    color:"bg-gray-active",
-                    link:"",
-                    estado:"0"   
-                },
-                {
-                    id:"5",
-                    etapa:"Calibración",
-                    imagen:"/assets/images/ede/calibracion.png",
-                    color:"bg-gray-active",
-                    link:"",
-                    estado:"0"   
-                },
-                {
-                    id:"6",
-                    etapa:"Feedback",
-                    imagen:"/assets/images/ede/feedback.png",
-                    color:"bg-gray-active",
-                    link:"",
-                    estado:"0"   
-                }
-            ],
             knobs:[
                 {
                     id:"1",
@@ -275,7 +213,7 @@ class Proceso {
                 }
             ]
         }
-        return view.render('desempeno/proceso',{data:data});
+        return view.render('desempeno/proceso',{data:data,etapasProceso,datosMenu,persona,PersonaEde,datosProceso});
     }
 }
 
