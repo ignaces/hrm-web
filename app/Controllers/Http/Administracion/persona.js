@@ -5,7 +5,7 @@ const data = use('App/Utils/Data')
         async registrarPersona  ({ view,request, response, session }) {
         
             //console.log(auth.user.username)
-            //console.log(auth.user.id)
+            //console.log(auth.user.id)/
             var objeto = {
                 tabla:"Genero"
             };
