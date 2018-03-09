@@ -56,7 +56,11 @@
                             <div class="card-box widget-box-two widget-two-primary">
                                 <i class="mdi mdi-file widget-two-icon"></i>
                                 <div class="wigdet-two-content">
-                                    <p class="m-0 text-uppercase font-bold font-secondary text-overflow" title="Statistics">{{instrumento.nombreInstrumento}}</p>
+                                    @if(instrumento.codigoTipoInstrumento=="TCO")
+                                        <p class="m-0 text-uppercase font-bold font-secondary text-overflow" title="Statistics">{{instrumento.nombreInstrumento}}</p>
+                                    @else
+                                        <p class="m-0 text-uppercase font-bold font-secondary text-overflow" title="Statistics">{{instrumento.codigoTipoInstrumento}}</p>
+                                    @endif
                                     <h2 class=""> <span data-plugin="counterup">{{instrumento.nombreEstado}}</span></h2>
                                     
                                      @if(instrumento.codigoEstado=="FINALIZADO")
