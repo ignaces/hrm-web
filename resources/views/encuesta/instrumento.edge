@@ -101,6 +101,25 @@
         {nombre:"Instrumento",activa:false},
         {nombre:"Instrumento",activa:true}
     ])
+    
+    <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-box">
+                            <h4 class="m-t-0 header-title"><b>Progreso</b></h4>
+                            <div class="row">
+                                <div class="progress progress-lg m-b-5">
+                                <div id="progress_bar" class="progress-bar progress-bar-purple" role="progressbar" aria-valuenow="{{instrumento.avance}}" aria-valuemin="0" aria-valuemax="100" style="width: {{instrumento.avance}}%;">
+                                    {{instrumento.avance}}%
+                                </div>
+                            </div>
+
+                               
+                            </div>
+                            <!-- end row -->
+
+                        </div> <!-- end card-box -->
+                    </div><!-- end col -->
+                </div>
             @each(dimension in instrumento.dimensiones)
                 @if($loop.first==true)
                     <div class="row paginaHeader headerActivo" id="H_{{dimension.id}}">
@@ -198,6 +217,7 @@
         </div>
     </div>
     <input type="hidden" id="idEncuestaPersona" name="idEncuestaPersona" value="{{idEncuestaPersona}}"/>
+    <input type="hidden" id="idFacsimil" name="idFacsimil" value="{{instrumento.idFacsimil}}"/>
     </div>
     <form id="frmVolver" action="/Encuesta/Encuesta/fin"></form>
 @endsection
