@@ -53,6 +53,10 @@ class Acreditacion {
         var personas = result.body.data.procesos;
         
         
+<<<<<<< HEAD
+        //console.log(personas);
+=======
+>>>>>>> efb1cd36d86025267b812ca1e35316bf7b96bb2f
         return view.render('/administracion/modulos/acreditacion/evaluadoProceso', {persona: personaProceso, instrumentos: instrumentosProceso, evaluaciones: evaluacionesProceso, personasProceso: personas});
     }
 
