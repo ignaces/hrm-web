@@ -61,31 +61,28 @@
                         
                         <div class="col-lg-12">
                          @each(instrumento in persona.instrumentos)
-                         <div class="col-lg-3 col-md-6">
-                            <div class="card-box widget-box-two widget-two-primary">
-                                <i class="mdi mdi-file widget-two-icon"></i>
-                                <div class="wigdet-two-content">
-                                    @if(instrumento.codigoTipoInstrumento=="TCO")
-                                        <p class="m-0 text-uppercase font-bold font-secondary text-overflow" title="Statistics">{{instrumento.nombreInstrumento}}</p>
-                                    @else
-                                        <p class="m-0 text-uppercase font-bold font-secondary text-overflow" title="Statistics">{{instrumento.codigoTipoInstrumento}}</p>
-                                    @endif
-                                    <h2 class=""> <span data-plugin="counterup">{{instrumento.nombreEstado}}</span></h2>
-                                    
-                                     @if(instrumento.codigoEstado=="FINALIZADO")
-                                            <button type="button" id="{{instrumento.idOpinante}}_{{instrumento.codigoTipoInstrumento}}" class="btn btn-info waves-effect waves-light disabled" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{instrumento.nombreEstado}}"> <span>Entrar</span> </button>
-                                    @else
-                                        <button type="button" id="{{instrumento.idOpinante}}_{{instrumento.codigoTipoInstrumento}}_{{$parent.persona.id}}" class="btn btn-info waves-effect waves-light bInstrumento" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{instrumento.nombreEstado}}"> <span>Entrar</span> </button>
-                                    @endif
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="card-box widget-box-two widget-two-primary">
+                                        <i class="mdi mdi-file widget-two-icon"></i>
+                                        <div class="wigdet-two-content">
+                                            @if(instrumento.codigoTipoInstrumento=="TCO")
+                                                <p class="m-0 text-uppercase font-bold font-secondary text-overflow" title="Statistics">{{instrumento.nombreInstrumento}}</p>
+                                            @else
+                                                <p class="m-0 text-uppercase font-bold font-secondary text-overflow" title="Statistics">{{instrumento.codigoTipoInstrumento}}</p>
+                                            @endif
+                                            <h2 class=""> <span data-plugin="counterup">{{instrumento.nombreEstado}}</span></h2>
+                                            
+                                            @if(instrumento.codigoEstado=="FINALIZADO")
+                                                    <button type="button" id="{{instrumento.idOpinante}}_{{instrumento.codigoTipoInstrumento}}" class="btn btn-info waves-effect waves-light disabled" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{instrumento.nombreEstado}}"> <span>Entrar</span> </button>
+                                            @else
+                                                <button type="button" id="{{instrumento.idOpinante}}_{{instrumento.codigoTipoInstrumento}}_{{$parent.persona.id}}" class="btn btn-info waves-effect waves-light bInstrumento" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{instrumento.nombreEstado}}"> <span>Entrar</span> </button>
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                                   </div>
 
-                        </div>
-                        <!-- end row -->
-
-                    </div><!--fin cardbox-->     
+                         
                                         
                         @endeach
                         
@@ -93,6 +90,10 @@
                         
 
                     </div>
+                     </div>
+                        <!-- end row -->
+
+                    </div><!--fin cardbox-->   
                     @endeach
                     
                           
