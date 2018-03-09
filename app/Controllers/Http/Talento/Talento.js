@@ -6,7 +6,7 @@ class Talento {
     
 
     async colaboradoresTalento ({view,request, response, auth, session}) {
-        
+        //busca proceso por get y trae cantidad colaboradores
         var all =  session.get('personaLogueada')
         var idOpinante = all.id
 
@@ -17,32 +17,82 @@ class Talento {
         };
         var result = await data.execApi(request.hostname(),'/Talento/Talento/getFindTalentoProceso',obj);
         var total = result.body;
-        
-        
-        return view.render('talento/colaboradores' ,  {total:total});
-        
+        //-----------------------------------COUNT(ColaboradoresClasificados)------------------
+        //------------------------------------------------------------------------------------
+        var countClasificados = await data.execApi(request.hostname(),'/Talento/Talento/obtenerColaboradorEvaluados',obj);
+        var totalEvaluados = countClasificados.body;
+
+
+        return view.render('talento/colaboradores' ,  {total:total,totalEvaluados:totalEvaluados});
     }
 
-    async colaboradoresTalento2 ({view,request, response, auth, session}) {
-        
+    async filtroDragColaboradoresSinClasificar({view,request, response, auth, session}) {
+        //TRAERLO POR AJAX Y VALIDARCTM
         
         var all =  session.get('personaLogueada')
         var idOpinante = all.id
         
-        var idTalentoProceso = request.input("talento");
+        //clasificaciones
+        var nombreFiltro = request.input("nombreFiltro");
+        //proceso
+        var traerProceso =  session.get('procesoTalento');
+        //cargosselectedoption
+        var cargosFiltro = request.input("cargosFiltro");
 
+        //datos personas
+        var rut = request.input("rut");
+        var nombres = request.input("nombres");
+        var paterno = request.input("paterno");
+        var materno = request.input("materno");
+
+        var obj = {
+            "idOpinante":idOpinante,
+            "idTalentoProceso":traerProceso,
+            "nombreFiltro":nombreFiltro,
+            "cargosFiltro":cargosFiltro,
+            "rut":rut,
+            "nombres":nombres,
+            "paterno":paterno,
+            "materno":materno
+        };
+        var result = await data.execApi(request.hostname(),'/Talento/Talento/filtrarColaboradoresSinClasificar',obj);
+        var total = result.body.data.arreglo;
+        
+        //var condiciones = result.body.data2.condicion;
+        //var total = result.body.data.arreglo;
+        console.log(total); 
+        //console.log(condiciones);
+        return total;
+        
+        
+    }
+
+
+
+
+
+
+
+
+
+   
+
+    async colaboradoresTalento2 ({view,request, response, auth, session}) {
+        //lista personas que estan en un proceso, pero no han sido evaluadas
+        var all =  session.get('personaLogueada')
+        var idOpinante = all.id
+        
+        var idTalentoProceso = request.input("talento");
+       
+        
         //var idTalento = request.input("talento")
         var obj = {
             "idTalentoProceso":idTalentoProceso,
             "idOpinante":idOpinante
         };
-        
         var result = await data.execApi(request.hostname(),'/Talento/Talento/getPersonaTalentos',obj);
         var personas = result.body;
-       
-        
         return view.render('talento/colaboradoresTalento' ,  {personas:personas});
-        
     }
 
 
@@ -51,7 +101,9 @@ class Talento {
         var all =  session.get('personaLogueada')
         var idOpinante = all.id
         
+        
         var idTalentoProceso = request.input("talento");
+        var rstl = session.put('procesoTalento',idTalentoProceso);
 
         //var idTalento = request.input("talento")
         var obj = {
@@ -61,6 +113,7 @@ class Talento {
         
         var result = await data.execApi(request.hostname(),'/Talento/Talento/colaboradoresSinCuadrante',obj);
         var personas = result.body;
+        
         
         
         var all1 =  session.get('personaLogueada')
@@ -77,7 +130,6 @@ class Talento {
         var cuadrantes = result.body;
         
         var cuadrante1 = cuadrantes[0];
-
         var cuadrante1 = cuadrantes[0];
         var cuadrante2 = cuadrantes[1];
         var cuadrante3 = cuadrantes[2];
@@ -102,32 +154,48 @@ class Talento {
 
        var result = await data.execApi(request.hostname(),'/Talento/Talento/colaboradoresEvaluados',obj);
        var colaboradoresEva = result.body;
+      
         
-    
 
-        return view.render('talento/nineBoxColaboradores', {personas:personas,cuadrante1:cuadrante1,cuadrante2:cuadrante2,cuadrante3:cuadrante3,cuadrante4:cuadrante4,cuadrante5:cuadrante5,cuadrante6:cuadrante6,cuadrante7:cuadrante7,cuadrante8:cuadrante8,cuadrante9:cuadrante9,colaboradoresEva:colaboradoresEva});
+       //-----------------------------------------------------------------------------------
+       //------------------------------------- CARGA DE COMBOBOX EMPRESA CARGO--------------
+       //-----------------------------------------------------------------------------------
+       
+       var all3 =  session.get('personaLogueada')
+        var idOpinante = all3.id
         
-    }
-
-    async colaboradoresEvaluados({view,request, response, auth, session}) {
-        
-        /*
-        var all =  session.get('personaLogueada')
-        var idOpinante = all.id
-        
-        var idTalentoProceso = request.input("talento");
-
-        //var idTalento = request.input("talento")
-        var obj = {
-            "idTalentoProceso":idTalentoProceso,
+        var obj3 = {
             "idOpinante":idOpinante
-        };
+            };
+            var resultadoEmpresa = await data.execApi(request.hostname(),'/Talento/Talento/obtenerEmpresaOpinante',obj);
+            
+            
+            var obtenerEmpresa = resultadoEmpresa.body;
+            var idEmpresa = obtenerEmpresa.idEmpresa;
+            
 
-        var result = await data.execApi(request.hostname(),'/Talento/Talento/colaboradoresEvaluados',obj);
-        var colaboradoresEva = result.body;
-        */
+            var obj4 = {
+                "idEmpresa":idEmpresa
+                };
 
+                var obj5 = {
+                    "idEmpresa":idEmpresa,
+                    "idTalentoProceso":idTalentoProceso2
+                    };
+            
+            var resultadoCargos = await data.execApi(request.hostname(),'/Talento/Talento/obtenerCargosPorEmpresa',obj4);
+            var cargosPorEmpresa = resultadoCargos.body;
+        //----------------------------------------------------------------------------------
+       //------------------------------------- CARGA DE COMBOBOX CLASIFICACION  ------------
+       //-----------------------------------------------------------------------------------
+       var resultadoClasificaciones = await data.execApi(request.hostname(),'/Talento/Talento/obtenerClasificaciones',obj5);
+       var clasificacionesPorEmpresa = resultadoClasificaciones.body;
+       
+        return view.render('talento/nineBoxColaboradores', {personas:personas,cuadrante1:cuadrante1,cuadrante2:cuadrante2,cuadrante3:cuadrante3,cuadrante4:cuadrante4,cuadrante5:cuadrante5,cuadrante6:cuadrante6,cuadrante7:cuadrante7,cuadrante8:cuadrante8,cuadrante9:cuadrante9,colaboradoresEva:colaboradoresEva,cargosPorEmpresa:cargosPorEmpresa,clasificacionesPorEmpresa:clasificacionesPorEmpresa});
+        
     }
+
+   
 
 
 
@@ -155,7 +223,6 @@ class Talento {
         //return {mensaje:"OK"}
         //return idInsert //devuelve el ultimo insert creado por el drag and drop
     }
-
 
 }
 

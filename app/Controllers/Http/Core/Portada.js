@@ -8,6 +8,7 @@ class Portada {
 
         var idPersona = session.get('idPersona', 'fall')
         var all =  session.get('personaLogueada')
+        
         var idOpinante = all.id
 
         var obj = {
@@ -27,8 +28,7 @@ class Portada {
         var talentos = resultadoTalento.body.data.talentos;
         var condicion = resultadoTalento.body.data1;
 
-        console.log(talentos);
-        console.log(condicion);
+        
        
         //var rstl = session.put('totalCol',talentos.Total)
         //console.log(rstl);

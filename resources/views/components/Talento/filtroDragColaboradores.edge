@@ -1,0 +1,89 @@
+ <!--<div class="col-lg-12"> -->
+
+                                <div class="portlet">
+                                    <div class="portlet-heading bg-inverse">
+                                        <h3 class="portlet-title">
+                                            Filtros
+                                        </h3>
+                                        <div class="portlet-widgets">
+                                           
+                                            <a data-toggle="collapse" data-parent="#accordion1" href="#bg-inverse"><i class="mdi mdi-minus"></i></a>
+                                           
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div id="bg-inverse" class="panel-collapse collapse in">
+                                        <div class="portlet-body">
+                                        <div class="row">
+                                        <div class="col-sm-3">
+                                        <label >Identificador</label>
+                                        <div><input id="rut" type="text" class="form-control" value=""></div>
+										 </div>
+                                        <div class="col-sm-3">
+                                         <label >Nombres</label>
+                                        <div><input id="nombres" type="text" class="form-control" value=""></div>
+                                        </div>
+										 
+										 <div class="col-sm-3">
+									   <label >Apellido Paterno</label>
+                                        <div><input id="paterno" type="text" class="form-control" value=""></div>
+									   </div>
+									   <div class="col-sm-3">
+									   <label >Apellido Materno</label>
+                                        <div><input id="materno" type="text" class="form-control" value=""></div>
+									   </div>
+									   </div>
+										<div class="row">
+										@each(clasificaciones in clasificacionesPorEmpresa.clasificaciones)
+									   <div class="col-sm-3">
+									    <div class="form-group">
+                                                        <label class="control-label">{{clasificaciones.nombrePadre}}</label>
+                                                        <div class="">
+                                                
+                                                            <select id="buscar" class="form-control buscarCla">
+                                                            <option value="" selected disabled hidden>Selecciona una Clasificación</option>
+                                                @each(claHijo in clasificacionesPorEmpresa.clasificaciones[$loop.index].clasificacionHijo)
+                                                                <option value="{{$loop.index+1}}">{{claHijo.nombreHijo}}</option>
+                                                                
+                                                @endeach
+                                                            </select>
+                                                
+                                        </div>
+                                        </div>
+									   </div>
+									   @endeach
+                                       
+                                        <div class="col-sm-3">
+									    <div class="form-group">
+                                                        <label class="control-label">Cargos</label>
+                                                
+                                                            <select id="buscarCargo" class="form-control buscar">
+                                                    <option value="-1" selected disabled hidden>Selecciona un Cargo</option>
+                                                                @each(cargos in cargosPorEmpresa)
+                                                                <option value="{{$loop.index+1}}">{{cargos.nombreCargos}}</option>
+                                                                @endeach
+                                                            </select>
+                                                
+                                                
+                                        </div>
+                                        </div>
+                                        
+									   </div>
+									   <div class="row">
+									   <div class="col-md-10 col-md-offset-11">
+									   <span class="input-group-btn">
+                                                    <button type="button" id="btnBuscar" class="btn waves-effect waves-light btn-primary">Buscar</button>
+                                                   <img id="spinner" src="/assets/plugins/slick-slider/ajax-loader.gif" alt="Loading"> </span>
+                                                    
+                                                    
+									   </div>
+									   </div>
+                                        </div>
+                                    </div>
+                                </div>
+                          
+
+
+
+            
+            

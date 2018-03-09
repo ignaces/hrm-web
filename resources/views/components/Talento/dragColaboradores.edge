@@ -1,3 +1,5 @@
+
+ 
  <div class="row">
                             <div class="col-md-3">
                                 <div class="card-box">
@@ -7,12 +9,16 @@
                                       Total de Colaboradores por evaluar.
                                     </p>
 
-                                    <ul class="sortable-list taskList list-unstyled ui-sortable" id="upcoming">
-                                     @each(talentos in personas)
-                                        <li class="task-warning ui-sortable-handle" style="" value="{{talentos.procesoOpinante}}">
-                                            
-                                            
-                                            {{talentos.Cargo}}
+                                    <ul class="taskList list-unstyled ui-sortable" id="upcoming">
+                                   
+                                     @each(talentos in personas.clasificaciones)
+                                               <!-- id="{{talentos.Cargo}}" -->
+                                        <li class="task-warning ui-sortable-handle" id="base" name="{{talentos.identificador}}"   value="{{talentos.procesoOpinante}}">
+                                                
+                                             @each(clasificacioness in personas.clasificaciones[$loop.index].clasificacionHijo)
+                                                <input class="" id="clasificaciones" name="clasificaciones" type="hidden" value="{{clasificacioness.ClasificacionesCol}}">
+                                             @endeach
+                                            <div>{{talentos.Cargo}}</div>
                                             <div class="clearfix"></div>
                                             <div class="m-t-20">
                                                 <p class="pull-right m-b-0 m-t-4">
@@ -22,6 +28,7 @@
                                             </div>
                                         </li>
                                         @endeach
+                                        
                                         </ul>
                                 </div>
                             </div>
@@ -131,7 +138,31 @@
                      </div>
                       </div>
 
+<div class="modal fade bs-example-modal-lg" id="error" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                    <h4 class="modal-title" id="myLargeModalLabel">Warning</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    No existen coincidencias.
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div><!-- /.modal -->
 
-@each(colaboradores in colaboradoresEva)
-<input class="aa" id="{{colaboradores.idTalentoCuadrante}}" name="prodId" type="hidden" value="{{colaboradores.nombres}}_{{colaboradores.apellidoPaterno}}_{{colaboradores.apellidoMaterno}}_{{colaboradores.Cargo}}"  accesskey="{{colaboradores.color}}" tabindex="{{colaboradores.idOpinante}}">
+            
+
+
+@each(colaboradores in colaboradoresEva.clasificaciones)
+    <input class="aa" id="{{colaboradores.idTalentoCuadrante}}" type="hidden" value="{{colaboradores.nombres}}_{{colaboradores.apellidoPaterno}}_{{colaboradores.apellidoMaterno}}_{{colaboradores.Cargo}}_{{colaboradores.identificador}}"  accesskey="{{colaboradores.color}}" tabindex="{{colaboradores.idOpinante}}">
+
+@each(claHijo in colaboradoresEva.clasificaciones[$loop.index].clasificacionHijo)
+    <input class="bb" id="" name="{{claHijo.ClasificacionesCol}}" type="hidden" value="{{claHijo.ClasificacionesCol}}">
 @endeach
+@endeach
+
+
+
+

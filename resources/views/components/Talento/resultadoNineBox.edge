@@ -8,7 +8,15 @@
                                     <div class="panel-body">
                                         <p>
                                             <img src="/assets/images/talento/seleccion.png" alt="img" height="80" class="pull-left img-rounded m-r-10">
-                                          Colaboradores Clasificados
+                                            
+                                          Colaboradores Clasificados 
+                                          <center><h3 class="m-t-0 header-title">
+                                          @each(evaluados in totalEvaluados)
+                                      {{evaluados.Clasificados}}/<font size=4>{{total.Total}}</font>
+                                                    
+                                          @endeach
+                                          </h3></center>
+                                          
                                           <div class="pull-right">
                         <a class="btn btn-info btn-rounded" href="/Talento/Talento/nineBoxColaboradores?talento={{total.idProcesoTalento}}"><i class="fa fa-chevron-circle-right"></i> Ingresar</a>
                      

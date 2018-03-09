@@ -9,7 +9,8 @@ module.exports = {
       Instrumento:['./client/src/Instrumento/instrumento.js'],
       Talento:['./client/src/Talento/talento.js'],
       dataTable:['./client/src/Talento/dataTable.js'],
-      drag:['./client/src/Talento/drag.js']
+      drag:['./client/src/Talento/drag.js'],
+      filtroClasificaciones:['./client/src/Talento/filtroClasificaciones.js']
     },
   output: {
     filename: '[name].min.js',
