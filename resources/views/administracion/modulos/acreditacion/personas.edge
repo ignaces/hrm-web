@@ -44,7 +44,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        @each(persona in personasProceso)
+                                        @each(persona in personas)
                                         <tr>
                                         
                                             
@@ -52,7 +52,7 @@
                                             <td>{{persona.nombres}} {{persona.apellidoPaterno}} {{persona.apellidoMaterno}}</td>
                                             <td> 
                                                 <a href="evaluadoProceso?id={{persona.idPersonaProceso}}&idProc={{idProceso}}">
-                                                Ver
+                                                    Ver
                                                 </a>
                                             </td>
                                             

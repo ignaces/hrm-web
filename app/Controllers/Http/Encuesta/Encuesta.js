@@ -32,13 +32,18 @@
         async instrumento ({ view,request, response, auth, session}){
           var idEncuestaPersona = request.input("idEncuestaPersona");
           
-          var instrumento ={}
+         var instrumento ={}
          var obj = {
-          idEncuestaPersona:idEncuestaPersona
+            idEncuestaPersona:idEncuestaPersona
          }
           var result = await data.execApi(request.hostname(),'/Encuesta/Medicion/getInstrumento',obj);
 
           instrumento = result.body;
+          
+          var avance = await data.execApi(request.hostname(),'/Evaluacion/Instrumento/getAvanceFacsimil',{idFacsimil:instrumento.idFacsimil});
+
+          var porcentaje =( avance.body.data.avance.Contestadas*100)/avance.body.data.avance.total;
+          instrumento.avance= `${porcentaje}`;
           instrumento.pp='components.Evaluacion.preguntaLickertGrilla';
           return view.render('encuesta/instrumento',  {idEncuestaPersona:idEncuestaPersona,instrumento:instrumento});
         }

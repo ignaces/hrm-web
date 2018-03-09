@@ -25,8 +25,8 @@ Route.get('/login/google', 'Account/ExternalLogin.redirect')
 Route.get('/google/callback', 'Account/ExternalLogin.callback')
 Route.get('/game', 'Game/Guess.render').middleware('auth')
 Route.get('/medirRedes/:codigo', 'Redes/Medicion.medir')
-
-Route.post('/finRedes', 'Redes/Medicion.save')
+Route.get('/medirRedes/:codigo', 'Redes/Medicion.medir')
+Route.get('/Redes/Medicion/identificar','Redes/Medicion.identificar')
 
 Route.get('users/:id', 'Account/UserController.profile').middleware('autenticacion')
 
@@ -44,7 +44,7 @@ Route.get('/Encuesta/Encuesta/instrumento','Encuesta/Encuesta.instrumento')
 Route.post('/Encuesta/Encuesta/instrumento','Encuesta/Encuesta.instrumento')
 Route.get('/Encuesta/Instrumento/putRespuesta','Encuesta/Instrumento.putRespuesta')
 Route.get('/Encuesta/Instrumento/cerrarInstrumento','Encuesta/Instrumento.cerrarInstrumento')
-Route.get('/Encuesta/Instrumento/fin','Encuesta/Instrumento.fin')
+Route.get('/Encuesta/Encuesta/fin','Encuesta/Encuesta.fin')
 
 Route.any('/:module/:controller/:action',  ({view ,request, response,params,auth, session}) => {
   

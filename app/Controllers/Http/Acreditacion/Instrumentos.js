@@ -3,7 +3,7 @@
 const got = use('got')
 
 class Instrumentos {
-    * index (request, response) {
+    async index ({view,request, response}) {
         
         var instrumentos = [
                 { nombre:"Set de Observaciones En Terreno (SOT)", idEstado:1,
@@ -20,9 +20,9 @@ class Instrumentos {
                 descripcion:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed molestie, ipsum et ullamcorper viverra, purus quam aliquam dolor, vel lacinia lectus odio porta risus. Aenean tincidunt pharetra iaculis. Pellentesque id mi magna. Ut commodo nisl in leo rutrum molestie. Nullam sed purus porta, finibus elit id, feugiat ex. Cras interdum porttitor dui vitae convallis. Mauris id magna ut turpis imperdiet auctor eget a diam."}
             ];
     
-        yield response.sendView('acreditacion/evaluacion/instrumentos',  {instrumentos:instrumentos});
+      return view.render('acreditacion/evaluacion/instrumentos',  {instrumentos:instrumentos});
     }
-    * competenciasInstrumento (request,response){
+    /* async competenciasInstrumento ({request,response}){
 
        
         var competencias = [
@@ -31,7 +31,7 @@ class Instrumentos {
         { id:3,nombre:"Competencia 3" ,class:"task-success",image:"funcional.png",descripcion:"Maecenas vehicula vel dolor nec lobortis. Vestibulum posuere quam quis fermentum posuere. Sed varius orci id massa facilisis, in lobortis enim lacinia. Curabitur fermentum lectus ac quam lacinia rutrum. Ut ut pretium ligula, eu condimentum massa. Nunc vitae massa non nisl accumsan aliquam non eu sapien. Mauris auctor condimentum nibh quis iaculis. Proin rhoncus enim id turpis gravida, in rutrum enim imperdiet. Sed feugiat sapien id nunc vulputate commodo. Suspendisse ornare mi sed odio elementum imperdiet. Phasellus imperdiet vel leo vitae pellentesque.", tipo:"Funcional",idTipo:1} ];
     
         yield response.sendView('acreditacion/evaluacion/competenciasInstrumento',  {competencias:competencias});
-    }
+    }*/
 }
 
 module.exports = Instrumentos

@@ -17,18 +17,24 @@ class UserController {
           var persona = rPersona.body.data;
           
           //var result = await data.execApi(request.hostname(),'/Persona/Persona/getIdPersona',obj);
-          persona.cargo="Evaluador"
+          if(!persona){
+            persona={};
+            persona.imageUser="/assets/images/icons/businessman.svg"
+          }else{
+            persona.cargo="Evaluador"
 
         
-          persona.imageUser="/assets/images/icons/businessman.svg"
-          if (persona.codigoGenero=="F"){
-            persona.imageUser="/assets/images/icons/businesswoman.svg"
+            persona.imageUser="/assets/images/icons/businessman.svg"
+            if (persona.codigoGenero=="F"){
+              persona.imageUser="/assets/images/icons/businesswoman.svg"
+            }
+            
+            //var traerLog = session.put('personaLogueada',persona); 
+            
+            session.put('personaLogueada',persona);
+            session.put('idPersona', persona.id)
           }
           
-          //var traerLog = session.put('personaLogueada',persona); 
-          
-          session.put('personaLogueada',persona);
-          session.put('idPersona', persona.id)
           try{
             var rUsuario = await data.execApi(request.hostname(),'/Core/Users/getMenuUser',{idUser:auth.user.id});
             var usuario = rUsuario.body.data;

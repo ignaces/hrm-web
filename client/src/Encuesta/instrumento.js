@@ -51,7 +51,8 @@ $(document).ready(function(){
             idOpinante:idOpinante,
             idPregunta:idPregunta,
             idAlternativa:idAlternativa,
-            justificacion:justificacion
+            justificacion:justificacion,
+            idFacsimil:$("#idFacsimil").val()
          };
         
         $.ajax({
@@ -61,6 +62,7 @@ $(document).ready(function(){
             data: obj,
             dataType: "json", 
             success: function (msg) {
+                setAvance(msg.avance);
                 $.toast({
                     text: 'Respuesta guardada correctamente.',
                     position: 'top-right',
@@ -72,7 +74,11 @@ $(document).ready(function(){
             }
         });
     };
-
+    var setAvance = function(avance){
+        $("#progress_bar").attr('aria-valuenow',avance)
+        $("#progress_bar").attr('style','width:'+avance+'%')
+        $("#progress_bar").text(avance+'%')
+    }
     $( ".bInstrumento" ).click(function() {
         var id = $( this ).attr('id');
         var arr = id.split("_");
