@@ -39,7 +39,7 @@ $(function () {
         {
             $.ajax({
                 type: "GET",
-                url: "/administracion/persona/userExiste",
+                url: "/Administracion/Persona/userExiste",
                 contentType: "application/json; charset=utf-8",
                 data: objEmail,
                 dataType: "json", 
@@ -77,7 +77,7 @@ $(function () {
 
             $.ajax({
                 type: "GET",
-                url: "/administracion/persona/doRegisterPersona",
+                url: "/Administracion/Persona/doRegisterPersona",
                 contentType: "application/json; charset=utf-8",
                 data: obj,
                 dataType: "json", 
@@ -95,7 +95,7 @@ $(function () {
                         
                         if(tipoMensaje == "success")
                         {
-                            location.href = "/administracion/persona/registrarPersona";
+                            location.href = "/Administracion/Persona/registrarPersona";
                         }
                     });
                 }
