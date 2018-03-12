@@ -16,6 +16,7 @@ class Proceso {
             "idProceso":idProceso,
             "idPersona": idPersona
         };
+        console.log(obj);
         var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getPersonasEvaluaciones',obj);
         var personas = result.body.data;
         

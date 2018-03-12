@@ -11,12 +11,14 @@ class UserController {
           "idUser":auth.user.id
         };
         
-        //console.log(auth.user.is_admin);
+        console.log(auth.user.is_admin);
         if(auth.user.is_admin!=1){
           var rPersona = await data.execApi(request.hostname(),'/Persona/Persona/getPersonaByIdUser',{idUser:auth.user.id});
           var persona = rPersona.body.data;
           
           //var result = await data.execApi(request.hostname(),'/Persona/Persona/getIdPersona',obj);
+
+          console.log(auth.user.id)
           if(!persona){
             persona={};
             persona.imageUser="/assets/images/icons/businessman.svg"
@@ -30,7 +32,7 @@ class UserController {
             }
             
             //var traerLog = session.put('personaLogueada',persona); 
-            
+    
             session.put('personaLogueada',persona);
             session.put('idPersona', persona.id)
           }

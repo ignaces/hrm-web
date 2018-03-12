@@ -75,7 +75,7 @@ class Register{
         }
 */      
 
-        var objeto = { respuesta: resultado }
+        var objeto = { respuesta: resultado,usuario:user }
         response.json(objeto);
     }
 }

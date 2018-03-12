@@ -31,23 +31,7 @@ const data = use('App/Utils/Data')
             var email = request.input("email");
 
             var creaUsuario = request.input("usuario");
-            
-            var objeto = {
-                "identificador": identificador,
-                "nombres": nombres,
-                "apellidoPaterno": ap_pat,
-                "apellidoMaterno": ap_mat,
-                "genero": genero,
-                "email": email
-            };
-            
-            var resultado = await data.execApi(request.hostname(),'/Persona/Persona/addPersona',objeto);
-            var respuesta = resultado.body;
-            
-            //console.log(respuesta.estado);
-            //console.log(respuesta.data);   
-            //return view.render('administracion/persona/registrarPersona', {estado:respuesta.estado, datos:respuesta.data} );
-            
+            var usuario = {};
             if(creaUsuario == "true")
             {
                 var objetoUsuario = {
@@ -57,8 +41,30 @@ const data = use('App/Utils/Data')
                         };
                 //console.log(objetoUsuario);
 
-                await data.execApiLocal(request.hostname(),'/Account/Register/registerPersona',objetoUsuario);
+                usuario = await data.execApiLocal(request.hostname(),'/Account/Register/registerPersona',objetoUsuario);
             }
+            var idUsuario = -1;
+            if(usuario.body!=undefined){
+                idUsuario= usuario.body.usuario.id;
+            }
+            var objeto = {
+                "identificador": identificador,
+                "nombres": nombres,
+                "apellidoPaterno": ap_pat,
+                "apellidoMaterno": ap_mat,
+                "genero": genero,
+                "email": email,
+                "idUsuario": idUsuario
+            };
+            
+            var resultado = await data.execApi(request.hostname(),'/Persona/Persona/addPersona',objeto);
+            var respuesta = resultado.body;
+            
+            //console.log(respuesta.estado);
+            //console.log(respuesta.data);   
+            //return view.render('administracion/persona/registrarPersona', {estado:respuesta.estado, datos:respuesta.data} );
+            
+            
 
             response.json(respuesta.estado, respuesta.data);
         }
