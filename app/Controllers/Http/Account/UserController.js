@@ -11,19 +11,19 @@ class UserController {
           "idUser":auth.user.id
         };
         
-        console.log(auth.user.is_admin);
+        
         if(auth.user.is_admin!=1){
           var rPersona = await data.execApi(request.hostname(),'/Persona/Persona/getPersonaByIdUser',{idUser:auth.user.id});
           var persona = rPersona.body.data;
           
           //var result = await data.execApi(request.hostname(),'/Persona/Persona/getIdPersona',obj);
 
-          console.log(auth.user.id)
+          
           if(!persona){
             persona={};
             persona.imageUser="/assets/images/icons/businessman.svg"
           }else{
-            persona.cargo="Evaluador"
+            persona.cargo=""
 
         
             persona.imageUser="/assets/images/icons/businessman.svg"
@@ -49,6 +49,10 @@ class UserController {
           }
           
 
+        }else{
+          var persona = {cargo:"admin",nombres:"",apellidoPaterno:"",apellidoMaterno:"",imageUser:"/assets/images/icons/businessman.svg"}
+          session.put('personaLogueada',persona);
+          session.put('idPersona', "");
         }
         
 
@@ -56,11 +60,11 @@ class UserController {
         return response.redirect('/')
       }
       
-      async logout ({ view,request, auth }) {
-        
+      async logout ({ view,request, auth ,response,session}) {
+        session.clear();
         await auth.logout()
     //
-        return view.render('account/login')
+        return response.redirect('/')
       }
 
       loginView({view,request}){
