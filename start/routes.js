@@ -25,8 +25,11 @@ Route.get('/login/google', 'Account/ExternalLogin.redirect')
 Route.get('/google/callback', 'Account/ExternalLogin.callback')
 Route.get('/game', 'Game/Guess.render').middleware('auth')
 Route.get('/medirRedes/:codigo', 'Redes/Medicion.medir')
-Route.get('/medirRedes/:codigo', 'Redes/Medicion.medir')
+Route.post('/finRedes', 'Redes/Medicion.save')
+
 Route.get('/Redes/Medicion/identificar','Redes/Medicion.identificar')
+
+Route.post('/Redes/Medicion/medirPersona','Redes/Medicion.medirPersona')
 
 Route.get('users/:id', 'Account/UserController.profile').middleware('autenticacion')
 

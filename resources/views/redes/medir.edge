@@ -39,6 +39,7 @@
                     <form action="/finRedes" method="post">
                     <input type="hidden" name="_csrf" value="{{ csrfToken }}">
                     <input type="hidden" name="_code" value="{{ medicion.codigo }}">
+                    <input type="hidden" name="idAplicacion" value="{{ medicion.idAplicacion }}">
                     @each(pregunta in medicion.preguntas)
                     <div class="form-horizontal">
                             <div class="form-group">

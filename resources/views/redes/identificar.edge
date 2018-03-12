@@ -37,15 +37,15 @@
                     <p class="text-muted font-14 m-b-30">
                         Redes de Energía
                     </p>
-                    <form action="/Redes/Medicion/medir" method="post">
+                    <form action="/Redes/Medicion/medirPersona" method="post">
                     <input type="hidden" name="_csrf" value="{{ csrfToken }}">
-                    <input type="hidden" name="_code" value="{{ medicion.codigo }}">
                    
                     <div class="form-horizontal">
                             <div class="form-group">
                                 <label>Seleccione al participante de esta lista</label>
-                                <select id="idPersona" name="idPersona" class="select2 form-control select2-multiple form-control" multiple="multiple" multiple data-placeholder="Seleccionar ...">
+                                <select id="_code" name="_code" class="select2 form-control" data-placeholder="Seleccionar ...">
                                                 <optgroup>
+                                                    <option value="">Seleccionar ...</option>
                                                 @each( persona in personas)
                                                     
                                                     <option value="{{ persona.id }}">{{ persona.nombres }} {{ persona.apellidoPaterno }} {{ persona.apellidoMaterno }}</option>
