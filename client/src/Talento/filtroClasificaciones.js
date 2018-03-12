@@ -20,31 +20,13 @@ $("#btnBuscar").on('click',function() {
             var nombreClasificaciones = $.map(valorClasificaciones ,function(option) {
                 return option.value;
             });
-            //alert(nombreClasificaciones);
-            //alert(nombreClasificaciones.length);
-            
-          
-        //datosPersonas 
+
         var rut = $("#rut").val();
         var nombres = $("#nombres").val();
         var paterno = $("#paterno").val();
         var materno = $("#materno").val();
         //selected disabled hidden
-           
-var jsonObj = {};
-for (var i = 0 ; i < nombreFiltro.length; i++) {
-    //jsonObj["nombreFiltro" + (i+1)] = nombreFiltro[i];
-    //jsonObj += nombreFiltro[i];
-    //jsonObj += nombreFiltro[i];
-    //jsonObJ += nombreFiltro[i];
-    
-}
-
 var validacionCargo = $('#buscarCargo').val();
-
-        //var bb = "'" + nombreFiltro.join("','") + "'";
-        //var q = nombreFiltro.join();
-
         
     //if (nombreClasificaciones == "," || validacionCargo == null || nombreClasificaciones == "" || rut == "" || nombres == "" || paterno == "" || materno == "" ){
        // alert("Debes seleccionar una opción de filtro");
@@ -79,10 +61,8 @@ var validacionCargo = $('#buscarCargo').val();
         dataType: "json", 
         success: function (total) {
             $("#spinner").hide();
+          
             //alert(Object.keys(total).length);
-           
-            //var valorTrae = total.lenght;
-            //alert(total.lenght);
             if(Object.keys(total).length == 0)
             {
                 alert("No Hay Coincidencias");
@@ -94,27 +74,12 @@ var validacionCargo = $('#buscarCargo').val();
             {
                 $('#upcoming').empty();
                 alert("Hay Coincidencias");
-            //var jua = total.arreglo;
-                /*
-                for(var i=0; i < total.arreglo; i++){
-              //html = html + total[i].idPersona
-              console.log("valor x "+total.arreglo[i].idPersona)
-              console.log("valor y "+total.arreglo[i].Colaborador)
-              console.log("valor f "+total.arreglo[i].apellidoPaterno)
-              console.log("valor f "+total.arreglo[i].apellidoMaterno)
-              console.log("valor g "+total.arreglo[i].Cargo)
-              console.log("valor j "+total.arreglo[i].procesoOpinante)
-
-            }
-            */
             
             //var elem = document.getElementById('base');
               //  elem.parentNode.removeChild(elem);
 
-                
-            
             $.each(total, function(index) {
-               // alert(total[index].idPersona);
+                //alert(total[index].idPersona);
                 //alert(total[index].Colaborador);
                 //alert(total[index].apellidoPaterno);
                 //alert(total[index].apellidoMaterno);
@@ -128,22 +93,6 @@ var validacionCargo = $('#buscarCargo').val();
            '<div class="clearfix"></div><div class="m-t-20"><p class="pull-right m-b-0 m-t-4"><button type="button" class="btn btn-warning waves-effect waves-light"> <i class="fa fa-rocket m-r-5"></i> <span>Ficha</span> </button></p><p class="m-b-0"><a href="" class="text-muted"><img src="/assets/images/icons/businessman.svg" alt="task-user" class="thumb-sm img-circle m-r-10"> <span class="font-bold font-secondary">'+total[index].Colaborador+' '+total[index].apellidoPaterno+' '+total[index].apellidoMaterno+'</span></a> </p></div></li>');
             });
         }
-            
-            
-            //for(var i=0 in msg.arreglo){
-             // msg.arreglo[i].idPersona;
-            //}
-            //var obj = jQuery.parseJSON(msg);
-           
-           //var obj = JSON.parse(msg);
-           //alert(obj.idLastInsert);
-           //alert(msg.idLastInsert);
-           //alert("Se ejecuto bien");
-
-           //$(".task-warning").append('<li class="task-warning ui-sortable-handle" style="" id="'+cargo+'" name="'+rut+'"   value="'+idOpinante+'">' 
-           //+'<input class="" id="clasificaciones" name="clasificaciones" type="hidden" value="'+clasificacionesHidden+'">' +cargo +
-           //'<div class="clearfix"></div><div class="m-t-20"><p class="pull-right m-b-0 m-t-4"><button type="button" class="btn btn-warning waves-effect waves-light"> <i class="fa fa-rocket m-r-5"></i> <span>Ficha</span> </button></p><p class="m-b-0"><a href="" class="text-muted"><img src="/assets/images/icons/businessman.svg" alt="task-user" class="thumb-sm img-circle m-r-10"> <span class="font-bold font-secondary">'+nombres+' '+apellidoPaterno+' '+apellidoMaterno+'</span></a> </p></div></li>');
-        
         },
         error: function(error){
             alert(error.status+"\n "+error.statusText);

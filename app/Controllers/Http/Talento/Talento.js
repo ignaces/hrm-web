@@ -27,7 +27,7 @@ class Talento {
     }
 
     async filtroDragColaboradoresSinClasificar({view,request, response, auth, session}) {
-        //TRAERLO POR AJAX Y VALIDARCTM
+        
         
         var all =  session.get('personaLogueada')
         var idOpinante = all.id
@@ -60,7 +60,7 @@ class Talento {
         
         //var condiciones = result.body.data2.condicion;
         //var total = result.body.data.arreglo;
-        console.log(total); 
+        
         //console.log(condiciones);
         return total;
         
