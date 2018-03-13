@@ -51,8 +51,11 @@
             };
             var options = {
                 nodes: {
-                    shape: 'dot',
-                    size: 35,
+                    shape: 'circle',
+                    widthConstraint:{
+                        minimum:100,
+                        maximum:100
+                    },
                     font: {
                         size: 18
                     },
