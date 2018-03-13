@@ -31,7 +31,13 @@
             // create an array with edges
             var edges = new vis.DataSet([
                 @each(relacion in graph.edges)
-                    {from:{{relacion.startNode}},to:{{relacion.endNode}},arrows:'to' },
+                    {
+                        from:{{relacion.startNode}},
+                        to:{{relacion.endNode}},
+                        arrows:'to',
+                        //label:"{{relacion.type}}",
+                        length:200 
+                    },
                @endeach 
             ]);
 
@@ -55,8 +61,7 @@
                 },
                 edges: {
                     width: 2,
-                    shadow:true,
-                    size:90
+                    shadow:true
                 }
             };
 
