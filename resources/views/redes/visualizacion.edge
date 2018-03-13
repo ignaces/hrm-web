@@ -1,0 +1,87 @@
+
+@layout('layouts/nomenu')
+
+ <!-- DataTables -->
+@section('pluginsCss')        
+    <link href="/assets/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css" rel="stylesheet" />
+        
+    <link href="/assets/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="/assets/plugins/vis/vis.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        #mynetwork {
+            width: 1400px;
+            height: 1200px;
+            border: 1px solid lightgray;
+        }
+    </style>
+@endsection
+@section('scripts')
+       <script src="/assets/plugins/vis/hammer.js" type="text/javascript"></script>
+       <script src="/assets/plugins/vis/vis.js" type="text/javascript"></script>
+       <script type="text/javascript">
+
+       $(document).ready(function(){
+           // create an array with nodes
+            var nodes = new vis.DataSet([
+               @each(node in graph.nodes)
+                    {id:{{node.id}},label:"{{node.properties.nombre}}" },
+               @endeach 
+            ]);
+
+            // create an array with edges
+            var edges = new vis.DataSet([
+                @each(relacion in graph.edges)
+                    {from:{{relacion.startNode}},to:{{relacion.endNode}},arrows:'to' },
+               @endeach 
+            ]);
+
+            // create a network
+            var container = document.getElementById('mynetwork');
+
+            // provide the data in the vis format
+            var data = {
+                nodes: nodes,
+                edges: edges
+            };
+            var options = {
+                nodes: {
+                    shape: 'dot',
+                    size: 35,
+                    font: {
+                        size: 18
+                    },
+                    borderWidth: 2,
+                    shadow:true
+                },
+                edges: {
+                    width: 2,
+                    shadow:true,
+                    size:90
+                }
+            };
+
+            // initialize your network!
+            var network = new vis.Network(container, data, options);
+       });
+            
+</script>
+@endsection
+@section('content')
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card-box table-responsive"> 
+                <h4 class="m-t-0 header-title">
+                    <b>Redes</b>
+                </h4>
+                    <p class="text-muted font-14 m-b-30">
+                        Redes de Energía
+                    </p>
+                   
+                    <div id="mynetwork"></div>
+            </div> 
+        </div>
+    </div>
+
+        
+@endsection

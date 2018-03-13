@@ -31,6 +31,8 @@ Route.get('/Redes/Medicion/identificar','Redes/Medicion.identificar')
 
 Route.post('/Redes/Medicion/medirPersona','Redes/Medicion.medirPersona')
 
+Route.get('/Redes/Visualizador/viewGraph','Redes/Visualizador.viewGraph')
+
 Route.get('users/:id', 'Account/UserController.profile').middleware('autenticacion')
 
 Route.get('/login', 'Account/UserController.loginView')
