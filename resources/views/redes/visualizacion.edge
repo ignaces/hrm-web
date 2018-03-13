@@ -24,7 +24,7 @@
            // create an array with nodes
             var nodes = new vis.DataSet([
                @each(node in graph.nodes)
-                    {id:{{node.id}},label:"{{node.properties.nombre}}" },
+                    {id:{{node.id}},label:"{{node.properties.nombre}} {{node.properties.apellidoPaterno}}" },
                @endeach 
             ]);
 
@@ -36,7 +36,7 @@
                         to:{{relacion.endNode}},
                         arrows:'to',
                         //label:"{{relacion.type}}",
-                        length:200 
+                        length:300 
                     },
                @endeach 
             ]);
@@ -53,18 +53,28 @@
                 nodes: {
                     shape: 'circle',
                     widthConstraint:{
-                        minimum:100,
-                        maximum:100
+                        minimum:90,
+                        maximum:90
                     },
                     font: {
-                        size: 18
+                        size: 15
                     },
                     borderWidth: 2,
                     shadow:true
                 },
                 edges: {
                     width: 2,
-                    shadow:true
+                    shadow:true,
+                    smooth:true
+                },
+                physics:{
+                    enabled:true,
+                    barnesHut:{
+                        gravitationalConstant:-15000,
+                        centralGravity:0,
+                        springLength:150,
+                        springConstant:0.02
+                    }
                 }
             };
 
