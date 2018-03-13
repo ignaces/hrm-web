@@ -66,6 +66,10 @@ var validacionCargo = $('#buscarCargo').val();
             if(Object.keys(total).length == 0)
             {
                 alert("No Hay Coincidencias");
+                //data-toggle="modal" data-target=".bs-example-modal-lg"
+                //$("#btnBuscar").attr("data-toggle", "modal");
+                //$("#btnBuscar").attr("data-target", ".bs-example-modal-lg");
+                //$("#texto").html("<h2>No Hay Coincidencias</h2>");
                 
                 //$("#error").addClass("modal fade bs-example-modal-lg in");
                 //$('#error').css('display','block');
@@ -73,7 +77,10 @@ var validacionCargo = $('#buscarCargo').val();
             else
             {
                 $('#upcoming').empty();
-                alert("Hay Coincidencias");
+                alert("Hay "+Object.keys(total).length+" Coincidencias");
+                //$("#btnBuscar").attr("data-toggle", "modal");
+                //$("#btnBuscar").attr("data-target", ".bs-example-modal-lg");
+                //$("#texto").html("<h2>Hay Coincidencias</h2>");
             
             //var elem = document.getElementById('base');
               //  elem.parentNode.removeChild(elem);
@@ -90,7 +97,7 @@ var validacionCargo = $('#buscarCargo').val();
 
                 $("#upcoming").append('<li class="task-warning ui-sortable-handle" style="" id="base" value="'+total[index].procesoOpinante+'">' 
             +total[index].Cargo +
-           '<div class="clearfix"></div><div class="m-t-20"><p class="pull-right m-b-0 m-t-4"><button type="button" class="btn btn-warning waves-effect waves-light"> <i class="fa fa-rocket m-r-5"></i> <span>Ficha</span> </button></p><p class="m-b-0"><a href="" class="text-muted"><img src="/assets/images/icons/businessman.svg" alt="task-user" class="thumb-sm img-circle m-r-10"> <span class="font-bold font-secondary">'+total[index].Colaborador+' '+total[index].apellidoPaterno+' '+total[index].apellidoMaterno+'</span></a> </p></div></li>');
+           '<div class="clearfix"></div><div class="m-t-20"><p class="pull-right m-b-0 m-t-4"><button type="button" class="btn btn-warning waves-effect waves-light"> <i class="fa fa-rocket m-r-5"></i> <span>Ficha</span> </button></p><p class="m-b-0"><a href="" class="text-muted"><img src="'+total[index].foto+'" alt="task-user" class="thumb-sm img-circle m-r-10"> <span class="font-bold font-secondary">'+total[index].Colaborador+' '+total[index].apellidoPaterno+' '+total[index].apellidoMaterno+'</span></a> </p></div></li>');
             });
         }
         },

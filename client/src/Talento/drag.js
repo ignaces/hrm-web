@@ -88,6 +88,7 @@ $(".sortable-list").droppable({
                         var apellidoMaterno = arr[2];
                         var cargo = arr[3];
                         var rut = arr[4];
+                        var foto = arr[5];
 
                         //alert("nombres"+nombres+"apellidoPaterno"+apellidoPaterno);
                         
@@ -103,7 +104,7 @@ $(".sortable-list").droppable({
                         //$("."+Color+"").append('<li class="task-warning ui-sortable-handle" style="" value="'+idOpinante+'">'+nombres+'</li>');
                        
 
-                        $("."+Color+"").append('<li class="task-warning ui-sortable-handle" style="" id="'+cargo+'" name="'+rut+'"   value="'+idOpinante+'">' +'<input class="" id="clasificaciones" name="clasificaciones" type="hidden" value="'+clasificacionesHidden+'">' +cargo +'<div class="clearfix"></div><div class="m-t-20"><p class="pull-right m-b-0 m-t-4"><button type="button" class="btn btn-warning waves-effect waves-light"> <i class="fa fa-rocket m-r-5"></i> <span>Ficha</span> </button></p><p class="m-b-0"><a href="" class="text-muted"><img src="/assets/images/icons/businessman.svg" alt="task-user" class="thumb-sm img-circle m-r-10"> <span class="font-bold font-secondary">'+nombres+' '+apellidoPaterno+' '+apellidoMaterno+'</span></a> </p></div></li>');
+                        $("."+Color+"").append('<li class="task-warning ui-sortable-handle" style="" id="'+cargo+'" name="'+rut+'"   value="'+idOpinante+'">' +'<input class="" id="clasificaciones" name="clasificaciones" type="hidden" value="'+clasificacionesHidden+'">' +cargo +'<div class="clearfix"></div><div class="m-t-20"><p class="pull-right m-b-0 m-t-4"><button type="button" class="btn btn-warning waves-effect waves-light"> <i class="fa fa-rocket m-r-5"></i> <span>Ficha</span> </button></p><p class="m-b-0"><a href="#" class="text-muted"><img src="'+foto+'" alt="task-user" class="thumb-sm img-circle m-r-10"> <span class="font-bold font-secondary">'+nombres+' '+apellidoPaterno+' '+apellidoMaterno+'</span></a> </p></div></li>');
 
                         
                     });

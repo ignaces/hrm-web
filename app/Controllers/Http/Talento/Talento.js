@@ -11,6 +11,10 @@ class Talento {
         var idOpinante = all.id
 
         var idTalentoProceso = request.input("talento");
+
+        
+
+
         var obj = {
             "idTalentoProceso":idTalentoProceso,
             "idOpinante":idOpinante
@@ -69,20 +73,14 @@ class Talento {
 
 
 
-
-
-
-
-
-
-   
-
     async colaboradoresTalento2 ({view,request, response, auth, session}) {
         //lista personas que estan en un proceso, pero no han sido evaluadas
         var all =  session.get('personaLogueada')
         var idOpinante = all.id
         
         var idTalentoProceso = request.input("talento");
+        session.put('procesoOrganigrama',idTalentoProceso);
+        
        
         
         //var idTalento = request.input("talento")
@@ -94,6 +92,8 @@ class Talento {
         var personas = result.body;
         return view.render('talento/colaboradoresTalento' ,  {personas:personas});
     }
+
+    
 
 
     async nineBoxColaboradores ({view,request, response, auth, session}) {
@@ -113,6 +113,8 @@ class Talento {
         
         var result = await data.execApi(request.hostname(),'/Talento/Talento/colaboradoresSinCuadrante',obj);
         var personas = result.body;
+        
+        
         
         
         
@@ -222,6 +224,22 @@ class Talento {
         //request.send(JSON.parse(idInsert));
         //return {mensaje:"OK"}
         //return idInsert //devuelve el ultimo insert creado por el drag and drop
+    }
+
+
+    async organigrama ({view,request, response, auth, session}) {
+       
+       var procesoOrganigrama =  session.get('procesoOrganigrama');
+        
+        
+        var obj = {
+            "procesoOrganigrama":procesoOrganigrama
+        };
+        var result = await data.execApi(request.hostname(),'/Talento/Talento/organigrama',obj);
+        var orgChart = result.body;
+        
+        
+        return view.render('talento/organigrama', {orgChart:orgChart});
     }
 
 }
