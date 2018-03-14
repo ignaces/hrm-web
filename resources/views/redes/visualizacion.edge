@@ -53,25 +53,7 @@
        <script type="text/javascript">
 
        $(document).ready(function(){
-           // create an array with nodes
-            /*var nodes = new vis.DataSet([
-               @each(node in graph.nodes)
-                    {id:{{node.id}},label:"{{node.properties.nombre}} {{node.properties.apellidoPaterno}}" },
-               @endeach 
-            ]);
-
-            // create an array with edges
-            var edges = new vis.DataSet([
-                @each(relacion in graph.edges)
-                    {
-                        from:{{relacion.startNode}},
-                        to:{{relacion.endNode}},
-                        arrows:'to',
-                        //label:"{{relacion.type}}",
-                        length:300 
-                    },
-               @endeach 
-            ]);*/
+           
 
             var nodes = new vis.DataSet([
                @each(node in graph.nodes)
@@ -79,26 +61,10 @@
                @endeach 
             ]);
 
-            
 
-          
-/*
-            @each(node in graph.nodes)
-                    {id:{{node.id}},label:"{{node.properties.nombre}} {{node.properties.apellidoPaterno}}" },
-               @endeach 
-*/
             // create an array with edges
             var edges = new vis.DataSet([
                 
-                   @each(relacion in graph.edges)
-                    {
-                        from:{{relacion.startNode}},
-                        to:{{relacion.endNode}},
-                        arrows:'to',
-                        //label:"{{relacion.type}}",
-                        length:300 
-                    },
-               @endeach 
             ]);
 
             // create a network
@@ -109,7 +75,7 @@
                 nodes: nodes,
                 edges: edges
             };
-            var options = {
+            var options = { 
                 nodes: {
                     shape: 'circle',
                     widthConstraint:{
@@ -160,8 +126,10 @@ setTimeout(function(){
     @each(node in graph.nodes)
                     //nodes.add({id:{{node.id}},label:"{{node.properties.nombre}} {{node.properties.apellidoPaterno}}" })
                @endeach 
-/*
+                var time = 100;
                @each(relacion in graph.edges)
+               time = time + 100;
+                setTimeout(function(){ 
                     edges.add({
                         from:{{relacion.startNode}},
                         to:{{relacion.endNode}},
@@ -169,8 +137,9 @@ setTimeout(function(){
                         //label:"{{relacion.type}}",
                         length:300 
                     })
+                }, time);
                @endeach
-               */
+               
     
     }, 1000);
            
