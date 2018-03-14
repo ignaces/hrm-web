@@ -10,5 +10,7 @@ class Visualizador {
         
         return view.render('redes/visualizacion',{graph:graph.body})
     }
+
+   
 }
 module.exports = Visualizador;
