@@ -26,7 +26,10 @@ $("#btnBuscar").on('click',function() {
         var paterno = $("#paterno").val();
         var materno = $("#materno").val();
         //selected disabled hidden
-var validacionCargo = $('#buscarCargo').val();
+        var validacionCargo = $('#buscarCargo').val();
+
+
+        
         
     //if (nombreClasificaciones == "," || validacionCargo == null || nombreClasificaciones == "" || rut == "" || nombres == "" || paterno == "" || materno == "" ){
        // alert("Debes seleccionar una opción de filtro");
@@ -65,7 +68,15 @@ var validacionCargo = $('#buscarCargo').val();
             //alert(Object.keys(total).length);
             if(Object.keys(total).length == 0)
             {
-                alert("No Hay Coincidencias");
+                //alert("No Hay Coincidencias");
+
+
+                swal({ 
+                    title: "No hay coincidencias",
+                     text: "",
+                      type: "error" 
+                    }
+                );
                 //data-toggle="modal" data-target=".bs-example-modal-lg"
                 //$("#btnBuscar").attr("data-toggle", "modal");
                 //$("#btnBuscar").attr("data-target", ".bs-example-modal-lg");
@@ -77,7 +88,14 @@ var validacionCargo = $('#buscarCargo').val();
             else
             {
                 $('#upcoming').empty();
-                alert("Hay "+Object.keys(total).length+" Coincidencias");
+                //alert("Hay "+Object.keys(total).length+" Coincidencias");
+                
+                sweetAlert({
+                    title: "Hay "+Object.keys(total).length+" coincidencias",
+                    text: "",
+                    type: "success"
+                }
+            );
                 //$("#btnBuscar").attr("data-toggle", "modal");
                 //$("#btnBuscar").attr("data-target", ".bs-example-modal-lg");
                 //$("#texto").html("<h2>Hay Coincidencias</h2>");

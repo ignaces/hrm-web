@@ -6,9 +6,10 @@
  
  @endeach
  
- 
- valor 12
- 
+@each(organigrama in orgChart)
+ <input id="prodId" class="aa" name="prodId" type="hidden" value="{{organigrama.nombresPersona}}">
+ @endeach
+
  <div id="people"></div>
 
 

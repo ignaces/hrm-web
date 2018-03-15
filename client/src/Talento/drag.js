@@ -14,6 +14,15 @@ $(document).ready(function () {
 
 });
 
+/*
+$(function() {
+    $(".card-box1").draggable({ scroll: true });
+    $(".card-box1").draggable({ scroll: true, scrollSensitivity: 100 });
+    $(".card-box1").draggable({ scroll: true, scrollSpeed: 100 });
+  });
+
+  */
+
 
 /*
 $("#completed").droppable({
@@ -31,7 +40,7 @@ $(".sortable-list").droppable({
        var idOpinante = (ui.draggable.attr('value'));
        var idComponente = $(this).attr("value");
        alert("ID del opinante"+ idOpinante+ "ID Componente "+ idComponente);
-        
+       
        //var arr = id.split("_");
        //var idTalentoMatriz = arr[0];
         //var idTalentoOpinante = arr[1];

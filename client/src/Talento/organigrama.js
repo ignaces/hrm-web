@@ -25,6 +25,7 @@ var interpolateColor = function (color1, color2, factor) {
     return result;
 };
 
+
 var source = [
         { id: 1, parentId: null, name: "Amber McKenzie", salary: "$10000",  image: "images/f-11.jpg" },
         { id: 2, parentId: 1, name: "Ava Field", salary: "$5000", image: "images/f-10.jpg" },
@@ -35,6 +36,18 @@ var source = [
         { id: 7, parentId: 4, name: "Max Ford", salary: "$6000", image: "images/f-4.jpg" },
         { id: 8, parentId: 4, name: "Callum Whitehouse", salary: "$7000", image: "images/f-3.jpg" }
 ];
+
+var arregloapem = [];
+$(".aa").each(function(){
+    arregloapem.push($(this).attr('value'));
+});
+
+var object = {};
+for(i = 0; i < arregloapem.length; i++){
+    //object += arregloapem[i];
+    object = arregloapem[i];
+}
+//alert(object);
 
 
 var start = hex2rgb("#008000");

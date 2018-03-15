@@ -11,7 +11,7 @@ class Talento {
         var idOpinante = all.id
 
         var idTalentoProceso = request.input("talento");
-
+        session.put('procesoOrganigrama',idTalentoProceso);
         
 
 
@@ -67,8 +67,7 @@ class Talento {
         
         //console.log(condiciones);
         return total;
-        
-        
+   
     }
 
 
@@ -79,7 +78,7 @@ class Talento {
         var idOpinante = all.id
         
         var idTalentoProceso = request.input("talento");
-        session.put('procesoOrganigrama',idTalentoProceso);
+        
         
        
         
@@ -239,7 +238,11 @@ class Talento {
         var orgChart = result.body;
         
         
+        
         return view.render('talento/organigrama', {orgChart:orgChart});
+
+
+        
     }
 
 }
