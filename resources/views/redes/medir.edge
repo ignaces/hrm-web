@@ -16,7 +16,8 @@
                     
                     $('.tooltip-hover').tooltipster();
                     $(".select2").select2({
-                        closeOnSelect: false
+                        closeOnSelect: false,
+                        maximumSelectionLength:3
                     });
                     
                     $('.selectpicker').selectpicker();
@@ -43,7 +44,7 @@
                     <div class="form-horizontal">
                             <div class="form-group">
                                 <label>{{ pregunta.orden }} .- {{ pregunta.pregunta }}</label>
-                                <select id="{{ pregunta.id }}" name="{{ pregunta.id }}" class="select2 form-control select2-multiple form-control" multiple="multiple" multiple data-placeholder="Seleccionar ...">
+                                <select id="{{ pregunta.id }}" name="{{ pregunta.id }}" class="select2 form-control select2-multiple form-control" data-max-option="3" multiple="multiple" multiple data-placeholder="Seleccionar ...">
                                                 <optgroup>
                                                 @each( persona in personas)
                                                     
