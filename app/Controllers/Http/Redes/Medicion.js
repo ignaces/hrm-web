@@ -4,8 +4,10 @@ const data = use('App/Utils/Data')
 class Medicion {
     
     async medir({view,request,response,params}){
-      
-      var obj = {idAplicacion:"4771dc31-2621-11e8-80db-bc764e10787e"};
+      //Recibir idEncuestaPersona
+
+
+      var obj = {idRedesPersona:params.codigo};
       
       var rPersonas = await data.execApi(request.hostname(),'/Redes/Medicion/getPersonas',obj);
       
@@ -51,7 +53,7 @@ class Medicion {
 
       async save({view,request,response}){
         
-        var obj = {idAplicacion:"4771dc31-2621-11e8-80db-bc764e10787e",req:request.all()};
+        var obj = {req:request.all()};
         const rPreguntas = await data.execApi(request.hostname(),'/Redes/Instrumento/save',request.all());
         
         return view.render('redes/fin')
