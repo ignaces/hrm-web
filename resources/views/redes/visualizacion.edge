@@ -54,7 +54,7 @@
     
         var nodes = new vis.DataSet([
                @each(node in graph.nodes)
-                    {id:{{node.id}},label:"{{node.properties.nombre}} {{node.properties.apellidoPaterno}}", group:{{node.id}} },
+                    {id:{{node.id}},label:"{{node.properties.nombre}} {{node.properties.apellidoPaterno}}", group:{{node.id}}, widthConstraint: Math.floor(Math.random() * 100)+100 },
                @endeach 
         ]);
 
@@ -97,9 +97,9 @@
                 physics:{
                     enabled:true,
                     barnesHut:{
-                        gravitationalConstant:-30000,
+                        gravitationalConstant:-300000,
                         centralGravity:1,
-                        springLength:250,
+                        springLength:300,
                         springConstant:0.001
                     }
                 },
@@ -123,7 +123,7 @@
                 }, 500);
             });
 
-            network.fit();
+            
             /*
             network.once('initRedraw', function() {
                 if (lastClusterZoomLevel === 0) {
