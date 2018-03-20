@@ -86,21 +86,21 @@
                     font: {
                         size: 15
                     },
-                    borderWidth: 2,
+                    
                     shadow:false
                 },
                 edges: {
                     width: 1,
                     shadow:false,
-                    smooth:true
+                    smooth:{type:"continous"}
                 },
                 physics:{
                     enabled:true,
                     barnesHut:{
-                        gravitationalConstant:-15000,
-                        centralGravity:0,
-                        springLength:150,
-                        springConstant:0.02
+                        gravitationalConstant:-30000,
+                        centralGravity:1,
+                        springLength:250,
+                        springConstant:0.001
                     }
                 }
             };
@@ -116,7 +116,10 @@
                 
                 document.getElementById('loadingBar').style.opacity = 0;
                 // really clean the dom element
-                setTimeout(function () {document.getElementById('loadingBar').style.display = 'none';}, 500);
+                setTimeout(function () {
+                    document.getElementById('loadingBar').style.display = 'none';
+                    loadEdges();
+                }, 500);
             });
 
             /*
@@ -198,25 +201,23 @@
             }
             */
 
-            //setInterval(function(){ refreshGraph(); }, 3000);
-            setTimeout(function(){ 
 
+
+            function loadEdges()
+            {
                 @each(node in graph.nodes)
                     //nodes.add({id:{{node.id}},label:"{{node.properties.nombre}} {{node.properties.apellidoPaterno}}" })
                 @endeach 
                 var time = 10;
                
                 @each(relacion in graph.edges)
-                time = time + 10;
+                time = time + 5;
                 
                 setTimeout(function(){ 
                     nuevaRelacion({{relacion.startNode}}, {{relacion.endNode}});
                 }, time);
                @endeach
-               
-                
-
-            }, 100);
+            }
 
             function nuevaRelacion(start, end)
             {
