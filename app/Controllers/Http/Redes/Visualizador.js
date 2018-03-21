@@ -6,7 +6,9 @@ class Visualizador {
     async viewGraph({view,request,response,params}){
 
         var obj={};
-        
+        var participantes = {};
+
+        var idAplicacion = "4771dc31-2621-11e8-80db-bc764e10787e";
         if(request.input("id"))
         {
             obj.id = request.input("id");
@@ -21,11 +23,26 @@ class Visualizador {
             obj.sentido = 0;
         }
 
-        obj.idAplicacion = "4771dc31-2621-11e8-80db-bc764e10787e";
+        obj.idAplicacion = idAplicacion;
+        participantes.idAplicacion = idAplicacion;
 
         var graph = await data.execApi(request.hostname(),'/Redes/Medicion/getGraph',obj);
-        
-        return view.render('redes/visualizacion',{graph:graph.body})
+        var participantes = await data.execApi(request.hostname(),'/Redes/Medicion/getParticipantes',participantes);
+
+        var idCodigo = 0;
+        var sentido = 0;
+
+        if(request.input("id")!="0")
+        {
+            idCodigo = request.input("id");
+        }
+
+        if(request.input("sentido"))
+        {
+            sentido = request.input("sentido");
+        }
+
+        return view.render('redes/visualizacion',{graph:graph.body, participantes:participantes.body, idCodigo:idCodigo, sentido:sentido});
     }
 
    
