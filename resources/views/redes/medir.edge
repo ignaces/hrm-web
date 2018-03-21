@@ -17,7 +17,10 @@
                     $('.tooltip-hover').tooltipster();
                     $(".select2").select2({
                         closeOnSelect: false,
-                        maximumSelectionLength:3
+                        maximumSelectionLength:3,
+                        createTag: function(params) {
+                                return undefined;
+                        }
                     });
                     
                     $('.selectpicker').selectpicker();
