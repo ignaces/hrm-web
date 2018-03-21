@@ -17,6 +17,10 @@ class Visualizador {
         var participantes = {};
 
         var idAplicacion = request.input("idAplicacion");
+        if(request.input("idAplicacion") || request.input("idAplicacion") == "undefined")
+        {
+            var idAplicacion = "'4771dc31-2621-11e8-80db-bc764e10787e'";
+        }
 
         if(request.input("id"))
         {
