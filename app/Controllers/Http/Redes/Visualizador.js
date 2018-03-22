@@ -18,7 +18,7 @@ class Visualizador {
 
         var idAplicacion = request.input("idAplicacion");
         
-        idAplicacion = "4771dc31-2621-11e8-80db-bc764e10787e";
+        //idAplicacion = "4771dc31-2621-11e8-80db-bc764e10787e";
         
         if(request.input("id"))
         {
