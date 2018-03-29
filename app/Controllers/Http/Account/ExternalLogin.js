@@ -5,27 +5,28 @@ class ExternalLogin {
     await ally.driver('google').redirect()
   }
 
-  async callback ({ ally, auth }) {
+  async callback ({ ally, auth ,response,session}) {
     try {
-      const fbUser = await ally.driver('google').getUser()
+      const googleUser = await ally.driver('google').getUser()
 
       // user details to be saved
       const userDetails = {
-        email: fbUser.getEmail(),
-        token: fbUser.getAccessToken(),
+        email: googleUser.getEmail(),
+        token: googleUser.getAccessToken(),
         login_source: 'google'
       }
-
+      
       // search for existing user
       const whereClause = {
-        email: fbUser.getEmail()
+        email: googleUser.getEmail()
       }
-
+      
       const user = await User.findOrCreate(whereClause, userDetails)
       await auth.login(user)
-
-      return 'Logged in'
+      
+      return response.redirect('/')
     } catch (error) {
+      console.log(error)
       return 'Unable to authenticate. Try again later'
     }
   }

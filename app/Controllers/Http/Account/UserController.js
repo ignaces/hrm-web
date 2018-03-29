@@ -5,6 +5,7 @@ class UserController {
     
       async login ({ view,request, auth ,response, session}) {
         const { username, password } = request.all()
+        
         await auth.attempt(username, password)
 
         var obj = {

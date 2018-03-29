@@ -42,9 +42,9 @@ module.exports = {
     |
     */
     google: {
-      clientId: Env.get('371802496314-dp2r38hoknes1a9n60b195f2itm3digq.apps.googleusercontent.com'),
-      clientSecret: Env.get('371802496314-dp2r38hoknes1a9n60b195f2itm3digq.apps.googleusercontent.com'),
-      redirectUri: `${Env.get('APP_URL')}/authenticated/google`
+      clientId: Env.get('GITHUB_CLIENT_ID'),
+      clientSecret: Env.get('GITHUB_CLIENT_SECRET'),
+      redirectUri: `${Env.get('APP_URL')}/google/callback`
     },
 
     /*

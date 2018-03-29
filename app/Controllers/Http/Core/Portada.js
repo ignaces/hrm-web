@@ -5,7 +5,7 @@ const data = use('App/Utils/Data')
 class Portada {
      async welcome  ({ view,request, response, auth, session }) {
         
-
+        console.log(auth.user)
         var idPersona = session.get('idPersona', 'fall')
         var all =  session.get('personaLogueada')
         //var idOpinante = all.id

@@ -20,6 +20,7 @@ var util = require('util')
 
 //Route.on('/').render('welcome').middleware('autenticacion')
 
+Route.get('/inicio', 'Account/ExternalLogin.callback').middleware('autenticacion')
 Route.get('/', 'Core/Portada.welcome').middleware('autenticacion')
 Route.get('/login/google', 'Account/ExternalLogin.redirect')
 Route.get('/google/callback', 'Account/ExternalLogin.callback')
