@@ -11,11 +11,15 @@
                 
                 </div>
                 <div class="col-md-8">
-                <div class="row">
+                @each(item in data)
+                  <div class="row">
                     <div class="col-md-4 text-center"><h3><i class="dripicons-document-new"></i></h3></div>
-                    <div class="col-md-4 text-center"><h5>Test de Conocimientos</h5></div>
-                    <div class="col-md-4 text-center"><h5><span class="label label-success">Aprobado</span></h5></div>
+                    <div class="col-md-4 text-center"><h5>{{item.Nombre}}</h5></div>
+                    <div class="col-md-4 text-center"><h5><span class="label label-success">{{item.Estado}}</span></h5></div>
                 </div>
+                @endeach
+                
+                <!--
                 <div class="row">
                      <div class="col-md-4 text-center"><h3><i class="dripicons-clipboard"></i></h3></div>
                     <div class="col-md-4 text-center"><h5>Observación en Terreno</h5></div>
@@ -26,6 +30,7 @@
                     <div class="col-md-4 text-center"><h5>Diagnóstico Conductual</h5></div>
                     <div class="col-md-4 text-center"><h5><span class="label label-success">Aprobado</span></h5></div>
                 </div>
+                -->
                 </div>
                 <div class="col-md-2">
                 

@@ -16,7 +16,7 @@
 </div>
 <div class="row">
         <div class="col-md-6">
-                @!component('components.Acreditacion.sintesisResultado',titulo = "SÍNTESIS DE RESULTADOS")
+                @!component('components.Acreditacion.sintesisResultado',titulo = "SÍNTESIS DE RESULTADOS", data = sintesis)
         </div>
         <div class="col-md-6">
         <div class="portlet">
@@ -27,9 +27,11 @@
                 <div id="bg-default" class="panel-collapse collapse in show">
                 <div class="portlet-body">
                         <p>Para la aprobación es necesario:<br/><br/>
-                        - Test de Conocimientos sobre 60% <br/>
+                        - Test de Conocimientos 100% <br/>
+                        <!--
                         - Observación en Terreno sobre 80% en cada una de sus competencias<br/>
                         - Diagnóstico Conductual 100%
+                        -->
                         </p>
                 </div>
                 </div>
@@ -53,13 +55,10 @@
         </div>
 </div>
 <div class="row">
-              @!component('components.Acreditacion.resultadoTCO',titulo = "TEST DE CONOCIMIENTOS")
+              @!component('components.Acreditacion.resultadoTCO',titulo = "TEST DE CONOCIMIENTOS", data=resultadoTCO)
 </div>
 <div class="row">
-              @!component('components.Acreditacion.resultadoSOT',titulo = "OBSERVACIÓN EN TERRENO/COMPETENCIAS TÉCNICAS")
-</div>
-<div class="row">
-              @!component('components.Acreditacion.resultadoEIC',titulo = "DIAGNÓSTICO CONDUCTUAL/COMPETENCIAS CONDUCTUALES")
+              @!component('components.Acreditacion.resultadoTCODetalle',titulo = "TEST DE CONOCIMIENTOS DETALLE")
 </div>
 <div class="row">
              <br/>
