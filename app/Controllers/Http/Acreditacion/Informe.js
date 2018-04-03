@@ -21,6 +21,8 @@ class Informe {
         var resultado = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getPersona',obj);
         var clasificacion = resultado.body;
 
+        
+
         var resultSintesis = await data.execApi(request.hostname(),'/Acreditacion/Informe/getResultadoSistesis',obj);
         var resultadoSintesis = resultSintesis.body.data;
 
