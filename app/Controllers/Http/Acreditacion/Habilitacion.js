@@ -8,18 +8,25 @@ const Antl = use('Antl')
 const readFile = Helpers.promisify(fs.readFile)
 class Habilitacion {
      async index  ({ view,request, response, auth }) {
-        var conDetalle = request.input("cd");
         var obj = {
-            "procesoPersona": request.input("procesoPersona")
+            "idProceso":""
+            
         };
 
-        var resultSintesis = await data.execApi(request.hostname(),'/Acreditacion/Informe/getResultadoSistesis',obj);
-        var resultadoSintesis = resultSintesis.body.data;
+        var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getProcesos',obj);
+        
+        var procesosActivos = result.body.data.procesos;
+      
+        var objInactivos = {
+            "idProceso":"",
+            "activo": 0 
+        };
 
-        var resultTCO = await data.execApi(request.hostname(),'/Acreditacion/Informe/getResultadoTCO',obj);
-        var resultadoTCO = resultTCO.body.data;
+        var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getProcesos',objInactivos);
+        
+        var procesosInactivos = result.body.data.procesos;
        
-        return view.render('acreditacion/habilitacion/index', {sintesis:resultadoSintesis, resultadoTCO:resultadoTCO,conDetalle});
+        return view.render('acreditacion/habilitacion/index', {procesosActivos, procesosInactivos});
     }   
 }
 
