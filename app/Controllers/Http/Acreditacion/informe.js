@@ -18,8 +18,10 @@ class Informe {
 
         var resultTCO = await data.execApi(request.hostname(),'/Acreditacion/Informe/getResultadoTCO',obj);
         var resultadoTCO = resultTCO.body.data;
-       
-        return view.render('acreditacion/informe/informesd', {sintesis:resultadoSintesis, resultadoTCO:resultadoTCO,conDetalle});
+
+        var resultTCODetalle = await data.execApi(request.hostname(),'/Acreditacion/Informe/getInstrumentosTCO',obj);
+        var resultadoTCODetalle = resultTCODetalle.body.data;
+        return view.render('acreditacion/informe/informesd', {sintesis:resultadoSintesis, resultadoTCO:resultadoTCO, TCODetalle:resultadoTCODetalle, conDetalle});
     }   
     async dashboard  ({ view,request, response, auth }) {
         var idProceso = request.input("proceso")
