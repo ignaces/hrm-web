@@ -60,7 +60,9 @@
               @!component('components.Acreditacion.resultadoTCO',titulo = "TEST DE CONOCIMIENTOS", data=resultadoTCO)
 </div>
 <div class="row">
+        @if(@conDetalle==1)
               @!component('components.Acreditacion.resultadoTCODetalle',titulo = "TEST DE CONOCIMIENTOS DETALLE", data=TCODetalle.instrumento)
+        @endif
 </div>
 <div class="row">
              <br/>
