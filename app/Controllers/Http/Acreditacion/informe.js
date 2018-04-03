@@ -18,8 +18,10 @@ class Informe {
             "idPersona":idPersona
         };
 
-        var resultado = await data.execApi(request.hostname(),'/Persona/Persona/getPersona',objeto);
+        var resultado = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getPersona',obj);
         var clasificacion = resultado.body;
+
+        console.log(resultado.body);
 
         var resultSintesis = await data.execApi(request.hostname(),'/Acreditacion/Informe/getResultadoSistesis',obj);
         var resultadoSintesis = resultSintesis.body.data;
@@ -29,7 +31,7 @@ class Informe {
 
         var resultTCODetalle = await data.execApi(request.hostname(),'/Acreditacion/Informe/getInstrumentosTCO',obj);
         var resultadoTCODetalle = resultTCODetalle.body.data;
-        return view.render('acreditacion/informe/informesd', {sintesis:resultadoSintesis, resultadoTCO:resultadoTCO, TCODetalle:resultadoTCODetalle, conDetalle, persona});
+        return view.render('acreditacion/informe/informesd', {sintesis:resultadoSintesis, resultadoTCO:resultadoTCO, TCODetalle:resultadoTCODetalle, conDetalle,clasificacion});
     }   
     async dashboard  ({ view,request, response, auth }) {
         var idProceso = request.input("proceso")
