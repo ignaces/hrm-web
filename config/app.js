@@ -145,7 +145,7 @@ module.exports = {
     | file, database
     |
     */
-    driver: 'file',
+    driver: 'database',
 
     /*
     |--------------------------------------------------------------------------
