@@ -1,0 +1,112 @@
+@layout('layouts/horizontal')
+
+@section('scripts')
+        <script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+
+         <!--C3 Chart-->
+        <script type="text/javascript" src="/assets/plugins/d3/d3.min.js"></script>
+        <script type="text/javascript" src="/assets/plugins/c3/c3.min.js"></script>
+
+        <!--Echart Chart-->
+        <script type="text/javascript" src="/assets/plugins/echart/echarts-all.js"></script>
+         
+
+         <script src="/assets/js/dist/dashboardReporte.min.js?v24s"></script>
+   
+
+
+@endsection  
+
+@section('content')
+    <input type="hidden" id="noIniciados" value="{{detalle.noIniciados}}"/>
+    <input type="hidden" id="enProgreso" value="{{detalle.enProgreso}}"/>
+    <input type="hidden" id="finalizados" value="{{detalle.finalizados}}"/>
+
+                    <div class="row">
+                        <div class="col-lg-4">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                            <div class="col-lg-12 col-md-6">
+                                                @!component('components.Core.cardbox',icon = "mdi mdi-account-multiple",titulo="N° Evaluados",dato=detalle.evaluados,pie=".")
+                                            </div><!-- end col -->
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="col-lg-12 col-md-6">
+                                            @!component('components.Core.cardbox',icon = "mdi mdi-chart-pie",titulo="% de Avance",dato=detalle.avance,pie=".")
+                                        </div><!-- end col -->
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="col-lg-12">
+                                            <div class="card-box">
+                                            <h4 class="text-dark header-title m-t-0 m-b-30">Descargas</h4>
+                                            <button type="button" class="btn btn-warning waves-effect waves-light" id="btnExcelReporte"> <i class="fa  fa-sellsy m-r-5"></i> <span>Excel Resultados Finales</span> </button>
+                                            
+                                        </div>
+                                    </div>
+                                        
+                                </div>
+                            </div>
+                        </div>
+                             <div class="col-lg-8">
+                                 @!component('components.Reportes.graficopie',titulo="% de Avance",porcentaje="20",titulo1="Evaluados",dato1=detalle.evaluados,titulo2="Finalizados",dato2=detalle.finalizados,nombre="piechart1")
+                                
+                            </div>
+                    </div>
+
+                        
+    <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card-box">
+                                    <h4 class="m-t-0 header-title"><b>Evaluados</b></h4>
+                                    <p class="text-muted font-14 m-b-20">
+                                        
+                                    </p>
+
+                                    <div class="table-responsive">
+                                        <table class="table table-hover m-0 mails table-actions-bar">
+
+                                            <thead>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <th>Resultado</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @each(persona in personas)
+                                            <tr>
+                                                <td>
+                                                    <h5 class="m-b-0 m-t-0">{{persona.nombres}} {{persona.apellidoPaterno}} {{persona.apellidoMaterno}}</h5>
+                                                    <p class="m-b-0"><small>{{persona.perfilCompetencia}}</small></p>
+                                                </td>
+
+                                               
+                                                <td>
+                                                
+                                                    {{persona.resultado}}
+                                                
+                                                
+                                                </td>
+                                                <td>
+                                                    <a href="#" class="table-action-btn"><i class="mdi mdi-pencil"></i></a>
+                                                    <a href="/Acreditacion/informe/informeSD" class="table-action-btn"><i class=" mdi mdi-file-chart"></i></a>
+                                                    <a href="/Acreditacion/informe/informeCD" class="table-action-btn"><i class=" mdi mdi-file-chart"></i></a>
+                                                </td>
+                                            </tr>
+
+                                            @endeach
+                                            
+                                            
+                                            
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- end col -->
+</div>
+<hr>
+@endsection
+
