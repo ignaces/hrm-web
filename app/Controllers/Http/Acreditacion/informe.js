@@ -12,7 +12,7 @@ class Informe {
         var idPersona = request.input("persona");
         var obj = {
             "procesoPersona": request.input("procesoPersona")
-        };
+        }; 
 
         var objeto = {
             "idPersona":idPersona
