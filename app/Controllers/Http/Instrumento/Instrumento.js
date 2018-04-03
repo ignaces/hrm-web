@@ -16,52 +16,23 @@ class Instrumento {
         };
         
         var result = await data.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumento',obj);
-
-        
-       /*
-        var persona = {
-            titulo:"IDENTIFICACIÓN",
-            nombre:"Juan",
-            apellidoP:"Rivas",
-            apellidoM:"Palma",
-            rut:"18493148-3",
-            cargo:"Contratista",
-            perfilCargo:"Encargado",
-
-               clasificacion :  [{
-                  nombre:"Clasificación 1",
-                  valor:"x1x1",
-                  
-              },
-              {
-                nombre:"Clasificación 2",
-                valor:"x2x2"
-            },
-        {
-            nombre:"Clasificación 3",
-                valor:"x3x3"
-
-        }]    
-        };
-        */
-       
-
         var instrumento = result.body;
-        
-
         const todo = request.all();
 
         var idPersona = todo.idPersona
         
         var objeto = {
-            "idPersona":idPersona
+            "idPersona":idPersona,
+            "idProceso":idProceso,
+            "procesoPersona":""
         };
 
-        var resultado = await data.execApi(request.hostname(),'/Persona/Persona/getPersona',objeto);
+        console.log(instrumento);
+
+        var resultado = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getPersona',objeto);
         var clasificacion = resultado.body;
-       
-        
-       
+
+
         //return view.render('Instrumento/instrumento',  {persona:persona,instrumento:instrumento,idOpinante:idOpinante});
         return view.render('Instrumento/instrumento',  {idProceso:idProceso,clasificacion:clasificacion,instrumento:instrumento,idOpinante:idOpinante});
     }

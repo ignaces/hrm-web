@@ -21,8 +21,6 @@ class Informe {
         var resultado = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getPersona',obj);
         var clasificacion = resultado.body;
 
-        console.log(resultado.body);
-
         var resultSintesis = await data.execApi(request.hostname(),'/Acreditacion/Informe/getResultadoSistesis',obj);
         var resultadoSintesis = resultSintesis.body.data;
 
@@ -35,9 +33,7 @@ class Informe {
     }   
     async dashboard  ({ view,request, response, auth }) {
         var idProceso = request.input("proceso")
-        
 
-        //var sss = Antl.formatMessage('messages.greeting', { name: 'virk' })
         var obj = {
             "proceso":idProceso
         };
