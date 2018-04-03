@@ -5,6 +5,8 @@
             <div class="clearfix"></div>
         </div>
         <div class="portlet-body">
+        @each(item in data)
+        
             <div class="row">
                  <div class="col-md-6">
                     <ul class="list-group">
@@ -12,7 +14,7 @@
                     <div class="row text-center">
                         <div class "col-md-12 ">
                          
-                            RESUALTADO TEST <br/><br/>
+                            RESULTADO TEST: {{item.Nombre}} - {{item.Codigo}} <br/><br/>
 
                         </div>
                     </div>
@@ -20,11 +22,11 @@
                         <div class="col-md-1"></div>
                         <div class="col-md-10">
                            <div class="progress  progress-lg">
-                                <div role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="width: 100%;" class="progress-bar progress-bar-success">
-                                    100% LOGRO
+                                <div role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="width: {{item.Resultado*100}}%;" class="progress-bar progress-bar-success">
+                                    {{item.Resultado*100}}% LOGRO
                                 </div>
-                                <div role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="width: 0%;" class="progress-bar progress-bar-danger">
-                                    0% BRECHA
+                                <div role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="width: {{100-(item.Resultado*100)}}%;" class="progress-bar progress-bar-danger">
+                                    {{100-(item.Resultado*100)}}% BRECHA
                                 </div>
                                 </div>
                         </div>
@@ -36,21 +38,23 @@
                  <div class="col-md-6">
                     <ul class="list-group">
                         <li class="list-group-item">
-                            <span class="badge badge-primary">43</span>
+                            <span class="badge badge-primary">{{item.TotalPreguntas}}</span>
                             Total de Preguntas
                         </li>
                         <li class="list-group-item">
-                            <span class="badge badge-success">27</span>
+                            <span class="badge badge-success">{{item.Correctas}}</span>
                             Respuestas Correctas
                         </li>
                         <li class="list-group-item">
-                            <span class="badge badge-danger">16</span>
+                            <span class="badge badge-danger">{{item.Incorrectas}}</span>
                             Respuestas Incorrectas
                         </li>
                     </ul>
 
                  </div>
             </div>
+        @endeach
+            
         <div>
     </div>
     </div>
