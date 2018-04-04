@@ -11,7 +11,11 @@
                 <hr/>
         </div>
 </div>
-@!component('components.Core.botonera')
+@!component('components.Core.botonera',botones=[{
+        texto:"PDF",
+        icono:"fa fa-file-pdf-o",
+        link:"/Acreditacion/Informe/getPdf?procesoPersona="+idProcesoPersona+"&cd="+conDetalle
+}])
 <div class"row">
 @!component('components.Acreditacion.encabezadoAcreditacion',titulo="IDENTIFICACIÓN", data={          
           clasificacion:clasificacion

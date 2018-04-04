@@ -7,7 +7,14 @@
             <div class="panel-body">
             <div class="row">
                 <div class="col-lg-10">
-                
+                    @each(boton in botones)
+                    <div class="pull-left">
+                        <a href="{{boton.link}}"  class="btn btn-primary waves-effect waves-light"> 
+                            <i class="{{boton.icono}} m-r-5"></i>
+                            <span>{{boton.texto}}</span>
+                        </a>
+                    </div>
+                    @endeach
                 </div>
                 <div class="col-lg-2" >
                     <div class="pull-right">

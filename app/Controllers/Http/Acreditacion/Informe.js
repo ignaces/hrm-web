@@ -5,11 +5,14 @@ const XLSX = require('xlsx')
 const Helpers = use('Helpers')
 const fs = use('fs')
 const Antl = use('Antl')
+var safeUrl = require('safe-url')
+var wget = require('node-wget-promise');
 const readFile = Helpers.promisify(fs.readFile)
 class Informe {
      async index  ({ view,request, response, auth }) {
         var conDetalle = request.input("cd");
         var idPersona = request.input("persona");
+        var idProcesoPersona = request.input("procesoPersona")
         var obj = {
             "procesoPersona": request.input("procesoPersona")
         }; 
@@ -31,8 +34,31 @@ class Informe {
 
         var resultTCODetalle = await data.execApi(request.hostname(),'/Acreditacion/Informe/getInstrumentosTCO',obj);
         var resultadoTCODetalle = resultTCODetalle.body.data;
-        return view.render('acreditacion/informe/informesd', {sintesis:resultadoSintesis, resultadoTCO:resultadoTCO, TCODetalle:resultadoTCODetalle, conDetalle,clasificacion});
+        return view.render('acreditacion/informe/informesd', {sintesis:resultadoSintesis, resultadoTCO:resultadoTCO, TCODetalle:resultadoTCODetalle, conDetalle,idProcesoPersona,clasificacion});
     }   
+
+    async getPdf({view,request, response, auth }) {
+        var conDetalle = request.input("cd");
+        var idPersona = request.input("procesoPersona");
+        var server = 'habilitaciongeovita.enovum.cl';//request.hostname();
+
+       
+        //var result = await got(`http://192.168.3.4:8080?url=${server}/Acreditacion/Informe/pdf?procesoPersona=${idPersona}&cd=${conDetalle}`);
+        var url = `http://192.168.3.4:8080/?url=http%3A%2F%2F${server}%2FAcreditacion%2FInforme%2Fpdf%3FprocesoPersona%3D${idPersona}%26cd%3D${conDetalle}`;
+
+
+        var file = await wget(url,{output: 'tmp/reporte.pdf'});
+       
+        response.type = "application/pdf";
+            
+        response.attachment(
+            Helpers.tmpPath('reporte.pdf'),
+            'reporte.pdf'
+        )
+          
+        
+        
+    }
 
     async pdf  ({ view,request, response, auth }) {
         var conDetalle = request.input("cd");
