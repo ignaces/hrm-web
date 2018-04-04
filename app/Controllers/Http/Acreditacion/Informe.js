@@ -33,6 +33,33 @@ class Informe {
         var resultadoTCODetalle = resultTCODetalle.body.data;
         return view.render('acreditacion/informe/informesd', {sintesis:resultadoSintesis, resultadoTCO:resultadoTCO, TCODetalle:resultadoTCODetalle, conDetalle,clasificacion});
     }   
+
+    async pdf  ({ view,request, response, auth }) {
+        var conDetalle = request.input("cd");
+        var idPersona = request.input("persona");
+        var obj = {
+            "procesoPersona": request.input("procesoPersona")
+        }; 
+
+        var objeto = {
+            "idPersona":idPersona
+        };
+
+        var resultado = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getPersona',obj);
+        var clasificacion = resultado.body;
+
+        
+
+        var resultSintesis = await data.execApi(request.hostname(),'/Acreditacion/Informe/getResultadoSistesis',obj);
+        var resultadoSintesis = resultSintesis.body.data;
+
+        var resultTCO = await data.execApi(request.hostname(),'/Acreditacion/Informe/getResultadoTCO',obj);
+        var resultadoTCO = resultTCO.body.data;
+
+        var resultTCODetalle = await data.execApi(request.hostname(),'/Acreditacion/Informe/getInstrumentosTCO',obj);
+        var resultadoTCODetalle = resultTCODetalle.body.data;
+        return view.render('acreditacion/informe/informesdpdf', {sintesis:resultadoSintesis, resultadoTCO:resultadoTCO, TCODetalle:resultadoTCODetalle, conDetalle,clasificacion});
+    }   
     async dashboard  ({ view,request, response, auth }) {
         var idProceso = request.input("proceso")
 
