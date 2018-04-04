@@ -31,7 +31,7 @@ Route.get('/Redes/Medicion/identificar','Redes/Medicion.identificar')
 
 Route.post('/Redes/Medicion/medirPersona','Redes/Medicion.medirPersona')
 
-Route.post('/Acreditacion/Informe/pdf','Acreditacion/Informe.pdf')
+Route.get('/Acreditacion/Informe/pdf','Acreditacion/Informe.pdf')
 
 Route.get('/Redes/Visualizador/viewGraph','Redes/Visualizador.viewGraph')
 
