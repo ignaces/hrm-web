@@ -62,9 +62,7 @@ class Informe {
     }   
     async dashboard  ({ view,request, response, auth }) {
         var idProceso = request.input("proceso")
-        
 
-        //var sss = Antl.formatMessage('messages.greeting', { name: 'virk' })
         var obj = {
             "proceso":idProceso
         };
