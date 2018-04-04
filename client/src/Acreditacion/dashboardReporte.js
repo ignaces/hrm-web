@@ -21,27 +21,7 @@ $(document).ready(function(){
   
     ChartC3.prototype.init = function () {
   
-      //Donut Chart
-      c3.generate({
-        bindto: '#donut-chart',
-        data: {
-          columns: [
-            ['Male', 46],
-            ['Female', 24]
-          ],
-          type : 'donut'
-        },
-        donut: {
-          title: "Candidates",
-          width: 30,
-          label: {
-            show:false
-          }
-        },
-        color: {
-          pattern: ["#64c5b1", "#ddd"]
-        }
-      });
+      
   
       //Pie Chart
       c3.generate({
@@ -63,25 +43,7 @@ $(document).ready(function(){
           }
         }
       });
-      //Pie Chart
-      c3.generate({
-        bindto: '#piechart2',
-        data: {
-          columns: [
-            ['Acreditados', 1],
-            ['No Acreditados', 1]
-          ],
-          type : 'pie'
-        },
-        color: {
-          pattern: ["#64c5b1", "#e68900"]
-        },
-        pie: {
-          label: {
-            show: false
-          }
-        }
-      });
+    
   
     },
         $.ChartC3 = new ChartC3, $.ChartC3.Constructor = ChartC3
