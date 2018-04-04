@@ -17,7 +17,8 @@
 
 @section('content')
 
-    
+    @!component('components.breadcrumb',title="Colaboradores")
+    @!component('components.Core.botonera')
     <form id="formInstrumento" method="POST" action="/Instrumento/Instrumento/index">
     {{ csrfField() }}
     <input type="hidden" id="idOpinante" name="idOpinante"  />

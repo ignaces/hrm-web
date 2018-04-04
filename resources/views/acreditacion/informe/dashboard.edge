@@ -13,36 +13,37 @@
     <input type="hidden" id="enProgreso" value="{{detalle.enProgreso}}"/>
     <input type="hidden" id="finalizados" value="{{detalle.finalizados}}"/>
 
-                    <div class="row">
-                        <div class="col-lg-4">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                            <div class="col-lg-12 col-md-6">
-                                                @!component('components.Core.cardbox',icon = "mdi mdi-account-multiple",titulo="N° Evaluados",dato=detalle.evaluados,pie=".")
-                                            </div><!-- end col -->
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="col-lg-12 col-md-6">
-                                            @!component('components.Core.cardbox',icon = "mdi mdi-chart-pie",titulo="% de Avance",dato=detalle.avance,pie=".")
-                                        </div><!-- end col -->
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="col-lg-12">
-                                            <div class="card-box">
-                                            <h4 class="text-dark header-title m-t-0 m-b-30">Descarga</h4>
-                                            <button type="button" class="btn btn-warning waves-effect waves-light" id="btnExcelReporte"> <i class="fa  fa-sellsy m-r-5"></i> <span>Excel Resultados Finales</span> </button>
-                                            
-                                        </div>
-                                    </div>
-                                        
-                                </div>
-                            </div>
-                        </div>
-                             <div class="col-lg-8">
-                                 @!component('components.Reportes.graficopie',titulo="% de Avance",porcentaje="20",titulo1="Evaluados",dato1=detalle.evaluados,titulo2="Finalizados",dato2=detalle.finalizados,nombre="piechart1")
-                                
-                            </div>
+    @!component('components.Core.botonera')
+    <div class="row">
+        <div class="col-lg-4">
+                <div class="row">
+                    <div class="col-lg-12">
+                            <div class="col-lg-12 col-md-6">
+                                @!component('components.Core.cardbox',icon = "mdi mdi-account-multiple",titulo="N° Evaluados",dato=detalle.evaluados,pie=".")
+                            </div><!-- end col -->
                     </div>
+                    <div class="col-lg-12">
+                        <div class="col-lg-12 col-md-6">
+                            @!component('components.Core.cardbox',icon = "mdi mdi-chart-pie",titulo="% de Avance",dato=detalle.avance,pie=".")
+                        </div><!-- end col -->
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="col-lg-12">
+                            <div class="card-box">
+                            <h4 class="text-dark header-title m-t-0 m-b-30">Descarga</h4>
+                            <button type="button" class="btn btn-warning waves-effect waves-light" id="btnExcelReporte"> <i class="fa  fa-sellsy m-r-5"></i> <span>Excel Resultados Finales</span> </button>
+                            
+                        </div>
+                    </div>
+                        
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            @!component('components.Reportes.graficopie',titulo="% de Avance",porcentaje="20",titulo1="Evaluados",dato1=detalle.evaluados,titulo2="Finalizados",dato2=detalle.finalizados,nombre="piechart1")
+        
+        </div>
+    </div>
 
                         
     <div class="row">
@@ -74,13 +75,15 @@
 
                                                <td>{{persona.estado}}</td>
                                                 <td>
-                                                
-                                                    {{persona.resultado}}
+                                                @if(persona.estadoCodigo=="FINALIZADO")
+                                                    {{persona.resultadoEstado}}
+                                                @endif
+                                                    
                                                 
                                                 
                                                 </td>
                                                 <td>
-                                                @if(persona.resultado>0)
+                                                @if(persona.estadoCodigo=="FINALIZADO")
                                                     <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Informe Sin Detalle" href="/Acreditacion/Informe/index?procesoPersona={{persona.idProcesoPersona}}&cd=0" class="table-action-btn"><i class=" mdi mdi-file-chart"></i></a>
                                                     <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Informe Con Detalle" href="/Acreditacion/Informe/index?procesoPersona={{persona.idProcesoPersona}}&cd=1" class="table-action-btn"><i class=" mdi mdi-file-chart"></i></a>
                                                 @endif
@@ -127,11 +130,5 @@
 
         <!--Echart Chart-->
         <script type="text/javascript" src="/assets/plugins/echart/echarts-all.js"></script>
-         
-
-         <script src="/assets/js/dist/dashboardReporte.min.js?v24s"></script>
-   
-
-
-@endsection  
-
+         <script src="/assets/js/dist/dashboardReporte.min.js?v29s"></script>
+@endsection
