@@ -17,10 +17,8 @@
 
 @section('content')
 
-    @!component('components.breadcrumb',title="Colaboradores", pages= [
-        {nombre:"Instrumento",activa:false},
-        {nombre:"Instrumento",activa:true}
-    ])
+    @!component('components.breadcrumb',title="Colaboradores")
+    @!component('components.Core.botonera')
     <form id="formInstrumento" method="POST" action="/Instrumento/Instrumento/index">
     {{ csrfField() }}
     <input type="hidden" id="idOpinante" name="idOpinante"  />

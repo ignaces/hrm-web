@@ -61,6 +61,11 @@ $(document).ready(function(){
           label: {
             show: false
           }
+        },
+        legend: {
+          item: {
+            onclick: function() { return false; }
+          }
         }
       });
       //Pie Chart
@@ -93,3 +98,6 @@ $(document).ready(function(){
         "use strict";
         $.ChartC3.init()
       }(window.jQuery);
+
+
+      console.log("asdas1");
