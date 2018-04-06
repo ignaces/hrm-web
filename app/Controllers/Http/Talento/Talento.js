@@ -87,8 +87,11 @@ class Talento {
             "idTalentoProceso":idTalentoProceso,
             "idOpinante":idOpinante
         };
+        
         var result = await data.execApi(request.hostname(),'/Talento/Talento/getPersonaTalentos',obj);
+        
         var personas = result.body;
+        
         return view.render('talento/colaboradoresTalento' ,  {personas:personas});
     }
 
@@ -114,7 +117,7 @@ class Talento {
         var personas = result.body;
         
         
-        
+        console.log(personas)
         
         
         var all1 =  session.get('personaLogueada')
@@ -130,7 +133,7 @@ class Talento {
         var result = await data.execApi(request.hostname(),'/Talento/Talento/generaCuadrantes',obj);
         var cuadrantes = result.body;
         
-        var cuadrante1 = cuadrantes[0];
+  
         var cuadrante1 = cuadrantes[0];
         var cuadrante2 = cuadrantes[1];
         var cuadrante3 = cuadrantes[2];
@@ -147,7 +150,6 @@ class Talento {
        
        var idTalentoProceso2 = request.input("talento");
 
-       //var idTalento = request.input("talento")
        var obj = {
            "idTalentoProceso":idTalentoProceso2,
            "idOpinante":idOpinante2

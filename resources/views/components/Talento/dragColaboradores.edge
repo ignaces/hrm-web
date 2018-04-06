@@ -1,7 +1,7 @@
 
  
  <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-3" height="100%">
                                 <div class="card-box">
                                    
                                     <h4 class="text-dark header-title m-t-0">Colaboradores</h4>
@@ -26,7 +26,16 @@
                                                 <p class="pull-right m-b-0 m-t-4">
                                                     <button type="button" class="btn btn-warning waves-effect waves-light"> <i class="fa fa-rocket m-r-5"></i> <span>Ficha</span> </button>
                                                 </p>
-                                                <p class="m-b-0"><a href="#" class="text-muted"><img src="{{talentos.foto}}" alt="task-user" class="thumb-sm img-circle m-r-10"> <span class="font-bold font-secondary">{{talentos.Colaborador}} {{talentos.apellidoPaterno}} {{talentos.apellidoMaterno}}</span></a> </p>
+                                                @if(!talentos.foto)
+                                                    @if(talentos.genero=='M')
+                                                          <p class="m-b-0"><a href="#" class="text-muted"><img src="/assets/images/users/maleuser.png" alt="task-user" class="thumb-sm img-circle m-r-10"> <span class="font-bold font-secondary">{{talentos.Colaborador}} {{talentos.apellidoPaterno}} {{talentos.apellidoMaterno}}</span></a> </p>
+                                                    @else
+                                                         <p class="m-b-0"><a href="#" class="text-muted"><img src="/assets/images/users/femaleuser.png" alt="task-user" class="thumb-sm img-circle m-r-10"> <span class="font-bold font-secondary">{{talentos.Colaborador}} {{talentos.apellidoPaterno}} {{talentos.apellidoMaterno}}</span></a> </p>
+                                                    @endif
+                                                    
+                                                @else
+                                                    <p class="m-b-0"><a href="#" class="text-muted"><img src="{{talentos.foto}}" alt="task-user" class="thumb-sm img-circle m-r-10"> <span class="font-bold font-secondary">{{talentos.Colaborador}} {{talentos.apellidoPaterno}} {{talentos.apellidoMaterno}}</span></a> </p>
+                                                @endif
                                             </div>
                                         </li>
                                         @endeach
@@ -141,13 +150,13 @@
                    
 
 
-@each(colaboradores in colaboradoresEva.clasificaciones)
-    <input class="aa" id="{{colaboradores.idTalentoCuadrante}}" type="hidden" value="{{colaboradores.nombres}}_{{colaboradores.apellidoPaterno}}_{{colaboradores.apellidoMaterno}}_{{colaboradores.Cargo}}_{{colaboradores.identificador}}_{{colaboradores.foto}}"  accesskey="{{colaboradores.color}}" tabindex="{{colaboradores.idOpinante}}">
+    @each(colaboradores in colaboradoresEva.clasificaciones)
+        <input class="aa" id="{{colaboradores.idTalentoCuadrante}}" type="hidden" value="{{colaboradores.nombres}}_{{colaboradores.apellidoPaterno}}_{{colaboradores.apellidoMaterno}}_{{colaboradores.Cargo}}_{{colaboradores.identificador}}_{{colaboradores.foto}}"  accesskey="{{colaboradores.color}}" tabindex="{{colaboradores.idOpinante}}">
 
-@each(claHijo in colaboradoresEva.clasificaciones[$loop.index].clasificacionHijo)
-    <input class="bb" id="" name="{{claHijo.ClasificacionesCol}}" type="hidden" value="{{claHijo.ClasificacionesCol}}">
-@endeach
-@endeach
+            @each(claHijo in colaboradoresEva.clasificaciones[$loop.index].clasificacionHijo)
+                <input class="bb" id="" name="{{claHijo.ClasificacionesCol}}" type="hidden" value="{{claHijo.ClasificacionesCol}}">
+            @endeach
+    @endeach
 
 
 
