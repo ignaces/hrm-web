@@ -14,44 +14,20 @@ $(document).ready(function () {
 
 });
 
-/*
-$(function() {
-    $(".card-box1").draggable({ scroll: true });
-    $(".card-box1").draggable({ scroll: true, scrollSensitivity: 100 });
-    $(".card-box1").draggable({ scroll: true, scrollSpeed: 100 });
-  });
 
-  */
-
-
-/*
-$("#completed").droppable({
-    drop: function( event, ui ) {
-     $(this).append($(ui.draggable).find('task1'));
-     var resultado =   $(this).append($(ui.draggable).find('task1'));
-      alert(resultado);
-    }
-})
-*/
 
 
 $(".sortable-list").droppable({
     drop: function(event, ui) {
        var idOpinante = (ui.draggable.attr('value'));
        var idComponente = $(this).attr("value");
-       alert("ID del opinante"+ idOpinante+ "ID Componente "+ idComponente);
-       
-       //var arr = id.split("_");
-       //var idTalentoMatriz = arr[0];
-        //var idTalentoOpinante = arr[1];
+      
         
 
-        //var seleccionDragTalento = function(idTalentoMatriz, idTalentoOpinante){
+        
         var obj = { 
             idOpinante:idOpinante,
             idComponente:idComponente
-            //arr:arr,
-            //idTalentoOpinante:idTalentoOpinante
          };
         $.ajax({
             type: "GET",
@@ -60,24 +36,15 @@ $(".sortable-list").droppable({
             data: obj,
             dataType: "json", 
             success: function (msg) {
-                //var obj = jQuery.parseJSON(msg);
-               //alert(obj);
-               //var obj = JSON.parse(msg);
-               //alert(obj.idLastInsert);
-               //alert(msg.idLastInsert);
-               //alert("Se ejecuto bien");
                
-            }//,
-            //error: function(error){
-              //  alert(error.status+"\n "+error.statusText);
-             //}
+               
+            }
         });
     //};
     }
   });
 
 
-    //var linkName = document.querySelector('.sortable-list').value; 
     $(document).ready(function(){
                      $(".aa").each(function(){
                         $(".sortable-list li").each(function(){
@@ -98,8 +65,15 @@ $(".sortable-list").droppable({
                         var cargo = arr[3];
                         var rut = arr[4];
                         var foto = arr[5];
-
-                        //alert("nombres"+nombres+"apellidoPaterno"+apellidoPaterno);
+                        var genero = arr[6];
+                        
+                        if(foto==''){
+                            if(genero=="M"){
+                                foto="/assets/images/users/maleuser.png"
+                            }else{
+                                foto="/assets/images/users/femaleuser.png"
+                            }
+                        }
                         
 
                         var clasificacionesHidden = new Array();
@@ -108,11 +82,6 @@ $(".sortable-list").droppable({
                             clasificacionesHidden.push($(this).attr('name'));
                         });
              
-                        //$(".ribbon-"+Color+"").append('<li>'+nombres+'</li>');
-
-                        //$("."+Color+"").append('<li class="task-warning ui-sortable-handle" style="" value="'+idOpinante+'">'+nombres+'</li>');
-                       
-
                         $("."+Color+"").append('<li class="task-warning ui-sortable-handle" style="" id="'+cargo+'" name="'+rut+'"   value="'+idOpinante+'">' +'<input class="" id="clasificaciones" name="clasificaciones" type="hidden" value="'+clasificacionesHidden+'">' +cargo +'<div class="clearfix"></div><div class="m-t-20"><p class="pull-right m-b-0 m-t-4"><button type="button" class="btn btn-warning waves-effect waves-light"> <i class="fa fa-rocket m-r-5"></i> <span>Ficha</span> </button></p><p class="m-b-0"><a href="#" class="text-muted"><img src="'+foto+'" alt="task-user" class="thumb-sm img-circle m-r-10"> <span class="font-bold font-secondary">'+nombres+' '+apellidoPaterno+' '+apellidoMaterno+'</span></a> </p></div></li>');
 
                         
@@ -120,4 +89,3 @@ $(".sortable-list").droppable({
         });
 
 
-   // $("#header ul").append('<li></li>');

@@ -1,0 +1,26 @@
+{
+    "short_name": "AirHorner",
+    "name": "Kinlan's AirHorner of Infamy",
+    "theme_color":"#317EFB",
+    "background_color": "#2196F3",
+    "display": "standalone",
+    "orientation": "portrait",
+    "icons": [
+      {
+        "src": "/assets/images/logo_sm.png",
+        "type": "image/png",
+        "sizes": "48x48"
+      },
+      {
+        "src": "/assets/images/logo_sm.png",
+        "type": "image/png",
+        "sizes": "96x96"
+      },
+      {
+        "src": "/assets/images/logo_sm.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      }
+    ],
+    "start_url": "/?launcher=true"
+  }

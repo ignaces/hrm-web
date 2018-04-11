@@ -7,13 +7,16 @@ $("#btnBuscar").on('click',function() {
     //clasificaciones filtro 
     var valorTexto = $('.buscarCla option:selected');
             var nombreFiltro = $.map(valorTexto ,function(option) {
-                return option.text;
+               if(option.value!='-1'){
+                return option.value;
+               }
+                
             });
 
             //cargos filtro 
             var value = $('.buscar option:selected');
             var cargosFiltro = $.map(value ,function(option) {
-                return option.text;
+                return option.value;
             });  
 
             var valorClasificaciones = $('.buscarCla option:selected');
@@ -104,18 +107,18 @@ $("#btnBuscar").on('click',function() {
               //  elem.parentNode.removeChild(elem);
 
             $.each(total, function(index) {
-                //alert(total[index].idPersona);
-                //alert(total[index].Colaborador);
-                //alert(total[index].apellidoPaterno);
-                //alert(total[index].apellidoMaterno);
-                //alert(total[index].Cargo);
-                //alert(total[index].procesoOpinante);
-
+                var foto = total[index].foto;
                 
-
+                if(foto==''){
+                    if(total[index].genero=="M"){
+                        foto = "/assets/images/users/maleuser.png";
+                    }else{
+                        foto = "/assets/images/users/femaleuser.png";
+                    }
+                }
                 $("#upcoming").append('<li class="task-warning ui-sortable-handle" style="" id="base" value="'+total[index].procesoOpinante+'">' 
-            +total[index].Cargo +
-           '<div class="clearfix"></div><div class="m-t-20"><p class="pull-right m-b-0 m-t-4"><button type="button" class="btn btn-warning waves-effect waves-light"> <i class="fa fa-rocket m-r-5"></i> <span>Ficha</span> </button></p><p class="m-b-0"><a href="" class="text-muted"><img src="'+total[index].foto+'" alt="task-user" class="thumb-sm img-circle m-r-10"> <span class="font-bold font-secondary">'+total[index].Colaborador+' '+total[index].apellidoPaterno+' '+total[index].apellidoMaterno+'</span></a> </p></div></li>');
+                +total[index].Cargo +
+                '<div class="clearfix"></div><div class="m-t-20"><p class="pull-right m-b-0 m-t-4"><button type="button" class="btn btn-warning waves-effect waves-light"> <i class="fa fa-rocket m-r-5"></i> <span>Ficha</span> </button></p><p class="m-b-0"><a href="" class="text-muted"><img src="'+foto+'" alt="task-user" class="thumb-sm img-circle m-r-10"> <span class="font-bold font-secondary">'+total[index].Colaborador+' '+total[index].apellidoPaterno+' '+total[index].apellidoMaterno+'</span></a> </p></div></li>');
             });
         }
         },

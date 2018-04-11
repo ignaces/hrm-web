@@ -48,7 +48,6 @@ class Talento {
         var nombres = request.input("nombres");
         var paterno = request.input("paterno");
         var materno = request.input("materno");
-
         var obj = {
             "idOpinante":idOpinante,
             "idTalentoProceso":traerProceso,
@@ -59,6 +58,7 @@ class Talento {
             "paterno":paterno,
             "materno":materno
         };
+        
         var result = await data.execApi(request.hostname(),'/Talento/Talento/filtrarColaboradoresSinClasificar',obj);
         var total = result.body.data.arreglo;
         
@@ -117,7 +117,6 @@ class Talento {
         var personas = result.body;
         
         
-        console.log(personas)
         
         
         var all1 =  session.get('personaLogueada')

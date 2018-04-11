@@ -37,16 +37,16 @@
 										@each(clasificaciones in clasificacionesPorEmpresa.clasificaciones)
 									   <div class="col-sm-3">
 									    <div class="form-group">
-                                                        <label class="control-label">{{clasificaciones.nombrePadre}}</label>
-                                                        <div class="">
-                                                
-                                                            <select id="buscar" class="form-control buscarCla">
-                                                            <option value="" selected disabled hidden>Selecciona una Clasificación</option>
-                                                @each(claHijo in clasificacionesPorEmpresa.clasificaciones[$loop.index].clasificacionHijo)
-                                                                <option value="{{$loop.index+1}}">{{claHijo.nombreHijo}}</option>
-                                                                
-                                                @endeach
-                                                            </select>
+                                            <label class="control-label">{{clasificaciones.nombrePadre}}</label>
+                                            <div class="">
+                                    
+                                                <select id="buscar" class="form-control buscarCla">
+                                                      <option value="-1" selected>Todos</option>
+                                                    @each(claHijo in clasificacionesPorEmpresa.clasificaciones[$loop.index].clasificacionHijo)
+                                                                    <option value="{{claHijo.id}}">{{claHijo.nombreHijo}}</option>
+                                                                    
+                                                    @endeach
+                                                </select>
                                                 
                                         </div>
                                         </div>
@@ -58,9 +58,9 @@
                                                         <label class="control-label">Cargos</label>
                                                 
                                                             <select id="buscarCargo" class="form-control buscar">
-                                                    <option value="-1" selected disabled hidden>Selecciona un Cargo</option>
+                                                                <option value="-1" selected>Todos</option>
                                                                 @each(cargos in cargosPorEmpresa)
-                                                                <option value="{{$loop.index+1}}">{{cargos.nombreCargos}}</option>
+                                                                <option value="{{cargos.idCargo}}">{{cargos.nombreCargos}}</option>
                                                                 @endeach
                                                             </select>
                                                 
