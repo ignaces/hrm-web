@@ -72,7 +72,7 @@ edge.global('theme', function (hostname) {
   //hostname="enel.enovum.cl"
   
   
-  if(hostname=="localhost" || hostname=="hrmdev"){
+  if(hostname=="localhost" || hostname=="hrmdev.enovum.cl"){
     theme = `/themes/${theme}` 
   }else{
     var company = hostname.split(".")[0]
