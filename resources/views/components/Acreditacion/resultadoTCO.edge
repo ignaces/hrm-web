@@ -1,62 +1,57 @@
-<div class="col-md-12">
-    <div class="portlet">
-        <div class="portlet-heading bg-primary">
-            <h5 class="portlet-title">{{titulo}}</h5>
-            <div class="clearfix"></div>
-        </div>
-        <div class="portlet-body">
-        @each(item in data)
-        
-            <div class="row">
-                 <div class="col-md-6">
-                    <ul class="list-group">
-                            <li class="list-group-item">
-                    <div class="row text-center">
-                        <div class "col-md-12 ">
-                         
-                            RESULTADO TEST: {{item.Nombre}} - {{item.Codigo}} <br/><br/>
-
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-1"></div>
-                        <div class="col-md-10">
-                           <div class="progress  progress-lg">
-                                <div role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="width: {{item.Resultado*100}}%;" class="progress-bar progress-bar-success">
-                                    {{item.Resultado*100}}% LOGRO
-                                </div>
-                                <div role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="width: {{100-(item.Resultado*100)}}%;" class="progress-bar progress-bar-danger">
-                                    {{100-(item.Resultado*100)}}% BRECHA
-                                </div>
-                                </div>
-                        </div>
-                        <div class="col-md-1"></div>
-                    </div>
-                                                </li>
-                        </ul>
-                 </div>
-                 <div class="col-md-6">
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <span class="badge badge-primary">{{item.TotalPreguntas}}</span>
-                            Total de Preguntas
-                        </li>
-                        <li class="list-group-item">
-                            <span class="badge badge-success">{{item.Correctas}}</span>
-                            Respuestas Correctas
-                        </li>
-                        <li class="list-group-item">
-                            <span class="badge badge-danger">{{item.Incorrectas}}</span>
-                            Respuestas Incorrectas
-                        </li>
-                    </ul>
-
-                 </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet">
+            <div class="portlet-heading bg-primary">
+                <h5 class="portlet-title">{{titulo}}</h5>
+                <div class="clearfix"></div>
             </div>
-        @endeach
-            
-        <div>
+            <div class="portlet-body">
+                @each(item in data)
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <div class="row text-center">
+                                        <div class "col-md-12 ">
+                                            RESULTADO TEST: {{item.Nombre}} - {{item.Codigo}} <br/><br/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-10">
+                                            <div class="progress  progress-lg">
+                                                <div role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="width: {{item.Resultado*100}}%;" class="progress-bar progress-bar-success">
+                                                    {{item.Resultado*100}}% LOGRO
+                                                </div>
+                                                <div role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="width: {{100-(item.Resultado*100)}}%;" class="progress-bar progress-bar-danger">
+                                                    {{100-(item.Resultado*100)}}% BRECHA
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1"></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <span class="badge badge-primary">{{item.TotalPreguntas}}</span>
+                                    Total de Preguntas
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge badge-success">{{item.Correctas}}</span>
+                                    Respuestas Correctas
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge badge-danger">{{item.Incorrectas}}</span>
+                                    Respuestas Incorrectas
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                @endeach  
+            <div>
+        </div>
     </div>
-    </div>
-</div>
 </div>

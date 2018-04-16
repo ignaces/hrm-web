@@ -1,28 +1,29 @@
-<div class="panel panel-border panel-primary">
-                <div class="panel-heading">
-                   <h3 class="panel-title">{{titulo}}</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-3"><h5>Nombre</h5></div>
-                        <div class="col-md-3">{{data.clasificacion.nombres}} {{data.clasificacion.apellidoPaterno}} {{data.clasificacion.apellidoMaterno}}</div>
-                        <div class="col-md-3"><h5>RUT</h5></div>
-                        <div class="col-md-3">{{data.clasificacion.identificador}}</div>
-                        
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3"><h5>Email</h5></div>
-                        <div class="col-md-3">{{data.clasificacion.email}}</div>
-                        <div class="col-md-3"><h5></h5></div>
-                        <div class="col-md-3"></div>
-                    </div>
-                 @each(clasificacion in data.clasificacion.clasificaciones)
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-border panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{titulo}}</h3>
+            </div>
+            <div class="panel-body">
                 <div class="row">
-                        <div class="col-md-3"><h5>{{clasificacion.nombre}}</h5></div>
-                        <div class="col-md-3">{{clasificacion.valor}}</div>               
+                    <div class="col-md-2"><span><b>Nombre</b></span></div>
+                    <div class="col-md-4"><span>{{data.clasificacion.nombres}} {{data.clasificacion.apellidoPaterno}} {{data.clasificacion.apellidoMaterno}}</span></div>
+                    <div class="col-md-2"><span><b>RUT</b></span></div>
+                    <div class="col-md-4"><span>{{data.clasificacion.identificador}}</span></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2"><h5>Email</h5></div>
+                    <div class="col-md-4">{{data.clasificacion.email}}</div>
+                    <div class="col-md-2"><h5></h5></div>
+                    <div class="col-md-4"></div>
+                </div>
+                @each(clasificacion in data.clasificacion.clasificaciones)
+                    <div class="row">
+                        <div class="col-md-2"><h5>{{clasificacion.nombre}}</h5></div>
+                        <div class="col-md-4">{{clasificacion.valor}}</div>               
                     </div>
                 @endeach 
-
-                </div> <!--<div class="panel-body">-->
-            </div> <!--<div class="panel panel-border panel-primary">-->
-          
+            </div> <!--<div class="panel-body">-->
+        </div> <!--<div class="panel panel-border panel-primary">-->          
+    </div>
+</div>

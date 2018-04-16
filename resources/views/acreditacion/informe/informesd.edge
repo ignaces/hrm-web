@@ -5,75 +5,68 @@
 @endsection  
 
 @section('content')
+
 <div class="row">
         <div class="col-md-12 text-center">
                 <h3>INFORME DE RESULTADOS</h3>
                 <hr/>
         </div>
 </div>
+
 @!component('components.Core.botonera',botones=[{
         texto:"PDF",
         icono:"fa fa-file-pdf-o",
         link:"/Acreditacion/Informe/getPdf?procesoPersona="+idProcesoPersona+"&cd="+conDetalle
-}])
-<div class"row">
-@!component('components.Acreditacion.encabezadoAcreditacion',titulo="IDENTIFICACIÓN", data={          
-          clasificacion:clasificacion
-})
+        }]
+)
 
-</div>
+@!component('components.Acreditacion.encabezadoAcreditacion',titulo="IDENTIFICACIÓN", data={clasificacion:clasificacion})
+
 <div class="row">
         <div class="col-md-6">
                 @!component('components.Acreditacion.sintesisResultado',titulo = "SÍNTESIS DE RESULTADOS", data = sintesis)
         </div>
         <div class="col-md-6">
-        <div class="portlet">
-                <div class="portlet-heading bg-primary">
-                <h5 class="portlet-title">REQUISITOS DE APROBACIÓN</h5>
-                <div class="clearfix"></div>
-                </div>
-                <div id="bg-default" class="panel-collapse collapse in show">
-                <div class="portlet-body">
-                        <p>Para la aprobación es necesario:<br/><br/>
-                        - Test de Conocimientos 100% <br/>
-                        <!--
-                        - Observación en Terreno sobre 80% en cada una de sus competencias<br/>
-                        - Diagnóstico Conductual 100%
-                        -->
-                        </p>
-                </div>
-                </div>
-        </div>
-        </div>
-</div>
-<!--
-<div class="row text-center">
-        <div class="col-md-12">
                 <div class="portlet">
-                <div class="portlet-heading bg-primary">
-                <h5 class="portlet-title">RESULTADO FINAL</h5>
-                <div class="clearfix"></div>
-                </div>
-                <div id="bg-default" class="panel-collapse collapse in show">
+                        <div class="portlet-heading bg-primary">
+                        <h5 class="portlet-title">REQUISITOS DE APROBACIÓN</h5>
+                        <div class="clearfix"></div>
+                        </div>
+                        <div id="bg-default" class="panel-collapse collapse in show">
                         <div class="portlet-body">
-                                <p>
-                                De acuerdo a la evaluación realizada y los resultados obtenidos, se determina que <strong>Carlos Herrera Sazo Espina</strong> se encuentra como <strong>NO ACREDITADO</strong> para el perfil <strong>Maestro Empalme BT PMT</strong>.
+                                <p>Para la aprobación es necesario:<br/><br/>
+                                - Test de Conocimientos 100% <br/>
+                                <!--
+                                - Observación en Terreno sobre 80% en cada una de sus competencias<br/>
+                                - Diagnóstico Conductual 100%
+                                -->
                                 </p>
+                        </div>
                         </div>
                 </div>
         </div>
 </div>
--->
-<div class="row">
-              @!component('components.Acreditacion.resultadoTCO',titulo = "TEST DE CONOCIMIENTOS", data=resultadoTCO)
+
+<div class="row text-center">
+        <div class="col-md-12">
+                <div class="portlet">
+                        <div class="portlet-heading bg-primary">
+                                <h5 class="portlet-title">RESULTADO FINAL</h5>
+                                <div class="clearfix"></div>
+                        </div>
+                        <div id="bg-default" class="panel-collapse collapse in show">
+                                <div class="portlet-body">
+                                        <p>De acuerdo a la evaluación realizada y los resultados obtenidos, se determina que <strong>Carlos Herrera Sazo Espina</strong> se encuentra como <strong>NO ACREDITADO</strong> para el perfil <strong>Maestro Empalme BT PMT</strong>.</p>
+                                </div>
+                        </div>
+                </div>
+        </div>
 </div>
-<div class="row">
-        @if(conDetalle==1)
-              @!component('components.Acreditacion.resultadoTCODetalle',titulo = "TEST DE CONOCIMIENTOS DETALLE", data=TCODetalle.instrumento)
-        @endif
-</div>
-<div class="row">
-             <br/>
-             <br/>
-</div>
+
+@!component('components.Acreditacion.resultadoTCO',titulo = "TEST DE CONOCIMIENTOS", data=resultadoTCO)
+
+@if(conDetalle==1)
+        @!component('components.Acreditacion.resultadoTCODetalle',titulo = "TEST DE CONOCIMIENTOS DETALLE", data=TCODetalle.instrumento)
+@endif
+
 @endsection

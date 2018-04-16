@@ -26,8 +26,8 @@ $(document).ready(function(){
         if($(txtJustificacion).val()){
             justificacion=$(txtJustificacion).val()
         }
-       
-        putRespuesta(idOpinante, idPregunta, idAlternativa, justificacion);
+
+        putRespuesta(idOpinante, idPregunta, idAlternativa, justificacion, id);
     });
 
     $( ".txt_justificacion" ).focusout(function() {  
@@ -43,10 +43,10 @@ $(document).ready(function(){
             justificacion=$("#txt_"+idPregunta+"_"+idOpinante).val()
         }
        
-        putRespuesta(idOpinante, idPregunta, idAlternativa, justificacion);
+        putRespuesta(idOpinante, idPregunta, idAlternativa, justificacion, id);
     });
 
-    var putRespuesta = function(idOpinante, idPregunta, idAlternativa, justificacion){
+    var putRespuesta = function(idOpinante, idPregunta, idAlternativa, justificacion, idElementoHTML){
         var obj = { 
             idOpinante:idOpinante,
             idPregunta:idPregunta,
@@ -61,8 +61,32 @@ $(document).ready(function(){
             data: obj,
             dataType: "json", 
             success: function (msg) {
-            
-            }
+                console.log("OK?23");
+
+                $.toast({
+                    text: 'Respuesta guardada correctamente.',
+                    position: 'top-right',
+                    loaderBg: '#5ba035',
+                    icon: 'success',
+                    hideAfter: 3000,
+                    stack: 1
+                });
+
+                
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                $.toast({
+                    text: 'No se pudo guardar su respuesta. Intente nuevamente.',
+                    position: 'top-right',
+                    loaderBg: '#5ba035',
+                    icon: 'error',
+                    hideAfter: 3000,
+                    stack: 1
+                });
+
+                $("#"+idElementoHTML).prop('checked', false);
+            },
+            timeout: 10000
         });
     };
 
