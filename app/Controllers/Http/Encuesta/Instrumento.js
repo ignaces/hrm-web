@@ -22,7 +22,7 @@ class Instrumento {
         var avance = await data.execApi(request.hostname(),'/Evaluacion/Instrumento/getAvanceFacsimil',{idFacsimil:idFacsimil});
 
         var porcentaje =( avance.body.data.avance.Contestadas*100)/avance.body.data.avance.total;
-        
+        porcentaje = Math.round(porcentaje);
         return {mensaje:"OK",avance:`${porcentaje}`}
     }
     

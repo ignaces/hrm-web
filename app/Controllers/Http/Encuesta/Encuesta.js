@@ -43,6 +43,7 @@
           var avance = await data.execApi(request.hostname(),'/Evaluacion/Instrumento/getAvanceFacsimil',{idFacsimil:instrumento.idFacsimil});
 
           var porcentaje =( avance.body.data.avance.Contestadas*100)/avance.body.data.avance.total;
+          porcentaje = Math.round(porcentaje);
           instrumento.avance= `${porcentaje}`;
           instrumento.pp='components.Evaluacion.preguntaLickertGrilla';
           return view.render('encuesta/instrumento',  {idEncuestaPersona:idEncuestaPersona,instrumento:instrumento});
