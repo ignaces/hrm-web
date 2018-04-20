@@ -47,6 +47,7 @@ Route.get('/Clima/Encuesta/index','Clima/Encuesta.index')
 Route.get('/Encuesta/Encuesta/intro','Encuesta/Encuesta.intro')
 Route.post('/Encuesta/Encuesta/intro','Encuesta/Encuesta.intro')
 
+Route.get('/Encuesta/Encuesta/index','Encuesta/Encuesta.index')
 Route.get('/Encuesta/Encuesta/instrumento','Encuesta/Encuesta.instrumento')
 Route.post('/Encuesta/Encuesta/instrumento','Encuesta/Encuesta.instrumento')
 Route.get('/Encuesta/Instrumento/putRespuesta','Encuesta/Instrumento.putRespuesta')
