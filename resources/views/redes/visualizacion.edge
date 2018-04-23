@@ -244,11 +244,11 @@
 @endsection
 @section('content')
 
-    <div class="row" style="margin-top: -60px;">
+    <div class="row" style="margin-top: -20px;">
         <div class="col-lg-12" style="margin-bottom: 5px;">
                         <form action="/Redes/Visualizador/viewGraph" method="POST" name="form">
                             {{ csrfField() }}
-
+                            <input id="idAplicacion" name="idAplicacion" value="{{idAplicacion}}" type="hidden">
                             <div class="col-md-2">
                                 <strong>Filtrar por:</strong> 
                                 &nbsp; Nombre 
