@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     $("#upcoming, #inprogress, #completed").sortable({
-        connectWith: ".taskList",
+        connectWith: ".itemCuadrante",
         placeholder: 'task-placeholder',
         forcePlaceholderSize: true,
         update: function (event, ui) {
@@ -46,6 +46,7 @@ $(".sortable-list").droppable({
 
 
     $(document).ready(function(){
+        
                      $(".aa").each(function(){
                         $(".sortable-list li").each(function(){
                             var idCuadrantes = ($(this).attr('value')); 
@@ -83,7 +84,7 @@ $(".sortable-list").droppable({
                             clasificacionesHidden.push($(this).attr('name'));
                         });
              
-                        $("."+Color+"").append('<li class="task-warning ui-sortable-handle" style="" id="'+cargo+'" name="'+rut+'"   value="'+idOpinante+'">' +'<input class="" id="clasificaciones" name="clasificaciones" type="hidden" value="'+clasificacionesHidden+'">' +cargo +'<div class="clearfix"></div><div class="m-t-20"><p class="pull-right m-b-0 m-t-4">'+atributos+'</p><p class="m-b-0"><a href="#" class="text-muted"><img src="'+foto+'" alt="task-user" class="thumb-sm img-circle m-r-10"> <span class="font-bold font-secondary">'+nombres+' '+apellidoPaterno+' '+apellidoMaterno+'</span></a> </p></div></li>');
+                        $("."+Color+"").append('<li class="task-warning ui-sortable-handle" style="" id="'+cargo+'" name="'+rut+'"   value="'+idOpinante+'">' +'<input class="" id="clasificaciones" name="clasificaciones" type="hidden" value="'+clasificacionesHidden+'"><p class="m-b-0"><div class="clearfix"></div><div><p class="pull-right">'+atributos+'</p></div><a href="#" class="text-muted"><img src="'+foto+'" alt="task-user" class="thumb-sm img-circle pull-left"> <H6 class="pull-left">'+nombres+' '+apellidoPaterno+' '+apellidoMaterno+'</H6></a> </p></li>');
 
                         
                     });

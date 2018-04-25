@@ -428,7 +428,7 @@ a:focus {
   background-color: #ffa91c !important;
 }
 .bg-danger {
-  background-color: #f96a74 !important;
+  background-color: #e60d72 !important;
 }
 .bg-muted {
   background-color: #797979 !important;
@@ -438,6 +438,9 @@ a:focus {
 }
 .bg-purple {
   background-color: #5553ce !important;
+}
+.bg-red {
+  background-color: #ff0000 !important;
 }
 .bg-pink {
   background-color: #ec6794 !important;
@@ -456,7 +459,7 @@ a:focus {
   color: #ffffff !important;
 }
 .text-danger {
-  color: #f96a74 !important;
+  color: #e60d72 !important;
 }
 .text-muted {
   color: #98a6ad !important;
@@ -481,6 +484,9 @@ a:focus {
 }
 .text-purple {
   color: #5553ce !important;
+}
+.text-red {
+  color: #ff0000 !important;
 }
 .text-dark {
   color: #313a46 !important;
@@ -510,10 +516,13 @@ a:focus {
   background-color: #ffa91c;
 }
 .label-danger {
-  background-color: #f96a74;
+  background-color: #e60d72;
 }
 .label-purple {
   background-color: #5553ce;
+}
+.label-red {
+  background-color: #ff0000;
 }
 .label-pink {
   background-color: #ec6794;
@@ -559,10 +568,13 @@ a:focus {
   background-color: #ffa91c;
 }
 .badge-danger {
-  background-color: #f96a74;
+  background-color: #e60d72;
 }
 .badge-purple {
   background-color: #5553ce;
+}
+.badge-red {
+  background-color: #ff0000;
 }
 .badge-pink {
   background-color: #ec6794;
@@ -735,13 +747,16 @@ a:focus {
   background-color: rgba(255, 169, 28, 0.4);
 }
 .waves-effect.waves-danger .waves-ripple {
-  background-color: rgba(249, 106, 116, 0.4);
+  background-color: rgba(230, 13, 114, 0.4);
 }
 .waves-effect.waves-pink .waves-ripple {
   background-color: rgba(236, 103, 148, 0.4);
 }
 .waves-effect.purple .waves-ripple {
   background-color: rgba(85, 83, 206, 0.2);
+}
+.waves-effect.red .waves-ripple {
+  background-color: rgba(255, 0, 0, 0.2);
 }
 .waves-effect.waves-inverse .waves-ripple {
   background-color: rgba(54, 64, 76, 0.4);
