@@ -53,7 +53,7 @@ class Visualizador {
             sentido = request.input("sentido");
         }
 
-        return view.render('redes/visualizacion',{graph:graph.body, participantes:participantes.body, idCodigo:idCodigo, sentido:sentido});
+        return view.render('redes/visualizacion',{graph:graph.body, participantes:participantes.body, idCodigo:idCodigo, sentido:sentido, idAplicacion: idAplicacion});
     }
 }
 module.exports = Visualizador;
