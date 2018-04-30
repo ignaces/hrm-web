@@ -413,7 +413,7 @@ a:focus {
 }
 /* Background colors */
 .bg-custom {
-  background-color: #9aec74 !important;
+  background-color: #244a7c !important;
 }
 .bg-primary {
   background-color: #4489e4 !important;
@@ -453,7 +453,7 @@ a:focus {
 }
 /* Text colors */
 .text-custom {
-  color: #9aec74 !important;
+  color: #244a7c !important;
 }
 .text-white {
   color: #ffffff !important;
@@ -501,7 +501,7 @@ a:focus {
   color: #313a46 !important;
 }
 .label-default {
-  background-color: #9aec74;
+  background-color: #244a7c;
 }
 .label-primary {
   background-color: #4489e4;
@@ -538,7 +538,7 @@ a:focus {
   text-transform: uppercase;
   padding: 3px 5px;
   margin-top: 1px;
-  background-color: #9aec74;
+  background-color: #244a7c;
   font-family: 'Nunito Sans', sans-serif;
 }
 .badge-xs {
@@ -622,8 +622,8 @@ a:focus {
 .pagination > .active > span:hover,
 .pagination > .active > a:focus,
 .pagination > .active > span:focus {
-  background-color: #9aec74;
-  border-color: #9aec74;
+  background-color: #244a7c;
+  border-color: #244a7c;
 }
 .pager li > a,
 .pager li > span {
@@ -635,8 +635,8 @@ a:focus {
 .list-group-item.active,
 .list-group-item.active:focus,
 .list-group-item.active:hover {
-  background-color: #9aec74;
-  border-color: #9aec74;
+  background-color: #244a7c;
+  border-color: #244a7c;
 }
 .list-group-item.active .list-group-item-text,
 .list-group-item.active:focus .list-group-item-text,
@@ -732,7 +732,7 @@ a:focus {
   background-color: rgba(255, 255, 255, 0.4);
 }
 .waves-effect.waves-custom .waves-ripple {
-  background-color: rgba(154, 236, 116, 0.4);
+  background-color: rgba(36, 74, 124, 0.4);
 }
 .waves-effect.waves-primary .waves-ripple {
   background-color: rgba(68, 137, 228, 0.4);
