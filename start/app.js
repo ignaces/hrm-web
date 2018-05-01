@@ -19,7 +19,9 @@ const providers = [
   '@adonisjs/shield/providers/ShieldProvider',
   '@adonisjs/session/providers/SessionProvider',
   '@adonisjs/auth/providers/AuthProvider',
-  '@adonisjs/ally/providers/AllyProvider'
+  '@adonisjs/ally/providers/AllyProvider',
+  '@adonisjs/redis/providers/RedisProvider',
+  '@adonisjs/antl/providers/AntlProvider'
 ]
 
 /*
@@ -68,11 +70,11 @@ edge.global('theme', function (hostname) {
   const Env = use('Env')
 
   var theme = Env.get('STYLE', 'default');
-
+  var hostalias = Env.get('HOSTALIAS', 'localhost');
   //hostname="enel.enovum.cl"
   
   
-  if(hostname=="localhost" || hostname=="hrmdev.enovum.cl"){
+  if(hostname==hostalias){
     theme = `/themes/${theme}` 
   }else{
     var company = hostname.split(".")[0]
@@ -81,4 +83,11 @@ edge.global('theme', function (hostname) {
   
   
   return theme;
+})
+
+edge.global('componente', function (modulo,componente) {
+  
+  var ruta = `${modulo}.${componente}`;
+  
+  return ruta;
 })

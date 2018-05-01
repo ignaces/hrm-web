@@ -1,0 +1,16 @@
+
+<div class="card-box">
+    <p class="text-center">
+        <strong>{{titulo}}</strong>
+    </p>
+    @each(barra in datos)
+    <div class="progress-group">
+        <span class="progress-text">{{barra.nombre}}</span>
+        <span class="progress-number"><b>{{barra.resultado}}</b>/{{barra.total}}</span>
+
+        <div class="progress sm">
+        <div class="progress-bar {{barra.color}}" style="width: {{barra.porce}}%"></div>
+        </div>
+    </div>
+   @endeach
+</div>

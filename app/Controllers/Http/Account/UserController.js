@@ -11,26 +11,48 @@ class UserController {
           "idUser":auth.user.id
         };
         
-        console.log(auth.user.is_admin);
+        
         if(auth.user.is_admin!=1){
           var rPersona = await data.execApi(request.hostname(),'/Persona/Persona/getPersonaByIdUser',{idUser:auth.user.id});
           var persona = rPersona.body.data;
           
           //var result = await data.execApi(request.hostname(),'/Persona/Persona/getIdPersona',obj);
-          persona.cargo="Evaluador"
+
+          
+          if(!persona){
+            persona={};
+            persona.imageUser="/assets/images/icons/businessman.svg"
+          }else{
+            persona.cargo=""
 
         
-          persona.imageUser="/assets/images/icons/businessman.svg"
-          if (persona.codigoGenero=="F"){
-            persona.imageUser="/assets/images/icons/businesswoman.svg"
+            persona.imageUser="/assets/images/icons/businessman.svg"
+            if (persona.codigoGenero=="F"){
+              persona.imageUser="/assets/images/icons/businesswoman.svg"
+            }
+            
+            //var traerLog = session.put('personaLogueada',persona); 
+    
+            session.put('personaLogueada',persona);
+            session.put('idPersona', persona.id)
           }
-          console.log(persona)
-          //var traerLog = session.put('personaLogueada',persona); 
           
-          session.put('personaLogueada',persona);
-          session.put('idPersona', persona.id)
+          try{
+            var rUsuario = await data.execApi(request.hostname(),'/Core/Users/getMenuUser',{idUser:auth.user.id});
+            var usuario = rUsuario.body.data;
+            session.put('usuario_roles_menu',usuario);
+
+            
+
+          }catch(err){
+            console.log(err)
+          }
           
 
+        }else{
+          var persona = {cargo:"admin",nombres:"",apellidoPaterno:"",apellidoMaterno:"",imageUser:"/assets/images/icons/businessman.svg"}
+          session.put('personaLogueada',persona);
+          session.put('idPersona', "");
         }
         
 
@@ -38,11 +60,11 @@ class UserController {
         return response.redirect('/')
       }
       
-      async logout ({ view,request, auth }) {
-        
+      async logout ({ view,request, auth ,response,session}) {
+        session.clear();
         await auth.logout()
     //
-        return view.render('account/login')
+        return response.redirect('/')
       }
 
       loginView({view,request}){

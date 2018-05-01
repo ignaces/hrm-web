@@ -15,11 +15,14 @@
                 ()=>{
                     
                     $('.tooltip-hover').tooltipster();
-                    $(".select2").select2();
-                    $(".select2-limiting").select2({
-                        maximumSelectionLength: 2
+                    $(".select2").select2({
+                        closeOnSelect: false,
+                        maximumSelectionLength:3,
+                        createTag: function(params) {
+                                return undefined;
+                        }
                     });
-
+                    
                     $('.selectpicker').selectpicker();
                 }
             );
@@ -34,16 +37,23 @@
                     <b>Redes</b>
                 </h4>
                     <p class="text-muted font-14 m-b-30">
-                        Redes de Energía
+                        Redes para la innovación
+                    </p>
+                    <p>
+                    A continuación, aplicaremos una breve encuesta en donde buscamos identificar cuáles son las redes de interacción de colaboradores en torno a la implementación de cambios e innovaciones en Monsanto. Para responder cada una de las preguntas, debes indicar hasta un máximo de tres personas que permitan responder a cada uno de los enunciados.
+                    </p>
+                    <p>
+                    ¡Muchas gracias por participar!
                     </p>
                     <form action="/finRedes" method="post">
                     <input type="hidden" name="_csrf" value="{{ csrfToken }}">
                     <input type="hidden" name="_code" value="{{ medicion.codigo }}">
+                    <input type="hidden" name="idAplicacion" value="{{ medicion.idAplicacion }}">
                     @each(pregunta in medicion.preguntas)
                     <div class="form-horizontal">
                             <div class="form-group">
                                 <label>{{ pregunta.orden }} .- {{ pregunta.pregunta }}</label>
-                                <select id="{{ pregunta.id }}" name="{{ pregunta.id }}" class="select2 form-control select2-multiple form-control" multiple="multiple" multiple data-placeholder="Seleccionar ...">
+                                <select id="{{ pregunta.id }}" name="{{ pregunta.id }}" class="select2 form-control select2-multiple form-control" data-max-option="3" multiple="multiple" multiple data-placeholder="Seleccionar ...">
                                                 <optgroup>
                                                 @each( persona in personas)
                                                     

@@ -1,0 +1,22 @@
+@layout('layouts/nomenu')
+       
+@section('content')
+    @!component('components.breadcrumb',title="Redes", pages= [
+        {nombre:"Redes",activa:false},
+        {nombre:"Aplicaciones",activa:true}
+    ])
+
+    <div class="row">
+        
+            @each(app in aplicaciones.apps)
+                <div class="col-lg-3">
+                    <form action="/Redes/Visualizador/viewGraph" method="POST" name="form">
+                    {{ csrfField() }}
+                        <input type="hidden" name="idAplicacion" value="{{app.id}}"> 
+                        <button type="submit" class="btn btn-lg btn-success col-12">{{app.nombre}}</button>
+                    </form>
+                </div>
+            @endeach                
+        
+    </div>
+@endsection

@@ -1,0 +1,23 @@
+
+<div class="box box-widget widget-user-2">
+@each(dato in etapa)
+    <div class="widget-user-header {{dato.color}}">
+        <div class="widget-user-image">
+            <img class="img-circle" src="/assets/images/ede/{{dato.imgActiva}}" alt="Imagen">
+        </div>
+        <h3 class="widget-user-username text-white">{{dato.nombreEtapa}}</h3>
+        <h5 class="widget-user-desc  text-white">{{nombreProceso}}</h5>
+ @endeach   
+    </div>
+  
+    <div class="box-footer no-padding">
+        <ul class="nav nav-stacked">
+         @each(menu in datamenu)
+        <li><a href="{{menu.link}}">{{menu.nombre}}</a></li>
+         @endeach
+        <li><a href="">Ayuda</a></li>
+        <li><a href="http://localhost:3335/">Volver</a></li>
+        </ul>
+    </div>
+
+</div>

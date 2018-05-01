@@ -14,26 +14,25 @@ class Instrumento {
             "idOpinante":idOpinante,
             "tipoInstrumento":codigo
         };
-       
-        var result = await data.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumento',obj);
-
-       
-        var instrumento = result.body;
         
-
+        var result = await data.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumento',obj);
+        var instrumento = result.body;
         const todo = request.all();
 
         var idPersona = todo.idPersona
         
         var objeto = {
-            "idPersona":idPersona
+            "idPersona":idPersona,
+            "idProceso":idProceso,
+            "procesoPersona":""
         };
 
-        var resultado = await data.execApi(request.hostname(),'/Persona/Persona/getPersona',objeto);
+        console.log(instrumento);
+
+        var resultado = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getPersona',objeto);
         var clasificacion = resultado.body;
-       
-        
-       
+
+
         //return view.render('Instrumento/instrumento',  {persona:persona,instrumento:instrumento,idOpinante:idOpinante});
         return view.render('Instrumento/instrumento',  {idProceso:idProceso,clasificacion:clasificacion,instrumento:instrumento,idOpinante:idOpinante});
     }
@@ -54,6 +53,7 @@ class Instrumento {
             "idAlternativa":idAlternativa,
             "justificacion":justificacion,
             };
+            
         var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/putRespuesta',obj);
 
         return {mensaje:"OK"}

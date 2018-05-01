@@ -1,0 +1,33 @@
+@layout('layouts/nomenu')
+
+
+@section('scripts')
+    <script src="/assets/js/dist/Instrumento.min.js?v24s"></script>
+    <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+@endsection
+
+@section('pluginsCss')
+    <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+@endsection
+  
+
+@section('content')
+
+    {{{encuestaPersona.intro}}}
+    <form id="form" method="POST" action="/Encuesta/Encuesta/instrumento">
+        {{ csrfField() }}
+        <input type="hidden" id="idEncuestaPersona" name="idEncuestaPersona" value="{{encuestaPersona.idEncuestaPersona}}" />
+    
+    <div class="row">
+        <div class="col-lg-12" style="align:center">
+           @if(encuestaPersona.codigo=="NOINICIADO")
+                <button type="submit" class="btn btn-block btn-primary waves-effect waves-light btn-lg">Comenzar encuesta</button>
+           @else
+                <button type="submit" class="btn btn-block btn-primary waves-effect waves-light btn-lg">Continuar encuesta</button>
+           @endif
+            
+
+        </div>
+    </div>
+    </form>
+@endsection

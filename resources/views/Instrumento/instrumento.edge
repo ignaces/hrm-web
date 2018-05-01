@@ -2,12 +2,14 @@
 
 
 @section('scripts')
-    <script src="/assets/js/dist/Instrumento.min.js?v24s"></script>
+    <script src="/assets/js/dist/Instrumento.min.js?v30s"></script>
     <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+    <script src="/assets/plugins/jquery-toastr/jquery.toast.min.js" type="text/javascript"></script>
 @endsection
 
 @section('pluginsCss')
     <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/plugins/jquery-toastr/jquery.toast.min.css" rel="stylesheet" />
 @endsection
   
 
@@ -16,12 +18,10 @@
 <input type="hidden" id="idOpinante" value="{{idOpinante}}" />
 
 
-    @!component('components.breadcrumb',title="Instrumento", pages= [
-        {nombre:"Instrumento",activa:false},
-        {nombre:"Instrumento",activa:true}
-    ])
+    
      <div class"row">
       <!--@!component('components.Acreditacion.encabezadoAcreditacion',titulo = "IDENTIFICACIÓN", nombre="diego",identificador="11489730-2",Perfil="Maestro Empalme BT PMT",CLA1="Proyectos y Medidas Técnicas",CLA2="Chilectra",CLA3="CAM")--> 
+    @!component('components.Core.botonera')
 
     @!component('components.Acreditacion.encabezadoAcreditacion',titulo="Datos del Evaluado", data={
           

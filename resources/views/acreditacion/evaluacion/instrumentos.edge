@@ -72,11 +72,9 @@
 @endsection
 @section('content')
 
-  {% from 'macros.breadcrumb' import breadcrumb %}
-    {{ breadcrumb('Instrumentos de acreditación', [
-            {nombre:"Acreditación",activa:false},
-            {nombre:"Instrumentos",activa:true}
-            ]) }}
+@!component('components.breadcrumb',title="Habilitacion", pages= [
+        {nombre:"Evaluacion",activa:false}
+    ])
 
     <div class="row">
         <div class="col-sm-12">
@@ -90,7 +88,7 @@
                     </p>
                       
                                     <ul class="sortable-list taskList list-unstyled" id="procesos">
-                                     {% for instrumento in instrumentos %}
+                                     @each(instrumento in instrumentos )
                                     
                                     <li class="{{instrumento.class}}" id="task{{instrumento.id}}">
                                             
@@ -109,7 +107,7 @@
                                             </div>
                                         </li>
                                     
-                                {% endfor %}
+                                @endeach
                                         
                                        
                                     </ul>
