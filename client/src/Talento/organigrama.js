@@ -86,7 +86,21 @@ var orgChart = new getOrgChart(peopleElement, {
     enableEdit: false,
     enableDetailsView: false,
     dataSource: source,
-    renderNodeEvent: renderNodeEventHandler
+    renderNodeEvent: renderNodeEventHandler,
+    boxSizeInPercentage: {
+        minBoxSize: {
+            width: 5,
+            height: 5
+        },
+        boxSize: {
+            width: 20,
+            height: 20
+        },
+        maxBoxSize: {
+            width: 100,
+            height: 100
+        }
+    }
 });        
 
 function renderNodeEventHandler(sender, args) {

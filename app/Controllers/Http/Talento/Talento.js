@@ -139,9 +139,9 @@ class Talento {
         var cuadrante4 = cuadrantes[3];
         var cuadrante5 = cuadrantes[4];
         var cuadrante6 = cuadrantes[5];
-       var cuadrante7 = cuadrantes[6];
+        var cuadrante7 = cuadrantes[6];
         var cuadrante8 = cuadrantes[7];
-       var cuadrante9 = cuadrantes[8];
+        var cuadrante9 = cuadrantes[8];
 
 
        var all2 =  session.get('personaLogueada')
