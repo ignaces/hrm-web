@@ -32,9 +32,9 @@ module.exports = {
   |
   */
   local: {
-    host: '127.0.0.1',
+    host: '192.168.3.8',
     port: 6379,
-    password: null,
+    password: "QazQwerty123_",
     db: 0,
     keyPrefix: ''
   },
@@ -46,7 +46,7 @@ module.exports = {
   |
   | Below is the configuration for the redis cluster.
   |
-  */
+  
   cluster: {
     clusters: [{
       host: '127.0.0.1',
@@ -61,4 +61,5 @@ module.exports = {
       db: 0
     }]
   }
+  */
 }
