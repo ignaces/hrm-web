@@ -16,10 +16,10 @@ class Portada {
             
         };
 
-        /*var objTalento = {
+        var objTalento = {
             "idOpinante": idOpinante
         };
-*/
+
         var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getProcesos',obj);
         var resultadoTalento = await data.execApi(request.hostname(),'/Talento/Talento/getTalentos',objTalento);
 
