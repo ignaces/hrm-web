@@ -16,7 +16,12 @@ module.exports = {
       configNotificacion:['./client/src/Mail/notificacion.js'],
       ingresoEncuesta:['./client/src/Encuesta/ingreso.js'],
       instrumentoEncuesta:['./client/src/Encuesta/paginacion.js','./client/src/Encuesta/instrumento.js'],
-      dashboardReporte:['./client/src/Acreditacion/dashboardReporte.js']
+      dashboardReporte:['./client/src/Acreditacion/dashboardReporte.js'],
+      Talento:['./client/src/Talento/talento.js'],
+      dataTable:['./client/src/Talento/dataTable.js'],
+      drag:['./client/src/Talento/drag.js'],
+      filtroClasificaciones:['./client/src/Talento/filtroClasificaciones.js'],
+      organigrama:['./client/src/Talento/organigrama.js']
     },
   output: {
     filename: '[name].min.js',

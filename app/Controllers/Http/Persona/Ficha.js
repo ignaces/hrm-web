@@ -5,7 +5,7 @@ const got = use('got')
 class Ficha {
      index ({view,request, response, auth}) {
 
-        console.log(auth.user)
+        
         const Env = use('Env')
         var server = Env.get('API_SERVER', 'development')
         var persona = {

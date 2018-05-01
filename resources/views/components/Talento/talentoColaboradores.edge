@@ -1,0 +1,29 @@
+ 
+        <table id="example" class="table table-striped table-bordered">
+    <thead>
+                          <tr>
+                              <th>Colaborador</th>
+                              <th>Cargo</th>
+                              <th>Cuadrante</th>
+                              <th>Ficha</th>
+                          </tr>
+   </thead>
+                          <tbody>
+                           @each(talentos in data.personas)
+               
+                <tr>
+                
+                              <td>{{talentos.Colaborador}} {{talentos.apellidoPaterno}} {{talentos.apellidoMaterno}}</td>
+                              <td>{{talentos.Cargo}}</td>
+                              <td>{{talentos.Cuadrante}}</td>
+                              <td></td>
+                              
+                            </tr>
+                @endeach
+
+
+                        </tbody>
+    </table>
+
+
+  

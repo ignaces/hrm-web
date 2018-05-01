@@ -1,6 +1,11 @@
 @layout('layouts/horizontal')
 
+@section('scripts')
+    <script src="/assets/js/dist/Talento.min.js"></script>
+@endsection
+
 @section('content')
+    
 
 
 <div class="row" >
@@ -44,6 +49,9 @@
              @!component('components.Desempeno.cajaDesempeno',titulo = "Gestión de Desempeño", procesos=procesosEde)
         </div>  
         -->
+                @!component('components.Acreditacion.cajaAcreditacion',titulo = "Acreditación",titulo2 = "Gestión de Talento", procesos=procesos, talentos=talentos,condicion=condicion)
+        </div>     
+        
     </div>
     <!-- END Centro -->
     <!-- Columna Derecha -->
@@ -82,5 +90,7 @@
     </div>
     <!-- END Columna Derecha -->
 </div>
+
+
 
 @endsection
