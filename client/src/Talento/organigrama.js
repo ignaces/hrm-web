@@ -1,120 +1,54 @@
-function isNumeric(n) {
-    return !isNaN(parseFloat(n)) && isFinite(n);
-}
+getOrgChart.themes.myCustomTheme =
+        {
+            size: [300, 100],
+            toolbarHeight: 46,
+            textPoints: [
+                { x: 130, y: 50, width: 250 },
+                { x: 130, y: 90, width: 250 }
+            ],
+            textPointsNoImage: [
+                { x: 130, y: 50, width: 250 },
+                { x: 130, y: 90, width: 250 }
+            ],
+            expandCollapseBtnRadius: 20,
+            defs: '<filter id="f1" x="0" y="0" width="200%" height="200%"><feOffset result="offOut" in="SourceAlpha" dx="5" dy="5" /><feGaussianBlur result="blurOut" in="offOut" stdDeviation="5" /><feBlend in="SourceGraphic" in2="blurOut" mode="normal" /></filter>',
+            box: '<rect x="0" y="0" height="100" width="300" rx="10" ry="10" class="myCustomTheme-box" filter="url(#f1)"  />',
+            text: '<text text-anchor="middle" width="[width]" class="get-text get-text-[index]" x="[x]" y="[y]">[text]</text>',
+            image: '<clipPath id="getMonicaClip"><circle cx="135" cy="255" r="85" /></clipPath><image preserveAspectRatio="xMidYMid slice" clip-path="url(#getMonicaClip)" xlink:href="[href]" x="5" y="0" height="90" width="90"/>',
+            reporters: '<circle cx="80" cy="190" r="20" class="reporters"></circle><text class="reporters-text" text-anchor="middle" width="100" x="80" y="195">[reporters]</text>'
+
+            //ddddd: '<text x="0" y="0">1</text>'
+        };
 
 
-var hex2rgb = function (hex) {
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result ? [
-        parseInt(result[1], 16),
-        parseInt(result[2], 16),
-        parseInt(result[3], 16)
-    ] : null;
-};
-
-var rgb2hex = function (rgb) {
-    return "#" + ((1 << 24) + (rgb[0] << 16) + (rgb[1] << 8) + rgb[2]).toString(16).slice(1);
-};
-
-var interpolateColor = function (color1, color2, factor) {
-    if (arguments.length < 3) { factor = 0.5; }
-    var result = color1.slice();
-    for (var i = 0; i < 3; i++) {
-        result[i] = Math.round(result[i] + factor * (color2[i] - color1[i]));
-    }
-    return result;
-};
-
-
-var source = [
-        { id: 1, parentId: null, name: "Amber McKenzie", salary: "$10000",  image: "images/f-11.jpg" },
-        { id: 2, parentId: 1, name: "Ava Field", salary: "$5000", image: "images/f-10.jpg" },
-        { id: 3, parentId: 1, name: "Evie Johnson", salary: "$8000", image: "images/f-9.jpg" },
-        { id: 4, parentId: 1, name: "Paul Shetler", salary: "$9000", image: "images/f-5.jpg" },
-        { id: 5, parentId: 2, name: "Rebecca Francis", salary: "$3000", image: "images/f-1.jpg" },
-        { id: 6, parentId: 2, name: "Riley Bray", salary: "$4000", image: "images/f-2.jpg" },
-        { id: 7, parentId: 4, name: "Max Ford", salary: "$6000", image: "images/f-4.jpg" },
-        { id: 8, parentId: 4, name: "Callum Whitehouse", salary: "$7000", image: "images/f-3.jpg" }
-];
-
-var arregloapem = [];
-$(".aa").each(function(){
-    arregloapem.push($(this).attr('value'));
-});
-
-var object = {};
-for(i = 0; i < arregloapem.length; i++){
-    //object += arregloapem[i];
-    object = arregloapem[i];
-}
-//alert(object);
-
-
-var start = hex2rgb("#008000");
-var end = hex2rgb("#cc3300");
-var max = null;
-var min = null;
-var factor = null;
-
-function setFactor(chart) {
-    max = null;
-    min = null;
-    for (var id in chart.nodes) {
-        var node = chart.nodes[id];
-        if (node.data["salary"]) {
-            var salary = node.data["salary"].replace("$", "");
-            if (isNumeric(salary)) {
-                if (max == null && min == null) {
-                    max = salary;
-                    min = salary;
+            var peopleElement = document.getElementById("people");
+            var orgChart = new getOrgChart(peopleElement, {
+                theme: "ula",
+                enableGridView: true,
+                primaryFields: ["CustomHtml"],               
+                renderNodeEvent: renderNodeHandler,
+                dataSource: [
+			        { id: 1, parentId: null, CustomHtml: '<i class="fa fa-plane m-r-5"></i><i class="fa fa-refresh m-r-5"></i><i class="fa fa-warning m-r-5"></i><i class="fa fa-star m-r-5"></i>', title: "CEO", phone: "rr", mail: "lemmons@jourrapide.com", adress: "Atlanta, GA 30303", image: "images/f-11.jpg" },
+			        { id: 2, parentId: 1, name: "Ava Field", title: "Paper goods machine setter", phone: "937-912-4971", mail: "anderson@jourrapide.com", image: "images/f-10.jpg" },
+			        { id: 3, parentId: 1, name: "Evie Johnson", title: "Employer relations representative", phone: "314-722-6164", mail: "thornton@armyspy.com", image: "images/f-9.jpg" },
+			        { id: 4, parentId: 1, name: "Paul Shetler", title: "Teaching assistant", phone: "330-263-6439", mail: "shetler@rhyta.com", image: "images/f-5.jpg" },
+			        { id: 5, parentId: 2, name: "Rebecca Francis", title: "Welding machine setter", phone: "408-460-0589", image: "images/f-4.jpg" },
+			        { id: 6, parentId: 2, name: "Rebecca Randall", title: "Optometrist", phone: "801-920-9842", mail: "JasonWGoodman@armyspy.com", image: "images/f-8.jpg" },
+			        { id: 7, parentId: 2, name: "Spencer May", title: "System operator", phone: "Conservation scientist", mail: "hodges@teleworm.us", image: "images/f-7.jpg" },
+			        { id: 8, parentId: 6, name: "Max Ford", title: "Budget manager", phone: "989-474-8325", mail: "hunter@teleworm.us", image: "images/f-6.jpg" },
+			        { id: 9, parentId: 7, name: "Riley Bray", title: "Structural metal fabricator", phone: "479-359-2159", image: "images/f-3.jpg" },
+			        { id: 10, parentId: 7, name: "Callum Whitehouse", title: "Radar controller", phone: "847-474-8775", image: "images/f-2.jpg" }
+                ],
+                customize: {
+                    "2":{color:"green"}
                 }
-                else {
-                    max = Math.max(salary, max);
-                    min = Math.min(salary, min);
+            });
+
+            function renderNodeHandler(sender, args) {
+                for (i = 0; i < args.content.length; i++) {
+                    if (args.content[i].indexOf(args.node.data["CustomHtml"]) != -1) {
+                        args.content[i] = "<foreignObject x='0' y='10' width='90%' height='100%'>" + args.node.data["CustomHtml"] + "</foreignObject>";
+                    }
                 }
             }
-        }
-    }
-    factor = (max - min) / 100;
-}
-
-var peopleElement = document.getElementById("people");
-var orgChart = new getOrgChart(peopleElement, {
-    primaryFields: ["salary", "name"],
-    photoFields: ["image"],
-    enableZoom: false,
-    enableEdit: false,
-    enableDetailsView: false,
-    dataSource: source,
-    renderNodeEvent: renderNodeEventHandler,
-    boxSizeInPercentage: {
-        minBoxSize: {
-            width: 5,
-            height: 5
-        },
-        boxSize: {
-            width: 20,
-            height: 20
-        },
-        maxBoxSize: {
-            width: 100,
-            height: 100
-        }
-    }
-});        
-
-function renderNodeEventHandler(sender, args) {
-    var salary = args.node.data["salary"].replace("$", "");
-    if (!isNumeric(salary)) {
-        return;
-    }
-
-    if (!factor) {
-        setFactor(sender);
-    }
-
-    var val = (salary - min) / factor;
-    var rgb = interpolateColor(start, end, val / 100);
-    var hex = rgb2hex(rgb);
-    args.content[1] = args.content[1].replace("rect", "rect style='fill: " + hex + "; stroke: " + hex + ";'")
-}
+    
