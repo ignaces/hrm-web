@@ -34,6 +34,7 @@ var files;
         contentType: false,
         success: function(data, textStatus, jqXHR)
         {
+            
             if(typeof data.error === 'undefined')
             {
                 // Success so call function to process the form
@@ -46,7 +47,7 @@ var files;
             else
             {
                 // Handle errors here
-                console.log('ERRORS: ' + data.error);
+                showErrors(data.error);
             }
         },
         error: function(jqXHR, textStatus, errorThrown)
@@ -121,6 +122,19 @@ var files;
             });
     }
  }
+ var showErrors = function(errors){
+    var correos="<ul>"; 
+
+    for(var error in errors){
+        correos +="<li>'"+errors[error].email+"'</li>";
+     }
+     correos +="</ul>";
+     swal({
+        title:'Error',
+        text:'Los siguientes correos presentan problemas por favor corrigelos y vuelve a intentar <br>'+ correos,
+        type:'error'
+    })
+ }
 $(document).ready(function () {
 
     /**
@@ -162,7 +176,7 @@ $(document).ready(function () {
                     title:'Exito',
                     text:'Notificación de prueba enviada correctamente.',
                     type:'success'
-                })
+                });
              
             }
         }); 
