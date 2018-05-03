@@ -25,8 +25,18 @@ Route.get('/login/google', 'Account/ExternalLogin.redirect')
 Route.get('/google/callback', 'Account/ExternalLogin.callback')
 Route.get('/game', 'Game/Guess.render').middleware('auth')
 Route.get('/medirRedes/:codigo', 'Redes/Medicion.medir')
-
 Route.post('/finRedes', 'Redes/Medicion.save')
+
+Route.get('/Redes/Medicion/identificar','Redes/Medicion.identificar')
+
+Route.post('/Redes/Medicion/medirPersona','Redes/Medicion.medirPersona')
+
+Route.get('/Acreditacion/Informe/pdf','Acreditacion/Informe.pdf')
+
+Route.get('/Redes/Visualizador/viewGraph','Redes/Visualizador.viewGraph')
+Route.post('/Redes/Visualizador/viewGraph','Redes/Visualizador.viewGraph')
+Route.get('/Redes/Visualizador/viewApps','Redes/Visualizador.viewApps')
+
 
 Route.get('users/:id', 'Account/UserController.profile').middleware('autenticacion')
 
@@ -36,6 +46,16 @@ Route.post('/login', 'Account/UserController.login')
 
 Route.get('/logout', 'Account/UserController.logout')
 
+Route.get('/Clima/Encuesta/index','Clima/Encuesta.index')
+Route.get('/Encuesta/Encuesta/intro','Encuesta/Encuesta.intro')
+Route.post('/Encuesta/Encuesta/intro','Encuesta/Encuesta.intro')
+
+Route.get('/Encuesta/Encuesta/index','Encuesta/Encuesta.index')
+Route.get('/Encuesta/Encuesta/instrumento','Encuesta/Encuesta.instrumento')
+Route.post('/Encuesta/Encuesta/instrumento','Encuesta/Encuesta.instrumento')
+Route.get('/Encuesta/Instrumento/putRespuesta','Encuesta/Instrumento.putRespuesta')
+Route.get('/Encuesta/Instrumento/cerrarInstrumento','Encuesta/Instrumento.cerrarInstrumento')
+Route.get('/Encuesta/Encuesta/fin','Encuesta/Encuesta.fin')
 
 Route.any('/:module/:controller/:action',  ({view ,request, response,params,auth, session}) => {
   
@@ -54,7 +74,7 @@ Route.any('/:module/:controller/:action',  ({view ,request, response,params,auth
    
     return controllerInstance.method.apply(controllerInstance.instance,[{view,request,response,params,auth, session}])
     
-}).middleware(['autenticacion'])
+}).middleware(['autenticacion:session'])
 
 
   

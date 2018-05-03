@@ -1,0 +1,212 @@
+@layout('layouts/horizontal')
+
+@section('scripts2')
+     <!-- KNOB JS -->
+        <!--[if IE]>
+        <script type="text/javascript" src="../plugins/jquery-knob/excanvas.js"></script>
+        <![endif]-->
+        <script src="/assets/plugins/jquery-knob/jquery.knob.js"></script>
+
+        <!-- Sparkline charts -->
+        <script src="/assets/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
+
+        <!--Chartist Chart-->
+        <script src="/assets/plugins/chartist/js/chartist.min.js"></script>
+        <script src="/assets/plugins/chartist/js/chartist-plugin-tooltip.min.js"></script>
+
+
+        <script>
+            $( document ).ready(function() {
+
+        var DrawSparkline = function() {
+            $('#dashboard-1').sparkline([5, 15, 80], {
+                type: 'pie',
+                width: '80',
+                height: '80',
+                sliceColors: ['#ff0000', '#ffff00','#009933']
+            });
+        }
+
+        DrawSparkline();
+
+        var resizeChart;
+        });
+    </script>
+    <script>
+        //Distributed series
+
+        new Chartist.Bar('#distributed-series', {
+        labels: ['Juan', 'Maria', 'Marco', 'Luis', 'Roberto', 'Rocio', 'Miguel'],
+        series: [20, 60, 120, 200, 180, 20, 10]
+        }, {
+        distributeSeries: true
+        });
+
+    </script>
+@endsection
+
+@section('pluginsCss2')
+        <link href="/assets/plugins/ede/infobox/infobox.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/plugins/ede/socialWidget/socialWidget.css" rel="stylesheet" type="text/css" />             
+         <link href="/assets/plugins/ede/progressbar/progressbar.css" rel="stylesheet" type="text/css" />    
+@endsection
+
+@section('content')
+
+
+<div class="row" >
+    <div class="col-md-3">
+        @!component('components.desempeno.widgetuser',datos=data,datamenu=datosMenu,persona=PersonaEde)
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            <div class="portlet">
+                <div class="portlet-heading bg-warning">
+                    <h3 class="portlet-title">
+                        {{datosProceso.nombre}}
+                    </h3>   
+                    <div class="portlet-widgets">
+                    
+                        <a data-toggle="collapse" data-parent="#accordion1" href="#bg-warning"><i class="mdi mdi-minus"></i></a>
+                    
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div id="bg-warning" class="panel-collapse collapse in">
+                    <div class="portlet-body">
+                        <div class="row">
+                           
+                        </div>
+                        <div class="row">
+                                @!component('components.desempeno.widgetetapa',datos=etapasProceso,idProceso=idProceso)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="portlet">
+                <div class="portlet-heading bg-warning">
+                    <h3 class="portlet-title">
+                        Mis Resultados
+                    </h3>
+                    <div class="portlet-widgets">
+                    
+                        <a data-toggle="collapse" data-parent="#accordion1" href="#bg-warning1"><i class="mdi mdi-minus"></i></a>
+                    
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div id="bg-warning1" class="panel-collapse collapse in">
+                    <div class="portlet-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Etapa</label>
+                                    <div class="col-md-10">
+                                        <select class="form-control">
+                                            <option>Midyear</option>
+                                            <option>Evaluación de Desempeño</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <hr/>
+                            </div>
+                            <br/>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div class="row">
+
+                        @!component('components.graficos.graKnob',datos=data)
+                            
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                @!component('components.graficos.graProgressBar',datos=data.barrasUC,titulo="Resultados Competencias")
+                            </div>
+                            <div class="col-md-6">
+                                 @!component('components.graficos.graProgressBar',datos=data.barrasMT,titulo="Resultados Metas")
+                            </div>
+
+                        </div>
+                        <div class="row pull-right">
+                        <div class="col-md-12">
+                        <button type="button" class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-bar-chart-o"></i> Ver Informe</button>
+                        </div>
+                        </div>
+                        <br/>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="portlet">
+                <div class="portlet-heading bg-warning">
+                    <h3 class="portlet-title">
+                        Mi Equipo
+                    </h3>
+                    <div class="portlet-widgets">
+                    
+                        <a data-toggle="collapse" data-parent="#accordion1" href="#bg-warning2"><i class="mdi mdi-minus"></i></a>
+                    
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div id="bg-warning2" class="panel-collapse collapse in">
+                    <div class="portlet-body">
+                        <div class="row">                          
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Etapa</label>
+                                    <div class="col-md-10">
+                                        <select class="form-control">
+                                            <option>Midyear</option>
+                                            <option>Evaluación de Desempeño</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                 @!component('components.desempeno.cardAvance',datos=data.avanceEQ)
+                            </div>
+                            <br/>
+                            <br/>
+                            <br/>
+                        </div>
+                        <div class="row">
+                            @!component('components.graficos.graKnob',datos=data)
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                @!component('components.graficos.graProgressBar',datos=data.barrasUCE,titulo="Resultados Competencias Equipo")
+                            </div>
+                            <div class="col-md-6">
+                                @!component('components.graficos.graProgressBar',datos=data.barrasMTE,titulo="Resultados Metas Equipo")
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="m-t-10">
+                                <div id="distributed-series" class="ct-chart ct-golden-section"></div>
+                            </div>
+                        </div>
+                        <div class="row pull-right">
+                            <div class="col-md-12">
+                            <button type="button" class="btn btn-success btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-binoculars"></i> Mis Jefaturas</button>
+                            <button type="button" class="btn btn-info btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-area-chart"></i> Informe Consolidado</button>
+                            <button type="button" class="btn btn-purple btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-bookmark"></i> Reportes Individuales</button>
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+@endsection
+
+

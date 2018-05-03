@@ -17,10 +17,8 @@
 
 @section('content')
 
-    @!component('components.breadcrumb',title="Colaboradores", pages= [
-        {nombre:"Instrumento",activa:false},
-        {nombre:"Instrumento",activa:true}
-    ])
+    @!component('components.breadcrumb',title="Colaboradores")
+    @!component('components.Core.botonera')
     <form id="formInstrumento" method="POST" action="/Instrumento/Instrumento/index">
     {{ csrfField() }}
     <input type="hidden" id="idOpinante" name="idOpinante"  />
@@ -28,7 +26,7 @@
     <input type="hidden" id="idPersona" name="idPersona"  />
     </form>
 
-        
+    
     @each(tipo in tipoOpinante.tipoOpinante)
         <div class="row">
             <div class="col-lg-12">
@@ -36,55 +34,84 @@
                     <div class="panel-heading">
                         <h3 class="panel-title">
                             @if(tipo.codigo == "AUTO")
-                                Autoevaluación
+                                Test de Evaluación
                             @else
                                 Colaboradores
                             @endif
                         </h3>
                     </div>
                     <div class="panel-body">
-                        <div class="row">
-                        
-                            <table class="table table-responsive">
-
-                                    <thead>
+                    
+                        <div class="">
+                            <table class="table table-colored-bordered table-hover" style="border: 2px solid #44515c">
+                                <thead style="background-color: #44515c">
                                     <tr>
-                                        <th>Identificador</th>
-                                        <th>Nombre</th>
                                         <th></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                        @each(persona in tipo.personas)
-                                        <tr>
+                                        <th>Instrumento</th>
+                                        <th>Estado</th>
                                         
+                                        <th>Acciones</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                 @each(persona in tipo.personas)
+                                    <tr>
+                                        <td rowspan="{{persona.instrumentos.length}}" style="vertical-align:middle;">
+                                            <div class="row text-center">
+                                                <div class="col-md-12">
+                                                    <img src="/assets/images/users/maleuser.png" alt="imagen" title="imagen" class="img-circle thumb-md" />  
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <h5 class="m-b-0 m-t-0">{{persona.nombres}} {{persona.apellidoPaterno}} {{persona.apellidoMaterno}}</h5>
+                                                    <p class="m-b-0">{{persona.identificador}}</p>
+                                                </div>									 
+                                            </div>
+                                        </td>
                                             
-                                            <td>{{persona.identificador}}</td>
-                                            <td>{{persona.nombres}} {{persona.apellidoPaterno}} {{persona.apellidoMaterno}}</td>
-                                            <td> 
-                                                <div style="text-align:right;">
-                                                    @each(instrumento in persona.instrumentos)
-                                                        @if(instrumento.codigoEstado=="FINALIZADO")
-                                                            <button type="button" id="{{instrumento.idOpinante}}_{{instrumento.codigoTipoInstrumento}}" class="btn btn-info waves-effect waves-light disabled" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{instrumento.nombreEstado}}"> <span>{{instrumento.codigoTipoInstrumento}}</span> </button>
+                                            @each(instrumento in persona.instrumentos)
+                                                @if(!$loop.first)
+                                                <tr>
+                                                @endif
+                                                
+                                                    <td>
+                                                        @if(instrumento.codigoTipoInstrumento=="TCO")
+                                                            <p class="m-0 text-uppercase font-bold font-secondary text-overflow" title="Statistics">{{instrumento.nombreInstrumento}}</p>
                                                         @else
-                                                            <button type="button" id="{{instrumento.idOpinante}}_{{instrumento.codigoTipoInstrumento}}_{{$parent.persona.id}}" class="btn btn-info waves-effect waves-light bInstrumento" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{instrumento.nombreEstado}}"> <span>{{instrumento.codigoTipoInstrumento}}</span> </button>
+                                                            <p class="m-0 text-uppercase font-bold font-secondary text-overflow" title="Statistics">{{instrumento.codigoTipoInstrumento}}</p>
                                                         @endif
-                                                        
-                                                    @endeach
-                                                    </div>
+                                                    </td>
+                                                    <td>
+                                                        <span data-plugin="counterup">{{instrumento.nombreEstado}}</span>
+                                                    </td>
+                                                    
+                                                    <td>
+                                                        @if(instrumento.codigoEstado=="FINALIZADO")
+                                                                <button type="button" id="{{instrumento.idOpinante}}_{{instrumento.codigoTipoInstrumento}}" class="btn btn-info waves-effect waves-light disabled" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{instrumento.nombreEstado}}"> <span>Entrar</span> </button>
+                                                        @else
+                                                            <button type="button" id="{{instrumento.idOpinante}}_{{instrumento.codigoTipoInstrumento}}_{{$parent.persona.id}}" class="btn btn-info waves-effect waves-light bInstrumento" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{instrumento.nombreEstado}}"> <span>Entrar</span> </button>
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                                
+                                            @else
+                                            <td>
+                                                No hay instrumentos cargados.
                                             </td>
                                             
-                                        </tr>
-                                        @endeach
-                                    
-                                    </tbody>
-                                </table>
-                    
-                                
-                        
-                        
+                                            </tr>
 
-                        </div><!--<div class="row">-->    
+                                            @endeach
+                                        
+                                        
+                                       
+                                    @endeach
+                                </tbody>
+                            </table>
+                        </div>
+                                
+                     
+                          
 
                         
                         
@@ -95,4 +122,44 @@
             
         </div><!--<div class="row">-->
     @endeach
+<style>
+@media(max-width:768px)
+{
+
+	/* Force table to not be like tables anymore */
+	table, thead, tbody, th, td, tr { 
+		display: block; 
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility) */
+	thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	tr { border: 1px solid #ccc; }
+	
+	td { 
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 50%; 
+        text-align:center;
+	}
+	
+	td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+	
+}
+</style>
 @endsection

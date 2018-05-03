@@ -1,0 +1,19 @@
+@each(data in datos)
+<div class="{{data.columna}}">
+    <div class="info-box bg-{{data.fondo}}">
+            <span class="info-box-icon text-white"><i class="{{data.icono}}"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text text-white">{{data.titulo}}</span>
+                <span class="info-box-number text-white">{{data.numero}}</span>
+
+                <div class="progress">
+                <div class="progress-bar" style="width: {{data.avance}}"></div>
+                </div>
+                <span class="progress-description text-white">
+                    {{data.subtitulo}}
+                    </span>
+            </div>
+    </div>
+</div>
+ @endeach

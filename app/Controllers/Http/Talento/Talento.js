@@ -141,9 +141,9 @@ class Talento {
         var cuadrante4 = cuadrantes[3];
         var cuadrante5 = cuadrantes[4];
         var cuadrante6 = cuadrantes[5];
-       var cuadrante7 = cuadrantes[6];
+        var cuadrante7 = cuadrantes[6];
         var cuadrante8 = cuadrantes[7];
-       var cuadrante9 = cuadrantes[8];
+        var cuadrante9 = cuadrantes[8];
 
 
        var all2 =  session.get('personaLogueada')
@@ -194,7 +194,7 @@ class Talento {
        //-----------------------------------------------------------------------------------
        var resultadoClasificaciones = await data.execApi(request.hostname(),'/Talento/Talento/obtenerClasificaciones',obj5);
        var clasificacionesPorEmpresa = resultadoClasificaciones.body;
-       
+
         return view.render('talento/nineBoxColaboradores', {personas:personas,cuadrante1:cuadrante1,cuadrante2:cuadrante2,cuadrante3:cuadrante3,cuadrante4:cuadrante4,cuadrante5:cuadrante5,cuadrante6:cuadrante6,cuadrante7:cuadrante7,cuadrante8:cuadrante8,cuadrante9:cuadrante9,colaboradoresEva:colaboradoresEva,cargosPorEmpresa:cargosPorEmpresa,clasificacionesPorEmpresa:clasificacionesPorEmpresa});
         
     }

@@ -1,0 +1,305 @@
+
+@layout('layouts/nomenu')
+
+ <!-- DataTables -->
+@section('pluginsCss')        
+    <link href="/assets/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css" rel="stylesheet" />
+        
+    <link href="/assets/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="/assets/plugins/vis/vis.css" rel="stylesheet" type="text/css" />
+
+    <link href="/assets/plugins/spinkit/spinkit.css" rel="stylesheet" />
+    <style type="text/css">
+        #mynetwork {
+            width: 100%;
+            height: 700px;
+            border: 1px solid lightgray;
+        }
+
+        #loadingBar {
+            position:absolute;
+            top:0px;
+            left:0px;
+            width: 100%;
+            height: 900px;
+            background-color:rgba(200,200,200,0.8);
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -ms-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+            opacity:1;
+        }
+        #wrapper {
+            position:relative;
+            width:900px;
+            height:900px;
+        }
+        .sk-cube:before{
+            background-color:#797979 !important;
+        }
+
+      
+    </style>
+@endsection
+@section('scripts')
+       <script src="/assets/plugins/vis/hammer.js" type="text/javascript"></script>
+       <script src="/assets/plugins/vis/vis.js" type="text/javascript"></script>
+       <script type="text/javascript">
+
+       // create an array with edges
+        var edges = new vis.DataSet([
+                
+        ]);
+    
+        var nodes = new vis.DataSet([
+               @each(node in graph.nodes)
+                    {id:{{node.id}},label:"{{node.properties.nombre}} {{node.properties.apellidoPaterno}}", group:{{node.id}}, widthConstraint: Math.floor(Math.random() * 100)+100 },
+               @endeach 
+        ]);
+
+       $(document).ready(function(){
+           
+            $(".footer").hide();
+
+            var clusterIndex = 0;
+            var clusters = [];
+            var lastClusterZoomLevel = 3;
+            var clusterFactor = 20;
+
+            // create a network
+            var container = document.getElementById('mynetwork');
+
+            // provide the data in the vis format
+            var data = {
+                nodes: nodes,
+                edges: edges
+            };
+            
+            var options = { 
+                nodes: {
+                    shape: 'circle',
+                    widthConstraint:{
+                        minimum:90,
+                        maximum:90
+                    },
+                    font: {
+                        size: 15
+                    },
+                    
+                    shadow:false
+                },
+                edges: {
+                    width: 1,
+                    shadow:false,
+                    smooth:{type:"continous"}
+                },
+                physics:{
+                    enabled:true,
+                    barnesHut:{
+                        gravitationalConstant:-300000,
+                        centralGravity:1,
+                        springLength:300,
+                        springConstant:0.001
+                    }
+                },
+                scale: 2.0
+            };
+
+            // initialize your network!
+            var network = new vis.Network(container, data, options);
+
+            network.on("stabilizationProgress", function(params) {
+                
+            });
+
+            network.once("stabilizationIterationsDone", function() {
+                
+                document.getElementById('loadingBar').style.opacity = 0;
+                // really clean the dom element
+                setTimeout(function () {
+                    document.getElementById('loadingBar').style.display = 'none';
+                    loadEdges();
+                }, 500);
+            });
+
+            
+            /*
+            network.once('initRedraw', function() {
+                if (lastClusterZoomLevel === 0) {
+                    lastClusterZoomLevel = network.getScale();
+                }
+            });
+
+            network.on('zoom', function (params) {
+                if (params.direction == '-') {
+                    if (params.scale < lastClusterZoomLevel*clusterFactor) {
+                        makeClusters(params.scale);
+                        lastClusterZoomLevel = params.scale;
+                    }
+                }
+                else {
+                    openClusters(params.scale);
+                }
+            });
+
+            
+            // if we click on a node, we want to open it up!
+            network.on("selectNode", function (params) {
+                if (params.nodes.length == 1) {
+                    if (network.isCluster(params.nodes[0]) == true) {
+                        network.openCluster(params.nodes[0])
+                    }
+                }
+            });
+
+
+            // make the clusters
+            function makeClusters(scale) {
+                var clusterOptionsByData = {
+                    processProperties: function (clusterOptions, childNodes) {
+                        clusterIndex = clusterIndex + 1;
+                        var childrenCount = 0;
+                        for (var i = 0; i < childNodes.length; i++) {
+                            childrenCount += childNodes[i].childrenCount || 1;
+                        }
+                        clusterOptions.childrenCount = childrenCount;
+                        clusterOptions.label = "# " + childrenCount + "";
+                        clusterOptions.font = {size: childrenCount*5+30}
+                        clusterOptions.id = 'cluster:' + clusterIndex;
+                        clusters.push({id:'cluster:' + clusterIndex, scale:scale});
+                        return clusterOptions;
+                    },
+                    clusterNodeProperties: {borderWidth: 3, shape: 'database', font: {size: 30}}
+                }
+                network.clusterOutliers(clusterOptionsByData);
+                if (document.getElementById('stabilizeCheckbox').checked === true) {
+                    // since we use the scale as a unique identifier, we do NOT want to fit after the stabilization
+                    network.setOptions({physics:{stabilization:{fit: false}}});
+                    network.stabilize();
+                }
+            }
+
+            // open them back up!
+            function openClusters(scale) {
+                var newClusters = [];
+                var declustered = false;
+                for (var i = 0; i < clusters.length; i++) {
+                    if (clusters[i].scale < scale) {
+                        network.openCluster(clusters[i].id);
+                        lastClusterZoomLevel = scale;
+                        declustered = true;
+                    }
+                    else {
+                        newClusters.push(clusters[i])
+                    }
+                }
+                clusters = newClusters;
+                if (declustered === true && document.getElementById('stabilizeCheckbox').checked === true) {
+                    // since we use the scale as a unique identifier, we do NOT want to fit after the stabilization
+                    network.setOptions({physics:{stabilization:{fit: false}}});
+                    network.stabilize();
+                }
+            }
+            */
+
+
+
+            function loadEdges()
+            {
+                @each(node in graph.nodes)
+                    //nodes.add({id:{{node.id}},label:"{{node.properties.nombre}} {{node.properties.apellidoPaterno}}" })
+                @endeach 
+                var time = 10;
+               
+                @each(relacion in graph.edges)
+                time = time + 5;
+                
+                setTimeout(function(){ 
+                    nuevaRelacion({{relacion.startNode}}, {{relacion.endNode}});
+                }, time);
+               @endeach
+            }
+
+            function nuevaRelacion(start, end)
+            {
+                //console.log(a, b);
+                //console.log(edges);
+                
+
+                edges.add({
+                    from:start,
+                    to:end,
+                    arrows:'to',
+                    //label:"{{relacion.type}}",
+                    length:300 
+                });
+            }
+
+       });
+
+       
+            
+</script>
+@endsection
+@section('content')
+
+    <div class="row" style="margin-top: -20px;">
+        <div class="col-lg-12" style="margin-bottom: 5px;">
+                        <form action="/Redes/Visualizador/viewGraph" method="POST" name="form">
+                            {{ csrfField() }}
+                            <input id="idAplicacion" name="idAplicacion" value="{{idAplicacion}}" type="hidden">
+                            <div class="col-md-2">
+                                <strong>Filtrar por:</strong> 
+                                &nbsp; Nombre 
+                                &nbsp;&nbsp;
+                            </div>
+                            <div class="col-md-4">
+                            
+                                <select name="id" class="form-control">
+                                    <option value=0>--Todos--</option>
+                                    @each(nodep in participantes.nodes)
+                                        
+                                        <option value="{{nodep.properties.codigo}}">{{nodep.properties.nombre}} {{nodep.properties.apellidoPaterno}}</option>
+                                    @endeach 
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">    
+                                &nbsp;&nbsp;
+                                <input type="radio" value=0 name="sentido"> &nbsp;Ambos Sentidos
+                                &nbsp;&nbsp;&nbsp;
+                                <input type="radio" value=1 name="sentido"> &nbsp;Lo conocen
+                                &nbsp;&nbsp;&nbsp;
+                                <input type="radio" value=2 name="sentido"> &nbsp;A quién conoce
+                                &nbsp;&nbsp;&nbsp;
+                                <input type="submit" value="Filtrar" name="filtrar" class="btn btn-sm btn-primary">
+                            </div>
+                        </form>                        
+                    </div>
+        <div class="col-sm-12">
+            <div class="card-box table-responsive"> 
+                <h4 class="m-t-0 header-title">
+                    <b>Redes para la Innovación</b>
+                </h4>
+                    <!--p class="text-muted font-14 m-b-30">
+                        Redes de Energía
+                    </p-->
+                   
+                    <div id="mynetwork"></div>
+                    <div id="loadingBar">
+                        <div  class="sk-folding-cube">
+                                        <div class="sk-cube1 sk-cube"></div>
+                                        <div class="sk-cube2 sk-cube"></div>
+                                        <div class="sk-cube4 sk-cube"></div>
+                                        <div class="sk-cube3 sk-cube"></div>
+                                    </div>
+                        <div style="width:100%;text-align:center;">Cargando</div>
+                       
+                    </div>
+            </div> 
+        </div>
+    </div>
+  
+        
+@endsection

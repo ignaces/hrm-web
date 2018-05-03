@@ -1,106 +1,60 @@
-function isNumeric(n) {
-    return !isNaN(parseFloat(n)) && isFinite(n);
-}
 
 
-var hex2rgb = function (hex) {
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result ? [
-        parseInt(result[1], 16),
-        parseInt(result[2], 16),
-        parseInt(result[3], 16)
-    ] : null;
-};
 
-var rgb2hex = function (rgb) {
-    return "#" + ((1 << 24) + (rgb[0] << 16) + (rgb[1] << 8) + rgb[2]).toString(16).slice(1);
-};
-
-var interpolateColor = function (color1, color2, factor) {
-    if (arguments.length < 3) { factor = 0.5; }
-    var result = color1.slice();
-    for (var i = 0; i < 3; i++) {
-        result[i] = Math.round(result[i] + factor * (color2[i] - color1[i]));
-    }
-    return result;
-};
-
-
-var source = [
-        { id: 1, parentId: null, name: "Amber McKenzie", salary: "$10000",  image: "images/f-11.jpg" },
-        { id: 2, parentId: 1, name: "Ava Field", salary: "$5000", image: "images/f-10.jpg" },
-        { id: 3, parentId: 1, name: "Evie Johnson", salary: "$8000", image: "images/f-9.jpg" },
-        { id: 4, parentId: 1, name: "Paul Shetler", salary: "$9000", image: "images/f-5.jpg" },
-        { id: 5, parentId: 2, name: "Rebecca Francis", salary: "$3000", image: "images/f-1.jpg" },
-        { id: 6, parentId: 2, name: "Riley Bray", salary: "$4000", image: "images/f-2.jpg" },
-        { id: 7, parentId: 4, name: "Max Ford", salary: "$6000", image: "images/f-4.jpg" },
-        { id: 8, parentId: 4, name: "Callum Whitehouse", salary: "$7000", image: "images/f-3.jpg" }
-];
-
-var arregloapem = [];
-$(".aa").each(function(){
-    arregloapem.push($(this).attr('value'));
-});
-
-var object = {};
-for(i = 0; i < arregloapem.length; i++){
-    //object += arregloapem[i];
-    object = arregloapem[i];
-}
-//alert(object);
-
-
-var start = hex2rgb("#008000");
-var end = hex2rgb("#cc3300");
-var max = null;
-var min = null;
-var factor = null;
-
-function setFactor(chart) {
-    max = null;
-    min = null;
-    for (var id in chart.nodes) {
-        var node = chart.nodes[id];
-        if (node.data["salary"]) {
-            var salary = node.data["salary"].replace("$", "");
-            if (isNumeric(salary)) {
-                if (max == null && min == null) {
-                    max = salary;
-                    min = salary;
+            var peopleElement = document.getElementById("people");
+            var badges = "<i class='fa fa-plane fa-2x m-r-5 text-red'></i>\
+                            <i class='fa fa-refresh fa-2x m-r-5 text-primary'></i>\
+                            <i class='fa fa-warning fa-2x m-r-5 text-warning'></i>\
+                            <i class='fa fa-star fa-2x m-r-5 text-success'></i>";
+            var orgChart = new getOrgChart(peopleElement, {
+                theme: "ula",
+                enableGridView: true,
+                primaryFields: ["Atributos","Nombre","Cargo"],               
+                renderNodeEvent: renderNodeHandler,
+                photoFields:["Imagen"],
+                enableZoom:false,
+                enableExportToImage: true,
+                dataSource: [
+			        { id: 1, parentId: null,Nombre:"Andrés Santa María",Cargo:"Lacayo", Atributos: badges,  Imagen: "/assets/images/users/avatar-2.jpg" },
+			        { id: 2, parentId: 1, Nombre: "Ava Field", Cargo: "Paper goods machine setter", Atributos: badges,Imagen: "/assets/images/users/avatar-1.jpg" },
+			        { id: 3, parentId: 1, Nombre: "Evie Johnson", Cargo: "Employer relations representative",  Atributos: '<p></p>',Imagen: "/assets/images/users/avatar-3.jpg" },
+			        { id: 4, parentId: 1, Nombre: "Paul Shetler", Cargo: "Teaching assistant",  Atributos: badges, Imagen: "/assets/images/users/avatar-4.jpg" },
+			        { id: 5, parentId: 2, Nombre: "Rebecca Francis", Cargo: "Welding machine setter",  Atributos: badges, Imagen: "/assets/images/users/avatar-5.jpg" },
+			        { id: 6, parentId: 2, Nombre: "Rebecca Randall", Cargo: "Optometrist",  Atributos: badges, Imagen: "/assets/images/users/avatar-6.jpg" },
+			        { id: 7, parentId: 2, Nombre: "Spencer May", Cargo: "System operator",  Atributos: badges, Imagen: "/assets/images/users/avatar-7.jpg" },
+			        { id: 8, parentId: 6, Nombre: "Max Ford", Cargo: "Budget manager",  Atributos: badges, Imagen: "/assets/images/users/avatar-8.jpg" },
+			        { id: 9, parentId: 7, Nombre: "Riley Bray", Cargo: "Structural metal fabricator",  Atributos: badges, Imagen: "/assets/images/users/avatar-9.jpg" },
+			        { id: 10, parentId: 7, Nombre: "Callum Whitehouse", Cargo: "Radar controller",  Atributos: badges, Imagen: "/assets/images/users/avatar-10.jpg" }
+                ],
+                boxSizeInPercentage: {
+                    minBoxSize: {
+                        width: 5,
+                        height: 5
+                    },
+                    boxSize: {
+                        width: 20,
+                        height: 20
+                    },
+                    maxBoxSize: {
+                        width: 100,
+                        height: 100
+                    }
+                },
+                customize: {
+                    "2":{color:"green"},
+                    "3":{color:"orange"},
+                    "4":{color:"yellow"},
+                    "5":{color:"darkred"},
+                    "6":{color:"lightgreen"},
+                    "7":{color:"lightgreen"}
                 }
-                else {
-                    max = Math.max(salary, max);
-                    min = Math.min(salary, min);
+            });
+
+            function renderNodeHandler(sender, args) {
+                for (i = 0; i < args.content.length; i++) {
+                    if (args.content[i].indexOf(args.node.data["Atributos"]) != -1) {
+                        args.content[i] = "<foreignObject x='200' y='80' width='80%' height='20px'>" + args.node.data["Atributos"] + "</foreignObject>";
+                    }
                 }
             }
-        }
-    }
-    factor = (max - min) / 100;
-}
-
-var peopleElement = document.getElementById("people");
-var orgChart = new getOrgChart(peopleElement, {
-    primaryFields: ["salary", "name"],
-    photoFields: ["image"],
-    enableZoom: false,
-    enableEdit: false,
-    enableDetailsView: false,
-    dataSource: source,
-    renderNodeEvent: renderNodeEventHandler
-});        
-
-function renderNodeEventHandler(sender, args) {
-    var salary = args.node.data["salary"].replace("$", "");
-    if (!isNumeric(salary)) {
-        return;
-    }
-
-    if (!factor) {
-        setFactor(sender);
-    }
-
-    var val = (salary - min) / factor;
-    var rgb = interpolateColor(start, end, val / 100);
-    var hex = rgb2hex(rgb);
-    args.content[1] = args.content[1].replace("rect", "rect style='fill: " + hex + "; stroke: " + hex + ";'")
-}
+    

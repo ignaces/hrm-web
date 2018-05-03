@@ -13,7 +13,7 @@ class Portada {
 
         var obj = {
             "idProceso":""
-        
+            
         };
 
         var objTalento = {
@@ -33,13 +33,23 @@ class Portada {
         //var rstl = session.put('totalCol',talentos.Total)
         //console.log(rstl);
        
+        obj={
+            idProceso:"",
+            idEstado:"1"
+        }
+        
+        /*var reultEde=await data.execApi(request.hostname(),'/Desempeno/Proceso/getProcesos',obj);
+        var procesosEde =reultEde.body.data;*/
 
         var user={usuario:auth.user}
         
         var persona = session.get('personaLogueada')
+    
        
+        var menu = session.get('usuario_roles_menu');
+        return view.render('core/welcome',  {user,procesos,persona,menu,talentos,condicion});
 
-        return view.render('core/welcome',  {user,procesos,persona,talentos,condicion});
+        
     }   
 }
 

@@ -42,6 +42,13 @@
         </div>
 
         <div class="row">
+                @!component('components.Acreditacion.cajaAcreditacion',titulo = "Evaluación", procesos=procesos)
+        </div>
+        <!--
+        <div class="row">
+             @!component('components.Desempeno.cajaDesempeno',titulo = "Gestión de Desempeño", procesos=procesosEde)
+        </div>  
+        -->
                 @!component('components.Acreditacion.cajaAcreditacion',titulo = "Acreditación",titulo2 = "Gestión de Talento", procesos=procesos, talentos=talentos,condicion=condicion)
         </div>     
         
@@ -58,14 +65,14 @@
 
                     <div class="clearfix"></div>
                     <div class="inbox-widget">
-                        
+                        <!--
                         <a class="btn btn-info btn-rounded btn-block" href="/Documentos"><i class="mdi mdi-library-books"></i> <span>Documentos</span> </a>
 
                         <a class="btn btn-info btn-rounded btn-block" href="#" onclick="calendario();">
                             <i class="mdi mdi-calendar-clock"></i> <span>Calendario</span>
                         </a>
                         <a class="btn btn-info btn-rounded btn-block" href="/files/FAQ.pdf" target="_blank"><i class="mdi mdi-help-circle"></i> <span>Preguntas Frecuentes</span> </a>
-                        
+                        -->
                     </div>
                 </div>
 
