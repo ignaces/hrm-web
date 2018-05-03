@@ -11,7 +11,8 @@ module.exports = {
       dataTable:['./client/src/Talento/dataTable.js'],
       drag:['./client/src/Talento/drag.js'],
       filtroClasificaciones:['./client/src/Talento/filtroClasificaciones.js'],
-      organigrama:['./client/src/Talento/organigrama.js']
+      organigrama:['./client/src/Talento/organigrama.js'],
+      curriculum:['./client/src/Talento/curriculum.js']
     },
   output: {
     filename: '[name].min.js',

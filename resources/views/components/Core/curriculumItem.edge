@@ -1,0 +1,13 @@
+@each(i in items)
+<div class="portlet-body">
+    <div class="">
+        <h5 class="text-custom m-b-5">{{i.titulo}}</h5>
+        <p class="m-b-0">{{i.bajada}}</p>
+        <p><b>{{i.desde}} - {{i.hasta}} </b></p>
+        <p class="text-gray m-b-0">
+            {{i.descripcion}}
+        </p>
+        <hr>
+    </div>
+</div>
+@endeach

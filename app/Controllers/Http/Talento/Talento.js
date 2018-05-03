@@ -19,6 +19,8 @@ class Talento {
             "idTalentoProceso":idTalentoProceso,
             "idOpinante":idOpinante
         };
+
+        console.log (obj)
         var result = await data.execApi(request.hostname(),'/Talento/Talento/getFindTalentoProceso',obj);
         var total = result.body;
         //-----------------------------------COUNT(ColaboradoresClasificados)------------------
@@ -246,6 +248,67 @@ class Talento {
         
     }
 
+    async fichaTalento ({view,request, response, auth, session}) {
+
+        var persona =  session.get('personaLogueada')
+        var obj = {
+            "idPersona":persona.id
+        };
+
+        var result = await data.execApi(request.hostname(),'/Talento/Talento/getCurriculumCategoria',obj);
+        var categoria = result.body;
+
+        var obj2 = {
+            "idPersona" : persona.id
+        };
+
+        var result2 = await data.execApi(request.hostname(),'/Talento/Talento/getCurriculumPersona',obj2);
+        var curriculum = result2.body;
+        var objCurriculum = [];
+
+        categoria.forEach(element => {
+
+            var objItems = [];
+
+            for(var c in curriculum){
+                if(curriculum[c]["id"] == element.id)
+                {
+                    objItems.push(curriculum[c]);
+                }
+            }
+
+            var objList = {
+                "nombreCategoria": element.nombre,
+                "idCategoria": element.id,
+                "listItems": objItems,
+                "totalItems": objItems.length
+            }
+
+            //console.log(objList)
+            //console.log(persona)
+            objCurriculum.push(objList)
+        });
+        return view.render('talento/fichaTalento', { objCurriculum:objCurriculum, persona:persona});
+    }
+
+    async addCurriculumPersona ({view,request, response, auth, session}) {
+
+        var persona =  session.get('personaLogueada')
+        var obj = {
+            "titulo": request.input("titulo"),
+            "bajada":request.input("bajada"),
+            "desde":request.input("desde"),
+            "hasta":request.input("hasta"),//"2010-01-01",
+            "descripcion":request.input("descripcion"),
+            "idPersona":persona.id,
+            "idPersonaCurriculumCategoria":request.input("idPersonaCurriculumCategoria")
+        };
+        
+        var result = await data.execApi(request.hostname(),'/Talento/Talento/addCurriculumPersona',obj);
+        var experiencia = result.body;
+        
+        return "mensaje:OK";
+    }
 }
 
 module.exports = Talento
