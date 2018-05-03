@@ -49,15 +49,61 @@
 
        // create an array with edges
         var edges = new vis.DataSet([
-                
+            //@each(edge in graph.edges)
+            //    {from: {{edge.startNode}}, to: {{edge.endNode}}, label: "{{edge.type}}", font: {align: 'bottom'} },
+            //@endeach  
         ]);
-    
-        var nodes = new vis.DataSet([
+        
+        var area = [];
+        var areaIndex = 0;
+        @each(node in graph.nodes)
+            if("{{node.properties.area}}" != "undefined")
+            {
+                area[areaIndex] = "{{node.properties.area}}";
+                areaIndex++;
+            }
+            
+        @endeach 
+        
+        //console.log(area);
+        
+        if(area.length>0)
+        {
+            var nodes = new vis.DataSet([
+               @each(node in graph.nodes)
+                    {id:{{node.id}},label:"{{node.properties.nombre}} {{node.properties.apellidoPaterno}}", color:"{{node.properties.color}}", widthConstraint: Math.floor(Math.random() * 100)+100 },
+               @endeach 
+            ]);
+
+            @each(node in graph.nodes)
+                var nodoColor = "{{node.properties.color}}";
+                nodoColor = nodoColor.replace("#", "");
+
+                $("#"+nodoColor).show();
+            @endeach 
+        }
+        else
+        {
+            var nodes = new vis.DataSet([
                @each(node in graph.nodes)
                     {id:{{node.id}},label:"{{node.properties.nombre}} {{node.properties.apellidoPaterno}}", group:{{node.id}}, widthConstraint: Math.floor(Math.random() * 100)+100 },
                @endeach 
-        ]);
+            ]);
 
+        }
+        
+            // legend
+            /*
+            var mynetwork = document.getElementById('mynetwork');
+            var x = - mynetwork.clientWidth / 2 + 50;
+            var y = - mynetwork.clientHeight / 2 + 50;
+            var step = 70;
+            nodes.add({id: 1000, x: mynetwork.clientWidth*(-1), y: y, label: 'Internet', group: 'internet', value: 1, fixed: true });
+            nodes.add({id: 1001, x: x, y: y + step, label: 'Switch', group: 'switch', value: 1, fixed: true,  physics:false});
+            nodes.add({id: 1002, x: x, y: y + 2 * step, label: 'Server', group: 'server', value: 1, fixed: true,  physics:false});
+            nodes.add({id: 1003, x: x, y: y + 3 * step, label: 'Computer', group: 'desktop', value: 1, fixed: true,  physics:false});
+            nodes.add({id: 1004, x: x, y: y + 4 * step, label: 'Smartphone', group: 'mobile', value: 1, fixed: true,  physics:false});        
+            */
        $(document).ready(function(){
            
             $(".footer").hide();
@@ -66,6 +112,8 @@
             var clusters = [];
             var lastClusterZoomLevel = 3;
             var clusterFactor = 20;
+
+            
 
             // create a network
             var container = document.getElementById('mynetwork');
@@ -123,6 +171,11 @@
                 }, 500);
             });
 
+            if({{graph.nodes.length}} == 0)
+            {
+                $("#loadingBar").hide();
+                
+            }
             
             /*
             network.once('initRedraw', function() {
@@ -216,14 +269,14 @@
                 time = time + 5;
                 
                 setTimeout(function(){ 
-                    nuevaRelacion({{relacion.startNode}}, {{relacion.endNode}});
+                    nuevaRelacion({{relacion.startNode}}, {{relacion.endNode}}, "{{relacion.type}}", "bottom");
                 }, time);
                @endeach
             }
 
-            function nuevaRelacion(start, end)
+            function nuevaRelacion(start, end, nombreRelacion, ubicacion)
             {
-                //console.log(a, b);
+                //console.log(start, end, nombreRelacion);
                 //console.log(edges);
                 
 
@@ -231,7 +284,8 @@
                     from:start,
                     to:end,
                     arrows:'to',
-                    //label:"{{relacion.type}}",
+                    label: nombreRelacion,
+                    font: {align: ubicacion},
                     length:300 
                 });
             }
@@ -249,30 +303,83 @@
                         <form action="/Redes/Visualizador/viewGraph" method="POST" name="form">
                             {{ csrfField() }}
                             <input id="idAplicacion" name="idAplicacion" value="{{idAplicacion}}" type="hidden">
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <strong>Filtrar por:</strong> 
-                                &nbsp; Nombre 
-                                &nbsp;&nbsp;
                             </div>
-                            <div class="col-md-4">
+                            
+                            <div class="col-md-1 align-middle">
+                                Participante 
+                            </div>
+                            
+                            <div class="col-md-2">
                             
                                 <select name="id" class="form-control">
                                     <option value=0>--Todos--</option>
                                     @each(nodep in participantes.nodes)
+                                        @if(nodep.properties.codigo == idPersona)
                                         
-                                        <option value="{{nodep.properties.codigo}}">{{nodep.properties.nombre}} {{nodep.properties.apellidoPaterno}}</option>
+                                            <option value="{{nodep.properties.codigo}}" selected="selected">{{nodep.properties.nombre}} {{nodep.properties.apellidoPaterno}}</option>
+                                        
+                                        @else
+                                        
+                                            <option value="{{nodep.properties.codigo}}">{{nodep.properties.nombre}} {{nodep.properties.apellidoPaterno}}</option>
+                                        
+                                        @endif
                                     @endeach 
                                 </select>
                             </div>
 
-                            <div class="col-md-6">    
-                                &nbsp;&nbsp;
-                                <input type="radio" value=0 name="sentido"> &nbsp;Ambos Sentidos
-                                &nbsp;&nbsp;&nbsp;
-                                <input type="radio" value=1 name="sentido"> &nbsp;Lo conocen
-                                &nbsp;&nbsp;&nbsp;
-                                <input type="radio" value=2 name="sentido"> &nbsp;A quién conoce
-                                &nbsp;&nbsp;&nbsp;
+                            <div class="col-md-1">
+                                Pregunta  
+                            </div>
+
+                            <div class="col-md-3">  
+                                <select name="relacion" class="form-control">
+                                    <option value=0>--Todos--</option>
+                                    @each(nodepr in preguntas.preguntas)
+                                        @if(nodepr.relacion == idRelacion)
+                                        
+                                            <option value="{{nodepr.relacion}}" selected="selected">{{nodepr.pregunta}}</option>
+                                        
+                                        @else
+                                        
+                                            <option value="{{nodepr.relacion}}">{{nodepr.pregunta}}</option>
+                                        
+                                        @endif
+                                    @endeach 
+                                </select>
+                                
+                            </div>
+
+                            <div class="col-md-1">
+                                Sentido   
+                            </div>
+
+                            <div class="col-md-2">    
+                                <select name="sentido" class="form-control">
+                                    @if(sentido == 0)
+                                        <option value=0 selected="selected">Ambos</option>
+                                    @else
+                                        <option value=0>Ambos</option>
+                                    @endif
+                                    
+                                    @if(sentido == 2)
+                                        <option value=2 selected="selected">Desde</option>
+                                    @else
+                                        <option value=2>Desde</option>
+                                    @endif   
+
+                                    @if(sentido == 1)
+                                        <option value=1 selected="selected">Hacia</option>
+                                    @else
+                                        <option value=1>Hacia</option>
+                                    @endif
+                                   
+                                </select>
+                                
+                            </div>
+
+                            <div class="col-md-1">
                                 <input type="submit" value="Filtrar" name="filtrar" class="btn btn-sm btn-primary">
                             </div>
                         </form>                        
@@ -297,7 +404,49 @@
                         <div style="width:100%;text-align:center;">Cargando</div>
                        
                     </div>
+            <div class="col-lg-12">
+                &nbsp;
+            </div>
+            <div class="row">
+
+                <div class="col-lg-3">
+                    <div class="col-md-12 text-white small" style="background-color: #00ed81; display: none;" id="00ed81">Finanzas</div>
+
+                    <div class="col-md-12 text-white small" style="background-color: #6acffa; display: none;" id="6acffa">Operaciones</div> 
+                
+                    <div class="col-md-12 text-white small" style="background-color: #cc0000; display: none;" id="cc0000">Enabling teams (internos)</div> 
+
+                    <div class="col-md-12 text-white small" style="background-color: #473f8e; display: none;" id="473f8e">Breeding - MSP</div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="col-md-12 text-white small" style="background-color: #6dc066; display: none;" id="6dc066">Planning & Customer Care</div> 
+
+                    <div class="col-md-12 text-white small" style="background-color: #f090f8; display: none;" id="f090f8">Producción Vegs</div> 
+
+                    <div class="col-md-12 text-white small" style="background-color: #ff4040; display: none;" id="ff4040">Calidad</div> 
+
+                    <div class="col-md-12 text-white small" style="background-color: #2f8ca8; display: none;" id="2f8ca8">Trade & Compliance</div> 
+                </div>
+                <div class="col-lg-3"> 
+                    <div class="col-md-12 text-white small" style="background-color: #66cdaa; display: none;" id="66cdaa">Otro</div> 
+
+                    <div class="col-md-12 text-white small" style="background-color: #efbc1a; display: none;" id="efbc1a">Production Research</div> 
+
+                    <div class="col-md-12 text-white small" style="background-color: #c6e2ff; display: none;" id="c6e2ff">Enabling teams con interacción con externos (Compras, Regulatorio, Asuntos Corporativos)</div> 
+
+                    <div class="col-md-12 text-white small" style="background-color: #d1a795; display: none;" id="d1a795">Comercial - Ventas & TD</div> 
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="col-md-12 text-white small" style="background-color: #976ddb; display: none;" id="976ddb">Producción RC</div> 
+
+                    <div class="col-md-12 text-white small" style="background-color: #c43081; display: none;" id="c43081">Comercial - Marketing</div> 
+
+                </div>
+            
+
             </div> 
+        
         </div>
     </div>
   
