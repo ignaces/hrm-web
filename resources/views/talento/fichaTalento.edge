@@ -1,0 +1,298 @@
+@layout('layouts/horizontal')
+@section('scripts')
+        <script src="/assets/js/dist/curriculum.min.js"></script>
+        <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+@endsection
+
+@section('pluginsCss')
+    <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+@endsection
+
+@section('content')
+
+<!-- Infobox css -->
+ <link rel="stylesheet" href="/assets/plugins/infobox/infobox.css">
+ <!-- socialWidget css -->
+ <link rel="stylesheet" href="/assets/plugins/socialWidget/socialWidget.css">
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="box box-widget widget-user-2">      
+                <div class="widget-user-header bg-primary">
+                <div class="widget-user-image">
+                    <!--<img class="img-circle" src={{persona.imageUser}} alt="User Avatar">-->
+                    <img class="img-circle" src="/assets/images/users/avatar-1.jpg" alt="User Avatar">
+                </div>
+                
+                <h3 class="widget-user-username text-white">{{persona.nombres}} {{persona.apellidoPaterno}} {{persona.apellidoMaterno}}</h3>
+                <h5 class="widget-user-desc  text-white">{{persona.cargo}}</h5>
+                </div>
+                <div class="box-footer no-padding">
+                    <div class="row">
+                        <div class="col-md-12">
+                        
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                                <div class="info-box bg-green">
+                                <span class="info-box-icon text-white"><i class="fa fa-diamond"></i></span>
+                    
+                                <div class="info-box-content">
+                                    <span class="info-box-text text-white">Talent Review</span>
+                                    <span class="info-box-number text-white">5</span>
+                    
+                                    <div class="progress">
+                                    <div class="progress-bar" style="width: 100%"></div>
+                                    </div>
+                                    <span class="progress-description text-white">
+                                        2017
+                                        </span>
+                                </div>
+                                <!-- /.info-box-content -->
+                                </div>
+                        </div>
+
+                        <div class="col-md-12">
+                                <div class="pull-right">
+                                <i class="fa  fa-plane text-success"></i>
+                                <i class="fa  fa-refresh text-primary"></i>
+                                <i class="fa  fa-warning text-danger"></i>
+                                <i class="fa  fa-star text-warning"></i>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8"> 
+            <!-- Personal-Information -->
+					  <div class="portlet">
+					  	   <div class="portlet-heading  portlet-default">
+    						   <h3 class="portlet-title">Información Personal</h3>
+    						   <div class="portlet-widgets"><a href="#"><i class="mdi mdi-dots-vertical"></i></a></div>
+							   <br>
+    						   <hr>
+						   </div>
+						   <div class="portlet-body">
+						   		<div class="row">
+									 <div class="col-md-6">
+									 	  <div class="text-left">
+        									 <p class="text-muted font-13"><strong>Nombre :</strong> <span class="m-l-15">Nadia Camacho</span></p>
+        									 <p class="text-muted font-13"><strong>Nacionalidad :</strong> <span class="flag-icon flag-icon-ar m-r-5 m-t-0" title="ar"></span><span>Argentina</span></p>
+        									 <p class="text-muted font-13"><strong>Fecha Nacimiento :</strong> <span class="m-l-15">12 Abril 1987</span></p>
+        								</div>
+        								
+        							</div>
+									<div class="col-md-6">
+									 	  <div class="text-left">
+										  	 <p class="text-muted font-13"><strong>Ubicación :</strong> <span class="m-l-15">Buenos Aires</span></p>
+        									 <p class="text-muted font-13"><strong>Fecha Ingreso :</strong> <span class="m-l-15">1 de Enero 2015</span></p>
+        									 <p class="text-muted font-13"><strong>Idiomas :</strong>
+        									 	<span class="m-l-5"><span class="flag-icon flag-icon-us m-r-5 m-t-0" title="us"></span><span>Ingles</span></span>
+        										<span class="m-l-5"><span class="flag-icon flag-icon-es m-r-5" title="es"></span><span>Español</span></span>
+        									 </p>
+        								</div>
+        								
+        							</div>
+									<div row="">
+										 <div class="pull-right">
+										 	<ul class="social-links list-inline m-t-20 m-b-0">
+        										<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Linkedin"><i class="fa  fa-linkedin"></i></a></li>
+											</ul>
+										 </div>
+									</div>
+									
+        						</div>
+							</div>
+	  					</div>
+                      <!-- Personal-Information -->
+        </div>
+        
+        <!-- Curriculum -->
+        <div class="col-md-6" id="curriculum">
+            @!component('components.Core.curriculum',objCurriculum=objCurriculum)
+        </div>
+        
+        <div class="col-md-6">
+            <!-- Mediciones -->
+
+                        <div class="row">
+                            <div class="col-md-4">
+                            <div class="panel panel-border panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Desempeño</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <span class="badge badge-success">AA</span>
+                                            2017
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="badge badge-danger">CC</span>
+                                            2016 
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="badge badge-warning">AC</span>
+                                            2015
+                                        </li>
+                                        
+                                        </ul>
+                                    </div>
+                            </div>
+                            </div>
+                            <div class="col-md-4">
+                            <div class="panel panel-border panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Clima</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <span class="badge badge-success">95%</span>
+                                            2017
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="badge badge-success">97%</span>
+                                            2016 
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="badge badge-warning">72%</span>
+                                            2015
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="badge badge-success">89%</span>
+                                            2014
+                                        </li>
+                                        </ul>
+                                    </div>
+                            </div>
+                            </div>
+                            <div class="col-md-4">
+                            <div class="panel panel-border panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Talent Review</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <span class="badge badge-warning">5</span>
+                                            2017
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="badge badge-success">1</span>
+                                            2016 
+                                        </li>
+                                        
+                                        </ul>
+                                    </div>
+                            </div>
+                            </div>
+                        
+                        </div>
+
+            <!-- Mediciones -->
+
+            <!-- Fortalezas y Oportunidades -->
+            <div class="portlet portlet-default">
+                    <div class="portlet-heading">
+                        <h3 class="portlet-title">Fortalezas y Oportunidades</h3>
+                        <div class="portlet-widgets"><a href="#"><i class="mdi mdi-dots-vertical"></i></a></div>
+                        <br>
+                        <hr>
+                    </div>
+                    <div class="portlet-body">
+                    
+                        <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-border panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Fortalezas</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p class="text-purple m-b-0">
+                                            Vestibulum malesuada nunc sed hendrerit tempus. Suspendisse felis est, tristique a elementum eget, rhoncus vel enim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris efficitur enim ipsum, et maximus velit condimentum convallis. Mauris a erat erat. Curabitur cursus accumsan consequat. 
+                                        </p>
+                                        <p class="text-muted m-b-30 font-13">
+                                        2018 -  Joe Doe
+                                        </p>
+                                        <p class="text-purple m-b-0">
+                                            Vestibulum malesuada nunc sed hendrerit tempus. Suspendisse felis est, tristique a elementum eget, rhoncus vel enim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris efficitur enim ipsum, et maximus velit condimentum convallis. Mauris a erat erat. Curabitur cursus accumsan consequat. 
+                                        </p>
+                                        <p class="text-muted m-b-30 font-13">
+                                        2017 -  Joe Doe
+                                        </p>
+                                        <div class="text-center">
+                                                <button type="button" class="btn btn-default btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-chevron-circle-down"></i> Cargar más Información</button>
+                                        </div>
+                                    </div>
+                            </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-border panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Oportunidades</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p class="text-purple m-b-0">
+                                            Vestibulum malesuada nunc sed hendrerit tempus. Suspendisse felis est, tristique a elementum eget, rhoncus vel enim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris efficitur enim ipsum, et maximus velit condimentum convallis. Mauris a erat erat. Curabitur cursus accumsan consequat. 
+                                        </p>
+                                        <p class="text-muted m-b-30 font-13">
+                                        2018 -  Joe Doe
+                                        </p>
+                                        <p class="text-purple m-b-0">
+                                            Vestibulum malesuada nunc sed hendrerit tempus. Suspendisse felis est, tristique a elementum eget, rhoncus vel enim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris efficitur enim ipsum, et maximus velit condimentum convallis. Mauris a erat erat. Curabitur cursus accumsan consequat. 
+                                        </p>
+                                        <p class="text-muted m-b-30 font-13">
+                                        2017 -  Joe Doe
+                                        </p>
+                                        <div class="text-center">
+                                                <button type="button" class="btn btn-default btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-chevron-circle-down"></i> Cargar más Información</button>
+                                        </div>
+
+                                    </div>
+                            </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+            </div>
+            <!-- Fortalezas y Oportunidades -->
+
+            <!-- Desarrollo -->
+            <div class="portlet portlet-default">
+                    <div class="portlet-heading">
+                        <h3 class="portlet-title">Desarrollo</h3>
+                        <div class="portlet-widgets"><a href="#"><i class="mdi mdi-dots-vertical"></i></a></div>
+                        <br>
+                        <hr>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-border panel-primary">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Posibles Próximos Roles</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        
+                                        
+
+                                    </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <!-- Desarrollo -->
+    </div>
+
+
+    
+
+@endsection
