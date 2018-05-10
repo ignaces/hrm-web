@@ -20,7 +20,7 @@ class Talento {
             "idOpinante":idOpinante
         };
 
-        console.log (obj)
+        
         var result = await data.execApi(request.hostname(),'/Talento/Talento/getFindTalentoProceso',obj);
         var total = result.body;
         //-----------------------------------COUNT(ColaboradoresClasificados)------------------
@@ -179,16 +179,18 @@ class Talento {
             
 
             var obj4 = {
-                "idEmpresa":idEmpresa
-                };
+                 "idEmpresa":idEmpresa
+            };
 
-                var obj5 = {
-                    "idEmpresa":idEmpresa,
-                    "idTalentoProceso":idTalentoProceso2
-                    };
+            var obj5 = {
+                "idEmpresa":idEmpresa,
+                "idTalentoProceso":idTalentoProceso2
+            };
             
             var resultadoCargos = await data.execApi(request.hostname(),'/Talento/Talento/obtenerCargosPorEmpresa',obj4);
             var cargosPorEmpresa = resultadoCargos.body;
+
+            
         //----------------------------------------------------------------------------------
        //------------------------------------- CARGA DE COMBOBOX CLASIFICACION  ------------
        //-----------------------------------------------------------------------------------
@@ -231,28 +233,29 @@ class Talento {
 
     async organigrama ({view,request, response, auth, session}) {
        
-       var procesoOrganigrama =  session.get('procesoOrganigrama');
+       
         
-        
-        var obj = {
-            "procesoOrganigrama":procesoOrganigrama
-        };
-        var result = await data.execApi(request.hostname(),'/Talento/Talento/organigrama',obj);
-        var orgChart = result.body;
-        
-        
-        
-        return view.render('talento/organigrama', {orgChart:orgChart});
+        return view.render('talento/organigrama', {});
 
 
         
     }
 
+    async getOrganigrama({view,request, response, auth, session}){
+        var obj = {
+            "idProceso":session.get('procesoOrganigrama')
+        };
+        var result = await data.execApi(request.hostname(),'/Talento/Talento/organigrama',obj);
+        var orgChart = result.body;
+        return orgChart;
+
+    }
     async fichaTalento ({view,request, response, auth, session}) {
 
-        var persona =  session.get('personaLogueada')
+        //var persona =  session.get('personaLogueada')
+        var idPersona = request.input('idPersona')
         var obj = {
-            "idPersona":persona.id
+            "idPersona":idPersona
         };
 
         var result = await data.execApi(request.hostname(),'/Talento/Talento/getCurriculumCategoria',obj);
