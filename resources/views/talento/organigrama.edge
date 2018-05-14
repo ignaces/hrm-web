@@ -15,56 +15,7 @@
 
             
 
-<div class="row">
-      <div class="col-lg-12">
-           <!--<div class="col-lg-12"> -->
 
-                                <div class="portlet">
-                                    <div class="portlet-heading bg-inverse">
-                                        <h3 class="portlet-title">
-                                            Filtros
-                                        </h3>
-                                        <div class="portlet-widgets">
-                                           
-                                            <a data-toggle="collapse" data-parent="#accordion1" href="#bg-inverse"><i class="mdi mdi-minus"></i></a>
-                                           
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                    <div id="bg-inverse" class="panel-collapse collapse in">
-                                        <div class="portlet-body">
-                                       
-										<div class="row">
-									
-                                       
-                                        <div class="col-sm-3">
-									    <div class="form-group">
-                                                        <label class="control-label">Cargos</label>
-                                                
-                                                            <select id="buscarCargo" class="form-control buscar">
-                                                                <option value="-1" selected>Todos</option>
-                                                               
-                                                            </select>
-                                        </div>
-                                        </div>
-                                        
-									   </div>
-									   <div class="row">
-									   <div class="col-md-10 col-md-offset-11">
-									   <span class="input-group-btn">
-                                                    <button type="button" id="btnBuscar" class="btn waves-effect waves-light btn-primary">Buscar</button>
-                                                   
-									   </div>
-									   </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-            
-            
-      </div>
-  </div>
         @!component('components.Talento.organigramaView',{orgChart:orgChart})
     @endsection
 

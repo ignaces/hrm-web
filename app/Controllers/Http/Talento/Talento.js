@@ -257,15 +257,12 @@ class Talento {
         var obj = {
             "idPersona":idPersona
         };
-
+        var resultPersona =  await data.execApi(request.hostname(),'/Persona/Persona/getPersona',obj);
         var result = await data.execApi(request.hostname(),'/Talento/Talento/getCurriculumCategoria',obj);
         var categoria = result.body;
+        var persona = resultPersona.body;
 
-        var obj2 = {
-            "idPersona" : persona.id
-        };
-
-        var result2 = await data.execApi(request.hostname(),'/Talento/Talento/getCurriculumPersona',obj2);
+        var result2 = await data.execApi(request.hostname(),'/Talento/Talento/getCurriculumPersona',obj);
         var curriculum = result2.body;
         var objCurriculum = [];
 
