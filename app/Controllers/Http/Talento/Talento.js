@@ -254,11 +254,14 @@ class Talento {
 
         //var persona =  session.get('personaLogueada')
         var idPersona = request.input('idPersona')
+        console.log(idPersona)
         var obj = {
             "idPersona":idPersona,
             "idProceso":session.get('procesoOrganigrama')
         };
+        
         var resultPersona =  await data.execApi(request.hostname(),'/Talento/Talento/getPersona',obj);
+       
         var result = await data.execApi(request.hostname(),'/Talento/Talento/getCurriculumCategoria',obj);
         var categoria = result.body;
         var persona = resultPersona.body;
@@ -289,11 +292,11 @@ class Talento {
             //console.log(persona)
             objCurriculum.push(objList)
         });
-        return view.render('talento/fichaTalento', { objCurriculum:objCurriculum, persona:persona});
+        return view.render('talento/fichaTalento', { objCurriculum:objCurriculum, persona:persona, idPersona:idPersona});
     }
 
     async addCurriculumPersona ({view,request, response, auth, session}) {
-
+        
         var persona =  session.get('personaLogueada')
         var obj = {
             "titulo": request.input("titulo"),
@@ -301,7 +304,7 @@ class Talento {
             "desde":request.input("desde"),
             "hasta":request.input("hasta"),//"2010-01-01",
             "descripcion":request.input("descripcion"),
-            "idPersona":persona.id,
+            "idPersonaFicha":request.input("idPersonaFicha"),
             "idPersonaCurriculumCategoria":request.input("idPersonaCurriculumCategoria")
         };
         
