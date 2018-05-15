@@ -6,7 +6,7 @@
                 <a  class="mdi mdi-dots-vertical" data-toggle="dropdown" aria-expanded="false" href="#"></a>
                 <ul class="dropdown-menu" role="menu">
                     
-                    <li><a href="#" data-toggle="modal" data-target={{ "#" + c.idCategoria }}>Agregar {{ c.nombreCategoria }}</a></li>
+                    <li><a href="#" data-toggle="modal" data-target={{ "#" + c.idCategoria }}>Agregar</a></li>
                     
                 </ul>
             </div>
@@ -74,6 +74,8 @@
                                         <!--<button type="button" id="instrumento_btn_finalizar" class="btn btn-success waves-effect waves-light"> <i class="fa fa-check m-r-5"></i> <span>Finalizar</span> </button>-->
                                     </div>
                                 </div>
+                                 <input type="text" style="display:none;" id="idPersonaFicha" class="form-control" value="{{idPersona}}">
+                                
                             </form>
                         </div>
                     </div>
