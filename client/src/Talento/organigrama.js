@@ -9,7 +9,9 @@ var cargaOrganigrama = function (organigrama){
                     <i class='fa fa-refresh fa-2x m-r-5 text-primary'></i>\
                     <i class='fa fa-warning fa-2x m-r-5 text-warning'></i>\
                     <i class='fa fa-star fa-2x m-r-5 text-success'></i>";
+    
     for(var posicion in organigrama){
+        
         var nodo = {
             id:organigrama[posicion].idPosicion, 
             parentId: organigrama[posicion].idPadre,
@@ -17,7 +19,8 @@ var cargaOrganigrama = function (organigrama){
             Cargo:organigrama[posicion].nombre, 
             Atributos: badges,  
             Imagen: organigrama[posicion].fotoPersona,
-            Cuadrante:organigrama[posicion].nombreCuadrante
+            Cuadrante:organigrama[posicion].nombreCuadrante,
+            idPersona: organigrama[posicion].idPersona,
         }
         source.push(nodo);
         if(organigrama[posicion]!=null){
@@ -57,16 +60,21 @@ var cargaOrganigrama = function (organigrama){
 }
             
 function clickHandler(sender, args) {
-
+    console.log(args.node.data)
     $("#modalColaborador").modal('show');
     
 }
+
 function renderNodeHandler(sender, args) {
     for (i = 0; i < args.content.length; i++) {
-        if (args.content[i].indexOf(args.node.data["Atributos"]) != -1) {
-            args.content[i] = "<foreignObject x='200' y='80' width='80%' height='20px'>" + args.node.data["Atributos"] + "</foreignObject>";
+var texto ="";
+        if (args.node.data["idPersona"] != 'VACANTE') {   
+            texto = "<foreignObject x='200' y='150' width='80%' height='20px'><a class='btn btn-primary' style='z-index:9000' href='/Talento/Talento/fichaTalento?idPersona=" + args.node.data["idPersona"] + "'><i class='fa fa-file'></i>Ficha</a></foreignObject>";
         }
-        
+        if (args.content[i].indexOf(args.node.data["Atributos"]) != -1) {
+            texto  += "<foreignObject x='200' y='80' width='80%' height='20px'>" + args.node.data["Atributos"] + "</foreignObject>";
+            args.content[i]=texto;
+        }
     }
 }
 
@@ -79,7 +87,7 @@ var getOrganigrama  = function(){
         data: obj,
         dataType: "json", 
         success: function (msg) {
-            console.log(msg)
+            
             cargaOrganigrama(msg)
 
         }
