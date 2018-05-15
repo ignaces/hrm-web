@@ -4,6 +4,11 @@
     <script src="/assets/getOrgChart/js/getorgchart.js"></script>
     <script src="/assets/js/dist/organigrama.min.js"></script>
         <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+        <script>
+        $('textarea#textarea').maxlength({
+            alwaysShow: true
+        });
+        </script>
 @endsection
 
 @section('pluginsCss')
@@ -31,7 +36,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title" id="myLargeModalLabel"></h4>
+                        <h4 class="modal-title" id="myLargeModalLabel">Sucesiones Gerente General</h4>
 
                     </div>
                     <div class="modal-body">
@@ -41,7 +46,7 @@
                                     <h2 class="panel-title">Posibles sucesores para Gerente General</h2>
                                 </div>
                                 <div class="panel-body">
-                                   @!component('components.Talento.colaboradorSquare',{colaboradores:[{nombre:"andres"},{nombre:"juan"}]})
+                                   @!component('components.Talento.colaboradorSquare',{colaboradores:[{idPersona:'DA9344B3-3698-2D9E-AA58-D6DB678ED7BA',nombre:"Delilah Eaton"}]})
                                 </div>    
                             </div>
                         </div>
@@ -51,7 +56,32 @@
                                     <h2 class="panel-title">Estrategia Sucesión</h2>
                                 </div>
                                 <div class="panel-body">
-                                   sucesores aqui
+                                   <div class="col-sm-6">
+                                                <div class="radio">
+                                                    <input type="radio" name="radio" id="radio1" value="option1" checked>
+                                                    <label for="radio1">
+                                                        Ir al MarketPlace
+                                                    </label>
+                                                </div>
+                                                <div class="radio radio-custom">
+                                                    <input type="radio" name="radio" id="radio2" value="option2">
+                                                    <label for="radio2">
+                                                        Mercado Externo
+                                                    </label>
+                                                </div>
+                                                <div class="radio radio-primary">
+                                                    <input type="radio" name="radio" id="radio3" value="option3">
+                                                    <label for="radio3">
+                                                        Libre
+                                                    </label>
+                                                </div>
+                                        <div class="m-t-20">
+                                            <p class="text-muted m-b-15 font-14">
+                                                Ingrese Estrategia
+                                            </p>
+                                            <textarea id="textarea" class="form-control" maxlength="1000" rows="3" placeholder="La estrategia debe tener un máximo de 1000 caracteres"></textarea>
+                                        </div>
+                                    </div>
                                 </div>    
                             </div>
                         </div>

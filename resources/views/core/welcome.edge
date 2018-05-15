@@ -15,7 +15,7 @@
     <div class="col-md-3">
         
 
- <div class="row">
+        <div class="row">
                 @!component('components.Usuario.cajausuario',persona=persona,user = user.usuario.username,cargo=cargo,genero=genero,imgUser=imageUser)
         </div>
 
@@ -24,7 +24,7 @@
     <!-- Centro -->
     <div class="col-md-6">
         <div class="row">
-            <div class="ol-md-12">
+            <div class="col-md-12">
                 <div class="col-sm-12 col-lg-12 col-xs-12">
 
                     <!-- Simple card -->
@@ -41,16 +41,10 @@
             </div>
         </div>
 
-        <div class="row">
-                @!component('components.Acreditacion.cajaAcreditacion',titulo = "Evaluación", procesos=procesos)
-        </div>
-        <!--
-        <div class="row">
-             @!component('components.Desempeno.cajaDesempeno',titulo = "Gestión de Desempeño", procesos=procesosEde)
-        </div>  
-        -->
-                @!component('components.Acreditacion.cajaAcreditacion',titulo = "Acreditación",titulo2 = "Gestión de Talento", procesos=procesos, talentos=talentos,condicion=condicion)
-        </div>     
+          <div class="row">
+            @!component('components.Acreditacion.cajaAcreditacion',titulo = "Acreditación",titulo2 = "Gestión de Talento", procesos=procesos, talentos=talentos,condicion=condicion)
+          </div>      
+           
         
     </div>
     <!-- END Centro -->
@@ -75,9 +69,6 @@
                         -->
                     </div>
                 </div>
-
-
-
 
             </div>
         </div>

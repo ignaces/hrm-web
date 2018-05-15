@@ -66,6 +66,7 @@ function renderNodeHandler(sender, args) {
         if (args.content[i].indexOf(args.node.data["Atributos"]) != -1) {
             args.content[i] = "<foreignObject x='200' y='80' width='80%' height='20px'>" + args.node.data["Atributos"] + "</foreignObject>";
         }
+        
     }
 }
 
@@ -78,7 +79,7 @@ var getOrganigrama  = function(){
         data: obj,
         dataType: "json", 
         success: function (msg) {
-            
+            console.log(msg)
             cargaOrganigrama(msg)
 
         }
