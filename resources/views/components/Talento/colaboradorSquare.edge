@@ -1,0 +1,50 @@
+<div class="row">
+@each(colaborador in colaboradores)
+    <div class="col-md-3">
+        <div class="text-center card-box">
+            
+            <div class="clearfix"></div>
+            <div class="member-card">
+                <div class="thumb-xl member-thumb m-b-10 center-block">
+                    <img src="/assets/images/users/avatar-4.jpg" class="img-circle img-thumbnail" alt="profile-image">
+                    <i class="mdi mdi-star-circle member-star text-success" title="verified user"></i>
+                </div>
+
+                <div class="">
+                    <h4 class="m-b-5">{{colaborador.nombre}} M. Rohr</h4>
+                    <p class="text-muted">@Webdesigner <span> | </span> <span> <a href="#" class="text-pink">websitename.com</a> </span></p>
+                </div>
+               
+
+                <button type="button" class="btn btn-primary m-t-20 btn-rounded btn-bordered waves-effect w-md waves-light">Sucesor</button>
+
+                <div class="m-t-20">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <div class="m-t-20 m-b-10">
+                                <h4 class="m-b-5">2562</h4>
+                                <p class="m-b-0 text-muted">Lifetime total sales</p>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="m-t-20">
+                                <h4 class="m-b-5">4848</h4>
+                                <p class="m-b-0 text-muted">Income amounts</p>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="m-t-20">
+                                <h4 class="m-b-5">978</h4>
+                                <p class="m-b-0 text-muted">Total visits</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div> <!-- end col -->
+   @endeach 
+</div>

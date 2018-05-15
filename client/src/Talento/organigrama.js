@@ -17,7 +17,7 @@ var cargaOrganigrama = function (organigrama){
             Cargo:organigrama[posicion].nombre, 
             Atributos: badges,  
             Imagen: organigrama[posicion].fotoPersona,
-            Cuadrante:"6 ffff"
+            Cuadrante:organigrama[posicion].nombreCuadrante
         }
         source.push(nodo);
         if(organigrama[posicion]!=null){
@@ -57,32 +57,34 @@ var cargaOrganigrama = function (organigrama){
 }
             
 function clickHandler(sender, args) {
-    alert("clecked node.id " + args.node.id);
-  }
-            function renderNodeHandler(sender, args) {
-                for (i = 0; i < args.content.length; i++) {
-                    if (args.content[i].indexOf(args.node.data["Atributos"]) != -1) {
-                        args.content[i] = "<foreignObject x='200' y='80' width='80%' height='20px'>" + args.node.data["Atributos"] + "</foreignObject>";
-                    }
-                }
-            }
+
+    $("#modalColaborador").modal('show');
     
-            var getOrganigrama  = function(){
-                var obj={idProceso:'6b4071d1-0ff1-11e8-bf12-bc764e100f2b'};
-                $.ajax({
-                    type: "GET",
-                    url: "/Talento/Talento/getOrganigrama",
-                    contentType: "application/json; charset=utf-8",
-                    data: obj,
-                    dataType: "json", 
-                    success: function (msg) {
-                       
-                       cargaOrganigrama(msg)
+}
+function renderNodeHandler(sender, args) {
+    for (i = 0; i < args.content.length; i++) {
+        if (args.content[i].indexOf(args.node.data["Atributos"]) != -1) {
+            args.content[i] = "<foreignObject x='200' y='80' width='80%' height='20px'>" + args.node.data["Atributos"] + "</foreignObject>";
+        }
+    }
+}
+
+var getOrganigrama  = function(){
+    var obj={idProceso:'6b4071d1-0ff1-11e8-bf12-bc764e100f2b'};
+    $.ajax({
+        type: "GET",
+        url: "/Talento/Talento/getOrganigrama",
+        contentType: "application/json; charset=utf-8",
+        data: obj,
+        dataType: "json", 
+        success: function (msg) {
             
-                    }
-                });   
-            }
-            $(document).ready(function(){
-                getOrganigrama();
-            });
+            cargaOrganigrama(msg)
+
+        }
+    });   
+}
+$(document).ready(function(){
+    getOrganigrama();
+});
             

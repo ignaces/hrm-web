@@ -3,10 +3,16 @@
 @section('scripts')
     <script src="/assets/getOrgChart/js/getorgchart.js"></script>
     <script src="/assets/js/dist/organigrama.min.js"></script>
+        <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
 @endsection
 
 @section('pluginsCss')
     <link href="/assets/getOrgChart/css/getorgchart.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    <!-- Infobox css -->
+ <link rel="stylesheet" href="/assets/plugins/infobox/infobox.css">
+ <!-- socialWidget css -->
+ <link rel="stylesheet" href="/assets/plugins/socialWidget/socialWidget.css">
 @endsection
   
 
@@ -14,15 +20,45 @@
     @!component('components.Core.botonera')
     <div class="panel panel-border panel-primary">
         <div class="panel-heading">
-            <h3 class="panel-title">Organigrama Comercial División Supermercados <span class="label label-success pull-right"><span class="flag-icon flag-icon-ar"></span> ARG</span></h3>
-
-            <h2></h2>
+            <h2 class="panel-title">Organigrama Comercial División Supermercados <span class="label label-success pull-right"><span class="flag-icon flag-icon-ar"></span> ARG</span></h2>
         </div>
         <div class="panel-body">
             @!component('components.Talento.organigramaView',{orgChart:orgChart})
-        </div>
+        </div>    
     </div>
-    
+    <div class="modal fade bs-example-modal-lg" id="modalColaborador" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myLargeModalLabel"></h4>
+
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="panel panel-border panel-primary">
+                                <div class="panel-heading">
+                                    <h2 class="panel-title">Posibles sucesores para Gerente General</h2>
+                                </div>
+                                <div class="panel-body">
+                                   @!component('components.Talento.colaboradorSquare',{colaboradores:[{nombre:"andres"},{nombre:"juan"}]})
+                                </div>    
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="panel panel-border panel-primary">
+                                <div class="panel-heading">
+                                    <h2 class="panel-title">Estrategia Sucesión</h2>
+                                </div>
+                                <div class="panel-body">
+                                   sucesores aqui
+                                </div>    
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
 @endsection
 
 

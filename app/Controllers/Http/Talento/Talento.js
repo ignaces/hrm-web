@@ -255,9 +255,10 @@ class Talento {
         //var persona =  session.get('personaLogueada')
         var idPersona = request.input('idPersona')
         var obj = {
-            "idPersona":idPersona
+            "idPersona":idPersona,
+            "idProceso":session.get('procesoOrganigrama')
         };
-        var resultPersona =  await data.execApi(request.hostname(),'/Persona/Persona/getPersona',obj);
+        var resultPersona =  await data.execApi(request.hostname(),'/Talento/Talento/getPersona',obj);
         var result = await data.execApi(request.hostname(),'/Talento/Talento/getCurriculumCategoria',obj);
         var categoria = result.body;
         var persona = resultPersona.body;
