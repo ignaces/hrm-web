@@ -11,8 +11,19 @@
   
 
 @section('content')
-        @!component('components.Talento.organigramaView',{orgChart:orgChart})
-    @endsection
+    @!component('components.Core.botonera')
+    <div class="panel panel-border panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Organigrama Comercial División Supermercados <span class="label label-success pull-right"><span class="flag-icon flag-icon-ar"></span> ARG</span></h3>
+
+            <h2></h2>
+        </div>
+        <div class="panel-body">
+            @!component('components.Talento.organigramaView',{orgChart:orgChart})
+        </div>
+    </div>
+    
+@endsection
 
 
      <style type="text/css" id="myStylesheet">
