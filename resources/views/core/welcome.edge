@@ -8,13 +8,16 @@
 
 
     <div class="col-md-3">
-        
-
- <div class="row">
+        <div class="row">
                 @!component('components.Usuario.cajausuario',persona=persona,user = user.usuario.username,cargo=cargo,genero=genero,imgUser=imageUser)
         </div>
 
+        <div class="row">
+                @!component('components.Incentivos.CheckIn')
+        </div>
+
     </div>
+                    
     <!-- END Columna Izquierda -->
     <!-- Centro -->
     <div class="col-md-6">
@@ -27,7 +30,7 @@
 
                         <img class="card-img-top img-fluid" src="{{theme(request.hostname())}}/assets/images/empresa/fondo.jpg" alt="Card image cap" style="width: 100% !important;">
                         <div class="card-block text-center">
-                            <h4 class="card-title">Plataforma Gestión del Desarrollo de Personas</h4>
+                            <h4 class="card-title">Plataforma de Incentivos Brightstar</h4>
                          
                         </div>
                     </div>
@@ -37,7 +40,7 @@
         </div>
 
         <div class="row">
-                @!component('components.Acreditacion.cajaAcreditacion',titulo = "Acreditación", procesos=procesos)
+                @!component('components.Incentivos.cajaIncentivos',titulo = "Incentivos", procesos=procesos)
         </div>
         <!--
         <div class="row">

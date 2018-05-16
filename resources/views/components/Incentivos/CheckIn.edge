@@ -1,0 +1,107 @@
+
+        <div class="col-md-12">
+
+                <div class="card-box ribbon-box">
+
+                    <div class="ribbon ribbon-custom">Check-in</div>
+
+                    <div class="clearfix"></div>
+                    
+                    <div id="map" style="width: 100%; height: 300px;"></div>
+                    <script>
+
+                    function initMap() {
+                        var map = new google.maps.Map(document.getElementById('map'), {
+                        center: {lat: -33.3714909, lng: -70.5780184},
+                        zoom: 12,
+                        disableDefaultUI: true
+                        });
+                        var infoWindow = new google.maps.InfoWindow({map: map});
+
+                        // Try HTML5 geolocation.
+                        if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(function(position) {
+                            var pos = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                            };
+
+                            //infoWindow.setPosition(pos);
+                            //infoWindow.setContent('Location found.');
+
+                            map.setCenter(pos);
+                        }, function() {
+                            handleLocationError(true, infoWindow, map.getCenter());
+
+                            var marker = new google.maps.Marker({
+                                position: pos,
+                                map: map
+                            });
+
+                        });
+                        } else {
+                        // Browser doesn't support Geolocation
+                        handleLocationError(false, infoWindow, map.getCenter());
+                        }
+                    }
+
+                    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+                        infoWindow.setPosition(pos);
+                        //infoWindow.setContent(browserHasGeolocation ?
+                        //                    'Error: The Geolocation service failed.' :
+                        //                    'Error: Your browser doesn\'t support geolocation.');
+                    }
+                    </script>
+
+                    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVVw6Lr22ECN9ZYmKzJ6fpVsLDz5pWtvY&callback=initMap"></script>
+                    
+                    <br>
+                    <div class="inbox-widget">
+                        <a class="btn btn-info btn-rounded btn-block" name="#" data-toggle="modal" data-target="#panel-modal"><i class="mdi mdi-check"></i> <span>Check-In</span> </a>
+                    </div>
+                </div>
+                
+                <div class="col-md-12">
+                    
+                </div>
+
+                
+
+        </div>
+
+
+<div id="panel-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content p-0 b-0">
+                                                <div class="panel panel-color panel-primary">
+                                                    <div class="panel-heading">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                        <h3 class="panel-title">Seleccione Punto de Venta</h3>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <select class="form-control" name="poscheckin" id="poscheckin">
+                                                            <option value="0">--Seleccione--</option>
+                                                            <option value="1">Punto de Venta 1</option>
+                                                            <option value="1">Punto de Venta 2</option>
+                                                            <option value="1">Punto de Venta 3</option>
+                                                            <option value="1">Punto de Venta 4</option>
+                                                            <option value="1">Punto de Venta 5</option>
+                                                            <option value="1">Punto de Venta 6</option>
+                                                            <option value="1">Punto de Venta 7</option>
+                                                            <option value="1">Punto de Venta 8</option>
+                                                            <option value="1">Punto de Venta 9</option>
+                                                            <option value="1">Punto de Venta 10</option>
+                                                            <option value="1">Punto de Venta 11</option>
+                                                        </select>
+
+                                                        <br>
+
+                                                        <div class="inbox-widget">
+                                                            <a class="btn btn-info btn-rounded btn-block" name="#"><i class="mdi mdi-check"></i> <span>Hacer Check-In</span> </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                            
+                                        </div><!-- /.modal-dialog -->
+</div>

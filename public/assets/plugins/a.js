@@ -551,20 +551,20 @@ jQuery(function($) {
         bindto: '#donut-chart',
         data: {
           columns: [
-            ['Male', 46],
-            ['Female', 24]
+            ['Avance', 150000],
+            ['Meta', 1500000]
           ],
           type : 'donut'
         },
         donut: {
-          title: "Candidates",
+          title: "Meta",
           width: 30,
           label: {
             show:false
           }
         },
         color: {
-          pattern: ["#64c5b1", "#ddd"]
+          pattern: ["lightblue", "lightgreen"]
         }
       });
   
