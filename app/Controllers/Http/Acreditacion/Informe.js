@@ -35,7 +35,7 @@ class Informe {
         var resultTCODetalle = await data.execApi(request.hostname(),'/Acreditacion/Informe/getInstrumentosTCO',obj);
         var resultadoTCODetalle = resultTCODetalle.body.data;
 
-        var cliente = hostname.split(".")[0]
+        var cliente = request.hostname().split(".")[0]
 
         return view.render('acreditacion/informe/informesd', {sintesis:resultadoSintesis, resultadoTCO:resultadoTCO, TCODetalle:resultadoTCODetalle, conDetalle,idProcesoPersona,clasificacion,cliente});
     }   
