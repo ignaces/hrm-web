@@ -22,51 +22,212 @@
 
 @!component('components.Acreditacion.encabezadoAcreditacion',titulo="IDENTIFICACIÓN", data={clasificacion:clasificacion})
 
-<div class="row">
-        <div class="col-md-6">
-                @!component('components.Acreditacion.sintesisResultado',titulo = "SÍNTESIS DE RESULTADOS", data = sintesis)
-        </div>
-        <div class="col-md-6">
-                <div class="portlet">
-                        <div class="portlet-heading bg-primary">
-                        <h5 class="portlet-title">REQUISITOS DE APROBACIÓN</h5>
-                        <div class="clearfix"></div>
-                        </div>
-                        <div id="bg-default" class="panel-collapse collapse in show">
-                        <div class="portlet-body">
-                                <p>Para la aprobación es necesario:<br/><br/>
-                                - Test de Conocimientos 100% <br/>
-                                <!--
-                                - Observación en Terreno sobre 80% en cada una de sus competencias<br/>
-                                - Diagnóstico Conductual 100%
-                                -->
-                                </p>
-                        </div>
-                        </div>
+@if(cliente=='metro')
+
+
+        <div class="row">
+                <div class="col-md-6">
+                        <div class="row">
+                                <div class="col-md-12">
+                                        <div class="portlet">
+                                        <div class="portlet-heading bg-primary">
+                                                <h5 class="portlet-title">Sintesis de Resultados</h5>
+                                                <div class="clearfix"></div>
+                                        </div>
+                                        <div id="bg-default" class="panel-collapse collapse in show">
+                                                <div class="portlet-body">
+                                                <div class="row">
+                                                <div class="col-md-2">
+                                                
+                                                </div>
+                                                <div class="col-md-8">
+                                               
+                                                <div class="row">
+                                                        <div class="col-md-4 text-center"><h3><i class="dripicons-document-new"></i></h3></div>
+                                                        <div class="col-md-4 text-center"><h5>Set de Observacion en terreno</h5></div>
+                                                        <div class="col-md-4 text-center">
+                                                        <h5>
+                                                                
+                                                                <span class="label label-danger">Reprobado</span>
+                                                        </h5>
+                                                        </div>
+                                                </div>
+                                               
+                                                
+                                                <!--
+                                                <div class="row">
+                                                        <div class="col-md-4 text-center"><h3><i class="dripicons-clipboard"></i></h3></div>
+                                                        <div class="col-md-4 text-center"><h5>Observación en Terreno</h5></div>
+                                                        <div class="col-md-4 text-center"><h5><span class="label label-danger">Reprobado</span></h5></div>
+                                                </div>
+                                                <div class="row">
+                                                        <div class="col-md-4 text-center"><h3><i class="dripicons-search"></i></h3></div>
+                                                        <div class="col-md-4 text-center"><h5>Diagnóstico Conductual</h5></div>
+                                                        <div class="col-md-4 text-center"><h5><span class="label label-success">Aprobado</span></h5></div>
+                                                </div>
+                                                -->
+                                                </div>
+                                                <div class="col-md-2">
+                                                
+                                                </div>
+                                                </div>
+
+                                                </div>
+                                        </div>
+                                        </div>
+                                </div>
+                                </div>
                 </div>
-        </div>
-</div>
-<!--
-<div class="row text-center">
-        <div class="col-md-12">
-                <div class="portlet">
-                        <div class="portlet-heading bg-primary">
-                                <h5 class="portlet-title">RESULTADO FINAL</h5>
+                <div class="col-md-6">
+                        <div class="portlet">
+                                <div class="portlet-heading bg-primary">
+                                <h5 class="portlet-title">REQUISITOS DE APROBACIÓN</h5>
                                 <div class="clearfix"></div>
-                        </div>
-                        <div id="bg-default" class="panel-collapse collapse in show">
+                                </div>
+                                <div id="bg-default" class="panel-collapse collapse in show">
                                 <div class="portlet-body">
-                                        <p>De acuerdo a la evaluación realizada y los resultados obtenidos, se determina que <strong>Carlos Herrera Sazo Espina</strong> se encuentra como <strong>NO ACREDITADO</strong> para el perfil <strong>Maestro Empalme BT PMT</strong>.</p>
+                                        <p>Para la aprobación es necesario:<br/><br/>
+                                        - Set de Observación en Terreno 100% <br/>
+                                        <!--
+                                        - Observación en Terreno sobre 80% en cada una de sus competencias<br/>
+                                        - Diagnóstico Conductual 100%
+                                        -->
+                                        </p>
+                                </div>
                                 </div>
                         </div>
                 </div>
         </div>
-</div>
--->
-@!component('components.Acreditacion.resultadoTCO',titulo = "TEST DE CONOCIMIENTOS", data=resultadoTCO)
+        
+        <div class="row text-center">
+                <div class="col-md-12">
+                        <div class="portlet">
+                                <div class="portlet-heading bg-primary">
+                                        <h5 class="portlet-title">RESULTADO FINAL</h5>
+                                        <div class="clearfix"></div>
+                                </div>
+                                <div id="bg-default" class="panel-collapse collapse in show">
+                                        <div class="portlet-body">
+                                                <p>De acuerdo a la evaluación realizada y los resultados obtenidos, se determina que <strong>{{clasificacion.nombres}} {{clasificacion.apellidoPaterno}} {{clasificacion.apellidoMaterno}}</strong> se encuentra como <strong>NO ACREDITADO</strong>.</p>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+        </div>
 
-@if(conDetalle==1)
-        @!component('components.Acreditacion.resultadoTCODetalle',titulo = "TEST DE CONOCIMIENTOS DETALLE", data=TCODetalle.instrumento)
+        
+       <div class="row">
+    <div class="col-md-12">
+        <div class="portlet">
+            <div class="portlet-heading bg-primary">
+                <h5 class="portlet-title">RESULTADO SOT</h5>
+                <div class="clearfix"></div>
+            </div>
+            <div class="portlet-body">
+                
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <div class="row text-center">
+                                        <div class "col-md-12 ">
+                                            RESULTADO Competencia 1<br/><br/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-10">
+                                            <div class="progress  progress-lg">
+                                                <div role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="width: {{0.6*100}}%;" class="progress-bar progress-bar-success">
+                                                    {{0.6*100}}% LOGRO
+                                                </div>
+                                                <div role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="width: {{100-(0.6*100)}}%;" class="progress-bar progress-bar-danger">
+                                                    {{100-(0.6*100)}}% BRECHA
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1"></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <span class="badge badge-primary">2</span>
+                                    Actividades Clave
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge badge-success">5</span>
+                                    Conocimientos
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge badge-danger">6</span>
+                                    Equipos y Herramientas
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                 
+            <div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+@else
+
+        <div class="row">
+                <div class="col-md-6">
+                        @!component('components.Acreditacion.sintesisResultado',titulo = "SÍNTESIS DE RESULTADOS", data = sintesis)
+                </div>
+                <div class="col-md-6">
+                        <div class="portlet">
+                                <div class="portlet-heading bg-primary">
+                                <h5 class="portlet-title">REQUISITOS DE APROBACIÓN</h5>
+                                <div class="clearfix"></div>
+                                </div>
+                                <div id="bg-default" class="panel-collapse collapse in show">
+                                <div class="portlet-body">
+                                        <p>Para la aprobación es necesario:<br/><br/>
+                                        - Test de Conocimientos 100% <br/>
+                                        <!--
+                                        - Observación en Terreno sobre 80% en cada una de sus competencias<br/>
+                                        - Diagnóstico Conductual 100%
+                                        -->
+                                        </p>
+                                </div>
+                                </div>
+                        </div>
+                </div>
+        </div>
+        <!--
+        <div class="row text-center">
+                <div class="col-md-12">
+                        <div class="portlet">
+                                <div class="portlet-heading bg-primary">
+                                        <h5 class="portlet-title">RESULTADO FINAL</h5>
+                                        <div class="clearfix"></div>
+                                </div>
+                                <div id="bg-default" class="panel-collapse collapse in show">
+                                        <div class="portlet-body">
+                                                <p>De acuerdo a la evaluación realizada y los resultados obtenidos, se determina que <strong>Carlos Herrera Sazo Espina</strong> se encuentra como <strong>NO ACREDITADO</strong> para el perfil <strong>Maestro Empalme BT PMT</strong>.</p>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+        </div>
+        -->
+        @!component('components.Acreditacion.resultadoTCO',titulo = "TEST DE CONOCIMIENTOS", data=resultadoTCO)
+
+        @if(conDetalle==1)
+                @!component('components.Acreditacion.resultadoTCODetalle',titulo = "TEST DE CONOCIMIENTOS DETALLE", data=TCODetalle.instrumento)
+        @endif
+
 @endif
 
 @endsection
