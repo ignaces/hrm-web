@@ -10,12 +10,20 @@ class Instrumento {
         var idOpinante = all.idOpinante
         var codigo = all.codigo
         
+console.log(idOpinante);
+console.log(codigo);
+ 
         var obj = {
             "idOpinante":idOpinante,
             "tipoInstrumento":codigo
         };
+
+        
         
         var result = await data.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumento',obj);
+
+        
+
         var instrumento = result.body;
         const todo = request.all();
 
@@ -27,7 +35,7 @@ class Instrumento {
             "procesoPersona":""
         };
 
-        console.log(instrumento);
+        
 
         var resultado = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getPersona',objeto);
         var clasificacion = resultado.body;
