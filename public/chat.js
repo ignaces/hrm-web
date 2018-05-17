@@ -13,10 +13,12 @@ function subscribeToChannel () {
     })
   
     chat.on('message', (message) => {
-        console.log("ddddd")
-      $('.messages').append(`
-        <div class="message"><h3> ${message.username} </h3> <p> ${message.body} </p> </div>
-      `)
+      swal(
+        ' Notificación ',
+        message.body,
+        'info'
+      );  
+      
     })
   }
 function startChat () {

@@ -1,20 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title></title>
-  {{ css('chat') }}
-</head>
-<body>
+@layout('layouts/horizontal')
 
-  @set('username', request.input('username'))
+@section('content')
+    @set('username', request.input('username'))
 
   <div class="chat-container">
     <div class="chat-wrapper">
       @if(username)
         <div class="header">
           <h2>
-            <span>Hello {{ username }}!</span>
+            
             <span class="connected-users"></span>
             <span class="connection-status"></span>
           </h2>
@@ -33,14 +27,22 @@
       @endif
     </div>
   </div>
+@endsection
 
-  <script>
-    window.username = '{{ username }}'
-  </script>
+@section('scripts')
+    <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+    <script>
+        window.username = '{{ username }}'
+    </script>
 
-  {{ script('https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js') }}
-  {{ script('https://unpkg.com/@adonisjs/websocket-client@1.0.9/dist/Ws.browser.js') }}
-  {{ script('https://unpkg.com/jquery@3.3.1/dist/jquery.js') }}
-  {{ script('chat.js') }}
-</body>
-</html>
+    {{ script('https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js') }}
+    {{ script('https://unpkg.com/@adonisjs/websocket-client@1.0.9/dist/Ws.browser.js') }}
+    
+    {{ script('chat.js') }}
+@endsection
+
+@section('pluginsCss')
+    <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    
+@endsection
+

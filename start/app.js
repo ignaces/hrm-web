@@ -73,7 +73,7 @@ edge.global('theme', function (hostname) {
   var hostalias = Env.get('HOSTALIAS', 'localhost');
   //hostname="enel.enovum.cl"
   
-  
+
   if(hostname==hostalias){
     theme = `/themes/${theme}` 
   }else{
