@@ -137,7 +137,7 @@ class Notificaciones {
         }).toArray();
        
         if(errores.length>0){
-            return {error:errores.toArray()}
+            return {error:errores}
         }else{
 
             var envio = await data.execApiPost(request.hostname(),'/Mail/Notificaciones/sendNotificacion',notificacion);  
