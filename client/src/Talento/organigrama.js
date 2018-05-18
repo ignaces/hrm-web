@@ -1,5 +1,16 @@
 
-
+var cColaboradores = new Vue({
+    el: '#cColaboradores',
+    data: {
+        colaboradores: []
+    }
+});
+/*var modalPosicion = new Vue({
+    el: '#modalPosicion',
+    data: {
+        posicion: {cargo:""}
+    }
+});*/
 var cargaOrganigrama = function (organigrama){
 
     var source = [];
@@ -60,8 +71,18 @@ var cargaOrganigrama = function (organigrama){
 }
             
 function clickHandler(sender, args) {
-    console.log(args.node.data)
+    
     $("#modalColaborador").modal('show');
+    cColaboradores.colaboradores=[
+        {idPersona:"ssss",nombre:"Andrrs sadada adaasd"},
+        {idPersona:"ssss",nombre:"Andrrs sadada adaasd"},
+        {idPersona:"ssss",nombre:"Andrrs sadada adaasd"},
+        {idPersona:"ssss",nombre:"Andrrs sadada adaasd"},
+        {idPersona:"ssss",nombre:"Andrrs sadada adaasd"},
+        {idPersona:"ssss",nombre:"Andrrs sadada adaasd"},
+        {idPersona:"ssss",nombre:"Andrrs sadada adaasd"}];
+
+    
     
 }
 
@@ -96,4 +117,4 @@ var getOrganigrama  = function(){
 $(document).ready(function(){
     getOrganigrama();
 });
-            
+

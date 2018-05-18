@@ -1,6 +1,7 @@
  @layout('layouts/horizontal')
 
 @section('scripts')
+    
     <script src="/assets/getOrgChart/js/getorgchart.js"></script>
     <script src="/assets/js/dist/organigrama.min.js"></script>
         <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
@@ -8,7 +9,11 @@
         $('textarea#textarea').maxlength({
             alwaysShow: true
         });
+        
+
+       
         </script>
+        
 @endsection
 
 @section('pluginsCss')
@@ -32,21 +37,21 @@
         </div>    
     </div>
     <div class="modal fade bs-example-modal-lg" id="modalColaborador" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
-            <div class="modal-dialog modal-lg">
+            <div class="modal-dialog modal-lg" id="modalPosicion">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title" id="myLargeModalLabel">Sucesiones Gerente General</h4>
+                        <h4 class="modal-title" id="myLargeModalLabel">Sucesiones @{{posicion.cargo}}</h4>
 
                     </div>
                     <div class="modal-body">
                         <div class="row">
                             <div class="panel panel-border panel-primary">
                                 <div class="panel-heading">
-                                    <h2 class="panel-title">Posibles sucesores para Gerente General</h2>
+                                    <h2 class="panel-title">Posibles sucesores para  @{{posicion.cargo}}</h2>
                                 </div>
                                 <div class="panel-body">
-                                   @!component('components.Talento.colaboradorSquare',{colaboradores:[{idPersona:'DA9344B3-3698-2D9E-AA58-D6DB678ED7BA',nombre:"Delilah Eaton"}]})
+                                   @!component('components.Talento.colaboradorSquare',{colaboradores:'[]'})
                                 </div>    
                             </div>
                         </div>
@@ -122,3 +127,4 @@
             fill: #ffffff;
         }
     </style>
+    
