@@ -11,11 +11,11 @@
         <script src="/assets/plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.min.js"></script>
         <script src="/assets/plugins/select2/js/select2.min.js" type="text/javascript"></script>
         <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
-         <script>
+        <script src="https://unpkg.com/promise-polyfill"></script>
+        <script>
          
          var formValidado = 0;
-            $(document).ready(
-                ()=>{
+            $(document).ready(function(){
                     
                     $('.tooltip-hover').tooltipster();
                     $(".select2").select2({
@@ -37,29 +37,10 @@
 
                     $('.selectpicker').selectpicker();
 
-                    $("form").submit(function() {
 
-                        $('#formRedes select').each(function(key, value) {
-                            
-                            if(this.value == "")
-                            {
-                                formValidado = 0;
-                                swal({
-                                    title:'Advertencia',
-                                    text:'Debes contestar todas las preguntas.',
-                                    type: 'warning',
-                                    confirmButtonColor: '#4fa7f3',
-                                    cancelButtonColor: '#d57171',
-                                    confirmButtonText: 'OK'
-                                });
-                                return false;
-                            }
-                            else
-                            {
-                                formValidado = 1;
-                            }
-                        });
-
+                    
+                    /*
+                    $("#formRedes").submit(function() {
                         if(formValidado == 0)
                         {
                             return false;
@@ -69,8 +50,40 @@
                             return true;
                         }
                     });
-
+                    */
                 });
+
+                function validaEnviaForm()
+                    {
+                        var formValidado = 0;
+                        
+                        $('#formRedes select').each(function(key, value) {
+                            
+
+                            if(this.value == "")
+                            {
+                                formValidado = 0;
+                                swal({
+                                    title:'Advertencia',
+                                    text:'Debes contestar todas las preguntas.',
+                                    type: 'warning',
+                                    confirmButtonColor: '#4fa7f3',
+                                    confirmButtonText: 'Aceptar'
+                                });
+                                formValidado = 0;
+                                return false;
+                            }
+                            else
+                            {
+                                formValidado = 1;
+                            }
+                        });
+
+                        if(formValidado == 1)
+                        {
+                            $("#formRedes").submit();
+                        }
+                    }
         </script>
 @endsection
 @section('content')
@@ -152,7 +165,7 @@
                     </div>
                     
                     @endeach
-                        <button type="submit" class="btn btn-primary" id="btnFinalizar">Finalizar</button>    
+                        <a class="btn btn-primary" id="btnFinalizar" onClick="validaEnviaForm();">Finalizar</a>    
                     </form>
                     
             </div> 
