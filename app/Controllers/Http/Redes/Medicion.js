@@ -13,13 +13,16 @@ class Medicion {
       
       var rPreguntas = await data.execApi(request.hostname(),'/Redes/Instrumento/preguntas',obj);
 
+      //validaEstado
+      var estado = await data.execApi(request.hostname(),'/Redes/Medicion/validaEstado',obj);
+
         const medicion = {codigo:params.codigo,
             preguntas:rPreguntas.body,
             idAplicacion:obj.idAplicacion
         }
         const personas = rPersonas.body
         
-        return view.render('redes/medir',{personas:personas,medicion:medicion})
+        return view.render('redes/medir',{personas:personas,medicion:medicion,estado:estado.body})
     }
     async medirPersona({view,request,response,params}){
       
