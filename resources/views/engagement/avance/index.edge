@@ -1,0 +1,134 @@
+@layout('layouts/horizontal')
+
+
+@section('scripts')
+    <script src="/assets/plugins/transit/jquery.transit.min.js"></script>
+    <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+    <script src="/assets/plugins/jquery-toastr/jquery.toast.min.js" type="text/javascript"></script>
+    <script src="/assets/js/jquery.slimscroll.js"></script>
+    <script src="/assets/js/jquery.scrollTo.min.js"></script> 
+   <script>
+  var scrollInit = function(){
+      $('.color-scroll').slimscroll({
+                    height: 'auto',
+                    color: '#64c5b1',
+                    position: 'right',
+                    size: "5px",
+                });
+    
+  }
+
+    var comEmpresas = new Vue({
+        el: '#empresasEncuestas',
+        data: {
+            empresas: []
+        },
+        directives:{
+            scroll:{
+                componentUpdated:scrollInit
+            }
+        },
+        methods:{
+            getExcel:function(id){
+                window.location.href="/Encuesta/Avance/getExcelAvance?idEncuestaAplicacion="+id;
+            },
+            ver:function(id){
+                $("#idEncuestaAplicacion").val(id);
+                $('form').submit();
+                
+            }
+        }
+    });
+    
+   $(document).ready(function(){
+       comEmpresas.empresas=[];
+   });
+   $("#cmbPeriodo").change(function(){
+       var obj ={
+           idPeriodo:$("#cmbPeriodo").val()
+       }
+       $.ajax({
+            type: "GET",
+            url: "/Engagement/Avance/empresasPeriodo",
+            contentType: "application/json; charset=utf-8",
+            data: obj,
+            dataType: "json", 
+            success: function (msg) {
+              comEmpresas.empresas=msg;
+            }
+        });
+   });
+   </script>
+   
+@endsection
+
+@section('pluginsCss')
+    <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/plugins/jquery-toastr/jquery.toast.min.css" rel="stylesheet" />
+    
+    </style>
+@endsection
+  
+
+@section('content')
+<form action="/Engagement/Avance/encuesta"  method="POST">
+    {{ csrfField() }}
+    <input type="hidden" id="idEncuestaAplicacion" name="idEncuestaAplicacion" value=""/> 
+</form>
+<div class="row">
+    <div class="card-box">
+                            <h4 class="header-title m-t-0 m-b-20">Seleccione Periodo</h4>
+                            <select class="form-control select2" id="cmbPeriodo">
+                                <option>Periodo</option>
+                                    @each(periodo in periodos)
+                                        <option value="{{periodo.id}}">{{periodo.nombre}}</option>
+                                    @endeach
+                                    
+                                    
+                            </select>
+                        </div>
+</div>
+<div class="row" id="empresasEncuestas" v-scroll><!--INICIO FILA EMPRESAS-->
+            <div class="col-md-6 col-lg-3" v-for="empresa in empresas"><!--INICIO TARJETA EMPRESA-->
+                        <div class="company-card card-box">
+                            <img :src="empresa.logo" alt="logo" :class="'company-logo'">
+                            
+                            
+                            <div class="company-detail">
+                                <h4 class=" m-b-5">@{{empresa.nombre}}</h4>
+                                <p>&nbsp;</p>
+                            </div>
+
+                            <hr>
+                            <div class="row color-scroll" style="height: 150px;">
+                            <!--INICIO TARJETA ENCUESTA-->
+                            <div class="card-box m-l-10 m-r-10" v-for="encuesta in empresa.encuestas"  >
+                              <h4 class="header-title m-t-0">@{{encuesta.nombre}}</h4>
+
+                                <div class="text-center">
+                                    <div class="row">
+                                        <div class="col-xs-4" v-for="estado in encuesta.estados">
+                                            <div class="m-t-20 m-b-20">
+                                                <p class="text-uppercase font-11 font-600">@{{estado.texto}}</p>
+                                                <h5 :class="'m-b-0 text-' + estado.class">@{{estado.porcentaje}}%  (@{{estado.cantidad}})</h5>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="row">
+                                        
+                                        <button v-on:click="getExcel(encuesta.id)" class="btn btn-purple waves-effect waves-light"> <i class="fa fa-file-excel-o"></i> <span>Avance</span> </button>
+                                        <button v-on:click="ver(encuesta.id)" class="btn btn-primary waves-effect waves-light"> <i class="fa fa-eye"></i> <span>Ver Más</span> </button>
+                                    </row>
+                                </div>
+                            
+                            </div>
+                            <!--FIN TARJETA ENCUESTA-->
+                            
+                            </div>
+                            
+
+                        </div>
+            </div><!--FIN TARJETA EMPRESA-->
+</div><!--FIN FILA EMPRESAS-->
+@endsection
