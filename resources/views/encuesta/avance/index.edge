@@ -8,6 +8,7 @@
     <script src="/assets/plugins/jquery-toastr/jquery.toast.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src="/assets/plugins/chart.js/chart.min.js"></script>
+    <script src="/assets/js/vue-chartjs.min.js"></script>
     
 <script>
 var idEncuestaAplicacion="{{idEncuestaAplicacion}}";
@@ -33,6 +34,55 @@ setInterval(function(){
         });
 }, 30000);
 var resumen = {{{toJSON(resumen)}}}
+var clasificaciones ={{{toJSON(clasificaciones)}}}
+
+var initBar = function(id,labels,data){
+    
+    Vue.component(id, {
+    extends: VueChartJs.Bar,
+    mounted () {
+        this.renderChart({
+        labels: labels,
+        datasets: data
+        },
+        {responsive: true, maintainAspectRatio: false,scales: {
+            xAxes: [{
+                stacked: true
+            }],
+            yAxes: [{
+                stacked: true
+            }]
+        }})
+    }
+    
+    })
+}
+
+for(var i in clasificaciones){
+
+    //console.log(clasificaciones[i]);
+    var labels =[];
+    var datasets =[];
+    var estados = clasificaciones[i].estados;
+    labels = clasificaciones[i].niveles;
+    
+    for(var e in estados){
+        
+            datasets.push({
+                label: estados[e].texto,
+                backgroundColor: estados[e].color,
+                data: estados[e].data,
+            });
+            
+    }
+    
+    initBar(clasificaciones[i].id,labels,datasets);
+    
+}
+
+
+
+
 var comResumen = new Vue({
         el: '#resumen',
         data: {
@@ -45,13 +95,18 @@ var comResumen = new Vue({
         }
 });
 
-var comResumen = new Vue({
+var comResumenEtiquetas = new Vue({
         el: '#etiquetas',
         data: {
             estados: resumen
         }
 });
-
+var comClasificaciones = new Vue({
+        el: '#comClasificaciones',
+        data: {
+            clasificaciones: clasificaciones
+        }
+});
 
 var initPie = function(){
     var myChart = new Chart(ctx, {
@@ -77,6 +132,8 @@ var initPie = function(){
     });
 }
 initPie();
+
+
 </script>
 @endsection
 
@@ -103,7 +160,7 @@ initPie();
 <div class="row" id="resumen">
 
                     <div class="col-lg-3 col-md-6" v-for="estado in estados">
-                        <div :class="'card-box widget-box-two widget-two-'+estado.color">
+                        <div :class="'card-box widget-box-two widget-two-'+estado.class">
                             <i :class="'fa '+ estado.icono +' widget-two-icon'"></i>
                             <div class="wigdet-two-content">
                                 <p class="m-0 text-uppercase font-bold font-secondary text-overflow" title="Statistics">@{{estado.estadoEncuesta}}</p>
@@ -125,7 +182,7 @@ initPie();
                                     <div class="col-xs-3" v-for="estado in estados">
                                         <div class="m-t-20 m-b-20">
                                             <p class="text-uppercase font-13 font-600">@{{estado.estadoEncuesta}}</p>
-                                            <h5 :class="'m-b-0 text-' + estado.color"> @{{estado.porcentaje}}% (@{{estado.cantidad}})</h5>
+                                            <h5 :class="'m-b-0 text-' + estado.class"> @{{estado.porcentaje}}% (@{{estado.cantidad}})</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -146,28 +203,33 @@ initPie();
                 </div>
                 <!--FIN GRAFICOS-->
                 <!--INICIO DETALLE-->
-                <div class="row">
-                <div class="col-md-12">
+                <div class="row" id="comClasificaciones">
+                <div class="col-md-12" >
+                    @each(clasificacion in clasificaciones)
                         <div class="card-box">
-                        <div class="dropdown pull-right">
-                                <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
-                                    <h3 class="m-0 text-muted"><i class="mdi mdi-dots-horizontal"></i></h3>
-                                </a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Descargar estados</a></li>
-                                    <li><a href="#">Enviar Recordatorios</a></li>
-                                </ul>
-                            </div>
-                            <h4 class="header-title m-t-0">Detalle Encuesta</h4>
+                            <!--<div class="dropdown pull-right">
+                                    <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
+                                        <h3 class="m-0 text-muted"><i class="mdi mdi-dots-horizontal"></i></h3>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#">Descargar estados</a></li>
+                                        <li><a href="#">Enviar Recordatorios</a></li>
+                                    </ul>
+                            </div>-->
+                            <h4 class="header-title m-t-0">Detalle {{clasificacion.nombre}} </h4>
 
-                            <div class="text-center">
-                                <div class="row">
-                                    
+                            <div class="text-center" >
+                                <div class="row" >
+                                      
+                                      
+                                        <{{clasificacion.id}}></{{clasificacion.id}}>
+                                      
                                 </div>
                             </div>
 
                             
                         </div>
+                    @endeach
                     </div>
                 </div>
                 <!--FIN DETALLE-->
