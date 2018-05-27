@@ -2,7 +2,7 @@
 var cColaboradores = new Vue({
     el: '#cColaboradores',
     data: {
-        colaboradores: []
+        posicion: {colaboradores:[]}
     }
 });
 /*var modalPosicion = new Vue({
@@ -73,7 +73,11 @@ var cargaOrganigrama = function (organigrama){
 function clickHandler(sender, args) {
     
     $("#modalColaborador").modal('show');
-    cColaboradores.colaboradores=[
+    //<a class='btn btn-primary' style='z-index:9000' href='/Talento/Talento/fichaTalento?idPersona=" + args.node.data["idPersona"] + "'><i class='fa fa-file'></i>Ficha</a>
+    
+
+    cColaboradores.posicion=args.node.data;
+    cColaboradores.posicion.colaboradores=[
         {idPersona:"ssss",nombre:"Andrrs sadada adaasd"},
         {idPersona:"ssss",nombre:"Andrrs sadada adaasd"},
         {idPersona:"ssss",nombre:"Andrrs sadada adaasd"},
@@ -89,9 +93,7 @@ function clickHandler(sender, args) {
 function renderNodeHandler(sender, args) {
     for (i = 0; i < args.content.length; i++) {
 var texto ="";
-        if (args.node.data["idPersona"] != 'VACANTE') {   
-            texto = "<foreignObject x='200' y='150' width='80%' height='20px'><a class='btn btn-primary' style='z-index:9000' href='/Talento/Talento/fichaTalento?idPersona=" + args.node.data["idPersona"] + "'><i class='fa fa-file'></i>Ficha</a></foreignObject>";
-        }
+        
         if (args.content[i].indexOf(args.node.data["Atributos"]) != -1) {
             texto  += "<foreignObject x='200' y='80' width='80%' height='20px'>" + args.node.data["Atributos"] + "</foreignObject>";
             args.content[i]=texto;

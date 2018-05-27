@@ -30,25 +30,25 @@
     @!component('components.Core.botonera')
     <div class="panel panel-border panel-primary">
         <div class="panel-heading">
-            <h2 class="panel-title">Organigrama Comercial División Supermercados <span class="label label-success pull-right"><span class="flag-icon flag-icon-ar"></span> ARG</span></h2>
+            <h1 class="panel-title">Organigrama Comercial División Supermercados <span class="label label-success pull-right"><span class="flag-icon flag-icon-ar"></span> ARG</span></h1>
         </div>
         <div class="panel-body">
             @!component('components.Talento.organigramaView',{orgChart:orgChart})
         </div>    
     </div>
     <div class="modal fade bs-example-modal-lg" id="modalColaborador" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
-            <div class="modal-dialog modal-lg" id="modalPosicion">
+            <div class="modal-dialog modal-lg" id="cColaboradores">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title" id="myLargeModalLabel">Sucesiones @{{posicion.cargo}}</h4>
+                        <h4 class="modal-title" id="myLargeModalLabel">Sucesiones @{{posicion.Cargo}}</h4>
 
                     </div>
                     <div class="modal-body">
                         <div class="row">
                             <div class="panel panel-border panel-primary">
                                 <div class="panel-heading">
-                                    <h2 class="panel-title">Posibles sucesores para  @{{posicion.cargo}}</h2>
+                                    <h2 class="panel-title">Posibles sucesores para  @{{posicion.Cargo}}</h2>
                                 </div>
                                 <div class="panel-body">
                                    @!component('components.Talento.colaboradorSquare',{colaboradores:'[]'})

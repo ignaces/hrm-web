@@ -1,6 +1,6 @@
-<div class="row" id="cColaboradores">
+<div class="row">
 
-    <div class="col-md-3"  v-for="colaborador in colaboradores">
+    <div class="col-md-3"  v-for="colaborador in posicion.colaboradores">
         <div class="text-center card-box">
             
             <div class="clearfix"></div>
@@ -17,7 +17,7 @@
                
 
                 <button type="button" class="btn btn-primary m-t-20 btn-rounded btn-bordered waves-effect w-md waves-light">Sucesor</button>
-                <a  class="btn btn-primary m-t-20 btn-rounded btn-bordered waves-effect w-md waves-light" href="/Talento/Talento/fichaTalento?idPersona=@{{colaborador.idPersona}}">Ficha</a>
+                <a  class="btn btn-primary m-t-20 btn-rounded btn-bordered waves-effect w-md waves-light" :href="'/Talento/Talento/fichaTalento?idPersona='+colaborador.idPersona">Ficha</a>
                 
 
             </div>
