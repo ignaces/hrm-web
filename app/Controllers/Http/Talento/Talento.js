@@ -254,7 +254,7 @@ class Talento {
 
         //var persona =  session.get('personaLogueada')
         var idPersona = request.input('idPersona')
-        console.log(idPersona)
+        
         var obj = {
             "idPersona":idPersona,
             "idProceso":session.get('procesoOrganigrama')

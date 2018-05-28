@@ -45,7 +45,54 @@
 
                     </div>
                     <div class="modal-body">
-                        <div class="row">
+                        <div class="row" v-if="posicion.idPersona!='VACANTE'">
+                            <div class="panel panel-border panel-primary">
+                                <div class="panel-heading">
+                                    <h2 class="panel-title">Datos Colaborador</h2>
+                                </div>
+                                <div class="panel-body">
+                                   <div class="row">
+
+                                        <div class="col-md-12">
+                                            <div class="text-center card-box">
+                                                
+                                                <div class="clearfix"></div>
+                                                <div class="member-card">
+                                                    <div class="thumb-xl member-thumb m-b-10 center-block">
+                                                        <img :src="posicion.Imagen" class="img-circle img-thumbnail" alt="profile-image">
+                                                        
+                                                    </div>
+
+                                                    <div class="">
+                                                        <h4 class="m-b-5">@{{posicion.Nombre}}</h4>
+                                                        <p class="text-muted"><span class="text-pink">@{{posicion.Cargo}}</span></p>
+                                                        <p class="text-muted" >
+                                                            <i :class="badge.iconoAtributo+' fa-2x m-r-5 '+badge.colorAtributo" v-for="badge in posicion.badges"></i>
+                                                            <i class="fa fa-star fa-2x m-r-5 text-warning" v-if="posicion.critico==1"></i>
+                                                        </p>
+                                                        <p class="text-muted">
+                                                            @{{posicion.edd}} @{{posicion.talentReview}}
+                                                            <i class="fa fa-search fa-2x m-r-5 text-warning" v-if="posicion.lupa==true"></i>
+                                                        </p>
+                                                    </div>
+                                                
+
+                                                    
+                                                    <a  class="btn btn-primary m-t-20 btn-rounded btn-bordered waves-effect w-md waves-light" :href="'/Talento/Talento/fichaTalento?idPersona='+posicion.idPersona">Ficha</a>
+                                                    <a  class="btn btn-primary m-t-20 btn-rounded btn-bordered waves-effect w-md waves-light" :href="'/Talento/Persona/fichaCompromiso?idPersona='+posicion.idPersona">Ficha Compromisos</a>
+                                                    
+
+                                                </div>
+
+                                            </div>
+
+                                        </div> <!-- end col -->
+                                    
+                                    </div>
+                                </div>    
+                            </div>
+                        </div>
+                        <div class="row" v-if="posicion.colaboradores.length>0">
                             <div class="panel panel-border panel-primary">
                                 <div class="panel-heading">
                                     <h2 class="panel-title">Posibles sucesores para  @{{posicion.Cargo}}</h2>
