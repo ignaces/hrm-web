@@ -23,9 +23,12 @@ var cargaOrganigrama = function (organigrama){
         
         var badges = "";
         var lupa=false;
-        if(organigrama[posicion].edd!=organigrama[posicion].valorEdeEq || organigrama[posicion].idCuadrante!=organigrama[posicion].idCuadranteEq){
-            lupa=true;
+        if(organigrama[posicion].valorEdeEq!=undefined){
+            if(organigrama[posicion].valorEdeEq.indexOf(organigrama[posicion].edd)==-1 || organigrama[posicion].idCuadrante!=organigrama[posicion].idCuadranteEq){
+                lupa=true;
+            }
         }
+        
         
         for(var i in organigrama[posicion].atributos){
             badges +="<i class='"+organigrama[posicion].atributos[i].iconoAtributo+" fa-3x m-r-5 "+organigrama[posicion].atributos[i].colorAtributo+"'></i>";
@@ -38,7 +41,7 @@ var cargaOrganigrama = function (organigrama){
             basges="&nbsp";
         }
         var nodo = {
-            id:organigrama[posicion].idPosicion, 
+            id:organigrama[posicion].idPosicion,
             parentId: organigrama[posicion].idPadre,
             Nombre:organigrama[posicion].nombresPersona + " " +organigrama[posicion].apellidoPaterno + " " +organigrama[posicion].apellidoMaterno,
             Cargo:organigrama[posicion].nombre, 
@@ -89,21 +92,32 @@ var cargaOrganigrama = function (organigrama){
         customize: custom 
     });
 }
+var getSucesores  = function(idPosicion){
+    
+    $.ajax({
+        type: "GET",
+        url: "/Talento/Persona/getPosiblesSucesores",
+        contentType: "application/json; charset=utf-8",
+        data: {idPosicion:idPosicion},
+        dataType: "json", 
+        async:false,
+        success: function (msg) {
             
+            cColaboradores.posicion.colaboradores = msg;
+
+        }
+    });   
+}          
 function clickHandler(sender, args) {
     
-    $("#modalColaborador").modal('show');
+    
     
     cColaboradores.posicion=args.node.data;
+    cColaboradores.posicion.id=args.node.id;
     cColaboradores.posicion.colaboradores=[];
-    /*cColaboradores.posicion.colaboradores=[
-        {idPersona:"ssss",nombre:"Andrrs sadada adaasd"},
-        {idPersona:"ssss",nombre:"Andrrs sadada adaasd"},
-        {idPersona:"ssss",nombre:"Andrrs sadada adaasd"},
-        {idPersona:"ssss",nombre:"Andrrs sadada adaasd"},
-        {idPersona:"ssss",nombre:"Andrrs sadada adaasd"},
-        {idPersona:"ssss",nombre:"Andrrs sadada adaasd"},
-        {idPersona:"ssss",nombre:"Andrrs sadada adaasd"}];*/
+    getSucesores(cColaboradores.posicion.id);
+    $("#modalColaborador").modal('show');
+    
 
     
     

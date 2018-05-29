@@ -5,19 +5,56 @@
     <script src="/assets/getOrgChart/js/getorgchart.js"></script>
         <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
         <script>
-            $('textarea#textarea').maxlength({
-                alwaysShow: true
-            });
-        
 
-       
-        </script>
+var cc= new Vue({
+  el: '#app',
+  data: {
+    acciones: [
+        {
+            nombre: 'TR 8. Plan de acción con objetivos claros y seguimiento pautado',
+            objetivo:'All accounts are to be paid within 7 days from receipt of invoice. To be paid by cheque or credit card or direct payment online. If account is not paid within 7 days the credits details supplied as confirmation of work undertaken will be charged the agreed quoted fee noted above.',
+            competencia:'asdasdasad asdadsad',
+            fechaInicio:'20-06-2018',
+            fechaTermino:'12-12-2018',
+            edit: false
+        },
+        {
+            nombre: 'TR 10. Plan de acción con objetivos claros y seguimiento pautado',
+            objetivo:'All accounts are to be paid within 7 days from receipt of invoice. To be paid by cheque or credit card or direct payment online. If account is not paid within 7 days the credits details supplied as confirmation of work undertaken will be charged the agreed quoted fee noted above.',
+            competencia:'asdasdasad asdadsad',
+            fechaInicio:'20-06-2018',
+            fechaTermino:'12-12-2018',
+            edit: false
+        }
+    ]
+  },
+  methods: {
+  	toggleEdit: function(ev, number){
+    	number.edit = !number.edit;
+        
+        // Focus input field
+
+        if(number.edit){
+            
+            Vue.nextTick(function() {
+                
+    			ev.focus();
+	  		})   
+        }
+    },
+    saveEdit: function(ev, number){
+				
+      	this.toggleEdit(ev, number);
+    }
+  }
+})
+</script>
         
 @endsection
 
 @section('pluginsCss')
-    <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
-    <!-- Infobox css -->
+ <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+ <!-- Infobox css -->
  <link rel="stylesheet" href="/assets/plugins/infobox/infobox.css">
  <!-- socialWidget css -->
  <link rel="stylesheet" href="/assets/plugins/socialWidget/socialWidget.css">
@@ -26,6 +63,7 @@
 
 @section('content')
     @!component('components.Core.botonera')
+    @!component('components.Talento.modalAccionFicha')
     <div class="row"> <!--ROW 1 -->  
         <div class="col-md-4"><!--LEFT USER-->
             <div class="box box-widget widget-user-2">      
@@ -90,17 +128,30 @@
      </div><!--ROW 1 END-->  
     <div class="row">
         <div class="col-md-12">
-        <div class="panel panel-border panel-primary">
+        <div class="panel panel-border panel-purple">
             <div class="panel-heading">
-                <h2 class="panel-title">Acciones</h2>
+                
+                <h2 class="panel-title">Acciones
+                <div class="dropdown pull-right">
+                                <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
+                                    <h3 class="m-0 text-muted"><i class="mdi mdi-dots-horizontal"></i></h3>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#" data-toggle="modal" data-target="#modalAccion">Nueva Acción</a></li>
+                                </ul>
+                            </div>
+                </h2>
+                     
             </div>
             <div class="panel-body">
-                
+            
+               @!component('components.Talento.accion',persona=persona)
             </div>    
         </div>
         </div>
         
     </div>
+
 @endsection
 
 

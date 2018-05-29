@@ -6,13 +6,13 @@
             <div class="clearfix"></div>
             <div class="member-card">
                 <div class="thumb-xl member-thumb m-b-10 center-block">
-                    <img src="/assets/images/users/avatar-1.jpg" class="img-circle img-thumbnail" alt="profile-image">
+                    <img :src="colaborador.fotoPersona" class="img-circle img-thumbnail" alt="profile-image">
                     
                 </div>
 
                 <div class="">
-                    <h4 class="m-b-5">@{{colaborador.nombre}}</h4>
-                    <p class="text-muted"><span class="text-pink">Gerente de Marketing Jumbo</span></p>
+                    <h4 class="m-b-5">@{{colaborador.nombresPersona}} @{{colaborador.apellidoPaterno}} @{{colaborador.apellidoMaterno}}</h4>
+                    <p class="text-muted"><span class="text-pink">@{{colaborador.nombre}}</span></p>
                 </div>
                
 

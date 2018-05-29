@@ -18,9 +18,27 @@ class Persona {
        
        
         var persona = resultPersona.body;
-console.log(persona)
+
        
         return view.render('talento/fichaCompromiso' ,  {persona:persona[0], idPersona:idPersona});
+    }
+
+    async getPosiblesSucesores ({view,request, response, auth, session}) {
+        
+        var idPosicion = request.input('idPosicion')
+        
+        var obj = {
+            "idPosicion":idPosicion,
+            "idProceso":session.get('procesoOrganigrama')
+        };
+        
+        var result =  await data.execApi(request.hostname(),'/Talento/Persona/getPosiblesSucesores',obj);
+        
+       
+        var posiciones = result.body;
+
+       
+        response.json(posiciones);
     }
 
 }
