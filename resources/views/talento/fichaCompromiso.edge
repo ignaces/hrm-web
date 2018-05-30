@@ -4,9 +4,13 @@
     
     <script src="/assets/getOrgChart/js/getorgchart.js"></script>
         <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+         <script src="/assets/plugins/moment/moment.js"></script>
+        <script src="/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+        <script src="/assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
         <script>
-
-var cc= new Vue({
+var accionesPredeterminadas = {{{toJSON(accionesPredefinidas)}}};
+var competenciasPredeterminadas = {{{toJSON(competencias)}}};
+var cAcciones= new Vue({
   el: '#app',
   data: {
     acciones: [
@@ -16,6 +20,7 @@ var cc= new Vue({
             competencia:'asdasdasad asdadsad',
             fechaInicio:'20-06-2018',
             fechaTermino:'12-12-2018',
+            indicadores:[{texto:"Experiencia y práctica en el puesto de trabajo"},{texto:"Experiencia y práctica en el puesto de trabajo"}],
             edit: false
         },
         {
@@ -24,6 +29,7 @@ var cc= new Vue({
             competencia:'asdasdasad asdadsad',
             fechaInicio:'20-06-2018',
             fechaTermino:'12-12-2018',
+            indicadores:[],
             edit: false
         }
     ]
@@ -45,8 +51,66 @@ var cc= new Vue({
     saveEdit: function(ev, number){
 				
       	this.toggleEdit(ev, number);
+    },
+    deleteIndicador:function(id){
+        console.log(this)
     }
   }
+})
+var cForm= new Vue({
+  el: '#formulario',
+  data: {
+    textoIndicador:"",  
+    accionesPredeterminadas:accionesPredeterminadas,
+    competenciasPredeterminadas:competenciasPredeterminadas,
+    accion: 
+        {
+            id:'',
+            idAccionPredeterminada:'',
+            nombre: '',
+            objetivo:'',
+            competencia:'',
+            fechaInicio:'',
+            fechaTermino:'',
+            indicadores:[],
+            edit: false
+        }
+    
+  },
+  methods: {
+    addIndicador:function () {
+        if(cForm.textoIndicador!=""){
+            cForm.accion.indicadores.push({texto:cForm.textoIndicador})
+        }
+        
+    },
+    deleteIndicador:function () {
+        cForm.accion.indicadores.pop(this)
+    },
+    addAccion:function () {
+        cAcciones.acciones.push(cForm.accion);
+        $("#modalAccion").modal("hide")
+    }
+  }
+})
+
+$(document).ready(function(){
+    $('#date-range').datepicker({
+        format: 'dd/mm/yyyy',
+        toggleActive: true,
+        locale: {
+            applyLabel: 'Submit',
+            cancelLabel: 'Cancel',
+            fromLabel: 'From',
+            toLabel: 'To',
+            customRangeLabel: 'Custom',
+            daysOfWeek: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+            monthNames: ['January', 'February', 'March', 'April', 'Mayo', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            firstDay: 1
+        }
+    });
+     
+    
 })
 </script>
         

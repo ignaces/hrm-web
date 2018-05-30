@@ -96,7 +96,22 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                     
+                                     <div class="table-responsive" v-if="accion.indicadores.length>0">
+                                            <table class="table m-t-30">
+                                                <thead>
+                                                <tr>
+                                                    <th class="text-primary">Indicador</th>
+                                                </tr></thead>
+                                                <tbody>
+                                                <tr v-for="indicador in accion.indicadores">
+                                                    
+                                                    <td>
+                                                        @{{indicador.texto}}
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                    </div>
 
                                 
 

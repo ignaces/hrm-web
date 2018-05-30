@@ -15,12 +15,17 @@ class Persona {
         };
         
         var resultPersona =  await data.execApi(request.hostname(),'/Talento/Persona/getPersona',obj);
-       
-       
+        var resultAcciones =  await data.execApi(request.hostname(),'/Talento/Accion/getAccionesPredefinidas',{});
+        var resultCompetencias =  await data.execApi(request.hostname(),'/Talento/Accion/getCompetencias',{});
         var persona = resultPersona.body;
 
        
-        return view.render('talento/fichaCompromiso' ,  {persona:persona[0], idPersona:idPersona});
+        return view.render('talento/fichaCompromiso' ,  {
+                persona:persona[0], 
+                idPersona:idPersona,
+                accionesPredefinidas:resultAcciones.body,
+                competencias:resultCompetencias.body
+            });
     }
 
     async getPosiblesSucesores ({view,request, response, auth, session}) {
