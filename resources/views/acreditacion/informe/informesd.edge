@@ -22,11 +22,14 @@
 
 @!component('components.Acreditacion.encabezadoAcreditacion',titulo="IDENTIFICACIÓN", data={clasificacion:clasificacion})
 
+
+
 @if(cliente=='metro')
 
 
         <div class="row">
                 <div class="col-md-6">
+                        @!component('components.Acreditacion.sintesisResultado',titulo = "SÍNTESIS DE RESULTADOS", data = sintesis)
                         <div class="row">
                                 <div class="col-md-12">
                                         <div class="portlet">
@@ -116,101 +119,6 @@
         </div>
 
         
-       <div class="row">
-    <div class="col-md-12">
-        <div class="portlet">
-            <div class="portlet-heading bg-primary">
-                <h5 class="portlet-title">RESULTADO SOT</h5>
-                <div class="clearfix"></div>
-            </div>
-            <div class="portlet-body">
-                
-                    <div class="row">
-                        <div class="col-md-6">
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <div class="row text-center">
-                                        <div class "col-md-12 ">
-                                            RESULTADO Competencia 1<br/><br/>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1"></div>
-                                        <div class="col-md-10">
-                                            <div class="progress  progress-lg">
-                                                <div role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="width: {{0.6*100}}%;" class="progress-bar progress-bar-success">
-                                                    {{0.6*100}}% LOGRO
-                                                </div>
-                                                <div role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="width: {{100-(0.6*100)}}%;" class="progress-bar progress-bar-danger">
-                                                    {{100-(0.6*100)}}% BRECHA
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-1"></div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-md-6">
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <div class="col-lg-4">
-                                        Actividades Clave
-                                    </div>
-                                    <div class="col-lg-8">
-                                        <div class="progress  progress-lg">
-                                                <div role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="width: 50%;" class="progress-bar progress-bar-success">
-                                                                50% LOGRO
-                                                        </div>
-                                                        <div role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="width: 50%;" class="progress-bar progress-bar-danger">
-                                                                50% BRECHA
-                                                        </div>
-                                        </div>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                        
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="col-lg-4">
-                                        Conocimientos
-                                    </div>
-                                    <div class="col-lg-8">
-                                        <div class="progress  progress-lg">
-                                                <div role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="width: 50%;" class="progress-bar progress-bar-success">
-                                                                50% LOGRO
-                                                        </div>
-                                                        <div role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="width: 50%;" class="progress-bar progress-bar-danger">
-                                                                50% BRECHA
-                                                        </div>
-                                        </div>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </li>
-                                <li class="list-group-item">
-                                    
-                                    <div class="col-lg-4">
-                                       Equipos y Herramientas
-                                    </div>
-                                    <div class="col-lg-8">
-                                        <div class="progress  progress-lg">
-                                                <div role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="width: 50%;" class="progress-bar progress-bar-success">
-                                                                50% LOGRO
-                                                        </div>
-                                                        <div role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="width: 50%;" class="progress-bar progress-bar-danger">
-                                                                50% BRECHA
-                                                        </div>
-                                        </div>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                 
-            <div>
-        </div>
-    </div>
-</div>
 
 
 
@@ -261,6 +169,13 @@
         </div>
         -->
         @!component('components.Acreditacion.resultadoTCO',titulo = "TEST DE CONOCIMIENTOS", data=resultadoTCO)
+
+        @!component('components.Acreditacion.resultadoSOT',titulo = "SET DE OBSERVACIONES EN TERRENO", data=resultadoTCO)
+
+        @!component('components.Acreditacion.resultadoEIC',titulo = "EVALUACION DE INCIDENTES CRITICOS", data=resultadoTCO)
+
+        
+
 
         @if(conDetalle==1)
                 @!component('components.Acreditacion.resultadoTCODetalle',titulo = "TEST DE CONOCIMIENTOS DETALLE", data=TCODetalle.instrumento)

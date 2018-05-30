@@ -13,15 +13,7 @@
         
         } 
 
-        async empresasPeriodo({ view,request, response, auth, session }){
-            var idPeriodo = request.input("idPeriodo");
-            
-            var result = await data.execApi(request.hostname(),'/Engagement/Empresa/list',{idPeriodo:idPeriodo});
-
-            const empresas = result.body;
-             
-           return empresas;
-        }
+       
         async encuesta  ({ view,request, response, auth, session }) {
             var id = request.input("idEncuestaAplicacion");
             
