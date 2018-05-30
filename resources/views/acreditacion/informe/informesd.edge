@@ -1,10 +1,5 @@
-@layout('layouts/horizontal')
-
-@section('scripts')
-        <script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script>
-@endsection  
-
-@section('content')
+@layout('layouts/horizontal') @section('scripts')
+<script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script> @endsection @section('content')
 
 <div class="row">
         <div class="col-md-12 text-center">
@@ -13,112 +8,60 @@
         </div>
 </div>
 
-@!component('components.Core.botonera',botones=[{
-        texto:"PDF",
-        icono:"fa fa-file-pdf-o",
-        link:"/Acreditacion/Informe/getPdf?procesoPersona="+idProcesoPersona+"&cd="+conDetalle
-        }]
-)
-
+@!component('components.Core.botonera',botones=[{ texto:"PDF", icono:"fa fa-file-pdf-o", link:"/Acreditacion/Informe/getPdf?procesoPersona="+idProcesoPersona+"&cd="+conDetalle
+}] ) 
 @!component('components.Acreditacion.encabezadoAcreditacion',titulo="IDENTIFICACIÓN", data={clasificacion:clasificacion})
-
-
 
 @if(cliente=='metro')
 
 
-        <div class="row">
-                <div class="col-md-6">
-                        @!component('components.Acreditacion.sintesisResultado',titulo = "SÍNTESIS DE RESULTADOS", data = sintesis)
-                        <div class="row">
-                                <div class="col-md-12">
-                                        <div class="portlet">
-                                        <div class="portlet-heading bg-primary">
-                                                <h5 class="portlet-title">Sintesis de Resultados</h5>
-                                                <div class="clearfix"></div>
-                                        </div>
-                                        <div id="bg-default" class="panel-collapse collapse in show">
-                                                <div class="portlet-body">
-                                                <div class="row">
-                                                <div class="col-md-2">
-                                                
-                                                </div>
-                                                <div class="col-md-8">
-                                               
-                                                <div class="row">
-                                                        <div class="col-md-4 text-center"><h3><i class="dripicons-document-new"></i></h3></div>
-                                                        <div class="col-md-4 text-center"><h5>Set de Observacion en terreno</h5></div>
-                                                        <div class="col-md-4 text-center">
-                                                        <h5>
-                                                                
-                                                                <span class="label label-danger">Reprobado</span>
-                                                        </h5>
-                                                        </div>
-                                                </div>
-                                               
-                                                
-                                                <!--
-                                                <div class="row">
-                                                        <div class="col-md-4 text-center"><h3><i class="dripicons-clipboard"></i></h3></div>
-                                                        <div class="col-md-4 text-center"><h5>Observación en Terreno</h5></div>
-                                                        <div class="col-md-4 text-center"><h5><span class="label label-danger">Reprobado</span></h5></div>
-                                                </div>
-                                                <div class="row">
-                                                        <div class="col-md-4 text-center"><h3><i class="dripicons-search"></i></h3></div>
-                                                        <div class="col-md-4 text-center"><h5>Diagnóstico Conductual</h5></div>
-                                                        <div class="col-md-4 text-center"><h5><span class="label label-success">Aprobado</span></h5></div>
-                                                </div>
-                                                -->
-                                                </div>
-                                                <div class="col-md-2">
-                                                
-                                                </div>
-                                                </div>
-
-                                                </div>
-                                        </div>
-                                        </div>
-                                </div>
-                                </div>
-                </div>
-                <div class="col-md-6">
-                        <div class="portlet">
-                                <div class="portlet-heading bg-primary">
+<div class="row">
+        <div class="col-md-6">
+                @!component('components.Acreditacion.sintesisResultado',titulo = "SÍNTESIS DE RESULTADOS", data = sintesis)
+        </div>
+        <div class="col-md-6">
+                <div class="portlet">
+                        <div class="portlet-heading bg-primary">
                                 <h5 class="portlet-title">REQUISITOS DE APROBACIÓN</h5>
                                 <div class="clearfix"></div>
-                                </div>
-                                <div id="bg-default" class="panel-collapse collapse in show">
+                        </div>
+                        <div id="bg-default" class="panel-collapse collapse in show">
                                 <div class="portlet-body">
-                                        <p>Para la aprobación es necesario:<br/><br/>
-                                        - Set de Observación en Terreno 100% <br/>
-                                        <!--
+                                        <p>Para la aprobación es necesario:
+                                                <br/>
+                                                <br/> - Set de Observación en Terreno 100%
+                                                <br/>
+                                                <!--
                                         - Observación en Terreno sobre 80% en cada una de sus competencias<br/>
                                         - Diagnóstico Conductual 100%
                                         -->
                                         </p>
                                 </div>
-                                </div>
                         </div>
                 </div>
         </div>
-        
-        <div class="row text-center">
-                <div class="col-md-12">
-                        <div class="portlet">
-                                <div class="portlet-heading bg-primary">
-                                        <h5 class="portlet-title">RESULTADO FINAL</h5>
-                                        <div class="clearfix"></div>
-                                </div>
-                                <div id="bg-default" class="panel-collapse collapse in show">
-                                        <div class="portlet-body">
-                                                <p>De acuerdo a la evaluación realizada y los resultados obtenidos, se determina que <strong>{{clasificacion.nombres}} {{clasificacion.apellidoPaterno}} {{clasificacion.apellidoMaterno}}</strong> se encuentra como <strong>NO ACREDITADO</strong>.</p>
-                                        </div>
-                                </div>
-                        </div>
-                </div>
-        </div>
+</div>
 
-        
+<div class="row text-center">
+        <div class="col-md-12">
+                <div class="portlet">
+                        <div class="portlet-heading bg-primary">
+                                <h5 class="portlet-title">RESULTADO FINAL</h5>
+                                <div class="clearfix"></div>
+                        </div>
+                        <div id="bg-default" class="panel-collapse collapse in show">
+                                <div class="portlet-body">
+                                        <p>De acuerdo a la evaluación realizada y los resultados obtenidos, se determina que
+                                                <strong>{{clasificacion.nombres}} {{clasificacion.apellidoPaterno}} {{clasificacion.apellidoMaterno}}</strong>
+                                                se encuentra como
+                                                <strong>NO ACREDITADO</strong>.</p>
+                                </div>
+                        </div>
+                </div>
+        </div>
+</div>
+
+
 
 
 
@@ -127,31 +70,33 @@
 
 @else
 
-        <div class="row">
-                <div class="col-md-6">
-                        @!component('components.Acreditacion.sintesisResultado',titulo = "SÍNTESIS DE RESULTADOS", data = sintesis)
-                </div>
-                <div class="col-md-6">
-                        <div class="portlet">
-                                <div class="portlet-heading bg-primary">
+<div class="row">
+        <div class="col-md-6">
+                @!component('components.Acreditacion.sintesisResultado',titulo = "SÍNTESIS DE RESULTADOS", data = sintesis)
+        </div>
+        <div class="col-md-6">
+                <div class="portlet">
+                        <div class="portlet-heading bg-primary">
                                 <h5 class="portlet-title">REQUISITOS DE APROBACIÓN</h5>
                                 <div class="clearfix"></div>
-                                </div>
-                                <div id="bg-default" class="panel-collapse collapse in show">
+                        </div>
+                        <div id="bg-default" class="panel-collapse collapse in show">
                                 <div class="portlet-body">
-                                        <p>Para la aprobación es necesario:<br/><br/>
-                                        - Test de Conocimientos 100% <br/>
-                                        <!--
+                                        <p>Para la aprobación es necesario:
+                                                <br/>
+                                                <br/> - Test de Conocimientos 100%
+                                                <br/>
+                                                <!--
                                         - Observación en Terreno sobre 80% en cada una de sus competencias<br/>
                                         - Diagnóstico Conductual 100%
                                         -->
                                         </p>
                                 </div>
-                                </div>
                         </div>
                 </div>
         </div>
-        <!--
+</div>
+<!--
         <div class="row text-center">
                 <div class="col-md-12">
                         <div class="portlet">
@@ -168,19 +113,12 @@
                 </div>
         </div>
         -->
-        @!component('components.Acreditacion.resultadoTCO',titulo = "TEST DE CONOCIMIENTOS", data=resultadoTCO)
+        @!component('components.Acreditacion.resultadoTCO',titulo = "TEST DE CONOCIMIENTOS", data=resultadoTCO) 
+        @!component('components.Acreditacion.resultadoSOT',titulo = "SET DE OBSERVACIONES EN TERRENO", data=resultadoSOT) 
+        @!component('components.Acreditacion.resultadoEIC',titulo = "EVALUACION DE INCIDENTES CRITICOS", data=resultadoTCO) 
 
-        @!component('components.Acreditacion.resultadoSOT',titulo = "SET DE OBSERVACIONES EN TERRENO", data=resultadoTCO)
-
-        @!component('components.Acreditacion.resultadoEIC',titulo = "EVALUACION DE INCIDENTES CRITICOS", data=resultadoTCO)
-
-        
-
-
-        @if(conDetalle==1)
-                @!component('components.Acreditacion.resultadoTCODetalle',titulo = "TEST DE CONOCIMIENTOS DETALLE", data=TCODetalle.instrumento)
-        @endif
-
-@endif
-
+        @if(conDetalle==1) 
+                @!component('components.Acreditacion.resultadoTCODetalle',titulo = "TEST DE CONOCIMIENTOS DETALLE", data=TCODetalle.instrumento) 
+        @endif 
+@endif 
 @endsection
