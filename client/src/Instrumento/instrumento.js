@@ -59,7 +59,7 @@ $(document).ready(function(){
             url: "/Instrumento/Instrumento/putRespuesta",
             contentType: "application/json; charset=utf-8",
             data: obj,
-            dataType: "json", 
+            dataType: "json",   
             success: function (msg) {
                 console.log("OK?23");
 

@@ -9,9 +9,6 @@ class Instrumento {
        
         var idOpinante = all.idOpinante
         var codigo = all.codigo
-        
-console.log(idOpinante);
-console.log(codigo);
  
         var obj = {
             "idOpinante":idOpinante,
