@@ -6,6 +6,7 @@
         <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
          <script src="/assets/plugins/moment/moment.js"></script>
         <script src="/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+        <script src="/assets/plugins/bootstrap-datepicker/locales/es.js"></script>
         <script src="/assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
         <script>
 var accionesPredeterminadas = {{{toJSON(accionesPredefinidas)}}};
@@ -66,9 +67,11 @@ var cForm= new Vue({
     accion: 
         {
             id:'',
-            idAccionPredeterminada:'',
+            idAccionPredeterminada:'-1',
+            idCompetencia:'-1',
             nombre: '',
             objetivo:'',
+            apoyoGerente:'',
             competencia:'',
             fechaInicio:'',
             fechaTermino:'',
@@ -77,10 +80,26 @@ var cForm= new Vue({
         }
     
   },
+  mounted() {
+      
+      $("#date-range").datepicker({
+            format: 'dd-mm-yyyy',
+            toggleActive: true,
+            language: 'es'
+            }).on(
+     		"changeDate", function(date) {
+                 
+                 cForm.accion.fechaInicio = $('#start').val();
+                 cForm.accion.fechaTermino = $('#end').val();
+                }
+		);
+    },
   methods: {
     addIndicador:function () {
         if(cForm.textoIndicador!=""){
+
             cForm.accion.indicadores.push({texto:cForm.textoIndicador})
+            cForm.textoIndicador="";
         }
         
     },
@@ -88,30 +107,25 @@ var cForm= new Vue({
         cForm.accion.indicadores.pop(this)
     },
     addAccion:function () {
-        cAcciones.acciones.push(cForm.accion);
-        $("#modalAccion").modal("hide")
+        
+        $.ajax({
+            type: "GET",
+            url: "/Talento/Persona/addAccion",
+            contentType: "application/json; charset=utf-8",
+            data: {accion:cForm.accion},
+            dataType: "json", 
+            async:false,
+            success: function (msg) {
+                $("#modalAccion").modal("hide");
+
+        }
+    });   
+        
     }
   }
 })
 
-$(document).ready(function(){
-    $('#date-range').datepicker({
-        format: 'dd/mm/yyyy',
-        toggleActive: true,
-        locale: {
-            applyLabel: 'Submit',
-            cancelLabel: 'Cancel',
-            fromLabel: 'From',
-            toLabel: 'To',
-            customRangeLabel: 'Custom',
-            daysOfWeek: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
-            monthNames: ['January', 'February', 'March', 'April', 'Mayo', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-            firstDay: 1
-        }
-    });
-     
-    
-})
+
 </script>
         
 @endsection
@@ -162,7 +176,7 @@ $(document).ready(function(){
                                     </div>
                                     <span class="progress-description text-white">
                                         2018
-                                        </span>
+                                    </span>
                                 </div>
                                 <!-- /.info-box-content -->
                                 </div>

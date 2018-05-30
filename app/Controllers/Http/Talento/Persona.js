@@ -45,6 +45,24 @@ class Persona {
        
         response.json(posiciones);
     }
+    async addAccion ({view,request, response, auth, session}) {
+        
+        var acciones = request.get('acciones')
+        
+        
+        var obj = {
+            "idPosicion":idPosicion,
+            "idProceso":session.get('procesoOrganigrama')
+        };
+        
+        //var result =  await data.execApi(request.hostname(),'/Talento/Persona/getPosiblesSucesores',obj);
+        
+       
+        //var posiciones = result.body;
+
+       
+        response.json({});
+    }
 
 }
 module.exports = Persona

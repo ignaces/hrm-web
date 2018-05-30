@@ -15,8 +15,8 @@
                                 <div class="form-group row">
                                     <label class="col-3 col-form-label">Acción</label>
                                     <div class="col-9">
-                                        <select id="cmbAccion" class="form-control">
-                                            <option selected disabled>Seleccione una acción...</option>
+                                        <select class="form-control" v-model="accion.idAccionPredeterminada">
+                                            <option selected disabled  value="-1">Seleccione una acción...</option>
                                             <option v-for="accionPredeterminada in accionesPredeterminadas" v-bind:value="accionPredeterminada.id">
                                                 @{{ accionPredeterminada.accion }}
                                             </option>
@@ -26,27 +26,33 @@
                                 <div class="form-group row">
                                     <label for="inputEmail3" class="col-3 col-form-label">Objetivo</label>
                                     <div class="col-9">
-                                        <textarea id="txtObjetivo" class="form-control" maxlength="225" rows="3" placeholder="Este es el objetivo de la acción"></textarea>
+                                        <textarea id="txtObjetivo" class="form-control" v-model="accion.objetivo" maxlength="225" rows="3" placeholder="Este es el objetivo de la acción"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-3 col-form-label">Competencia</label>
                                     <div class="col-9">
-                                        <select id="cmbCompetencia" class="form-control">
-                                            <option selected disabled>Seleccione una competencia...</option>
+                                        <select id="cmbCompetencia" class="form-control" v-model="accion.idCompetencia">
+                                            <option selected disabled value="-1">Seleccione una competencia...</option>
                                             <option v-for="competencia in competenciasPredeterminadas" v-bind:value="competencia.id">
                                                 @{{ competencia.nombre }}
                                             </option>
                                         </select>
                                     </div>
                                 </div>  
+                                <div class="form-group row">
+                                    <label for="inputEmail3" class="col-3 col-form-label">Apoyo del Gerente</label>
+                                    <div class="col-9">
+                                        <textarea id="txtApoyoGerente" class="form-control" v-model="accion.apoyoGerente" maxlength="225" rows="3" placeholder="Apoyo del Gerente - Distintos compromisos del gerente que ayudarán al colaborador en el proceso de desarrollo."></textarea>
+                                    </div>
+                                </div>
                                <div class="form-group row">
                                     <label>Fecha inicio / fin</label>
                                     <div>
-                                        <div class="input-daterange input-group" id="date-range">
-                                            <input type="text" class="form-control" name="start" />
+                                        <div class="input-daterange input-group" id="date-range" >
+                                            <input type="text" class="form-control" name="start" id="start"  />
                                             <span class="input-group-addon bg-custom text-white b-0">hasta</span>
-                                            <input type="text" class="form-control" name="end" />
+                                            <input type="text" class="form-control" name="end" id="end"/>
                                         </div>
                                     </div>
                                 </div>
