@@ -1,5 +1,7 @@
-@layout('layouts/horizontal') @section('scripts')
-<script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script> @endsection @section('content')
+@layout('layouts/horizontal') 
+@section('scripts')
+<script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script> 
+@endsection @section('content')
 
 <div class="row">
         <div class="col-md-12 text-center">
@@ -8,8 +10,7 @@
         </div>
 </div>
 
-@!component('components.Core.botonera',botones=[{ texto:"PDF", icono:"fa fa-file-pdf-o", link:"/Acreditacion/Informe/getPdf?procesoPersona="+idProcesoPersona+"&cd="+conDetalle
-}] ) 
+@!component('components.Core.botonera',botones=[{ texto:"PDF", icono:"fa fa-file-pdf-o", link:"/Acreditacion/Informe/getPdf?procesoPersona="+idProcesoPersona+"&cd="+conDetalle}] ) 
 @!component('components.Acreditacion.encabezadoAcreditacion',titulo="IDENTIFICACIÓN", data={clasificacion:clasificacion})
 
 @if(cliente=='metro')
