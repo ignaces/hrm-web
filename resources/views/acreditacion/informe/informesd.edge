@@ -64,7 +64,7 @@
                 @!component('components.Acreditacion.resultadoTCO',titulo = "TEST DE CONOCIMIENTOS", data=resultadoTCO) 
         @endif
 
-        @if(resultadoSOT != "")
+        @if(resultadoSOT.competencias != "")
                 @!component('components.Acreditacion.resultadoSOT',titulo = "SET DE OBSERVACIONES EN TERRENO", data=resultadoSOT) 
         @endif
 
