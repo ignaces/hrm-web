@@ -15,7 +15,10 @@ class Persona {
         };
         
         var resultPersona =  await data.execApi(request.hostname(),'/Talento/Persona/getPersona',obj);
+        var resultPlanDesarrollo =  await data.execApi(request.hostname(),'/Talento/Accion/getPlanDesarrollo',obj);
+        
         var resultAcciones =  await data.execApi(request.hostname(),'/Talento/Accion/getAccionesPredefinidas',{});
+        
         var resultCompetencias =  await data.execApi(request.hostname(),'/Talento/Accion/getCompetencias',{});
         var persona = resultPersona.body;
 
@@ -24,14 +27,15 @@ class Persona {
                 persona:persona[0], 
                 idPersona:idPersona,
                 accionesPredefinidas:resultAcciones.body,
-                competencias:resultCompetencias.body
+                competencias:resultCompetencias.body,
+                planDesarrollo:resultPlanDesarrollo.body
             });
     }
 
     async getPosiblesSucesores ({view,request, response, auth, session}) {
         
         var idPosicion = request.input('idPosicion')
-        
+        var idPersona = request.input('idPersona')
         var obj = {
             "idPosicion":idPosicion,
             "idProceso":session.get('procesoOrganigrama')
@@ -47,21 +51,23 @@ class Persona {
     }
     async addAccion ({view,request, response, auth, session}) {
         
-        var acciones = request.get('acciones')
-        
-        
+        var accion = request.get('acciones')
+        var idPlan = request.input('idPlan')
+       
         var obj = {
-            "idPosicion":idPosicion,
+        
+            "accion":accion,
+            "idPlan":idPlan,
             "idProceso":session.get('procesoOrganigrama')
         };
         
-        //var result =  await data.execApi(request.hostname(),'/Talento/Persona/getPosiblesSucesores',obj);
+        var result =  await data.execApiPost(request.hostname(),'/Talento/Accion/addAccion',obj);
         
-       
-        //var posiciones = result.body;
+        var resultPlanDesarrollo =  await data.execApi(request.hostname(),'/Talento/Accion/getPlanDesarrolloById',obj);
+        var acciones = resultPlanDesarrollo.body.acciones;
 
        
-        response.json({});
+        response.json(acciones);
     }
 
 }
