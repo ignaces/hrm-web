@@ -6,7 +6,7 @@
                 <div class="clearfix"></div>
             </div>
             <div class="portlet-body">
-                @each(item in data)
+                @each(item in data.competencias)
                     <div class="row">
                         <div class="col-md-6">
                             <ul class="list-group">
@@ -20,11 +20,11 @@
                                         <div class="col-md-1"></div>
                                         <div class="col-md-10">
                                             <div class="progress  progress-lg">
-                                                <div role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="width: {{item.valor*100}}%;" class="progress-bar progress-bar-success">
-                                                    {{item.valor*100}}% LOGRO
+                                                <div role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="width: {{item.logro}}%;" class="progress-bar progress-bar-success">
+                                                    {{item.logro}}% LOGRO
                                                 </div>
-                                                <div role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="width: {{100-(item.valor*100)}}%;" class="progress-bar progress-bar-danger">
-                                                    {{100-(item.valor*100)}}% BRECHA
+                                                <div role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="width: {{item.brecha}}%;" class="progress-bar progress-bar-danger">
+                                                    {{item.brecha}}% BRECHA
                                                 </div>
                                             </div>
                                         </div>
@@ -45,11 +45,11 @@
                                         </div>
                                         <div class="col-lg-8">
                                         <div class="progress  progress-lg">
-                                            <div role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="width: {{instrumento.totalBuenas / instrumento.total * 100 }}%;" class="progress-bar progress-bar-success">
-                                                {{instrumento.totalBuenas / instrumento.total * 100 }}% LOGRO
+                                            <div role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="width: {{instrumento.logro}}%;" class="progress-bar progress-bar-success">
+                                                {{instrumento.logro}}% LOGRO
                                             </div>
-                                            <div role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="width: {{instrumento.totalMalas / instrumento.total * 100 }}%;" class="progress-bar progress-bar-danger">
-                                                {{instrumento.totalMalas / instrumento.total * 100 }}% BRECHA
+                                            <div role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="width: {{instrumento.brecha}}%;" class="progress-bar progress-bar-danger">
+                                                {{instrumento.brecha}}% BRECHA
                                             </div>
                                         </div>
                                         </div>

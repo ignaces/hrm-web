@@ -35,6 +35,8 @@ class Informe {
         var resultSOT = await data.execApi(request.hostname(), '/Acreditacion/Informe/getResultadoSOT', obj);
         var resultadoSOT = resultSOT.body.data;
 
+        console.log(resultadoSOT)
+
         var resultTCODetalle = await data.execApi(request.hostname(), '/Acreditacion/Informe/getInstrumentosTCO', obj);
         var resultadoTCODetalle = resultTCODetalle.body.data;
 
