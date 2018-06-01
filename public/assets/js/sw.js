@@ -23,7 +23,7 @@ limitations under the License.
       '/assets/js/metisMenu.min.js',
       '/assets/js/waves.js',
       '/assets/js/jquery.slimscroll.js',
-      '/assets/plugins/bootstrap-select/js/bootstrap-select.min.js" type="text/javascript',
+      '/assets/plugins/bootstrap-select/js/bootstrap-select.min.js',
       '/assets/js/dist/notificacionesSistema.min.js',
       '/themes/horizontal/assets/js/jquery.core.js',
       '/themes/horizontal/assets/js/jquery.app.js',
