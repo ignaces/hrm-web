@@ -74,7 +74,7 @@ limitations under the License.
     });
    // I'm a new service worker
   
-   self.addEventListener('fetch', function(event) {
+   self.addEventListener('fetch', function(e) {
     console.log('[ServiceWorker] Fetch', e.request.url);
     e.respondWith(
       caches.match(e.request).then(function(response) {
