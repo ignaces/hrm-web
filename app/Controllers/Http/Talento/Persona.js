@@ -22,7 +22,7 @@ class Persona {
         var resultCompetencias =  await data.execApi(request.hostname(),'/Talento/Accion/getCompetencias',{});
         var persona = resultPersona.body;
 
-       
+        console.log(resultPlanDesarrollo.body)
         return view.render('talento/fichaCompromiso' ,  {
                 persona:persona[0], 
                 idPersona:idPersona,

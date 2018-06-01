@@ -12,7 +12,10 @@
     </template>
 </div>-->
                     <div class="col-md-12" id="app">
-                        <div class="card-box" v-for="accion in acciones">
+                        <div class="card-box"  v-if="acciones.length==0">
+                            <p>No hay aciones creadas.  Para crear una nueva acción haz click en los tres puntos (<i class="mdi mdi-dots-horizontal"></i>) en la esquina derecha de este panel.</p>
+                        </div>
+                        <div class="card-box" v-for="accion in acciones" v-if="acciones.length>0">
                         <div class="dropdown pull-right">
                                 <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
                                     <h3 class="m-0 text-muted"><i class="mdi mdi-dots-horizontal"></i></h3>
@@ -21,7 +24,7 @@
                                     <li><a href="#">Editar</a></li>
                                     <li><a href="#">Eliminar</a></li>
                                 </ul>
-                            </div>
+                        </div>
                             <h4 class="m-t-0 m-b-30 header-title text-primary">@{{accion.nombre}}</h4>                               
                                     
                             <hr\>
