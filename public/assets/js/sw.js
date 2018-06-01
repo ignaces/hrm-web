@@ -15,10 +15,38 @@ limitations under the License.
 */
 (function() {
     'use strict';
-  
+    var filesToCache = [
+      '/',
+      '/assets/js/jquery.min.js',
+      '/assets/js/bootstrap.min.js',
+      '/assets/js/metisMenu.min.js',
+      '/assets/js/waves.js',
+      '/assets/js/jquery.slimscroll.js',
+      '/assets/plugins/bootstrap-select/js/bootstrap-select.min.js" type="text/javascript',
+      '/assets/js/dist/notificacionesSistema.min.js',
+      '/themes/horizontal/assets/js/jquery.core.js',
+      '/themes/horizontal/assets/js/jquery.app.js',
+      '/assets/plugins/tooltipster/tooltipster.bundle.min.js',
+      '/themes/horizontal/assets/js/modernizr.min.js',
+      '/assets/js/dist/Talento.min.js',
+      '/assets/css/bootstrap.min.css',
+      '/assets/css/core.css',
+      '/assets/css/components.css',
+      '/assets/css/icons.css',
+      '/assets/css/pages.css',
+      '/assets/css/menu.css',
+      '/assets/css/responsive.css',
+      '/assets/plugins/tooltipster/tooltipster.bundle.min.css',
+      '/assets/js/vue.min.js'
+    ];
     self.addEventListener('install', function(event) {
-      console.log('Service worker installing...');
-      self.skipWaiting();
+      console.log('[ServiceWorker] Install');
+      e.waitUntil(
+        caches.open(cacheName).then(function(cache) {
+          console.log('[ServiceWorker] Caching app shell');
+          return cache.addAll(filesToCache);
+        })
+      );
     });
     
     self.addEventListener('activate', function(event) {
