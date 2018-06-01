@@ -50,8 +50,19 @@ limitations under the License.
       );
     });
     
-    self.addEventListener('activate', function(event) {
-      console.log('Service worker activating...');
+    self.addEventListener('activate', function(e) {
+      console.log('[ServiceWorker] Activate');
+      e.waitUntil(
+        caches.keys().then(function(keyList) {
+          return Promise.all(keyList.map(function(key) {
+            if (key !== cacheName) {
+              console.log('[ServiceWorker] Removing old cache', key);
+              return caches.delete(key);
+            }
+          }));
+        })
+  );
+  return self.clients.claim();
     });
     self.addEventListener('fetch', function(e) {
       console.log('[ServiceWorker] Fetch', e.request.url);
@@ -64,17 +75,11 @@ limitations under the License.
    // I'm a new service worker
   
    self.addEventListener('fetch', function(event) {
-    console.log('Fetching:', event.request.url);
-    console.log(event.request.url);
-
-    event.respondWith(
-
-        caches.match(event.request).then(function(response) {
-
-        return response || fetch(event.request);
-
-        })
-
+    console.log('[ServiceWorker] Fetch', e.request.url);
+    e.respondWith(
+      caches.match(e.request).then(function(response) {
+        return response || fetch(e.request);
+      })
     );
   });
   
