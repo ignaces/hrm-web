@@ -38,7 +38,8 @@ limitations under the License.
       '/assets/css/menu.css',
       '/assets/css/responsive.css',
       '/assets/plugins/tooltipster/tooltipster.bundle.min.css',
-      '/assets/js/vue.min.js'
+      '/assets/js/vue.min.js',
+      '/assets/js/sw.js'
     ];
     self.addEventListener('install', function(e) {
       console.log('[ServiceWorker] Install');
