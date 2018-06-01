@@ -25,9 +25,30 @@ limitations under the License.
       console.log('Service worker activating...');
     });
     self.addEventListener('fetch', function(event) {
-      // If a match isn't found in the cache, the response
-      // will look like a connection error
-      event.respondWith(caches.match(event.request));
+      event.respondWith(
+        fetch(event.request).catch(function(error) {
+          console.log(
+            "[Service Worker] Network request Failed. Serving content from cache: " +
+              error
+          );
+          //Check to see if you have it in the cache
+          //Return response
+          //If not in the cache, then return error page
+          return caches
+            .open(
+              "https://hrmdev.enovum.cl/"
+            )
+            .then(function(cache) {
+              return cache.match(event.request).then(function(matching) {
+                var report =
+                  !matching || matching.status == 404
+                    ? Promise.reject("no-match")
+                    : matching;
+                return report;
+              });
+            });
+        })
+      );
     });
    // I'm a new service worker
   
