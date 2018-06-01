@@ -1,0 +1,177 @@
+@layout('layouts/horizontal')
+
+ <!-- DataTables -->
+        <link href="/assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/plugins/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/plugins/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/plugins/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/plugins/datatables/dataTables.colVis.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/plugins/datatables/fixedColumns.dataTables.min.css" rel="stylesheet" type="text/css"/>
+@section('scripts')
+        <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+        <script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="/assets/plugins/datatables/dataTables.bootstrap.js"></script>
+        <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+
+        <script src="/assets/js/dist/Productos.min.js?v1s"></script>
+@endsection
+@section('content')
+
+    <div class="row">
+
+        <div class="col-sm-12">
+            
+                <div class="card-box table-responsive">
+                
+                <h4 class="m-t-0 header-title"><b>Productos Activos</b></h4>
+                                    <p class="text-muted font-14 m-b-30">
+                                    Productos que se encuentran en la base de datos.
+                                    </p>
+                
+                      <!-- Table -->
+                      <div class="row">
+                        <div class="col-lg-12">
+                            <button class="btn btn-success pull-right" onclick="$('#modalAgregarMarca').modal('show');"><i class="fa fa-plus"></i> Agregar Marca</button>
+                            <button class="btn btn-success pull-right" onclick="$('#modalAgregarMl').modal('show');"><i class="fa fa-plus"></i> Agregar ML</button>
+                            <a class="btn btn-success pull-right" href="agregarProducto"><i class="fa fa-plus"></i> Agregar Producto</a> 
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-12">
+                            <br>
+                        </div>
+                      </div>
+
+                      <table id="tblPersonas" class="table table-striped table-bordered">
+                          <thead>
+                          <tr>
+                              <th>Nombre</th>
+                              <th>Marca</th>
+                              <th>ML</th>
+                              <th>Acciones</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                                <td>Perfume 1</td>
+                                <td>Marca X</td>
+                                <td>100</td>
+                                <td width="260">
+                                    <a class="btn btn-success fa fa-pencil" href="modificarProducto"> Editar</a>
+                                    <a class="btn btn-danger fa fa-trash" onclick="eliminarProducto('AAAAAAA');"> Eliminar</a>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Perfume 2</td>
+                                <td>Marca X</td>
+                                <td>120</td>
+                                <td width="260">
+                                    <a class="btn btn-success fa fa-pencil"> Editar</a>
+                                    <a class="btn btn-danger fa fa-trash"> Eliminar</a>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Perfume 3</td>
+                                <td>Marca Y</td>
+                                <td>50</td>
+                                <td width="260">
+                                    <a class="btn btn-success fa fa-pencil"> Editar</a>
+                                    <a class="btn btn-danger fa fa-trash"> Eliminar</a>
+                                </td>
+                            </tr>
+                          </tbody>
+                      </table>
+                    
+                   </div> 
+        </div>
+    </div>
+
+    <div class="modal fade bs-example-modal-lg in" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modalAgregarMarca">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel">Large modal</h4>
+                </div>
+                
+                <div class="modal-body">
+                                <div class="form-group row">
+                                    <label for="nombres" class="col-sm-4 form-control-label">Nombre Marca<span class="text-danger">*</span></label>
+                                    <div class="col-sm-7">
+                                        <input type="text" required="" class="form-control" id="sku" placeholder="Ingrese nueva Marca">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="nombres" class="col-sm-4 form-control-label">Imagen<span class="text-danger">*</span></label>
+                                    <input type="file" class="filestyle" data-buttonname="btn-primary" id="filestyle-4" tabindex="-1" style="position: absolute; clip: rect(0px, 0px, 0px, 0px);">
+                                
+                                    <div class="col-sm-7">
+                                        <div class="bootstrap-filestyle input-group"><input type="text" class="form-control " placeholder="" disabled=""> <span class="group-span-filestyle input-group-btn" tabindex="0"><label for="filestyle-4" class="btn btn-primary "><span class="icon-span-filestyle glyphicon glyphicon-folder-open"></span> <span class="buttonText">Elegir Archivo   </span></label></span></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-8 col-sm-offset-4">
+                                        <button type="submit" class="btn btn-primary waves-effect waves-light" id="botonRegistrar">
+                                            Guardar
+                                        </button>
+                                        
+                                    </div>
+                                </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+
+    <div class="modal fade bs-example-modal-lg in" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modalAgregarMl">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel">Large modal</h4>
+                </div>
+                
+                <div class="modal-body">
+                                <div class="form-group row">
+                                    <label for="nombres" class="col-sm-4 form-control-label">ML<span class="text-danger">*</span></label>
+                                    <div class="col-sm-7">
+                                        <input type="text" required="" class="form-control" id="sku" placeholder="Ingrese Nuevo ML">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-8 col-sm-offset-4">
+                                        <button type="submit" class="btn btn-primary waves-effect waves-light" id="botonRegistrar">
+                                            Guardar
+                                        </button>
+                                        
+                                    </div>
+                                </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+
+
+    <script>
+    
+    function eliminarProducto(id){
+        swal({
+            title: 'Advertencia',
+            text: "¿Desea borrar producto? <br><br> <img src='https://i.imgur.com/36DVbRG.gif' width='100%'>",
+            type: "warning",
+            showCancelButton: true,
+            cancelButtonColor: '#d57171',
+            confirmButtonText: 'Aceptar',
+            cancelButtonText: 'Cancelar'
+        });
+    }
+    
+    </script>
+        
+@endsection

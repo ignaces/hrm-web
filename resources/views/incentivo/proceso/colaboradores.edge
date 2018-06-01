@@ -15,11 +15,14 @@
         <script type="text/javascript" src="/assets/plugins/a.js"></script>
         <script type="text/javascript" src="/assets/plugins/b.js"></script>
 
+        <script src="/assets/plugins/jquery-toastr/jquery.toast.min.js" type="text/javascript"></script>
+        
 @endsection
 
 @section('pluginsCss')
     <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
     <link href="/assets/plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/plugins/jquery-toastr/jquery.toast.min.css" rel="stylesheet">
 @endsection
   
 
@@ -32,8 +35,6 @@
     <input type="hidden" id="idPersona" name="idPersona"  />
     </form-->
 
-    
-    
     <!-- Begin page -->
         <div id="wrapper" style="margin-top: -70px; width: 100% !important;">
             <!-- ============================================================== -->
@@ -61,6 +62,13 @@
 
                         
                         <div class="row">
+                            <div class="col-lg-3 col-md-6">
+                                <a href="catalogo" class="btn btn-success waves-effect w-md waves-light" style="width: 100%;">Ver Catalogo de Productos</a>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6">
+                                &nbsp;
+                            </div>
 
                             <div class="col-lg-3 col-md-6">
                                 <div class="card-box widget-box-two widget-two-custom">
@@ -68,7 +76,7 @@
                                     <div class="wigdet-two-content">
                                         <p class="m-0 text-uppercase font-bold font-secondary text-overflow" title="Statistics">Ventas Totales del Mes</p>
                                         <h2 class=""><span><!--i class="mdi mdi-arrow-up"></i--></span> <span data-plugin="counterup">150.000</span></h2>
-                                        <p class="m-0">Abril 2018</p>
+                                        <p class="m-0">Junio 2018</p>
                                     </div>
                                 </div>
                             </div><!-- end col -->
@@ -79,7 +87,7 @@
                                     <div class="wigdet-two-content">
                                         <p class="m-0 text-uppercase font-bold font-secondary text-overflow" title="Statistics">Meta del Mes</p>
                                         <h2 class=""><span><!--i class="mdi mdi-arrow-up"></i--></span> <span data-plugin="counterup">1.500.000</span></h2>
-                                        <p class="m-0">Abril 2018</p>
+                                        <p class="m-0">Junio 2018</p>
                                     </div>
                                 </div>
                             </div><!-- end col -->
@@ -90,7 +98,7 @@
                                     <div class="wigdet-two-content">
                                         <p class="m-0 text-uppercase font-bold font-secondary text-overflow" title="Statistics">Nº de Productos Vendidos</p>
                                         <h2 class=""><span><!--i class="mdi mdi-arrow-up"></i--></span> <span data-plugin="counterup">3</span></h2>
-                                        <p class="m-0">Abril 2018</p>
+                                        <p class="m-0">Junio 2018</p>
                                     </div>
                                 </div>
                             </div><!-- end col -->
@@ -256,19 +264,30 @@
                         </div>
                         <!--- end row -->
 
+                        <div class="row">
+                            <div class="col-lg-12">
+                                @!component('components.Incentivos.RegistrarCliente')
+                                <div class="inbox-widget">
+                                    <a class="btn btn-info btn-rounded btn-block" name="#" ><i class="mdi mdi-account-card-details"></i> <span>Guardar Datos Cliente</span> </a>
+                                </div>
 
+                                <div class="col-lg-12">
+                                    &nbsp;
+                                </div>
+                            </div>
+                        </div>
                     </div> <!-- container -->
                 </div> <!-- content -->
             </div>
         </div>
         
-        <br>
-        <br>
+        <!--div class="jq-toast-wrap top-right"><div class="jq-toast-single jq-has-icon jq-icon-info" style="text-align: left;"><span class="jq-toast-loader jq-toast-loaded" style="-webkit-transition: width 2.6s ease-in;                       -o-transition: width 2.6s ease-in;                       transition: width 2.6s ease-in;                       background-color: #3b98b5;"></span><span class="close-jq-toast-single">×</span><h2 class="jq-toast-heading">Heads up!</h2>This alert needs your attention, but it is not super important.</div></div-->
+        
 <style>
     .share_box {
         position: fixed;
         display: block;
-        bottom: 5px;
+        bottom: 10px;
         left: 34%;
         cursor: pointer;
         align-content: center;
@@ -278,9 +297,27 @@
 
 <div class="share_box" onclick="ayudaEvaluacion();">
     <a href="/Incentivo/Proceso/ingresoVenta">
-        <button style="height: 50px;" type="button" class="btn btn-icon waves-effect waves-light btn-success btn-rounded"> <i class="fa fa-plus"> Agregar Venta</i> </button>
+        <button style="height: 50px;" type="button" class="btn btn-icon waves-effect waves-light btn-success btn-rounded"> <i class="fa fa-plus"></i> Agregar Venta</button>
     </a>
 </div>
+
+<script>
+    /*
+    $(document).ready(function(){
+        $.toast({
+                heading: 'Heads up!',
+                text: 'This alert needs your attention, but it is not super important.',
+                position: 'top-right',
+                loaderBg: '#3b98b5',
+                icon: 'info',
+                hideAfter: 3000,
+                stack: 1
+        });
+    });
+    */
+
+
+</script>
 
 @endsection
 

@@ -1,29 +1,230 @@
 @layout('layouts/horizontal')
 
+@section('pluginsCss')        
+<link href="/assets/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css" rel="stylesheet" />
+        <link href="/assets/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" />
+        <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
 
-@section('scripts')
-    <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
-    <!--Echart Chart-->
-    <script src="/assets/plugins/echart/echarts-all.js"></script>
-    
-             <!--C3 Chart-->
-        <script type="text/javascript" src="/assets/plugins/d3/d3.min.js"></script>
-        <script type="text/javascript" src="/assets/plugins/c3/c3.min.js"></script>
-
-        <!--Echart Chart-->
-        <script type="text/javascript" src="/assets/plugins/echart/echarts-all.js"></script>
-        <script type="text/javascript" src="/assets/plugins/a.js"></script>
-        <script type="text/javascript" src="/assets/plugins/b.js"></script>
-
+        <style>
+            /* In order to place the tracking correctly */
+            canvas.drawing, canvas.drawingBuffer {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+        </style>
 @endsection
+@section('scripts')
+        <script src="/assets/plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.min.js"></script>
+        <script src="/assets/plugins/select2/js/select2.min.js" type="text/javascript"></script>
+        <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+        <script src="/assets/plugins/quagga/quagga.min.js"></script>
+    <script>
+            var submarca = "";
+            var envase = "";
+            var idproducto = 0;
+            
+            $("#buscar_producto").click(function(){
+                //console.log($("#codigo_producto").val());
+                $.ajax({
+                            url: '/Incentivo/Proceso/getProducto',
+                            type: "GET",
+                            data: {idProducto:  $("#codigo_producto").val()},
+                            dataType: "json",
+                            success: function (data) {
+                                if(data.length == 0)
+                                {
+                                    $("#datos_producto").hide();
+                                    swal("Advertencia", "Producto no existe", "error");
 
-@section('pluginsCss')
-    <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
-    <link href="/assets/plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css" />
+                                    submarca = "";
+                                    envase = "";
+                                    idproducto = 0;
+                                }
+                                else
+                                {
+                                    $("#datos_producto").show();
+                                    $("#caja_productos").show();
+                                    $("#marca_producto").html(data[0].marca);
+                                    $("#submarca_producto").html(data[0].submarca);
+                                    $("#descripcion_producto").html(data[0].descripcion);
+                                    $("#envase_producto").html(data[0].envase);
+                                    $("#id_producto").val(data[0].idproducto);
+
+                                    var submarca = data[0].submarca;
+                                    var envase = data[0].envase;
+                                    var idproducto = data[0].idproducto;
+
+                                    $("#valor_submarca").val(submarca);
+                                    $("#valor_envase").val(envase);
+                                    $("#valor_idproducto").val(idproducto);
+                                    
+                                }
+                            }
+                });
+            });
+
+            $("#agregar_producto").click(function(){
+                $("#fila_inicial").hide();
+
+                var cont = "";
+                var n_invoice = 1;
+
+                $(".productos_ingresados").each(function(){
+                    n_invoice++;
+                });
+                
+
+                cont = "<tr class='productos_ingresados'>";
+                cont = cont + "<td>"+n_invoice+"</td>";
+                cont = cont + "<td>"+$("#valor_submarca").val()+" "+$("#valor_envase").val()+"</td>";
+                cont = cont + "<td>"+$("#valor_cantidad").val()+"</td>";
+                cont = cont + "<td>"+$("#valor_precio").val()+"</td>";
+
+                cont = cont + "</tr>";
+
+                //console.log(cont);
+
+                $("#tabla_invoice").append(cont);
+                $("#valor_submarca").val("");
+                $("#valor_envase").val("");
+                $("#valor_idproducto").val("");
+                $("#valor_cantidad").val("");
+                $("#valor_precio").val("");
+                $("#codigo_producto").val("");
+                $("#datos_producto").hide();
+            });
+
+            var _scannerIsRunning = false;
+
+            function startScanner() {
+                Quagga.init({
+                    inputStream: {
+                        name: "Live",
+                        type: "LiveStream",
+                        target: document.querySelector('#scanner-container'),
+                        constraints: {
+                            width: 480,
+                            height: 320,
+                            facingMode: "environment"
+                        },
+                    },
+                    decoder: {
+                        readers: [
+                            "ean_reader"
+                        ],
+                        debug: {
+                            showCanvas: true,
+                            showPatches: true,
+                            showFoundPatches: true,
+                            showSkeleton: true,
+                            showLabels: true,
+                            showPatchLabels: true,
+                            showRemainingPatchLabels: true,
+                            boxFromPatches: {
+                                showTransformed: true,
+                                showTransformedBox: true,
+                                showBB: true
+                            }
+                        }
+                    },
+
+                }, function (err) {
+                    if (err) {
+                        console.log(err);
+                        return
+                    }
+
+                    console.log("Initialization finished. Ready to start");
+                    Quagga.start();
+
+                    // Set flag to is running
+                    _scannerIsRunning = true;
+                });
+
+                Quagga.onProcessed(function (result) {
+                    var drawingCtx = Quagga.canvas.ctx.overlay,
+                    drawingCanvas = Quagga.canvas.dom.overlay;
+
+                    if (result) {
+                        if (result.boxes) {
+                            drawingCtx.clearRect(0, 0, parseInt(drawingCanvas.getAttribute("width")), parseInt(drawingCanvas.getAttribute("height")));
+                            result.boxes.filter(function (box) {
+                                return box !== result.box;
+                            }).forEach(function (box) {
+                                Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, drawingCtx, { color: "green", lineWidth: 2 });
+                            });
+                        }
+
+                        if (result.box) {
+                            Quagga.ImageDebug.drawPath(result.box, { x: 0, y: 1 }, drawingCtx, { color: "#00F", lineWidth: 2 });
+                        }
+
+                        if (result.codeResult && result.codeResult.code) {
+                            Quagga.ImageDebug.drawPath(result.line, { x: 'x', y: 'y' }, drawingCtx, { color: 'red', lineWidth: 3 });
+                        }
+                    }
+                });
+
+                var code ="";
+                var countMatch=0;
+                Quagga.onDetected(function (result) {
+                    if(code==""){
+                        code=result.codeResult.code;
+                    }else{
+                        if(code==result.codeResult.code){
+                            countMatch++;
+                        }else{
+                            code=result.codeResult.code;
+                            countMatch=0;
+                        }
+                    }
+                    if(countMatch>15){
+                        //console.log("Barcode detected and processed : [" + result.codeResult.code + "]", result);
+                        Quagga.stop();
+                        $("#modal-camara").modal("hide");
+                        $("#codigo_producto").val(result.codeResult.code);
+                        $("#buscar_producto").trigger("click");
+                        countMatch=0;
+                    }
+                    //
+                });
+            }
+
+            $("#btn_camara").click(function(){
+                if (_scannerIsRunning) {
+                    Quagga.stop();
+                    
+                } else {
+                    startScanner();
+                    $("#modal-camara").modal("show");
+                }
+            });
+            
+                
+    </script>
 @endsection
   
 
 @section('content')
+
+    <div id="modal-camara" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="full-width-modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-full">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div width="100%; height: 100;" id="scanner-container">
+        
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>    
+
     <div id="wrapper">
             <!-- ============================================================== -->
             <!-- Start right Content here -->
@@ -31,136 +232,180 @@
             <div class="content-page">
                 <!-- Start content -->
                 <div class="content">
-                    <div class="container">
+                            <div class="panel panel-color panel-primary">
+                                        <div class="panel-heading">
+                                            <!--button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button-->
+                                            <h3 class="panel-title">Guardar Venta</h3>
+                                        </div>
 
-                        <div class="row">
-
-                            <div class="col-lg-12 col-md-12">
-                                <div class="card-box">
-                                        <p class="m-0 text-uppercase font-bold font-secondary text-overflow" title="Statistics">Ingreso de Productos</p>
-                                        <br>
+                                        <div class="panel-body">
                                             <form class="form-horizontal" role="form">
-                                                    <div class="form-group">
-                                                        <label class="col-md-2 control-label">Seleccione Producto</label>
-                                                        <div class="col-md-10">
-                                                            <select class="form-control">
-                                                                <option>Perfume 1</option>
-                                                                <option>Perfume 2</option>
-                                                                <option>Perfume 3</option>
-                                                                <option>Perfume 4</option>
-                                                                <option>Perfume 5</option>
-                                                            </select>
+                                                <div class="portlet">
+                                                        
+                                                            <div class="portlet-heading bg-custom">
+                                                                <h3 class="panel-title">Ingresar Producto</h3>
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                            
+                                                        <div id="prod_{{prod}}" class="panel-collapse collapse in" aria-expanded="true" style="">
+                                                            <div class="portlet-body">
+                                                                <div class="form-group">
+
+                                                                        <div class="col-md-12">
+                                                                            <table width=100%>
+                                                                                <tr>
+                                                                                    <td width="90%">
+                                                                                        <div class="input-group">
+                                                                                            <span class="input-group-addon" id="btn_camara"><i class="fa fa-camera"></i></span>
+                                                                                            <input type="text" id="codigo_producto" name="example-input1-group1" class="form-control" placeholder="Buscar Producto">
+                                                                                            <input type="hidden" id="valor_idproducto">
+                                                                                        </div>
+                                                                                    </td>
+
+                                                                                    <td width="1%">
+
+                                                                                    </td>
+
+                                                                                    <td width="9%">
+                                                                                        <a class="btn btn-success" name="" id="buscar_producto"><i class="fa fa-search"></i></a>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                
+                                                                            </table>
+
+                                                                            <div class="row" style="display: none;" id="datos_producto">
+                                                                                <div class="col-lg-12">
+                                                                                    &nbsp;
+                                                                                </div>
+                                                                            
+                                                                                <div class="col-lg-12">
+                                                                                    <table width="100%">
+                                                                                        <tr>
+                                                                                            <td>
+                                                                                                <b>Marca:</b>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <p id="marca_producto"></p>
+                                                                                            </td>
+                                                                                        </tr>    
+
+                                                                                        <tr>
+                                                                                            <td>
+                                                                                                <b>Submarca:</b>
+                                                                                            </td>
+
+                                                                                            <td>
+                                                                                                <p id="submarca_producto"></p>
+                                                                                                <input type="hidden" id="valor_submarca">
+                                                                                            </td>
+
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td>
+                                                                                                <b>Envase:</b>
+                                                                                            </td>
+
+                                                                                            <td>
+                                                                                                <p id="envase_producto"></p>
+                                                                                                <input type="hidden" id="valor_envase">
+                                                                                            </td>
+
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td>
+                                                                                                <b>Descripcion:</b>
+                                                                                            </td>
+
+                                                                                            <td>
+                                                                                                <p id="descripcion_producto"></p>
+                                                                                            </td>
+
+                                                                                        </tr>
+                                                                                    </table>
+                                                                                </div>
+
+                                                                                <div class="col-lg-12">
+                                                                                    &nbsp;
+                                                                                </div>
+
+                                                                                <div class="col-md-12">
+                                                                                    <table width=100%>
+                                                                                        <tr>
+                                                                                            <td width="49%">
+                                                                                                <input type="number" class="form-control" placeholder="Cantidad" pattern="[0-9]*" id="valor_cantidad">
+                                                                                            </td>
+
+                                                                                            <td width="2%">
+
+                                                                                            </td>
+
+                                                                                            <td width="49%">
+                                                                                                <input type="number" class="form-control" placeholder="Precio" pattern="[0-9]*" id="valor_precio">
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </table>
+                                                                                </div>
+
+                                                                                <div class="col-lg-12">
+                                                                                    &nbsp;
+                                                                                </div>
+
+                                                                                <div class="col-lg-12">
+                                                                                    <a class="btn btn-primary" style="width: 100%;" id="agregar_producto">Agregar a la Venta</a>
+                                                                                </div>
+                                                                            </div>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                </div>
+
+                                                <div class="portlet" id="caja_productos" style="display: none;">
+                                                        
+                                                            <div class="portlet-heading bg-custom">
+                                                                <h3 class="panel-title">Productos Ingresados</h3>
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                            
+                                                        <div id="productos_ingresados" class="panel-collapse collapse in" aria-expanded="true" style="">
+                                                            <div class="portlet-body">
+
+                                                            <table width="100%" id="tabla_invoice" class="table table-bordered m-0">
+                                                                <tr>
+                                                                    <th width="20">#</th>
+                                                                    <th>Producto</th>
+                                                                    <th>Cantidad</th>
+                                                                    <th>Precio</th>
+                                                                </tr>
+
+                                                                <tr id="fila_inicial">
+                                                                    <td colspan="4" align="center"><br>No se han ingresado productos<br><br></td>
+                                                                </tr>
+                                                            </table>
+
+                                                            </div>
+                                                        </div>
+
+                                                </div>
+
+                                                </div>
+                                            </div>
+                                                    @!component('components.Incentivos.RegistrarCliente')
 
                                                     <div class="form-group">
-                                                        <label class="col-md-2 control-label">Cantidad</label>
-                                                        <div class="col-md-10">
-                                                            <input type="number" class="form-control" placeholder="Ingrese Cantidad">
-                                                        </div>
-                                                    </div>
-
-                                                    <hr>
-                                                    <div class="form-group">
-                                                        <label class="col-md-2 control-label">Seleccione Producto</label>
-                                                        <div class="col-md-10">
-                                                            <select class="form-control">
-                                                                <option>Perfume 1</option>
-                                                                <option>Perfume 2</option>
-                                                                <option>Perfume 3</option>
-                                                                <option>Perfume 4</option>
-                                                                <option>Perfume 5</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label class="col-md-2 control-label">Cantidad</label>
-                                                        <div class="col-md-10">
-                                                            <input type="number" class="form-control" placeholder="Ingrese Cantidad">
-                                                        </div>
-                                                    </div>
-
-                                                    <hr>
-                                                    <div class="form-group">
-                                                        <label class="col-md-2 control-label">Seleccione Producto</label>
-                                                        <div class="col-md-10">
-                                                            <select class="form-control">
-                                                                <option>Perfume 1</option>
-                                                                <option>Perfume 2</option>
-                                                                <option>Perfume 3</option>
-                                                                <option>Perfume 4</option>
-                                                                <option>Perfume 5</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label class="col-md-2 control-label">Cantidad</label>
-                                                        <div class="col-md-10">
-                                                            <input type="number" class="form-control" placeholder="Ingrese Cantidad">
-                                                        </div>
-                                                    </div>
-
-                                                    <hr>
-                                                    <div class="form-group">
-                                                        <label class="col-md-2 control-label">Seleccione Producto</label>
-                                                        <div class="col-md-10">
-                                                            <select class="form-control">
-                                                                <option>Perfume 1</option>
-                                                                <option>Perfume 2</option>
-                                                                <option>Perfume 3</option>
-                                                                <option>Perfume 4</option>
-                                                                <option>Perfume 5</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label class="col-md-2 control-label">Cantidad</label>
-                                                        <div class="col-md-10">
-                                                            <input type="number" class="form-control" placeholder="Ingrese Cantidad">
-                                                        </div>
-                                                    </div>
-
-                                                    <hr>
-                                                    <div class="form-group">
-                                                        <label class="col-md-2 control-label">Seleccione Producto</label>
-                                                        <div class="col-md-10">
-                                                            <select class="form-control">
-                                                                <option>Perfume 1</option>
-                                                                <option>Perfume 2</option>
-                                                                <option>Perfume 3</option>
-                                                                <option>Perfume 4</option>
-                                                                <option>Perfume 5</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label class="col-md-2 control-label">Cantidad</label>
-                                                        <div class="col-md-10">
-                                                            <input type="number" class="form-control" placeholder="Ingrese Cantidad">
-                                                        </div>
-                                                    </div>
-
-                                                    <br>
-                                                    <div class="form-group">
-                                                        <div class="col-md-10">
+                                                        <div class="col-md-12">
                                                             <a href="/Incentivo/Proceso/colaboradores">
                                                                 <button type="button" class="btn btn-success waves-effect w-md waves-light" style="width: 100%;">Guardar Venta</button>
                                                             </a>
                                                         </div>
                                                     </div>
                                             </form>
+                                    </div>
 
                                 </div>
-                            </div><!-- end col -->
-                            <br>
-                            <br>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
-        </div>    
+        </div> 
 @endsection
