@@ -39,7 +39,7 @@ limitations under the License.
       '/assets/plugins/tooltipster/tooltipster.bundle.min.css',
       '/assets/js/vue.min.js'
     ];
-    self.addEventListener('install', function(event) {
+    self.addEventListener('install', function(e) {
       console.log('[ServiceWorker] Install');
       e.waitUntil(
         caches.open(cacheName).then(function(cache) {
