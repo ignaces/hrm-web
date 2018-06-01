@@ -15,6 +15,7 @@ limitations under the License.
 */
 (function() {
     'use strict';
+    var cacheName = 'talento';
     var filesToCache = [
       '/',
       '/assets/js/jquery.min.js',
