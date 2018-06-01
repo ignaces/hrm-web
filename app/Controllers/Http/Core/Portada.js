@@ -9,6 +9,9 @@ class Portada {
         var idPersona = session.get('idPersona', 'fall')
         var all =  session.get('personaLogueada')
         
+        if(all==null){
+            return view.render('account/login');
+        }
         var idOpinante = all.id
 
         var obj = {

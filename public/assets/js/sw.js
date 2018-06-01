@@ -53,11 +53,13 @@ limitations under the License.
     self.addEventListener('activate', function(event) {
       console.log('Service worker activating...');
     });
-    self.addEventListener('fetch', function(event) {
-      // If a match isn't found in the cache, the response
-      // will look like a connection error
-      console.log(event.request)
-      event.respondWith(caches.match(event.request));
+    self.addEventListener('fetch', function(e) {
+      console.log('[ServiceWorker] Fetch', e.request.url);
+      e.respondWith(
+        caches.match(e.request).then(function(response) {
+          return response || fetch(e.request);
+        })
+      );
     });
    // I'm a new service worker
   
