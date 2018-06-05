@@ -57,7 +57,7 @@ Route.get('/Encuesta/Instrumento/putRespuesta','Encuesta/Instrumento.putRespuest
 Route.get('/Encuesta/Instrumento/cerrarInstrumento','Encuesta/Instrumento.cerrarInstrumento')
 Route.get('/Encuesta/Encuesta/fin','Encuesta/Encuesta.fin')
 
-Route.any('/:module/:controller/:action',  ({view ,request, response,params,auth, session}) => {
+Route.any('/:module/:controller/:action',  ({view ,request, response,params,auth, session,antl}) => {
   
     const module = params.module
     
@@ -72,7 +72,7 @@ Route.any('/:module/:controller/:action',  ({view ,request, response,params,auth
     
     const controllerInstance = ioc.makeFunc(url)
    
-    return controllerInstance.method.apply(controllerInstance.instance,[{view,request,response,params,auth, session}])
+    return controllerInstance.method.apply(controllerInstance.instance,[{view,request,response,params,auth, session,antl}])
     
 }).middleware(['autenticacion:session'])
 

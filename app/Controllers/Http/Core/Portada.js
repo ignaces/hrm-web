@@ -3,7 +3,7 @@
 const data = use('App/Utils/Data')
 
 class Portada {
-     async welcome  ({ view,request, response, auth, session }) {
+     async welcome  ({ view,request, response, auth, session ,antl}) {
         
 
         var idPersona = session.get('idPersona', 'fall')
@@ -31,7 +31,8 @@ class Portada {
         var talentos = resultadoTalento.body.data.talentos;
         var condicion = resultadoTalento.body.data1;
 
-        
+        antl.switchLocale('pt')
+         
        
         //var rstl = session.put('totalCol',talentos.Total)
         //console.log(rstl);
@@ -50,7 +51,8 @@ class Portada {
     
        
         var menu = session.get('usuario_roles_menu');
-        return view.render('core/welcome',  {user,procesos,persona,menu,talentos,condicion});
+        var etag = "app_cs"
+        return view.render('core/welcome',  {etag,user,procesos,persona,menu,talentos,condicion});
 
         
     }   

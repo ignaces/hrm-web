@@ -5,7 +5,7 @@ const Schema = use('Schema')
 class LocaleSchema extends Schema {
   up () {
     this.create('locales', table => {
-      table.increments()
+      table.string('id','varchar(45)').notNullable()
       table.string('locale').notNullable()
       table.string('group').notNullable()
       table.string('item').notNullable()
