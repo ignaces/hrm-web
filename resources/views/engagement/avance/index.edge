@@ -32,6 +32,9 @@
             getExcel:function(id){
                 window.location.href="/Encuesta/Avance/getExcelAvance?idEncuestaAplicacion="+id;
             },
+            getExcelResultados:function(id){
+                window.location.href="/Engagement/Empresa/getExcelResultado?idEncuestaAplicacion="+id;
+            },
             ver:function(id){
                 $("#idEncuestaAplicacion").val(id);
                 $('form').submit();
@@ -118,6 +121,7 @@
                                     <div class="row">
                                         
                                         <button v-on:click="getExcel(encuesta.id)" class="btn btn-purple waves-effect waves-light"> <i class="fa fa-file-excel-o"></i> <span>Avance</span> </button>
+                                        <button v-on:click="getExcelResultados(encuesta.id)" class="btn btn-success waves-effect waves-light"> <i class="fa fa-file-excel-o"></i> <span>Resultados</span> </button>
                                         <button v-on:click="ver(encuesta.id)" class="btn btn-primary waves-effect waves-light"> <i class="fa fa-eye"></i> <span>Ver Más</span> </button>
                                     </row>
                                 </div>
