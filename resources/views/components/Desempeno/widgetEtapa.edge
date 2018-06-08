@@ -1,19 +1,46 @@
 
 @each(etapa in datos)
-<div class="col-md-2">
-    @if(etapa.codigo=="1")
-    <a href="{{etapa.linkUser}}?idProcesoEtapa={{etapa.idEtapa}}">
-    @endif
-    <div class="box box-widget widget-user">    
-        <div class="widget-user-header {{etapa.color}}">
-        <div class="text-center text-white"><p>{{etapa.nombreEtapa}}</p></div>
+@if(etapa.etapa_ocultar=="0")
+<div class="col-md-2 col-xs-12">
+    <div class="text-center card-box  {{etapa.etapa_color}}">
+        <div class="clearfix"></div>
+        <div class="member-card">
+            <div class="thumb-lg member-thumb m-b-10 center-block">
+                <img src="{{etapa.etapa_imagen}}" class="img-circle img-thumbnail" alt="{{etapa.etapa_nombre}}">
+            </div>
+
+            <div class="">
+                <h5 class="m-b-3">{{etapa.etapa_nombre}}</h5>
+            </div>
+
+            @if(etapa.estado_codigo=="ABIERTA")
+                <!--<button type="button" class="btn btn-{{etapa.colorEstado}} m-t-20 btn-rounded btn-bordered waves-effect w-md waves-light btn-xs btnEtapa" id="{{etapa.id}}_{{etapa.idEdeProceso}}"><i class='{{etapa.iconoEstado}}'></i> {{etapa.textoEstado}}</button>-->
+                <a href="/Desempeno/Proceso/etapa?idProceso={{etapa.idProceso}}&idEtapa={{etapa.idEtapa}}" class="btn btn-{{etapa.estado_color}} m-t-20 btn-rounded btn-bordered waves-effect w-md waves-light btn-xs"><i class='{{etapa.estado_icono}}'></i> {{etapa.estado_texto}}</a>
+            @else
+                <a href="#" class="btn btn-{{etapa.estado_color}} m-t-20 btn-rounded btn-bordered waves-effect w-md waves-light btn-xs" disabled><i class='{{etapa.estado_icono}}'></i> {{etapa.estado_texto}}</a>
+            @endif 
+
+            <div class="m-t-5">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="m-t-2 m-b-5">
+                         @if(etapa.codigoEstado=="ABIERTA")
+                            <h6 class="m-b-0 text-muted">Fecha de Cierre</h6>
+                            <h6 class="m-b-0 text-muted">{{etapa.etapa_fecha_termino}}</h6>
+                         @else
+                            <h6 class="m-b-0 text-muted">Fecha de Inicio</h6>
+                            <h6 class="m-b-0 text-muted">{{etapa.etapa_fecha_inicio}}</h6>
+                         @endif 
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-        <div class="widget-user-image">
-        <img class="img-circle" src="/assets/images/ede/{{etapa.imgActiva}}" alt="Imagen Etapa">
-        </div>
+
     </div>
-    @if(etapa.codigo=="1")
-    </a>
-    @endif  
-</div>
+
+</div> 
+@endif
+
  @endeach
