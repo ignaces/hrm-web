@@ -19,8 +19,8 @@ class Proceso {
         
         var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getPersonasEvaluaciones',obj);
         var personas = result.body.data;
-        
-        return view.render('acreditacion/proceso/colaboradores',  {tipoOpinante:personas});
+        var avance = result.body.data.avance;
+        return view.render('acreditacion/proceso/colaboradores',  {tipoOpinante:personas,avance:avance});
     }
 }
 
