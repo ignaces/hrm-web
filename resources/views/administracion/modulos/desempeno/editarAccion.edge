@@ -1,0 +1,121 @@
+@layout('layouts/horizontal')
+
+@section('scripts')
+    <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+    <script src="/assets/plugins/parsleyjs/parsley.min.js"></script>
+    
+    <script src="/assets/plugins/select2/js/select2.min.js" type="text/javascript"></script>
+    <script src="/assets/plugins/bootstrap-select/js/bootstrap-select.min.js" type="text/javascript"></script>
+    <script src="/assets/plugins/tinymce/tinymce.min.js"></script>
+    <script src=/assets/js/dist/procesosEde.min.js></script>
+@endsection
+
+@section('pluginsCss')
+    <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" />
+@endsection
+
+
+@section('content')
+    @!component('components.breadcrumb',title="Agregar Acción", pages= [
+        {nombre:"Administración",activa:false},
+        {nombre:"Desempeño",activa:false},
+        {nombre:"Proceso",activa:false},
+        {nombre:"Etapa",activa:false},
+        {nombre:"Editar Etapa",activa:true}
+    ])
+
+    {{ csrfField() }}
+    <input type="hidden" id="idEtapaTarea" value="{{idEtapaTarea}}">
+    <input type="hidden" id="idAccionTarea" value="{{datosAccion[0].idAccionTarea}}">
+    <input type="hidden" id="esFin" value="0">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet">
+                <div class="portlet-heading bg-primary">
+                    <h3 class="portlet-title">
+                        Editar Acción
+                    </h3>
+                    <div class="portlet-widgets">
+                        <a data-toggle="collapse" data-parent="#accordion1" href="#formulario"><i class="mdi mdi-minus"></i></a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div id="formulario" class="panel-collapse collapse in">
+                    <div class="portlet-body">
+                        <div class="row">
+                            <div class="col-md-12"> 
+                                <form role="form">
+                                    <div class="form-group">
+                                        <label for="idAccion">Acción</label>
+                                            <select class="form-control" id="idAccion">
+                                                    <option value="">Seleccionar...</option>
+                                                @each(accion in datosAcciones)
+                                                   @if(accion.idAccion==datosAccion[0].idAccion)
+                                                      <option value="{{accion.idAccion}}" selected>{{accion.accion_nombre}}</option>
+                                                    @else
+                                                      <option value="{{accion.idAccion}}">{{accion.accion_nombre}}</option>
+                                                    @endif
+                                                @endeach
+                                            </select>
+                                    </div>
+                                     <div class="form-group">
+                                        <label for="idActor">Actor</label>
+                                            <select class="form-control" id="idActor">
+                                                    <option value="">Seleccionar...</option>
+                                                @each(actor in datosActores)
+                                                     @if(actor.idActor==datosAccion[0].idActor)
+                                                    <option value="{{actor.idActor}}" selected>{{actor.actor_nombre}}</option>
+                                                    @else
+                                                    <option value="{{actor.idActor}}">{{actor.actor_nombre}}</option>
+                                                    @endif                                          
+                                                @endeach   
+                                            </select>
+                                    </div>
+                                     <div class="form-group">
+                                        <label for="orden">Orden</label>
+                                            <select class="form-control" id="orden">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                            </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="idEstado">Estado</label>
+                                            <select class="form-control" id="idEstado">
+                                                <option value="">Seleccionar...</option>
+                                                @each(estado in datosEstados)
+                                                     @if(estado.idEstado==datosAccion[0].accionTarea_idEdeEstado)
+                                                          <option value="{{estado.idEstado}}" class="bg-{{estado.estado_color}}" selected>{{estado.estado_texto}}</option>
+                                                     @else
+                                                        <option value="{{estado.idEstado}}" class="bg-{{estado.estado_color}}">{{estado.estado_texto}}</option>
+                                                     @endif                                              
+                                                @endeach
+                                            </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="instruccion">Instrucción</label>
+                                        <textarea id="instruccion" name="instruccion">{{datosAccion[0].accionTarea_instruccion}}</textarea>
+                                    </div>
+                                </form>
+                            </div>
+                        <div class="row pull-right">
+                            <div class="col-md-12">
+                            <button type="button" id="btnEditarAccion" class="btn btn-warning btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-save"></i> Grabar</button>
+                            </div>
+                        </div>
+                        <br/>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+@endsection
+
+
+

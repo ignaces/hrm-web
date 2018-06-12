@@ -17,7 +17,10 @@ module.exports = {
       ingresoEncuesta:['./client/src/Encuesta/ingreso.js'],
       instrumentoEncuesta:['./client/src/Encuesta/paginacion.js','./client/src/Encuesta/instrumento.js'],
       dashboardReporte:['./client/src/Acreditacion/dashboardReporte.js'],
-      AcreditacionColaboradores:['./client/src/Acreditacion/colaboradores.js']
+      AcreditacionColaboradores:['./client/src/Acreditacion/colaboradores.js'],
+      etapasProceso:['./client/src/ede/etapasProceso.js'],
+      procesosEde:['./client/src/ede/procesosEde.js'],
+      metaFeedbackPublicar:['./client/src/ede/metaFeedbackPublicar.js']
     },
   output: {
     filename: '[name].min.js',
