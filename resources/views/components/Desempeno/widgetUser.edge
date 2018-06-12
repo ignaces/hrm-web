@@ -1,22 +1,37 @@
 
+<div class="row">
+<div class="col-md-12">
 <div class="box box-widget widget-user-2">
      @each(dato in persona)
-    <div class="widget-user-header bg-warning">
-        <div class="widget-user-image">
-            <img class="img-circle" src="/assets/images/users/{{dato.foto}}" alt="Imagen">
-        </div>
-        <h3 class="widget-user-username text-white">{{dato.nombres}} {{dato.apellidoPaterno}} {{dato.apellidoMaterno}}</h3>
-        <h5 class="widget-user-desc  text-white">{{dato.cargo}}</h5>
-        
-    </div>
-    @endeach
-    <div class="box-footer no-padding">
-        <ul class="nav nav-stacked">
-         @each(menu in datamenu)
-        <li><a href="{{menu.link}}">{{menu.nombre}}</a></li>
-         @endeach
-        <li><a href="">Ayuda</a></li>
-        <li><a href="http://localhost:3335/">Volver</a></li>
-        </ul>
-    </div>
+		<div class="col-md-12 text-center">
+			<div class="card-box ribbon-box">
+				<div class="clearfix"></div>
+				<div class="member-card">
+					 <div class="thumb-lg member-thumb m-b-5 mx-auto" style="margin: 0 auto;">
+						<img src='{{dato.foto}}' class="img-circle img-thumbnail" alt="colaborador/a">
+					 </div>
+					 <div class="">
+						<h5 class="m-b-">{{dato.nombres}} {{dato.apellidoPaterno}} {{dato.apellidoMaterno}}</h5>
+						<p class="text-muted font-12">{{dato.cargo}}</p>
+					 </div>
+				</div>
+			</div>
+		</div>
+	 @endeach
+</div>
+<div class="box box-widget widget-user-2">
+    		<div class="col-md-12 text-center">
+			<div class="card-box ribbon-box">
+	
+		<ul class="nav nav-stacked">
+			 @each(menu in datamenu)
+            <li><a href="{{menu.link}}">{{menu.nombre}}</a></li>
+			 @endeach
+			<!--<li><a href="">Ayuda</a></li>-->
+			<li><a href="http://localhost:3335/">Volver</a></li>
+		</ul>
+	 </div>
+     </div>
+</div>
+</div>
 </div>
