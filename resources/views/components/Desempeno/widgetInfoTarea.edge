@@ -1,0 +1,38 @@
+
+@each(tarea in datos)
+<div class="col-md-12 col-xs-12">
+    <div class="text-center card-box  {{etapa.colorEtapa}}">
+        <div class="clearfix"></div>
+        <div class="member-card">
+            <div class="thumb-lg member-thumb m-b-10 center-block">
+                <img src="{{tarea.etapaTarea_imagen}}" class="img-circle img-thumbnail" alt="{{etapaTarea.nombre}}">
+            </div>
+
+            <div class="">
+                <h5 class="m-b-3">{{tarea.etapaTarea_nombre}}</h5>
+                <h6 class="text-muted">{{tarea.proceso_nombre}}</h6>
+                <h6 class="text-muted">{{tarea.etapa_nombre}}</h6>
+            </div>
+            
+            <div class="m-t-5">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="m-t-2 m-b-5">
+                         @if(tarea.estado_codigo=="ABIERTA")
+                            <h6 class="m-b-0 text-muted">Fecha de Cierre</h6>
+                            <h6 class="m-b-0 text-muted">{{tarea.etapaTarea_fecha_termino}}</h6>
+                         @else
+                            <h6 class="m-b-0 text-muted">Fecha de Inicio</h6>
+                            <h6 class="m-b-0 text-muted">{{tarea.etapaTarea_fecha_inicio}}</h6>
+                         @endif 
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div> 
+@endeach

@@ -1,0 +1,42 @@
+
+@each(tarea in datos)
+<div class="col-md-2 col-xs-12">
+    <div class="text-center card-box  {{tarea.colorEtapa}}">
+        <div class="clearfix"></div>
+        <div class="member-card">
+            <div class="thumb-lg member-thumb m-b-10 center-block">
+                <img src="{{tarea.img}}" class="img-circle img-thumbnail" alt="{{tarea.nombre}}">
+            </div>
+
+            <div class="">
+                <h5 class="m-b-3">{{tarea.nombre}}</h5>
+            </div>
+            
+            @if(tarea.codigoEstado=="ABIERTA")
+                <a href="{{tarea.vinculo}}?idEtapa={{tarea.idEdeEtapa}}&idEdeTarea={{tarea.idEdeTarea}}&idTareaEtapa={{tarea.id}}"" class="btn btn-{{tarea.colorEstado}} m-t-20 btn-rounded btn-bordered waves-effect w-md waves-light btn-xs"><i class='{{tarea.iconoEstado}}'></i> {{tarea.textoEstado}}</a>
+            @else
+                <a href="#" class="btn btn-{{tarea.colorEstado}} m-t-20 btn-rounded btn-bordered waves-effect w-md waves-light btn-xs" disabled><i class='{{tarea.iconoEstado}}'></i> {{tarea.textoEstado}}</a>
+            @endif 
+
+            <div class="m-t-5">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="m-t-2 m-b-5">
+                         @if(tarea.codigoEstado=="ABIERTA")
+                            <h6 class="m-b-0 text-muted">Fecha de Cierre</h6>
+                            <h6 class="m-b-0 text-muted">{{tarea.fecha_termino}}</h6>
+                         @else
+                            <h6 class="m-b-0 text-muted">Fecha de Inicio</h6>
+                            <h6 class="m-b-0 text-muted">{{tarea.fecha_inicio}}</h6>
+                         @endif 
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div> 
+@endeach

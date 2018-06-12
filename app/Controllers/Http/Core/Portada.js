@@ -29,11 +29,11 @@ class Portada {
        
         obj={
             idProceso:"",
-            idEstado:"1"
+            idEstado:"ACTIVO"
         }
         
-        /*var reultEde=await data.execApi(request.hostname(),'/Desempeno/Proceso/getProcesos',obj);
-        var procesosEde =reultEde.body.data;*/
+        var reultEde=await data.execApi(request.hostname(),'/Desempeno/Proceso/getProcesos',obj);
+        var procesosEde =reultEde.body.data;
 
         var user={usuario:auth.user}
         
@@ -41,7 +41,7 @@ class Portada {
     
        
         var menu = session.get('usuario_roles_menu');
-        return view.render('core/welcome',  {user,procesos,persona,menu});
+        return view.render('core/welcome',  {user,procesos,persona,menu,procesosEde});
     }   
 }
 

@@ -1,0 +1,154 @@
+@layout('layouts/horizontal')
+
+@section('scripts2')
+     <!-- KNOB JS -->
+        <!--[if IE]>
+        <script type="text/javascript" src="../plugins/jquery-knob/excanvas.js"></script>
+        <![endif]-->
+        <script src="/assets/plugins/jquery-knob/jquery.knob.js"></script>
+
+        <!-- Sparkline charts -->
+        <script src="/assets/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
+
+        <!--Chartist Chart-->
+        <script src="/assets/plugins/chartist/js/chartist.min.js"></script>
+        <script src="/assets/plugins/chartist/js/chartist-plugin-tooltip.min.js"></script>
+
+    </script>
+
+@endsection
+
+@section('pluginsCss2')
+        <link href="/assets/plugins/ede/infobox/infobox.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/plugins/ede/socialWidget/socialWidget.css" rel="stylesheet" type="text/css" />             
+         <link href="/assets/plugins/ede/progressbar/progressbar.css" rel="stylesheet" type="text/css" />    
+@endsection
+
+@section('content')
+
+
+<div class="row" >
+    <div class="col-md-3">
+        @!component('components.desempeno.widgeMenuEtapa',datamenu=datosMenu,etapa=etapasProceso,nombreProceso=datosProceso.nombre)
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            <div class="portlet">
+                <div id="bg-warning" class="panel-collapse collapse in">
+                    <div class="portlet-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card-box widget-user">
+                                    <div>
+                                        <img src="{{colaborador[0].foto}}" class="img-responsive img-circle" alt="user">
+                                        <div class="wid-u-info">
+                                            <h5 class="m-t-20 m-b-5">{{colaborador[0].nombres}} {{colaborador[0].apellidoPaterno}} {{colaborador[0].apellidoMaterno}}</h5>
+                                            <p class="text-muted m-b-0 font-14">{{colaborador[0].cargo}}</p>
+                                        </div>    
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="col-md-6">
+                                  @!component('components.desempeno.boxLte',datos=widgets)
+                            </div>
+                        </div>
+                    </div>   
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="portlet">
+                <div class="portlet-heading ">
+                    <h3 class="portlet-title text-warning">
+                     Nueva Meta
+                    </h3>
+                     <div class="clearfix"></div>
+                </div>
+                 <div class="portlet-body">
+                     <div class="row">
+                     <div class="col-md-12">
+                         <div class="row">
+                            <div class="col-md-12">
+                                <div class="p-20">
+                                    <form class="form-horizontal" role="form">
+
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">Dimensión</label>
+                                            <div class="col-md-10">
+                                                <select class="form-control">
+                                                    <option>Seleccione</option>
+                                                    <option>General</option>
+                                                    <option>Personal</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">Meta</label>
+                                            <div class="col-md-10">
+                                                <textarea class="form-control" rows="5"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">Indicador</label>
+                                            <div class="col-md-10">
+                                                <textarea class="form-control" rows="5"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">Esperado</label>
+                                            <div class="col-md-10">
+                                                <textarea class="form-control" rows="5"></textarea>
+                                            </div>
+                                        </div>
+
+                                            <div class="form-group">
+                                            <label class="control-label col-md-2">Fecha</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="date" name="date">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">Ponderación (%)</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="number" name="number">
+                                                <span class="font-14 text-muted">Ponderación Máxima 100%</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">Validada</label>
+                                            <div class="col-md-10">
+                                                <input type="checkbox" checked data-plugin="switchery" data-color="#64b0f2" data-size="small"/>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+
+                     </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <button type="button" class="btn btn-success btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-save"></i> Guadar</button> 
+                            <button type="button" class="btn btn-danger btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-times"></i> Cancelar</button>
+
+                        </div>
+                    </div>
+
+                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+@endsection
+
+

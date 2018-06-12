@@ -23,7 +23,7 @@
                                 <thead style="background-color: #44515c">
                                     <tr>
                                         <th>Colaborador/a</th>
-                                        <th>Número de Metas</th>
+                                       <!-- <th>Número de Metas</th>-->
                                         <th>Estado</th>
                                         <th>Informe</th>
                                         <th>Acciones</th>
@@ -36,7 +36,7 @@
                                         <td>
                                             <div class="row text-center">
                                                 <div class="col-md-3">
-                                                    <img src="/assets/images/users/{{persona.foto}}" alt="imagen" title="imagen" class="img-circle thumb-sm" />  
+                                                    <img src="{{persona.foto}}" alt="imagen" title="imagen" class="img-circle thumb-sm" />  
                                                 </div>
                                                 <div class="col-md-9">
                                                     <h5 class="m-b-0 m-t-0">{{persona.nombres}} {{persona.apellidoPaterno}} {{persona.apellidoMaterno}}</h5>
@@ -44,7 +44,7 @@
                                                 </div>									 
                                             </div>
                                         </td>
-                                        <td>
+                                       <!-- <td>
                                             
                                             @if(persona.numeroMetas=="0")
                                                 Sin Metas Creadas
@@ -52,7 +52,7 @@
                                                 {{persona.numeroMetas}} Metas
                                             @endif
                                         
-                                        </td>
+                                        </td>-->
                                         <td>
                                             <div class="label label-{{persona.colorEstado}}"> <i class="{{persona.iconoEstado}}"></i> {{persona.textoEstado}}</div>
                                         </td>

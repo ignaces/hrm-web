@@ -41,7 +41,7 @@
                             <div class="col-md-6">
                                 <div class="card-box widget-user">
                                     <div>
-                                        <img src="/assets/images/users/erasmo.jpeg" class="img-responsive img-circle" alt="user">
+                                        <img src="{{colaborador[0].foto}}" class="img-responsive img-circle" alt="user">
                                         <div class="wid-u-info">
                                             <h5 class="m-t-20 m-b-5">{{colaborador[0].nombres}} {{colaborador[0].apellidoPaterno}} {{colaborador[0].apellidoMaterno}}</h5>
                                             <p class="text-muted m-b-0 font-14">{{colaborador[0].cargo}}</p>
@@ -59,11 +59,27 @@
         </div>
         <div class="row">
             <div class="portlet">
+                <div class="portlet-heading ">
+                    <h3 class="portlet-title text-warning">
+                        Metas
+                    </h3>
+                                       <div class="clearfix"></div>
+                </div>
                  <div class="portlet-body">
                     <div class="row pull-right">
                         <div class="col-md-12">
-                            
+                          @if(puedeCrear=="SI")
+                            <a href="/Desempeno/MetasCreacion/metaNueva?idProcesoEtapa={{colaborador[0].idEdeProcesoEtapa}}&idColaborador={{colaborador[0].idPersona}}" class="btn btn-warning btn-xs btn-rounded btn-bordered waves-effect w-md"><i class="fa fa-plus"></i> Nueva Meta</a>
+                          @endif
+                            <div class="clearfix"></div>
                         </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="row">
+                        <!-- Panel Dimensiones -->
+                        @!component('components.desempeno.listaMetasCreacion',datos=dataMetas, columnas=dataColumnas) 
+                        <!-- Panel Dimensiones -->
                     </div>
                  </div>
             </div>
