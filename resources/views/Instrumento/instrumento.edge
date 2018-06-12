@@ -8,7 +8,9 @@
     <script src="/assets/plugins/intro/intro.min.js"></script>
 <script>
 $(document).ready(function(){
-    introJs().setOptions({nextLabel: 'Siguiente', skipLabel: 'Salir', prevLabel: 'Anterior', doneLabel:'Listo'}).start();
+    @if(showIntro)
+        introJs().setOptions({nextLabel: 'Siguiente', skipLabel: 'Salir', prevLabel: 'Anterior', doneLabel:'Listo'}).start();
+    @endif
 })
 </script>
     
