@@ -41,7 +41,7 @@ class Portada {
     
        
         var menu = session.get('usuario_roles_menu');
-        return view.render('core/welcome',  {user,procesos,persona,menu,procesosEde});
+        return view.render('core/welcome',  {user,procesos,persona,menu,procesosEde}); //hay que hacer que los procesos vengan de la BD segun cliente por modulo ASMN
     }   
 }
 
