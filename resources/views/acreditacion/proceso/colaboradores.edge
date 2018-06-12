@@ -81,7 +81,9 @@
                                 <thead style="background-color: #44515c">
                                     <tr>
                                         <th></th>
+                                        @if(!hideTipo)
                                         <th>Tipo</th>
+                                        @endif
                                         <th>Instrumento</th>
                                         <th>Estado</th>
                                         <th>Acciones</th>
@@ -107,9 +109,11 @@
                                                 @if(!$loop.first)
                                                 <tr>
                                                 @endif
+                                                 @if(!hideTipo)
                                                     <td>
                                                         <p class="m-0 text-uppercase font-bold font-secondary text-overflow" title="Statistics">{{instrumento.codigoTipoInstrumento}}</p>
                                                     </td>
+                                                 @endif
                                                     <td>
                                                         
                                                         <p class="m-0 text-uppercase font-bold font-secondary text-overflow" title="Statistics">{{instrumento.nombreInstrumento}}</p>
