@@ -40,6 +40,23 @@ class Proceso {
         
         return view.render('incentivo/proceso/catalogo');
     }
+    async cardex ({view,request, response, auth, session}) {
+        
+        var idPersona = session.get('idPersona', 'fail')
+        var idProceso = request.input("proceso")
+
+        session.put('idProceso',idProceso);
+
+        var obj = {
+            "idProceso":idProceso,
+            "idPersona": idPersona
+        };
+        //console.log(obj);
+        //var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getPersonasEvaluaciones',obj);
+        //var personas = result.body.data;
+        
+        return view.render('incentivo/proceso/cardex');
+    }
 
     async ingresoVenta ({view,request, response, auth, session}) {
         /*

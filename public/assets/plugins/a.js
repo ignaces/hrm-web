@@ -19,130 +19,6 @@ jQuery(function($) {
     CMPLTADMIN_SETTINGS.dashboardEcharts = function() {
   
   
-      /*--------------- Chart 1 -------------*/
-      if($("#platform_type_dates_donut").length){
-        var myChart = echarts.init(document.getElementById('platform_type_dates_donut'));
-  
-        var idx = 1;
-        var option_dt = {
-  
-          timeline : {
-            show: true,
-            data : ['06-16','05-16','04-16'],
-            label : {
-              formatter : function(s) {
-                return s.slice(0, 5);
-              }
-            },
-            x:10,
-            y:null,
-            x2:10,
-            y2:0,
-            width:250,
-            height:50,
-            backgroundColor:"rgba(0,0,0,0)",
-            borderColor:"#eaeaea",
-            borderWidth:0,
-            padding:5,
-            controlPosition:"left",
-            autoPlay:true,
-            loop:true,
-            playInterval:2000,
-            lineStyle:{
-              width:1,
-              color:"#bdbdbd",
-              type:""
-            },
-  
-          },
-  
-          options : [
-            {
-              color: ['#dddddd','#64c5b1','#414b4f','#ee4b82','#45bbe0'],
-              title : {
-                text: '',
-                subtext: ''
-              },
-              tooltip : {
-                trigger: 'item',
-                formatter: "{a} <br/>{b} : {c} ({d}%)"
-              },
-              legend: {
-                show: false,
-                x: 'left',
-                orient:'vertical',
-                padding: 0,
-                data:['iPhone 7','Windows','Desktop','Mobiles','Others']
-              },
-              toolbox: {
-                show : true,
-                color : ['#bdbdbd','#bdbdbd','#bdbdbd','#bdbdbd'],
-                feature : {
-                  mark : {show: false},
-                  dataView : {show: false, readOnly: true},
-                  magicType : {
-                    show: true,
-                    type: ['pie', 'funnel'],
-                    option: {
-                      funnel: {
-                        x: '10%',
-                        width: '80%',
-                        funnelAlign: 'center',
-                        max: 50
-                      },
-                      pie: {
-                        roseType : 'none',
-                      }
-                    }
-                  },
-                  restore : {show: false},
-                  saveAsImage : {show: true}
-                }
-              },
-  
-  
-              series : [
-                {
-                  name:'06-16',
-                  type:'pie',
-                  radius : [20, '80%'],
-                  roseType : 'none',
-                  center: ['50%', '45%'],
-                  width: '50%',       // for funnel
-                  itemStyle : {
-                    normal : { label : { show : true }, labelLine : { show : true } },
-                    emphasis : { label : { show : false }, labelLine : {show : false} }
-                  },
-                  data:[{value: 35,  name:'iPhone 7'}, {value: 16,  name:'Windows'}, {value: 27,  name:'Desktop'}, {value: 29,  name:'Mobiles'}, {value: 12,  name:'Others'}]
-                }
-              ]
-            },
-            {
-              series : [
-                {
-                  name:'05-16',
-                  type:'pie',
-                  data:[{value: 42,  name:'iPhone 7'}, {value: 51,  name:'Windows'}, {value: 39,  name:'Desktop'}, {value: 25,  name:'Mobiles'}, {value: 9,  name:'Others'}]
-                }
-              ]
-            },
-            {
-              series : [
-                {
-                  name:'04-16',
-                  type:'pie',
-                  data:[{value: 29,  name:'iPhone 7'}, {value: 16,  name:'Windows'}, {value: 24,  name:'Desktop'}, {value: 19,  name:'Mobiles'}, {value: 5,  name:'Others'}]
-                }
-              ]
-            },
-  
-          ] // end options object
-        };
-  
-        myChart.setOption(option_dt);
-  
-  
-      }
   
   
       /*-------------- Chart 2 ---------------*/
@@ -178,35 +54,6 @@ jQuery(function($) {
           legend: {
             data: []
           },
-          toolbox: {
-            orient: 'vertical',
-            show : true,
-            showTitle: true,
-            color : ['#bdbdbd','#bdbdbd','#bdbdbd','#bdbdbd'],
-            feature : {
-              mark : {show: false},
-              dataZoom : {
-                show : true,
-                title : {
-                  dataZoom : 'Data Zoom',
-                  dataZoomReset : 'Reset Zoom'
-                }
-              },
-              dataView : {show: false, readOnly: true},
-              magicType : {
-                show: true,
-                title : {
-                  bar : 'Bar',
-                  line : 'Area',
-                  stack : 'Stacked Bar',
-                  tiled: 'Tiled Bar'
-                },
-                type: ['bar','line','stack','tiled']
-              },
-              restore : {show: false},
-              saveAsImage : {show: true,title:'Save as Image'}
-            }
-          },
   
           // Enable drag recalculate
           calculable: true,
@@ -215,7 +62,7 @@ jQuery(function($) {
           xAxis: [{
             type: 'category',
             boundaryGap: false,
-            data: ['2016-06-01','2016-05-01','2016-04-01','2016-03-01','2016-02-01','2016-01-01','2015-12-01','2015-11-01','2015-10-01','2015-09-01'],
+            data: ['HUGO','DOLCE','GUCCI','CALVIN'],
             axisLine: {
               show: true,
               onZero: true,
@@ -298,26 +145,7 @@ jQuery(function($) {
               },
   
               data: [2323,2144,4534,1989,3232,2323,2144,4534,1989,3232,2323,2144,4534,1989,3232,2323,2144,4534,1989,3232,2323,2144,4534,1989,3232,2323,2144,4534,1989,3232]
-            },
-            {
-              name: 'Guest Visitors',
-              type: 'bar',
-              smooth: true,
-              symbol:'none',
-              symbolSize:2,
-              showAllSymbol: true,
-              barWidth:10,
-              barGap:'10%',
-              itemStyle: {
-                normal: {
-                  color:'#dddddd',
-                  borderWidth:2, borderColor:'#dddddd',
-                  areaStyle: {color:'#dddddd', type: 'default'}
-                }
-              },
-  
-              data: [5656,6567,7675,3423,4343,5656,6567,7675,3423,4343,5656,6567,7675,3423,4343,5656,6567,7675,3423,4343,5656,6567,7675,3423,4343,5656,6567,7675,3423,4343]
-            },
+            }
           ]
         };
   
@@ -551,8 +379,28 @@ jQuery(function($) {
         bindto: '#donut-chart',
         data: {
           columns: [
-            ['Avance', 150000],
-            ['Meta', 1500000]
+            ['Avance', 9900000],
+            ['Meta', 1100000]
+          ],
+          type : 'donut'
+        },
+        donut: {
+          title: "Meta",
+          width: 30,
+          label: {
+            show:false
+          }
+        },
+        color: {
+          pattern: ["lightblue", "lightgreen"]
+        }
+      });
+      c3.generate({
+        bindto: '#donut-chart_m',
+        data: {
+          columns: [
+            ['Avance', 33000],
+            ['Meta', 220000]
           ],
           type : 'donut'
         },

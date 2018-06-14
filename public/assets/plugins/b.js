@@ -178,35 +178,6 @@ jQuery(function($) {
           legend: {
             data: []
           },
-          toolbox: {
-            orient: 'vertical',
-            show : true,
-            showTitle: true,
-            color : ['#bdbdbd','#bdbdbd','#bdbdbd','#bdbdbd'],
-            feature : {
-              mark : {show: false},
-              dataZoom : {
-                show : true,
-                title : {
-                  dataZoom : 'Data Zoom',
-                  dataZoomReset : 'Reset Zoom'
-                }
-              },
-              dataView : {show: false, readOnly: true},
-              magicType : {
-                show: true,
-                title : {
-                  bar : 'Bar',
-                  line : 'Area',
-                  stack : 'Stacked Bar',
-                  tiled: 'Tiled Bar'
-                },
-                type: ['bar','line','stack','tiled']
-              },
-              restore : {show: false},
-              saveAsImage : {show: true,title:'Save as Image'}
-            }
-          },
   
           // Enable drag recalculate
           calculable: true,
@@ -215,7 +186,7 @@ jQuery(function($) {
           xAxis: [{
             type: 'category',
             boundaryGap: false,
-            data: ['2016-06-01','2016-05-01','2016-04-01','2016-03-01','2016-02-01','2016-01-01','2015-12-01','2015-11-01','2015-10-01','2015-09-01'],
+            data: ['HUGO','DOLCE','GUCCI','CALVIN'],
             axisLine: {
               show: true,
               onZero: true,
