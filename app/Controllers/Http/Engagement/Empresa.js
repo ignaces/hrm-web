@@ -27,6 +27,16 @@ class Empresa {
              
            return empresas;
     }
+    async getEmpresasFueraProceso({ view,request, response, auth, session }){
+            var idProceso = request.input("idProceso");
+            
+            
+            var result = await data.execApi(request.hostname(),'/Engagement/Empresa/getEmpresasFueraProceso',{idProceso:idProceso});
+
+            const empresas = result.body;
+            
+        return empresas;
+    }
     async getExcelResultado ({ view,request, response, auth, session }) {
         var id = request.input("idEncuestaAplicacion");
         var result = await data.execApi(request.hostname(),'/Engagement/Aplicacion/resultados',{idEncuestaAplicacion:id});  
