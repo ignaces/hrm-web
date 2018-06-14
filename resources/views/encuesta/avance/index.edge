@@ -37,8 +37,8 @@ var resumen = {{{toJSON(resumen)}}}
 var clasificaciones ={{{toJSON(clasificaciones)}}}
 
 var initBar = function(id,labels,data){
-    
-    Vue.component(id, {
+    var cId= "c"+id;
+    Vue.component(cId, {
     extends: VueChartJs.Bar,
     mounted () {
         this.renderChart({
@@ -222,7 +222,7 @@ initPie();
                                 <div class="row" >
                                       
                                       
-                                        <{{clasificacion.id}}></{{clasificacion.id}}>
+                                        <c{{clasificacion.id}}></c{{clasificacion.id}}>
                                       
                                 </div>
                             </div>
