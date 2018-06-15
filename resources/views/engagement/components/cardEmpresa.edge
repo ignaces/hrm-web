@@ -6,9 +6,11 @@
                                     <h3 class="m-0 text-muted"><i class="mdi mdi-dots-horizontal"></i></h3>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Edit</a></li>
-                                    <li><a href="#">Delete</a></li>
-                                    <li><a href="#">Block</a></li>
+                                    <li><a href="#" v-on:click="edit(empresa.id)">Editar</a></li>
+                                    <li><a href="#" v-on:click="clasificaciones(empresa.idProcesoEmpresa)">Clasificaciones</a></li>
+                                    <li><a href="#" v-on:click="addEncuesta(empresa.idProcesoEmpresa)" >Agregar Encuesta</a></li>
+                                    <li><a href="#">Eliminar</a></li>
+                                    
                                 </ul>
                             </div>
                             <img :src="empresa.logo" alt="logo" :class="'company-logo'">
@@ -20,9 +22,9 @@
                             </div>
 
                             <hr>
-                            <div class="row color-scroll" style="height: 150px;">
+                            <div class="row color-scroll" style="height: 150px;" v-if="empresa.encuestas.length>0">
                             <!--INICIO TARJETA ENCUESTA-->
-                            <div class="card-box m-l-10 m-r-10" v-for="encuesta in empresa.encuestas"  >
+                            <div class="card-box m-l-10 m-r-10"  v-for="encuesta in empresa.encuestas"  >
                               <h4 class="header-title m-t-0">@{{encuesta.nombre}}</h4>
 
                                 <div class="text-center">
@@ -40,7 +42,7 @@
                                         <button v-on:click="getExcel(encuesta.id)" class="btn btn-purple waves-effect waves-light"> <i class="fa fa-file-excel-o"></i> <span>Avance</span> </button>
                                         <button v-on:click="getExcelResultados(encuesta.id)" class="btn btn-success waves-effect waves-light"> <i class="fa fa-file-excel-o"></i> <span>Resultados</span> </button>
                                         <button v-on:click="ver(encuesta.id)" class="btn btn-primary waves-effect waves-light"> <i class="fa fa-eye"></i> <span>Ver Más</span> </button>
-                                    </row>
+                                    </div>
                                 </div>
                             
                             </div>

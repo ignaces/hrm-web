@@ -39,7 +39,23 @@
                 $("#idEncuestaAplicacion").val(id);
                 $('form').submit();
                 
-            }
+            },
+            addEncuesta:function(id){
+                $("#idEmpresa").val(id);
+                alert(id)
+                
+            },
+            clasificaciones:function(id){
+                cFormClasificacion.idEmpresaProceso = id;
+
+                modalClasificaciones(id);
+                
+            },
+            edit:function(id){
+                $("#idEmpresa").val(id);
+                alert(id)
+                
+            },
         }
     });
     
@@ -97,6 +113,28 @@
             }
         });
     }
+    var modalClasificaciones = function(id){
+       var obj ={
+           idEmpresaProceso:id
+       }
+
+        $.ajax({
+            type: "GET",
+            url: "/Engagement/Empresa/getClasificaciones",
+            contentType: "application/json; charset=utf-8",
+            data: obj,
+            dataType: "json", 
+            success: function (msg) {
+                if(obj.idProceso=="Periodo"){
+                            $("#modalClasificaciones").modal('hide');
+                }else{
+                            $("#modalClasificaciones").modal('show');
+                }
+            
+              cFormClasificacion.clasificaciones=msg;
+            }
+        });
+    }
     var cForm= new Vue({
         el: '#formularioEmpresa',
         data: {
@@ -139,7 +177,7 @@
                 }
                 $.ajax({
                     type: "GET",
-                    url: "/Core/Empresa/create",
+                    url: "/Engagement/Empresa/create",
                     contentType: "application/json; charset=utf-8",
                     data: obj,
                     dataType: "json", 
@@ -152,6 +190,46 @@
 
                 });   
                 
+            }
+        }
+        })
+        var cFormClasificacion= new Vue({
+        el: '#formularioClasificaciones',
+        data: {
+            idEmpresaProceso:"",
+            idClasificacion:"",
+            clasificaciones:[],
+            clasificacion: 
+                {
+                    id:'',
+                    nombre:'',
+                    codigo:'',
+                    nivel:0,
+                    orden:1,
+                    edit: false
+                }
+            
+        },
+        methods: {
+            add:function (id) {
+                var obj ={
+                    idPadre:cFormClasificacion.idClasificacion,
+                    idEmpresaProceso:cFormClasificacion.idEmpresaProceso,
+                    clasificacion:cFormClasificacion.clasificacion
+                }
+                $.ajax({
+                    type: "GET",
+                    url: "/Engagement/Empresa/addClasificacion",
+                    contentType: "application/json; charset=utf-8",
+                    data: obj,
+                    dataType: "json", 
+                    async:false,
+                    success: function (msg) {
+                        cFormClasificacion.clasificaciones = msg;
+
+                    }
+
+                });   
             }
         }
         })
@@ -169,6 +247,7 @@
 
 @section('content')
  @!component('engagement.components.modalEmpresa')
+ @!component('engagement.components.modalClasificaciones')
 <form action="/Engagement/Avance/encuesta" id="formulario"  method="POST">
     {{ csrfField() }}
     <input type="hidden" id="idEncuestaAplicacion" name="idEncuestaAplicacion" value=""/> 
@@ -185,6 +264,7 @@
                         <option value="{{periodo.id}}">{{periodo.nombre}}</option>
                     @endeach                   
             </select>
+            <br />
             <button type="button"  class="btn btn-purple waves-effect waves-light" id="btnEmpresa" style="display:none" > <span>Agregar Empresa</span> <i class="fa fa-plus m-l-5"></i> </button>
         </div>
     </div>
