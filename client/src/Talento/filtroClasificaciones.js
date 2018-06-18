@@ -103,9 +103,9 @@ $("#btnBuscar").on('click',function() {
                         foto = "/assets/images/users/femaleuser.png";
                     }
                 }
-                var atributos = '<i class="fa fa-plane m-r-5"></i><i class="fa fa-refresh m-r-5"></i><i class="fa fa-warning m-r-5"></i><i class="fa fa-star m-r-5"></i>';
+               
                 $("#upcoming").append('<li class="task-warning ui-sortable-handle" style="" id="base" value="'+total[index].procesoOpinante+'">' +
-                '<div class="m-t-20"><p class="pull-right">'+atributos+'</p><p class="m-b-0"><a href="" class="text-muted"><img src="'+foto+'" alt="task-user" class="thumb-sm img-circle pull-left"> <H6 class="pull-left">'+total[index].Colaborador+' '+total[index].apellidoPaterno+' '+total[index].apellidoMaterno+'</H6></a> </p></div></li>');
+                '<div class="m-t-20"><p class="m-b-0"><a href="" class="text-muted"><img src="'+foto+'" alt="task-user" class="thumb-sm img-circle pull-left"> <H6 class="pull-left">'+total[index].Colaborador+' '+total[index].apellidoPaterno+' '+total[index].apellidoMaterno+'</H6></a> </p></div></li>');
             });
         }//$("."+Color+"").append('<li class="task-warning ui-sortable-handle" style="" id="'+cargo+'" name="'+rut+'"   value="'+idOpinante+'">' +'<input class="" id="clasificaciones" name="clasificaciones" type="hidden" value="'+clasificacionesHidden+'"><p class="m-b-0"><div class="clearfix"></div><div><p class="pull-right">'+atributos+'</p></div><a href="#" class="text-muted"><img src="'+foto+'" alt="task-user" class="thumb-sm img-circle pull-left"> <H6 class="pull-left">'+nombres+' '+apellidoPaterno+' '+apellidoMaterno+'</H6></a> </p></li>');
         },

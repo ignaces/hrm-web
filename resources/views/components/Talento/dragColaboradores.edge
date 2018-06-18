@@ -10,26 +10,40 @@
             <ul class="itemCuadrante list-unstyled ui-sortable" id="upcoming" style="width:300px; height: 800px; overflow: auto">
             
                 @each(talentos in personas.clasificaciones)
-                        <!-- id="{{talentos.Cargo}}" -->
-                <li class="task-warning ui-sortable-handle" id="base" name="{{talentos.identificador}}"   value="{{talentos.procesoOpinante}}">
-                    <div class="clearfix"></div>
-                    <div>
-                        <p class="pull-right">
-                            @each(atributo in talentos.atributos)
-                                <i class="{{atributo.icono}} m-r-5"></i>
-                            @endeach
-                        </p>
-                    </div>
+                
+                <li class="task-warning ui-sortable-handle" style="background-color: rgba(255,255,255,0.4); border:1px solid rgba(0,0,0,0.1);" id="base" name="{{talentos.identificador}}"   value="{{talentos.procesoOpinante}}">
+                    <div class="row">
+                        <div class="col-xs-2">
                         @if(!talentos.foto)
-                            @if(talentos.genero=='M')
-                                    <p class="m-b-0"><a href="#" class="text-muted"><img src="/assets/images/users/maleuser.png" alt="task-user" class="thumb-sm img-circle pull-left"> <H6 class="pull-left">{{talentos.Colaborador}} {{talentos.apellidoPaterno}} {{talentos.apellidoMaterno}}</H6></a> </p>
-                            @else
-                                    <p class="m-b-0"><a href="#" class="text-muted"><img src="/assets/images/users/femaleuser.png" alt="task-user" class="thumb-sm img-circle  pull-left"> <H6 class="pull-left">{{talentos.Colaborador}} {{talentos.apellidoPaterno}} {{talentos.apellidoMaterno}}</H6></a> </p>
-                            @endif
                             
+                                
+                                    @if(talentos.genero=='M')
+                                           <a href="/Talento/Talento/fichaTalento?idPersona={{talentos.idPersona}}" class="text-muted">
+                                                    <img src="/assets/images/users/maleuser.png" alt="task-user" class="thumb-sm img-circle pull-left"> 
+                                            </a> 
+                                           
+                                    @else
+                                            <a href="/Talento/Talento/fichaTalento?idPersona={{talentos.idPersona}}" class="text-muted">
+                                                    <img src="/assets/images/users/femaleuser.png" alt="task-user" class="thumb-sm img-circle pull-left"> 
+                                            </a> 
+                                    @endif
+                                
                         @else
-                            <p class="m-b-0"><a href="#" class="text-muted"><img src="{{talentos.foto}}" alt="task-user" class="thumb-sm img-circle  pull-left"> <H6 class="pull-left">{{talentos.Colaborador}} {{talentos.apellidoPaterno}} {{talentos.apellidoMaterno}}</H6></a> </p>
+                         <a href="/Talento/Talento/fichaTalento?idPersona={{talentos.idPersona}}" class="text-muted">
+                                                    <img src="{{talentos.foto}}" alt="task-user" class="thumb-sm img-circle pull-left"> 
+                                            </a> 
+                                
                         @endif
+                        </div>
+                        <div class="col-xs-6">
+                            <h6>
+                                <a href="/Talento/Talento/fichaTalento?idPersona={{talentos.idPersona}}" class="">
+                                    <span style="width: 100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display: inline-block;">{{talentos.Colaborador}} {{talentos.apellidoPaterno}} {{talentos.apellidoMaterno}}</span>
+                                </a>
+                            </h6>
+                            
+                        </div>
+                        </div>
                     
                 </li>
                 @endeach
@@ -138,7 +152,7 @@
 
 
 @each(colaboradores in colaboradoresEva.clasificaciones)
-        <input class="aa" id="{{colaboradores.idTalentoCuadrante}}" type="hidden" value="{{colaboradores.nombres}}_{{colaboradores.apellidoPaterno}}_{{colaboradores.apellidoMaterno}}_{{colaboradores.Cargo}}_{{colaboradores.identificador}}_{{colaboradores.foto}}_{{colaboradores.genero}}"  accesskey="{{colaboradores.idTalentoCuadrante}}" tabindex="{{colaboradores.idOpinante}}">
+        <input class="aa" id="{{colaboradores.idTalentoCuadrante}}" type="hidden" value="{{colaboradores.nombres}}_{{colaboradores.apellidoPaterno}}_{{colaboradores.apellidoMaterno}}_{{colaboradores.Cargo}}_{{colaboradores.identificador}}_{{colaboradores.foto}}_{{colaboradores.genero}}_{{colaboradores.idPersona}}"  accesskey="{{colaboradores.idTalentoCuadrante}}" tabindex="{{colaboradores.idOpinante}}">
 
         @each(claHijo in colaboradoresEva.clasificaciones[$loop.index].clasificacionHijo)
             <input class="bb" id="" name="{{claHijo.ClasificacionesCol}}" type="hidden" value="{{claHijo.ClasificacionesCol}}">
