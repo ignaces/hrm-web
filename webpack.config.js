@@ -1,6 +1,6 @@
 var webpack = require('webpack');
 const path = require('path');
-
+var HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 module.exports = {
   entry: {
       Users:['./client/src/Users/users.js'],
@@ -23,7 +23,8 @@ module.exports = {
       filtroClasificaciones:['./client/src/Talento/filtroClasificaciones.js'],
       organigrama:['./client/src/Talento/organigrama.js'],
       curriculum:['./client/src/Talento/curriculum.js'],
-      notificacionesSistema:['./client/src/Notificaciones/sistema.js']
+      notificacionesSistema:['./client/src/Notificaciones/sistema.js'],
+      marketplace:['./client/src/Talento/marketplace.js']
     },
   output: {
     filename: '[name].min.js',
@@ -32,6 +33,7 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin({
       include: /\.min\.js$/,
       minimize: true
-    })
+    }),
+    new HardSourceWebpackPlugin()
   ]
 };

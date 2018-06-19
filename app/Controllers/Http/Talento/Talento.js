@@ -251,8 +251,11 @@ class Talento {
     }
 
     async getOrganigrama({view,request, response, auth, session}){
+        var persona =  session.get('personaLogueada')
+        
         var obj = {
-            "idProceso":session.get('procesoOrganigrama')
+            "idProceso":session.get('procesoOrganigrama'),
+            "idPersonaOpinante":persona.id
         };
         var result = await data.execApi(request.hostname(),'/Talento/Talento/organigrama',obj);
         var orgChart = result.body;
