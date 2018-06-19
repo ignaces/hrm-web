@@ -240,6 +240,15 @@ class Talento {
 
         
     }
+    async marketPlace ({view,request, response, auth, session}) {
+       
+       
+        
+        return view.render('talento/marketPlace', {});
+
+
+        
+    }
 
     async getOrganigrama({view,request, response, auth, session}){
         var obj = {

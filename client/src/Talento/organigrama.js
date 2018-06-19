@@ -31,7 +31,7 @@ var cargaOrganigrama = function (organigrama){
         
         
         for(var i in organigrama[posicion].atributos){
-            badges +="<i class='"+organigrama[posicion].atributos[i].iconoAtributo+" fa-3x m-r-5 "+organigrama[posicion].atributos[i].colorAtributo+"'></i>";
+            badges +="<i class='"+organigrama[posicion].atributos[i].iconoAtributo+" fa-3x m-r-5 "+organigrama[posicion].atributos[i].colorAtributo+"' data-toggle='tooltip' data-placement='top' title='' data-original-title='Tooltip on top'></i>";
         }
         if(organigrama[posicion].critico==1){
             badges +="<i class='fa fa-star fa-3x m-r-5 text-warning'></i>";
@@ -129,7 +129,7 @@ function renderNodeHandler(sender, args) {
         if (args.content[i].indexOf(args.node.data["talentReview"]) != -1) {
             if(args.node.data["talentReview"]!=undefined){
                 
-                texto  = "<foreignObject x='298' y='150' width='30px' height='20px'><h2 align='center' style='background-color: rgba(255,255,255,1); border:1px solid rgba(0,0,0,0.1);'>"+args.node.data["talentReview"]+"</h2></foreignObject>";
+                texto  = "<foreignObject x='298' y='150' width='30px' height='20px'><h2 align='center' style='background-color: rgba(255,255,255,1); border:1px solid rgba(0,0,0,0.1);' data-toggle='tooltip' data-placement='top' title='' data-original-title='Tooltip on top'>"+args.node.data["talentReview"]+"</h2></foreignObject>";
             }
         }
         

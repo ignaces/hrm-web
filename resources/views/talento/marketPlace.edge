@@ -1,0 +1,179 @@
+ @layout('layouts/horizontal')
+
+@section('scripts')
+    
+     <script src="/assets/plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.min.js"></script>
+    <script src="/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+    
+    
+
+    <script src="/assets/plugins/custombox/js/custombox.min.js"></script>
+    <script src="/assets/plugins/custombox/js/legacy.min.js"></script>
+
+
+    <script src="/assets/js/jquery.core.js"></script>
+    <script src="/assets/js/jquery.app.js"></script>
+    
+        <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+        <script>
+        $('#textarea').maxlength({
+            alwaysShow: true
+        });
+        
+
+       
+        </script>
+         <script>
+            $(document).ready(function () {
+
+                $("#upcoming, #inprogress, #completed").sortable({
+                    connectWith: ".taskList",
+                    placeholder: 'task-placeholder',
+                    forcePlaceholderSize: true,
+                    update: function (event, ui) {
+
+                        var todo = $("#todo").sortable("toArray");
+                        var inprogress = $("#inprogress").sortable("toArray");
+                        var completed = $("#completed").sortable("toArray");
+                    }
+                }).disableSelection();
+
+            });
+        </script>
+@endsection
+
+@section('pluginsCss')
+    <link href="/assets/getOrgChart/css/getorgchart.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    <!-- Infobox css -->
+    <link rel="stylesheet" href="/assets/plugins/infobox/infobox.css">
+    <!-- socialWidget css -->
+    <link rel="stylesheet" href="/assets/plugins/socialWidget/socialWidget.css">
+@endsection
+  
+
+@section('content')
+    @!component('components.Core.botonera')
+    <div class="panel panel-border panel-primary">
+        <div class="panel-heading">
+            <h1 class="panel-title">Marketplace Comercial (Oferta Demanda)</h1>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="col-sm-6 col-md-4 col-lg-12">
+                        <i class='fa fa-star m-r-5 text-warning'></i> Cargo Crítico
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-12">
+                        <i class='fa fa-plane m-r-5 text-primary'></i> Con Movilidad
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-12">
+                        <i class='fa fa-refresh m-r-5 text-primary'></i> Expatriado
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-12">
+                        <i class='fa fa-warning m-r-5 text-warning'></i> Alerta Amarilla
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-12">
+                        <i class='fa fa-warning m-r-5 text-red'></i> TR 8, 9 por dos años
+                    </div>
+                    
+                </div>
+                
+            </div>
+            <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card-box">
+                            <h4 class="text-dark header-title m-t-0">Posibles Vacantes Futuras</h4>
+                            
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <ul class="sortable-list taskList list-unstyled" id="upcoming">
+                                        <li class="task-warning" id="task1">
+                                            <div class="pull-right">
+                                                <label>3</label>
+                                            </div>
+                                                
+                                            <div class="clearfix"></div>
+                                            <div class="m-t-20">
+                                                <p class="pull-right m-b-0 m-t-10">
+                                                    <button type="button" class="btn btn-success btn-xs waves-effect waves-light" data-toggle="modal" data-target="#task-detail-modal">View</button>
+                                                </p>
+                                                <p class="m-b-0"><a href="" class="text-muted"><img src="assets/images/users/avatar-1.jpg" alt="task-user" class="thumb-sm img-circle m-r-10"> <span class="font-bold font-secondary">Petey Cruiser</span></a> </p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-6">
+                                    <ul class="sortable-list taskList list-unstyled" id="upcoming">
+                                    
+                                    </ul>
+                                </div>
+                            </div><!--end row-->
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6">
+                        <div class="card-box">
+                            <h4 class="text-dark header-title m-t-0">Pool de talentos Área Comercial</h4>
+                            
+
+                            <ul class="sortable-list taskList list-unstyled" id="completed">
+                                <li class="task-warning" id="task14">
+                                    <div class="checkbox checkbox-custom checkbox-single pull-right">
+                                        <input type="checkbox" aria-label="Single checkbox Two">
+                                        <label></label>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="m-t-20">
+                                        <p class="pull-right m-b-0 m-t-10">
+                                            <button type="button" class="btn btn-success btn-xs waves-effect waves-light" data-toggle="modal" data-target="#task-detail-modal">View</button>
+                                        </p>
+                                        <p class="m-b-0"><a href="" class="text-muted"><img src="assets/images/users/avatar-1.jpg" alt="task-user" class="thumb-sm img-circle m-r-10"> <span class="font-bold font-secondary">Petey Cruiser</span></a> </p>
+                                    </div>
+                                </li>
+                               
+                            </ul>
+                        </div>
+                    </div>
+
+            </div><!--end row 1 -->
+            <div class="row">
+            <div class="col-lg-6">
+                        <div class="card-box">
+                            <h4 class="text-dark header-title m-t-0">Vacantes Actuales</h4>
+                            
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <ul class="sortable-list taskList list-unstyled" id="upcoming">
+                                        <li class="task-warning" id="task1">
+                                            <div class="checkbox checkbox-custom checkbox-single pull-right">
+                                                <input type="checkbox" aria-label="Single checkbox Two">
+                                                <label></label>
+                                            </div>
+                                            When an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                                            <div class="clearfix"></div>
+                                            <div class="m-t-20">
+                                                <p class="pull-right m-b-0 m-t-10">
+                                                    <button type="button" class="btn btn-success btn-xs waves-effect waves-light" data-toggle="modal" data-target="#task-detail-modal">View</button>
+                                                </p>
+                                                <p class="m-b-0"><a href="" class="text-muted"><img src="assets/images/users/avatar-1.jpg" alt="task-user" class="thumb-sm img-circle m-r-10"> <span class="font-bold font-secondary">Petey Cruiser</span></a> </p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-6">
+                                    <ul class="sortable-list taskList list-unstyled" id="upcoming">
+                                    
+                                    </ul>
+                                </div>
+                            </div><!--end row-->
+                        </div>
+                    </div>
+            </div>
+        </div>    
+    </div>
+    
+@endsection
+
