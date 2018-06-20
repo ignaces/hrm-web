@@ -54,8 +54,7 @@ class Portada {
         var cliente = request.hostname().split(".")[0]
         var etag = `app_${cliente}`
 
-        
-        return view.render('core/welcome',  {etag,user,procesos,persona,menu,talentos,condicion});
+        return view.render('core/welcome',  {etag,user,procesos,persona,menu,talentos,condicion,procesosEde});
 
         
     }   

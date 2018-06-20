@@ -42,7 +42,16 @@
                 </div><!-- end col -->
             </div>
         </div>
-
+        @if(procesos.length>0)
+        <div class="row">
+                @!component('components.Acreditacion.cajaAcreditacion',titulo = "Acreditación", procesos=procesos)
+        </div>
+        @endif
+        @if(procesosEde.length>0)
+         <div class="row">
+             @!component('components.Desempeno.cajaDesempeno',titulo = "Gestión de Desempeño", procesos=procesosEde)
+        </div>  
+        @endif
           <div class="row">
             @!component('components.Acreditacion.cajaAcreditacion',titulo = "Acreditación",titulo2 = "Gestión de Talento", procesos=procesos, talentos=talentos,condicion=condicion)
           </div>      
