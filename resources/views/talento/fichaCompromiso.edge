@@ -88,11 +88,14 @@ var cForm= new Vue({
     deleteIndicador:function () {
         cForm.accion.indicadores.pop(this)
     },
-    addAccion:function () {
-        
+    saveAccion:function () {
+        var url = "/Talento/Persona/addAccion"
+        if(cForm.accion.edit){
+            url="/Talento/Persona/saveAccion"
+        }
         $.ajax({
             type: "GET",
-            url: "/Talento/Persona/addAccion",
+            url: url,
             contentType: "application/json; charset=utf-8",
             data: {idPlan:idPlan,accion:cForm.accion},
             dataType: "json", 
@@ -127,7 +130,24 @@ var cForm= new Vue({
   }
 })
 
-
+$(document).ready(function(){
+    $("#btnNewAccion").click(function(){
+        cForm.accion={
+            id:'',
+            idTipoAccion:'-1',
+            idAccionPredeterminada:'-1',
+            idCompetencia:'-1',
+            nombre: '',
+            objetivo:'',
+            apoyoGerente:'',
+            competencia:'',
+            fechaInicio:'',
+            fechaTermino:'',
+            indicadores:[],
+            edit: false
+        }
+    })
+});
 </script>
         
 @endsection
@@ -217,7 +237,7 @@ var cForm= new Vue({
                                     <h3 class="m-0 text-muted"><i class="mdi mdi-dots-horizontal"></i></h3>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#" data-toggle="modal" data-target="#modalAccion">Nueva Acción</a></li>
+                                    <li><a href="#" data-toggle="modal" data-target="#modalAccion" id="btnNewAccion">Nueva Acción</a></li>
                                 </ul>
                             </div>
                 </h2>
