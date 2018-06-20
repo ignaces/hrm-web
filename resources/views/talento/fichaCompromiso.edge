@@ -23,6 +23,7 @@ var cAcciones= new Vue({
   methods: {
   	editAccion: function(accion){
     	cForm.accion = accion;
+        cForm.accion.edit=true;
         $("#modalAccion").modal("show");
     },
     saveEdit: function(ev, number){
