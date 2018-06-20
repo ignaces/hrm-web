@@ -8,3 +8,4 @@
 * Módulos
 
  * [Acreditación](/modulos/acreditacion/)
+ * [Ede](/modulos/ede/creacionMeta/)

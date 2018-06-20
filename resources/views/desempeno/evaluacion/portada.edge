@@ -1,0 +1,370 @@
+@layout('layouts/horizontal')
+
+
+@section('pluginsCss2')
+        <link href="/assets/plugins/ede/infobox/infobox.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/plugins/ede/socialWidget/socialWidget.css" rel="stylesheet" type="text/css" />             
+         <link href="/assets/plugins/ede/progressbar/progressbar.css" rel="stylesheet" type="text/css" />   
+         
+@endsection
+@section('scripts2')
+  <script src="/assets/js/dist/etapasProceso.min.js"></script> 
+@endsection
+@section('content')
+
+<div class="row" >
+    <div class="col-md-2">
+      @!component('components.desempeno.widgetInfoEtapa',datos=etapa,nombreProceso=dataProceso.nombre)
+      @!component('components.desempeno.widgetuser',datos=data,datamenu=datosMenu,persona=PersonaEde)
+    </div>
+    <div class="col-md-10">
+        {{-- WIDGETS --}}
+        <div class="row">
+            <div class="portlet">
+                <div class="portlet-heading">
+                     <h4 class="portlet-title text-dark">
+                       {{tarea[0].nombre}}
+                    </h4>   
+                    <div class="portlet-widgets">
+                        <a data-toggle="collapse" data-parent="#accordion1" href="#widgets"><i class="mdi mdi-minus"></i></a>                  
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div id="widgets" class="panel-collapse collapse in">
+                    <div class="portlet-body">
+                        <div class="row">
+                               <div class="col-md-3 col-sm-6 col-xs-12">
+  <div class="info-box bg-green">
+            <span class="info-box-icon text-white"><i class="fa fa-flag-o"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text text-white">Mentions</span>
+              <span class="info-box-number text-white">92,050</span>
+
+              <div class="progress">
+                <div class="progress-bar" style="width: 20%"></div>
+              </div>
+              <span class="progress-description text-white">
+                    20% Increase in 30 Days
+                  </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+			</div>
+  <div class="col-md-3 col-sm-6 col-xs-12">
+  <div class="info-box bg-aqua">
+            <span class="info-box-icon text-white"><i class="fa fa-flag-o"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text text-white">Mentions</span>
+              <span class="info-box-number text-white">92,050</span>
+
+              <div class="progress">
+                <div class="progress-bar" style="width: 20%"></div>
+              </div>
+              <span class="progress-description text-white">
+                    20% Increase in 30 Days
+                  </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+			</div>
+			  <div class="col-md-3 col-sm-6 col-xs-12">
+  <div class="info-box bg-red">
+            <span class="info-box-icon text-white"><i class="fa fa-flag-o"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text text-white">Mentions</span>
+              <span class="info-box-number text-white">92,050</span>
+
+              <div class="progress">
+                <div class="progress-bar" style="width: 20%"></div>
+              </div>
+              <span class="progress-description text-white">
+                    20% Increase in 30 Days
+                  </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+			</div>
+			 <div class="col-md-3 col-sm-6 col-xs-12">
+  <div class="info-box bg-yellow">
+            <span class="info-box-icon text-white"><i class="fa fa-flag-o"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text text-white">Mentions</span>
+              <span class="info-box-number text-white">92,050</span>
+
+              <div class="progress">
+                <div class="progress-bar" style="width: 20%"></div>
+              </div>
+              <span class="progress-description text-white">
+                    20% Increase in 30 Days
+                  </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+			</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        {{-- /WIDGETS --}}
+
+        {{-- EVALUADO --}}
+        <div class="row">
+            <div class="portlet">
+                <div class="portlet-heading">
+                     <h4 class="portlet-title text-dark">
+                        Mi Proceso de Evaluación
+                    </h4>
+                    <div class="portlet-widgets">
+                        <a data-toggle="collapse" data-parent="#accordion1" href="#evaluado"><i class="mdi mdi-minus"></i></a>                  
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                
+                <div id="evaluado" class="panel-collapse collapse in">
+                     <div class="portlet-body">
+                         <div class="row" >
+                             <div class="col-md-12">
+                                <div class="row">
+                            <div class="col-md-2">
+                                <div class="text-center card-box">
+                                    <div class="clearfix"></div>
+                                    <div class="member-card">
+                                        <div class="thumb-md member-thumb m-b-10 center-block">
+                                            <img src="/assets/images/users/avatar-6.jpg" class="img-circle img-thumbnail" alt="profile-image">
+                                        </div>
+                                        <div class="">
+                                            <h5 class="m-b-5">Erasmus Raymond Melton</h5>
+                                            <p class="text-muted">Gerente de Recursos Humano</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="table-responsive">
+                                <table class="table table-hover m-0 mails table-actions-bar">
+                                    <thead>
+                                    <tr>                                      
+                                        <th>Actividad</th>
+                                        <th>Estado</th>
+										<th>Informe</th>
+                                        <th>Acción</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                Evaluación de Mitad de año
+                                            </td>
+                                            <td>
+                                                <div class="label label-success"> <i class="fa fa-check-circle-o"></i> Finalizado</div>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-bar-chart-o"></i> Ver Informe</button>
+                                            </td>
+                                            <td>
+                                                 <button type="button" class="btn btn-default btn-xs btn-rounded btn-bordered waves-effect w-md"><i class="fa fa-ban"></i> No Disponible</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Feedback de Mitad de Año
+                                            </td>
+                                            <td>
+                                                <div class="label label-success"> <i class="fa fa-check-circle-o"></i> Finalizado</div>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-bar-chart-o"></i> Ver Informe</button>
+                                            </td>
+                                            <td>
+                                                 <button type="button" class="btn btn-default btn-xs btn-rounded btn-bordered waves-effect w-md"><i class="fa fa-ban"></i> No Disponible</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end row -->
+                        
+
+
+
+
+                                
+                             {{-- Maqueta--}}
+                             </div>
+                         </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+        {{-- /EVALUADO --}}
+
+        {{-- EQUIPO --}}
+        <div class="row">
+            <div class="portlet">
+                <div class="portlet-heading">
+                     <h4 class="portlet-title text-dark">
+                        Mi Equipo
+                    </h4>
+                    <div class="portlet-widgets">
+                        <a data-toggle="collapse" data-parent="#accordion1" href="#equipo"><i class="mdi mdi-minus"></i></a>                  
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                
+                <div id="equipo" class="panel-collapse collapse in">
+                     <div class="portlet-body">
+                         <div class="row" >
+                             <div class="col-md-12">
+                             {{-- Maqueta--}}
+
+                            <div class="row">
+                            <div class="col-md-2">
+                                <div class="text-center card-box">
+                                    <div class="clearfix"></div>
+                                    <div class="member-card">
+                                        <div class="thumb-md member-thumb m-b-10 center-block">
+                                            <img src="/assets/images/users/avatar-8.jpg" class="img-circle img-thumbnail" alt="profile-image">
+                                        </div>
+                                        <div class="">
+                                            <h5 class="m-b-5">Jade M. Walker</h5>
+                                            <p class="text-muted">Coordinador de Marketing</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="table-responsive">
+                                <table class="table table-hover m-0 mails table-actions-bar">
+                                    <thead>
+                                    <tr>                                      
+                                        <th>Actividad</th>
+                                        <th>Estado</th>
+										<th>Informe</th>
+                                        <th>Acción</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                Evaluación de Mitad de año
+                                            </td>
+                                            <td>
+                                                <div class="label label-success"> <i class="fa fa-check-circle-o"></i> Finalizado</div>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-bar-chart-o"></i> Ver Informe</button>
+                                            </td>
+                                            <td>
+                                                 <button type="button" class="btn btn-default btn-xs btn-rounded btn-bordered waves-effect w-md"><i class="fa fa-ban"></i> No Disponible</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Feedback de Mitad de Año
+                                            </td>
+                                            <td>
+                                                <div class="label label-success"> <i class="fa fa-check-circle-o"></i> Finalizado</div>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-bar-chart-o"></i> Ver Informe</button>
+                                            </td>
+                                            <td>
+                                                 <button type="button" class="btn btn-default btn-xs btn-rounded btn-bordered waves-effect w-md"><i class="fa fa-ban"></i> No Disponible</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end row -->
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="text-center card-box">
+                                    <div class="clearfix"></div>
+                                    <div class="member-card">
+                                        <div class="thumb-md member-thumb m-b-10 center-block">
+                                            <img src="/assets/images/users/avatar-9.jpg" class="img-circle img-thumbnail" alt="profile-image">
+                                        </div>
+                                        <div class="">
+                                            <h5 class="m-b-5">Mathias L. Lassen</h5>
+                                            <p class="text-muted">Coordinador de CRM</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="table-responsive">
+                                <table class="table table-hover m-0 mails table-actions-bar">
+                                    <thead>
+                                    <tr>                                      
+                                        <th>Actividad</th>
+                                        <th>Estado</th>
+										<th>Informe</th>
+                                        <th>Acción</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                Evaluación de Mitad de año
+                                            </td>
+                                            <td>
+                                                <div class="label label-success"> <i class="fa fa-check-circle-o"></i> Finalizado</div>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-bar-chart-o"></i> Ver Informe</button>
+                                            </td>
+                                            <td>
+                                                 <button type="button" class="btn btn-default btn-xs btn-rounded btn-bordered waves-effect w-md"><i class="fa fa-ban"></i> No Disponible</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Feedback de Mitad de Año
+                                            </td>
+                                            <td>
+                                                <div class="label label-success"> <i class="fa fa-check-circle-o"></i> Finalizado</div>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-bar-chart-o"></i> Ver Informe</button>
+                                            </td>
+                                            <td>
+                                                 <button type="button" class="btn btn-default btn-xs btn-rounded btn-bordered waves-effect w-md"><i class="fa fa-ban"></i> No Disponible</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end row -->
+
+
+
+
+                                
+                             {{-- Maqueta--}}
+                             </div>
+                         </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+        {{-- EQUIPO --}}
+    </div>
+</div>
+
+
+
+@endsection
+
+

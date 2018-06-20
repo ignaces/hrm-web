@@ -5,11 +5,22 @@
     <script src="/assets/js/dist/Instrumento.min.js?v30s"></script>
     <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
     <script src="/assets/plugins/jquery-toastr/jquery.toast.min.js" type="text/javascript"></script>
+    <script src="/assets/plugins/intro/intro.min.js"></script>
+<script>
+$(document).ready(function(){
+    @if(showIntro)
+        introJs().setOptions({nextLabel: 'Siguiente', skipLabel: 'Salir', prevLabel: 'Anterior', doneLabel:'Listo'}).start();
+    @endif
+})
+</script>
+    
 @endsection
 
 @section('pluginsCss')
     <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
     <link href="/assets/plugins/jquery-toastr/jquery.toast.min.css" rel="stylesheet" />
+    <link href="/assets/plugins/intro/introjs-rtl.min.css" rel="stylesheet" />
+    <link href="/assets/plugins/intro/introjs.min.css" rel="stylesheet" />
 @endsection
   
 
@@ -40,16 +51,24 @@
                         @if(instrumento.tipoInstrumento=="TCO")
                             @each(pregunta in instrumento.preguntas)
                                 @if(pregunta.tipoPregunta == "ALT")
-
-                                    @!component('components.Evaluacion.preguntaSimple', data={idOpinante:idOpinante,pregunta:pregunta})
+                                    @if($loop.first)
+                                        @!component('components.Evaluacion.preguntaSimple', data={idOpinante:idOpinante,pregunta:pregunta,first:true})
+                                    @else
+                                        @!component('components.Evaluacion.preguntaSimple', data={idOpinante:idOpinante,pregunta:pregunta,first:false})
+                                    @endif
+                                    
                                 @else
                                 @endif     
                             @endeach
                         @endif
                         @if(instrumento.tipoInstrumento=="SOT")
                             @each(competencia in instrumento.competencias)
-                                
-                                    @!component('components.Evaluacion.preguntaDicotomica',data={idOpinante:idOpinante,competencia:competencia})
+                                @if($loop.first)
+                                        @!component('components.Evaluacion.preguntaDicotomica',data={idOpinante:idOpinante,competencia:competencia,first:true})
+                                    @else
+                                        @!component('components.Evaluacion.preguntaDicotomica',data={idOpinante:idOpinante,competencia:competencia,first:false})
+                                    @endif
+                                    
                                 
                             @endeach
                             @!component('components.Evaluacion.css.preguntaDicotomica')

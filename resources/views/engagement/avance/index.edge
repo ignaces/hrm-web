@@ -1,0 +1,272 @@
+@layout('layouts/horizontal')
+
+
+@section('scripts')
+    <script src="/assets/plugins/transit/jquery.transit.min.js"></script>
+    <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+    <script src="/assets/plugins/jquery-toastr/jquery.toast.min.js" type="text/javascript"></script>
+    <script src="/assets/js/jquery.slimscroll.js"></script>
+    <script src="/assets/js/jquery.scrollTo.min.js"></script> 
+   <script>
+  var scrollInit = function(){
+      $('.color-scroll').slimscroll({
+                    height: 'auto',
+                    color: '#64c5b1',
+                    position: 'right',
+                    size: "5px",
+                });
+    
+  }
+
+    var comEmpresas = new Vue({
+        el: '#empresasEncuestas',
+        data: {
+            empresas: []
+        },
+        directives:{
+            scroll:{
+                componentUpdated:scrollInit
+            }
+        },
+        methods:{
+            getExcel:function(id){
+                window.location.href="/Encuesta/Avance/getExcelAvance?idEncuestaAplicacion="+id;
+            },
+            getExcelResultados:function(id){
+                window.location.href="/Engagement/Empresa/getExcelResultado?idEncuestaAplicacion="+id;
+            },
+            ver:function(id){
+                $("#idEncuestaAplicacion").val(id);
+                $('form').submit();
+                
+            },
+            addEncuesta:function(id){
+                $("#idEmpresa").val(id);
+                alert(id)
+                
+            },
+            clasificaciones:function(id){
+                cFormClasificacion.idEmpresaProceso = id;
+
+                modalClasificaciones(id);
+                
+            },
+            edit:function(id){
+                $("#idEmpresa").val(id);
+                alert(id)
+                
+            },
+        }
+    });
+    
+   $(document).ready(function(){
+       comEmpresas.empresas=[];
+       $("#btnEmpresa").click(function(){
+           modalEmpresa();
+       })
+
+   });
+   var getEmpresasPeriodo = function(){
+        var obj ={
+           idPeriodo:$("#cmbPeriodo").val()
+       }
+       
+       $.ajax({
+            type: "GET",
+            url: "/Engagement/Empresa/empresasPeriodo",
+            contentType: "application/json; charset=utf-8",
+            data: obj,
+            dataType: "json", 
+            success: function (msg) {
+                if(obj.idPeriodo=="Periodo"){
+                    $("#btnEmpresa").hide();
+                }else{
+                    $("#btnEmpresa").show();
+                }
+            
+              comEmpresas.empresas=msg;
+            }
+        });
+   }
+   $("#cmbPeriodo").change(function(){
+       getEmpresasPeriodo();
+   });
+    var modalEmpresa = function(){
+       var obj ={
+           idProceso:$("#cmbPeriodo").val()
+       }
+
+        $.ajax({
+            type: "GET",
+            url: "/Engagement/Empresa/getEmpresasFueraProceso",
+            contentType: "application/json; charset=utf-8",
+            data: obj,
+            dataType: "json", 
+            success: function (msg) {
+                if(obj.idProceso=="Periodo"){
+                            $("#modalEmpresa").modal('hide');
+                }else{
+                            $("#modalEmpresa").modal('show');
+                }
+            
+              cForm.empresas=msg;
+            }
+        });
+    }
+    var modalClasificaciones = function(id){
+       var obj ={
+           idEmpresaProceso:id
+       }
+
+        $.ajax({
+            type: "GET",
+            url: "/Engagement/Empresa/getClasificaciones",
+            contentType: "application/json; charset=utf-8",
+            data: obj,
+            dataType: "json", 
+            success: function (msg) {
+                if(obj.idProceso=="Periodo"){
+                            $("#modalClasificaciones").modal('hide');
+                }else{
+                            $("#modalClasificaciones").modal('show');
+                }
+            
+              cFormClasificacion.clasificaciones=msg;
+            }
+        });
+    }
+    var cForm= new Vue({
+        el: '#formularioEmpresa',
+        data: {
+            empresas:[],
+            empresa: 
+                {
+                    id:'',
+                    nombre:'',
+                    codigo:'',
+                    logo: '/assets/images/companies/default.png',
+                    edit: false
+                }
+            
+        },
+        methods: {
+            addEmpresa:function () {
+                var obj ={
+                    idProceso:$("#cmbPeriodo").val(),
+                    empresa:cForm.empresa
+                }
+                $.ajax({
+                    type: "GET",
+                    url: "/Engagement/Proceso/addEmpresa",
+                    contentType: "application/json; charset=utf-8",
+                    data: obj,
+                    dataType: "json", 
+                    async:false,
+                    success: function (msg) {
+                        comEmpresas.empresas=msg;
+                        $("#modalEmpresa").modal("hide");
+
+                    }
+
+                });   
+            },
+            createEmpresa:function () {
+                var obj ={
+                    idProceso:$("#cmbPeriodo").val(),
+                    empresa:cForm.empresa
+                }
+                $.ajax({
+                    type: "GET",
+                    url: "/Engagement/Empresa/create",
+                    contentType: "application/json; charset=utf-8",
+                    data: obj,
+                    dataType: "json", 
+                    async:false,
+                    success: function (msg) {
+                        comEmpresas.empresas=msg;
+                        $("#modalEmpresa").modal("hide");
+
+                    }
+
+                });   
+                
+            }
+        }
+        })
+        var cFormClasificacion= new Vue({
+        el: '#formularioClasificaciones',
+        data: {
+            idEmpresaProceso:"",
+            idClasificacion:"",
+            clasificaciones:[],
+            clasificacion: 
+                {
+                    id:'',
+                    nombre:'',
+                    codigo:'',
+                    nivel:0,
+                    orden:1,
+                    edit: false
+                }
+            
+        },
+        methods: {
+            add:function (id) {
+                var obj ={
+                    idPadre:cFormClasificacion.idClasificacion,
+                    idEmpresaProceso:cFormClasificacion.idEmpresaProceso,
+                    clasificacion:cFormClasificacion.clasificacion
+                }
+                $.ajax({
+                    type: "GET",
+                    url: "/Engagement/Empresa/addClasificacion",
+                    contentType: "application/json; charset=utf-8",
+                    data: obj,
+                    dataType: "json", 
+                    async:false,
+                    success: function (msg) {
+                        cFormClasificacion.clasificaciones = msg;
+
+                    }
+
+                });   
+            }
+        }
+        })
+   </script>
+   
+@endsection
+
+@section('pluginsCss')
+    <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/plugins/jquery-toastr/jquery.toast.min.css" rel="stylesheet" />
+    
+    </style>
+@endsection
+  
+
+@section('content')
+ @!component('engagement.components.modalEmpresa')
+ @!component('engagement.components.modalClasificaciones')
+<form action="/Engagement/Avance/encuesta" id="formulario"  method="POST">
+    {{ csrfField() }}
+    <input type="hidden" id="idEncuestaAplicacion" name="idEncuestaAplicacion" value=""/> 
+    <input type="hidden" id="idEmpresaProceso" name="idEmpresaProceso" value=""/> 
+    <input type="hidden" id="idProceso" name="idProceso" value=""/> 
+</form>
+ 
+    <div class="row">
+        <div class="card-box">
+            <h4 class="header-title m-t-0 m-b-20">Seleccione Periodo</h4>
+            <select class="form-control select2" id="cmbPeriodo">
+                <option>Periodo</option>
+                    @each(periodo in periodos)
+                        <option value="{{periodo.id}}">{{periodo.nombre}}</option>
+                    @endeach                   
+            </select>
+            <br />
+            <button type="button"  class="btn btn-purple waves-effect waves-light" id="btnEmpresa" style="display:none" > <span>Agregar Empresa</span> <i class="fa fa-plus m-l-5"></i> </button>
+        </div>
+    </div>
+@!component('engagement.components.cardEmpresa')
+@endsection

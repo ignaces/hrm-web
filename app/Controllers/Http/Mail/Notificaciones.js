@@ -140,7 +140,7 @@ class Notificaciones {
             return {error:errores}
         }else{
 
-            //var envio = await data.execApiPost(request.hostname(),'/Mail/Notificaciones/sendNotificacion',notificacion);  
+            var envio = await data.execApiPost(request.hostname(),'/Mail/Notificaciones/sendNotificacion',notificacion);  
             return {mesaje:"ok"}
         }
         

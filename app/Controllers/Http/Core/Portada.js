@@ -39,11 +39,11 @@ class Portada {
        
         obj={
             idProceso:"",
-            idEstado:"1"
+            idEstado:"ACTIVO"
         }
         
-        /*var reultEde=await data.execApi(request.hostname(),'/Desempeno/Proceso/getProcesos',obj);
-        var procesosEde =reultEde.body.data;*/
+        var reultEde=await data.execApi(request.hostname(),'/Desempeno/Proceso/getProcesos',obj);
+        var procesosEde =reultEde.body.data;
 
         var user={usuario:auth.user}
         

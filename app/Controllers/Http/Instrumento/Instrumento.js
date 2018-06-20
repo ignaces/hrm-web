@@ -9,13 +9,18 @@ class Instrumento {
        
         var idOpinante = all.idOpinante
         var codigo = all.codigo
-        
+ 
         var obj = {
             "idOpinante":idOpinante,
             "tipoInstrumento":codigo
         };
+
+        
         
         var result = await data.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumento',obj);
+
+        
+
         var instrumento = result.body;
         const todo = request.all();
 
@@ -27,14 +32,23 @@ class Instrumento {
             "procesoPersona":""
         };
 
-        console.log(instrumento);
+        
 
         var resultado = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getPersona',objeto);
         var clasificacion = resultado.body;
 
 
+        var tipo = "CON";
+        if(instrumento.competencias!=undefined){
+        tipo =instrumento.competencias[0].codigo;
+        } 
+        var showIntro = false;
+
+        if(instrumento.tipoInstrumento=="SOT" && tipo !="CON" && tipo!="EYH"){
+            showIntro=true;
+        }
         //return view.render('Instrumento/instrumento',  {persona:persona,instrumento:instrumento,idOpinante:idOpinante});
-        return view.render('Instrumento/instrumento',  {idProceso:idProceso,clasificacion:clasificacion,instrumento:instrumento,idOpinante:idOpinante});
+        return view.render('Instrumento/instrumento',  {idProceso:idProceso,clasificacion:clasificacion,instrumento:instrumento,idOpinante:idOpinante,showIntro});
     }
     
    

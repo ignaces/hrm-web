@@ -62,4 +62,4 @@ $(document).ready(function(){
       }(window.jQuery);
 
 
-      console.log("asdas1");
+      
