@@ -17,16 +17,17 @@ class Persona {
         var resultPersona =  await data.execApi(request.hostname(),'/Talento/Persona/getPersona',obj);
         var resultPlanDesarrollo =  await data.execApi(request.hostname(),'/Talento/Accion/getPlanDesarrollo',obj);
         
-        var resultAcciones =  await data.execApi(request.hostname(),'/Talento/Accion/getAccionesPredefinidas',{});
+        var tiposAccion =  await data.execApi(request.hostname(),'/Talento/Accion/tipoAccion',{obj});
         
         var resultCompetencias =  await data.execApi(request.hostname(),'/Talento/Accion/getCompetencias',{});
         var persona = resultPersona.body;
 
-        console.log(resultPlanDesarrollo.body)
+        
         return view.render('talento/fichaCompromiso' ,  {
                 persona:persona[0], 
                 idPersona:idPersona,
-                accionesPredefinidas:resultAcciones.body,
+                tiposAccion:tiposAccion.body,
+                accionesPredefinidas:[],
                 competencias:resultCompetencias.body,
                 planDesarrollo:resultPlanDesarrollo.body
             });
@@ -48,6 +49,24 @@ class Persona {
 
        
         response.json(posiciones);
+    }
+    async accionesTipo ({view,request, response, auth, session}) {
+        
+        
+        var idTipo = request.input('idTipo')
+        var obj = {
+            "idTipo":idTipo,
+            "idProceso":session.get('procesoOrganigrama')
+        };
+        
+        
+        var result =  await data.execApi(request.hostname(),'/Talento/Accion/acciones',obj);
+        
+       
+        var acciones = result.body;
+
+       
+        response.json(acciones);
     }
     async addAccion ({view,request, response, auth, session}) {
         

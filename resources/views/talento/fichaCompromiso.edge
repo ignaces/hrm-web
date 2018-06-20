@@ -9,21 +9,11 @@
         <script src="/assets/plugins/bootstrap-datepicker/locales/es.js"></script>
         <script src="/assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
         <script>
-var accionesPredeterminadas = {{{toJSON(accionesPredefinidas)}}};
+var accionesPredeterminadas = [];
+var tiposAccion = {{{toJSON(tiposAccion)}}};
 var competenciasPredeterminadas = {{{toJSON(competencias)}}};
 var acciones = {{{toJSON(planDesarrollo.acciones)}}}
-/*
-[
-        {
-            nombre: 'TR 8. Plan de acción con objetivos claros y seguimiento pautado',
-            objetivo:'All accounts are to be paid within 7 days from receipt of invoice. To be paid by cheque or credit card or direct payment online. If account is not paid within 7 days the credits details supplied as confirmation of work undertaken will be charged the agreed quoted fee noted above.',
-            competencia:'asdasdasad asdadsad',
-            fechaInicio:'20-06-2018',
-            fechaTermino:'12-12-2018',
-            indicadores:[{texto:"Experiencia y práctica en el puesto de trabajo"},{texto:"Experiencia y práctica en el puesto de trabajo"}],
-            edit: false
-        }]
-*/
+
 var idPlan="{{planDesarrollo.idPlan}}";
 var cAcciones= new Vue({
   el: '#app',
@@ -31,25 +21,16 @@ var cAcciones= new Vue({
     acciones:acciones
   },
   methods: {
-  	toggleEdit: function(ev, number){
-    	number.edit = !number.edit;
-        
-        // Focus input field
-
-        if(number.edit){
-            
-            Vue.nextTick(function() {
-                
-    			ev.focus();
-	  		})   
-        }
+  	editAccion: function(accion){
+    	cForm.accion = accion;
+        $("#modalAccion").modal("show");
     },
     saveEdit: function(ev, number){
 				
       	this.toggleEdit(ev, number);
     },
-    deleteIndicador:function(id){
-        console.log(this)
+    deleteAccion:function(accion){
+        console.log(accion)
     }
   }
 })
@@ -57,11 +38,13 @@ var cForm= new Vue({
   el: '#formulario',
   data: {
     textoIndicador:"",  
+    tiposAccion:tiposAccion,
     accionesPredeterminadas:accionesPredeterminadas,
     competenciasPredeterminadas:competenciasPredeterminadas,
     accion: 
         {
             id:'',
+            idTipoAccion:'-1',
             idAccionPredeterminada:'-1',
             idCompetencia:'-1',
             nombre: '',
@@ -118,6 +101,24 @@ var cForm= new Vue({
 
         });   
         
+    },
+    getAcciones:function () {
+        
+        $.ajax({
+            type: "GET",
+            url: "/Talento/Persona/accionesTipo",
+            contentType: "application/json; charset=utf-8",
+            data: {idTipo:cForm.accion.idTipoAccion},
+            dataType: "json", 
+            async:false,
+            success: function (msg) {
+                cForm.accionesPredeterminadas = msg;
+                
+
+            }
+
+        });   
+        
     }
   }
 })
@@ -138,7 +139,7 @@ var cForm= new Vue({
 
 @section('content')
     @!component('components.Core.botonera')
-    @!component('components.Talento.modalAccionFicha')
+    @!component('talento.components.modalAccionFicha')
     <div class="row"> <!--ROW 1 -->  
         <div class="col-md-4"><!--LEFT USER-->
             <div class="box box-widget widget-user-2">      
@@ -220,7 +221,7 @@ var cForm= new Vue({
             </div>
             <div class="panel-body">
             
-               @!component('components.Talento.accion',persona=persona)
+               @!component('talento.components.accion',persona=persona)
             </div>    
         </div>
         </div>

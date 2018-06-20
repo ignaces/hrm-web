@@ -21,14 +21,21 @@
                                     <h3 class="m-0 text-muted"><i class="mdi mdi-dots-horizontal"></i></h3>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Editar</a></li>
-                                    <li><a href="#">Eliminar</a></li>
+                                    <li><a href="#" v-on:click="editAccion(accion)">Editar</a></li>
+                                    <li><a href="#" v-on:click="deleteAccion(accion)">Eliminar</a></li>
                                 </ul>
                         </div>
-                            <h4 class="m-t-0 m-b-30 header-title text-primary">@{{accion.nombre}}</h4>                               
+                            <h4 class="m-t-0 m-b-30 header-title text-primary">@{{accion.tipoAccion}}</h4>                               
                                     
                             <hr\>
 
+                                    <div class="clearfix p-t-50">
+                                        <h5 class="text-primary">Acción:</h5>
+
+                                        <small>
+                                            @{{accion.nombre}}
+                                        </small>
+                                    </div>
                                     <div class="clearfix p-t-50">
                                         <h5 class="text-primary">Objetivo:</h5>
 
@@ -60,45 +67,7 @@
                                         </small>
                                     </div>
                                     </div>
-                                    
-                                    
-                                    <div class="table-responsive">
-                                        <table class="table m-t-30">
-                                            <thead>
-                                            <tr>
-                                                <th class="text-primary">Experiencia Aprendizaje</th>
-                                                <th class="text-primary">Ponderación</th>
-                                            </tr></thead>
-                                            <tbody>
-                                            <tr>
-                                                
-                                                <td>
-                                                    Experiencia y práctica en el puesto de trabajo
-                                                </td>
-                                                <td>70%</td>
-                                                
-                                            </tr>
-                                            <tr>
-                                                
-                                                <td>
-                                                    Conversaciones y feedback con otras personas
-                                                </td>
-                                                <td>20%</td>
-                                                
-                                            </tr>
-                                            <tr>
-                                                
-                                                <td>
-                                                    Cursos y programas
-                                                </td>
-                                                <td>10%</td>
-                                                
-                                            </tr>
-                                           
-
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                   
                                      <div class="table-responsive" v-if="accion.indicadores.length>0">
                                             <table class="table m-t-30">
                                                 <thead>
