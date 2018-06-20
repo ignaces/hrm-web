@@ -104,14 +104,14 @@ File: Menu
   min-height: 62px;
 }
 #topnav .has-submenu.active a {
-  color: #9aec74;
-  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: #244a7c;
+  background-color: rgba(104, 104, 104, 0.1) !important;
 }
 #topnav .has-submenu.active a i {
-  color: #9aec74;
+  color: #244a7c;
 }
 #topnav .has-submenu.active .submenu li.active > a {
-  color: #9aec74;
+  color: #244a7c;
 }
 #topnav .app-search {
   position: relative;
@@ -151,7 +151,7 @@ File: Menu
   color: rgba(49, 58, 70, 0.8);
 }
 #topnav .navbar-custom {
-  background-color: #343c49;
+  background-color: #ffffff;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
 #topnav .navbar-custom .logo-main {
@@ -206,12 +206,12 @@ File: Menu
   text-align: center;
   border-radius: 50%;
   margin: 12px 8px;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(104, 104, 104, 0.7);
 }
 #topnav .navbar-custom .nav > li > a:focus,
 #topnav .navbar-custom .nav > li > a:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
+  background-color: rgba(104, 104, 104, 0.1);
+  color: #686868;
 }
 #topnav .navbar-custom .navbar-nav > .open > a {
   background-color: rgba(49, 58, 70, 0.1) !important;
@@ -253,13 +253,13 @@ File: Menu
   background-color: transparent;
 }
 #topnav .navbar-toggle:hover span {
-  background-color: #ffffff;
+  background-color: #686868;
 }
 #topnav .navbar-toggle:focus {
   background-color: transparent;
 }
 #topnav .navbar-toggle:focus span {
-  background-color: #ffffff;
+  background-color: #686868;
 }
 #topnav .navbar-toggle .lines {
   width: 25px;
@@ -273,7 +273,7 @@ File: Menu
 #topnav .navbar-toggle span {
   height: 2px;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(104, 104, 104, 0.8);
   display: block;
   margin-bottom: 5px;
   -webkit-transition: -webkit-transform 0.5s ease;
@@ -309,7 +309,7 @@ File: Menu
 }
 #topnav .navigation-menu > li > a {
   display: block;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(104, 104, 104, 0.7);
   font-weight: 500;
   -webkit-transition: all .5s ease;
   transition: all .5s ease;
@@ -318,13 +318,13 @@ File: Menu
   padding-right: 20px;
 }
 #topnav .navigation-menu > li > a:hover {
-  color: #9aec74;
+  color: #244a7c;
 }
 #topnav .navigation-menu > li > a:focus {
-  color: #9aec74;
+  color: #244a7c;
 }
 #topnav .navigation-menu > li > a:active {
-  color: #9aec74;
+  color: #244a7c;
 }
 #topnav .navigation-menu > li > a i {
   font-size: 18px;
@@ -359,10 +359,10 @@ File: Menu
     margin-right: 10px;
   }
   #topnav .navigation-menu > li:hover a {
-    color: #9aec74;
+    color: #244a7c;
   }
   #topnav .navigation-menu > li:hover a i {
-    color: #9aec74;
+    color: #244a7c;
   }
   #topnav .navigation-menu > li .submenu {
     position: absolute;
@@ -379,7 +379,7 @@ File: Menu
     margin-top: 10px;
     -webkit-transition: all .2s ease;
     transition: all .2s ease;
-    background-color: #ffffff;
+    background-color: #686868;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   }
   #topnav .navigation-menu > li .submenu.megamenu {
@@ -425,7 +425,7 @@ File: Menu
     transition: all .35s ease;
   }
   #topnav .navigation-menu > li .submenu li a:hover {
-    color: #9aec74;
+    color: #244a7c;
   }
   #topnav #topnav .navigation-menu > li.has-submenu:hover > .submenu {
     visibility: visible;
@@ -532,7 +532,7 @@ File: Menu
     color: #313a46;
   }
   #topnav .navigation-menu > li .submenu li a:hover {
-    color: #9aec74;
+    color: #244a7c;
   }
   #topnav .navigation-menu > li .submenu li.has-submenu > a:after {
     content: "\54";
@@ -564,7 +564,7 @@ File: Menu
     color: #313a46;
   }
   #topnav .navigation-menu > li.has-submenu.open > a {
-    color: #9aec74;
+    color: #244a7c;
   }
   #topnav .navbar-header {
     float: left;
@@ -616,7 +616,7 @@ File: Menu
   padding: 20px 0;
   position: absolute;
   right: 0;
-  background-color: #ffffff;
+  background-color: #686868;
   left: 0;
 }
 .footer ul li {
@@ -627,7 +627,7 @@ File: Menu
   color: #98a6ad;
 }
 .footer ul li a:hover {
-  color: #9aec74;
+  color: #244a7c;
 }
 /* Notification */
 .user-list .user-list-item {
@@ -653,7 +653,7 @@ File: Menu
   text-align: center;
 }
 .user-list .user-list-item .icon i {
-  color: #ffffff;
+  color: #686868;
   line-height: 30px;
   font-size: 16px;
 }
@@ -688,5 +688,5 @@ File: Menu
   display: block;
 }
 .notify-list .all-msgs a:hover {
-  color: #f96a74;
+  color: #e60d72;
 }

@@ -1,25 +1,40 @@
 @layout('layouts/horizontal')
 
-
+        
 @section('scripts')
-    <script src="/assets/js/dist/Instrumento.min.js?v22s"></script>
-    <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+    
+    <script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="/assets/plugins/datatables/dataTables.bootstrap.js"></script>
+    
+    <script src="/assets/plugins/datatables/dataTables.buttons.min.js"></script>
+    <script src="/assets/plugins/datatables/jszip.min.js"></script>
+    <script src="/assets/plugins/datatables/buttons.html5.min.js"></script>
+    <script src="/assets/js/dist/dataTable.min.js"></script>
+    
 @endsection
 
 @section('pluginsCss')
     <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/plugins/datatables/buttons.dataTables.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/plugins/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/plugins/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/plugins/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/plugins/datatables/dataTables.colVis.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/plugins/datatables/fixedColumns.dataTables.min.css" rel="stylesheet" type="text/css"/>
 @endsection
   
 
 @section('content')
 
 
-@!component('components.Acreditacion.talentoColaboradores',titulo="Colaboradores", data={
+@!component('components.Talento.talentoColaboradores',titulo="Colaboradores", data={
           
           personas:personas
            
         })
 
-   
-
+    
 @endsection

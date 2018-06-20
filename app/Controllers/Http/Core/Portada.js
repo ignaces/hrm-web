@@ -3,27 +3,37 @@
 const data = use('App/Utils/Data')
 
 class Portada {
-     async welcome  ({ view,request, response, auth, session }) {
+     async welcome  ({ view,request, response, auth, session ,antl}) {
         
 
         var idPersona = session.get('idPersona', 'fall')
         var all =  session.get('personaLogueada')
-        //var idOpinante = all.id
+        
+        if(all==null){
+            return view.render('account/login');
+        }
+        var idOpinante = all.id
 
         var obj = {
             "idProceso":""
             
         };
 
-        /*var objTalento = {
+        var objTalento = {
             "idOpinante": idOpinante
         };
-*/
+
         var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getProcesos',obj);
-        //var resultadoTalento = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getTalentos',objTalento);
+        var resultadoTalento = await data.execApi(request.hostname(),'/Talento/Talento/getTalentos',objTalento);
 
         var procesos = result.body.data.procesos;
         //var talentos = resultadoTalento.body;
+        var talentos = resultadoTalento.body.data.talentos;
+        var condicion = resultadoTalento.body.data1;
+
+        antl.switchLocale('pt')
+         
+       
         //var rstl = session.put('totalCol',talentos.Total)
         //console.log(rstl);
        
@@ -41,7 +51,10 @@ class Portada {
     
        
         var menu = session.get('usuario_roles_menu');
-        return view.render('core/welcome',  {user,procesos,persona,menu,procesosEde}); //hay que hacer que los procesos vengan de la BD segun cliente por modulo ASMN
+        var etag = "app_cs"
+        return view.render('core/welcome',  {etag,user,procesos,persona,menu,talentos,condicion,procesosEde});
+
+        
     }   
 }
 

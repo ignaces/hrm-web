@@ -4,12 +4,19 @@
   <head>
      <meta charset="utf-8" />
         <title>Enovum</title>
+        <link rel="manifest" href="/manifest.json">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
         <meta content="Coderthemes" name="author" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="theme-color" content="#317EFB"/>
 
         <!-- App favicon -->
+        <style>
+        [v-cloak] {
+            display: none;
+        }
+        </style>
         <link rel="shortcut icon" href="{{theme(request.hostname())}}/assets/images/logo_sm.png">
          @!section('pluginsCss')
     
@@ -22,8 +29,8 @@
         <link href="{{theme(request.hostname())}}/assets/css/menu.css" rel="stylesheet" type="text/css" />
         <link href="{{theme(request.hostname())}}/assets/css/responsive.css" rel="stylesheet" type="text/css" />
         <link href="/assets/plugins/tooltipster/tooltipster.bundle.min.css" rel="stylesheet" type="text/css" />
-        <!--<script src="/assets/js/vue.min.js"></script>-->
-        <script src="/assets/js/vue.js"></script>
+        <script src="/assets/js/vue.min.js"></script>
+        <!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
         @!section('pluginsCss2')
   </head>
 
@@ -173,7 +180,7 @@
       <script>
             var resizefunc = [];
         </script>
-
+        
         <!-- jQuery  -->
         <script src="/assets/js/jquery.min.js"></script>
         <script src="/assets/js/bootstrap.min.js"></script>
@@ -181,7 +188,7 @@
         <script src="/assets/js/waves.js"></script>
         <script src="/assets/js/jquery.slimscroll.js"></script>
         <script src="/assets/plugins/bootstrap-select/js/bootstrap-select.min.js" type="text/javascript"></script>
-
+        <script src="/assets/js/dist/notificacionesSistema.min.js"></script>
          
         @!section('scripts2')
 
@@ -193,9 +200,30 @@
 
 
 
-       
-         @!section('scripts')
-        
+        <script>
+        $(document).ready(()=>{
+            //$("body").toggleClass("enlarged");
+        });
+        </script>
+        @!section('scripts')
+          <script>
+      (function() {
+        'use strict';
+
+        if (!('serviceWorker' in navigator)) {
+          console.log('Service worker not supported');
+          return;
+        }
+        navigator.serviceWorker.register('/assets/js/sw.js')
+        .then(function() {
+          console.log('Registered');
+        })
+        .catch(function(error) {
+          console.log('Registration failed:', error);
+        });
+
+      })();
+    </script>
   </body>
 </html>
 

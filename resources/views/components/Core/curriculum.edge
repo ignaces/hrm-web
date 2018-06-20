@@ -1,0 +1,92 @@
+@each(c in objCurriculum)
+    <div class="portlet portlet-default">
+        <div class="portlet-heading">
+            <h3 class="portlet-title">{{ c.nombreCategoria }}</h3>
+            <div class="portlet-widgets">
+                <a  class="mdi mdi-dots-vertical" data-toggle="dropdown" aria-expanded="false" href="#"></a>
+                <ul class="dropdown-menu" role="menu">
+                    
+                    <li><a href="#" data-toggle="modal" data-target={{ "#" + c.idCategoria }}>Agregar</a></li>
+                    
+                </ul>
+            </div>
+            <br>
+            <hr>
+        </div>
+
+        @!component('components.Core.curriculumItem',id=c.id, items=c.listItems, total=c.totalItems )
+
+        <!--  Modal content for the above example -->
+        <div class="modal fade bs-example-modal-lg" id={{ c.idCategoria }} id="modalAgregar" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myLargeModalLabel">{{ c.nombreCategoria }}</h4>
+
+                    </div>
+                    <div class="modal-body">
+                        
+                    <div class="row">
+                    <div class="col-md-12">
+                        <div class="p-20">
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Titulo</label>
+                                    <div class="col-md-10">
+                                        <input type="text" id="txtTitulo_{{c.idCategoria}}" class="form-control" value="" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Bajada</label>
+                                    <div class="col-md-10">
+                                        <input type="text" id="txtBajada_{{c.idCategoria}}" class="form-control" value="">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Descripcion</label>
+                                    <div class="col-md-10">
+                                        <textarea class="form-control" id="txtDescripcion_{{c.idCategoria}}" rows="5"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">Desde</label>
+                                    <div class="col-md-10">
+                                        <input class="form-control" id="txtFechaDesde_{{c.idCategoria}}" type="date" >
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">Hasta</label>
+                                    <div class="col-md-10">
+                                        <input class="form-control" id="txtFechaHasta_{{c.idCategoria}}" type="date">
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-lg-12" style="text-align:right;">
+                                        <button type="button" id={{c.idCategoria}} class="btn btn-info waves-effect waves-light curriculum_btn_guardar"> 
+                                            <i class="fa fa-save m-r-5"></i> <span>Guardar</span> 
+                                        </button>
+                                        <!--<button type="button" id="instrumento_btn_finalizar" class="btn btn-success waves-effect waves-light"> <i class="fa fa-check m-r-5"></i> <span>Finalizar</span> </button>-->
+                                    </div>
+                                </div>
+                                 <input type="text" style="display:none;" id="idPersonaFicha" class="form-control" value="{{idPersona}}">
+                                
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        
+    </div>
+@endeach
