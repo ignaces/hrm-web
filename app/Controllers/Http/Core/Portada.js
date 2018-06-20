@@ -51,7 +51,10 @@ class Portada {
     
        
         var menu = session.get('usuario_roles_menu');
-        var etag = "app_cs"
+        var cliente = request.hostname().split(".")[0]
+        var etag = `app_${cliente}`
+
+        
         return view.render('core/welcome',  {etag,user,procesos,persona,menu,talentos,condicion});
 
         
