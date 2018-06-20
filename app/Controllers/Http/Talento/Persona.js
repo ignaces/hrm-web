@@ -108,6 +108,26 @@ class Persona {
        
         response.json(acciones);
     }
+    async deleteAccion ({view,request, response, auth, session}) {
+        
+        var accion = request.get('acciones')
+        var idPlan = request.input('idPlan')
+       
+        var obj = {
+        
+            "accion":accion,
+            "idPlan":idPlan,
+            "idProceso":session.get('procesoOrganigrama')
+        };
+        
+        var result =  await data.execApiPost(request.hostname(),'/Talento/Accion/deleteAccion',obj);
+        
+        var resultPlanDesarrollo =  await data.execApi(request.hostname(),'/Talento/Accion/getPlanDesarrolloById',obj);
+        var acciones = resultPlanDesarrollo.body.acciones;
+
+       
+        response.json(acciones);
+    }
 
 }
 module.exports = Persona

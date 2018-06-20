@@ -34,7 +34,22 @@ var cAcciones= new Vue({
       	this.toggleEdit(ev, number);
     },
     deleteAccion:function(accion){
-        console.log(accion)
+        cForm.accion = accion;
+        
+        $.ajax({
+            type: "GET",
+            url: "/Talento/Persona/deleteAccion",
+            contentType: "application/json; charset=utf-8",
+            data: {idPlan:idPlan,accion:cForm.accion},
+            dataType: "json", 
+            async:false,
+            success: function (msg) {
+                cAcciones.acciones=msg;
+                //$("#modalAccion").modal("hide");
+
+            }
+
+        });   
     }
   }
 })

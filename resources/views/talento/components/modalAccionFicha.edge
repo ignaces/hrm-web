@@ -61,9 +61,9 @@
                                     <label>Fecha inicio / fin</label>
                                     <div>
                                         <div class="input-daterange input-group" id="date-range" >
-                                            <input type="text" class="form-control" name="start" id="start"  />
+                                            <input type="text" class="form-control" v-model="accion.fechaInicio" name="start" id="start"  />
                                             <span class="input-group-addon bg-custom text-white b-0">hasta</span>
-                                            <input type="text" class="form-control" name="end" id="end"/>
+                                            <input type="text" class="form-control" v-model="accion.fechaTermino" name="end" id="end"/>
                                         </div>
                                     </div>
                                 </div>
