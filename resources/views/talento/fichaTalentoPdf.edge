@@ -1,4 +1,4 @@
-@layout('layouts/horizontal')
+@layout('layouts/nomenu')
 @section('scripts')
         <script src="/assets/js/dist/curriculum.min.js"></script>
         <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
@@ -15,7 +15,7 @@
 @section('content')
 
 
-@!component('components.Core.botonera',botones=[{ texto:"PDF", icono:"fa fa-file-pdf-o", link:"/Talento/Persona/getPdfFicha?idPersona="+idPersona}] ) 
+
     <div class="row">
         <div class="col-md-4">
             <div class="box box-widget widget-user-2">      
