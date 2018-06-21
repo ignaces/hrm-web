@@ -1,6 +1,13 @@
 @layout('layouts/horizontal')
 
+@section('scripts')
+    <script src="/assets/js/dist/Talento.min.js"></script>
+    
+    
+@endsection
+
 @section('content')
+    
 
 
 <div class="row" >
@@ -10,7 +17,7 @@
     <div class="col-md-3">
         
 
- <div class="row">
+        <div class="row">
                 @!component('components.Usuario.cajausuario',persona=persona,user = user.usuario.username,cargo=cargo,genero=genero,imgUser=imageUser)
         </div>
 
@@ -19,7 +26,7 @@
     <!-- Centro -->
     <div class="col-md-6">
         <div class="row">
-            <div class="ol-md-12">
+            <div class="col-md-12">
                 <div class="col-sm-12 col-lg-12 col-xs-12">
 
                     <!-- Simple card -->
@@ -27,7 +34,7 @@
 
                         <img class="card-img-top img-fluid" src="{{theme(request.hostname())}}/assets/images/empresa/fondo.jpg" alt="Card image cap" style="width: 100% !important;">
                         <div class="card-block text-center">
-                            <h4 class="card-title">Plataforma Gestión del Desarrollo de Personas</h4>
+                            <h4 class="card-title">{{antl.formatMessage(etag+'.titulo')}}</h4>
                          
                         </div>
                     </div>
@@ -35,14 +42,21 @@
                 </div><!-- end col -->
             </div>
         </div>
-
+        @if(procesos.length>0)
         <div class="row">
                 @!component('components.Acreditacion.cajaAcreditacion',titulo = "Acreditación", procesos=procesos)
         </div>
-               <div class="row">
+        @endif
+        @if(procesosEde.length>0)
+         <div class="row">
              @!component('components.Desempeno.cajaDesempeno',titulo = "Gestión de Desempeño", procesos=procesosEde)
         </div>  
-      
+        @endif
+          <div class="row">
+            @!component('components.Acreditacion.cajaAcreditacion',titulo = "Acreditación",titulo2 = "Gestión de Talento", procesos=procesos, talentos=talentos,condicion=condicion)
+          </div>      
+           
+        
     </div>
     <!-- END Centro -->
     <!-- Columna Derecha -->
@@ -56,19 +70,16 @@
 
                     <div class="clearfix"></div>
                     <div class="inbox-widget">
-                        
+                        <!--
                         <a class="btn btn-info btn-rounded btn-block" href="/Documentos"><i class="mdi mdi-library-books"></i> <span>Documentos</span> </a>
 
                         <a class="btn btn-info btn-rounded btn-block" href="#" onclick="calendario();">
                             <i class="mdi mdi-calendar-clock"></i> <span>Calendario</span>
                         </a>
                         <a class="btn btn-info btn-rounded btn-block" href="/files/FAQ.pdf" target="_blank"><i class="mdi mdi-help-circle"></i> <span>Preguntas Frecuentes</span> </a>
-                        
+                        -->
                     </div>
                 </div>
-
-
-
 
             </div>
         </div>
@@ -81,5 +92,7 @@
     </div>
     <!-- END Columna Derecha -->
 </div>
+
+
 
 @endsection

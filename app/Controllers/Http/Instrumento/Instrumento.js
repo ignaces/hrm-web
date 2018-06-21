@@ -38,8 +38,17 @@ class Instrumento {
         var clasificacion = resultado.body;
 
 
+        var tipo = "CON";
+        if(instrumento.competencias!=undefined){
+        tipo =instrumento.competencias[0].codigo;
+        } 
+        var showIntro = false;
+
+        if(instrumento.tipoInstrumento=="SOT" && tipo !="CON" && tipo!="EYH"){
+            showIntro=true;
+        }
         //return view.render('Instrumento/instrumento',  {persona:persona,instrumento:instrumento,idOpinante:idOpinante});
-        return view.render('Instrumento/instrumento',  {idProceso:idProceso,clasificacion:clasificacion,instrumento:instrumento,idOpinante:idOpinante});
+        return view.render('Instrumento/instrumento',  {idProceso:idProceso,clasificacion:clasificacion,instrumento:instrumento,idOpinante:idOpinante,showIntro});
     }
     
    

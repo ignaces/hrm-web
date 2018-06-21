@@ -413,7 +413,7 @@ a:focus {
 }
 /* Background colors */
 .bg-custom {
-  background-color: #9aec74 !important;
+  background-color: #244a7c !important;
 }
 .bg-primary {
   background-color: #4489e4 !important;
@@ -428,7 +428,7 @@ a:focus {
   background-color: #ffa91c !important;
 }
 .bg-danger {
-  background-color: #f96a74 !important;
+  background-color: #e60d72 !important;
 }
 .bg-muted {
   background-color: #797979 !important;
@@ -438,6 +438,9 @@ a:focus {
 }
 .bg-purple {
   background-color: #5553ce !important;
+}
+.bg-red {
+  background-color: #ff0000 !important;
 }
 .bg-pink {
   background-color: #ec6794 !important;
@@ -450,13 +453,13 @@ a:focus {
 }
 /* Text colors */
 .text-custom {
-  color: #9aec74 !important;
+  color: #244a7c !important;
 }
 .text-white {
   color: #ffffff !important;
 }
 .text-danger {
-  color: #f96a74 !important;
+  color: #e60d72 !important;
 }
 .text-muted {
   color: #98a6ad !important;
@@ -482,6 +485,9 @@ a:focus {
 .text-purple {
   color: #5553ce !important;
 }
+.text-red {
+  color: #ff0000 !important;
+}
 .text-dark {
   color: #313a46 !important;
 }
@@ -495,7 +501,7 @@ a:focus {
   color: #313a46 !important;
 }
 .label-default {
-  background-color: #9aec74;
+  background-color: #244a7c;
 }
 .label-primary {
   background-color: #4489e4;
@@ -510,10 +516,13 @@ a:focus {
   background-color: #ffa91c;
 }
 .label-danger {
-  background-color: #f96a74;
+  background-color: #e60d72;
 }
 .label-purple {
   background-color: #5553ce;
+}
+.label-red {
+  background-color: #ff0000;
 }
 .label-pink {
   background-color: #ec6794;
@@ -529,7 +538,7 @@ a:focus {
   text-transform: uppercase;
   padding: 3px 5px;
   margin-top: 1px;
-  background-color: #9aec74;
+  background-color: #244a7c;
   font-family: 'Nunito Sans', sans-serif;
 }
 .badge-xs {
@@ -559,10 +568,13 @@ a:focus {
   background-color: #ffa91c;
 }
 .badge-danger {
-  background-color: #f96a74;
+  background-color: #e60d72;
 }
 .badge-purple {
   background-color: #5553ce;
+}
+.badge-red {
+  background-color: #ff0000;
 }
 .badge-pink {
   background-color: #ec6794;
@@ -610,8 +622,8 @@ a:focus {
 .pagination > .active > span:hover,
 .pagination > .active > a:focus,
 .pagination > .active > span:focus {
-  background-color: #9aec74;
-  border-color: #9aec74;
+  background-color: #244a7c;
+  border-color: #244a7c;
 }
 .pager li > a,
 .pager li > span {
@@ -623,8 +635,8 @@ a:focus {
 .list-group-item.active,
 .list-group-item.active:focus,
 .list-group-item.active:hover {
-  background-color: #9aec74;
-  border-color: #9aec74;
+  background-color: #244a7c;
+  border-color: #244a7c;
 }
 .list-group-item.active .list-group-item-text,
 .list-group-item.active:focus .list-group-item-text,
@@ -720,7 +732,7 @@ a:focus {
   background-color: rgba(255, 255, 255, 0.4);
 }
 .waves-effect.waves-custom .waves-ripple {
-  background-color: rgba(154, 236, 116, 0.4);
+  background-color: rgba(36, 74, 124, 0.4);
 }
 .waves-effect.waves-primary .waves-ripple {
   background-color: rgba(68, 137, 228, 0.4);
@@ -735,13 +747,16 @@ a:focus {
   background-color: rgba(255, 169, 28, 0.4);
 }
 .waves-effect.waves-danger .waves-ripple {
-  background-color: rgba(249, 106, 116, 0.4);
+  background-color: rgba(230, 13, 114, 0.4);
 }
 .waves-effect.waves-pink .waves-ripple {
   background-color: rgba(236, 103, 148, 0.4);
 }
 .waves-effect.purple .waves-ripple {
   background-color: rgba(85, 83, 206, 0.2);
+}
+.waves-effect.red .waves-ripple {
+  background-color: rgba(255, 0, 0, 0.2);
 }
 .waves-effect.waves-inverse .waves-ripple {
   background-color: rgba(54, 64, 76, 0.4);
