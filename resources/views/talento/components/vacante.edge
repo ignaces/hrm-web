@@ -1,0 +1,38 @@
+<div class="col-lg-6" id="{{id}}"  >
+
+                        <div class="card-box">
+                            <h4 class="text-dark header-title m-t-0">{{titulo}}</h4>
+                            
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <ul class="sortable-list taskList list-unstyled" id="upcoming">
+                                        <li class="task-primary" id="task1" v-cloak v-for="posicion in vacantes">
+                                            <div class="m-t-20">
+                                                <p class="pull-right m-b-0 m-t-10">
+                                                    <label>@{{posicion.talentReview}}</label>
+                                                </p>
+                                                <p class="m-b-0"><a href="" class="text"><img :src="posicion.Imagen" alt="task-user" class="thumb-sm img-circle m-r-10"> 
+                                                
+                                                    <span class="font-bold font-secondary">@{{posicion.Nombre}}</span><br />
+                                                    <span class="font-bold font-secondary">@{{posicion.Cargo}}</span></a>
+                                                </p>
+                                                
+                                            </div>
+                                            <p class="m-b-0" v-html="posicion.Atributos">
+                                                
+                                            </p>
+                                                
+                                            <div class="clearfix"></div>
+                                            
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-6">
+                                    <ul class="sortable-list taskList list-unstyled" id="upcoming">
+                                    
+                                    </ul>
+                                </div>
+                            </div><!--end row-->
+                            
+                        </div>
+                    </div>

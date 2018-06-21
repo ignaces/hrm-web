@@ -1,0 +1,216 @@
+@layout('layouts/horizontal')
+
+@section('scripts')
+    <script src="/assets/plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.min.js"></script>
+    <script src="/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+    
+    <script src="/assets/js/dist/drag.min.js"></script>
+    <script src="/assets/js/dist/filtroClasificaciones.min.js"></script>
+
+    <script src="/assets/plugins/custombox/js/custombox.min.js"></script>
+    <script src="/assets/plugins/custombox/js/legacy.min.js"></script>
+
+
+    <script src="/assets/js/jquery.core.js"></script>
+    <script src="/assets/js/jquery.app.js"></script>
+    <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+    
+@endsection
+
+@section('pluginsCss')
+    <link href="/assets/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/plugins/custombox/css/custombox.min.css" rel="stylesheet">
+    <link href="/assets/plugins/spinkit/spinkit.css" rel="stylesheet">
+    <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    <style>
+    .card-box1 {
+  padding: 20px;
+  border: 1px solid #e2e2e2;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  background-clip: padding-box;
+  margin-bottom: 20px;
+  background-color: #db9411;
+}
+.card-box2 {
+  padding: 20px;
+  border: 1px solid #e2e2e2;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  background-clip: padding-box;
+  margin-bottom: 20px;
+  background-color: #6FC617;
+}
+.card-box3 {
+  padding: 20px;
+  border: 1px solid #e2e2e2;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  background-clip: padding-box;
+  margin-bottom: 20px;
+  background-color: #019103;
+}
+.card-box4 {
+  padding: 20px;
+  border: 1px solid #e2e2e2;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  background-clip: padding-box;
+  margin-bottom: 20px;
+  background-color: #ff7200;
+}
+
+.card-box5 {
+  padding: 20px;
+  border: 1px solid #e2e2e2;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  background-clip: padding-box;
+  margin-bottom: 20px;
+  background-color: #ffff28;
+}
+.card-box6 {
+  padding: 20px;
+  border: 1px solid #e2e2e2;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  background-clip: padding-box;
+  margin-bottom: 20px;
+  background-color: #6FC617;
+}
+
+.card-box7 {
+  padding: 20px;
+  border: 1px solid #e2e2e2;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  background-clip: padding-box;
+  margin-bottom: 20px;
+  background-color: #FF0000;
+}
+
+.card-box8 {
+  padding: 20px;
+  border: 1px solid #e2e2e2;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  background-clip: padding-box;
+  margin-bottom: 20px;
+  background-color: #ffff28;
+}
+
+.card-box9 {
+  padding: 20px;
+  border: 1px solid #e2e2e2;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  background-clip: padding-box;
+  margin-bottom: 20px;
+  background-color: #db9411;
+}
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+}
+/*
+ * Styles copied from the Grid example to make grid rows & columns visible.
+ */
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+h4 {
+  margin-top: 25px;
+}
+.row {
+  margin-bottom: 20px;
+}
+.row .row {
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+/* =============
+   Task board
+============= */
+/*
+.itemCuadrante {
+  min-height: 100px;
+  margin-bottom: 0;
+}
+.itemCuadrante li {
+  background-color: #ffffff;
+  border: 1px solid rgba(121, 121, 121, 0.2);
+  border-left-width: 3px;
+  padding: 10px;
+  margin-bottom: 5px;
+}
+.itemCuadrante li:last-of-type {
+  margin-bottom: 0;
+}
+.itemCuadrante .task-success {
+  background-color: #e7f9ec;
+  border-left-color: #32c861;
+}
+.itemCuadrante .task-info {
+  background-color: #7affe6;
+  border-left-color: #00ad8c;
+}
+.itemCuadrante .task-warning {
+  background-color: #fff2de;
+  border-left-color: #ffa91c;
+}
+.itemCuadrante .task-danger {
+  background-color: #f880b8;
+  border-left-color: #e60d72;
+}
+.itemCuadrante a {
+  font-size: 13px;
+}
+.itemCuadrante .checkbox {
+  margin-left: 20px;
+  margin-top: 5px;
+}*/
+</style>
+
+    
+@endsection
+
+
+@section('content')
+@!component('components.Core.botonera')
+  <div class="row">
+      <div class="col-lg-12">
+          @!component('components.Talento.filtroDragColaboradores', {cargosPorEmpresa:cargosPorEmpresa,clasificacionesPorEmpresa:clasificacionesPorEmpresa})
+      </div>
+  </div>
+  <div class="row">
+        <div class="col-lg-12">
+              @!component('components.Talento.dragColaboradores', {personas:personas,cuadrante1:cuadrante1,cuadrante2:cuadrante2,cuadrante3:cuadrante3,cuadrante4:cuadrante4,cuadrante5:cuadrante5,cuadrante6:cuadrante6,cuadrante7:cuadrante7,cuadrante8:cuadrante8,cuadrante9:cuadrante9,colaboradoresEva:colaboradoresEva})
+        </div>
+  </div>
+   
+@endsection
+
+
+
+
+
+
+
+
+
+

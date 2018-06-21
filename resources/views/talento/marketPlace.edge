@@ -1,0 +1,73 @@
+ @layout('layouts/horizontal')
+
+@section('scripts')
+    
+     <script src="/assets/plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.min.js"></script>
+    <script src="/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+    
+    
+
+    <script src="/assets/plugins/custombox/js/custombox.min.js"></script>
+    <script src="/assets/plugins/custombox/js/legacy.min.js"></script>
+
+
+    <script src="/assets/js/jquery.core.js"></script>
+    <script src="/assets/js/jquery.app.js"></script>
+    <script src="/assets/js/dist/marketplace.min.js"></script>
+        <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+      
+       
+@endsection
+
+@section('pluginsCss')
+    <link href="/assets/getOrgChart/css/getorgchart.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    <!-- Infobox css -->
+    <link rel="stylesheet" href="/assets/plugins/infobox/infobox.css">
+    <!-- socialWidget css -->
+    <link rel="stylesheet" href="/assets/plugins/socialWidget/socialWidget.css">
+@endsection
+  
+
+@section('content')
+    @!component('components.Core.botonera')
+    <div class="panel panel-border panel-primary">
+        <div class="panel-heading">
+            <h1 class="panel-title">Marketplace Comercial (Oferta Demanda)</h1>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="col-sm-6 col-md-4 col-lg-12">
+                        <i class='fa fa-star m-r-5 text-warning'></i> Cargo Crítico
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-12">
+                        <i class='fa fa-plane m-r-5 text-primary'></i> Con Movilidad
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-12">
+                        <i class='fa fa-refresh m-r-5 text-primary'></i> Expatriado
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-12">
+                        <i class='fa fa-warning m-r-5 text-warning'></i> Alerta Amarilla
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-12">
+                        <i class='fa fa-warning m-r-5 text-red'></i> TR 8, 9 por dos años
+                    </div>
+                    
+                </div>
+                
+            </div>
+            <div class="row">
+                    
+                    @!component('talento.components.vacante',{id:'cPosiblesVacantes',titulo:'Posibles Vacantes Futuras'})
+                    @!component('talento.components.vacante',{id:'cTalentos',titulo:'Pool de Talentos'})
+
+            </div><!--end row 1 -->
+            <div class="row">
+                    @!component('talento.components.vacante',{id:'cVacantes',titulo:'Vacantes Actuales'})
+            </div>
+        </div>    
+    </div>
+    
+@endsection
+

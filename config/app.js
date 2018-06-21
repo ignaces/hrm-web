@@ -145,7 +145,7 @@ module.exports = {
     | file, database
     |
     */
-    driver: 'database',
+    loader: 'database',
 
     /*
     |--------------------------------------------------------------------------
@@ -157,7 +157,7 @@ module.exports = {
     | based on HTTP headers/query string.
     |
     */
-    locale: 'en'
+    locale: 'es'
   },
 
   logger: {
@@ -172,7 +172,7 @@ module.exports = {
     | Available drivers are: `file` and `console`.
     |
     */
-    transport: 'console',
+    transport: 'file',
 
     /*
     |--------------------------------------------------------------------------
