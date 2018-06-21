@@ -24,14 +24,23 @@ class Portada {
         };
 
         var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getProcesos',obj);
-        var resultadoTalento = await data.execApi(request.hostname(),'/Talento/Talento/getTalentos',objTalento);
+        var talentos = [];
+        var condicion = [];
+        try{
+            var resultadoTalento = await data.execApi(request.hostname(),'/Talento/Talento/getTalentos',objTalento);
+            talentos = resultadoTalento.body.data.talentos;
+            condicion = resultadoTalento.body.data1;
+        }catch(e){
+            
+        }
+        
 
         var procesos = result.body.data.procesos;
         //var talentos = resultadoTalento.body;
-        var talentos = resultadoTalento.body.data.talentos;
-        var condicion = resultadoTalento.body.data1;
+        
+        
 
-        antl.switchLocale('pt')
+        antl.switchLocale('es')
          
        
         //var rstl = session.put('totalCol',talentos.Total)
