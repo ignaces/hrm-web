@@ -1,7 +1,12 @@
 'use strict'
 
 const data = use('App/Utils/Data')
-
+const Helpers = use('Helpers')
+const fs = use('fs')
+const Antl = use('Antl')
+var safeUrl = require('safe-url')
+var wget = require('node-wget-promise');
+const readFile = Helpers.promisify(fs.readFile)
 class Persona {
     
 
@@ -49,6 +54,73 @@ class Persona {
 
        
         response.json(posiciones);
+    }
+    async getPdfFicha({ view, request, response, auth }) {
+        
+        var idPersona = request.input("idPersona");
+        var server = 'cs.enovum.cl';//request.hostname();
+
+
+        //var result = await got(`http://192.168.3.4:8080?url=${server}/Acreditacion/Informe/pdf?procesoPersona=${idPersona}&cd=${conDetalle}`);
+        //%2FTalento%2FPersona%2FfichaPdf%3FidPersona=%3D
+        var url = `http://192.168.3.4:8080/?url=http%3A%2F%2F${server}%2FTalento%2FPersona%2FfichaPdf%3FidPersona=%3D${idPersona}`;
+
+
+        var file = await wget(url, { output: 'tmp/ficha.pdf' });
+
+        response.type = "application/pdf";
+
+        response.attachment(
+            Helpers.tmpPath('ficha.pdf'),
+            'ficha.pdf'
+        )
+
+
+
+    }
+    async fichaPdf ({view,request, response, auth, session}) {
+
+        //var persona =  session.get('personaLogueada')
+        var idPersona = request.input('idPersona')
+        
+        var obj = {
+            "idPersona":idPersona,
+            "idProceso":session.get('procesoOrganigrama')
+        };
+        
+        var resultPersona =  await data.execApi(request.hostname(),'/Talento/Talento/getPersona',obj);
+       
+        var result = await data.execApi(request.hostname(),'/Talento/Talento/getCurriculumCategoria',obj);
+        var categoria = result.body;
+        var persona = resultPersona.body;
+
+        var result2 = await data.execApi(request.hostname(),'/Talento/Talento/getCurriculumPersona',obj);
+        var curriculum = result2.body;
+        var objCurriculum = [];
+
+        categoria.forEach(element => {
+
+            var objItems = [];
+
+            for(var c in curriculum){
+                if(curriculum[c]["id"] == element.id)
+                {
+                    objItems.push(curriculum[c]);
+                }
+            }
+
+            var objList = {
+                "nombreCategoria": element.nombre,
+                "idCategoria": element.id,
+                "listItems": objItems,
+                "totalItems": objItems.length
+            }
+
+            //console.log(objList)
+            //console.log(persona)
+            objCurriculum.push(objList)
+        });
+        return view.render('talento/fichaTalentoPdf', { objCurriculum:objCurriculum, persona:persona, idPersona:idPersona});
     }
     async accionesTipo ({view,request, response, auth, session}) {
         
