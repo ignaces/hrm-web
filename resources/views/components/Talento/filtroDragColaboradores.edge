@@ -42,9 +42,8 @@
                                     
                                                 <select id="buscar" class="form-control buscarCla">
                                                       <option value="-1" selected>Todos</option>
-                                                    @each(claHijo in clasificacionesPorEmpresa.clasificaciones[$loop.index].clasificacionHijo)
-                                                         <option value="{{claHijo.id}}">{{claHijo.nombreHijo}}</option>
-                                                                    
+                                                    @each(claHijo in clasificaciones.clasificacionHijo)
+                                                        <option value="{{claHijo.id}}">{{claHijo.nombreHijo}}</option>
                                                     @endeach
                                                 </select>
                                                 
