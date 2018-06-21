@@ -154,7 +154,7 @@
 @each(colaboradores in colaboradoresEva.clasificaciones)
         <input class="aa" id="{{colaboradores.idTalentoCuadrante}}" type="hidden" value="{{colaboradores.nombres}}_{{colaboradores.apellidoPaterno}}_{{colaboradores.apellidoMaterno}}_{{colaboradores.Cargo}}_{{colaboradores.identificador}}_{{colaboradores.foto}}_{{colaboradores.genero}}_{{colaboradores.idPersona}}"  accesskey="{{colaboradores.idTalentoCuadrante}}" tabindex="{{colaboradores.idOpinante}}">
 
-        @each(claHijo in colaboradoresEva.clasificaciones[$loop.index].clasificacionHijo)
+        @each(claHijo in colaboradores.clasificacionHijo)
             <input class="bb" id="" name="{{claHijo.ClasificacionesCol}}" type="hidden" value="{{claHijo.ClasificacionesCol}}">
         @endeach
 @endeach
