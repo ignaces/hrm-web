@@ -17,6 +17,21 @@ class Empresa {
         */
         return view.render('engagement/empresa/index',  {periodos:periodos});
     }
+    async create  ({ view,request, response, auth, session }) {
+          
+        var empresa = request.get("empresa");
+        
+        var idPeriodo = request.input("idProceso");
+        
+        var rEmpresa = await data.execApiPost(request.hostname(),'/Engagement/Empresa/create',{empresa:empresa});
+        
+        var result = await data.execApi(request.hostname(),'/Engagement/Empresa/list',{idPeriodo:idPeriodo});
+
+        const empresas = result.body;
+            
+        return empresas;
+    
+    }  
 
     async empresasPeriodo({ view,request, response, auth, session }){
             var idPeriodo = request.input("idPeriodo");
@@ -27,6 +42,38 @@ class Empresa {
              
            return empresas;
     }
+    async getEmpresasFueraProceso({ view,request, response, auth, session }){
+            var idProceso = request.input("idProceso");
+            
+            
+            var result = await data.execApi(request.hostname(),'/Engagement/Empresa/getEmpresasFueraProceso',{idProceso:idProceso});
+
+            const empresas = result.body;
+            
+        return empresas;
+    }
+    async getClasificaciones({ view,request, response, auth, session }){
+        var idEmpresaProceso = request.input("idEmpresaProceso");
+        
+        
+        var result = await data.execApi(request.hostname(),'/Engagement/Empresa/getClasificaciones',{idEmpresaProceso:idEmpresaProceso});
+
+        const clasificaciones = result.body;
+        
+        return clasificaciones;
+    }
+    async addClasificacion  ({ view,request, response, auth, session }) {
+          
+        var clasificacion = request.get("clasificacion");
+        
+    
+        var result = await data.execApiPost(request.hostname(),'/Engagement/Empresa/addClasificacion',{clasificacion:clasificacion});
+
+        const clasificaciones = result.body;
+            
+        return clasificaciones;
+    
+    }  
     async getExcelResultado ({ view,request, response, auth, session }) {
         var id = request.input("idEncuestaAplicacion");
         var result = await data.execApi(request.hostname(),'/Engagement/Aplicacion/resultados',{idEncuestaAplicacion:id});  

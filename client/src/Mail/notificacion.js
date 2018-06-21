@@ -112,7 +112,8 @@ var files;
                                     { text: 'Apellido Paterno', value: '#{ApellidoPaterno}' },
                                     { text: 'Apellido Materno', value: '#{ApellidoMaterno}' },
                                     { text: 'Contraseña', value: '#{Password}' },
-                                    { text: 'Usuario', value: '#{UserName}' }
+                                    { text: 'Usuario', value: '#{UserName}' },
+                                    { text: 'Empresa', value: '#{Empresa}' },
                                 ],
                                 onPostRender: function () {
                                     this.value('&nbsp;<em>Some italic text!</em>');

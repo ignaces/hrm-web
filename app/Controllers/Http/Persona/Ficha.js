@@ -5,7 +5,7 @@ const got = use('got')
 class Ficha {
      index ({view,request, response, auth}) {
 
-        console.log(auth.user)
+        
         const Env = use('Env')
         var server = Env.get('API_SERVER', 'development')
         var persona = {
@@ -25,6 +25,20 @@ class Ficha {
              descripcion:""
          }];
         return view.render('persona/historia',  {historial:historial}); 
+    }
+
+    talento ({view,request, response, auth}) {
+
+        
+        const Env = use('Env')
+        var server = Env.get('API_SERVER', 'development')
+        var persona = {
+            nombre:"Juan Alberto Gonzales Moya",
+            cargo:"Cargo x",
+            perfilCargo:"Maestro OOCC Empalmes",
+            contratista:"Cobra"
+        };
+        return view.render('persona/talento',  {persona:persona});
     }
 }
 
