@@ -55,7 +55,7 @@ class Persona {
        
         response.json(posiciones);
     }
-    async getPdfFicha({ view, request, response, auth }) {
+    async getPdfFicha({ view, request, response, auth ,session}) {
         
         var idPersona = request.input("idPersona");
         var idPersona = session.get('procesoOrganigrama');
