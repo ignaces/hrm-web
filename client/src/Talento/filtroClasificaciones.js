@@ -1,56 +1,36 @@
 import _ from 'lodash';
 $(document).ready(function() {
-
+    $(".select2").select2();
     $("#spinner").hide();
+
 $("#btnBuscar").on('click',function() {
     $("#spinner").show();
     //clasificaciones filtro 
-    var valorTexto = $('.buscarCla option:selected');
-            var nombreFiltro = $.map(valorTexto ,function(option) {
-               if(option.value!='-1'){
-                return option.value;
-               }
-                
-            });
+    
+    var clasificaciones =[];
 
-            //cargos filtro 
-            var value = $('.buscar option:selected');
-            var cargosFiltro = $.map(value ,function(option) {
-                return option.value;
-            });  
-
-            var valorClasificaciones = $('.buscarCla option:selected');
-            var nombreClasificaciones = $.map(valorClasificaciones ,function(option) {
-                return option.value;
-            });
 
         var rut = $("#rut").val();
         var nombres = $("#nombres").val();
         var paterno = $("#paterno").val();
         var materno = $("#materno").val();
         //selected disabled hidden
-        var validacionCargo = $('#buscarCargo').val();
+        var cargos = $('#cmbCargo').val();
+        var tr = $('#cmbCuadrante').val();
 
+        $('.buscarCla').each(function(i, obj) {
+            clasificaciones= $.merge(clasificaciones,$(this).val());
+        });
+        /*console.log(clasificaciones)
+        console.log(cargos)
+        console.log(idTr)*/
 
-        
-        
-    //if (nombreClasificaciones == "," || validacionCargo == null || nombreClasificaciones == "" || rut == "" || nombres == "" || paterno == "" || materno == "" ){
-       // alert("Debes seleccionar una opción de filtro");
-        
-        
-        /*
-    if (email==""){
-        $('input[name=emailNieuwsbrief]').css({'border':'2px solid red'});
-        proceed = false;
-        }
-        */
-
-    //}
     
     var obj = { 
-        nombreFiltro:nombreFiltro,  //nombreFiltro   //bb
-        cargosFiltro:cargosFiltro,
-        rut:rut,
+        clasificaciones:clasificaciones,  //nombreFiltro   //bb
+        cargos:cargos,
+        tr:tr,
+        identificador:rut,
         nombres:nombres,
         paterno:paterno,
         materno:materno
