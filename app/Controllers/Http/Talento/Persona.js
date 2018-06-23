@@ -64,7 +64,7 @@ class Persona {
 
         //var result = await got(`http://192.168.3.4:8080?url=${server}/Acreditacion/Informe/pdf?procesoPersona=${idPersona}&cd=${conDetalle}`);
         //%2FTalento%2FPersona%2FfichaPdf%3FidPersona=%3D
-        var url = `http://192.168.3.4:8080/?url=http%3A%2F%2F${server}%2FTalento%2FPersona%2FfichaPdf%3FidPersona=%3D${idPersona}%26idProceso%3D${idProceso}`;
+        var url = `http://192.168.3.4:8080/?url=http%3A%2F%2F${server}%2FTalento%2FPersona%2FfichaPdf%3FidPersona%3D${idPersona}%26idProceso%3D${idProceso}`;
 
 
         var file = await wget(url, { output: 'tmp/ficha.pdf' });
