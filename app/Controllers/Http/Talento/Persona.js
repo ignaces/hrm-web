@@ -58,7 +58,7 @@ class Persona {
     async getPdfFicha({ view, request, response, auth ,session}) {
         
         var idPersona = request.input("idPersona");
-        var idPersona = session.get('procesoOrganigrama');
+        var idProceso = session.get('procesoOrganigrama');
         var server = 'cs.enovum.cl';//request.hostname();
 
 
@@ -83,6 +83,7 @@ class Persona {
 
         //var persona =  session.get('personaLogueada')
         var idPersona = request.input('idPersona')
+        
         var idProceso = request.input('idProceso')
         var obj = {
             "idPersona":idPersona,
@@ -116,9 +117,6 @@ class Persona {
                 "listItems": objItems,
                 "totalItems": objItems.length
             }
-
-            //console.log(objList)
-            //console.log(persona)
             objCurriculum.push(objList)
         });
         return view.render('talento/fichaTalentoPdf', { objCurriculum:objCurriculum, persona:persona, idPersona:idPersona});
