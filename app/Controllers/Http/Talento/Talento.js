@@ -66,10 +66,7 @@ class Talento {
         var result = await data.execApi(request.hostname(),'/Talento/Talento/filtrarColaboradoresSinClasificar',obj);
         var total = result.body.data.arreglo;
         
-        //var condiciones = result.body.data2.condicion;
-        //var total = result.body.data.arreglo;
         
-        //console.log(condiciones);
         return total;
    
     }
@@ -279,6 +276,23 @@ class Talento {
         return orgChart;
 
     }
+    async setSucesor({view,request, response, auth, session}){
+        var persona =  session.get('personaLogueada')
+        var idPosicion = request.input('idPosicion');
+        var idPersonaProceso = request.input('idProcesoPersona');
+        
+        var obj = {
+            "idProceso":session.get('procesoOrganigrama'),
+            "idPersonaOpinante":persona.id,
+            "idPosicion":idPosicion,
+            "idPersonaProceso":idPersonaProceso
+        };
+        
+        var result = await data.execApi(request.hostname(),'/Talento/Organigrama/setSucesor',obj);
+        var orgChart = result.body;
+        return orgChart;
+
+    }
     async fichaTalento ({view,request, response, auth, session}) {
 
         //var persona =  session.get('personaLogueada')
@@ -298,7 +312,7 @@ class Talento {
         var result2 = await data.execApi(request.hostname(),'/Talento/Talento/getCurriculumPersona',obj);
         var curriculum = result2.body;
         var objCurriculum = [];
-
+        
         categoria.forEach(element => {
 
             var objItems = [];
@@ -318,7 +332,7 @@ class Talento {
             }
 
             //console.log(objList)
-            //console.log(persona)
+            
             objCurriculum.push(objList)
         });
         return view.render('talento/fichaTalento', { objCurriculum:objCurriculum, persona:persona, idPersona:idPersona});

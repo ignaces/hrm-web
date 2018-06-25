@@ -1,19 +1,19 @@
 'use strict'
 
-const got = use('got')
+const data = use('App/Utils/Data')
 
 class Ficha {
-     index ({view,request, response, auth}) {
+   async index ({view,request, response, auth,session}) {
 
-        
-        const Env = use('Env')
-        var server = Env.get('API_SERVER', 'development')
-        var persona = {
-            nombre:"Juan Alberto Gonzales Moya",
-            cargo:"Cargo x",
-            perfilCargo:"Maestro OOCC Empalmes",
-            contratista:"Cobra"
-        };
+
+            var persona =  session.get('personaLogueada')
+            
+            var obj = {
+                "idPersona":persona.id
+            };
+            
+            var resultPersona =  await data.execApi(request.hostname(),'/Persona/Persona/getPersona',obj);
+           
         return view.render('persona/ficha',  {persona:persona});
     }
      historia ({view,request,response}){

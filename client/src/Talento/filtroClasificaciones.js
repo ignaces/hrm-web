@@ -84,8 +84,7 @@ $("#btnBuscar").on('click',function() {
                     }
                 }
                
-                $("#upcoming").append('<li class="task-warning ui-sortable-handle" style="" id="base" value="'+total[index].procesoOpinante+'">' +
-                '<div class="m-t-20"><p class="m-b-0"><a href="" class="text-muted"><img src="'+foto+'" alt="task-user" class="thumb-sm img-circle pull-left"> <H6 class="pull-left">'+total[index].Colaborador+' '+total[index].apellidoPaterno+' '+total[index].apellidoMaterno+'</H6></a> </p></div></li>');
+                $("#upcoming").append('<li class="task-warning ui-sortable-handle p-0" style="background-color: rgba(255,255,255,0.4); border:1px solid rgba(0,0,0,0.1);" id="'+total[index].cargo+'" name="'+total[index].rut+'" value="'+total[index].procesoOpinante+'"><div class="row"><div class="col-xs-2"><a href="/Talento/Talento/fichaTalento?idPersona='+total[index].idPersona+'" class="text-muted"><img src="'+foto+'" alt="task-user" class="thumb-sm img-circle"> </a>    </div><div class="col-xs-6"><h6><a href="/Talento/Talento/fichaTalento?idPersona='+total[index].idPersona+'" class=""><span style="width: 100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display: inline-block;">'+total[index].Colaborador+' '+total[index].apellidoPaterno+' '+total[index].apellidoMaterno+'</span></a></h6></div></div></li>');
             });
         }//$("."+Color+"").append('<li class="task-warning ui-sortable-handle" style="" id="'+cargo+'" name="'+rut+'"   value="'+idOpinante+'">' +'<input class="" id="clasificaciones" name="clasificaciones" type="hidden" value="'+clasificacionesHidden+'"><p class="m-b-0"><div class="clearfix"></div><div><p class="pull-right">'+atributos+'</p></div><a href="#" class="text-muted"><img src="'+foto+'" alt="task-user" class="thumb-sm img-circle pull-left"> <H6 class="pull-left">'+nombres+' '+apellidoPaterno+' '+apellidoMaterno+'</H6></a> </p></li>');
         },
