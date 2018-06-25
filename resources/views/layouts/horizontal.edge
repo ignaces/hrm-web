@@ -112,7 +112,7 @@
                             
                             @loggedIn
                              <li class="dropdown navbar-c-items">
-                                <a href="" class="dropdown-toggle waves-effect profile" data-toggle="dropdown" aria-expanded="true"><img src="/assets/images/users/maestro.png" alt="user-img" class="img-circle"> </a>
+                                <a href="" class="dropdown-toggle waves-effect profile" data-toggle="dropdown" aria-expanded="true"><img src="{{request.session.get('personaLogueada').imageUser}}" alt="user-img" class="img-circle"> </a>
                                 <ul class="dropdown-menu dropdown-menu-right arrow-dropdown-menu arrow-menu-right user-list notify-list">
                                     <!--<li><a href="/Persona/Ficha/index"><i class="dripicons-user m-r-10"></i> Perfil</a></li>-->
                                     <!--<li><a href="/Persona/Ficha/historia"><i class="dripicons-clipboard m-r-10"></i>  Historia</a></li>-->

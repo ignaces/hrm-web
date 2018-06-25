@@ -40,7 +40,7 @@
                                             <label class="control-label">{{clasificaciones.nombrePadre}}</label>
                                             <div class="">
                                     
-                                                <select id="buscar" class="select2 form-control select2-multiple buscarCla" multiple="multiple" multiple data-placeholder="Choose ...">
+                                                <select id="buscar" class="select2 form-control select2-multiple buscarCla" multiple="multiple" multiple data-placeholder="Selecciona una o más {{clasificaciones.nombrePadre}}">
                                                       <option value="-1" selected>Todos</option>
                                                     @each(claHijo in clasificaciones.clasificacionHijo)
                                                         <option value="{{claHijo.id}}">{{claHijo.nombreHijo}}</option>

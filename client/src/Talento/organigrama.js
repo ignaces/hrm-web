@@ -3,6 +3,26 @@ var cColaboradores = new Vue({
     el: '#cColaboradores',
     data: {
         posicion: {colaboradores:[]}
+    },
+    methods:{
+        setSucesor:function(idProcesoPersona,idPosicion){
+            
+            
+            $.ajax({
+                type: "GET",
+                url: "/Talento/Talento/setSucesor",
+                contentType: "application/json; charset=utf-8",
+                data: {idProcesoPersona:idProcesoPersona,idPosicion:idPosicion},
+                dataType: "json", 
+                async:false,
+                success: function (msg) {
+                    getOrganigrama();
+                    //$("#modalAccion").modal("hide");
+    
+                }
+    
+            });  
+        }
     }
 });
 /*var modalPosicion = new Vue({
@@ -38,11 +58,12 @@ var cargaOrganigrama = function (organigrama){
         }
         if(badges==""){
 
-            basges="&nbsp";
+            badges="&nbsp";
         }
         var nodo = {
             id:organigrama[posicion].idPosicion,
             parentId: organigrama[posicion].idPadre,
+            secondParenId:organigrama[posicion].idSucede,
             Nombre:organigrama[posicion].nombresPersona + " " +organigrama[posicion].apellidoPaterno + " " +organigrama[posicion].apellidoMaterno,
             Cargo:organigrama[posicion].nombre, 
             Atributos: badges,  
@@ -75,6 +96,7 @@ var cargaOrganigrama = function (organigrama){
         enableEdit: false,
         dataSource: source,
         clickNodeEvent: clickHandler,  
+        secondParentIdField: "secondParenId",
         boxSizeInPercentage: {
             minBoxSize: {
                 width: 5,
@@ -112,11 +134,14 @@ function clickHandler(sender, args) {
     
     
     
-    cColaboradores.posicion=args.node.data;
-    cColaboradores.posicion.id=args.node.id;
-    cColaboradores.posicion.colaboradores=[];
-    getSucesores(cColaboradores.posicion.id);
-    $("#modalColaborador").modal('show');
+    if(args.node.secondParent==null){
+        cColaboradores.posicion=args.node.data;
+        cColaboradores.posicion.id=args.node.id;
+        cColaboradores.posicion.colaboradores=[];
+        getSucesores(cColaboradores.posicion.id);
+        $("#modalColaborador").modal('show');
+    }
+    
     
 
     
