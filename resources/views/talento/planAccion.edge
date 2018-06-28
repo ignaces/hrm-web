@@ -1,0 +1,275 @@
+ @layout('layouts/horizontal')
+
+@section('scripts')
+    
+    <script src="/assets/getOrgChart/js/getorgchart.js"></script>
+        <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+         <script src="/assets/plugins/moment/moment.js"></script>
+        <script src="/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+        <script src="/assets/plugins/bootstrap-datepicker/locales/es.js"></script>
+        <script src="/assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+        <script>
+var accionesPredeterminadas = [];
+var tiposAccion = {{{toJSON(tiposAccion)}}};
+var competenciasPredeterminadas = {{{toJSON(competencias)}}};
+var acciones = {{{toJSON(planDesarrollo.acciones)}}}
+
+var idPlan="{{planDesarrollo.idPlan}}";
+var cAcciones= new Vue({
+  el: '#app',
+  data: {
+    acciones:acciones
+  },
+  methods: {
+  	editAccion: function(accion){
+    	cForm.accion = accion;
+        cForm.getAcciones(accion.idTipoAccion);
+        
+        cForm.accion.edit=true;
+
+        $("#modalAccion").modal("show");
+    },
+    saveEdit: function(ev, number){
+				
+      	this.toggleEdit(ev, number);
+    },
+    deleteAccion:function(accion){
+        cForm.accion = accion;
+        
+        $.ajax({
+            type: "GET",
+            url: "/Talento/Persona/deleteAccion",
+            contentType: "application/json; charset=utf-8",
+            data: {idPlan:idPlan,accion:cForm.accion},
+            dataType: "json", 
+            async:false,
+            success: function (msg) {
+                cAcciones.acciones=msg;
+                //$("#modalAccion").modal("hide");
+
+            }
+
+        });   
+    }
+  }
+})
+var cForm= new Vue({
+  el: '#formulario',
+  data: {
+    textoIndicador:"",  
+    tiposAccion:tiposAccion,
+    accionesPredeterminadas:accionesPredeterminadas,
+    competenciasPredeterminadas:competenciasPredeterminadas,
+    accion: 
+        {
+            id:'',
+            idTipoAccion:'-1',
+            idAccionPredeterminada:'-1',
+            idCompetencia:'-1',
+            nombre: '',
+            objetivo:'',
+            apoyoGerente:'',
+            competencia:'',
+            fechaInicio:'',
+            fechaTermino:'',
+            indicadores:[],
+            edit: false
+        }
+    
+  },
+  mounted() {
+      
+      $("#date-range").datepicker({
+            format: 'yyyy-mm-dd',
+            toggleActive: true,
+            language: 'es'
+            }).on(
+     		"changeDate", function(date) {
+                 
+                 cForm.accion.fechaInicio = $('#start').val();
+                 cForm.accion.fechaTermino = $('#end').val();
+                }
+		);
+    },
+  methods: {
+    addIndicador:function () {
+        if(cForm.textoIndicador!=""){
+
+            cForm.accion.indicadores.push({texto:cForm.textoIndicador})
+            cForm.textoIndicador="";
+        }
+        
+    },
+    deleteIndicador:function () {
+        cForm.accion.indicadores.pop(this)
+    },
+    saveAccion:function () {
+        var url = "/Talento/Persona/addAccion"
+        if(cForm.accion.edit){
+            url="/Talento/Persona/saveAccion"
+        }
+        $.ajax({
+            type: "GET",
+            url: url,
+            contentType: "application/json; charset=utf-8",
+            data: {idPlan:idPlan,accion:cForm.accion},
+            dataType: "json", 
+            async:false,
+            success: function (msg) {
+                cAcciones.acciones=msg;
+                $("#modalAccion").modal("hide");
+
+            }
+
+        });   
+        
+    },
+    getAcciones:function () {
+        
+        $.ajax({
+            type: "GET",
+            url: "/Talento/Persona/accionesTipo",
+            contentType: "application/json; charset=utf-8",
+            data: {idTipo:cForm.accion.idTipoAccion},
+            dataType: "json", 
+            async:false,
+            success: function (msg) {
+                cForm.accionesPredeterminadas = msg;
+                
+
+            }
+
+        });   
+        
+    }
+  }
+})
+
+$(document).ready(function(){
+    $("#btnNewAccion").click(function(){
+        cForm.accion={
+            id:'',
+            idTipoAccion:'-1',
+            idAccionPredeterminada:'-1',
+            idCompetencia:'-1',
+            nombre: '',
+            objetivo:'',
+            apoyoGerente:'',
+            competencia:'',
+            fechaInicio:'',
+            fechaTermino:'',
+            indicadores:[],
+            edit: false
+        }
+    })
+});
+</script>
+        
+@endsection
+
+@section('pluginsCss')
+ <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+ <!-- Infobox css -->
+ <link rel="stylesheet" href="/assets/plugins/infobox/infobox.css">
+ <!-- socialWidget css -->
+ <link rel="stylesheet" href="/assets/plugins/socialWidget/socialWidget.css">
+@endsection
+  
+
+@section('content')
+    @!component('components.Core.botonera')
+    @!component('talento.components.modalAccionFicha')
+    <div class="row"> <!--ROW 1 -->  
+        <div class="col-md-4"><!--LEFT USER-->
+            <div class="box box-widget widget-user-2">      
+                <div class="widget-user-header bg-primary">
+                <div class="widget-user-image">
+                    <!--<img class="img-circle" src={{persona.imageUser}} alt="User Avatar">-->
+                    <img class="img-circle" src="{{persona.fotoPersona}}" alt="User Avatar">
+                </div>
+                <h4>
+                
+            </h4>
+                <h3 class="widget-user-username text-white">{{persona.nombres}} {{persona.apellidoPaterno}} {{persona.apellidoMaterno}}</h3>
+                <h5 class="widget-user-desc  text-white">{{persona.posicion}}</h5>
+                </div>
+                <div class="box-footer no-padding">
+                    <div class="row">
+                        <div class="col-md-12">
+                        
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                                <div class="info-box bg-{{persona.colorPosicion}}">
+                                <span class="info-box-icon text-white"><i class="fa fa-diamond"></i></span>
+                    
+                                <div class="info-box-content">
+                                    <span class="info-box-text text-white">Talent Review</span>
+                                    <span class="info-box-number text-white">{{persona.valor}}</span>
+                    
+                                    <div class="progress">
+                                    <div class="progress-bar" style="width: 100%"></div>
+                                    </div>
+                                    <span class="progress-description text-white">
+                                        2018
+                                    </span>
+                                </div>
+                                <!-- /.info-box-content -->
+                                </div>
+                        </div>
+
+                       <!-- <div class="col-md-12">
+                                <div class="pull-right">
+                                @each(atributo in persona.atributos)
+                                    <i class="{{atributo.iconoAtributo}} {{atributo.colorAtributo}}"></i>
+                                @endeach
+                                @if(persona.critico==1)
+                                    <i class="fa fa-star text-warning"></i>
+                                @endif
+                                </div>
+                        </div-->
+                    </div>
+                </div>
+            </div>
+        </div><!--LEFT USER END-->
+
+        <div class="col-md-8"> 
+                      <!-- Personal-Information -->
+            @!component('components.Talento.informacionPersonal',persona=persona)
+            <!-- Personal-Information -->
+        </div>
+        
+     </div><!--ROW 1 END-->  
+    <div class="row">
+        <div class="col-md-12">
+        <div class="panel panel-border panel-purple">
+            <div class="panel-heading">
+                
+                <h2 class="panel-title">Acciones
+                <div class="dropdown pull-right">
+                                <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
+                                    <h3 class="m-0 text-muted"><i class="mdi mdi-dots-horizontal"></i></h3>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#" data-toggle="modal" data-target="#modalAccion" id="btnNewAccion">Nueva Acción</a></li>
+                                </ul>
+                            </div>
+                </h2>
+                     
+            </div>
+            <div class="panel-body">
+            
+               @!component('talento.components.accion',persona=persona)
+            </div>    
+        </div>
+        </div>
+        
+    </div>
+    <br>
+
+@endsection
+
+
+     
+    

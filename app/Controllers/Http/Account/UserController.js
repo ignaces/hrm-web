@@ -25,11 +25,13 @@ class UserController {
           }else{
             persona.cargo=""
 
-        
-            persona.imageUser="/assets/images/icons/businessman.svg"
-            if (persona.codigoGenero=="F"){
-              persona.imageUser="/assets/images/icons/businesswoman.svg"
+            if(persona.imageUser=="" || persona.imageUser==null){
+              persona.imageUser="/assets/images/icons/businessman.svg"
+              if (persona.codigoGenero=="F"){
+                persona.imageUser="/assets/images/icons/businesswoman.svg"
+              }
             }
+            
             
             //var traerLog = session.put('personaLogueada',persona); 
     

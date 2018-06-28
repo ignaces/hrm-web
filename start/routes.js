@@ -33,6 +33,13 @@ Route.post('/Redes/Medicion/medirPersona','Redes/Medicion.medirPersona')
 
 Route.get('/Acreditacion/Informe/pdf','Acreditacion/Informe.pdf')
 
+
+Route.get('/Account/Register/doRegisterPersonas','/Account/Register.doRegisterPersonas')
+
+
+
+Route.get('/Talento/Persona/fichaPdf','Talento/Persona.fichaPdf')
+
 Route.get('/Redes/Visualizador/viewGraph','Redes/Visualizador.viewGraph')
 Route.post('/Redes/Visualizador/viewGraph','Redes/Visualizador.viewGraph')
 Route.get('/Redes/Visualizador/viewApps','Redes/Visualizador.viewApps')

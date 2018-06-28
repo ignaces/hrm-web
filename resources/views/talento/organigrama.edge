@@ -1,18 +1,12 @@
  @layout('layouts/horizontal')
 
 @section('scripts')
-    
-    <script src="/assets/getOrgChart/js/getorgchart.js"></script>
-    <script src="/assets/js/dist/organigrama.min.js"></script>
-        <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
-        <script>
-        $('#textarea').maxlength({
-            alwaysShow: true
-        });
-        
 
-       
-        </script>
+    <script src="/assets/getOrgChart/js/getorgchart.js"></script>
+   <script src="/assets/plugins/select2/js/select2.min.js" type="text/javascript"></script>
+    <script src="/assets/js/dist/organigrama.min.js"></script>
+    <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+    
         
 @endsection
 
@@ -20,9 +14,10 @@
     <link href="/assets/getOrgChart/css/getorgchart.css" rel="stylesheet" type="text/css" />
     <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
     <!-- Infobox css -->
- <link rel="stylesheet" href="/assets/plugins/infobox/infobox.css">
- <!-- socialWidget css -->
- <link rel="stylesheet" href="/assets/plugins/socialWidget/socialWidget.css">
+    <link rel="stylesheet" href="/assets/plugins/infobox/infobox.css">
+    <!-- socialWidget css -->
+    <link rel="stylesheet" href="/assets/plugins/socialWidget/socialWidget.css">
+    <link href="/assets/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
 @endsection
   
 
@@ -48,7 +43,7 @@
                     <i class='fa fa-warning m-r-5 text-warning'></i> Alerta Amarilla
                 </div>
                 <div class="col-sm-6 col-md-4 col-lg-12">
-                    <i class='fa fa-warning m-r-5 text-red'></i> TR 8, 9 por dos años
+                    <i class='fa fa-warning m-r-5 text-danger'></i> TR 8, 9 por dos años
                 </div>
                     
                 </div>
@@ -57,111 +52,7 @@
             @!component('components.Talento.organigramaView',{orgChart:orgChart})
         </div>    
     </div>
-    <div class="modal fade bs-example-modal-lg" id="modalColaborador" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
-            <div class="modal-dialog modal-lg" id="cColaboradores">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title" id="myLargeModalLabel">Sucesiones @{{posicion.Cargo}}</h4>
-
-                    </div>
-                    <div class="modal-body">
-                        <div class="row" v-if="posicion.idPersona!='VACANTE'">
-                            <div class="panel panel-border panel-primary">
-                                <div class="panel-heading">
-                                    <h2 class="panel-title">Datos Colaborador</h2>
-                                </div>
-                                <div class="panel-body">
-                                   <div class="row">
-
-                                        <div class="col-md-12">
-                                            <div class="text-center card-box">
-                                                
-                                                <div class="clearfix"></div>
-                                                <div class="member-card">
-                                                    <div class="thumb-xl member-thumb m-b-10 center-block">
-                                                        <img :src="posicion.Imagen" class="img-circle img-thumbnail" alt="profile-image">
-                                                        
-                                                    </div>
-
-                                                    <div class="">
-                                                        <h4 class="m-b-5">@{{posicion.Nombre}}</h4>
-                                                        <p class="text-muted"><span class="text-pink">@{{posicion.Cargo}}</span></p>
-                                                        <p class="text-muted" >
-                                                            <i :class="badge.iconoAtributo+' fa-2x m-r-5 '+badge.colorAtributo" v-for="badge in posicion.badges"></i>
-                                                            <i class="fa fa-star fa-2x m-r-5 text-warning" v-if="posicion.critico==1"></i>
-                                                        </p>
-                                                        <p class="text-muted">
-                                                            @{{posicion.edd}} @{{posicion.talentReview}}
-                                                            <i class="fa fa-search fa-2x m-r-5 text-warning" v-if="posicion.lupa==true"></i>
-                                                        </p>
-                                                    </div>
-                                                
-
-                                                    
-                                                    <a  class="btn btn-primary m-t-20 btn-rounded btn-bordered waves-effect w-md waves-light" :href="'/Talento/Talento/fichaTalento?idPersona='+posicion.idPersona">Ficha</a>
-                                                    <a  class="btn btn-primary m-t-20 btn-rounded btn-bordered waves-effect w-md waves-light" :href="'/Talento/Persona/fichaCompromiso?idPersona='+posicion.idPersona">Ficha Compromisos</a>
-                                                    
-
-                                                </div>
-
-                                            </div>
-
-                                        </div> <!-- end col -->
-                                    
-                                    </div>
-                                </div>    
-                            </div>
-                        </div>
-                        <div class="row" v-if="posicion.colaboradores.length>0">
-                            <div class="panel panel-border panel-primary">
-                                <div class="panel-heading">
-                                    <h2 class="panel-title">Posibles sucesores para  @{{posicion.Cargo}}</h2>
-                                </div>
-                                <div class="panel-body">
-                                   @!component('components.Talento.colaboradorSquare',{colaboradores:'[]'})
-                                </div>    
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="panel panel-border panel-primary">
-                                <div class="panel-heading">
-                                    <h2 class="panel-title">Estrategia Sucesión</h2>
-                                </div>
-                                <div class="panel-body">
-                                   <div class="col-sm-6">
-                                                <div class="radio">
-                                                    <input type="radio" name="radio" id="radio1" value="option1" checked>
-                                                    <label for="radio1">
-                                                        Ir al MarketPlace
-                                                    </label>
-                                                </div>
-                                                <div class="radio radio-custom">
-                                                    <input type="radio" name="radio" id="radio2" value="option2">
-                                                    <label for="radio2">
-                                                        Mercado Externo
-                                                    </label>
-                                                </div>
-                                                <div class="radio radio-primary">
-                                                    <input type="radio" name="radio" id="radio3" value="option3">
-                                                    <label for="radio3">
-                                                        Libre
-                                                    </label>
-                                                </div>
-                                        <div class="m-t-20">
-                                            <p class="text-muted m-b-15 font-14">
-                                                Ingrese Estrategia
-                                            </p>
-                                            <textarea id="textarea" class="form-control" maxlength="1000" rows="3" placeholder="La estrategia debe tener un máximo de 1000 caracteres"></textarea>
-                                        </div>
-                                    </div>
-                                </div>    
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
+    @!component('talento.components.modalColaboradorPosicion',{posicion:posicion,colaboradoresList:colaboradoresList})
 @endsection
 
 

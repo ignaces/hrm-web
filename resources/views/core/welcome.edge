@@ -44,7 +44,7 @@
         </div>
         @if(procesos.length>0)
         <div class="row">
-                @!component('components.Acreditacion.cajaAcreditacion',titulo = "Acreditación", procesos=procesos)
+                @!component('components.Acreditacion.cajaDnd',titulo = "Acreditación", procesos=procesos)
         </div>
         @endif
         @if(procesosEde.length>0)
@@ -70,9 +70,9 @@
 
                     <div class="clearfix"></div>
                     <div class="inbox-widget">
+                        
+                        <a class="btn btn-info btn-rounded btn-block" href="/Core/Herramientas/documentos"><i class="mdi mdi-library-books"></i> <span>Documentos</span> </a>
                         <!--
-                        <a class="btn btn-info btn-rounded btn-block" href="/Documentos"><i class="mdi mdi-library-books"></i> <span>Documentos</span> </a>
-
                         <a class="btn btn-info btn-rounded btn-block" href="#" onclick="calendario();">
                             <i class="mdi mdi-calendar-clock"></i> <span>Calendario</span>
                         </a>
