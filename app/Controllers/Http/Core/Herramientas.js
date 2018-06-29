@@ -1,27 +1,20 @@
 'use strict'
 
-const got = use('got')
-const fs =require('fs')
-
-  
+const api = use('App/Utils/Data')
   
 class Herramientas {
+
     async documentos  ({ view,request, response }) {
-        var docs=[{
-                id:"",
-                nombre:"sss",
-                tipo:"pdf",
-                url:"#"
+    //Datos Documentos
+    var objDatosDocs = {
+        "activo": "1"
+    };
+    var resultDocs = await api.execApi(request.hostname(), '/Core/Documentos/getDocumentos', objDatosDocs);
+    var datosDocs= resultDocs.body.data;
+    
+    //RENDER
+    return view.render('core/herramientas/documentos', {datosDocs});
 
-        },{
-            id:"",
-            nombre:"sss",
-            tipo:"pdf",
-            url:"#"
-
-        }];      
-        return view.render('core/herramientas/documentos',{docs});
-        
         
     }
 }
