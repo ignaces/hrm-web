@@ -238,8 +238,8 @@ File: Components
   border-color: #ff9f02 !important;
 }
 .btn-danger {
-  background-color: #e60d72 !important;
-  border: 1px solid #e60d72 !important;
+  background-color: #ff0000 !important;
+  border: 1px solid #ff0000 !important;
 }
 .btn-danger:active,
 .btn-danger:focus,
@@ -250,8 +250,8 @@ File: Components
 .btn-danger:focus,
 .btn-danger:hover,
 .open > .dropdown-toggle.btn-danger {
-  background-color: #ce0c66 !important;
-  border-color: #ce0c66 !important;
+  background-color: #e60000 !important;
+  border-color: #e60000 !important;
 }
 .btn-inverse {
   background-color: #36404c !important;
@@ -352,15 +352,15 @@ File: Components
   border: 2px solid #f79a00 !important;
 }
 .btn-bordered.btn-danger {
-  color: #e60d72 !important;
-  border: 2px solid #e60d72 !important;
+  color: #ff0000 !important;
+  border: 2px solid #ff0000 !important;
 }
 .btn-bordered.btn-danger:hover,
 .btn-bordered.btn-danger:focus,
 .btn-bordered.btn-danger:active {
-  background-color: #e60d72;
+  background-color: #ff0000;
   color: #ffffff !important;
-  border: 2px solid #c40b61 !important;
+  border: 2px solid #db0000 !important;
 }
 .btn-bordered.btn-inverse {
   color: #36404c !important;
@@ -518,7 +518,7 @@ File: Components
   background-color: #ffa91c;
 }
 .panel-danger > .panel-heading {
-  background-color: #e60d72;
+  background-color: #ff0000;
 }
 .panel-purple > .panel-heading {
   background-color: #5553ce;
@@ -560,8 +560,8 @@ File: Components
   color: #ffa91c !important;
 }
 .panel-border.panel-danger .panel-heading {
-  border-color: #e60d72 !important;
-  color: #e60d72 !important;
+  border-color: #ff0000 !important;
+  color: #ff0000 !important;
 }
 .panel-border.panel-purple .panel-heading {
   border-color: #5553ce !important;
@@ -766,8 +766,8 @@ File: Components
   color: #ffffff;
 }
 .checkbox-danger input[type="checkbox"]:checked + label::before {
-  background-color: #e60d72;
-  border-color: #e60d72;
+  background-color: #ff0000;
+  border-color: #ff0000;
 }
 .checkbox-danger input[type="checkbox"]:checked + label::after {
   color: #ffffff;
@@ -909,13 +909,13 @@ File: Components
   background-color: #4489e4;
 }
 .radio-danger input[type="radio"] + label::after {
-  background-color: #e60d72;
+  background-color: #ff0000;
 }
 .radio-danger input[type="radio"]:checked + label::before {
-  border-color: #e60d72;
+  border-color: #ff0000;
 }
 .radio-danger input[type="radio"]:checked + label::after {
-  background-color: #e60d72;
+  background-color: #ff0000;
 }
 .radio-info input[type="radio"] + label::after {
   background-color: #00ad8c;
@@ -1169,7 +1169,7 @@ File: Components
   background-color: #ffa91c;
 }
 .progress-bar-danger {
-  background-color: #e60d72;
+  background-color: #ff0000;
 }
 .progress-bar-inverse {
   background-color: #36404c;
@@ -1297,15 +1297,15 @@ File: Components
   border-top-color: #e89000;
 }
 .alert-danger {
-  color: #e60d72;
-  background-color: #fccde3;
-  border-color: #f663a7;
+  color: #ff0000;
+  background-color: #ffd6d6;
+  border-color: #ff6666;
 }
 .alert-danger .alert-link {
-  color: #b60a5a;
+  color: #cc0000;
 }
 .alert-danger hr {
-  border-top-color: #b60a5a;
+  border-top-color: #cc0000;
 }
 .alert-white {
   background-color: #ffffff !important;
@@ -1342,9 +1342,9 @@ File: Components
   border-color: #ffa91c;
 }
 .jq-icon-error {
-  background-color: #e60d72;
+  background-color: #ff0000;
   color: #ffffff;
-  border-color: #e60d72;
+  border-color: #ff0000;
 }
 .close-jq-toast-single {
   position: absolute;
@@ -1416,10 +1416,10 @@ File: Components
   border-color: #ffa91c;
 }
 .swal2-icon.swal2-error {
-  border-color: #e60d72;
+  border-color: #ff0000;
 }
 .swal2-icon.swal2-error .line {
-  background-color: #e60d72;
+  background-color: #ff0000;
 }
 .swal2-modal .swal2-file:focus,
 .swal2-modal .swal2-input:focus,
@@ -1486,8 +1486,8 @@ File: Components
   border: 4px double #00ad8c;
 }
 .widget-two-danger .widget-two-icon {
-  color: #e60d72;
-  border: 4px double #e60d72;
+  color: #ff0000;
+  border: 4px double #ff0000;
 }
 .widget-two-inverse .widget-two-icon {
   color: #36404c;
@@ -1875,8 +1875,8 @@ File: Components
   color: #ffa91c;
 }
 .external-event.bg-danger {
-  background-color: rgba(230, 13, 114, 0.3) !important;
-  color: #e60d72;
+  background-color: rgba(255, 0, 0, 0.3) !important;
+  color: #ff0000;
 }
 .external-event.bg-pink {
   background-color: rgba(236, 103, 148, 0.3) !important;
@@ -2012,7 +2012,7 @@ textarea.form-control {
 .has-error.radio label,
 .has-error.radio-inline label,
 .has-error .form-control-feedback {
-  color: #e60d72;
+  color: #ff0000;
 }
 .has-success .form-control {
   border-color: #32c861;
@@ -2023,7 +2023,7 @@ textarea.form-control {
   box-shadow: none !important;
 }
 .has-error .form-control {
-  border-color: #e60d72;
+  border-color: #ff0000;
   box-shadow: none !important;
 }
 .input-group-addon {
@@ -2168,7 +2168,7 @@ textarea.form-control {
 .parsley-errors-list > li {
   font-size: 12px;
   list-style: none;
-  color: #e60d72;
+  color: #ff0000;
   margin-top: 5px;
   padding-left: 20px;
   font-weight: 600;
@@ -2567,7 +2567,7 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child:before {
 }
 table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td:first-child:before,
 table.dataTable.dtr-inline.collapsed > tbody > tr.parent > th:first-child:before {
-  background-color: #e60d72;
+  background-color: #ff0000;
 }
 table.dataTable > tbody > tr.child span.dtr-title {
   font-family: 'Nunito Sans', sans-serif;
@@ -2711,10 +2711,10 @@ ul.ColVis_collection li {
   width: 100%;
 }
 #datatable-editable .fa-trash-o {
-  color: #e60d72;
+  color: #ff0000;
 }
 #datatable-editable .fa-times {
-  color: #e60d72;
+  color: #ff0000;
 }
 #datatable-editable .fa-pencil {
   color: #244a7c;
@@ -2866,7 +2866,7 @@ table.dataTable thead th.sorting_desc:after {
   background-color: #ffa91c;
 }
 .table-colored.table-danger thead th {
-  background-color: #e60d72;
+  background-color: #ff0000;
 }
 .table-colored.table-inverse thead th {
   background-color: #36404c;
@@ -2913,10 +2913,10 @@ table.dataTable thead th.sorting_desc:after {
   background-color: #ffa91c;
 }
 .table-colored-bordered.table-bordered-danger {
-  border: 2px solid #e60d72;
+  border: 2px solid #ff0000;
 }
 .table-colored-bordered.table-bordered-danger thead th {
-  background-color: #e60d72;
+  background-color: #ff0000;
 }
 .table-colored-bordered.table-bordered-inverse {
   border: 2px solid #36404c;
@@ -2994,13 +2994,13 @@ table.dataTable thead th.sorting_desc:after {
   background-color: #ffa91c;
 }
 .table-colored-full.table-full-danger {
-  background-color: rgba(230, 13, 114, 0.8);
+  background-color: rgba(255, 0, 0, 0.8);
 }
 .table-colored-full.table-full-danger thead th {
-  background-color: #e60d72;
+  background-color: #ff0000;
 }
 .table-colored-full.table-full-danger tbody tr:hover {
-  background-color: #e60d72;
+  background-color: #ff0000;
 }
 .table-colored-full.table-full-inverse {
   background-color: rgba(54, 64, 76, 0.8);
@@ -3107,7 +3107,7 @@ table.dataTable thead th.sorting_desc:after {
 .ct-chart .ct-series.ct-series-b .ct-line,
 .ct-chart .ct-series.ct-series-b .ct-point,
 .ct-chart .ct-series.ct-series-b .ct-slice-donut {
-  stroke: #e60d72;
+  stroke: #ff0000;
 }
 .ct-chart .ct-series.ct-series-c .ct-bar,
 .ct-chart .ct-series.ct-series-c .ct-line,
@@ -3145,7 +3145,7 @@ table.dataTable thead th.sorting_desc:after {
 }
 .ct-series-b .ct-area,
 .ct-series-b .ct-slice-pie {
-  fill: #e60d72;
+  fill: #ff0000;
 }
 .ct-series-c .ct-area,
 .ct-series-c .ct-slice-pie {
@@ -3318,7 +3318,7 @@ table.dataTable thead th.sorting_desc:after {
 }
 .typeahead-empty-message {
   padding: 5px 10px;
-  color: #e60d72;
+  color: #ff0000;
 }
 .league-name {
   padding: 3px 20px;
@@ -3389,10 +3389,10 @@ table.dataTable thead th.sorting_desc:after {
   border-color: #e89000 transparent transparent;
 }
 .ribbon-box .ribbon-danger {
-  background: #e60d72;
+  background: #ff0000;
 }
 .ribbon-box .ribbon-danger:before {
-  border-color: #b60a5a transparent transparent;
+  border-color: #cc0000 transparent transparent;
 }
 .ribbon-box .ribbon-pink {
   background: #ec6794;
@@ -3517,15 +3517,15 @@ table.dataTable thead th.sorting_desc:after {
   border-top: 3px solid #cf8000;
 }
 .ribbon-box .ribbon-two-danger span {
-  background: #e60d72;
+  background: #ff0000;
 }
 .ribbon-box .ribbon-two-danger span:before {
-  border-left: 3px solid #9e094e;
-  border-top: 3px solid #9e094e;
+  border-left: 3px solid #b30000;
+  border-top: 3px solid #b30000;
 }
 .ribbon-box .ribbon-two-danger span:after {
-  border-right: 3px solid #9e094e;
-  border-top: 3px solid #9e094e;
+  border-right: 3px solid #b30000;
+  border-top: 3px solid #b30000;
 }
 .ribbon-box .ribbon-two-pink span {
   background: #ec6794;

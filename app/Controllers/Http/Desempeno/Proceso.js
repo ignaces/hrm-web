@@ -10,7 +10,7 @@ class Proceso {
         var idProceso = request.input("idProceso")
         //console.log(request.all());
         session.put('idProceso',idProceso);
-
+        
         //Datos Proceso
         var objDatosProceso = {
             "idProceso":idProceso,
@@ -20,7 +20,7 @@ class Proceso {
         var datosProceso =resultProceso.body.data[0];
 
         session.put('dataProceso',datosProceso)
-        //console.log(datosProceso);
+        console.log(datosProceso);
 
         //Etapas Proceso
         var objEtapasProceso = {
@@ -39,7 +39,7 @@ class Proceso {
         var resultMenu =await api.execApi(request.hostname(),'/Desempeno/Proceso/getMenuUsuario',objMenuContextual);
         var datosMenu =resultMenu.body.data;
         //
-
+        //console.log(datosMenu);
         //Datos Persona
         var user={usuario:auth.user}
         var persona = session.get('personaLogueada')
@@ -48,10 +48,11 @@ class Proceso {
             "idProceso":idProceso,
             "idPersona":idPersona
         };
-        
+        console.log(idProceso)
+        console.log(idPersona)
         var resultPersonaEde =await api.execApi(request.hostname(),'/Desempeno/Proceso/getProcesoPersona',objdatosPersona);
         var PersonaEde =resultPersonaEde.body.data;
-        //console.log(PersonaEde)
+        
         //
         //Etapa
         var objEtapa = {
@@ -119,6 +120,7 @@ class Proceso {
 
         var resultPersonaEde =await api.execApi(request.hostname(),'/Desempeno/Proceso/getProcesoPersona',objdatosPersona);
         var PersonaEde =resultPersonaEde.body.data;
+       
         //
 
         //Menu Contextual
@@ -129,6 +131,7 @@ class Proceso {
         var resultMenu =await api.execApi(request.hostname(),'/Desempeno/Proceso/getMenuUsuario',objMenuContextual);
         var datosMenu =resultMenu.body.data;
         //
+        
 
         //Etapa
         var objEtapa = {
@@ -138,7 +141,9 @@ class Proceso {
         var resultEtapa=await api.execApi(request.hostname(),'/Desempeno/Proceso/getEtapas',objEtapa);
         var etapa =resultEtapa.body.data;
         //
-
+        console.log("AA")
+        console.log(idEtapa)
+        console.log(idPersona)
          //Lista EVAL
          var objEval={
             "idEtapa":idEtapa,
@@ -149,6 +154,7 @@ class Proceso {
         var resultEval=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluados',objEval);
         var listaEval =resultEval.body.data;      
         //
+        
         console.log(objEval)
         
          //Lista Supe
@@ -161,6 +167,7 @@ class Proceso {
         var resultSupe=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluados',objSupe);
         var listaSupe =resultSupe.body.data;      
         //
+        console.log(objSupe)
         
         return view.render('desempeno/etapa',{datosProceso,PersonaEde,datosMenu,etapa,listaEval,listaSupe});
     }
