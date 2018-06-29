@@ -61,10 +61,15 @@ class Portada {
        
         var menu = session.get('usuario_roles_menu');
         var cliente = request.hostname().split(".")[0]
+<<<<<<< HEAD
+        //var etag = `app_${cliente}`
+        var etag = `app_hrmdev`
+=======
         if(cliente=="localhost"){
             cliente="hrmdev"
         }
         var etag = `app_${cliente}`
+>>>>>>> 2b163ee5b82e057973f93f5facafcc88b38a37e8
 
         return view.render('core/welcome',  {etag,user,procesos,persona,menu,talentos,condicion,procesosEde});
 

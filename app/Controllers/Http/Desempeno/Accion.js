@@ -85,8 +85,14 @@ class Accion {
         var dataObservacion =resultObservacion.body.data;
         console.log(dataObservacion);
 
+        var textoObservacion="";
+        if (dataObservacion.lenght > 0){
+            textoObservacion=dataObservacion[0].observacion
+        };
+
+
         //RENDER
-        return view.render('desempeno/metas/feedback/publicar', {dataVista, datosTarea, Perso, listaEval,dataMetas,dataColumnas,dataObservacion});
+        return view.render('desempeno/metas/feedback/publicar', {dataVista, datosTarea, Perso, listaEval,dataMetas,dataColumnas,dataObservacion,textoObservacion});
     }
 
    
