@@ -5,10 +5,10 @@
             <div class="panel-heading">
                 
                 <div class="pull-right">
-                    <p class="panel-sub-title text-muted">
+                    <!--<p class="panel-sub-title text-muted">
                         <div class="badge badge-topbar {{dimension.resPonderacionColor}}"><i class="fa fa-percent"></i> {{dimension.ponderacionMetas}}% <i class="{{dimension.resPonderacionIcono}}"></i></div>
                         <div class="badge {{dimension.resNumeroColor}}"><i class="fa fa-flag-checkered"></i> {{dimension.numeroMetas}}<i class="{{dimension.resNumeroIcono}}"></i></div>
-                    </p>
+                    </p>-->
                 </div>
                 <h3 class="panel-title">{{dimension.nombre}}</h3>
             </div>
@@ -24,29 +24,29 @@
                                  @endeach
                             @endif
                             <th>Ponderación</th>
-                            <th>Estado</th>
-                            <th>Acciones</th>
+                           <!-- <th>Estado</th>-->
+                            <!--<th>Acciones</th>-->
                         </tr>
                         </thead>
                         <tbody>
                         @each(meta in dimension.metas)
                         <tr>
                       
-                                    <td>{{meta.meta.Meta}}</td>
+                                    <td>{{meta.meta.Objetivo}}</td>
                                     <td>{{meta.meta.Indicador}}</td>
-                                    <td>{{meta.meta.Esperado}}</td>
+                                    <td>{{meta.meta.Métrica}}</td>
  
 
                             <td>{{meta.meta.ponderacion}} %</td>
-                            <td><div class="label label-{{meta.meta.validadaColor}}"> <i class="{{meta.meta.validadaIcono}}"></i> {{meta.meta.validadaTexto}}</div></td>
-                            <td>
+                           <!-- <td><div class="label label-{{meta.meta.validadaColor}}"> <i class="{{meta.meta.validadaIcono}}"></i> {{meta.meta.validadaTexto}}</div></td>-->
+                           <!-- <td>
                                 @if(meta.meta.editable==1)
                                    <a href="" class="btn btn-success btn-xs btn-rounded btn-bordered waves-effect w-md"><i class="fa fa-edit"></i> Editar</a>
                                 @endif
                                 @if(meta.meta.eliminable==1)
                                    <a href="" class="btn btn-danger btn-xs btn-rounded btn-bordered waves-effect w-md"><i class="fa fa-times"></i> Eliminar</a>
                                 @endif
-                            </td>
+                            </td>-->
                         </tr>
                         @endeach                   
                         </tbody>
