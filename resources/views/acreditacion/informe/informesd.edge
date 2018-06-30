@@ -32,9 +32,9 @@
                                                 <br/>
                                                 <br/> - Test de Conocimientos 100%
                                                 <br/>
-                                                <!--
-                                        - Observación en Terreno sobre 80% en cada una de sus competencias<br/>
-                                        - Diagnóstico Conductual 100%
+                                        <!--
+                                                - Observación en Terreno sobre 80% en cada una de sus competencias<br/>
+                                                - Diagnóstico Conductual 100%
                                         -->
                                         </p>
                                 </div>
@@ -70,7 +70,12 @@
 
 
         @if(conDetalle==1) 
+                @!component('components.Acreditacion.resultadoSOTDetalle',titulo = "SOT DETALLE", data=resultadoDetalleSOT.instrumento) 
+                
+                <!--
                 @!component('components.Acreditacion.resultadoTCODetalle',titulo = "TEST DE CONOCIMIENTOS DETALLE", data=TCODetalle.instrumento) 
+
+                -->
         @endif
 
 @endsection

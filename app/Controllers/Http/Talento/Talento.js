@@ -32,6 +32,27 @@ class Talento {
         return view.render('talento/colaboradores' ,  {total:total,totalEvaluados:totalEvaluados});
     }
 
+    async getColaboradores ({view,request, response, auth, session}) {
+   
+        
+
+        var all =  session.get('personaLogueada')
+        var idOpinante = all.id
+        var idProceso =  session.get('procesoTalento');
+        
+        var obj = {
+            "idTalentoProceso":idProceso,
+            "idOpinante":idOpinante
+        };
+        
+        var result = await data.execApi(request.hostname(),'/Talento/Talento/getPersonaTalentos',obj);
+        
+        var colaboradores = result.body;
+
+        return colaboradores;
+
+    }
+
     async filtroDragColaboradoresSinClasificar({view,request, response, auth, session}) {
         
         
@@ -248,8 +269,20 @@ class Talento {
     async organigrama ({view,request, response, auth, session}) {
        
        
+        var all =  session.get('personaLogueada')
+        var idOpinante = all.id
+        var idProceso =  session.get('procesoOrganigrama')
         
-        return view.render('talento/organigrama', {});
+        var obj = {
+            "idTalentoProceso":idProceso,
+            "idOpinante":idOpinante
+        };
+        
+        var result = await data.execApi(request.hostname(),'/Talento/Talento/getPersonaTalentos',obj);
+        
+        var colaboradores = result.body;
+        
+        return view.render('talento/organigrama', {colaboradoresList:colaboradores});
 
 
         

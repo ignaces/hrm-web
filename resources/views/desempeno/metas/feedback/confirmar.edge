@@ -20,8 +20,8 @@
     {{-- IZQUIERDA --}}
     <div class="col-md-2">
         <div class="row">
-            @!component('components.Desempeno.widgetInfoTarea',datos=datosTarea) 
-            @!component('components.Desempeno.widgetUser', datamenu=datosMenu, persona=Perso)
+            @!component('components.desempeno.widgetInfoTarea',datos=datosTarea) 
+            @!component('components.desempeno.widgetuser', datamenu=datosMenu, persona=Perso)
         </div>
     </div>
     {{-- //IZQUIERDA --}}
@@ -43,7 +43,7 @@
                             </p>
                             <p>
                             {{-- Panel METAS --}}
-                            @!component('components.Desempeno.metasColaborador',datos=dataMetas, columnas=dataColumnas) 
+                            @!component('components.desempeno.metasColaborador',datos=dataMetas, columnas=dataColumnas) 
                             {{-- //Panel METAS --}}
                             </p>
                         </div>

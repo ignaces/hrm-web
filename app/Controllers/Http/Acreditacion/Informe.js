@@ -35,14 +35,16 @@ class Informe {
         var resultSOT = await data.execApi(request.hostname(), '/Acreditacion/Informe/getResultadoSOT', obj);
         var resultadoSOT = resultSOT.body.data;
 
-        console.log(resultadoSOT)
+        var resultDetalleSOT = await data.execApi(request.hostname(), '/Acreditacion/Informe/getResultadoDetalleSOT', obj);
+        var resultadoDetalleSOT = resultDetalleSOT.body.data;
+
 
         var resultTCODetalle = await data.execApi(request.hostname(), '/Acreditacion/Informe/getInstrumentosTCO', obj);
         var resultadoTCODetalle = resultTCODetalle.body.data;
 
         var cliente = request.hostname().split(".")[0]
 
-        return view.render('acreditacion/informe/informesd', { sintesis: resultadoSintesis, resultadoTCO, resultadoSOT, TCODetalle: resultadoTCODetalle, conDetalle, idProcesoPersona, clasificacion, cliente });
+        return view.render('acreditacion/informe/informesd', { sintesis: resultadoSintesis, resultadoTCO, resultadoSOT, resultadoDetalleSOT, TCODetalle: resultadoTCODetalle, conDetalle, idProcesoPersona, clasificacion, cliente });
     }
 
     async getPdf({ view, request, response, auth }) {

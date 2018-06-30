@@ -1191,8 +1191,8 @@ ul.sitemap-icon ul li a {
   border-left-color: #ffa91c;
 }
 .taskList .task-danger {
-  background-color: #f880b8;
-  border-left-color: #e60d72;
+  background-color: #ff8585;
+  border-left-color: #ff0000;
 }
 .taskList a {
   font-size: 13px;
