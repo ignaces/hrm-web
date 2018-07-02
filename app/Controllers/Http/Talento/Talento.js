@@ -287,6 +287,17 @@ class Talento {
 
         
     }
+    async getColaboradores({view,request, response, auth, session}){
+        var persona =  session.get('personaLogueada')
+        
+        var obj = {
+            "idTalentoProceso":session.get('procesoOrganigrama'),
+            "idOpinante":persona.id
+        };
+        var result = await data.execApi(request.hostname(),'/Talento/Talento/getPersonaTalentos',obj);
+        
+        var personas = result.body;
+    }
     async marketPlace ({view,request, response, auth, session}) {
        
        

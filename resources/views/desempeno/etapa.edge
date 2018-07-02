@@ -12,8 +12,8 @@
 
 <div class="row" >
     <div class="col-md-2">
-       @!component('components.desempeno.widgetInfoEtapa',datos=etapa,nombreProceso=dataProceso.nombre)
-      @!component('components.desempeno.widgetuser',datos=data,datamenu=datosMenu,persona=PersonaEde)
+       @!component('components.Desempeno.widgetInfoEtapa',datos=etapa,nombreProceso=dataProceso.nombre)
+      @!component('components.Desempeno.widgetUser',datos=data,datamenu=datosMenu,persona=PersonaEde)
     </div>
     <div class="col-md-10">
         
@@ -37,7 +37,7 @@
                 
                 <div id="evaluado" class="panel-collapse collapse in">
                      <div class="portlet-body">
-                          @!component('components.desempeno.listaColaboradoresEtapa',lista=listaEval)
+                          @!component('components.Desempeno.listaColaboradoresEtapa',lista=listaEval)
                      </div>
                 </div>
             </div>
@@ -62,7 +62,7 @@
                 <div id="equipo" class="panel-collapse collapse in">
                      <div class="portlet-body">
                          
-                               @!component('components.desempeno.listaColaboradoresEtapa',lista=listaSupe)
+                               @!component('components.Desempeno.listaColaboradoresEtapa',lista=listaSupe)
                          
                      </div>
                 </div>
