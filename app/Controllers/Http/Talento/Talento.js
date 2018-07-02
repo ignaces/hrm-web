@@ -359,7 +359,7 @@ class Talento {
         };
         
         var resultPersona =  await data.execApi(request.hostname(),'/Talento/Talento/getPersona',obj);
-       
+        var resultadosPersona =  await data.execApi(request.hostname(),'/Talento/Persona/getResultados',{idPersona:idPersona});
         var result = await data.execApi(request.hostname(),'/Talento/Talento/getCurriculumCategoria',obj);
         var categoria = result.body;
         var persona = resultPersona.body;
@@ -367,6 +367,7 @@ class Talento {
         var result2 = await data.execApi(request.hostname(),'/Talento/Talento/getCurriculumPersona',obj);
         var curriculum = result2.body;
         var objCurriculum = [];
+        persona.resultados=resultadosPersona.body;
         
         categoria.forEach(element => {
 
