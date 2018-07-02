@@ -4,20 +4,20 @@
                             <h3 class="panel-title">Clima</h3>
                         </div>
                         <div class="panel-body">
-                            <ul class="list-group">
-                            <li class="list-group-item">
-                                <span class="badge badge-success">95%</span>
-                                2017
-                            </li>
-                            <li class="list-group-item">
-                                <span class="badge badge-success">97%</span>
-                                2016 
-                            </li>
-                            <li class="list-group-item">
-                                <span class="badge badge-warning">72%</span>
-                                2015
-                            </li>
-                            </ul>
+                            
+                            @if(resultados.length>0)
+                                <ul class="list-group">
+                                    @each(resultado in resultados)
+                                        <li class="list-group-item">
+                                            <span class="badge badge-primary">{{resultado.value}}%</span>
+                                            {{resultado.year}}
+                                        </li>
+                                    @endeach
+                                </ul>
+                            @else 
+                                <p>No existen resultados</p>
+                            @endif
+                            
                         </div>
                 </div>
                 </div>
