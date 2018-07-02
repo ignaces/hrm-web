@@ -110,14 +110,20 @@ var cargaOrganigrama = function (organigrama){
     var orgChart = new getOrgChart(peopleElement, {
         theme: "ula",
         enableGridView: true,
-        primaryFields: ["Atributos","Nombre","Cargo"],               
+        depth: 0,
+        primaryFields: ["Atributos","Nombre","Cargo"],    
+        enableZoomOnNodeDoubleClick:true,
+        orientation: getOrgChart.RO_LEFT_PARENT_TOP,           
         renderNodeEvent: renderNodeHandler,
+        expandToLevel: 1,
         photoFields:["Imagen"],
-        enableZoom:false,
+        enableZoom:true,
         enablePrint: true,
+        levelSeparation: 200,
         enableExportToImage: true,
         enableDetailsView: false,
         enableEdit: false,
+        scale: 0.5,
         dataSource: source,
         clickNodeEvent: clickHandler,  
         secondParentIdField: "secondParenId",
@@ -165,10 +171,7 @@ var getColaboradores  = function(idPosicion){
         dataType: "json", 
         async:false,
         success: function (msg) {
-            
             cColaboradores.colaboradoresList = msg;
-            
-
         }
     });   
 }          
