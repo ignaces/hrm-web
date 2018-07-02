@@ -279,10 +279,21 @@ class Talento {
         };
         
         var result = await data.execApi(request.hostname(),'/Talento/Talento/getPersonaTalentos',obj);
-        
+        var clasificacionesPersona = await data.execApi(request.hostname(),'/Talento/Persona/getClasificaciones',{idProceso:idProceso,idPersona:idOpinante});
         var colaboradores = result.body;
-        
-        return view.render('talento/organigrama', {colaboradoresList:colaboradores});
+
+        clasificacionesPersona = clasificacionesPersona.body;
+        var Clasificaciones={area:"",division:""};
+        for(var i in clasificacionesPersona){
+            
+            if(clasificacionesPersona[i].CodigoClasificacionPadre=="CSCL002"){
+                    Clasificaciones.area = clasificacionesPersona[i].nombre
+            }
+            if(clasificacionesPersona[i].CodigoClasificacionPadre=="CSCL001"){
+                Clasificaciones.division = clasificacionesPersona[i].nombre
+            }
+        }
+        return view.render('talento/organigrama', {colaboradoresList:colaboradores,Clasificaciones:Clasificaciones});
 
 
         
