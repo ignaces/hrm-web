@@ -5,7 +5,6 @@ const data = use('App/Utils/Data')
 class Portada {
      async welcome  ({ view,request, response, auth, session ,antl}) {
         
-
         var idPersona = session.get('idPersona', 'fall')
         var all =  session.get('personaLogueada')
         
@@ -25,6 +24,7 @@ class Portada {
 
         var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getProcesos',obj);
         var talentos = [];
+        
         var condicion = [];
         try{
             var resultadoTalento = await data.execApi(request.hostname(),'/Talento/Talento/getTalentos',objTalento);

@@ -279,13 +279,35 @@ class Talento {
         };
         
         var result = await data.execApi(request.hostname(),'/Talento/Talento/getPersonaTalentos',obj);
-        
+        var clasificacionesPersona = await data.execApi(request.hostname(),'/Talento/Persona/getClasificaciones',{idProceso:idProceso,idPersona:idOpinante});
         var colaboradores = result.body;
-        
-        return view.render('talento/organigrama', {colaboradoresList:colaboradores});
+
+        clasificacionesPersona = clasificacionesPersona.body;
+        var Clasificaciones={area:"",division:""};
+        for(var i in clasificacionesPersona){
+            
+            if(clasificacionesPersona[i].CodigoClasificacionPadre=="CSCL002"){
+                    Clasificaciones.area = clasificacionesPersona[i].nombre
+            }
+            if(clasificacionesPersona[i].CodigoClasificacionPadre=="CSCL001"){
+                Clasificaciones.division = clasificacionesPersona[i].nombre
+            }
+        }
+        return view.render('talento/organigrama', {colaboradoresList:colaboradores,Clasificaciones:Clasificaciones});
 
 
         
+    }
+    async getColaboradores({view,request, response, auth, session}){
+        var persona =  session.get('personaLogueada')
+        
+        var obj = {
+            "idTalentoProceso":session.get('procesoOrganigrama'),
+            "idOpinante":persona.id
+        };
+        var result = await data.execApi(request.hostname(),'/Talento/Talento/getPersonaTalentos',obj);
+        
+        var personas = result.body;
     }
     async marketPlace ({view,request, response, auth, session}) {
        
@@ -337,14 +359,15 @@ class Talento {
         };
         
         var resultPersona =  await data.execApi(request.hostname(),'/Talento/Talento/getPersona',obj);
-       
+        var resultadosPersona =  await data.execApi(request.hostname(),'/Talento/Persona/getResultados',{idPersona:idPersona});
         var result = await data.execApi(request.hostname(),'/Talento/Talento/getCurriculumCategoria',obj);
         var categoria = result.body;
         var persona = resultPersona.body;
-
+        
         var result2 = await data.execApi(request.hostname(),'/Talento/Talento/getCurriculumPersona',obj);
         var curriculum = result2.body;
         var objCurriculum = [];
+        persona.resultados=resultadosPersona.body;
         
         categoria.forEach(element => {
 

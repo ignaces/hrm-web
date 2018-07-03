@@ -6,7 +6,7 @@ class AuthValidator {
     try {
       
       const isLoggedIn = await auth.check()
-    request.session=session;
+      request.session=session;
       if (!isLoggedIn && request.url()!='/login' && request.url()!='/register') {// && request.url()!='/register'
       
          response.redirect('/login');

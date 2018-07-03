@@ -57,12 +57,12 @@
                         </div>
 
                         <div class="col-md-12">
-                            <div class="pull-right">
+                            <!--<div class="pull-right">
                                 <i class="fa  fa-plane text-primary"></i>
                                 <i class="fa  fa-refresh text-primary"></i>
                                 <i class="fa  fa-warning text-danger"></i>
                                 <i class="fa  fa-star text-warning"></i>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                 </div>
@@ -85,12 +85,17 @@
         <div class="col-md-6">
             <!-- Mediciones -->
             <div class="row">
-                @!component('talento.components.medicionDesempeno',persona=persona)
                 
-                @!component('talento.components.medicionClima',persona=persona)
-
-                @!component('talento.components.medicionTalentReview',persona=persona)
-            
+                    @!component('talento.components.medicionDesempeno',resultados=persona.resultados.edd)
+                
+                
+                
+                    @!component('talento.components.medicionClima',resultados=persona.resultados.clima)
+                
+                
+                
+                    @!component('talento.components.medicionTalentReview',resultados=persona.resultados.tr)
+                
             </div>
 
             <!-- Mediciones -->

@@ -16,25 +16,30 @@
 @section('pluginsCss')
     <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
     <link href="/assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
-        <link href="/assets/plugins/datatables/buttons.dataTables.min.css" rel="stylesheet" type="text/css"/>
-        <link href="/assets/plugins/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="/assets/plugins/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="/assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="/assets/plugins/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="/assets/plugins/datatables/dataTables.colVis.css" rel="stylesheet" type="text/css"/>
-        <link href="/assets/plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="/assets/plugins/datatables/fixedColumns.dataTables.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/assets/plugins/datatables/buttons.dataTables.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/assets/plugins/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/assets/plugins/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/assets/plugins/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/assets/plugins/datatables/dataTables.colVis.css" rel="stylesheet" type="text/css"/>
+    <link href="/assets/plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/assets/plugins/datatables/fixedColumns.dataTables.min.css" rel="stylesheet" type="text/css"/>
 @endsection
   
 
 @section('content')
+@!component('components.Core.botonera')
+<div class="panel panel-border panel-primary">
+        <div class="panel-heading">
+            <h1 class="panel-title">Colaboradores</h1>
+        </div>
+        <div class="panel-body">
+            
+            @!component('components.Talento.talentoColaboradores',titulo="Colaboradores", data={personas:personas})
+        </div>    
+    </div>
 
 
-@!component('components.Talento.talentoColaboradores',titulo="Colaboradores", data={
-          
-          personas:personas
-           
-        })
 
     
 @endsection
