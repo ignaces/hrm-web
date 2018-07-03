@@ -15,14 +15,14 @@
 @section('content')
 
 
-
+@!component('components.Core.botonera',botones=[{ texto:"PDF", icono:"fa fa-file-pdf-o", link:"/Talento/Persona/getPdfFicha?idPersona="+idPersona}] ) 
     <div class="row">
         <div class="col-md-4">
             <div class="box box-widget widget-user-2">      
                 <div class="widget-user-header bg-primary">
                 <div class="widget-user-image">
                     <!--<img class="img-circle" src={{persona.imageUser}} alt="User Avatar">-->
-                    <img class="img-circle" src="/assets/images/users/avatar-1.jpg" alt="User Avatar">
+                    <img class="img-circle" src="{{persona.imageUser}}" alt="User Avatar">
                 </div>
                 <h4>
                 
@@ -50,19 +50,19 @@
                                     </div>
                                     <span class="progress-description text-white">
                                         2017
-                                        </span>
+                                    </span>
                                 </div>
                                 <!-- /.info-box-content -->
                                 </div>
                         </div>
 
                         <div class="col-md-12">
-                                <div class="pull-right">
-                                <i class="fa  fa-plane text-success"></i>
+                            <!--<div class="pull-right">
+                                <i class="fa  fa-plane text-primary"></i>
                                 <i class="fa  fa-refresh text-primary"></i>
                                 <i class="fa  fa-warning text-danger"></i>
                                 <i class="fa  fa-star text-warning"></i>
-                                </div>
+                            </div>-->
                         </div>
                     </div>
                 </div>
@@ -79,17 +79,23 @@
             <!-- Curriculum -->
             @!component('components.Core.curriculum',objCurriculum=objCurriculum,idPersona=idPersona)
             <!-- Curriculum -->
+
         </div>
         
         <div class="col-md-6">
             <!-- Mediciones -->
             <div class="row">
-                @!component('components.Talento.medicionDesempeno',persona=persona)
                 
-                @!component('components.Talento.medicionClima',persona=persona)
-
-                @!component('components.Talento.medicionTalentReview',persona=persona)
-            
+                    @!component('talento.components.medicionDesempeno',resultados=persona.resultados.edd)
+                
+                
+                
+                    @!component('talento.components.medicionClima',resultados=persona.resultados.clima)
+                
+                
+                
+                    @!component('talento.components.medicionTalentReview',resultados=persona.resultados.tr)
+                
             </div>
 
             <!-- Mediciones -->
@@ -174,7 +180,7 @@
                     <div class="portlet-body">
                         <div class="row">
                         <div class="col-md-12">
-                            <div class="panel panel-border panel-primary">
+                            <div class="panel panel-border panel-default">
                                     <div class="panel-heading">
                                         <h3 class="panel-title">Posibles Próximos Roles</h3>
                                     </div>
@@ -184,6 +190,36 @@
 
                                     </div>
                             </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel panel-border panel-default">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title">Síntesis value drivers</h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="text-left">
+                                                <p class="text-muted font-13"><strong>Estilo Pensamiento :</strong> <span class="m-l-15">No disponible</span></p>
+                                                <p class="text-muted font-13"><strong>Valores :</strong> <span class="m-l-15">No disponible</span></p>
+                                                <p class="text-muted font-13"><strong>Anclas :</strong><span class="m-l-15">No disponible</span></p>
+                                            </div>
+
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel panel-border panel-default">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title">Entrevista de Desarrollo</h3>
+                                        </div>
+                                        <div class="panel-body">
+                                           
+                                        </div>
+                                </div>
                             </div>
                         </div>
                     </div>
