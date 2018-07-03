@@ -111,11 +111,30 @@ class Accion {
         var obj = {
             "idEtapaTareaAccionProcesoPersona":idEtapaTareaAccionProcesoPersona,
             "idEtapaTareaActor":idEtapaTareaActor,
-            "idAobservacionctor":observacion
+            "observacion":observacion
             
         };
 
         var result = await api.execApi(request.hostname(),'/Desempeno/Accion/addObservacionAccion',obj);  
+
+        return{mensaje:"ok"} 
+      
+    }
+
+    async addObservacionAccionFinalizar({view,request, response}) {
+       
+        var idEtapaTareaAccionProcesoPersona= request.input('idEtapaTareaAccionProcesoPersona');
+        var idEtapaTareaActor= request.input('idEtapaTareaActor');
+        var observacion= request.input('observacion');
+        
+        var obj = {
+            "idEtapaTareaAccionProcesoPersona":idEtapaTareaAccionProcesoPersona,
+            "idEtapaTareaActor":idEtapaTareaActor,
+            "observacion":observacion
+            
+        };
+
+        var result = await api.execApi(request.hostname(),'/Desempeno/Accion/addObservacionAccionFinalizar',obj);  
 
         return{mensaje:"ok"} 
       
@@ -132,11 +151,32 @@ class Accion {
             "idObservacionAccion":idObservacionAccion,
             "idEtapaTareaAccionProcesoPersona":idEtapaTareaAccionProcesoPersona,
             "idEtapaTareaActor":idEtapaTareaActor,
-            "idAobservacionctor":observacion
+            "observacion":observacion
             
         };
 
         var result = await api.execApi(request.hostname(),'/Desempeno/Accion/updObservacionAccion',obj);  
+
+        return{mensaje:"ok"} 
+      
+    }
+
+    async updObservacionAccionFinalizar({view,request, response}) {
+       
+        var idObservacionAccion= request.input('idObservacionAccion');
+        var idEtapaTareaAccionProcesoPersona= request.input('idEtapaTareaAccionProcesoPersona');
+        var idEtapaTareaActor= request.input('idEtapaTareaActor');
+        var observacion= request.input('observacion');
+        
+        var obj = {
+            "idObservacionAccion":idObservacionAccion,
+            "idEtapaTareaAccionProcesoPersona":idEtapaTareaAccionProcesoPersona,
+            "idEtapaTareaActor":idEtapaTareaActor,
+            "observacion":observacion
+            
+        };
+
+        var result = await api.execApi(request.hostname(),'/Desempeno/Accion/updObservacionAccionFinalizar',obj);  
 
         return{mensaje:"ok"} 
       
@@ -222,12 +262,12 @@ class Accion {
             "idEtapaTareaAccionProcesoPersona":listaEval[0].tareas[0].tarea.evaluado_idEtapaTareaAccionPersona,
             "idEtapaTareaActor":listaEval[0].tareas[0].tarea.actor_idEtapaTareaActor
         }
+        
         var resultObservacion =await api.execApi(request.hostname(),'/Desempeno/Accion/getObservacionAccion',objObservacion);
         var dataObservacion =resultObservacion.body.data;
-        console.log(dataObservacion);
 
         var textoObservacion="";
-        if (dataObservacion.lenght > 0){
+        if (dataObservacion.length > 0){
             textoObservacion=dataObservacion[0].observacion
         };
 
