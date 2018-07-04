@@ -3,6 +3,8 @@ $(document).ready(function () {
 
     $("#btnConfirmar").click(function(){
 
+
+
         var idProceso = $("#idProceso").val();
         var idEtapa = $("#idEtapa").val();
         var idAccionPersona = $("#idAccionPersona").val();
@@ -14,10 +16,7 @@ $(document).ready(function () {
         var valor = $('input[name=rdoConfirmar]:checked').val();
         var csrf = $('input[name=_csrf]').val();
 
-
-
         var obj = {   
-
             idProceso:idProceso,
             idEtapa:idEtapa,
             idAccionPersona:idAccionPersona,
@@ -30,6 +29,16 @@ $(document).ready(function () {
             _csrf:csrf
         };
         
+        if($('input[name=rdoConfirmar]:checked').length == 0){
+            swal({
+                title:'Advertencia',
+                text:'No ha contestado todas las preguntas.',
+                type:'warning'
+            }).then(function(result){
+                
+            });
+            return false;
+        }
         $.ajax({    
             type: "POST",
             url: "/Desempeno/Accion/addConfirmacionAccion",
@@ -49,8 +58,6 @@ $(document).ready(function () {
              
             }
         }); 
-    });
-//
-    
+    }); 
 
 });

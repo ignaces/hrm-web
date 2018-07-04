@@ -1,6 +1,7 @@
 'use strict'
 
 const api = use('App/Utils/Data')
+const mail = use('App/Controllers/Http/Mail/Mailgun')
 
 class Proceso {
     
@@ -104,6 +105,14 @@ class Proceso {
 
 
     async etapa ({view,request, response, auth, session}) {
+
+       /* var obMail = new mail();
+        obMail.sendEmail(
+            {}
+        );
+*/
+      
+
         var idPersona = session.get('idPersona', 'fail')
         var idEtapa = request.input("idEtapa")
         var idProceso = session.get('idProceso')
