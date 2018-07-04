@@ -21,6 +21,7 @@ module.exports = {
       etapasProceso:['./client/src/ede/etapasProceso.js'],
       procesosEde:['./client/src/ede/procesosEde.js'],
       metaFeedbackPublicar:['./client/src/ede/metaFeedbackPublicar.js'],
+      metaFeedbackConfirmar:['./client/src/ede/metaFeedbackConfirmar.js'],
       Talento:['./client/src/Talento/talento.js'],
       dataTable:['./client/src/Talento/dataTable.js'],
       drag:['./client/src/Talento/drag.js'],
