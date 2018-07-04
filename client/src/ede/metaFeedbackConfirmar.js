@@ -43,7 +43,8 @@ alert(valor);
                     text:'La Observación se guardó correctamente',
                     type:'success'
                 }).then(function(result){
-                    window.location = "/Desempeno/Accion/confirmar?idProceso="+idProceso+"&idEtapa="+idEtapa+"&idAccionPersona="+idAccionPersona+"&codigoActor="+codigoActor ;
+                    
+                    window.location = "/Desempeno/Proceso/etapa?idProceso="+idProceso+"&idEtapa="+idEtapa;
                 });
              
             }
