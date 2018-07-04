@@ -6,21 +6,23 @@ const Helpers = use('Helpers')
 const fs = use('fs')
 const readFile = Helpers.promisify(fs.readFile)
 class Mailgun {
+    
    async sendEmail ({view,request, response}) {
        
-        var tag = request.input("tag");
-        var to = request.input("to");
-        var subject = request.input("subject");
-        var body = request.input("body");
-        var obj = {
-            tag:tag,
-            to:to,
-            subject:subject,
-            body:body
-        };
+    var tag = request.input("tag");
+    var to = request.input("to");
+    var subject = request.input("subject");
+    var body = request.input("body");
+    var obj = {
+        tag:tag,
+        to:to,
+        subject:subject,
+        body:body
+    };
         
     var result = await data.execApiPost(request.hostname(),'/Mail/Mailgun/send',obj);  
    }
+
    async statsDownload ({view,request, response}) {
     
     var tag = request.input("tag")
