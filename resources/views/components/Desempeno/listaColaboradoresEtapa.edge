@@ -24,8 +24,8 @@
                                         <div class="text-center">
                                             <div class="clearfix"></div>
                                             <div class="member-card">
-                                                <div class="thumb-md member-thumb m-b-10 center-block">
-                                                    <img src="{{tarea.tarea.evaluado_foto_row}}" class="img-circle img-thumbnail" alt="profile-image">
+                                                <div class="center-block">
+                                                    <img src="{{tarea.tarea.evaluado_foto_row}}" class="img-circle img-thumbnail" alt="profile-image" width="48px">
                                                 </div>
                                                 <div class="">
                                                     <h5 class="m-b-5">{{tarea.tarea.evaluado_nombres_row}} {{tarea.tarea.evaluado_apellidoPaterno_row}} {{tarea.tarea.evaluado_apellidoMaterno_row}}</h5>
@@ -48,7 +48,7 @@
                                     </td>
                                     <td>
                                         @if(tarea.tarea.informe_mostrar=="SI")
-                                            <a href="" class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-bar-chart-o"></i> Ver Informe</a>
+                                            <a href="{{tarea.tarea.informe_link}}" class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-bar-chart-o"></i> Ver Informe</a>
                                         @else
                                             <button type="button" class="btn btn-default btn-xs btn-rounded btn-bordered waves-effect w-md" disabled><i class="fa fa-ban"></i> No Disponible</button>
                                         @endif

@@ -7,6 +7,9 @@ class Accion {
     //---->> PUBLICAR METAS
 
     async publicar({ view, request, response, auth, session }) {
+        
+
+
         var idPersona = session.get('idPersona', 'fail')
         var idEtapa = request.input("idEtapa")
         var idAccionPersona = request.input("idAccionPersona")
