@@ -15,8 +15,7 @@
 @section('content')
 
 
-@!component('components.Core.botonera',botones=[{ texto:"PDF", icono:"fa fa-file-pdf-o", link:"/Talento/Persona/getPdfFicha?idPersona="+idPersona}] ) 
-    <div class="row">
+ <div class="row">
         <div class="col-md-4">
             <div class="box box-widget widget-user-2">      
                 <div class="widget-user-header bg-primary">
@@ -74,7 +73,8 @@
             @!component('components.Talento.informacionPersonal',persona=persona)
             <!-- Personal-Information -->
         </div>
-        
+    </div>
+    <div class="row">
         <div class="col-md-6" id="curriculum">
             <!-- Curriculum -->
             @!component('components.Core.curriculum',objCurriculum=objCurriculum,idPersona=idPersona)
