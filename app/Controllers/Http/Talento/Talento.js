@@ -368,7 +368,9 @@ class Talento {
         var curriculum = result2.body;
         var objCurriculum = [];
         persona.resultados=resultadosPersona.body;
-        
+        if(persona.imageUser=="" || persona.imageUser==null){
+            persona.imageUser="/assets/images/icons/businessman.svg"
+          }
         categoria.forEach(element => {
 
             var objItems = [];

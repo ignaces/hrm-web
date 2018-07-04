@@ -24,7 +24,7 @@ class UserController {
             persona.imageUser="/assets/images/icons/businessman.svg"
           }else{
             persona.cargo=""
-
+            
             if(persona.imageUser=="" || persona.imageUser==null){
               persona.imageUser="/assets/images/icons/businessman.svg"
               if (persona.codigoGenero=="F"){
