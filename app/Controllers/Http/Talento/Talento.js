@@ -363,7 +363,7 @@ class Talento {
         var result = await data.execApi(request.hostname(),'/Talento/Talento/getCurriculumCategoria',obj);
         var categoria = result.body;
         var persona = resultPersona.body;
-        
+
         var result2 = await data.execApi(request.hostname(),'/Talento/Talento/getCurriculumPersona',obj);
         var curriculum = result2.body;
         var objCurriculum = [];
@@ -386,8 +386,6 @@ class Talento {
                 "listItems": objItems,
                 "totalItems": objItems.length
             }
-
-            //console.log(objList)
             
             objCurriculum.push(objList)
         });

@@ -175,7 +175,7 @@ class Accion {
             "observacion":observacion
             
         };
-
+console.log(obj);
         var result = await api.execApi(request.hostname(),'/Desempeno/Accion/updObservacionAccionFinalizar',obj);  
 
         return{mensaje:"ok"} 
@@ -262,7 +262,7 @@ class Accion {
             "idEtapaTareaAccionProcesoPersona":listaEval[0].tareas[0].tarea.evaluado_idEtapaTareaAccionPersona,
             "idEtapaTareaActor":listaEval[0].tareas[0].tarea.actor_idEtapaTareaActor
         }
-        
+
         var resultObservacion =await api.execApi(request.hostname(),'/Desempeno/Accion/getObservacionAccion',objObservacion);
         var dataObservacion =resultObservacion.body.data;
 
@@ -354,12 +354,12 @@ async confirmar({ view, request, response, auth, session }) {
         "idEtapaTareaAccionProcesoPersona":listaEval[0].tareas[0].tarea.evaluado_idEtapaTareaAccionPersona,
         "idEtapaTareaActor":listaEval[0].tareas[0].tarea.actor_idEtapaTareaActor
     }
-    var resultObservacion =await api.execApi(request.hostname(),'/Desempeno/Accion/getObservacionAccion',objObservacion);
+    var resultObservacion =await api.execApi(request.hostname(),'/Desempeno/Accion/getObservacionAccionColaborador',objObservacion);
     var dataObservacion =resultObservacion.body.data;
-    console.log(dataObservacion);
+    console.log(objObservacion);
 
     var textoObservacion="";
-    if (dataObservacion.lenght > 0){
+    if (dataObservacion.length > 0){
         textoObservacion=dataObservacion[0].observacion
     };
 
@@ -368,6 +368,25 @@ async confirmar({ view, request, response, auth, session }) {
     return view.render('desempeno/metas/feedback/confirmar', {dataVista, datosTarea, Perso, listaEval,dataMetas,dataColumnas,dataObservacion,textoObservacion});
 
 
+}
+
+async addConfirmacionAccion({view,request, response}) {
+       
+    var idEtapaTareaAccionProcesoPersona= request.input('idEtapaTareaAccionProcesoPersona');
+    var idEtapaTareaActor= request.input('idEtapaTareaActor');
+    var valor= request.input('valor');
+    
+    var obj = {
+        "idEtapaTareaAccionProcesoPersona":idEtapaTareaAccionProcesoPersona,
+        "idEtapaTareaActor":idEtapaTareaActor,
+        "valor":valor
+        
+    };
+console.log(obj);
+    var result = await api.execApi(request.hostname(),'/Desempeno/Accion/addConfirmacionAccion',obj);  
+
+    return{mensaje:"ok"} 
+  
 }
 
 

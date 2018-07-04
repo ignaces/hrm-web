@@ -87,7 +87,7 @@ class Persona {
         var idPersona = request.input("idPersona");
         var idProceso = session.get('procesoOrganigrama');
         var server = 'cs.enovum.cl';//request.hostname();
-
+        
 
         //var result = await got(`http://192.168.3.4:8080?url=${server}/Acreditacion/Informe/pdf?procesoPersona=${idPersona}&cd=${conDetalle}`);
         //%2FTalento%2FPersona%2FfichaPdf%3FidPersona=%3D
@@ -118,11 +118,11 @@ class Persona {
         };
         
         var resultPersona =  await data.execApi(request.hostname(),'/Talento/Talento/getPersona',obj);
-       
+        var resultadosPersona =  await data.execApi(request.hostname(),'/Talento/Persona/getResultados',{idPersona:idPersona});
         var result = await data.execApi(request.hostname(),'/Talento/Talento/getCurriculumCategoria',obj);
         var categoria = result.body;
         var persona = resultPersona.body;
-
+        persona.resultados=resultadosPersona.body;
         var result2 = await data.execApi(request.hostname(),'/Talento/Talento/getCurriculumPersona',obj);
         var curriculum = result2.body;
         var objCurriculum = [];
