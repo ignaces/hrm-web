@@ -14,7 +14,7 @@ $(document).ready(function () {
         var valor = $('input[name=rdoConfirmar]:checked').val();
         var csrf = $('input[name=_csrf]').val();
 
-alert(valor);
+
 
         var obj = {   
 
@@ -36,7 +36,7 @@ alert(valor);
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(obj),
             dataType: "json", 
-            success: function (msg) {
+            success: function (msg) { 
                
                 swal({
                     title:'Exito',
@@ -50,7 +50,7 @@ alert(valor);
             }
         }); 
     });
-
+//
     
 
 });
