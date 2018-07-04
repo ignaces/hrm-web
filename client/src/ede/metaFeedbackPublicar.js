@@ -27,7 +27,7 @@ $(document).ready(function () {
             observacion:observacion,
             _csrf:csrf
         };
-        
+        console.log("");
         $.ajax({    
             type: "POST",
             url: "/Desempeno/Accion/addObservacionAccion",
@@ -80,7 +80,7 @@ $(document).ready(function () {
             type: "POST",
             url: "/Desempeno/Accion/addObservacionAccionFinalizar",
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(obj),
+            data: JSON.stringify(obj), 
             dataType: "json", 
             success: function (msg) {
                
@@ -95,7 +95,7 @@ $(document).ready(function () {
             }
         }); 
     }); 
-
+//
 
     $("#btnEditar").click(function(){
 
