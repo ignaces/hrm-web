@@ -70,12 +70,16 @@
 
 
         @if(conDetalle==1) 
-                @!component('components.Acreditacion.resultadoSOTDetalle',titulo = "SOT DETALLE", data=resultadoDetalleSOT.instrumento) 
+                @if(resultadoDetalleSOT.instrumento.length>0)
+                        @!component('components.Acreditacion.resultadoSOTDetalle',titulo = "SOT DETALLE", data=resultadoDetalleSOT.instrumento) 
+                @endif
+                @if(TCODetalle.instrumento.length>0)
+                        @!component('components.Acreditacion.resultadoTCODetalle',titulo = "TEST DE CONOCIMIENTOS DETALLE", data=TCODetalle.instrumento) 
+                @endif
                 
-                <!--
-                @!component('components.Acreditacion.resultadoTCODetalle',titulo = "TEST DE CONOCIMIENTOS DETALLE", data=TCODetalle.instrumento) 
+                
 
-                -->
+        
         @endif
 
 @endsection

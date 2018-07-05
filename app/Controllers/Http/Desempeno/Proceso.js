@@ -106,12 +106,8 @@ class Proceso {
 
     async etapa ({view,request, response, auth, session}) {
 
-       /* var obMail = new mail();
-        obMail.sendEmail(
-            {}
-        );
-*/
-      
+       var obMail = new mail();
+        //obMail.send('test','jonathan.olivares@fch.cl','prueba','Hola soy un test', request.hostname());
 
         var idPersona = session.get('idPersona', 'fail')
         var idEtapa = request.input("idEtapa")
@@ -129,8 +125,6 @@ class Proceso {
 
         var resultPersonaEde =await api.execApi(request.hostname(),'/Desempeno/Proceso/getProcesoPersona',objdatosPersona);
         var PersonaEde =resultPersonaEde.body.data;
-       
-        //
 
         //Menu Contextual
         var objMenuContextual = {
@@ -150,9 +144,9 @@ class Proceso {
         var resultEtapa=await api.execApi(request.hostname(),'/Desempeno/Proceso/getEtapas',objEtapa);
         var etapa =resultEtapa.body.data;
         //
-        console.log("AA")
-        console.log(idEtapa)
-        console.log(idPersona)
+        //console.log("AA")
+        //console.log(idEtapa)
+        //console.log(idPersona)
          //Lista EVAL
          var objEval={
             "idEtapa":idEtapa,
@@ -164,7 +158,7 @@ class Proceso {
         var listaEval =resultEval.body.data;      
         //
         
-        console.log(objEval)
+        //console.log(objEval)
         
          //Lista Supe
          var objSupe={
@@ -176,7 +170,7 @@ class Proceso {
         var resultSupe=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluados',objSupe);
         var listaSupe =resultSupe.body.data;      
         //
-        console.log(objSupe)
+        //console.log(objSupe)
         
         return view.render('desempeno/etapa',{datosProceso,PersonaEde,datosMenu,etapa,listaEval,listaSupe});
     }
