@@ -387,7 +387,7 @@ class Accion {
 
 
     async sendNotificacion(request, idMatriz){
-        cliente = request.hostname().split('.')[0];
+        var cliente = request.hostname().split(".")[0];
 
         var obj = {
             "idEdeEtapaTareaAccionProcesoPersona":idMatriz
@@ -396,6 +396,8 @@ class Accion {
         var correo = result.body.data;
 
         if(correo.email != ""){
+            console.log("entre a correo")
+
             var obMail = new mail();
             var html = `<p>Estimado(a) COLABORADOR</p>
                 <p>&nbsp;</p>
@@ -406,6 +408,8 @@ class Accion {
             //obMail.send(cliente+ ' metas publicadas', correo.email, 'Notificación', html, request.hostname());
             obMail.send(cliente+ ' metas publicadas', 'maribel.viera@fch.cl', 'Notificación', html, request.hostname());
         }
+
+        console.log(cliente);
     }
 
 
