@@ -23,6 +23,16 @@ class Mailgun {
     var result = await data.execApiPost(request.hostname(),'/Mail/Mailgun/send',obj);  
    }
 
+   async send (tag, to, subject, body, hostname) {  
+    var obj = {
+        tag:tag,
+        to:to,
+        subject:subject,
+        body:body
+    }; 
+    var result = await data.execApiPost(hostname,'/Mail/Mailgun/send',obj);  
+   }
+
    async statsDownload ({view,request, response}) {
     
     var tag = request.input("tag")
