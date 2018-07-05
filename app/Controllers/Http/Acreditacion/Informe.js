@@ -87,7 +87,7 @@ class Informe {
     async getPdf({ view, request, response, auth }) {
         var conDetalle = request.input("cd");
         var idPersona = request.input("procesoPersona");
-        var server = 'habilitaciongeovita.enovum.cl';//request.hostname();
+        var server = request.hostname()+'.enovum.cl';//request.hostname();
 
        
 
