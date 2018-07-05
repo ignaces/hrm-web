@@ -1,6 +1,7 @@
 'use strict'
 
 const api = use('App/Utils/Data')
+const mail = use('App/Controllers/Http/Mail/Mailgun')
 
 class Accion {
 
@@ -8,8 +9,6 @@ class Accion {
 
     async publicar({ view, request, response, auth, session }) {
         
-
-
         var idPersona = session.get('idPersona', 'fail')
         var idEtapa = request.input("idEtapa")
         var idAccionPersona = request.input("idAccionPersona")
@@ -86,7 +85,6 @@ class Accion {
         }
         var resultObservacion =await api.execApi(request.hostname(),'/Desempeno/Accion/getObservacionAccion',objObservacion);
         var dataObservacion =resultObservacion.body.data;
-        console.log(dataObservacion);
 
         var textoObservacion="";
         if (dataObservacion.lenght > 0){
@@ -120,8 +118,7 @@ class Accion {
 
         var result = await api.execApi(request.hostname(),'/Desempeno/Accion/addObservacionAccion',obj);  
 
-        return{mensaje:"ok"} 
-      
+        return{mensaje:"ok"}       
     }
 
     async addObservacionAccionFinalizar({view,request, response}) {
@@ -134,11 +131,10 @@ class Accion {
             "idEtapaTareaAccionProcesoPersona":idEtapaTareaAccionProcesoPersona,
             "idEtapaTareaActor":idEtapaTareaActor,
             "observacion":observacion
-            
         };
 
         var result = await api.execApi(request.hostname(),'/Desempeno/Accion/addObservacionAccionFinalizar',obj);  
-
+        this.sendNotificacion(request);
         return{mensaje:"ok"} 
       
     }
@@ -161,7 +157,6 @@ class Accion {
         var result = await api.execApi(request.hostname(),'/Desempeno/Accion/updObservacionAccion',obj);  
 
         return{mensaje:"ok"} 
-      
     }
 
     async updObservacionAccionFinalizar({view,request, response}) {
@@ -178,11 +173,10 @@ class Accion {
             "observacion":observacion
             
         };
-console.log(obj);
-        var result = await api.execApi(request.hostname(),'/Desempeno/Accion/updObservacionAccionFinalizar',obj);  
 
-        return{mensaje:"ok"} 
-      
+        var result = await api.execApi(request.hostname(),'/Desempeno/Accion/updObservacionAccionFinalizar',obj);  
+        this.sendNotificacion(request);
+        return{mensaje:"ok"}       
     }
 
     //----<< OBSERVACIÓN
@@ -279,119 +273,129 @@ console.log(obj);
         return view.render('desempeno/metas/feedback/publicar', {dataVista, datosTarea, Perso, listaEval,dataMetas,dataColumnas,dataObservacion,textoObservacion});
     }
 
-//----> CONFIRMAR METAS
+    //----> CONFIRMAR METAS
 
 
-async confirmar({ view, request, response, auth, session }) {
-    var idPersona = session.get('idPersona', 'fail')
-    var idEtapa = request.input("idEtapa")
-    var idAccionPersona = request.input("idAccionPersona")
-    var codigoActor = request.input("codigoActor")
-    var idProceso = session.get('idProceso')
-    var datosProceso = session.get('dataProceso')
+    async confirmar({ view, request, response, auth, session }) {
+        var idPersona = session.get('idPersona', 'fail')
+        var idEtapa = request.input("idEtapa")
+        var idAccionPersona = request.input("idAccionPersona")
+        var codigoActor = request.input("codigoActor")
+        var idProceso = session.get('idProceso')
+        var datosProceso = session.get('dataProceso')
 
-    //DataVista
-    var dataVista = {
-        "idProceso" : idProceso,
-        "idEtapa" : idEtapa,
-        "idAccionPersona" : idAccionPersona,
-        "codigoActor" : codigoActor
-    }
+        //DataVista
+        var dataVista = {
+            "idProceso" : idProceso,
+            "idEtapa" : idEtapa,
+            "idAccionPersona" : idAccionPersona,
+            "codigoActor" : codigoActor
+        }
 
-    //Data Evaluado
-    var objEval = {
-        "idEtapa": idEtapa,
-        "idPersonaActor": idPersona,
-        "codigoActor": codigoActor,
-        "idAccionPersona": idAccionPersona
-    }
-    var resultEval = await api.execApi(request.hostname(), '/Desempeno/Proceso/getListaEvaluados', objEval);
-    var listaEval = resultEval.body.data;
-   //console.log(listaEval)
-    //
+        //Data Evaluado
+        var objEval = {
+            "idEtapa": idEtapa,
+            "idPersonaActor": idPersona,
+            "codigoActor": codigoActor,
+            "idAccionPersona": idAccionPersona
+        }
+        var resultEval = await api.execApi(request.hostname(), '/Desempeno/Proceso/getListaEvaluados', objEval);
+        var listaEval = resultEval.body.data;
+    //console.log(listaEval)
+        //
 
-    var persona = {
-        "foto": listaEval[0].foto,
-        "nombres": listaEval[0].nombres,
-        "apellidoPaterno": listaEval[0].apellidoPaterno,
-        "apellidoMaterno": listaEval[0].apellidoMaterno,
-        "cargo": listaEval[0].nombreCargo
-    }
+        var persona = {
+            "foto": listaEval[0].foto,
+            "nombres": listaEval[0].nombres,
+            "apellidoPaterno": listaEval[0].apellidoPaterno,
+            "apellidoMaterno": listaEval[0].apellidoMaterno,
+            "cargo": listaEval[0].nombreCargo
+        }
 
-    var Perso = []
+        var Perso = []
 
-    Perso.push(persona);
+        Perso.push(persona);
 
-    var idEtapaTarea = listaEval[0].tareas[0].tarea.idEtapaTarea
+        var idEtapaTarea = listaEval[0].tareas[0].tarea.idEtapaTarea
 
-    //Datos Tarea
-    var objDatosTarea = {
-        "idEtapa": "",
-        "idTareaEtapa": idEtapaTarea
-    };
-    var resultTarea = await api.execApi(request.hostname(), '/Desempeno/Proceso/getTareasEtapas', objDatosTarea);
-    var datosTarea = resultTarea.body.data;
+        //Datos Tarea
+        var objDatosTarea = {
+            "idEtapa": "",
+            "idTareaEtapa": idEtapaTarea
+        };
+        var resultTarea = await api.execApi(request.hostname(), '/Desempeno/Proceso/getTareasEtapas', objDatosTarea);
+        var datosTarea = resultTarea.body.data;
 
-    //COLUMNAS
-    var objDataColumnas = {
-        "idProceso":idProceso
-    };
-    var resultDataColumnas =await api.execApi(request.hostname(),'/Desempeno/Metas/getMetasColumnas',objDataColumnas);
-    var dataColumnas =resultDataColumnas.body.data;
+        //COLUMNAS
+        var objDataColumnas = {
+            "idProceso":idProceso
+        };
+        var resultDataColumnas =await api.execApi(request.hostname(),'/Desempeno/Metas/getMetasColumnas',objDataColumnas);
+        var dataColumnas =resultDataColumnas.body.data;
 
-    //METAS
-    var objDataMetas = {
-        "idProceso":idProceso,
-        "idPerfilMeta": listaEval[0].idEdeMetaPerfil,
-        "idProcesoPersona": listaEval[0].idEvaluado,
-        "eliminada":0
+        //METAS
+        var objDataMetas = {
+            "idProceso":idProceso,
+            "idPerfilMeta": listaEval[0].idEdeMetaPerfil,
+            "idProcesoPersona": listaEval[0].idEvaluado,
+            "eliminada":0
 
-    };
-    var resultDataMetas =await api.execApi(request.hostname(),'/Desempeno/Metas/getMetasColaborador',objDataMetas);
-    var dataMetas =resultDataMetas.body.data;
-    
-    
-    //OBSERVACION
-    var objObservacion = {
-        "idObservacionAccion":"",
-        "idEtapaTareaAccionProcesoPersona":listaEval[0].tareas[0].tarea.evaluado_idEtapaTareaAccionPersona,
-        "idEtapaTareaActor":listaEval[0].tareas[0].tarea.actor_idEtapaTareaActor
-    }
-    var resultObservacion =await api.execApi(request.hostname(),'/Desempeno/Accion/getObservacionAccionColaborador',objObservacion);
-    var dataObservacion =resultObservacion.body.data;
-    console.log(objObservacion);
-
-    var textoObservacion="";
-    if (dataObservacion.length > 0){
-        textoObservacion=dataObservacion[0].observacion
-    };
-
-
-    //RENDER
-    return view.render('desempeno/metas/feedback/confirmar', {dataVista, datosTarea, Perso, listaEval,dataMetas,dataColumnas,dataObservacion,textoObservacion});
-
-
-}
-
-async addConfirmacionAccion({view,request, response}) {
-       
-    var idEtapaTareaAccionProcesoPersona= request.input('idEtapaTareaAccionProcesoPersona');
-    var idEtapaTareaActor= request.input('idEtapaTareaActor');
-    var valor= request.input('valor');
-    
-    var obj = {
-        "idEtapaTareaAccionProcesoPersona":idEtapaTareaAccionProcesoPersona,
-        "idEtapaTareaActor":idEtapaTareaActor,
-        "valor":valor
+        };
+        var resultDataMetas =await api.execApi(request.hostname(),'/Desempeno/Metas/getMetasColaborador',objDataMetas);
+        var dataMetas =resultDataMetas.body.data;
         
-    };
-console.log(obj);
-    var result = await api.execApi(request.hostname(),'/Desempeno/Accion/addConfirmacionAccion',obj);  
+        
+        //OBSERVACION
+        var objObservacion = {
+            "idObservacionAccion":"",
+            "idEtapaTareaAccionProcesoPersona":listaEval[0].tareas[0].tarea.evaluado_idEtapaTareaAccionPersona,
+            "idEtapaTareaActor":listaEval[0].tareas[0].tarea.actor_idEtapaTareaActor
+        }
+        var resultObservacion =await api.execApi(request.hostname(),'/Desempeno/Accion/getObservacionAccionColaborador',objObservacion);
+        var dataObservacion =resultObservacion.body.data;
+        console.log(objObservacion);
 
-    return{mensaje:"ok"} 
-  
-}
+        var textoObservacion="";
+        if (dataObservacion.length > 0){
+            textoObservacion=dataObservacion[0].observacion
+        };
 
+
+        //RENDER
+        return view.render('desempeno/metas/feedback/confirmar', {dataVista, datosTarea, Perso, listaEval,dataMetas,dataColumnas,dataObservacion,textoObservacion});
+
+
+    }
+
+    async addConfirmacionAccion({view,request, response}) {
+        
+        var idEtapaTareaAccionProcesoPersona= request.input('idEtapaTareaAccionProcesoPersona');
+        var idEtapaTareaActor= request.input('idEtapaTareaActor');
+        var valor= request.input('valor');
+        
+        var obj = {
+            "idEtapaTareaAccionProcesoPersona":idEtapaTareaAccionProcesoPersona,
+            "idEtapaTareaActor":idEtapaTareaActor,
+            "valor":valor
+            
+        };
+        var result = await api.execApi(request.hostname(),'/Desempeno/Accion/addConfirmacionAccion',obj);  
+
+        return{mensaje:"ok"} 
+    
+    }
+
+
+    async sendNotificacion(request){
+        var obMail = new mail();
+        var html = `<p>Estimado(a) COLABORADOR</p>
+        <p>&nbsp;</p>
+        <p>Tu jefatura indic&oacute; que ya realizaron la reuni&oacute;n de retroalimentaci&oacute;n.</p>
+        <p>Para continuar con el proceso, debes ingresar a&nbsp;<a href="http://gibraltar.enovum.cl">http://gibraltar.enovum.cl</a>&nbsp;para confirmar la reuni&oacute;n y asi finalizar tu proceso de evaluaci&oacute;n de desempe&ntilde;o.</p>
+        <p>Saludos.</p>
+        <p>Gerencia de Personas.</p>`;
+        obMail.send('Gibraltar metas publicadas', 'maribel.viera@fch.cl', 'Notificación', html, request.hostname());
+    }
 
 
 }
