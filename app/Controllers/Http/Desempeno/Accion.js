@@ -396,8 +396,6 @@ class Accion {
         var correo = result.body.data;
 
         if(correo.email != ""){
-            console.log("entre a correo")
-
             var obMail = new mail();
             var html = `<p>Estimado(a) COLABORADOR</p>
                 <p>&nbsp;</p>
