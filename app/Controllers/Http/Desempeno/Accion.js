@@ -386,15 +386,26 @@ class Accion {
     }
 
 
-    async sendNotificacion(request){
-        var obMail = new mail();
-        var html = `<p>Estimado(a) COLABORADOR</p>
-        <p>&nbsp;</p>
-        <p>Tu jefatura indic&oacute; que ya realizaron la reuni&oacute;n de retroalimentaci&oacute;n.</p>
-        <p>Para continuar con el proceso, debes ingresar a&nbsp;<a href="http://gibraltar.enovum.cl">http://gibraltar.enovum.cl</a>&nbsp;para confirmar la reuni&oacute;n y asi finalizar tu proceso de evaluaci&oacute;n de desempe&ntilde;o.</p>
-        <p>Saludos.</p>
-        <p>Gerencia de Personas.</p>`;
-        obMail.send('Gibraltar metas publicadas', 'maribel.viera@fch.cl', 'Notificación', html, request.hostname());
+    async sendNotificacion(request, idMatriz){
+        cliente = request.hostname().split('.')[0];
+
+        var obj = {
+            "idEdeEtapaTareaAccionProcesoPersona":idMatriz
+        };
+        var result = await api.execApi(request.hostname(),'/Desempeno/Proceso/getEmailPorIdMatriz',obj);  
+        var correo = result.body.data;
+
+        if(correo.email != ""){
+            var obMail = new mail();
+            var html = `<p>Estimado(a) COLABORADOR</p>
+                <p>&nbsp;</p>
+                <p>Tu jefatura indic&oacute; que ya realizaron la reuni&oacute;n de retroalimentaci&oacute;n.</p>
+                <p>Para continuar con el proceso, debes ingresar a&nbsp;<a href="http://`+cliente+`.enovum.cl">http://`+cliente+`.enovum.cl</a>&nbsp;para confirmar la reuni&oacute;n y asi finalizar tu proceso de evaluaci&oacute;n de desempe&ntilde;o.</p>
+                <p>Saludos.</p>
+                <p>Gerencia de Personas.</p>`;
+            //obMail.send(cliente+ ' metas publicadas', correo.email, 'Notificación', html, request.hostname());
+            obMail.send(cliente+ ' metas publicadas', 'maribel.viera@fch.cl', 'Notificación', html, request.hostname());
+        }
     }
 
 
