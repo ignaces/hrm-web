@@ -10,6 +10,9 @@ var wget = require('node-wget-promise');
 const readFile = Helpers.promisify(fs.readFile)
 class Informe {
     async index({ view, request, response, auth }) {
+
+console.log(request.hostname());
+
         var conDetalle = request.input("cd");
         var idPersona = request.input("persona");
         var idProcesoPersona = request.input("procesoPersona")
@@ -87,7 +90,7 @@ class Informe {
     async getPdf({ view, request, response, auth }) {
         var conDetalle = request.input("cd");
         var idPersona = request.input("procesoPersona");
-        var server = request.hostname()+'.enovum.cl';//request.hostname();
+        var server = request.hostname().split(".")[0]+'.enovum.cl';//request.hostname();
 
        
 
