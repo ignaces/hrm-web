@@ -81,18 +81,19 @@ class Accion {
         //OBSERVACION
         var objObservacion = {
             "idObservacionAccion":"",
-            "idEtapaTareaAccionProcesoPersona":listaEval[0].tareas[0].tarea.evaluado_idEtapaTareaAccionPersona,
-            "idEtapaTareaActor":listaEval[0].tareas[0].tarea.actor_idEtapaTareaActor
+            "idEtapaTareaAccionProcesoPersona":idAccionPersona,
+            "idEtapaTareaActor":""
         }
         var resultObservacion =await api.execApi(request.hostname(),'/Desempeno/Accion/getObservacionAccion',objObservacion);
         var dataObservacion =resultObservacion.body.data;
-        console.log(dataObservacion);
+        //console.log(dataObservacion);
 
         var textoObservacion="";
-        if (dataObservacion.lenght > 0){
+        if (dataObservacion.length > 0){
             textoObservacion=dataObservacion[0].observacion
         };
 
+        //console.log(idAccionPersona);
 
         //RENDER
         return view.render('desempeno/metas/informe/meta', {dataVista, datosTarea, Perso, listaEval,dataMetas,dataColumnas,dataObservacion,textoObservacion});
