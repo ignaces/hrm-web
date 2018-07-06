@@ -5,7 +5,10 @@
     
     <script>
     $(document).ready(function(){
-        $("#modalMensaje").modal('show');
+        if("{{mensaje}}" != "")
+        {
+            $("#modalMensaje").modal('show');
+        }        
     });
         
     </script>
