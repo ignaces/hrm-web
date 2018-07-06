@@ -22,6 +22,9 @@ class Portada {
             "idOpinante": idOpinante
         };
 
+        var mensaje = await data.execApi(request.hostname(),'/Core/Empresa/getMensaje',{});
+        var mensajeResult =mensaje.body.data;
+
         var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getProcesos',obj);
         var talentos = [];
         
@@ -66,7 +69,11 @@ class Portada {
         }
         var etag = `app_${cliente}`
 
-        return view.render('core/welcome',  {etag,user,procesos,persona,menu,talentos,condicion,procesosEde});
+        console.log(mensajeResult[0].texto);
+
+        var texto = mensajeResult[0].texto;
+
+        return view.render('core/welcome',  {etag,user,procesos,persona,menu,talentos,condicion,procesosEde,mensaje:texto});
 
         
     }   
