@@ -4,13 +4,16 @@ const data = use('App/Utils/Data')
 class UserController {
     
       async login ({ view,request, auth ,response, session}) {
+
+        session.clear();
+        await auth.logout()
+
         const { username, password } = request.all()
         await auth.attempt(username, password)
 
         var obj = {
           "idUser":auth.user.id
         };
-        
         
         if(auth.user.is_admin!=1){
           var rPersona = await data.execApi(request.hostname(),'/Persona/Persona/getPersonaByIdUser',{idUser:auth.user.id});
