@@ -403,8 +403,8 @@ class Accion {
                 <p>Para continuar con el proceso, debes ingresar a&nbsp;<a href="http://`+cliente+`.enovum.cl">http://`+cliente+`.enovum.cl</a>&nbsp;para confirmar la reuni&oacute;n y asi finalizar tu proceso de evaluaci&oacute;n de desempe&ntilde;o.</p>
                 <p>Saludos.</p>
                 <p>Gerencia de Personas.</p>`;
-            //obMail.send(cliente+ ' metas publicadas', correo.email, 'Notificación', html, request.hostname());
-            obMail.send(cliente+ ' metas publicadas', 'maribel.viera@fch.cl', 'Notificación', html, request.hostname());
+            obMail.send(cliente+ ' metas publicadas', correo.email, 'Notificación', html, request.hostname());
+            //obMail.send(cliente+ ' metas publicadas', 'jonathan.olivares@fch.cl', 'Notificación', html, request.hostname());
         }
 
         console.log(cliente);

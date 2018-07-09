@@ -89,7 +89,8 @@ $(document).ready(function () {
                 swal({
                     title:'Exito',
                     text:'Acción realizada correctamente',
-                    type:'success'
+                    type:'success',
+                    confirmButtonText:"Aceptar"
                 }).then(function(result){
                     window.location = redirect;
                 });

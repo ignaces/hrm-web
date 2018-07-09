@@ -21,6 +21,13 @@ class Register{
 
         return view.render('account/login',  {persona:persona,instrumento:instrumento});
     }
+
+    async updateUser(){
+        var id = "1986";
+        var user = await user.find();
+
+        console.log(user.username);
+    }
     
     async doRegisterPersonas({view,request, response}) {
        
