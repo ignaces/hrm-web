@@ -72,7 +72,6 @@ class Accion {
             "idPerfilMeta": listaEval[0].idEdeMetaPerfil,
             "idProcesoPersona": listaEval[0].idEvaluado,
             "eliminada":0
-
         };
         var resultDataMetas =await api.execApi(request.hostname(),'/Desempeno/Metas/getMetasColaborador',objDataMetas);
         var dataMetas =resultDataMetas.body.data;
@@ -84,7 +83,7 @@ class Accion {
             "idEtapaTareaAccionProcesoPersona":idAccionPersona,
             "idEtapaTareaActor":""
         }
-        var resultObservacion =await api.execApi(request.hostname(),'/Desempeno/Accion/getObservacionAccion',objObservacion);
+        var resultObservacion =await api.execApi(request.hostname(),'/Desempeno/Accion/getObservacionAccionColaborador',objObservacion);
         var dataObservacion =resultObservacion.body.data;
         //console.log(dataObservacion);
 
