@@ -358,11 +358,11 @@ class Talento {
             "idProceso":session.get('procesoOrganigrama')
         };
         
-        var resultPersona =  await data.execApi(request.hostname(),'/Talento/Talento/getPersona',obj);
+        var resultPersona =  await data.execApi(request.hostname(),'/Talento/Persona/getPersona',obj);;//data.execApi(request.hostname(),'/Talento/Talento/getPersona',obj);
         var resultadosPersona =  await data.execApi(request.hostname(),'/Talento/Persona/getResultados',{idPersona:idPersona});
         var result = await data.execApi(request.hostname(),'/Talento/Talento/getCurriculumCategoria',obj);
         var categoria = result.body;
-        var persona = resultPersona.body;
+        var persona = resultPersona.body[0];
 
         var result2 = await data.execApi(request.hostname(),'/Talento/Talento/getCurriculumPersona',obj);
         var curriculum = result2.body;
@@ -391,6 +391,7 @@ class Talento {
             
             objCurriculum.push(objList)
         });
+        
         return view.render('talento/fichaTalento', { objCurriculum:objCurriculum, persona:persona, idPersona:idPersona});
     }
 
