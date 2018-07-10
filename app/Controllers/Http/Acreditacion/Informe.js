@@ -10,6 +10,9 @@ var wget = require('node-wget-promise');
 const readFile = Helpers.promisify(fs.readFile)
 class Informe {
     async index({ view, request, response, auth }) {
+
+console.log(request.hostname());
+
         var conDetalle = request.input("cd");
         var idPersona = request.input("persona");
         var idProcesoPersona = request.input("procesoPersona")
@@ -47,32 +50,10 @@ class Informe {
         return view.render('acreditacion/informe/informesd', { sintesis: resultadoSintesis, resultadoTCO, resultadoSOT, resultadoDetalleSOT, TCODetalle: resultadoTCODetalle, conDetalle, idProcesoPersona, clasificacion, cliente });
     }
 
-    async getPdf({ view, request, response, auth }) {
-        var conDetalle = request.input("cd");
-        var idPersona = request.input("procesoPersona");
-        var server = 'habilitaciongeovita.enovum.cl';//request.hostname();
-
-
-        //var result = await got(`http://192.168.3.4:8080?url=${server}/Acreditacion/Informe/pdf?procesoPersona=${idPersona}&cd=${conDetalle}`);
-        var url = `http://192.168.3.4:8080/?url=http%3A%2F%2F${server}%2FAcreditacion%2FInforme%2Fpdf%3FprocesoPersona%3D${idPersona}%26cd%3D${conDetalle}`;
-
-
-        var file = await wget(url, { output: 'tmp/reporte.pdf' });
-
-        response.type = "application/pdf";
-
-        response.attachment(
-            Helpers.tmpPath('reporte.pdf'),
-            'reporte.pdf'
-        )
-
-
-
-    }
-
     async pdf({ view, request, response, auth }) {
         var conDetalle = request.input("cd");
         var idPersona = request.input("persona");
+        var idProcesoPersona = request.input("procesoPersona")
         var obj = {
             "procesoPersona": request.input("procesoPersona")
         };
@@ -92,10 +73,45 @@ class Informe {
         var resultTCO = await data.execApi(request.hostname(), '/Acreditacion/Informe/getResultadoTCO', obj);
         var resultadoTCO = resultTCO.body.data;
 
+        var resultSOT = await data.execApi(request.hostname(), '/Acreditacion/Informe/getResultadoSOT', obj);
+        var resultadoSOT = resultSOT.body.data;
+
+        var resultDetalleSOT = await data.execApi(request.hostname(), '/Acreditacion/Informe/getResultadoDetalleSOT', obj);
+        var resultadoDetalleSOT = resultDetalleSOT.body.data;
+
+
         var resultTCODetalle = await data.execApi(request.hostname(), '/Acreditacion/Informe/getInstrumentosTCO', obj);
         var resultadoTCODetalle = resultTCODetalle.body.data;
-        return view.render('acreditacion/informe/informesdpdf', { sintesis: resultadoSintesis, resultadoTCO: resultadoTCO, TCODetalle: resultadoTCODetalle, conDetalle, clasificacion });
+
+        var cliente = request.hostname().split(".")[0]
+        return view.render('acreditacion/informe/informesdpdf', { sintesis: resultadoSintesis, resultadoTCO, resultadoSOT, resultadoDetalleSOT, TCODetalle: resultadoTCODetalle, conDetalle, idProcesoPersona, clasificacion, cliente });
     }
+
+    async getPdf({ view, request, response, auth }) {
+        var conDetalle = request.input("cd");
+        var idPersona = request.input("procesoPersona");
+        var server = request.hostname().split(".")[0]+'.enovum.cl';//request.hostname();
+
+       
+
+        //var result = await got(`http://192.168.3.4:8080?url=${server}/Acreditacion/Informe/pdf?procesoPersona=${idPersona}&cd=${conDetalle}`);
+        var url = `http://192.168.3.4:8080/?url=http%3A%2F%2F${server}%2FAcreditacion%2FInforme%2Fpdf%3FprocesoPersona%3D${idPersona}%26cd%3D${conDetalle}`;
+        console.log(url);
+
+        var file = await wget(url, { output: 'tmp/reporte.pdf' });
+
+        response.type = "application/pdf";
+
+        response.attachment(
+            Helpers.tmpPath('reporte.pdf'),
+            'reporte.pdf'
+        )
+
+
+
+    }
+
+    
     async dashboard({ view, request, response, auth }) {
         var idProceso = request.input("proceso")
 
@@ -153,7 +169,7 @@ class Informe {
         var ws_name = "Resultados";
 
         /* make worksheet */
-        var ws_data = [
+        var ws_data = [ 
             cabecera
         ];
         for (var fila in registros) {

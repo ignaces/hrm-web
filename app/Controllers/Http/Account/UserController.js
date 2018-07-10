@@ -1,16 +1,24 @@
 'use strict'
 const got = use('got')
 const data = use('App/Utils/Data')
+const User = use('App/Models/User')
 class UserController {
     
+      async updateUser ({ view,request, auth ,response, session}) {
+        
+      }
+
       async login ({ view,request, auth ,response, session}) {
+
+        session.clear();
+        await auth.logout();
+
         const { username, password } = request.all()
         await auth.attempt(username, password)
 
         var obj = {
           "idUser":auth.user.id
         };
-        
         
         if(auth.user.is_admin!=1){
           var rPersona = await data.execApi(request.hostname(),'/Persona/Persona/getPersonaByIdUser',{idUser:auth.user.id});
@@ -57,6 +65,13 @@ class UserController {
           session.put('idPersona', "");
         }
         
+
+        const user = await User.find("1986");
+        console.log("uers:"+user.username);
+        user.password = "12345678";
+        
+
+        await user.save();
 
 
         return response.redirect('/')

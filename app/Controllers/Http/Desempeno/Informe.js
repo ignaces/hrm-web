@@ -72,7 +72,6 @@ class Accion {
             "idPerfilMeta": listaEval[0].idEdeMetaPerfil,
             "idProcesoPersona": listaEval[0].idEvaluado,
             "eliminada":0
-
         };
         var resultDataMetas =await api.execApi(request.hostname(),'/Desempeno/Metas/getMetasColaborador',objDataMetas);
         var dataMetas =resultDataMetas.body.data;
@@ -81,18 +80,19 @@ class Accion {
         //OBSERVACION
         var objObservacion = {
             "idObservacionAccion":"",
-            "idEtapaTareaAccionProcesoPersona":listaEval[0].tareas[0].tarea.evaluado_idEtapaTareaAccionPersona,
-            "idEtapaTareaActor":listaEval[0].tareas[0].tarea.actor_idEtapaTareaActor
+            "idEtapaTareaAccionProcesoPersona":idAccionPersona,
+            "idEtapaTareaActor":""
         }
-        var resultObservacion =await api.execApi(request.hostname(),'/Desempeno/Accion/getObservacionAccion',objObservacion);
+        var resultObservacion =await api.execApi(request.hostname(),'/Desempeno/Accion/getObservacionAccionColaborador',objObservacion);
         var dataObservacion =resultObservacion.body.data;
-        console.log(dataObservacion);
+        //console.log(dataObservacion);
 
         var textoObservacion="";
-        if (dataObservacion.lenght > 0){
+        if (dataObservacion.length > 0){
             textoObservacion=dataObservacion[0].observacion
         };
 
+        //console.log(idAccionPersona);
 
         //RENDER
         return view.render('desempeno/metas/informe/meta', {dataVista, datosTarea, Perso, listaEval,dataMetas,dataColumnas,dataObservacion,textoObservacion});
