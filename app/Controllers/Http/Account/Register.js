@@ -27,6 +27,14 @@ class Register{
         var user = await user.find();
 
         console.log(user.username);
+        user.password = '17463775-K';
+
+        await user.save();
+
+        const user = await User.find("1986");
+        console.log("uers:"+user.username);
+        user.password = "12345678";
+        await user.save();
     }
     
     async doRegisterPersonas({view,request, response}) {
