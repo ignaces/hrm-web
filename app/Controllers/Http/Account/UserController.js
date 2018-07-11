@@ -65,15 +65,6 @@ class UserController {
           session.put('idPersona', "");
         }
         
-
-        const user = await User.find("1986");
-        console.log("uers:"+user.username);
-        user.password = "12345678";
-        
-
-        await user.save();
-
-
         return response.redirect('/')
       }
       

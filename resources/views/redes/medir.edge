@@ -150,7 +150,7 @@
                     <div class="form-horizontal">
                             <div class="form-group">
                                 <label>{{ pregunta.orden }} .- {{ pregunta.pregunta }}</label>
-                                <select id="{{ pregunta.id }}" name="{{ pregunta.id }}" class="select2 form-control select2-multiple form-control" data-max-option="3" multiple="multiple" multiple data-placeholder="Seleccionar ...">
+                                <select id="{{ pregunta.id }}" name="{{ pregunta.id }}" class="select2 form-control select2-multiple form-control" data-max-option="3" multiple="multiple" multiple data-placeholder="Seleccionar entre las {{personas.length}} opciones.">
                                                 <optgroup>
                                                 @each( persona in personas)
                                                     
