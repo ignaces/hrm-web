@@ -34,6 +34,9 @@
                             
                         </p>
                         <p class="text-muted font-13"><strong>Movilidad :</strong>
+                        @if(persona.movilidades.length<=0)
+                            <span>Sin Movilidad</span>
+                        @endif
                             @each(movilidad in persona.movilidades)
                                 <span>{{movilidad.observacion}}</span>
                             @endeach
