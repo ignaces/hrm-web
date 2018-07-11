@@ -22,6 +22,8 @@
         <link href="/assets/css/menu.css" rel="stylesheet" type="text/css" />
         <link href="/assets/css/responsive.css" rel="stylesheet" type="text/css" />
 
+        <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+
         <script src="/assets/js/modernizr.min.js"></script>
 
     </head>
@@ -65,7 +67,7 @@
                                             </div>
                                             <div class="form-group m-b-20">
                                                 <div class="col-xs-12">
-                                                    <a href="#" class="text-muted"><small>Olvidé mi contraseña</small></a>
+                                                    <a href="#" id="lnkForgot2" class="text-muted"><small>Olvidé mi contraseña</small></a>
                                                     
                                                 </div>
                                             </div>
@@ -123,9 +125,7 @@
 
 
 
-        <script>
-            var resizefunc = [];
-        </script>
+       
 
         <!-- jQuery  -->
         <script src="/assets/js/jquery.min.js"></script>
@@ -139,5 +139,35 @@
         <script src="/assets/js/jquery.core.js"></script>
         <script src="/assets/js/jquery.app.js"></script>
 
+         <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+
+        <script>
+            var resizefunc = [];
+
+            $("#lnkForgot").click(function(){
+                
+                swal({
+                    title: '¿Olvido su contraseña?',
+                    text: "Ingrese su correo para solicitar cambio de clave.",
+                    type: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Solicitar cambio de clave',
+                    cancelButtonText: 'Cancelar',
+                    input: 'email',
+                    inputPlaceholder: 'Ingrese su correo'
+                }).then(function(result)  {
+                    if (result) {
+                        
+                        console.log(result);
+
+                    }
+                }, function(reason) {
+                    //Usuario cancela accion
+                    //console.log(reason); //cancel
+                });
+            });
+        </script>
     </body>
 </html>
