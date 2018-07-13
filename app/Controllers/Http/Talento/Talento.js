@@ -216,6 +216,7 @@ class Talento {
        //-----------------------------------------------------------------------------------
        var resultadoClasificaciones = await data.execApi(request.hostname(),'/Talento/Talento/obtenerClasificaciones',obj5);
        var clasificacionesPorEmpresa = resultadoClasificaciones.body;
+       var equivalenciasR = await data.execApi(request.hostname(),'/Talento/Talento/getEquivalencias',{idProceso:idTalentoProceso});
 
         return view.render('talento/nineBoxColaboradores', {
             personas:personas,
@@ -231,7 +232,8 @@ class Talento {
             cuadrante9:cuadrante9,
             colaboradoresEva:colaboradoresEva,
             cargosPorEmpresa:cargosPorEmpresa,
-            clasificacionesPorEmpresa:clasificacionesPorEmpresa
+            clasificacionesPorEmpresa:clasificacionesPorEmpresa,
+            equivalencias:equivalenciasR.body
         });
         
     }
@@ -242,27 +244,21 @@ class Talento {
 
     async seleccionDragTalento({view,request, response, auth, session}) {
         
-        //var idColaborador = request.input("idColaborador");
-        //const all = request.all()
-
-        //console.log(all);
         var idTalentoMatriz = request.input("idComponente");
+
         var idTalentoOpinante = request.input("idOpinante");
         
         var obj = {
             "idTalentoOpinante":idTalentoOpinante,
             "idTalentoMatriz":idTalentoMatriz
             };
-        //var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/putRespuesta',obj);
         
         var result = await data.execApi(request.hostname(),'/Talento/Talento/seleccionDragTalentoAPI',obj);
+        
         var idInsert = result.body;
         
-
-        //request.setHeader('Content-Type', 'application/json');
-        //request.send(JSON.parse(idInsert));
-        //return {mensaje:"OK"}
-        //return idInsert //devuelve el ultimo insert creado por el drag and drop
+        var equivalenciasR = await data.execApi(request.hostname(),'/Talento/Talento/getEquivalencias',{idProceso:idTalentoProceso});
+        
     }
 
 
@@ -284,6 +280,8 @@ class Talento {
 
         clasificacionesPersona = clasificacionesPersona.body;
         var Clasificaciones={area:"",division:""};
+        
+
         for(var i in clasificacionesPersona){
             
             if(clasificacionesPersona[i].CodigoClasificacionPadre=="CSCL002"){

@@ -14,31 +14,36 @@
                 <li class="task-warning ui-sortable-handle" style="background-color: rgba(255,255,255,0.4); border:1px solid rgba(0,0,0,0.1);" id="base" name="{{talentos.identificador}}"   value="{{talentos.procesoOpinante}}">
                     <div class="row">
                         <div class="col-xs-2">
-                        @if(!talentos.foto)
-                            
+                            @if(!talentos.foto)
                                 
-                                    @if(talentos.genero=='M')
-                                           <a href="/Talento/Talento/fichaTalento?idPersona={{talentos.idPersona}}" class="text-muted">
-                                                    <img src="/assets/images/users/maleuser.png" alt="task-user" class="thumb-sm img-circle pull-left"> 
-                                            </a> 
-                                           
-                                    @else
-                                            <a href="/Talento/Talento/fichaTalento?idPersona={{talentos.idPersona}}" class="text-muted">
-                                                    <img src="/assets/images/users/femaleuser.png" alt="task-user" class="thumb-sm img-circle pull-left"> 
-                                            </a> 
-                                    @endif
-                                
-                        @else
-                         <a href="/Talento/Talento/fichaTalento?idPersona={{talentos.idPersona}}" class="text-muted">
-                                                    <img src="{{talentos.foto}}" alt="task-user" class="thumb-sm img-circle pull-left"> 
-                                            </a> 
-                                
-                        @endif
+                                    
+                                @if(talentos.genero=='M')
+                                    <a href="/Talento/Talento/fichaTalento?idPersona={{talentos.idPersona}}" class="text-muted">
+                                                <img src="/assets/images/users/maleuser.png" alt="task-user" class="thumb-sm img-circle pull-left"> 
+                                        </a> 
+                                    
+                                @else
+                                        <a href="/Talento/Talento/fichaTalento?idPersona={{talentos.idPersona}}" class="text-muted">
+                                                <img src="/assets/images/users/femaleuser.png" alt="task-user" class="thumb-sm img-circle pull-left"> 
+                                        </a> 
+                                @endif
+                                    
+                            @else
+                                        <a href="/Talento/Talento/fichaTalento?idPersona={{talentos.idPersona}}" class="text-muted">
+                                                <img src="{{talentos.foto}}" alt="task-user" class="thumb-sm img-circle pull-left"> 
+                                        </a> 
+                                    
+                            @endif
                         </div>
                         <div class="col-xs-6">
                             <h6>
                                 <a href="/Talento/Talento/fichaTalento?idPersona={{talentos.idPersona}}" class="">
-                                    <span style="width: 100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display: inline-block;">{{talentos.Colaborador}} {{talentos.apellidoPaterno}} {{talentos.apellidoMaterno}}</span>
+                                    <span style="width: 100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display: inline-block;">
+                                        {{talentos.Colaborador}} {{talentos.apellidoPaterno}} {{talentos.apellidoMaterno}}
+                                    </span>
+                                    <span style="width: 100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display: inline-block;">
+                                        {{talentos.edd}}
+                                    </span>
                                 </a>
                             </h6>
                             
@@ -152,7 +157,7 @@
 
 
 @each(colaboradores in colaboradoresEva.clasificaciones)
-        <input class="aa" id="{{colaboradores.idTalentoCuadrante}}" type="hidden" value="{{colaboradores.nombres}}_{{colaboradores.apellidoPaterno}}_{{colaboradores.apellidoMaterno}}_{{colaboradores.Cargo}}_{{colaboradores.identificador}}_{{colaboradores.foto}}_{{colaboradores.genero}}_{{colaboradores.idPersona}}"  accesskey="{{colaboradores.idTalentoCuadrante}}" tabindex="{{colaboradores.idOpinante}}">
+        <input class="aa" id="{{colaboradores.idTalentoCuadrante}}" type="hidden" value="{{colaboradores.nombres}}_{{colaboradores.apellidoPaterno}}_{{colaboradores.apellidoMaterno}}_{{colaboradores.Cargo}}_{{colaboradores.identificador}}_{{colaboradores.foto}}_{{colaboradores.genero}}_{{colaboradores.idPersona}}" edd="{{colaboradores.edd}}"  accesskey="{{colaboradores.idTalentoCuadrante}}" tabindex="{{colaboradores.idOpinante}}">
 
         @each(claHijo in colaboradores.clasificacionHijo)
             <input class="bb" id="" name="{{claHijo.ClasificacionesCol}}" type="hidden" value="{{claHijo.ClasificacionesCol}}">
