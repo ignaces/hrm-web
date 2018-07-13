@@ -244,8 +244,8 @@ class Talento {
 
     async seleccionDragTalento({view,request, response, auth, session}) {
         
+        
         var idTalentoMatriz = request.input("idComponente");
-
         var idTalentoOpinante = request.input("idOpinante");
         
         var obj = {
@@ -255,9 +255,9 @@ class Talento {
         
         var result = await data.execApi(request.hostname(),'/Talento/Talento/seleccionDragTalentoAPI',obj);
         
-        var idInsert = result.body;
+       // var idInsert = result.body;
         
-        var equivalenciasR = await data.execApi(request.hostname(),'/Talento/Talento/getEquivalencias',{idProceso:idTalentoProceso});
+       // var equivalenciasR = await data.execApi(request.hostname(),'/Talento/Talento/getEquivalencias',{idProceso:idTalentoProceso});
         
     }
 
