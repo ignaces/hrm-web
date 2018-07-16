@@ -118,15 +118,33 @@ class Talento {
     }
 
     
+    async getColaboradoresClasidicados ({view,request, response, auth, session}) {
+        var all =  session.get('personaLogueada')
+        var idOpinante = all.id
+        
+        var idTalentoProceso = session.get('talentoProceso');
+ 
+        var obj = {
+            "idTalentoProceso":idTalentoProceso,
+            "idOpinante":idOpinante
+        };
+ 
+        var result = await data.execApi(request.hostname(),'/Talento/Talento/colaboradoresEvaluados',obj);
+        var colaboradoresEva = result.body;
 
+        return colaboradoresEva.clasificaciones;
+       
+    }
 
     async nineBoxColaboradores ({view,request, response, auth, session}) {
         
         var all =  session.get('personaLogueada')
+        
         var idOpinante = all.id
         
         
         var idTalentoProceso = request.input("talento");
+        session.put('talentoProceso',idTalentoProceso);
         var rstl = session.put('procesoTalento',idTalentoProceso);
 
         //var idTalento = request.input("talento")
@@ -153,18 +171,6 @@ class Talento {
 
         var result = await data.execApi(request.hostname(),'/Talento/Talento/generaCuadrantes',obj);
         var cuadrantes = result.body;
-        
-  
-        var cuadrante1 = cuadrantes[0];
-        var cuadrante2 = cuadrantes[1];
-        var cuadrante3 = cuadrantes[2];
-        var cuadrante4 = cuadrantes[3];
-        var cuadrante5 = cuadrantes[4];
-        var cuadrante6 = cuadrantes[5];
-        var cuadrante7 = cuadrantes[6];
-        var cuadrante8 = cuadrantes[7];
-        var cuadrante9 = cuadrantes[8];
-
 
        var all2 =  session.get('personaLogueada')
        var idOpinante2 = all2.id
@@ -221,15 +227,6 @@ class Talento {
         return view.render('talento/nineBoxColaboradores', {
             personas:personas,
             cuadrantes:cuadrantes,
-            cuadrante1:cuadrante1,
-            cuadrante2:cuadrante2,
-            cuadrante3:cuadrante3,
-            cuadrante4:cuadrante4,
-            cuadrante5:cuadrante5,
-            cuadrante6:cuadrante6,
-            cuadrante7:cuadrante7,
-            cuadrante8:cuadrante8,
-            cuadrante9:cuadrante9,
             colaboradoresEva:colaboradoresEva,
             cargosPorEmpresa:cargosPorEmpresa,
             clasificacionesPorEmpresa:clasificacionesPorEmpresa
@@ -246,17 +243,20 @@ class Talento {
         
         var idTalentoMatriz = request.input("idComponente");
         var idTalentoOpinante = request.input("idOpinante");
+        var justificacion = request.input("justificacion");
         
         var obj = {
-            "idTalentoOpinante":idTalentoOpinante,
-            "idTalentoMatriz":idTalentoMatriz
+                "idTalentoOpinante":idTalentoOpinante,
+                "idTalentoMatriz":idTalentoMatriz,
+                "justificacion":justificacion
             };
         
         var result = await data.execApi(request.hostname(),'/Talento/Talento/seleccionDragTalentoAPI',obj);
         
        // var idInsert = result.body;
         
-       // var equivalenciasR = await data.execApi(request.hostname(),'/Talento/Talento/getEquivalencias',{idProceso:idTalentoProceso});
+       
+       return result.body;
         
     }
 
