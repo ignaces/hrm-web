@@ -18,10 +18,12 @@ $(document).ready(function () {
 
 
 $(".sortable-list").droppable({
+    
     drop: function(event, ui) {
+        
        var idOpinante = (ui.draggable.attr('value'));
        var idComponente = $(this).attr("value");
-      console.log(idComponente)
+      
         var obj = { 
             idOpinante:idOpinante,
             idComponente:idComponente
@@ -33,7 +35,6 @@ $(".sortable-list").droppable({
             data: obj,
             dataType: "json", 
             success: function (msg) {
-               
                
             }
         });
@@ -57,6 +58,7 @@ $(".sortable-list").droppable({
                         var idOpinante = ($(this).attr('tabindex'));
                         //var Cargo = ($(this).attr('title'));
                         var arr = nombreCargo.split("_");
+                        
                         var nombres = arr[0];
                         var apellidoPaterno =arr[1]; 
                         var apellidoMaterno = arr[2];
@@ -65,7 +67,9 @@ $(".sortable-list").droppable({
                         var foto = arr[5];
                         var genero = arr[6];
                         var idPersona = arr[7];
+
                         var edd = ($(this).attr('edd'));
+                        
                         if(foto==''){
                             if(genero=="M"){
                                 foto="/assets/images/users/maleuser.png"

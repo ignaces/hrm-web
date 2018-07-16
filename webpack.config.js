@@ -29,7 +29,8 @@ module.exports = {
       organigrama:['./client/src/Talento/organigrama.js'],
       curriculum:['./client/src/Talento/curriculum.js'],
       notificacionesSistema:['./client/src/Notificaciones/sistema.js'],
-      marketplace:['./client/src/Talento/marketplace.js']
+      marketplace:['./client/src/Talento/marketplace.js'],
+      easter:['./client/src/Core/easter.js']
     },
   output: {
     filename: '[name].min.js',

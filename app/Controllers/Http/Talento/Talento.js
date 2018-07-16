@@ -216,7 +216,7 @@ class Talento {
        //-----------------------------------------------------------------------------------
        var resultadoClasificaciones = await data.execApi(request.hostname(),'/Talento/Talento/obtenerClasificaciones',obj5);
        var clasificacionesPorEmpresa = resultadoClasificaciones.body;
-       var equivalenciasR = await data.execApi(request.hostname(),'/Talento/Talento/getEquivalencias',{idProceso:idTalentoProceso});
+       
 
         return view.render('talento/nineBoxColaboradores', {
             personas:personas,
@@ -232,8 +232,7 @@ class Talento {
             cuadrante9:cuadrante9,
             colaboradoresEva:colaboradoresEva,
             cargosPorEmpresa:cargosPorEmpresa,
-            clasificacionesPorEmpresa:clasificacionesPorEmpresa,
-            equivalencias:equivalenciasR.body
+            clasificacionesPorEmpresa:clasificacionesPorEmpresa
         });
         
     }
