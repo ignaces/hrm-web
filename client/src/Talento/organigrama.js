@@ -225,10 +225,6 @@ function renderNodeHandler(sender, args) {
             args.content[i]=texto;
         }
         
-            
-            
-        
-        
         
     }
 }
