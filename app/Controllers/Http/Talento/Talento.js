@@ -347,9 +347,14 @@ class Talento {
     }
     async fichaTalento ({view,request, response, auth, session}) {
 
-        //var persona =  session.get('personaLogueada')
+        var personaLogueada =  session.get('personaLogueada')
+        console.log(personaLogueada)
         var idPersona = request.input('idPersona')
-        
+        var showAll = true
+        if(personaLogueada.id==idPersona){
+            showAll=false;
+        }
+
         var obj = {
             "idPersona":idPersona,
             "idProceso":session.get('procesoOrganigrama')
@@ -389,7 +394,7 @@ class Talento {
             objCurriculum.push(objList)
         });
         
-        return view.render('talento/fichaTalento', { objCurriculum:objCurriculum, persona:persona, idPersona:idPersona});
+        return view.render('talento/fichaTalento', { objCurriculum:objCurriculum, persona:persona, idPersona:idPersona,showAll:showAll});
     }
 
     async addCurriculumPersona ({view,request, response, auth, session}) {

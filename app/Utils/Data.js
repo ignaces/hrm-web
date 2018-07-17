@@ -10,10 +10,14 @@ module.exports = {
         //console.log(obj);
         var server = Env.get('API_SERVER', 'development')
         var alias = Env.get('HOSTALIAS', 'localhost')
-
+        var clienteDefault = Env.get('CLIENTE_DEFAULT', null)
         var cliente = hostname.split(".")[0]
         if(hostname==alias){
             cliente = "localhost";
+        }
+
+        if(clienteDefault!=null){
+            cliente=clienteDefault;
         }
         obj.cliente = cliente;
         
