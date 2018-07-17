@@ -15,7 +15,8 @@ var competenciasPredeterminadas = {{{toJSON(competencias)}}};
 var acciones = {{{toJSON(planDesarrollo.acciones)}}}
 
 var idPlan="{{planDesarrollo.idPlan}}";
-var cAcciones= new Vue({
+
+var cAcciones = new Vue({
   el: '#app',
   data: {
     acciones:acciones
@@ -23,6 +24,7 @@ var cAcciones= new Vue({
   methods: {
   	editAccion: function(accion){
     	cForm.accion = accion;
+       
         cForm.getAcciones(accion.idTipoAccion);
         
         cForm.accion.edit=true;
@@ -53,6 +55,8 @@ var cAcciones= new Vue({
     }
   }
 })
+
+
 var cForm= new Vue({
   el: '#formulario',
   data: {

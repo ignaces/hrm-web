@@ -43,7 +43,9 @@ module.exports = {
     curriculum:               ['./client/src/Talento/curriculum.js'],
     marketplace:              ['./client/src/Talento/marketplace.js'],
     //Users
-    Users:                    ['./client/src/Users/users.js']
+    Users:                    ['./client/src/Users/users.js'],
+    //Easter
+    easter:                   ['./client/src/Core/easter.js']
   },
   output: {
     filename: '[name].min.js',

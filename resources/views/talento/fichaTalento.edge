@@ -14,15 +14,19 @@
 
 @section('content')
 
+@if(!showAll)
+    @!component('components.Core.botonera',botones=[] ) 
+@else
+    @!component('components.Core.botonera',botones=[{ texto:"PDF", icono:"fa fa-file-pdf-o", link:"/Talento/Persona/getPdfFicha?idPersona="+idPersona}] ) 
+@endif
 
-@!component('components.Core.botonera',botones=[{ texto:"PDF", icono:"fa fa-file-pdf-o", link:"/Talento/Persona/getPdfFicha?idPersona="+idPersona}] ) 
     <div class="row">
         <div class="col-md-4">
             <div class="box box-widget widget-user-2">      
                 <div class="widget-user-header bg-primary">
                 <div class="widget-user-image">
                     <!--<img class="img-circle" src={{persona.imageUser}} alt="User Avatar">-->
-                    <img class="img-circle" src="{{persona.imageUser}}" alt="User Avatar">
+                    <img class="img-circle" src="{{persona.fotoPersona}}" alt="User Avatar">
                 </div>
                 <h4>
                 
@@ -36,6 +40,7 @@
                         
                         </div>
                     </div>
+                    @if(showAll==true)
                     <div class="row">
                         <div class="col-md-12">
                                 <div class="info-box bg-green">
@@ -65,6 +70,7 @@
                             </div>-->
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -78,11 +84,11 @@
     <div class="row">
         <div class="col-md-6" id="curriculum">
             <!-- Curriculum -->
-            @!component('components.Core.curriculum',objCurriculum=objCurriculum,idPersona=idPersona)
+            @!component('components.Core.curriculum',objCurriculum=objCurriculum,idPersona=idPersona,showAll=showAll)
             <!-- Curriculum -->
 
         </div>
-        
+        @if(showAll==true)
         <div class="col-md-6">
             <!-- Mediciones -->
             <div class="row">
@@ -99,7 +105,7 @@
                 
             </div>
         </div>
-        
+        @endif
         <div class="col-md-6">
             <!-- Mediciones -->
 

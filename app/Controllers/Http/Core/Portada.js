@@ -21,7 +21,13 @@ class Portada {
         var objTalento = {
             "idOpinante": idOpinante
         };
-
+        var miPerfil = await data.execApi(request.hostname(),'/Core/Componentes/getComponente',{componente:'MI_PERFIL'});
+        var perfilResult = miPerfil.body.data;
+        
+        if(perfilResult.length>0){
+            perfilResult[0].ruta = perfilResult[0].ruta.replace("#idPersona",all.id)
+        }
+        
         var mensaje = await data.execApi(request.hostname(),'/Core/Empresa/getMensaje',{});
         var mensajeResult =mensaje.body.data;
 
@@ -76,7 +82,7 @@ class Portada {
             texto = mensajeResult[0].texto;
             mensajeTitulo = mensajeResult[0].titulo;
         }
-        return view.render('core/welcome',  {etag,user,procesos,persona,menu,talentos,condicion,procesosEde,mensaje:texto,mensajeTitulo});
+        return view.render('core/welcome',  {etag,user,procesos,persona,menu,talentos,condicion,procesosEde,mensaje:texto,mensajeTitulo,miperfil:perfilResult});
     }   
 }
 
