@@ -64,9 +64,22 @@ class UserController {
           session.put('personaLogueada',persona);
           session.put('idPersona', "");
         }
-        
+
         return response.redirect('/')
       }
+
+      
+    async forgotPassword({request,response}){
+
+      var correo = request.input("correo")
+      var obj = {
+          "correo":correo          
+          };
+          
+      //var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/putRespuesta',obj);
+
+      return {mensaje:"OK"}
+  } 
       
       async logout ({ view,request, auth ,response,session}) {
         session.clear();
