@@ -2,6 +2,7 @@
     <div class="portlet portlet-default">
         <div class="portlet-heading">
             <h3 class="portlet-title">{{ c.nombreCategoria }}</h3>
+            @if(showAll==true)
             <div class="portlet-widgets">
                 <a  class="mdi mdi-dots-vertical" data-toggle="dropdown" aria-expanded="false" href="#"></a>
                 <ul class="dropdown-menu" role="menu">
@@ -10,6 +11,7 @@
                     
                 </ul>
             </div>
+            @endif
             <br>
             <hr>
         </div>
