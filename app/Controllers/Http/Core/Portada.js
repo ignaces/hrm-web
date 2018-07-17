@@ -22,10 +22,12 @@ class Portada {
             "idOpinante": idOpinante
         };
         var miPerfil = await data.execApi(request.hostname(),'/Core/Componentes/getComponente',{componente:'MI_PERFIL'});
-        var perfilResult =miPerfil.body.data;
+        var perfilResult = miPerfil.body.data;
+        
         if(perfilResult.length>0){
-            perfilResult.ruta = perfilResult[0].ruta.replace("#idPersona",all.id)
+            perfilResult[0].ruta = perfilResult[0].ruta.replace("#idPersona",all.id)
         }
+        
         var mensaje = await data.execApi(request.hostname(),'/Core/Empresa/getMensaje',{});
         var mensajeResult =mensaje.body.data;
 
