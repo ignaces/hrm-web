@@ -348,7 +348,7 @@ class Talento {
     async fichaTalento ({view,request, response, auth, session}) {
 
         var personaLogueada =  session.get('personaLogueada')
-        console.log(personaLogueada)
+        
         var idPersona = request.input('idPersona')
         var showAll = true
         if(personaLogueada.id==idPersona){
@@ -370,8 +370,9 @@ class Talento {
         var curriculum = result2.body;
         var objCurriculum = [];
         persona.resultados=resultadosPersona.body;
-        if(persona.imageUser=="" || persona.imageUser==null){
-            persona.imageUser="/assets/images/icons/businessman.svg"
+    
+        if(persona.fotoPersona=="" || persona.fotoPersona==null){
+            persona.fotoPersona="/assets/images/icons/businessman.svg"
           }
         categoria.forEach(element => {
 
