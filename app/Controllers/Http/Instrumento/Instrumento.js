@@ -15,11 +15,11 @@ class Instrumento {
             "tipoInstrumento":codigo
         };
 
-        
+        console.log(obj);
         
         var result = await data.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumento',obj);
 
-        
+        console.log(result);
 
         var instrumento = result.body;
         const todo = request.all();

@@ -933,7 +933,7 @@ var modalDependant = function modalDependant() {
             if (emailRegex.test(email)) {
               resolve();
             } else {
-              reject('Invalid email address');
+              reject('Correo invalido');
             }
           });
         };

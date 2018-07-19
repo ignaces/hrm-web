@@ -76,11 +76,13 @@ class Portada {
         var etag = `app_${cliente}`
 
         var texto = "";
+        var mensajeTitulo = "";
         if(mensajeResult.length > 0)
         {
             texto = mensajeResult[0].texto;
+            mensajeTitulo = mensajeResult[0].titulo;
         }
-        return view.render('core/welcome',  {etag,user,procesos,persona,menu,talentos,condicion,procesosEde,mensaje:texto,miperfil:perfilResult});
+        return view.render('core/welcome',  {etag,user,procesos,persona,menu,talentos,condicion,procesosEde,mensaje:texto,mensajeTitulo,miperfil:perfilResult});
     }   
 }
 
