@@ -57,7 +57,7 @@
                     
                     <br>
                     <div class="inbox-widget">
-                        <a class="btn btn-info btn-rounded btn-block" name="#" data-toggle="modal" data-target="#panel-checkin"><i class="mdi mdi-check"></i> <span>Check-In</span> </a>
+                        <a class="btn btn-info btn-rounded btn-block {{data.checkin}}" name="#" data-toggle="modal" data-target="#panel-checkin" id="btnCheckin"><i class="mdi mdi-check"></i> <span>Check-In</span> </a>
                     </div>
                 </div>
                 
@@ -79,21 +79,13 @@
                                                         <h3 class="panel-title">Seleccione Punto de Venta</h3>
                                                     </div>
                                                     <div class="panel-body">
-                                                        <select class="form-control" name="poscheckin" id="poscheckin">
-                                                            <option value="0">--Seleccione--</option>
-                                                            <option value="1">Punto de Venta 1</option>
-                                                            <option value="1">Punto de Venta 2</option>
-                                                            <option value="1">Punto de Venta 3</option>
-                                                            <option value="1">Punto de Venta 4</option>
-                                                            <option value="1">Punto de Venta 5</option>
-                                                            <option value="1">Punto de Venta 6</option>
-                                                            <option value="1">Punto de Venta 7</option>
-                                                            <option value="1">Punto de Venta 8</option>
-                                                            <option value="1">Punto de Venta 9</option>
-                                                            <option value="1">Punto de Venta 10</option>
-                                                            <option value="1">Punto de Venta 11</option>
-                                                        </select>
-
+                                                        
+                                                            <select class="form-control" name="poscheckin" id="poscheckin">
+                                                                <option value="0">--Seleccione--</option>
+                                                                @each(pos in data.puntosDeVenta)
+                                                                    <option value="{{pos.id}}">{{pos.nombre}}</option>
+                                                                @endeach
+                                                            </select>
                                                         <br>
 
                                                         <div class="inbox-widget">
@@ -122,8 +114,38 @@
         }
         else
         {
-            swal("Check-in", "Check-in realizado correctamente.", "success");
-            $("#panel-checkin").modal("close");
+            var obj = { 
+                idPersona: "{{data.idPersona}}",
+                idPuntoDeVenta: $("#poscheckin").val(),
+                lat: "0",
+                lon: "0"
+            };
+            
+            $.ajax({
+                type: "GET",
+                url: "/Incentivo/Proceso/addCheckIn",
+                contentType: "application/json; charset=utf-8",
+                data: obj,
+                dataType: "json", 
+                success: function (msg) {
+                    $("#btnCheckin").addClass("disabled");
+                    $("#accesoMetas").removeClass("disabled");
+                    $("#accesoMetas").attr("href", "/Incentivo/Proceso/colaboradores");
+
+                    swal({
+                        title: 'Check-in',
+                        text: 'Check-in realizado correctamente.',
+                        type: 'success',
+                        confirmButtonText: 'Aceptar',
+                    }).then( function(result) {
+                        location.href = "/";
+                    });
+                    
+
+                }
+            });
+
+            
         }
         
     }

@@ -10,7 +10,8 @@
                                                             <div class="form-group">
                                                                 <label class="col-md-4 control-label">RUT</label>
                                                                 <div class="col-md-8">
-                                                                    <input type="text" class="form-control" placeholder="Ingrese RUT">
+                                                                    <input type="hidden" class="form-control" placeholder="Ingrese RUT" id="idCliente" value="0">
+                                                                    <input type="text" class="form-control" placeholder="Ingrese RUT para buscar o ingresar nuevo" id="rutCliente" onblur="getDatosCliente();">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -19,7 +20,7 @@
                                                             <div class="form-group">
                                                                 <label class="col-md-4 control-label">Nombre</label>
                                                                 <div class="col-md-8">
-                                                                    <input type="text" class="form-control" placeholder="Ingrese Nombre">
+                                                                    <input type="text" class="form-control" placeholder="Ingrese Nombre" id="nombreCliente">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -28,7 +29,7 @@
                                                             <div class="form-group">
                                                                 <label class="col-md-4 control-label">Apellido</label>
                                                                 <div class="col-md-8">
-                                                                    <input type="text" class="form-control" placeholder="Ingrese Apellido">
+                                                                    <input type="text" class="form-control " placeholder="Ingrese Apellido" id="apellidoCliente">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -37,7 +38,7 @@
                                                             <div class="form-group">
                                                                 <label class="col-md-4 control-label">Email</label>
                                                                 <div class="col-md-8">
-                                                                    <input type="text" class="form-control" placeholder="Ingrese Email">
+                                                                    <input type="text" class="form-control" placeholder="Ingrese Email" id="emailCliente">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -46,9 +47,41 @@
                                                             <div class="form-group">
                                                                 <label class="col-md-4 control-label">Teléfono</label>
                                                                 <div class="col-md-8">
-                                                                    <input type="text" class="form-control" placeholder="Ingrese Teléfono">
+                                                                    <input type="text" class="form-control" placeholder="Ingrese Teléfono" id="telefonoCliente">
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                
+                                                <script>
+                                                    function getDatosCliente()
+                                                    {
+                                                            $.ajax({
+                                                                        url: '/Incentivo/Proceso/getCliente',
+                                                                        type: "GET",
+                                                                        data: {identificador:  $("#rutCliente").val()},
+                                                                        dataType: "json",
+                                                                        success: function (data) {
+                                                                            if(data[0].id && data[0].id != "")
+                                                                            {
+                                                                                $("#idCliente").val(data[0].id);
+                                                                                $("#rutCliente").val(data[0].identificador);
+                                                                                $("#nombreCliente").val(data[0].nombres);
+                                                                                $("#apellidoCliente").val(data[0].apellido);
+                                                                                $("#emailCliente").val(data[0].email);
+                                                                                $("#telefonoCliente").val(data[0].telefono);
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                $("#nombreCliente").removeClass("disabled");
+                                                                                $("#apellidoCliente").removeClass("disabled");
+                                                                                $("#emailCliente").removeClass("disabled");
+                                                                                $("#telefonoCliente").removeClass("disabled");
+                                                                            }
+                                                                            
+                                                                        }
+                                                            });
+                                                        
+                                                    }
+                                                </script>

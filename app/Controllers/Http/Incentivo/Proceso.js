@@ -8,19 +8,68 @@ class Proceso {
     async colaboradores ({view,request, response, auth, session}) {
         
         var idPersona = session.get('idPersona', 'fail')
-        var idProceso = request.input("proceso")
+        var idPuntoDeVenta = session.get('idPuntoDeVenta', 'fail');
 
-        session.put('idProceso',idProceso);
+        //var idProceso = request.input("proceso")
+        var persona = session.get('personaLogueada')
 
+        //session.put('idProceso',idProceso);
+        
+        //var obj = {
+        //    "idProceso":idProceso,
+        //    "idPersona": idPersona
+        //};
+        
+        //var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getPersonasEvaluaciones',obj);
+        //var personas = result.body.data;
+        
+        var objMet = {
+            "idPersona": "",
+            "idPuntoDeVenta": idPuntoDeVenta
+        };
+        console.log(objMet);
+        var resultMetas = await data.execApi(request.hostname(),'/Incentivos/Incentivos/getValoresMeta',objMet);
+        //var valoresMetas = "";
+        var valoresMetas = resultMetas.body[0];
+        console.log(valoresMetas);
+        
+        return view.render('incentivo/proceso/colaboradores', {persona, valoresMetas});
+    }
+
+    async supervisor ({view,request, response, auth, session}) {
+        
+        //var idPersona = session.get('idPersona', 'fail')
+        //var idProceso = request.input("proceso")
+
+        //session.put('idProceso',idProceso);
+        /*
         var obj = {
             "idProceso":idProceso,
             "idPersona": idPersona
         };
+        */
+        //var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getPersonasEvaluaciones',obj);
+        //var personas = result.body.data;
         
-        var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getPersonasEvaluaciones',obj);
-        var personas = result.body.data;
+        return view.render('incentivo/proceso/supervisor');
+    }
+
+    async gestionDeVenta ({view,request, response, auth, session}) {
         
-        return view.render('incentivo/proceso/colaboradores');
+        //var idPersona = session.get('idPersona', 'fail')
+        //var idProceso = request.input("proceso")
+
+        //session.put('idProceso',idProceso);
+        /*
+        var obj = {
+            "idProceso":idProceso,
+            "idPersona": idPersona
+        };
+        */
+        //var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getPersonasEvaluaciones',obj);
+        //var personas = result.body.data;
+        
+        return view.render('incentivo/proceso/gestionDeVenta');
     }
 
     async catalogo ({view,request, response, auth, session}) {
@@ -58,37 +107,153 @@ class Proceso {
         return view.render('incentivo/proceso/cardex');
     }
 
-    async ingresoVenta ({view,request, response, auth, session}) {
-        /*
-        var idPersona = session.get('idPersona', 'fail')
-        var idProceso = request.input("proceso")
-
-        session.put('idProceso',idProceso);
+    //async addCheckIn ({view,request, response, auth, session}) {
+    async addCheckIn ({request, response}) {
+        var idPersona = request.input("idPersona");
+        var idPuntoDeVenta = request.input("idPuntoDeVenta");
+        var lat = request.input("lat");
+        var lon = request.input("lon");
 
         var obj = {
-            "idProceso":idProceso,
-            "idPersona": idPersona
+            "idPersona":idPersona,
+            "idPuntoDeVenta":idPuntoDeVenta,
+            "lat":lat,
+            "lon":lon
         };
-        console.log(obj);
-        var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getPersonasEvaluaciones',obj);
-        var personas = result.body.data;
-        */
+            
+        var result = await data.execApi(request.hostname(),'/Incentivos/Incentivos/addCheckIn',obj);
 
-        var ventaProds = [];
-        var objProds = {};
+        return {mensaje:"OK"};
+    }
 
-        for(var i=1; i<=5; i++)
-        {
-            ventaProds.push(i);
-        }
-
-        objProds.prods = ventaProds;
+    async addVenta ({request, response, session}) {
+        
+        //objProds.prods = ventaProds;
         //console.log(objProds);
+        var idPersona = session.get("idPersona");
+        var idPuntoDeVenta = session.get("idPuntoDeVenta");
+        var urlFoto = "";
+        var lat = request.input("lat");
+        var lon = request.input("lon");
+        var productos = request.input("productos");
+        var idCliente = request.input("idCliente");
+        var identificadorCliente = request.input("identificadorCliente");
+        var nombreCliente = request.input("nombreCliente");
+        var apellidoCliente = request.input("apellidoCliente");
+        var emailCliente = request.input("emailCliente");
+        var telefonoCliente = request.input("telefonoCliente");
+        
+        //console.log(productos);
+        //return false;
+        
+        var objForm = {
+            "idPersona": idPersona,
+            "idPuntoDeVenta": idPuntoDeVenta,
+            "urlFoto": "",
+            "lat": lat,
+            "lon": lon,
+            "idCliente": idCliente,
+            "identificadorCliente": identificadorCliente,
+            "nombreCliente": nombreCliente,
+            "apellidoCliente": apellidoCliente,
+            "emailCliente": emailCliente,
+            "telefonoCliente": telefonoCliente,
+            "productos": productos 
+        };
 
+        var result = await data.execApiPost(request.hostname(),'/Incentivos/Incentivos/addVenta',objForm);
+        console.log(result);
+        return {mensaje:"OK"};
+        //return view.render('incentivo/proceso/addVenta');
+    }
+
+    async ingresoVenta ({request, response, session, view, auth}) {
+        
+        //objProds.prods = ventaProds;
+        //console.log(objProds);
         return view.render('incentivo/proceso/ingresoVenta');
     }
 
+    async detalleVentas ({request, response, session, view, auth}) {
+        var idPersona = session.get('idPersona', 'fail')
+        var idPuntoDeVenta = session.get('idPuntoDeVenta', 'fail');
+
+        var idProceso = request.input("proceso")
+        var persona = session.get('personaLogueada')
+        //objProds.prods = ventaProds;
+        //console.log(objProds);
+
+        var objDet = {
+            "idPersona": idPersona,
+            "idPuntoDeVenta": idPuntoDeVenta
+        };
+        //console.log(objDet);
+        var resultVentas = await data.execApi(request.hostname(),'/Incentivos/Incentivos/getDetalleVentas',objDet);
+        //var valoresMetas = "";
+        var valoresVentasCab = resultVentas.body.cabeceras;
+        var valoresVentasDet = resultVentas.body.detalles;
+        console.log(valoresVentasCab);
+        return view.render('incentivo/proceso/detalleVentas', {persona, valoresVentasCab, valoresVentasDet});
+    }
+
+
     async getProducto ({view,request, response, auth, session}) {
+        
+        var idProducto = request.input("idProducto")
+        
+        var obj = {
+            "idProducto":idProducto
+        };
+        //console.log(obj);
+        var result = await data.execApi(request.hostname(),'/Incentivos/Incentivos/getProducto',obj);
+        var personas = result.body;
+
+        response.json(personas);
+    }
+
+    async getCliente ({request, response, session}) {
+        
+        var identificador = request.input("identificador")
+        
+        var obj = {
+            "identificador":identificador
+        };
+        //console.log(obj);
+        var result = await data.execApi(request.hostname(),'/Incentivos/Incentivos/getCliente',obj);
+        var cliente = result.body;
+        //console.log(cliente);
+        response.json(cliente);
+    }
+
+    async deleteVenta ({request, response}) {
+        
+        var idVenta = request.input("idVenta");
+        
+        var obj = {
+            "idVenta": idVenta
+        };
+        //console.log(obj);
+        var result = await data.execApi(request.hostname(),'/Incentivos/Incentivos/deleteVenta',obj);
+
+        response.json(1);
+    }
+
+    async getProductoPos ({view,request, response, auth, session}) {
+        
+        var idProducto = request.input("idProducto");
+        
+        var obj = {
+            "ean":idProducto,
+            "idPuntoDeVenta": session.get("idPuntoDeVenta")
+        };
+        //console.log(obj);
+        var result = await data.execApi(request.hostname(),'/Incentivos/Incentivos/getProductoPOS',obj);
+        var personas = result.body;
+
+        response.json(personas);
+    }
+
+    async getCatalogoProductos ({request, response, session}) {
         
         var idProducto = request.input("idProducto")
         
