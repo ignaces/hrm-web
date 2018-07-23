@@ -20,7 +20,7 @@ class Proceso {
         var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getPersonasEvaluaciones',obj);
         var personas = result.body.data;
 
-        console.log(personas);
+        //console.log(personas);
 
         var avance = result.body.data.avance;
         var cliente = request.hostname().split(".")[0];
