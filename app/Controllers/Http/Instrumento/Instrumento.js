@@ -7,19 +7,18 @@ class Instrumento {
         const all = request.all();
         var idProceso = session.get('idProceso', 'fail')
        
+
+
         var idOpinante = all.idOpinante
         var codigo = all.codigo
+        var codigoComponente = all.codigoComponente
  
         var obj = {
             "idOpinante":idOpinante,
             "tipoInstrumento":codigo
         };
-
-        console.log(obj);
         
         var result = await data.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumento',obj);
-
-        console.log(result);
 
         var instrumento = result.body;
         const todo = request.all();
@@ -32,6 +31,16 @@ class Instrumento {
             "procesoPersona":""
         };
 
+        var objetoInstruccion = {
+            "codigo": codigo+"-"+codigoComponente,
+            "vista": request.url()
+        }
+
+console.log(objetoInstruccion)
+
+        var instruccion = await data.execApi(request.hostname(),'/Core/Core/getInstruccion',objetoInstruccion);
+        var instruccionResult = instruccion.body.data;
+        
         
 
         var resultado = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getPersona',objeto);
@@ -48,7 +57,16 @@ class Instrumento {
             showIntro=true;
         }
         //return view.render('Instrumento/instrumento',  {persona:persona,instrumento:instrumento,idOpinante:idOpinante});
-        return view.render('Instrumento/instrumento',  {idProceso:idProceso,clasificacion:clasificacion,instrumento:instrumento,idOpinante:idOpinante,showIntro});
+        return view.render('Instrumento/instrumento',  
+            {
+                idProceso:idProceso,
+                clasificacion:clasificacion,
+                instrumento:instrumento,
+                idOpinante:idOpinante,
+                showIntro,
+                instruccion:instruccionResult
+            }
+        );
     }
     
    
