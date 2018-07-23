@@ -1,3 +1,17 @@
+
+$(document).ready(function() {
+    $(".sortable-list").droppable({
+    
+        drop: function(event, ui) {
+            
+           var idOpinante = (ui.draggable.attr('value'));
+           var idComponente = $(this).attr("value");
+          setCuadrante(idOpinante,idComponente,"")
+        }
+      });
+});
+
+
 var objCuadrante ={}
 
 var setCuadrante = function(idOpinante,idCuadrante,justificacion){
@@ -26,15 +40,7 @@ var setCuadrante = function(idOpinante,idCuadrante,justificacion){
         }
     });
 }
-$(".sortable-list").droppable({
-    
-    drop: function(event, ui) {
-        
-       var idOpinante = (ui.draggable.attr('value'));
-       var idComponente = $(this).attr("value");
-      setCuadrante(idOpinante,idComponente,"")
-    }
-  });
+
 
 var loadCuadrantes=function(){
     clearCuadrantes();

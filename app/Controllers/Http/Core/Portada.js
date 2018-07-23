@@ -53,16 +53,13 @@ class Portada {
             condicion = resultadoTalento.body.data1;
 
             
-            var talentos = resultadoTalento.body;
+            //talentos = resultadoTalento.body;
         }catch(e){
             
         }
         
-
+        console.log(talentos);
         
-        
-        
-
         antl.switchLocale('es')
          
        
