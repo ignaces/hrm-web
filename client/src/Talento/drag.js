@@ -28,8 +28,13 @@ var setCuadrante = function(idOpinante,idCuadrante,justificacion){
         dataType: "json", 
         success: function (msg) {
            if(msg.valido==0 && justificacion==""){
-               var mensaje = 'El cuadrante seleccionado debe ser utilizado por la(s) siguientes calificaciones de desempeño: <br>' + msg.valorEde + ' <br> \
+               
+                /*var mensaje = 'El cuadrante seleccionado debe ser utilizado por la(s) siguientes calificaciones de desempeño: <br>' + msg.valorEde + ' <br> \
                Si desea continuar debe ingresar una justificación.'
+               */
+
+              var mensaje = 'Según el siguiente cuadro, existe una inconsistencia entre la Evaluación de Desempeño y la ubicación en la Matriz de Talent Review. ' + msg.valorEde + ' <br> \
+              Si aún así desea continuar, ingrese la justificación abajo'
                
                $("#explicacion").html(mensaje)
                
@@ -83,7 +88,7 @@ var loadCuadrantes=function(){
                                             <img src="'+foto+'" alt="task-user" class="thumb-sm img-circle"> \
                                         </a>    \
                                     </div>\
-                                    <div class="col-xs-6">\
+                                    <div class="col-xs-10">\
                                         <h6>\
                                             <a href="/Talento/Talento/fichaTalento?idPersona='+idPersona+'" class="">\
                                                 <span style="width: 100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display: inline-block;">'+nombre+'</span>\
