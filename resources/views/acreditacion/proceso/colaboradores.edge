@@ -3,25 +3,25 @@
 
 @section('scripts')
     <script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script>
-        <script src="/assets/plugins/datatables/dataTables.bootstrap.js"></script>
-        <script src="/assets/plugins/datatables/dataTables.buttons.min.js"></script>
-        <script src="/assets/plugins/datatables/buttons.bootstrap.min.js"></script>
-        <script src="/assets/plugins/datatables/jszip.min.js"></script>
-        <script src="/assets/plugins/datatables/pdfmake.min.js"></script>
-        <script src="/assets/plugins/datatables/vfs_fonts.js"></script>
-        <script src="/assets/plugins/datatables/buttons.html5.min.js"></script>
-        <script src="/assets/plugins/datatables/buttons.print.min.js"></script>
-        <script src="/assets/plugins/datatables/dataTables.fixedHeader.min.js"></script>
-        <script src="/assets/plugins/datatables/dataTables.keyTable.min.js"></script>
-        <script src="/assets/plugins/datatables/dataTables.responsive.min.js"></script>
-        <script src="/assets/plugins/datatables/responsive.bootstrap.min.js"></script>
-        <script src="/assets/plugins/datatables/dataTables.scroller.min.js"></script>
-        <script src="/assets/plugins/datatables/dataTables.colVis.js"></script>
-        <script src="/assets/plugins/datatables/dataTables.fixedColumns.min.js"></script>
+    <script src="/assets/plugins/datatables/dataTables.bootstrap.js"></script>
+    <script src="/assets/plugins/datatables/dataTables.buttons.min.js"></script>
+    <script src="/assets/plugins/datatables/buttons.bootstrap.min.js"></script>
+    <script src="/assets/plugins/datatables/jszip.min.js"></script>
+    <script src="/assets/plugins/datatables/pdfmake.min.js"></script>
+    <script src="/assets/plugins/datatables/vfs_fonts.js"></script>
+    <script src="/assets/plugins/datatables/buttons.html5.min.js"></script>
+    <script src="/assets/plugins/datatables/buttons.print.min.js"></script>
+    <script src="/assets/plugins/datatables/dataTables.fixedHeader.min.js"></script>
+    <script src="/assets/plugins/datatables/dataTables.keyTable.min.js"></script>
+    <script src="/assets/plugins/datatables/dataTables.responsive.min.js"></script>
+    <script src="/assets/plugins/datatables/responsive.bootstrap.min.js"></script>
+    <script src="/assets/plugins/datatables/dataTables.scroller.min.js"></script>
+    <script src="/assets/plugins/datatables/dataTables.colVis.js"></script>
+    <script src="/assets/plugins/datatables/dataTables.fixedColumns.min.js"></script>
         
     <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
-    <script src="/assets/js/dist/Instrumento.min.js?v4"></script>
-    <script src="/assets/js/dist/AcreditacionColaboradores.min.js?v"></script>
+
+    <script src="/assets/js/dist/AcreditacionColaboradores.min.js?v=2"></script>
     
     
 @endsection
@@ -37,10 +37,11 @@
     @!component('components.breadcrumb',title="Colaboradores")
     @!component('components.Core.botonera')
     <form id="formInstrumento" method="POST" action="/Instrumento/Instrumento/index">
-    {{ csrfField() }}
-    <input type="hidden" id="idOpinante" name="idOpinante"  />
-    <input type="hidden" id="codigo" name="codigo"  />
-    <input type="hidden" id="idPersona" name="idPersona"  />
+        {{ csrfField() }}
+        <input type="hidden" id="idOpinante" name="idOpinante"  />
+        <input type="hidden" id="codigo" name="codigo"  />
+        <input type="hidden" id="idPersona" name="idPersona"  />
+        <input type="hidden" id="codigoComponente" name="codigoComponente"  />
     </form>
 
     <div class="row">
@@ -125,9 +126,9 @@
                                                     
                                                     <td>
                                                         @if(instrumento.codigoEstado=="FINALIZADO")
-                                                                <button type="button" id="{{instrumento.idOpinante}}_{{instrumento.codigoTipoInstrumento}}" class="btn btn-info waves-effect waves-light disabled" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{instrumento.nombreEstado}}"> <span>Entrar</span> </button>
+                                                            <button type="button" id="{{instrumento.idOpinante}}_{{instrumento.codigoTipoInstrumento}}" codComponente="{{instrumento.codigoComponente}}" class="btn btn-info waves-effect waves-light disabled" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{instrumento.nombreEstado}}"> <span>Entrar</span> </button>
                                                         @else
-                                                            <button type="button" id="{{instrumento.idOpinante}}_{{instrumento.codigoTipoInstrumento}}_{{$parent.persona.id}}" class="btn btn-info waves-effect waves-light bInstrumento" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{instrumento.nombreEstado}}"> <span>Entrar</span> </button>
+                                                            <button type="button" id="{{instrumento.idOpinante}}_{{instrumento.codigoTipoInstrumento}}_{{$parent.persona.id}}" codComponente="{{instrumento.codigoComponente}}" class="btn btn-info waves-effect waves-light bInstrumento" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{instrumento.nombreEstado}}"> <span>Entrar</span> </button>
                                                         @endif
                                                         
                                                     </td>
