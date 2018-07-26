@@ -397,6 +397,61 @@ class Talento {
         
         return view.render('talento/fichaTalento', { objCurriculum:objCurriculum, persona:persona, idPersona:idPersona,showAll:showAll});
     }
+    async encuesta ({view,request, response, auth, session}) {
+
+        try
+        {
+
+        
+            var personaLogueada =  session.get('personaLogueada')
+            
+            var idPersona = request.input('idPersona')
+            var showAll = true
+            if(personaLogueada.id==idPersona){
+                showAll=false;
+            }
+
+            var obj = {
+                "idPersona":idPersona,
+                "idProceso":session.get('procesoOrganigrama')
+            };
+            
+            var resultPersona =  await data.execApi(request.hostname(),'/Talento/Persona/getPersona',obj);;//data.execApi(request.hostname(),'/Talento/Talento/getPersona',obj);
+            
+            var persona = resultPersona.body[0];
+
+            
+        
+            var objEncuestaLista = {
+                idPersona:idPersona
+            }
+            var resultEncuestaLista = await data.execApi(request.hostname(),'/Encuesta/Medicion/getListaEncuesta',objEncuestaLista);
+
+            var lista = resultEncuestaLista.body;
+
+            console.log(lista.data[0].id);
+
+            var idEncuestaPersona = lista.data[0].id
+            var objEnc = {
+                idEncuestaPersona:idEncuestaPersona
+            }
+            var result = await data.execApi(request.hostname(),'/Encuesta/Medicion/getInstrumento',objEnc);
+
+            var instrumento = result.body;
+            
+            return view.render('talento/encuesta', 
+            {
+                persona:persona, 
+                idPersona:idPersona,                
+
+                idEncuestaPersona:idEncuestaPersona,
+                instrumento:instrumento
+            });
+
+        } catch(e){
+            console.log(e)
+        }
+    }
 
     async addCurriculumPersona ({view,request, response, auth, session}) {
         
