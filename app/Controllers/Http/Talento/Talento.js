@@ -430,7 +430,7 @@ class Talento {
 
             console.log(lista.data[0].id);
 
-            var idEncuestaPersona = lista.data[0].id
+            var idEncuestaPersona = lista.data[0].id 
             var objEnc = {
                 idEncuestaPersona:idEncuestaPersona
             }
