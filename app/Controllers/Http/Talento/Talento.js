@@ -417,7 +417,7 @@ class Talento {
             
             var resultPersona =  await data.execApi(request.hostname(),'/Encuesta/Medicion/getPersona',obj);;//data.execApi(request.hostname(),'/Talento/Talento/getPersona',obj);
             
-            var persona = resultPersona.body[0];
+            var persona = resultPersona.body.data[0];
 
             
         
