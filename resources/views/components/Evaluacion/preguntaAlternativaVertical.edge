@@ -18,7 +18,7 @@
                         <div class="row">
                             <input type="hidden" class="pr_pregunta" id="{{data.pregunta.id}}" />
                             @each(alternativa in data.pregunta.alternativas)
-                                <div class="radio radio-info col-lg-12">
+                                <div class="radio radio-custom col-lg-12">
                                     
                                     @if(alternativa.estaSeleccionada==1)
                                     <input checked class="hidden radio-label option-button r_alternativa" type="radio" name="rd_{{data.pregunta.id}}" id="rd_{{data.pregunta.id}}_{{alternativa.id}}_{{alternativa.requiereJustificacion}}_{{data.idEncuestaPersona}}"/>

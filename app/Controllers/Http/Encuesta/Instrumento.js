@@ -9,12 +9,13 @@ class Instrumento {
         var idPregunta = request.input("idPregunta")
         var idAlternativa = request.input("idAlternativa")
         var justificacion = request.input("justificacion")
-        
+        var isChecked = request.input("isChecked")
         var obj = {
             "idEncuestaPersona":idOpinante,
             "idPregunta":idPregunta,
             "idAlternativa":idAlternativa,
             "justificacion":justificacion,
+            "isChecked":isChecked
             };
             
         var result = await data.execApi(request.hostname(),'/Encuesta/Instrumento/putRespuesta',obj);
