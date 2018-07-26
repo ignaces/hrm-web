@@ -134,7 +134,7 @@ class Accion {
         };
 
         var result = await api.execApi(request.hostname(),'/Desempeno/Accion/addObservacionAccionFinalizar',obj);  
-        this.sendNotificacion(request);
+        this.sendNotificacion(request,idEtapaTareaAccionProcesoPersona);
         return{mensaje:"ok"} 
       
     }
@@ -175,7 +175,7 @@ class Accion {
         };
 
         var result = await api.execApi(request.hostname(),'/Desempeno/Accion/updObservacionAccionFinalizar',obj);  
-        this.sendNotificacion(request);
+        this.sendNotificacion(request,idEtapaTareaAccionProcesoPersona);
         return{mensaje:"ok"}       
     }
 
@@ -392,8 +392,13 @@ class Accion {
         var obj = {
             "idEdeEtapaTareaAccionProcesoPersona":idMatriz
         };
+
+        console.log(obj);
+
         var result = await api.execApi(request.hostname(),'/Desempeno/Proceso/getEmailPorIdMatriz',obj);  
-        var correo = result.body.data;
+        var correo = result.body.data[0];
+
+        console.log(result.body.data);
 
         if(correo.email != ""){
             var obMail = new mail();
