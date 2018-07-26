@@ -412,11 +412,10 @@ class Talento {
             }
 
             var obj = {
-                "idPersona":idPersona,
-                "idProceso":session.get('procesoOrganigrama')
+                "idPersona":idPersona
             };
             
-            var resultPersona =  await data.execApi(request.hostname(),'/Talento/Persona/getPersona',obj);;//data.execApi(request.hostname(),'/Talento/Talento/getPersona',obj);
+            var resultPersona =  await data.execApi(request.hostname(),'/Encuesta/Medicion/getPersona',obj);;//data.execApi(request.hostname(),'/Talento/Talento/getPersona',obj);
             
             var persona = resultPersona.body[0];
 
