@@ -76,7 +76,6 @@ class UserController {
           "correo":correo          
           };
           
-      //var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/putRespuesta',obj);
 
       return {mensaje:"OK"}
   } 

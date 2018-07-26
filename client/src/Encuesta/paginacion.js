@@ -16,9 +16,7 @@ $(document).ready(function(){
         $("input[name='rd_"+idPregunta+"']").each(function () {
             
             if ($(this).prop('checked')) {
-               
                 respondida =true;
-                
             }
            
         });
@@ -26,7 +24,6 @@ $(document).ready(function(){
         if(respondida==false){
             checked=false;
         }
-        
         
     });
     var vacios=true;
@@ -57,18 +54,31 @@ $(document).ready(function(){
         );
         return false;
     }
+
     $("#btnAnterior").show();
     var hActivo = $(".headerActivo").eq(0);
+
+console.log("tag1");
+
     var dimension = hActivo.attr('id').split("_")[1];
-    
+    console.log("tag2");
    // $(".paginaActiva").transition({ y: '-40000px' },10000,'ease');
    
        $(".pagina").each(function(i,obj){
             if(obj==activa){
+
+
+                
+                console.log("valor i:"+i)
+
                 var domElement = $(".pagina").eq(i+1);
                 $(".paginaActiva").hide();
                 $(".paginaActiva").removeClass('paginaActiva');
+
+                console.log("tag3");
                var dimensionNew = domElement.attr('id').split("_")[1];
+               console.log("tag4");
+
                if(dimension!=dimensionNew){
                    hActivo.hide();
                    hActivo.removeClass('headerActivo');
@@ -78,6 +88,7 @@ $(document).ready(function(){
                domElement.show();
                domElement.addClass('paginaActiva');
               // domElement.transition({ y: '0px' },10000,'ease');
+              console.log("valor i:"+ i);
               if($(".pagina").length-1==i+1){
                 $("#btnSiguiente").hide();
                 $("#instrumento_btn_finalizar").show();

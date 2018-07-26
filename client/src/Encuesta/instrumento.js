@@ -3,6 +3,8 @@ import _ from 'lodash';
 $(document).ready(function(){
     
     $( ".r_alternativa" ).click(function() {
+
+        var isChecked = $(this).is(':checked');
         
         var id = $( this ).attr('id');
         
@@ -12,7 +14,9 @@ $(document).ready(function(){
         var requiereJustificacion = arr[3]*1;
         var idOpinante =arr[4]; 
         var justificacion = "";
-        var txtJustificacion = "#txt_"+idPregunta;
+        var txtJustificacion = "#txt_"+idPregunta+"_"+idAlternativa+"_"+requiereJustificacion+"_"+idOpinante;
+
+        
 
         if(requiereJustificacion==1){
             $(txtJustificacion).show();
@@ -27,10 +31,11 @@ $(document).ready(function(){
             justificacion=$(txtJustificacion).val()
         }
        
-        putRespuesta(idOpinante, idPregunta, idAlternativa, justificacion);
+        putRespuesta(idOpinante, idPregunta, idAlternativa, justificacion, isChecked);
     });
 
     $( ".txt_pregunta" ).focusout(function() {  
+
         var id = $( this ).attr('id');
         var idAlternativa = $( this ).attr('idAlternativa');
         
@@ -43,17 +48,34 @@ $(document).ready(function(){
             justificacion=$("#txt_"+idPregunta).val()
         }
        
-        putRespuesta(idOpinante, idPregunta, idAlternativa, justificacion);
+        putRespuesta(idOpinante, idPregunta, idAlternativa, justificacion, true);
     });
 
-    var putRespuesta = function(idOpinante, idPregunta, idAlternativa, justificacion){
-        var obj = { 
+    $( ".txt_justificacion" ).focusout(function() {  
+
+        var id = $( this ).attr('id');
+        var idAlternativa = $( this ).attr('idAlternativa');
+        
+        var arr = id.split("_");
+        var idPregunta = arr[1];
+        var idOpinante =arr[4]; 
+        var justificacion = ( $(this).val() ) ? $(this).val() : ""; //Si existe valor en el txt se utiliza, de lo contrario se setea en ""
+       
+        putRespuesta(idOpinante, idPregunta, idAlternativa, justificacion, true);
+    });
+
+    var putRespuesta = function(idOpinante, idPregunta, idAlternativa, justificacion, isChecked){
+        var obj= { 
             idOpinante:idOpinante,
+            isChecked:isChecked,
             idPregunta:idPregunta,
             idAlternativa:idAlternativa,
             justificacion:justificacion,
             idFacsimil:$("#idFacsimil").val()
+            
          };
+
+         
         
         $.ajax({
             type: "GET",
@@ -74,6 +96,7 @@ $(document).ready(function(){
             }
         });
     };
+
     var setAvance = function(avance){
         $("#progress_bar").attr('aria-valuenow',avance)
         $("#progress_bar").attr('style','width:'+avance+'%')
