@@ -33,10 +33,11 @@ var setCuadrante = function(idOpinante,idCuadrante,justificacion){
                Si desea continuar debe ingresar una justificación.'
                */
 
-              var mensaje = 'Según el siguiente cuadro, existe una inconsistencia entre la Evaluación de Desempeño y la ubicación en la Matriz de Talent Review. ' + msg.valorEde + ' <br> \
+              var mensaje = 'Según el siguiente cuadro, existe una inconsistencia entre la Evaluación de Desempeño y la ubicación en la Matriz de Talent Review. <br> \
+              <img src=""  \
               Si aún así desea continuar, ingrese la justificación abajo'
                
-               $("#explicacion").html(mensaje)
+               //$("#explicacion").html(mensaje)
                
                $("#justificaModal").modal('show');
            }else{
