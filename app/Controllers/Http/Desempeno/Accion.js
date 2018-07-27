@@ -393,12 +393,8 @@ class Accion {
             "idEdeEtapaTareaAccionProcesoPersona":idMatriz
         };
 
-        console.log(obj);
-
         var result = await api.execApi(request.hostname(),'/Desempeno/Proceso/getEmailPorIdMatriz',obj);  
         var correo = result.body.data[0];
-
-        console.log(result.body.data);
 
         if(correo.email != ""){
             var obMail = new mail();

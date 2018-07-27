@@ -35,6 +35,7 @@ Route.get('/Acreditacion/Informe/pdf','Acreditacion/Informe.pdf')
 
 
 Route.get('/Account/Register/doRegisterPersonas','/Account/Register.doRegisterPersonas')
+Route.get('/Account/Register/updateUser','/Account/Register.updateUser')
 
 
 
