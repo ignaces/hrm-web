@@ -23,18 +23,22 @@ class Register{
     }
 
     async updateUser(){
-        var id = "1986";
-        var user = await user.find();
+        /*var id = "1137";
+        var user = await user.find(id);
 
         console.log(user.username);
-        user.password = '17463775-K';
+        user.password = '8609816-4';
+        user.username = '8609816-4';
 
         await user.save();
-
-        const user = await User.find("1986");
+*/
+        /*
+        const user = await User.find("1137");
         console.log("uers:"+user.username);
-        user.password = "12345678";
+        user.password = '8609816-4';
+        user.username = '8609816-4';
         await user.save();
+        */
     }
     
     async doRegisterPersonas({view,request, response}) {
