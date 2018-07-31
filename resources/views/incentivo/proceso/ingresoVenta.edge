@@ -134,6 +134,8 @@
                                     $("#descripcion_producto").html(data[0].descripcion);
                                     $("#envase_producto").html(data[0].envase);
                                     $("#id_producto").val(data[0].idProducto);
+                                    $("#valor_precio").val(data[0].precio);
+
 
                                     var submarca = data[0].submarca;
                                     var envase = data[0].envase;
@@ -145,7 +147,7 @@
                                     
                                     if($("#prod_"+idproducto))
                                     {
-                                        $("#valor_precio").val($("#idPrecioProdUn_"+idproducto).val());
+                                      //  $("#valor_precio").val($("#idPrecioProdUn_"+idproducto).val());
                                     }
                                 }
                             }
