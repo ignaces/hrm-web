@@ -66,6 +66,7 @@ class Talento {
         //cargosselectedoption
         var cargos = request.input("cargos");
         var tr = request.input("tr");
+        var jefatura = request.input("jefatura");
 
         //datos personas
         var identificador = request.input("identificador");
@@ -78,6 +79,7 @@ class Talento {
             "clasificaciones":clasificaciones,
             "cargos":cargos,
             "tr":tr,
+            "jefatura":jefatura,
             "identificador":identificador,
             "nombres":nombres,
             "paterno":paterno,
@@ -216,8 +218,12 @@ class Talento {
             var resultadoCargos = await data.execApi(request.hostname(),'/Talento/Talento/obtenerCargosPorEmpresa',obj4);
             var cargosPorEmpresa = resultadoCargos.body;
 
-            
-        //----------------------------------------------------------------------------------
+            var resultJefaturas = await data.execApi(request.hostname(),'/Talento/Talento/getPersonasArbol',{
+                "idProceso":idTalentoProceso,
+                "idPersonaOpinante":idOpinante
+            });
+            var jefaturas= resultJefaturas.body;
+       //-----------------------------------------------------------------------------------
        //------------------------------------- CARGA DE COMBOBOX CLASIFICACION  ------------
        //-----------------------------------------------------------------------------------
        var resultadoClasificaciones = await data.execApi(request.hostname(),'/Talento/Talento/obtenerClasificaciones',obj5);
@@ -229,7 +235,8 @@ class Talento {
             cuadrantes:cuadrantes,
             colaboradoresEva:colaboradoresEva,
             cargosPorEmpresa:cargosPorEmpresa,
-            clasificacionesPorEmpresa:clasificacionesPorEmpresa
+            clasificacionesPorEmpresa:clasificacionesPorEmpresa,
+            jefaturas
         });
         
     }
