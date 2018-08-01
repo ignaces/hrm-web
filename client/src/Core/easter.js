@@ -17,6 +17,9 @@ function handleKeyDown(e) {
     if (shiftPressed && altPressed && ctrlPressed && evt.keyCode==80) {
         loadEaster();
     }
+    if (shiftPressed && altPressed && ctrlPressed && evt.keyCode==68) {
+        loadDoom();
+    }
       
       
     return true;
@@ -46,6 +49,11 @@ function loadEaster(){
             
             pauseGame();
         });
+
+}
+function loadDoom(){
+    window.open("/assets/plugins/doom",'_blank');
+        
 
 }
 

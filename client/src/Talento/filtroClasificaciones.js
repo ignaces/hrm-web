@@ -17,6 +17,7 @@ $("#btnBuscar").on('click',function() {
         //selected disabled hidden
         var cargos = $('#cmbCargo').val();
         var tr = $('#cmbCuadrante').val();
+        var jefatura = $('#cmbJefatura').val();
 
         $('.buscarCla').each(function(i, obj) {
             clasificaciones= $.merge(clasificaciones,$(this).val());
@@ -30,6 +31,7 @@ $("#btnBuscar").on('click',function() {
         clasificaciones:clasificaciones,  //nombreFiltro   //bb
         cargos:cargos,
         tr:tr,
+        jefatura:jefatura,
         identificador:rut,
         nombres:nombres,
         paterno:paterno,

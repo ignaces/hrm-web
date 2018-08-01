@@ -9,6 +9,14 @@ $(document).ready(function() {
           setCuadrante(idOpinante,idComponente,"")
         }
       });
+      $("#upcoming").sortable({
+        connectWith: ".itemCuadrante",
+        placeholder: 'task-placeholder',
+        forcePlaceholderSize: true,
+        update: function (event, ui) {
+
+        }
+    }).disableSelection();
 });
 
 
