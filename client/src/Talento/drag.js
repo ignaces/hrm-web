@@ -80,6 +80,8 @@ var loadCuadrantes=function(){
                 var idPersona = colaboradores[i].idPersona;
 
                 var edd = colaboradores[i].edd;
+
+                var trAnterior = colaboradores[i].trAnterior;
                 
                 if(foto==''){
                     if(genero=="M"){
@@ -101,7 +103,7 @@ var loadCuadrantes=function(){
                                         <h6>\
                                             <a href="/Talento/Talento/fichaTalento?idPersona='+idPersona+'" class="">\
                                                 <span style="width: 100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display: inline-block;">'+nombre+'</span>\
-                                                <span style="width: 100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display: inline-block;">'+edd+'</span>\
+                                                <span style="width: 100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display: inline-block;">'+edd+' - TR Anterior '+trAnterior+'</span>\
                                             </a>\
                                         </h6>\
                                     </div>\
