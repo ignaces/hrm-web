@@ -243,10 +243,14 @@ class Proceso {
     async getProductoPos ({view,request, response, auth, session}) {
         
         var idProducto = request.input("idProducto");
+        var nombre = request.input("nombre");
+        var marca = request.input("marca");
         
         var obj = {
-            "ean":idProducto,
-            "idPuntoDeVenta": session.get("idPuntoDeVenta")
+            ean:idProducto,
+            idPuntoDeVenta: session.get("idPuntoDeVenta"),
+            nombre: nombre,
+            marca: marca
         };
         //console.log(obj);
         var result = await data.execApi(request.hostname(),'/Incentivos/Incentivos/getProductoPOS',obj);

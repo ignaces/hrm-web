@@ -15,321 +15,21 @@
             }
         </style>
 @endsection
+
 @section('scripts')
-        <script src="/assets/plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.min.js"></script>
-        <script src="/assets/plugins/select2/js/select2.min.js" type="text/javascript"></script>
-        <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
-      <script type="text/javascript" src="/assets/js/instascan.min.js"></script>
-    <script>
-            var submarca = "";
-            var envase = "";
-            var idproducto = 0;
-            
-            function guardarVenta()
-            {
-                if($(".idProducto") && $(".idProducto").length > 0 )
-                {
-                    var obj = {};
-                    
-                    var arr = [];
+    <script src="/assets/plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.min.js"></script>
+    <script src="/assets/plugins/select2/js/select2.min.js" type="text/javascript"></script>
+    <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+    <script type="text/javascript" src="/assets/js/instascan.min.js"></script>
 
-                    $(".idProducto").each(function(){
-                        idProducto = $(this).attr("id");
-                        
-                        obj = {
-                            "valor": 0,
-                            "cantidad": $("#idCantProd_"+idProducto).val(),
-                            "precioUnitario": $("#idPrecioProdUn_"+idProducto).val(),
-                            "fotoSku": '',
-                            "idProducto": idProducto
-                        };
-
-                        arr.push(obj);
-                    });
-
-                    var objForm = {};
-
-                    var lat = "";
-                    var lon = "";
-                    var idCliente = $("#idCliente").val();
-                    var identificadorCliente = $("#rutCliente").val();
-                    var nombreCliente = $("#nombreCliente").val();
-                    var apellidoCliente = $("#apellidoCliente").val();
-                    var emailCliente = $("#emailCliente").val();
-                    var telefonoCliente = $("#telefonoCliente").val();
-                    var productos = JSON.stringify(arr);
-
-                    objForm = {
-                        "lat": lat,
-                        "lon": lon,
-                        "idCliente": idCliente,
-                        "identificadorCliente": identificadorCliente,
-                        "nombreCliente": nombreCliente,
-                        "apellidoCliente": apellidoCliente,
-                        "emailCliente": emailCliente,
-                        "telefonoCliente": telefonoCliente,
-                        "productos": productos 
-                        //"productos": ""
-                        ,"_csrf": $("#_csrf").val()
-                    };
-
-                    //console.log(productos);
-                    
-                    
-                    $.ajax({
-                            url: '/Incentivo/Proceso/addVenta',
-                            type: "POST",
-                            data: objForm,
-                            dataType: "json",
-                            success: function (data) {
-                                //swal("Venta Finalizada", "Tu venta se ha guardado correctamente", "success");
-
-                                swal({
-                                    title: 'Venta Finalizada',
-                                    text: 'Venta guardada correctamente',
-                                    type: 'success',
-                                    confirmButtonText: 'Aceptar',
-                                }).then( function(result) {
-                                    location.href = "/Incentivo/Proceso/colaboradores";
-                                });
-
-                                //location.reload();
-                            },
-                            error: function(e){
-                                console.log(e);
-                            }
-                    });
-                    //console.log(arr);
-                }
-                else
-                {
-                    swal("Advertencia", "Debes ingresar al menos un producto para poder guardar la venta.", "error");
-                    return false;
-                }
-            }
-
-            $("#buscar_producto").click(function(){
-                //console.log($("#codigo_producto").val());
-                $.ajax({
-                            url: '/Incentivo/Proceso/getProductoPos',
-                            type: "GET",
-                            data: {idProducto:  $("#codigo_producto").val()},
-                            dataType: "json",
-                            success: function (data) {
-                                if(data.length == 0)
-                                {
-                                    $("#datos_producto").hide();
-                                    swal("Advertencia", "Producto no existe", "error");
-
-                                    submarca = "";
-                                    envase = "";
-                                    idproducto = 0;
-                                }
-                                else
-                                {
-                                    $("#datos_producto").show();
-                                    $("#caja_productos").show();
-                                    $("#marca_producto").html(data[0].marca);
-                                    $("#submarca_producto").html(data[0].submarca);
-                                    $("#descripcion_producto").html(data[0].descripcion);
-                                    $("#envase_producto").html(data[0].envase);
-                                    $("#id_producto").val(data[0].idProducto);
-                                    $("#valor_precio").val(data[0].precio);
-
-
-                                    var submarca = data[0].submarca;
-                                    var envase = data[0].envase;
-                                    var idproducto = data[0].idProducto;
-
-                                    $("#valor_submarca").val(submarca);
-                                    $("#valor_envase").val(envase);
-                                    //$("#valor_idproducto").val(idProducto);
-                                    
-                                    if($("#prod_"+idproducto))
-                                    {
-                                      //  $("#valor_precio").val($("#idPrecioProdUn_"+idproducto).val());
-                                    }
-                                }
-                            }
-                });
-            });
-
-            $("#agregar_producto").click(function(){
-                
-                if($("#valor_cantidad").val()==0 || $("#valor_cantidad").val() == "" || $("#valor_cantidad").val().lengtg == 0)
-                {
-                    swal("Advertencia", "Debes ingresar una cantidad válida.", "error");
-                    return false;
-                }
-
-                if($("#valor_precio").val()==0 || $("#valor_precio").val() == "" || $("#valor_precio").val().lengtg == 0)
-                {
-                    swal("Advertencia", "Debes ingresar un precio válido", "error");
-                    return false;
-                }
-
-                $("#fila_inicial").hide();
-
-                $("#tr_total").remove();
-
-                var cont = "";
-                var n_invoice = 1;
-
-                $(".productos_ingresados").each(function(){
-                    n_invoice++;
-                });
-                
-                var existeInvoice = 0;
-                
-                $(".idProducto").each(function(){
-                    //console.log($(this).attr("id"));
-                    if($("#id_producto").val() == $(this).attr("id"))
-                    {
-                        existeInvoice = $("#id_producto").val();
-                    }
-                });
-                
-                var cuentaProds = 0;
-                var sumaPrecios = 0;
-
-                if(existeInvoice == 0)
-                {
-                    cuentaProds = $("#valor_cantidad").val();
-                    sumaPrecios = $("#valor_precio").val()*$("#valor_cantidad").val();
-
-                    var idProdStr = '"'+$("#id_producto").val()+'"';
-
-                    cont = "<tr class='productos_ingresados ' id='prod_"+$("#id_producto").val()+"'>";
-                    cont = cont + "<td><p class='nInvoice'>"+n_invoice+"</p> <input type='hidden' class='idProducto' id='"+$("#id_producto").val()+"' value='"+$("#id_producto").val()+"'> </td>";
-                    cont = cont + "<td>"+$("#valor_submarca").val()+" "+$("#valor_envase").val()+"</td>";
-                    cont = cont + "<td align='right'><input type='hidden' class='cantidadProd prod_"+$("#id_producto").val()+"' id='idCantProd_"+$("#id_producto").val()+"' value='"+$("#valor_cantidad").val()+"'><p id='txtCant_"+$("#id_producto").val()+"'>"+$("#valor_cantidad").val()+"</p></td>";
-                    cont = cont + "<td align='right'><input type='hidden' class='precioProdUn prod_"+$("#id_producto").val()+"' id='idPrecioProdUn_"+$("#id_producto").val()+"' value='"+$("#valor_precio").val()+"'> <input type='hidden' class='precioProd' id='idSumPrecios_"+$("#id_producto").val()+"' value='"+$("#valor_precio").val()*$("#valor_cantidad").val()+"'><p id='txtPrecio_"+$("#id_producto").val()+"'>$"+Math.round(sumaPrecios)+"</p></td>";
-                    cont = cont + "<td align='center' valign='middle' class='remProd' id='rem_prod_"+$("#id_producto").val()+"' style='cursor: pointer;' onclick='eliminarProducto("+idProdStr+");'><i class='fa fa-trash'></i></td>";
-
-                    cont = cont + "</tr>";
-                    
-                }
-                else{
-                    var cuentaProdsAct = parseInt($("#idCantProd_"+existeInvoice).val())+parseInt($("#valor_cantidad").val());
-                    var sumaPreciosAct = parseInt($("#idSumPrecios_"+existeInvoice).val())+parseInt(parseInt($("#valor_precio").val())*parseInt($("#valor_cantidad").val()));
-
-                    $("#idPrecioProdUn_"+existeInvoice).val($("#valor_precio").val());
-
-                    $("#idCantProd_"+existeInvoice).val(cuentaProdsAct);
-                    $("#idSumPrecios_"+existeInvoice).val(sumaPreciosAct);
-
-                    $("#txtCant_"+existeInvoice).html(cuentaProdsAct);
-                    $("#txtPrecio_"+existeInvoice).html("$"+sumaPreciosAct);
-                    
-                }
-
-                $(".cantidadProd").each(function(){
-                    cuentaProds = parseInt(cuentaProds) + parseInt($(this).val());
-                });
-
-                $(".precioProd").each(function(){
-                    sumaPrecios = parseInt(sumaPrecios) + parseInt($(this).val());
-                });
-
-                cont = cont + "<tr id='tr_total'>";
-                cont = cont + "<td colspan='2' align='right' valign='middle'>Total:</td>";
-                cont = cont + "<td align='right' valign='middle'>"+cuentaProds+"</td>";
-                cont = cont + "<td align='right' valign='middle'>$"+sumaPrecios+"</td>";
-                cont = cont + "<td align='right' valign='middle'></td>";
-                    
-                cont = cont + "</tr>";
-                
-                $("#tabla_invoice").append(cont);
-                $("#valor_submarca").val("");
-                $("#valor_envase").val("");
-                $("#valor_idproducto").val("");
-                $("#valor_cantidad").val("");
-                $("#valor_precio").val("");
-                $("#codigo_producto").val("");
-                $("#datos_producto").hide();
-            });
-
-      var startScanner = function(){
-            let scanner = new Instascan.Scanner({ video: document.getElementById('scanner-container') });
-                scanner.addListener('scan', function (content) {
-                     $("#modal-camara").modal("hide");
-                        $("#codigo_producto").val(content);
-                        $("#buscar_producto").trigger("click");
-                });
-                Instascan.Camera.getCameras().then(function (cameras) {
-                    if (cameras.length > 0) {
-                        if(cameras.length>1){
-                                scanner.start(cameras[1]);  
-                        }else{
-                            scanner.start(cameras[0]);  
-                        }
-                        
-                    } else {
-                    console.error('No cameras found.');
-                    }
-                }).catch(function (e) {
-                    console.error(e);
-                });
-      }
-      
-    
-
-            $("#btn_camara").click(function(){
-              
-                    startScanner();
-                    $("#modal-camara").modal("show");
-              
-              
-            });
-
-
-            function eliminarProducto(id)
-            {
-                $("#prod_"+id).remove();
-                //alert($(".productos_ingresados").length);
-                $("#tr_total").remove();
-
-                var cuentaProds = 0;
-                var sumaPrecios = 0;
-
-                if($(".productos_ingresados").length > 0)
-                {
-                    $(".cantidadProd").each(function(){
-                        cuentaProds = parseInt(cuentaProds) + parseInt($(this).val());
-                    });
-
-                    $(".precioProd").each(function(){
-                        sumaPrecios = parseInt(sumaPrecios) + parseInt($(this).val());
-                    });
-
-                    var cont =  "<tr id='tr_total'>";
-                    cont = cont + "<td colspan='2' align='right' valign='middle'>Total:</td>";
-                    cont = cont + "<td align='right' valign='middle'>"+cuentaProds+"</td>";
-                    cont = cont + "<td align='right' valign='middle'>$"+sumaPrecios+"</td>";
-                    cont = cont + "<td align='right' valign='middle'></td>";
-                        
-                    cont = cont + "</tr>";
-
-                    $("#tabla_invoice").append(cont);
-
-                    var n_invoice = 1;
-
-                    $(".nInvoice").each(function(){
-                        $(this).html(n_invoice);
-                        n_invoice++;
-                    });
-                }
-                else
-                {
-                    $("#fila_inicial").show();
-                }
-            }
-                
-    </script>
+    <script type="text/javascript" src="/assets/js/dist/IncentivoIngresoVenta.min.js?v=14"></script>
 @endsection
   
 
 @section('content')
+
+
+
     
     <input type="hidden" id="_csrf" name="_csrf" value="{{ csrfToken }}">
     <div id="modal-camara" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="full-width-modalLabel" aria-hidden="true">
@@ -349,196 +49,215 @@
     </div>    
 
     <div id="wrapper">
-            <!-- ============================================================== -->
-            <!-- Start right Content here -->
-            <!-- ============================================================== -->
-            <div class="content-page">
-                <!-- Start content -->
-                <div class="content">
-                            <div class="panel panel-color panel-primary">
-                                        <div class="panel-heading">
-                                            <!--button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button-->
-                                            <h3 class="panel-title">Guardar Venta</h3>
+           
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+                <div class="panel panel-color panel-primary">
+                    <div class="panel-heading">
+                        <!--button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button-->
+                        <h3 class="panel-title">Guardar Venta</h3>
+                    </div>
+
+                    <div class="panel-body">
+                        <form class="form-horizontal" role="form">
+                            <div class="portlet">
+                                    
+                                <div class="portlet-heading bg-custom">
+                                    <h3 class="panel-title">Ingresar Producto</h3>
+                                    <div class="clearfix"></div>
+                                </div>
+                                        
+                                <div class="panel-collapse collapse in" aria-expanded="true" style="">
+                                    <div class="portlet-body">
+                                        
+                                        <div class="form-group row">
+                                            <label class="col-md-2 col-xs-12 col-form-label">Nombre producto</label>
+                                            <div class="input-group col-md-10 col-xs-12">
+                                                <input type="text" id="txtNombreProducto" name="example-input1-group1" class="form-control" placeholder="Ingrese Nombre producto a buscar">
+                                            </div>
                                         </div>
 
-                                        <div class="panel-body">
-                                            <form class="form-horizontal" role="form">
-                                                <div class="portlet">
-                                                        
-                                                            <div class="portlet-heading bg-custom">
-                                                                <h3 class="panel-title">Ingresar Producto</h3>
-                                                                <div class="clearfix"></div>
-                                                            </div>
-                                                            
-                                                        <div id="prod_{{prod}}" class="panel-collapse collapse in" aria-expanded="true" style="">
-                                                            <div class="portlet-body">
-                                                                <div class="form-group">
-
-                                                                        <div class="col-md-12">
-                                                                            <table width=100%>
-                                                                                <tr>
-                                                                                    <td width="90%">
-                                                                                        <div class="input-group">
-                                                                                            <span class="input-group-addon" id="btn_camara"><i class="fa fa-camera"></i></span>
-                                                                                            <input type="text" id="codigo_producto" name="example-input1-group1" class="form-control" placeholder="Buscar Producto">
-                                                                                            <input type="hidden" id="valor_idproducto">
-                                                                                        </div>
-                                                                                    </td>
-
-                                                                                    <td width="1%">
-
-                                                                                    </td>
-
-                                                                                    <td width="9%">
-                                                                                        <a class="btn btn-success" name="" id="buscar_producto"><i class="fa fa-search"></i></a>
-                                                                                    </td>
-                                                                                </tr>
-
-                                                                                <tr>
-                                                                                    <td colspan="3" align="center">
-                                                                                        <div class="row">&nbsp;</div>
-                                                                                        <div class="row">
-                                                                                            <a class="btn btn-success" name="" id="buscar_producto"><i class="fa fa-list"></i> Ver Catálogo</a>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                
-                                                                            </table>
-
-                                                                            <div class="row" style="display: none;" id="datos_producto">
-                                                                                <div class="col-lg-12">
-                                                                                    &nbsp;
-                                                                                </div>
-                                                                            
-                                                                                <div class="col-lg-12">
-                                                                                    <table width="100%">
-                                                                                        <tr>
-                                                                                            <td>
-                                                                                                <b>Marca:</b>
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <p id="marca_producto"></p>
-                                                                                                <input type="hidden" id="id_producto">
-                                                                                            </td>
-                                                                                        </tr>    
-
-                                                                                        <tr>
-                                                                                            <td>
-                                                                                                <b>Submarca:</b>
-                                                                                            </td>
-
-                                                                                            <td>
-                                                                                                <p id="submarca_producto"></p>
-                                                                                                <input type="hidden" id="valor_submarca">
-                                                                                            </td>
-
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td>
-                                                                                                <b>Envase:</b>
-                                                                                            </td>
-
-                                                                                            <td>
-                                                                                                <p id="envase_producto"></p>
-                                                                                                <input type="hidden" id="valor_envase">
-                                                                                            </td>
-
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td>
-                                                                                                <b>Descripcion:</b>
-                                                                                            </td>
-
-                                                                                            <td>
-                                                                                                <p id="descripcion_producto"></p>
-                                                                                            </td>
-
-                                                                                        </tr>
-                                                                                    </table>
-                                                                                </div>
-
-                                                                                <div class="col-lg-12">
-                                                                                    &nbsp;
-                                                                                </div>
-
-                                                                                <div class="col-md-12">
-                                                                                    <table width=100%>
-                                                                                        <tr>
-                                                                                            <td width="49%">
-                                                                                                <input type="number" class="form-control" placeholder="Cantidad" pattern="[0-9]*" id="valor_cantidad">
-                                                                                            </td>
-
-                                                                                            <td width="2%">
-
-                                                                                            </td>
-
-                                                                                            <td width="49%">
-                                                                                                <input type="number" class="form-control" placeholder="Precio" pattern="[0-9]*" id="valor_precio">
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                    </table>
-                                                                                </div>
-
-                                                                                <div class="col-lg-12">
-                                                                                    &nbsp;
-                                                                                </div>
-
-                                                                                <div class="col-lg-12">
-                                                                                    <a class="btn btn-primary" style="width: 100%;" id="agregar_producto">Agregar a la Venta</a>
-                                                                                </div>
-                                                                            </div>
-                                                                        
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                </div>
-
-                                                <div class="portlet" id="caja_productos" style="display: none;">
-                                                        
-                                                            <div class="portlet-heading bg-custom">
-                                                                <h3 class="panel-title">Productos Ingresados</h3>
-                                                                <div class="clearfix"></div>
-                                                            </div>
-                                                            
-                                                        <div id="productos_ingresados" class="panel-collapse collapse in" aria-expanded="true" style="">
-                                                            <div class="portlet-body">
-
-                                                            <table width="100%" id="tabla_invoice" class="table table-bordered m-0">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th width="20">#</th>
-                                                                        <th>Producto</th>
-                                                                        <th>Cantidad</th>
-                                                                        <th>Precio</th>
-                                                                        <th></th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tr id="fila_inicial">
-                                                                    <td colspan="5" align="center"><br>No se han ingresado productos<br><br></td>
-                                                                </tr>
-                                                            </table>
-
-                                                            </div>
-                                                        </div>
-
-                                                </div>
-
-                                                </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-2 col-form-label col-xs-12">Marca producto</label>
+                                            <div class="input-group col-md-10 col-xs-12">
+                                                <input type="text" id="txtMarcaProducto" name="example-input1-group1" class="form-control" placeholder="Ingrese Marca producto a buscar">
                                             </div>
-                                                    @!component('components.Incentivos.RegistrarCliente')
+                                        </div>
 
-                                                    <div class="form-group">
-                                                        <div class="col-md-12">
-                                                            <button type="button" class="btn btn-success waves-effect w-md waves-light" style="width: 100%;" onclick="guardarVenta();">Guardar Venta</button>
-                                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-2 col-form-label col-xs-12">Código producto</label>
+                                            <div class="input-group col-md-10 col-xs-12">
+                                                <span class="input-group-addon" id="btn_camara"><i class="fa fa-camera"></i></span>
+                                                <input type="text" id="codigo_producto" name="example-input1-group1" class="form-control" placeholder="Ingrese código producto a buscar">
+                                                <input type="hidden" id="valor_idproducto">                                                
+                                                <!--
+                                                <span class="input-group-btn">
+                                                        <a class="btn btn-success" name="" id="buscar_producto"><i class="fa fa-search"></i></a>
+                                                </span>
+                                                -->
+                                            </div>
+                                        </div>
+                                            
+                                            
+                                        <div class="row m-t-15 m-b-15" style="text-align:center;">
+                                            <a class="btn btn-success" name="" id="btnBuscarProducto"><i class="fa fa-search"></i> Buscar</a>
+                                        </div>
+                                            
+                                        
+                                        <div class="col-12" id="fichaProducto" v-if="producto!=null">
+                                            <div class="card-box">
+
+                                                <input type="hidden" id="id_producto" v-model="producto.idProducto">
+                                                <input type="hidden" id="valor_submarca" v-model="producto.subMarca">
+                                                <input type="hidden" id="valor_envase" v-model="producto.envase">
+                                    
+                                                <h5 class="header-title m-t-0">@{{producto.submarca}}</h5>
+                                    
+                                                <span class="text-muted font-13">
+                                                    <b>Marca:</b> @{{producto.marca}}
+                                                </span><br>
+                                                <span class="text-muted font-13">
+                                                        <b>Envase:</b> @{{producto.envase}}
+                                                </span><br>
+                                                <span class="text-muted font-13">
+                                                        <b>Descripcion:</b> @{{producto.descripcion}}
+                                                </span>
+
+                                                <br><br>
+
+                                                <table width=100%>
+                                                    <tr>
+                                                        <td width="49%">
+                                                            <input type="number" class="form-control" placeholder="Cantidad" pattern="[0-9]*" id="valor_cantidad">
+                                                        </td>
+
+                                                        <td width="2%">
+
+                                                        </td>
+
+                                                        <td width="49%">
+                                                            <input type="number" class="form-control" placeholder="Precio" pattern="[0-9]*" id="valor_precio" v-model="producto.precio">
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                    
+                                            </div>
+                                        </div><!-- end col -->
+
+
+
+                                                          
+                                                 
+                                                   
+
+                                                   
+
+
+                                                    <div class="col-lg-12">
+                                                        <a class="btn btn-primary" style="width: 100%;" id="agregar_producto">Agregar a la Venta</a>
                                                     </div>
-                                            </form>
+                                                
+                                                                    
+                                            </div>
+                                        </div>
                                     </div>
-
                                 </div>
-                    
-                </div>
+                            </div>
+
+                            <div class="portlet" id="caja_productos" style="display: none;">
+                                    
+                                <div class="portlet-heading bg-custom">
+                                    <h3 class="panel-title">Productos Ingresados</h3>
+                                    <div class="clearfix"></div>
+                                </div>
+                                        
+                                <div id="productos_ingresados" class="panel-collapse collapse in" aria-expanded="true" style="">
+                                    <div class="portlet-body">
+
+                                        <table width="100%" id="tabla_invoice" class="table table-bordered m-0">
+                                            <thead>
+                                                <tr>
+                                                    <th width="20">#</th>
+                                                    <th>Producto</th>
+                                                    <th>Cantidad</th>
+                                                    <th>Precio</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tr id="fila_inicial">
+                                                <td colspan="5" align="center"><br>No se han ingresado productos<br><br></td>
+                                            </tr>
+                                        </table>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    @!component('components.Incentivos.RegistrarCliente')
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-success waves-effect w-md waves-light" style="width: 100%;" id="btnGuardarVenta">Guardar Venta</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-        </div> 
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="modalProductos" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel">Seleccione un producto</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-md-12" id="app">
+                            <div class="row">
+                                <div class="col-12" v-for="producto in productos" v-on:click="selectProducto(producto)">
+                                    <div class="card-box">
+                            
+                                        <h5 class="header-title m-t-0">@{{producto.submarca}}</h5>
+                            
+                                        <span class="text-muted font-13">
+                                            <b>Marca:</b> @{{producto.marca}}
+                                        </span><br>
+                                        <span class="text-muted font-13">
+                                                <b>Envase:</b> @{{producto.envase}}
+                                        </span><br>
+                                        <span class="text-muted font-13">
+                                                <b>Descripcion:</b> @{{producto.descripcion}}
+                                        </span>
+                                        <button type="button" v-on:click="selectProducto(producto)" class="pull-right btn btn-primary waves-effect w-md waves-light">Seleccionar</button>
+                                    </div>
+                                </div><!-- end col -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+
+    
 @endsection
