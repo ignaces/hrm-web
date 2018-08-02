@@ -27,13 +27,15 @@ class Proceso {
             "idPersona": "",
             "idPuntoDeVenta": idPuntoDeVenta
         };
-        console.log(objMet);
+        //console.log(objMet);
         var resultMetas = await data.execApi(request.hostname(),'/Incentivos/Incentivos/getValoresMeta',objMet);
+        var resultMetasBonoMix = await data.execApi(request.hostname(),'/Incentivos/Incentivos/getValoresMetaBonoMix',objMet);
         //var valoresMetas = "";
         var valoresMetas = resultMetas.body[0];
-        console.log(valoresMetas);
+        var valoresMetasBonoMix = resultMetasBonoMix.body;
+        console.log(valoresMetasBonoMix);
         
-        return view.render('incentivo/proceso/colaboradores', {persona, valoresMetas});
+        return view.render('incentivo/proceso/colaboradores', {persona, valoresMetas, valoresMetasBonoMix});
     }
 
     async supervisor ({view,request, response, auth, session}) {
