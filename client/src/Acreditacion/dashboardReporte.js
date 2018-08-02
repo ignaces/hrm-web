@@ -1,6 +1,6 @@
 $(document).ready(function(){
     $("#btnExcelReporte").click(function(){
-        window.location.href="/Acreditacion/Informe/resultadosDownload?proceso="+'a087578b-20a7-11e8-80db-bc764e10787e';
+        window.location.href="/Acreditacion/Informe/resultadosDownload?proceso="+idProceso;
     });
     $('#tblPersonas').DataTable({
       "language": {

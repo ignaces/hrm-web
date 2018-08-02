@@ -11,8 +11,6 @@ const readFile = Helpers.promisify(fs.readFile)
 class Informe {
     async index({ view, request, response, auth }) {
 
-console.log(request.hostname());
-
         var conDetalle = request.input("cd");
         var idPersona = request.input("persona");
         var idProcesoPersona = request.input("procesoPersona")
@@ -142,7 +140,7 @@ console.log(request.hostname());
         }
         var avance = Math.round((detalle.finalizados * 100) / detalle.evaluados);
         detalle.avance = `${avance} %`;
-        return view.render('acreditacion/informe/dashboard', { personas, detalle });
+        return view.render('acreditacion/informe/dashboard', { personas, detalle,idProceso });
 
     }
     async resultadosDownload({ view, request, response }) {
