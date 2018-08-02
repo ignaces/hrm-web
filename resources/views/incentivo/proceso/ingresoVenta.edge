@@ -22,7 +22,7 @@
     <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
     <script type="text/javascript" src="/assets/js/instascan.min.js"></script>
 
-    <script type="text/javascript" src="/assets/js/dist/IncentivoIngresoVenta.min.js?v=13"></script>
+    <script type="text/javascript" src="/assets/js/dist/IncentivoIngresoVenta.min.js?v=14"></script>
 @endsection
   
 
@@ -246,15 +246,14 @@
                                         <span class="text-muted font-13">
                                                 <b>Descripcion:</b> @{{producto.descripcion}}
                                         </span>
-                            
+                                        <button type="button" v-on:click="selectProducto(producto)" class="pull-right btn btn-primary waves-effect w-md waves-light">Seleccionar</button>
                                     </div>
                                 </div><!-- end col -->
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                        
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->

@@ -184,7 +184,7 @@ $("#agregar_producto").click(function(){
         cont = cont + "<td>"+$("#valor_submarca").val()+" "+$("#valor_envase").val()+"</td>";
         cont = cont + "<td align='right'><input type='hidden' class='cantidadProd prod_"+$("#id_producto").val()+"' id='idCantProd_"+$("#id_producto").val()+"' value='"+$("#valor_cantidad").val()+"'><p id='txtCant_"+$("#id_producto").val()+"'>"+$("#valor_cantidad").val()+"</p></td>";
         cont = cont + "<td align='right'><input type='hidden' class='precioProdUn prod_"+$("#id_producto").val()+"' id='idPrecioProdUn_"+$("#id_producto").val()+"' value='"+$("#valor_precio").val()+"'> <input type='hidden' class='precioProd' id='idSumPrecios_"+$("#id_producto").val()+"' value='"+$("#valor_precio").val()*$("#valor_cantidad").val()+"'><p id='txtPrecio_"+$("#id_producto").val()+"'>$"+Math.round(sumaPrecios)+"</p></td>";
-        cont = cont + "<td align='center' valign='middle' class='remProd' id='rem_prod_"+$("#id_producto").val()+"' style='cursor: pointer;' idProducto='"+idProdStr+"'><i class='fa fa-trash deleteProducto'></i></td>";
+        cont = cont + "<td align='center' valign='middle' class='remProd' id='rem_prod_"+$("#id_producto").val()+"' style='cursor: pointer;'><i idProducto='"+idProdStr+"' class='fa fa-trash deleteProducto'></i></td>";
 
         cont = cont + "</tr>";
         
@@ -240,46 +240,46 @@ $("#btn_camara").click(function(){
 
 
 $(".deleteProducto").click(function(){
-console.log("remoce");
-var id = $(this).attr("idProducto");
-$("#prod_"+id).remove();
-//alert($(".productos_ingresados").length);
-$("#tr_total").remove();
+    console.log("remoce");
+    var id = $(this).attr("idProducto");
+    $("#prod_"+id).remove();
+    //alert($(".productos_ingresados").length);
+    $("#tr_total").remove();
 
-var cuentaProds = 0;
-var sumaPrecios = 0;
+    var cuentaProds = 0;
+    var sumaPrecios = 0;
 
-if($(".productos_ingresados").length > 0)
-{
-    $(".cantidadProd").each(function(){
-        cuentaProds = parseInt(cuentaProds) + parseInt($(this).val());
-    });
+    if($(".productos_ingresados").length > 0)
+    {
+        $(".cantidadProd").each(function(){
+            cuentaProds = parseInt(cuentaProds) + parseInt($(this).val());
+        });
 
-    $(".precioProd").each(function(){
-        sumaPrecios = parseInt(sumaPrecios) + parseInt($(this).val());
-    });
+        $(".precioProd").each(function(){
+            sumaPrecios = parseInt(sumaPrecios) + parseInt($(this).val());
+        });
 
-    var cont =  "<tr id='tr_total'>";
-    cont = cont + "<td colspan='2' align='right' valign='middle'>Total:</td>";
-    cont = cont + "<td align='right' valign='middle'>"+cuentaProds+"</td>";
-    cont = cont + "<td align='right' valign='middle'>$"+sumaPrecios+"</td>";
-    cont = cont + "<td align='right' valign='middle'></td>";
-        
-    cont = cont + "</tr>";
+        var cont =  "<tr id='tr_total'>";
+        cont = cont + "<td colspan='2' align='right' valign='middle'>Total:</td>";
+        cont = cont + "<td align='right' valign='middle'>"+cuentaProds+"</td>";
+        cont = cont + "<td align='right' valign='middle'>$"+sumaPrecios+"</td>";
+        cont = cont + "<td align='right' valign='middle'></td>";
+            
+        cont = cont + "</tr>";
 
-    $("#tabla_invoice").append(cont);
+        $("#tabla_invoice").append(cont);
 
-    var n_invoice = 1;
+        var n_invoice = 1;
 
-    $(".nInvoice").each(function(){
-        $(this).html(n_invoice);
-        n_invoice++;
-    });
-}
-else
-{
-    $("#fila_inicial").show();
-}
+        $(".nInvoice").each(function(){
+            $(this).html(n_invoice);
+            n_invoice++;
+        });
+    }
+    else
+    {
+        $("#fila_inicial").show();
+    }
 });
 
 
