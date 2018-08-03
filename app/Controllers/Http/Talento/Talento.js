@@ -184,8 +184,8 @@ class Talento {
            "idOpinante":idOpinante2
        };
 
-       var result = await data.execApi(request.hostname(),'/Talento/Talento/colaboradoresEvaluados',obj);
-       var colaboradoresEva = result.body;
+       /*var result = await data.execApi(request.hostname(),'/Talento/Talento/colaboradoresEvaluados',obj);
+       var colaboradoresEva = result.body;*/
       
         
 
@@ -233,7 +233,6 @@ class Talento {
         return view.render('talento/nineBoxColaboradores', {
             personas:personas,
             cuadrantes:cuadrantes,
-            colaboradoresEva:colaboradoresEva,
             cargosPorEmpresa:cargosPorEmpresa,
             clasificacionesPorEmpresa:clasificacionesPorEmpresa,
             jefaturas

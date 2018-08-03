@@ -9,6 +9,7 @@
 
 
 @section('content')
+
     <input type="hidden" id="noIniciados" value="{{detalle.noIniciados}}"/>
     <input type="hidden" id="enProgreso" value="{{detalle.enProgreso}}"/>
     <input type="hidden" id="finalizados" value="{{detalle.finalizados}}"/>
@@ -107,6 +108,11 @@
 @endsection
 
 @section('scripts')
+<script>
+
+    var idProceso = "{{idProceso}}";
+    
+</script>
          <script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="/assets/plugins/datatables/dataTables.bootstrap.js"></script>
         <script src="/assets/plugins/datatables/dataTables.buttons.min.js"></script>
