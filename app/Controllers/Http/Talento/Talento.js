@@ -266,7 +266,6 @@ class Talento {
         
     }
 
-
     async organigrama ({view,request, response, auth, session}) {
        
        
