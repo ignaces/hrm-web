@@ -1,0 +1,46 @@
+<div class="card-box">
+    <div class="row">
+            <h5 class="portlet-title">Movilidad</h3>
+    </div>
+    <div class="row">
+        @each(dimension in instrumento.dimensiones)                                     
+            @each(pagina in dimension.paginas)                       
+                @each(pregunta in pagina.preguntas)
+                                
+                    <div class="col-lg-12">
+                        <p class="text-muted font-13">
+                            
+                            <strong>
+                                    @each(fraseo in encuestaFraseo)                                    
+                                        @if(fraseo.codigo == $parent.pregunta.codigoPregunta)
+                                            {{{fraseo.fraseo}}}:
+                                        @endif
+                                    @endeach
+                            </strong> 
+
+                            <span class="m-l-5">
+                                @set('count', 1)
+                                @each(alternativa in pregunta.alternativas)
+
+                                    @if(alternativa.estaSeleccionada==1)
+                                        @if(count == 1)
+                                            {{{alternativa.texto}}}
+                                            @set('count', count+1)
+                                        @else
+                                            , {{{alternativa.texto}}}
+                                        @endif
+                                    @endif
+                                    
+                                    @if(alternativa.requiereJustificacion==1 & alternativa.estaSeleccionada==1)                                                                                
+                                        <input type="text" readonly value="{{alternativa.justificacion}}">                                      
+                                    @endif
+                                @endeach 
+                            </span>
+                        </p>
+                    </div><!--<div class="col-lg-12">-->
+
+                @endeach                       
+            @endeach            
+        @endeach
+    </div><!-- end row -->
+</div> <!-- end card-box -->
