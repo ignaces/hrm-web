@@ -398,18 +398,42 @@ class Talento {
                 "listItems": objItems,
                 "totalItems": objItems.length
             }
-            
             objCurriculum.push(objList)
         });
+
+        var objEncuestaLista = {
+            idPersona:idPersona
+        }
+        var resultEncuestaLista = await data.execApi(request.hostname(),'/Encuesta/Medicion/getListaEncuesta',objEncuestaLista);
+        var lista = resultEncuestaLista.body;
+
+        var idEncuestaPersona = lista.data[0].id 
+        var objEnc = {
+            idEncuestaPersona:idEncuestaPersona
+        }
+        var result = await data.execApi(request.hostname(),'/Encuesta/Medicion/getInstrumento',objEnc);
+        var instrumento = result.body;
+
+        var resultEncuestaFraseo = await data.execApi(request.hostname(),'/Talento/Persona/getEncuestaFraseo',objEnc);
+        var encuestaFraseo = resultEncuestaFraseo.body.data;
         
-        return view.render('talento/fichaTalento', { objCurriculum:objCurriculum, persona:persona, idPersona:idPersona,showAll:showAll});
+        return view.render('talento/fichaTalento', 
+        { 
+            objCurriculum:objCurriculum, 
+            persona:persona, 
+            idPersona:idPersona,
+            showAll:showAll,
+
+            idEncuestaPersona:idEncuestaPersona,
+            instrumento:instrumento,
+            encuestaFraseo
+        });
     }
+
     async encuesta ({view,request, response, auth, session}) {
 
         try
         {
-
-        
             var personaLogueada =  session.get('personaLogueada')
             
             var idPersona = request.input('idPersona')
@@ -432,10 +456,7 @@ class Talento {
                 idPersona:idPersona
             }
             var resultEncuestaLista = await data.execApi(request.hostname(),'/Encuesta/Medicion/getListaEncuesta',objEncuestaLista);
-
             var lista = resultEncuestaLista.body;
-
-            console.log(lista.data[0].id);
 
             var idEncuestaPersona = lista.data[0].id 
             var objEnc = {
