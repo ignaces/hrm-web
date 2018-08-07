@@ -42,7 +42,7 @@ class UserController {
             
             
             //var traerLog = session.put('personaLogueada',persona); 
-    
+            
             session.put('personaLogueada',persona);
             session.put('idPersona', persona.id)
           }
@@ -100,20 +100,21 @@ class UserController {
       }
 
       async list({view,request,response}){
-        const Env = use('Env')
-        var server = Env.get('API_SERVER', 'development')
+        
+        return view.render('account/users')
+      }
 
-        const result = await got(`${server}/Core/Users/find`,
-        {
+      async find({view,request,response}){
+        
+        const result = await data.execApi(request.hostname(),'/Core/Users/find', {
           
-          json:true,
-          query:{nombre:"a"}
+          nombre:"a"
           
-        })
+        });
         
         const usuarios = result.body
-        
-        return view.render('account/users',{usuarios:usuarios})
+        console.log(usuarios)
+        return usuarios;
       }
 
 }

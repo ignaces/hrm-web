@@ -17,12 +17,6 @@
 @section('content')
 
 <input type="hidden" id="idOpinante" value="{{idOpinante}}" />
-
-
-    @!component('components.breadcrumb',title="Instrumento", pages= [
-        {nombre:"Instrumento",activa:false},
-        {nombre:"Instrumento",activa:true}
-    ])
     
     <div class="row">
         <div class="col-lg-12">
@@ -31,7 +25,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div id="container">
-                            <iframe  style="border: 0; width: 100%; height: 600px" src="http://reportes.enovum.cl/jasperserver-pro/flow.html?_flowId=viewReportFlow&_flowId=viewReportFlow&j_username=nutrimarket%7Cfchile&j_password=nutrimarket&ParentFolderUri=%2Forganizations%2Ffchile%2FReportes_FCHILE%2Freportes&reportUnit=%2Forganizations%2Ffchile%2FReportes_FCHILE%2Freportes%2F1_rpt_resultados_generales&standAlone=true&decorate=no"></iframe>
+                            <iframe  style="border: 0; width: 100%; height: 800px" src="{{reporte.link}}"></iframe>
                         </div>
                     </div>    
                 </div><!--<div class="panel-body">-->
