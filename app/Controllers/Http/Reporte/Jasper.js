@@ -8,7 +8,7 @@ class Jasper {
         return view.render('Reportes/jasper',  {});
     }
     
-   async testE ({view,request,response}){
+   async Show ({view,request,response}){
     return view.render('Reportes/jasperE',  {});
    }
     
