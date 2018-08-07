@@ -36,7 +36,7 @@ class Instrumento {
             "vista": request.url()
         }
 
-console.log(objetoInstruccion)
+        console.log(objetoInstruccion)
 
         var instruccion = await data.execApi(request.hostname(),'/Core/Core/getInstruccion',objetoInstruccion);
         var instruccionResult = instruccion.body.data;
@@ -72,7 +72,7 @@ console.log(objetoInstruccion)
    
     
     
-    async putRespuesta({request,response}){
+    async putRespuesta({request,response, session}){
 
         var idOpinante = request.input("idOpinante")
         var idPregunta = request.input("idPregunta")
@@ -87,6 +87,18 @@ console.log(objetoInstruccion)
             };
             
         var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/putRespuesta',obj);
+
+
+        var idPersona = session.get('idPersona', 'fall')
+
+        if(idPersona != 'fall'){
+            var objUpd = {
+                idDndOpinante:idOpinante,
+                idPersona: idPersona
+            }
+
+            var resultUpd = await data.execApi(request.hostname(),'/Acreditacion/Proceso/setOpinanteEvaluado',objUpd);
+        }
 
         return {mensaje:"OK"}
     } 

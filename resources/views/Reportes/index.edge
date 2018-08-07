@@ -1,0 +1,27 @@
+
+
+@layout('layouts/horizontal')
+
+@section('scripts')
+    <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+
+@endsection
+
+@section('pluginsCss')
+    <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+@endsection
+  
+
+@section('content')
+
+<input type="hidden" id="idOpinante" value="{{idOpinante}}" />
+
+
+    @!component('components.breadcrumb',title="Reportes", pages= [
+        {nombre:"Reportes",activa:false},
+        {nombre:"Lista",activa:true}
+    ])
+    
+   @!component('Reportes.components.thumbnail',reportes=reportes)
+
+@endsection

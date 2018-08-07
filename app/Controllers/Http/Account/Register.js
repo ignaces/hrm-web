@@ -68,7 +68,7 @@ class Register{
         }
 */      
     }
-
+    
     async registerPersona({request, response}) {
         //console.log("...", request.all());
         
