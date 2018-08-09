@@ -49,11 +49,11 @@
                             <div class="col-lg-12">
                                 <div class="card-box widget-box-two widget-two-custom ">
                                     <center>
-                                        <img src="https://adminlte.io/themes/AdminLTE/dist/img/user7-128x128.jpg" alt="image" class="img-responsive img-circle" width="120">  
+                                        <!--<img src="{{persona.imageUser}}" alt="image" class="img-responsive img-circle" width="120">-->  
                                         <div class="wigdet-two-content">
                                             <p class="m-0 text-uppercase font-bold font-secondary text-overflow" title="Statistics"></p>
-                                            <h2 class=""><span><!--i class="mdi mdi-arrow-up"></i--></span> <span data-plugin="counterup"></span>Sofía Hapgood</h2>
-                                            <p class="m-0">Consultora BrightStar</p>
+                                            <h2 class=""><span><!--i class="mdi mdi-arrow-up"></i--></span> <span data-plugin="counterup"></span>{{persona.nombres}} {{persona.apellidoPaterno}} {{persona.apellidoMaterno}}</h2>
+                                            <p class="m-0">{{persona.cargo}}</p>
                                         </div>
                                     <center>
                                 </div>
@@ -64,7 +64,7 @@
                             <div class="col-lg-12">
                                 @!component('components.Incentivos.RegistrarCliente')
                                 <div class="inbox-widget">
-                                    <a class="btn btn-info btn-rounded btn-block" name="#" ><i class="mdi mdi-account-card-details"></i> <span>Guardar Datos Cliente</span> </a>
+                                    <a class="btn btn-info btn-rounded btn-block" name="#"  onclick="guardarCliente();"><i class="mdi mdi-account-card-details"></i> <span>Guardar Datos Cliente</span> </a>
                                 </div>
 
                                 <div class="col-lg-12">
@@ -78,23 +78,98 @@
                 </div> <!-- content -->
             </div>
         </div>
-<style>
-    .share_box {
-        position: fixed;
-        display: block;
-        bottom: 10px;
-        left: 34%;
-        cursor: pointer;
-        align-content: center;
-        z-Index: 9999;
-    }
-</style>
+    
+        <style>
+        .share_box {
+            position: fixed;
+            display: block;
+            top: 15%;
+            right: 0 !important;
+            width: 40px;
+            -webkit-border-top-left-radius: 10px;
+            -webkit-border-bottom-left-radius: 10px;
+            -moz-border-radius-topleft: 10px;
+            -moz-border-radius-bottomleft: 10px;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            align-content: center;
+            cursor: pointer;
+            z-Index: 9999;
+        }
 
-<div class="share_box" onclick="ayudaEvaluacion();">
-    <a href="/Incentivo/Proceso/ingresoVenta">
-        <button style="height: 50px;" type="button" class="btn btn-icon waves-effect waves-light btn-success btn-rounded"> <i class="fa fa-plus"></i> Agregar Venta</button>
-    </a>
-</div>
+        .detail_box {
+            position: fixed;
+            display: block;
+            top: 25%;
+            right: 0 !important;
+            width: 40px;
+            -webkit-border-top-left-radius: 10px;
+            -webkit-border-bottom-left-radius: 10px;
+            -moz-border-radius-topleft: 10px;
+            -moz-border-radius-bottomleft: 10px;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            align-content: center;
+            cursor: pointer;
+            z-Index: 9999;
+        }
+    </style>
+
+    <div class="share_box text-center">
+        <a href="/Incentivo/Proceso/ingresoVenta">
+            <button style="height: 50px;" type="button" class="btn btn-icon waves-effect waves-light btn-info"> <i class="fa fa-usd"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+        </a>
+    </div>
+
+    <div class="detail_box text-center">
+        <a href="/Incentivo/Proceso/colaboradores">
+            <button style="height: 50px;" type="button" class="btn btn-icon waves-effect waves-light btn-primary"> <i class="fa fa-tachometer"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+        </a>
+    </div>
+
+    <script>
+        function guardarCliente()
+        {
+            var obj = {};
+
+            var identificador = $("#rutCliente").val();
+            var nombre = $("#nombreCliente").val();
+
+            var apellido = $("#apellidoCliente").val();
+            var email = $("#emailCliente").val();
+            var telefono = $("#telefonoCliente").val();
+
+            obj = {identificador: identificador, nombre: nombre, apellido: apellido, email: email, telefono: telefono};
+
+            $.ajax({
+                        url: '/Incentivo/Proceso/addCliente',
+                        type: "GET",
+                        data: obj,
+                        dataType: "json",
+                        success: function (data) {
+                            //swal("Venta Finalizada", "Tu venta se ha guardado correctamente", "success");
+
+                            swal({
+                                title: 'Cárdex',
+                                text: "Los datos del cliente han sido registrados correctamente.",
+                                type: 'success',
+                                showCancelButton: false,
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'Aceptar'
+                                }).then((result) => {
+                                location.href = "/Incentivo/Proceso/cardex";
+                            });
+
+                            //location.reload();
+                        },
+                        error: function(e){
+                            console.log(e);
+                        }
+            });
+        }
+        
+
+    </script>
 
 
 @endsection

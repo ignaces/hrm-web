@@ -96,6 +96,12 @@ class Proceso {
         var idPersona = session.get('idPersona', 'fail')
         var idProceso = request.input("proceso")
 
+        var idPersona = session.get('idPersona', 'fail')
+        var idPuntoDeVenta = session.get('idPuntoDeVenta', 'fail');
+
+        //var idProceso = request.input("proceso")
+        var persona = session.get('personaLogueada')
+
         session.put('idProceso',idProceso);
 
         var obj = {
@@ -106,7 +112,7 @@ class Proceso {
         //var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getPersonasEvaluaciones',obj);
         //var personas = result.body.data;
         
-        return view.render('incentivo/proceso/cardex');
+        return view.render('incentivo/proceso/cardex', {persona});
     }
 
     //async addCheckIn ({view,request, response, auth, session}) {
@@ -124,6 +130,31 @@ class Proceso {
         };
             
         var result = await data.execApi(request.hostname(),'/Incentivos/Incentivos/addCheckIn',obj);
+
+        return {mensaje:"OK"};
+    }
+
+    async addCliente ({request, response, session}) {
+        var idPersona = session.get('idPersona', 'fail');
+        var idPuntoDeVenta = session.get('idPuntoDeVenta', 'fail');
+        var identificador = request.input("identificador");
+        
+        var nombres = request.input("nombre");
+        var apellido = request.input("apellido");
+        var email = request.input("email");
+        var telefono = request.input("telefono");
+        
+        var obj = {
+            "idPersona":idPersona,
+            "idPuntoDeVenta":idPuntoDeVenta,
+            "identificador": identificador,
+            "nombres":nombres,
+            "apellido":apellido,
+            "email": email, 
+            "telefono": telefono
+        };
+            
+        var result = await data.execApi(request.hostname(),'/Incentivos/Incentivos/addCliente',obj);
 
         return {mensaje:"OK"};
     }

@@ -42,10 +42,12 @@ class Portada {
         var resultcheckin = await data.execApiPost(request.hostname(),'/Incentivos/Incentivos/getCheckIn', obj);
         
         var checkin = "";
+        var puntoDeVenta = "";
 
         if(resultcheckin.body[0])
         {
-            checkin = resultcheckin.body[0].checkin;        
+            checkin = resultcheckin.body[0].checkin;
+            puntoDeVenta = resultcheckin.body[0].PuntoDeVenta;
             session.put("idPuntoDeVenta", resultcheckin.body[0].idPuntoDeVenta);
         }
         
@@ -59,7 +61,7 @@ class Portada {
         //console.log(persona);
        
         var menu = session.get('usuario_roles_menu');
-        return view.render('core/welcome',  {user,procesos,persona,menu, puntosDeVenta, checkin});
+        return view.render('core/welcome',  {user,procesos,persona,menu, puntosDeVenta, checkin, puntoDeVenta});
     }   
 }
 
