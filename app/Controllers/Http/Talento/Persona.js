@@ -108,45 +108,85 @@ class Persona {
     }
     async fichaPdf ({view,request, response, auth, session}) {
 
-        //var persona =  session.get('personaLogueada')
-        var idPersona = request.input('idPersona')
+        try{
+            var personaLogueada =  session.get('personaLogueada')
         
-        var idProceso = request.input('idProceso')
-        var obj = {
-            "idPersona":idPersona,
-            "idProceso":idProceso
-        };
+            var idPersona = request.input('idPersona')
+            var showAll = true
+            if(personaLogueada.id==idPersona){
+                showAll=false;
+            }
+
+            var obj = {
+                "idPersona":idPersona,
+                "idProceso":session.get('procesoOrganigrama')
+            };
+            
+            var resultPersona =  await data.execApi(request.hostname(),'/Talento/Persona/getPersona',obj);;//data.execApi(request.hostname(),'/Talento/Talento/getPersona',obj);
+            var resultadosPersona =  await data.execApi(request.hostname(),'/Talento/Persona/getResultados',{idPersona:idPersona});
+            var result = await data.execApi(request.hostname(),'/Talento/Talento/getCurriculumCategoria',obj);
+            var categoria = result.body;
+            var persona = resultPersona.body[0];
+
+            var result2 = await data.execApi(request.hostname(),'/Talento/Talento/getCurriculumPersona',obj);
+            var curriculum = result2.body;
+            var objCurriculum = [];
+            persona.resultados=resultadosPersona.body;
         
-        var resultPersona =  await data.execApi(request.hostname(),'/Talento/Talento/getPersona',obj);
-        var resultadosPersona =  await data.execApi(request.hostname(),'/Talento/Persona/getResultados',{idPersona:idPersona});
-        var result = await data.execApi(request.hostname(),'/Talento/Talento/getCurriculumCategoria',obj);
-        var categoria = result.body;
-        var persona = resultPersona.body;
-        persona.resultados=resultadosPersona.body;
-        var result2 = await data.execApi(request.hostname(),'/Talento/Talento/getCurriculumPersona',obj);
-        var curriculum = result2.body;
-        var objCurriculum = [];
+            if(persona.fotoPersona=="" || persona.fotoPersona==null){
+                persona.fotoPersona="/assets/images/icons/businessman.svg"
+            }
+            categoria.forEach(element => {
 
-        categoria.forEach(element => {
+                var objItems = [];
 
-            var objItems = [];
-
-            for(var c in curriculum){
-                if(curriculum[c]["id"] == element.id)
-                {
-                    objItems.push(curriculum[c]);
+                for(var c in curriculum){
+                    if(curriculum[c]["id"] == element.id)
+                    {
+                        objItems.push(curriculum[c]);
+                    }
                 }
-            }
 
-            var objList = {
-                "nombreCategoria": element.nombre,
-                "idCategoria": element.id,
-                "listItems": objItems,
-                "totalItems": objItems.length
+                var objList = {
+                    "nombreCategoria": element.nombre,
+                    "idCategoria": element.id,
+                    "listItems": objItems,
+                    "totalItems": objItems.length
+                }
+                objCurriculum.push(objList)
+            });
+
+            var objEncuestaLista = {
+                idPersona:idPersona
             }
-            objCurriculum.push(objList)
-        });
-        return view.render('talento/fichaTalentoPdf', { objCurriculum:objCurriculum, persona:persona, idPersona:idPersona});
+            var resultEncuestaLista = await data.execApi(request.hostname(),'/Encuesta/Medicion/getListaEncuesta',objEncuestaLista);
+            var lista = resultEncuestaLista.body;
+
+            var idEncuestaPersona = lista.data[0].id 
+            var objEnc = {
+                idEncuestaPersona:idEncuestaPersona
+            }
+            var result = await data.execApi(request.hostname(),'/Encuesta/Medicion/getInstrumento',objEnc);
+            var instrumento = result.body;
+
+            var resultEncuestaFraseo = await data.execApi(request.hostname(),'/Talento/Persona/getEncuestaFraseo',objEnc);
+            var encuestaFraseo = resultEncuestaFraseo.body.data;
+            
+            return view.render('talento/fichaTalentoPdf', 
+            { 
+                objCurriculum:objCurriculum, 
+                persona:persona, 
+                idPersona:idPersona,
+                showAll:showAll,
+
+                idEncuestaPersona:idEncuestaPersona,
+                instrumento:instrumento,
+                encuestaFraseo
+            });
+        } catch(e){
+            console.log(e);
+            return "";
+        }
     }
     async accionesTipo ({view,request, response, auth, session}) {
         

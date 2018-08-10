@@ -15,26 +15,27 @@
 @section('content')
 
 
-  <div class="row">
-        <div class="col-md-4">
-            <div class="box box-widget widget-user-2">      
-                <div class="widget-user-header bg-primary">
-                <div class="widget-user-image">
-                    <!--<img class="img-circle" src={{persona.imageUser}} alt="User Avatar">-->
-                    <img class="img-circle" src="{{persona.imageUser}}" alt="User Avatar">
-                </div>
-                <h4>
-                
-            </h4>
-                <h3 class="widget-user-username text-white">{{persona.nombres}} {{persona.apellidoPaterno}} {{persona.apellidoMaterno}}</h3>
-                <h5 class="widget-user-desc  text-white">{{persona.cargo}}</h5>
-                </div>
-                <div class="box-footer no-padding">
-                    <div class="row">
-                        <div class="col-md-12">
-                        
-                        </div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="box box-widget widget-user-2">      
+            <div class="widget-user-header bg-primary">
+            <div class="widget-user-image">
+                <!--<img class="img-circle" src={{persona.imageUser}} alt="User Avatar">-->
+                <img class="img-circle" src="{{persona.fotoPersona}}" alt="User Avatar">
+            </div>
+            <h4>
+            
+        </h4>
+            <h3 class="widget-user-username text-white">{{persona.nombres}} {{persona.apellidoPaterno}} {{persona.apellidoMaterno}}</h3>
+            <h5 class="widget-user-desc  text-white">{{persona.cargo}}</h5>
+            </div>
+            <div class="box-footer no-padding">
+                <div class="row">
+                    <div class="col-md-12">
+                    
                     </div>
+                </div>
+                @if(showAll==true)
                     <div class="row">
                         <div class="col-md-12">
                                 <div class="info-box bg-green">
@@ -54,175 +55,174 @@
                                 <!-- /.info-box-content -->
                                 </div>
                         </div>
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
 
+    <div class="col-md-8"> 
+                  <!-- Personal-Information -->
+        @!component('components.Talento.informacionPersonal',persona=persona)
+        <!-- Personal-Information -->
+    </div>
+</div>
+
+<div class="row">
+        
+
+    <div class="col-md-6" id="curriculum">
+        <!-- Curriculum -->
+        @!component('components.Core.curriculum',objCurriculum=objCurriculum,idPersona=idPersona,showAll=showAll)
+        <!-- Curriculum -->
+
+        @!component('talento.components.contenedorEncuesta', instrumento=instrumento, encuestaFraseo=encuestaFraseo) 
+    </div>
+
+    
+
+    @if(showAll==true)
+    <div class="col-md-6">
+        <!-- Mediciones -->
+        <div class="row">
+            
+                @!component('talento.components.medicionResultado',resultados=persona.resultados.edd, titulo="Desempeño")
+                @!component('talento.components.medicionResultado',resultados=persona.resultados.clima, titulo="Clima")
+                @!component('talento.components.medicionResultado',resultados=persona.resultados.tr, titulo="Talent Review")
+            
+        </div>
+    </div>
+    @endif
+
+    <div class="col-md-6">
+        <!-- Mediciones -->
+
+        <!-- Fortalezas y Oportunidades -->
+        <div class="portlet portlet-default">
+                <div class="portlet-heading">
+                    <h3 class="portlet-title">Fortalezas y Oportunidades</h3>
+                    <div class="portlet-widgets"><a href="#"><i class="mdi mdi-dots-vertical"></i></a></div>
+                    <br>
+                    <hr>
+                </div>
+                <div class="portlet-body">
+                
+                    <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-border panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Fortalezas</h3>
+                                </div>
+                                <div class="panel-body">
+                                  <!--  <p class="text-purple m-b-0">
+                                        Vestibulum malesuada nunc sed hendrerit tempus. Suspendisse felis est, tristique a elementum eget, rhoncus vel enim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris efficitur enim ipsum, et maximus velit condimentum convallis. Mauris a erat erat. Curabitur cursus accumsan consequat. 
+                                    </p>
+                                    <p class="text-muted m-b-30 font-13">
+                                    2018 -  Joe Doe
+                                    </p>
+                                    <p class="text-purple m-b-0">
+                                        Vestibulum malesuada nunc sed hendrerit tempus. Suspendisse felis est, tristique a elementum eget, rhoncus vel enim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris efficitur enim ipsum, et maximus velit condimentum convallis. Mauris a erat erat. Curabitur cursus accumsan consequat. 
+                                    </p>
+                                    <p class="text-muted m-b-30 font-13">
+                                    2017 -  Joe Doe
+                                    </p>
+                                    <div class="text-center">
+                                            <button type="button" class="btn btn-default btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-chevron-circle-down"></i> Cargar más Información</button>
+                                    </div>-->
+                                </div>
+                        </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-border panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Oportunidades</h3>
+                                </div>
+                                <div class="panel-body">
+                                   <!-- <p class="text-purple m-b-0">
+                                        Vestibulum malesuada nunc sed hendrerit tempus. Suspendisse felis est, tristique a elementum eget, rhoncus vel enim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris efficitur enim ipsum, et maximus velit condimentum convallis. Mauris a erat erat. Curabitur cursus accumsan consequat. 
+                                    </p>
+                                    <p class="text-muted m-b-30 font-13">
+                                    2018 -  Joe Doe
+                                    </p>
+                                    <p class="text-purple m-b-0">
+                                        Vestibulum malesuada nunc sed hendrerit tempus. Suspendisse felis est, tristique a elementum eget, rhoncus vel enim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris efficitur enim ipsum, et maximus velit condimentum convallis. Mauris a erat erat. Curabitur cursus accumsan consequat. 
+                                    </p>
+                                    <p class="text-muted m-b-30 font-13">
+                                    2017 -  Joe Doe
+                                    </p>
+                                    <div class="text-center">
+                                            <button type="button" class="btn btn-default btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-chevron-circle-down"></i> Cargar más Información</button>
+                                    </div>-->
+
+                                </div>
+                        </div>
+                        </div>
+                    </div>
+                    
+                </div>
+        </div>
+        <!-- Fortalezas y Oportunidades -->
+
+        <!-- Desarrollo -->
+        <div class="portlet portlet-default">
+                <div class="portlet-heading">
+                    <h3 class="portlet-title">Desarrollo</h3>
+                    <div class="portlet-widgets"><a href="#"><i class="mdi mdi-dots-vertical"></i></a></div>
+                    <br>
+                    <hr>
+                </div>
+                <div class="portlet-body">
+                    <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-border panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Posibles Próximos Roles</h3>
+                                </div>
+                                <div class="panel-body">
+                                    
+                                    
+
+                                </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-12">
-                            <!--<div class="pull-right">
-                                <i class="fa  fa-plane text-primary"></i>
-                                <i class="fa  fa-refresh text-primary"></i>
-                                <i class="fa  fa-warning text-danger"></i>
-                                <i class="fa  fa-star text-warning"></i>
-                            </div>-->
+                            <div class="panel panel-border panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Síntesis value drivers</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="text-left">
+                                            <p class="text-muted font-13"><strong>Estilo Pensamiento :</strong> <span class="m-l-15">No disponible</span></p>
+                                            <p class="text-muted font-13"><strong>Valores :</strong> <span class="m-l-15">No disponible</span></p>
+                                            <p class="text-muted font-13"><strong>Anclas :</strong><span class="m-l-15">No disponible</span></p>
+                                        </div>
+
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-border panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Entrevista de Desarrollo</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                       
+                                    </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
-
-        <div class="col-md-8"> 
-                      <!-- Personal-Information -->
-            @!component('components.Talento.informacionPersonal',persona=persona)
-            <!-- Personal-Information -->
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6" id="curriculum">
-            <!-- Curriculum -->
-            @!component('components.Core.curriculum',objCurriculum=objCurriculum,idPersona=idPersona)
-            <!-- Curriculum -->
-
-        </div>
-        
-        <div class="col-md-6">
-            <!-- Mediciones -->
-            <div class="row">
-                
-                    @!component('talento.components.medicionResultado',resultados=persona.resultados.edd, titulo="Desempeño")
-                    @!component('talento.components.medicionResultado',resultados=persona.resultados.clima, titulo="Clima")
-                    @!component('talento.components.medicionResultado',resultados=persona.resultados.tr, titulo="Talent Review")
-                
-            </div>
-        </div>
-        
-        <div class="col-md-6">
-            <!-- Mediciones -->
-
-            <!-- Fortalezas y Oportunidades -->
-            <div class="portlet portlet-default">
-                    <div class="portlet-heading">
-                        <h3 class="portlet-title">Fortalezas y Oportunidades</h3>
-                        <div class="portlet-widgets"><a href="#"><i class="mdi mdi-dots-vertical"></i></a></div>
-                        <br>
-                        <hr>
-                    </div>
-                    <div class="portlet-body">
-                    
-                        <div class="row">
-                        <div class="col-md-12">
-                            <div class="panel panel-border panel-default">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title">Fortalezas</h3>
-                                    </div>
-                                    <div class="panel-body">
-                                      <!--  <p class="text-purple m-b-0">
-                                            Vestibulum malesuada nunc sed hendrerit tempus. Suspendisse felis est, tristique a elementum eget, rhoncus vel enim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris efficitur enim ipsum, et maximus velit condimentum convallis. Mauris a erat erat. Curabitur cursus accumsan consequat. 
-                                        </p>
-                                        <p class="text-muted m-b-30 font-13">
-                                        2018 -  Joe Doe
-                                        </p>
-                                        <p class="text-purple m-b-0">
-                                            Vestibulum malesuada nunc sed hendrerit tempus. Suspendisse felis est, tristique a elementum eget, rhoncus vel enim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris efficitur enim ipsum, et maximus velit condimentum convallis. Mauris a erat erat. Curabitur cursus accumsan consequat. 
-                                        </p>
-                                        <p class="text-muted m-b-30 font-13">
-                                        2017 -  Joe Doe
-                                        </p>
-                                        <div class="text-center">
-                                                <button type="button" class="btn btn-default btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-chevron-circle-down"></i> Cargar más Información</button>
-                                        </div>-->
-                                    </div>
-                            </div>
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                        <div class="col-md-12">
-                            <div class="panel panel-border panel-default">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title">Oportunidades</h3>
-                                    </div>
-                                    <div class="panel-body">
-                                       <!-- <p class="text-purple m-b-0">
-                                            Vestibulum malesuada nunc sed hendrerit tempus. Suspendisse felis est, tristique a elementum eget, rhoncus vel enim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris efficitur enim ipsum, et maximus velit condimentum convallis. Mauris a erat erat. Curabitur cursus accumsan consequat. 
-                                        </p>
-                                        <p class="text-muted m-b-30 font-13">
-                                        2018 -  Joe Doe
-                                        </p>
-                                        <p class="text-purple m-b-0">
-                                            Vestibulum malesuada nunc sed hendrerit tempus. Suspendisse felis est, tristique a elementum eget, rhoncus vel enim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris efficitur enim ipsum, et maximus velit condimentum convallis. Mauris a erat erat. Curabitur cursus accumsan consequat. 
-                                        </p>
-                                        <p class="text-muted m-b-30 font-13">
-                                        2017 -  Joe Doe
-                                        </p>
-                                        <div class="text-center">
-                                                <button type="button" class="btn btn-default btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-chevron-circle-down"></i> Cargar más Información</button>
-                                        </div>-->
-
-                                    </div>
-                            </div>
-                            </div>
-                        </div>
-                        
-                    </div>
-            </div>
-            <!-- Fortalezas y Oportunidades -->
-
-            <!-- Desarrollo -->
-            <div class="portlet portlet-default">
-                    <div class="portlet-heading">
-                        <h3 class="portlet-title">Desarrollo</h3>
-                        <div class="portlet-widgets"><a href="#"><i class="mdi mdi-dots-vertical"></i></a></div>
-                        <br>
-                        <hr>
-                    </div>
-                    <div class="portlet-body">
-                        <div class="row">
-                        <div class="col-md-12">
-                            <div class="panel panel-border panel-default">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title">Posibles Próximos Roles</h3>
-                                    </div>
-                                    <div class="panel-body">
-                                        
-                                        
-
-                                    </div>
-                            </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="panel panel-border panel-default">
-                                        <div class="panel-heading">
-                                            <h3 class="panel-title">Síntesis value drivers</h3>
-                                        </div>
-                                        <div class="panel-body">
-                                            <div class="text-left">
-                                                <p class="text-muted font-13"><strong>Estilo Pensamiento :</strong> <span class="m-l-15">No disponible</span></p>
-                                                <p class="text-muted font-13"><strong>Valores :</strong> <span class="m-l-15">No disponible</span></p>
-                                                <p class="text-muted font-13"><strong>Anclas :</strong><span class="m-l-15">No disponible</span></p>
-                                            </div>
-
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="panel panel-border panel-default">
-                                        <div class="panel-heading">
-                                            <h3 class="panel-title">Entrevista de Desarrollo</h3>
-                                        </div>
-                                        <div class="panel-body">
-                                           
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-            <!-- Desarrollo -->
-    </div>
-
+        <!-- Desarrollo -->
+</div>
 
     
 
