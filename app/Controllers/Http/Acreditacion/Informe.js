@@ -9,7 +9,7 @@ var safeUrl = require('safe-url');
 var wget = require('node-wget-promise');
 const readFile = Helpers.promisify(fs.readFile);
 var Enumerable = require('linq');
-
+ 
 class Informe {
     async index({ view, request, response, auth }) {
 
@@ -173,7 +173,7 @@ class Informe {
             }
         }).toArray();
 
-        console.log(clasificaciones);
+        //console.log(clasificaciones);
 
         return view.render('acreditacion/informe/dashboard', { personas, detalle, idProceso, clasificaciones });
 
