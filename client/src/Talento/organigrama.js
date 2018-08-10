@@ -67,10 +67,16 @@ var cargaOrganigrama = function (organigrama){
         
         var badges = "";
         var lupa=false;
-        if(organigrama[posicion].valorEdeEq!=undefined){
+        
+        if(organigrama[posicion].valorEdeEq!=undefined && organigrama[posicion].idCuadrante!=null && organigrama[posicion].valor!=null){
             if(organigrama[posicion].valorEdeEq.indexOf(organigrama[posicion].edd)==-1 || organigrama[posicion].idCuadrante!=organigrama[posicion].idCuadranteEq){
                 lupa=true;
             }
+        }
+        
+        if(organigrama[posicion].idCuadrante==null){
+            
+            lupa=false;
         }
         
         
