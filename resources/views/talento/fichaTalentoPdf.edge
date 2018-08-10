@@ -86,15 +86,9 @@
             <!-- Mediciones -->
             <div class="row">
                 
-                    @!component('talento.components.medicionDesempeno',resultados=persona.resultados.edd)
-                
-                
-                
-                    @!component('talento.components.medicionClima',resultados=persona.resultados.clima)
-                
-                
-                
-                    @!component('talento.components.medicionTalentReview',resultados=persona.resultados.tr)
+                    @!component('talento.components.medicionResultado',resultados=persona.resultados.edd, titulo="Desempeño")
+                    @!component('talento.components.medicionResultado',resultados=persona.resultados.clima, titulo="Clima")
+                    @!component('talento.components.medicionResultado',resultados=persona.resultados.tr, titulo="Talent Review")
                 
             </div>
         </div>
