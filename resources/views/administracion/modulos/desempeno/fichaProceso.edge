@@ -48,7 +48,7 @@
                                         <ul class="nav nav-stacked">
                                             <li><a href=""><i class="fa fa-cogs"></i> Parámetros</a></li>
                                             <li><a href=""><i class="fa fa-file-text"></i> Instrumentos</a></li>
-                                            <li><a href=""><i class="fa fa-users"></i> Participantes</a></li>
+                                            <li><a href="participantes?idProceso={{datosProceso[0].idProceso}}"><i class="fa fa-users"></i> Participantes</a></li>
                                             <li><a href=""><i class="fa fa-send"></i> Notificaciones</a></li>
                                             <li><a href=""><i class="fa fa-tachometer"></i> Reportes</a></li>
                                             <li><a href=""><i class="fa fa-warning"></i> Log</a></li>
@@ -64,7 +64,7 @@
             {{-- /MENU ADMINISTRACIÓN --}}
         </div>
         {{-- /IZQUIERDA --}}
-        {{-- DERECHA --}}
+                {{-- DERECHA --}}
         <div class="col-md-9">
             {{-- PROCESO --}}
             <div class="row">
@@ -201,18 +201,6 @@
         {{-- /DERECHA --}}
     </div>
     {{-- /CUERPO --}}
-    
-    <div class="row">
-        <div class="col-md-6">
-            
-        </div>
-    </div>
-    <div class="row">
-      
-    </div>
-    <div class="row">
-       
-    </div>
 
 
 @endsection
