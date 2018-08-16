@@ -1,17 +1,17 @@
 'use strict'
 
-const data = use('App/Utils/Data')
-const XLSX = require('xlsx')
-const Helpers = use('Helpers')
-const fs = use('fs')
-const Antl = use('Antl')
-var safeUrl = require('safe-url')
+const data = use('App/Utils/Data');
+const XLSX = require('xlsx');
+const Helpers = use('Helpers');
+const fs = use('fs');
+const Antl = use('Antl');
+var safeUrl = require('safe-url');
 var wget = require('node-wget-promise');
-const readFile = Helpers.promisify(fs.readFile)
+const readFile = Helpers.promisify(fs.readFile);
+var Enumerable = require('linq');
+ 
 class Informe {
     async index({ view, request, response, auth }) {
-
-console.log(request.hostname());
 
         var conDetalle = request.input("cd");
         var idPersona = request.input("persona");
@@ -28,7 +28,7 @@ console.log(request.hostname());
         var clasificacion = resultado.body;
 
 
-
+ 
         var resultSintesis = await data.execApi(request.hostname(), '/Acreditacion/Informe/getResultadoSistesis', obj);
         var resultadoSintesis = resultSintesis.body.data;
 
@@ -96,7 +96,7 @@ console.log(request.hostname());
 
         //var result = await got(`http://192.168.3.4:8080?url=${server}/Acreditacion/Informe/pdf?procesoPersona=${idPersona}&cd=${conDetalle}`);
         var url = `http://192.168.3.4:8080/?url=http%3A%2F%2F${server}%2FAcreditacion%2FInforme%2Fpdf%3FprocesoPersona%3D${idPersona}%26cd%3D${conDetalle}`;
-        console.log(url);
+        //console.log(url);
 
         var file = await wget(url, { output: 'tmp/reporte.pdf' });
 
@@ -142,7 +142,40 @@ console.log(request.hostname());
         }
         var avance = Math.round((detalle.finalizados * 100) / detalle.evaluados);
         detalle.avance = `${avance} %`;
-        return view.render('acreditacion/informe/dashboard', { personas, detalle });
+
+
+        var detalleClasificaciones = await data.execApi(request.hostname(),'/Acreditacion/Avance/getAvanceClasificaciones',{idProceso:idProceso});  
+        var clasificaciones = Enumerable.from(detalleClasificaciones.body).distinct("$.id").select(function(clasificacion){
+            return{
+                id:clasificacion.id,
+                nombre:clasificacion.nombre,
+                niveles:Enumerable.from(clasificacion.niveles).distinct("$.id").select(function(nivel){
+                    return nivel.nombre                            
+                }).toArray(),
+                estados:Enumerable.from(clasificacion.niveles[0].estados).select(function(estado){                    
+                    return{
+                        texto:estado.texto,
+                        color:estado.color,
+                        nombre:estado.nombre,
+                        class:estado.class,
+                        codigo:estado.codigo,
+                        data:Enumerable.from(clasificacion.niveles).select(function(data){
+                            var cantidad = 0;
+                            for(var i in data.estados){
+                                if(data.estados[i].codigo==estado.codigo){
+                                    cantidad= data.estados[i].cantidad
+                                }
+                            }
+                            return cantidad;
+                }).toArray(),
+                }
+                    }).toArray(),
+            }
+        }).toArray();
+
+        //console.log(clasificaciones);
+
+        return view.render('acreditacion/informe/dashboard', { personas, detalle, idProceso, clasificaciones });
 
     }
     async resultadosDownload({ view, request, response }) {

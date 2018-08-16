@@ -66,6 +66,7 @@ class Talento {
         //cargosselectedoption
         var cargos = request.input("cargos");
         var tr = request.input("tr");
+        var jefatura = request.input("jefatura");
 
         //datos personas
         var identificador = request.input("identificador");
@@ -78,6 +79,7 @@ class Talento {
             "clasificaciones":clasificaciones,
             "cargos":cargos,
             "tr":tr,
+            "jefatura":jefatura,
             "identificador":identificador,
             "nombres":nombres,
             "paterno":paterno,
@@ -182,8 +184,8 @@ class Talento {
            "idOpinante":idOpinante2
        };
 
-       var result = await data.execApi(request.hostname(),'/Talento/Talento/colaboradoresEvaluados',obj);
-       var colaboradoresEva = result.body;
+       /*var result = await data.execApi(request.hostname(),'/Talento/Talento/colaboradoresEvaluados',obj);
+       var colaboradoresEva = result.body;*/
       
         
 
@@ -216,8 +218,12 @@ class Talento {
             var resultadoCargos = await data.execApi(request.hostname(),'/Talento/Talento/obtenerCargosPorEmpresa',obj4);
             var cargosPorEmpresa = resultadoCargos.body;
 
-            
-        //----------------------------------------------------------------------------------
+            var resultJefaturas = await data.execApi(request.hostname(),'/Talento/Talento/getPersonasArbol',{
+                "idProceso":idTalentoProceso,
+                "idPersonaOpinante":idOpinante
+            });
+            var jefaturas= resultJefaturas.body;
+       //-----------------------------------------------------------------------------------
        //------------------------------------- CARGA DE COMBOBOX CLASIFICACION  ------------
        //-----------------------------------------------------------------------------------
        var resultadoClasificaciones = await data.execApi(request.hostname(),'/Talento/Talento/obtenerClasificaciones',obj5);
@@ -227,9 +233,9 @@ class Talento {
         return view.render('talento/nineBoxColaboradores', {
             personas:personas,
             cuadrantes:cuadrantes,
-            colaboradoresEva:colaboradoresEva,
             cargosPorEmpresa:cargosPorEmpresa,
-            clasificacionesPorEmpresa:clasificacionesPorEmpresa
+            clasificacionesPorEmpresa:clasificacionesPorEmpresa,
+            jefaturas
         });
         
     }
@@ -259,7 +265,6 @@ class Talento {
        return result.body;
         
     }
-
 
     async organigrama ({view,request, response, auth, session}) {
        
@@ -346,56 +351,136 @@ class Talento {
 
     }
     async fichaTalento ({view,request, response, auth, session}) {
-
-        var personaLogueada =  session.get('personaLogueada')
+        try{
+            var personaLogueada =  session.get('personaLogueada')
         
-        var idPersona = request.input('idPersona')
-        var showAll = true
-        if(personaLogueada.id==idPersona){
-            showAll=false;
-        }
-
-        var obj = {
-            "idPersona":idPersona,
-            "idProceso":session.get('procesoOrganigrama')
-        };
-        
-        var resultPersona =  await data.execApi(request.hostname(),'/Talento/Persona/getPersona',obj);;//data.execApi(request.hostname(),'/Talento/Talento/getPersona',obj);
-        var resultadosPersona =  await data.execApi(request.hostname(),'/Talento/Persona/getResultados',{idPersona:idPersona});
-        var result = await data.execApi(request.hostname(),'/Talento/Talento/getCurriculumCategoria',obj);
-        var categoria = result.body;
-        var persona = resultPersona.body[0];
-
-        var result2 = await data.execApi(request.hostname(),'/Talento/Talento/getCurriculumPersona',obj);
-        var curriculum = result2.body;
-        var objCurriculum = [];
-        persona.resultados=resultadosPersona.body;
-    
-        if(persona.fotoPersona=="" || persona.fotoPersona==null){
-            persona.fotoPersona="/assets/images/icons/businessman.svg"
-          }
-        categoria.forEach(element => {
-
-            var objItems = [];
-
-            for(var c in curriculum){
-                if(curriculum[c]["id"] == element.id)
-                {
-                    objItems.push(curriculum[c]);
-                }
+            var idPersona = request.input('idPersona')
+            var showAll = true
+            if(personaLogueada.id==idPersona){
+                showAll=false;
             }
 
-            var objList = {
-                "nombreCategoria": element.nombre,
-                "idCategoria": element.id,
-                "listItems": objItems,
-                "totalItems": objItems.length
-            }
+            var obj = {
+                "idPersona":idPersona,
+                "idProceso":session.get('procesoOrganigrama')
+            };
             
-            objCurriculum.push(objList)
-        });
+            var resultPersona =  await data.execApi(request.hostname(),'/Talento/Persona/getPersona',obj);;//data.execApi(request.hostname(),'/Talento/Talento/getPersona',obj);
+            var resultadosPersona =  await data.execApi(request.hostname(),'/Talento/Persona/getResultados',{idPersona:idPersona});
+            var result = await data.execApi(request.hostname(),'/Talento/Talento/getCurriculumCategoria',obj);
+            var categoria = result.body;
+            var persona = resultPersona.body[0];
+
+            var result2 = await data.execApi(request.hostname(),'/Talento/Talento/getCurriculumPersona',obj);
+            var curriculum = result2.body;
+            var objCurriculum = [];
+            persona.resultados=resultadosPersona.body;
         
-        return view.render('talento/fichaTalento', { objCurriculum:objCurriculum, persona:persona, idPersona:idPersona,showAll:showAll});
+            if(persona.fotoPersona=="" || persona.fotoPersona==null){
+                persona.fotoPersona="/assets/images/icons/businessman.svg"
+            }
+            categoria.forEach(element => {
+
+                var objItems = [];
+
+                for(var c in curriculum){
+                    if(curriculum[c]["id"] == element.id)
+                    {
+                        objItems.push(curriculum[c]);
+                    }
+                }
+
+                var objList = {
+                    "nombreCategoria": element.nombre,
+                    "idCategoria": element.id,
+                    "listItems": objItems,
+                    "totalItems": objItems.length
+                }
+                objCurriculum.push(objList)
+            });
+
+            var objEncuestaLista = {
+                idPersona:idPersona
+            }
+            var resultEncuestaLista = await data.execApi(request.hostname(),'/Encuesta/Medicion/getListaEncuesta',objEncuestaLista);
+            var lista = resultEncuestaLista.body;
+
+            var idEncuestaPersona = lista.data[0].id 
+            var objEnc = {
+                idEncuestaPersona:idEncuestaPersona
+            }
+            var result = await data.execApi(request.hostname(),'/Encuesta/Medicion/getInstrumento',objEnc);
+            var instrumento = result.body;
+
+            var resultEncuestaFraseo = await data.execApi(request.hostname(),'/Talento/Persona/getEncuestaFraseo',objEnc);
+            var encuestaFraseo = resultEncuestaFraseo.body.data;
+            
+            return view.render('talento/fichaTalento', 
+            { 
+                objCurriculum:objCurriculum, 
+                persona:persona, 
+                idPersona:idPersona,
+                showAll:showAll,
+
+                idEncuestaPersona:idEncuestaPersona,
+                instrumento:instrumento,
+                encuestaFraseo
+            });
+        } catch(e){
+            console.log(e);
+            return "";
+        }
+        
+    }
+
+    async encuesta ({view,request, response, auth, session}) {
+
+        try
+        {
+            var personaLogueada =  session.get('personaLogueada')
+            
+            var idPersona = request.input('idPersona')
+            var showAll = true
+            if(personaLogueada.id==idPersona){
+                showAll=false;
+            }
+
+            var obj = {
+                "idPersona":idPersona
+            };
+            
+            var resultPersona =  await data.execApi(request.hostname(),'/Encuesta/Medicion/getPersona',obj);;//data.execApi(request.hostname(),'/Talento/Talento/getPersona',obj);
+            
+            var persona = resultPersona.body.data[0];
+
+            
+        
+            var objEncuestaLista = {
+                idPersona:idPersona
+            }
+            var resultEncuestaLista = await data.execApi(request.hostname(),'/Encuesta/Medicion/getListaEncuesta',objEncuestaLista);
+            var lista = resultEncuestaLista.body;
+
+            var idEncuestaPersona = lista.data[0].id 
+            var objEnc = {
+                idEncuestaPersona:idEncuestaPersona
+            }
+            var result = await data.execApi(request.hostname(),'/Encuesta/Medicion/getInstrumento',objEnc);
+
+            var instrumento = result.body;
+            
+            return view.render('talento/encuesta', 
+            {
+                persona:persona, 
+                idPersona:idPersona,                
+
+                idEncuestaPersona:idEncuestaPersona,
+                instrumento:instrumento
+            });
+
+        } catch(e){
+            console.log(e)
+        }
     }
 
     async addCurriculumPersona ({view,request, response, auth, session}) {

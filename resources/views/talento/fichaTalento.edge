@@ -41,35 +41,26 @@
                         </div>
                     </div>
                     @if(showAll==true)
-                    <div class="row">
-                        <div class="col-md-12">
-                                <div class="info-box bg-green">
-                                <span class="info-box-icon text-white"><i class="fa fa-diamond"></i></span>
-                    
-                                <div class="info-box-content">
-                                    <span class="info-box-text text-white">Talent Review</span>
-                                    <span class="info-box-number text-white">{{persona.resultados.tr[0].value}}</span>
-                    
-                                    <div class="progress">
-                                    <div class="progress-bar" style="width: 100%"></div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                    <div class="info-box bg-green">
+                                    <span class="info-box-icon text-white"><i class="fa fa-diamond"></i></span>
+                        
+                                    <div class="info-box-content">
+                                        <span class="info-box-text text-white">Talent Review</span>
+                                        <span class="info-box-number text-white">{{persona.resultados.tr[0].value}}</span>
+                        
+                                        <div class="progress">
+                                        <div class="progress-bar" style="width: 100%"></div>
+                                        </div>
+                                        <span class="progress-description text-white">
+                                            {{persona.resultados.tr[0].year}}
+                                        </span>
                                     </div>
-                                    <span class="progress-description text-white">
-                                        {{persona.resultados.tr[0].year}}
-                                    </span>
-                                </div>
-                                <!-- /.info-box-content -->
-                                </div>
+                                    <!-- /.info-box-content -->
+                                    </div>
+                            </div>
                         </div>
-
-                        <div class="col-md-12">
-                            <!--<div class="pull-right">
-                                <i class="fa  fa-plane text-primary"></i>
-                                <i class="fa  fa-refresh text-primary"></i>
-                                <i class="fa  fa-warning text-danger"></i>
-                                <i class="fa  fa-star text-warning"></i>
-                            </div>-->
-                        </div>
-                    </div>
                     @endif
                 </div>
             </div>
@@ -81,31 +72,33 @@
             <!-- Personal-Information -->
         </div>
     </div>
+
     <div class="row">
+            
+
         <div class="col-md-6" id="curriculum">
             <!-- Curriculum -->
             @!component('components.Core.curriculum',objCurriculum=objCurriculum,idPersona=idPersona,showAll=showAll)
             <!-- Curriculum -->
 
+            @!component('talento.components.contenedorEncuesta', instrumento=instrumento, encuestaFraseo=encuestaFraseo) 
         </div>
+
+        
+
         @if(showAll==true)
         <div class="col-md-6">
             <!-- Mediciones -->
             <div class="row">
                 
-                    @!component('talento.components.medicionDesempeno',resultados=persona.resultados.edd)
-                
-                
-                
-                    @!component('talento.components.medicionClima',resultados=persona.resultados.clima)
-                
-                
-                
-                    @!component('talento.components.medicionTalentReview',resultados=persona.resultados.tr)
+                    @!component('talento.components.medicionResultado',resultados=persona.resultados.edd, titulo="Desempeño")
+                    @!component('talento.components.medicionResultado',resultados=persona.resultados.clima, titulo="Clima")
+                    @!component('talento.components.medicionResultado',resultados=persona.resultados.tr, titulo="Talent Review")
                 
             </div>
         </div>
         @endif
+
         <div class="col-md-6">
             <!-- Mediciones -->
 

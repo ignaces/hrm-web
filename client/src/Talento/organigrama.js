@@ -67,10 +67,16 @@ var cargaOrganigrama = function (organigrama){
         
         var badges = "";
         var lupa=false;
-        if(organigrama[posicion].valorEdeEq!=undefined){
+        
+        if(organigrama[posicion].valorEdeEq!=undefined && organigrama[posicion].idCuadrante!=null && organigrama[posicion].valor!=null){
             if(organigrama[posicion].valorEdeEq.indexOf(organigrama[posicion].edd)==-1 || organigrama[posicion].idCuadrante!=organigrama[posicion].idCuadranteEq){
                 lupa=true;
             }
+        }
+        
+        if(organigrama[posicion].idCuadrante==null){
+            
+            lupa=false;
         }
         
         
@@ -203,6 +209,7 @@ function clickHandler(sender, args) {
 function renderNodeHandler(sender, args) {
     for (i = 0; i < args.content.length; i++) {
         var texto ="";
+        console.log(args.node.data["talentReview"])
         if (args.content[i].indexOf(args.node.data["talentReview"]) != -1) {
             if(args.node.data["talentReview"]!=undefined){
                 

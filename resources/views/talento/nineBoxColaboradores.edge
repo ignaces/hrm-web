@@ -6,8 +6,8 @@
     <script>
     var cuadrantes = {{{toJSON(cuadrantes)}}}
     </script>
-    <script src="/assets/js/dist/drag.min.js"></script>
-    <script src="/assets/js/dist/filtroClasificaciones.min.js"></script>
+    <script src="/assets/js/dist/drag.min.js?v=5"></script>
+    <script src="/assets/js/dist/filtroClasificaciones.min.js?v=1"></script>
 
     <script src="/assets/plugins/custombox/js/custombox.min.js"></script>
     <script src="/assets/plugins/custombox/js/legacy.min.js"></script>
@@ -160,12 +160,13 @@ h4 {
           @!component('talento.components.filtroDragColaboradores', {
             cargosPorEmpresa:cargosPorEmpresa,
             clasificacionesPorEmpresa:clasificacionesPorEmpresa,
-            cuadrantes:cuadrantes})
+            cuadrantes:cuadrantes,
+            jefatura:jefaturas})
       </div>
   </div>
   <div class="row">
         <div class="col-lg-12">
-              @!component('talento.components.dragColaboradores', {personas:personas,cuadrantes:cuadrantes,colaboradoresEva:colaboradoresEva})
+              @!component('talento.components.dragColaboradores', {personas:personas,cuadrantes:cuadrantes})
         </div>
   </div>
    

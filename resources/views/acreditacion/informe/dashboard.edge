@@ -9,6 +9,7 @@
 
 
 @section('content')
+
     <input type="hidden" id="noIniciados" value="{{detalle.noIniciados}}"/>
     <input type="hidden" id="enProgreso" value="{{detalle.enProgreso}}"/>
     <input type="hidden" id="finalizados" value="{{detalle.finalizados}}"/>
@@ -45,68 +46,233 @@
         </div>
     </div>
 
+
+
+
+
+    <!--INICIO DETALLE-->
+    <div class="row" id="comClasificaciones">
+        <div class="col-md-12" >
+            @each(clasificacion in clasificaciones)
+                <div class="card-box">
+                    <!--<div class="dropdown pull-right">
+                            <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
+                                <h3 class="m-0 text-muted"><i class="mdi mdi-dots-horizontal"></i></h3>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Descargar estados</a></li>
+                                <li><a href="#">Enviar Recordatorios</a></li>
+                            </ul>
+                    </div>-->
+                    <h4 class="header-title m-t-0">Detalle {{clasificacion.nombre}} </h4>
+
+                    <div class="text-center">
+                        <div class="row">
+                                <c{{clasificacion.id}}></c{{clasificacion.id}}>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            @endeach
+            </div>
+        </div>
+        <!--FIN DETALLE-->
+
                         
     <div class="row">
-                            <div class="col-lg-12">
-                                <div class="card-box">
-                                    <h4 class="m-t-0 header-title"><b>Evaluados</b></h4>
-                                    <p class="text-muted font-14 m-b-20">
-                                        
-                                    </p>
+        <div class="col-lg-12">
+            <div class="card-box">
+                <h4 class="m-t-0 header-title"><b>Evaluados</b></h4>
+                <p class="text-muted font-14 m-b-20">
+                    
+                </p>
 
-                                    <div class="table-responsive">
-                                        <table class="table table-striped table-bordered" id="tblPersonas">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered" id="tblPersonas">
 
-                                            <thead>
-                                            <tr>
-                                                <th>Nombre</th>
-                                                <th>Estado</th>
-                                                <th>Resultado</th>
-                                                <th>Acciones</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            @each(persona in personas)
-                                            <tr>
-                                                <td>
-                                                    <h5 class="m-b-0 m-t-0">{{persona.nombres}} {{persona.apellidoPaterno}} {{persona.apellidoMaterno}}</h5>
-                                                    <p class="m-b-0"><small>{{persona.perfilCompetencia}}</small></p>
-                                                </td>
+                        <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Estado</th>
+                            <th>Resultado</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @each(persona in personas)
+                        <tr>
+                            <td>
+                                <h5 class="m-b-0 m-t-0">{{persona.nombres}} {{persona.apellidoPaterno}} {{persona.apellidoMaterno}}</h5>
+                                <p class="m-b-0"><small>{{persona.perfilCompetencia}}</small></p>
+                            </td>
 
-                                               <td>{{persona.estado}}</td>
-                                                <td>
-                                                @if(persona.estadoCodigo=="FINALIZADO")
-                                                    {{persona.resultadoEstado}}
-                                                @endif
-                                                    
-                                                
-                                                
-                                                </td>
-                                                <td>
-                                                @if(persona.estadoCodigo=="FINALIZADO")
-                                                    <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Informe Sin Detalle" href="/Acreditacion/Informe/index?procesoPersona={{persona.idProcesoPersona}}&cd=0" class="table-action-btn"><i class=" mdi mdi-file-chart"></i></a>
-                                                    <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Informe Con Detalle" href="/Acreditacion/Informe/index?procesoPersona={{persona.idProcesoPersona}}&cd=1" class="table-action-btn"><i class=" mdi mdi-file-chart"></i></a>
-                                                @endif
-                                                </td>
-                                            </tr>
+                            <td>{{persona.estado}}</td>
+                            <td>
+                            @if(persona.estadoCodigo=="FINALIZADO")
+                                {{persona.resultadoEstado}}
+                            @endif
+                                
+                            
+                            
+                            </td>
+                            <td>
+                            @if(persona.estadoCodigo=="FINALIZADO")
+                                <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Informe Sin Detalle" href="/Acreditacion/Informe/index?procesoPersona={{persona.idProcesoPersona}}&cd=0" class="table-action-btn"><i class=" mdi mdi-file-chart"></i></a>
+                                <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Informe Con Detalle" href="/Acreditacion/Informe/index?procesoPersona={{persona.idProcesoPersona}}&cd=1" class="table-action-btn"><i class=" mdi mdi-file-chart"></i></a>
+                            @endif
+                            </td>
+                        </tr>
 
-                                            @endeach
-                                            
-                                            
-                                            
+                        @endeach
+                        
+                        
+                        
 
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-                            </div>
-                            <!-- end col -->
-</div>
+        </div>
+        <!-- end col -->
+    </div>
 <hr>
 @endsection
 
 @section('scripts')
+<script src="/assets/plugins/chart.js/chart.min.js"></script>
+<script src="/assets/js/vue-chartjs.min.js"></script>
+<script>
+    var idEncuestaAplicacion="{{idEncuestaAplicacion}}";
+    //var ctx = $("#pieChart");
+    
+    /*
+    setInterval(function(){
+     var obj ={
+               idEncuestaAplicacion:idEncuestaAplicacion
+           }
+           $.ajax({
+                type: "GET",
+                url: "/Encuesta/Avance/getResumen",
+                contentType: "application/json; charset=utf-8",
+                data: obj,
+                dataType: "json", 
+                success: function (msg) {
+                  if(JSON.stringify(msg) === JSON.stringify(resumen)){
+                      return;
+                  }
+                  resumen=msg;
+                  initPie();
+                }
+            });
+    }, 30000);
+*/
+
+    var resumen = {{{toJSON(resumen)}}}
+    var clasificaciones ={{{toJSON(clasificaciones)}}}
+    
+    var initBar = function(id,labels,data){
+        var cId= "c"+id;
+        Vue.component(cId, {
+        extends: VueChartJs.Bar,
+        mounted () {
+            this.renderChart({
+            labels: labels,
+            datasets: data
+            },
+            {responsive: true, maintainAspectRatio: false,scales: {
+                xAxes: [{
+                    stacked: true
+                }],
+                yAxes: [{
+                    stacked: true
+                }]
+            }})
+        }
+        
+        })
+    }
+    
+    for(var i in clasificaciones){
+    
+        //console.log(clasificaciones[i]);
+        var labels =[];
+        var datasets =[];
+        var estados = clasificaciones[i].estados;
+
+        console.log(clasificaciones[i].estados);
+
+        labels = clasificaciones[i].niveles;
+        
+        for(var e in estados){
+            datasets.push({
+                label: estados[e].nombre,
+                backgroundColor: estados[e].color,
+                data: estados[e].data,
+            });
+        }
+        console.log("labels: "+ datasets[0].label )
+        initBar(clasificaciones[i].id,labels,datasets);
+
+    }
+
+    var comResumenEtiquetas = new Vue({
+            el: '#etiquetas',
+            data: {
+                estados: {{{toJSON(clasificaciones.estados)}}}
+            }
+    });
+    var comClasificaciones = new Vue({
+            el: '#comClasificaciones',
+            data: {
+                clasificaciones: clasificaciones
+            }
+    });
+    
+    /*
+    var initPie = function(){
+        var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ["No Iniciada", "En Proceso", "Finalizada"],
+            datasets: [{
+                label: '# of Votes',
+                data: [resumen[0].cantidad, resumen[1].cantidad, resumen[2].cantidad],
+                backgroundColor: [
+                    $(".text-danger").css('color'),
+                    $(".text-warning").css('color'),
+                    $(".text-success").css('color'),
+                ],
+                borderColor: [
+                    $(".text-danger").css('color'),
+                    $(".text-warning").css('color'),
+                    $(".text-success").css('color'),
+                ],
+                borderWidth: 1
+            }]
+        }
+        });
+    }
+    initPie();
+    */
+    
+    
+    </script>
+
+
+
+
+
+<script>
+
+    var idProceso = "{{idProceso}}";
+    
+</script>
+
+
+
+
          <script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="/assets/plugins/datatables/dataTables.bootstrap.js"></script>
         <script src="/assets/plugins/datatables/dataTables.buttons.min.js"></script>

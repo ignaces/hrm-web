@@ -80,6 +80,21 @@
                                                     
                                             </div>
                                         </div>
+
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                            <label class="control-label">Jefatura Directa</label>
+                                                    
+                                                                <select id="cmbJefatura" class="select2 form-control select2-multiple buscar" multiple="multiple" multiple data-placeholder="Choose ...">
+                                                                    <option value="-1" selected>Todos</option>
+                                                                    @each(jefe in jefatura)
+                                                                    <option value="{{jefe.id}}">{{jefe.nombres}} {{jefe.apellidoPaterno}} {{jefe.apellidoMaterno}}</option>
+                                                                    @endeach
+                                                                </select>
+                                                    
+                                                    
+                                            </div>
+                                        </div>
                                         
 									   </div>
 									   <div class="row">

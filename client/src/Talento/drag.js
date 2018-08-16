@@ -1,3 +1,26 @@
+
+//
+$(document).ready(function() {
+    $(".sortable-list").droppable({
+    
+        drop: function(event, ui) {
+            
+           var idOpinante = (ui.draggable.attr('value'));
+           var idComponente = $(this).attr("value");
+          setCuadrante(idOpinante,idComponente,"")
+        }
+      });
+      $("#upcoming").sortable({
+        connectWith: ".itemCuadrante",
+        placeholder: 'task-placeholder',
+        forcePlaceholderSize: true,
+        update: function (event, ui) {
+
+        }
+    }).disableSelection();
+});
+
+
 var objCuadrante ={}
 
 var setCuadrante = function(idOpinante,idCuadrante,justificacion){
@@ -14,10 +37,16 @@ var setCuadrante = function(idOpinante,idCuadrante,justificacion){
         dataType: "json", 
         success: function (msg) {
            if(msg.valido==0 && justificacion==""){
-               var mensaje = 'El cuadrante seleccionado debe ser utilizado por la(s) siguientes calificaciones de desempeño: <br>' + msg.valorEde + ' <br> \
-               Si desea continuar debe ingresar una justificación.'
                
-               $("#explicacion").html(mensaje)
+                /*var mensaje = 'El cuadrante seleccionado debe ser utilizado por la(s) siguientes calificaciones de desempeño: <br>' + msg.valorEde + ' <br> \
+               Si desea continuar debe ingresar una justificación.'
+               */
+
+              var mensaje = 'Según el siguiente cuadro, existe una inconsistencia entre la Evaluación de Desempeño y la ubicación en la Matriz de Talent Review. <br> \
+              <img src=""  \
+              Si aún así desea continuar, ingrese la justificación abajo'
+               
+               //$("#explicacion").html(mensaje)
                
                $("#justificaModal").modal('show');
            }else{
@@ -26,15 +55,7 @@ var setCuadrante = function(idOpinante,idCuadrante,justificacion){
         }
     });
 }
-$(".sortable-list").droppable({
-    
-    drop: function(event, ui) {
-        
-       var idOpinante = (ui.draggable.attr('value'));
-       var idComponente = $(this).attr("value");
-      setCuadrante(idOpinante,idComponente,"")
-    }
-  });
+
 
 var loadCuadrantes=function(){
     clearCuadrantes();
@@ -60,6 +81,8 @@ var loadCuadrantes=function(){
                 var idPersona = colaboradores[i].idPersona;
 
                 var edd = colaboradores[i].edd;
+
+                var trAnterior = colaboradores[i].trAnterior;
                 
                 if(foto==''){
                     if(genero=="M"){
@@ -77,11 +100,11 @@ var loadCuadrantes=function(){
                                             <img src="'+foto+'" alt="task-user" class="thumb-sm img-circle"> \
                                         </a>    \
                                     </div>\
-                                    <div class="col-xs-6">\
+                                    <div class="col-xs-10">\
                                         <h6>\
                                             <a href="/Talento/Talento/fichaTalento?idPersona='+idPersona+'" class="">\
                                                 <span style="width: 100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display: inline-block;">'+nombre+'</span>\
-                                                <span style="width: 100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display: inline-block;">'+edd+'</span>\
+                                                <span style="width: 100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display: inline-block;">'+edd+' - TR Anterior '+trAnterior+'</span>\
                                             </a>\
                                         </h6>\
                                     </div>\

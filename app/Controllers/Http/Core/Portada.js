@@ -21,8 +21,13 @@ class Portada {
         var objTalento = {
             "idOpinante": idOpinante
         };
+
+        
+
         var miPerfil = await data.execApi(request.hostname(),'/Core/Componentes/getComponente',{componente:'MI_PERFIL'});
         var perfilResult = miPerfil.body.data;
+
+        
         
         if(perfilResult.length>0){
             perfilResult[0].ruta = perfilResult[0].ruta.replace("#idPersona",all.id)
@@ -30,29 +35,35 @@ class Portada {
         
         var mensaje = await data.execApi(request.hostname(),'/Core/Empresa/getMensaje',{});
         var mensajeResult =mensaje.body.data;
-
+        
         var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getProcesos',obj);
         var talentos = [];
+
+        
         
         var condicion = [];
+        
+        var procesos = result.body.data.procesos;
+        
+        var talentos = "";
+
         try{
             var resultadoTalento = await data.execApi(request.hostname(),'/Talento/Talento/getTalentos',objTalento);
             talentos = resultadoTalento.body.data.talentos;
             condicion = resultadoTalento.body.data1;
+
+            
+            //talentos = resultadoTalento.body;
         }catch(e){
             
         }
         
-
-        var procesos = result.body.data.procesos;
-        //var talentos = resultadoTalento.body;
+        console.log(talentos);
         
-        
-
         antl.switchLocale('es')
          
        
-        //var rstl = session.put('totalCol',talentos.Total)
+        var rstl = session.put('totalCol',talentos.Total)
         //console.log(rstl);
        
         obj={
@@ -82,6 +93,7 @@ class Portada {
             texto = mensajeResult[0].texto;
             mensajeTitulo = mensajeResult[0].titulo;
         }
+        
         return view.render('core/welcome',  {etag,user,procesos,persona,menu,talentos,condicion,procesosEde,mensaje:texto,mensajeTitulo,miperfil:perfilResult});
     }   
 }

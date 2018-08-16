@@ -13,7 +13,35 @@
        
         <script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="/assets/plugins/datatables/dataTables.bootstrap.js"></script>
-        <script src="/assets/js/dist/Persona/lista.min.js"></script>
+        <script src="/assets/js/dist/Persona.min.js"></script>
+        <script>
+        var comUsuarios = new Vue({
+      el:"#cardUsuarios",
+      data:{
+            usuarios:[]
+      }
+});
+var getUsers = function(){
+      $.ajax({
+            type: "GET",
+            url: "/Account/UserController/find",
+            contentType: "application/json; charset=utf-8",
+            data: {},
+            dataType: "json", 
+            async:false,
+            success: function (msg) {
+                  comUsuarios.usuarios = msg;
+            }
+
+        });   
+}
+$(document).ready(function(){
+    //
+      
+      getUsers();
+      
+});
+        </script>
          <script>
             $(document).ready(
                 ()=>{
@@ -25,40 +53,39 @@
 @endsection
 @section('content')
 
-    @!component('components.breadcrumb',title="Perfiles", pages= [
+    @!component('components.breadcrumb',title="Usuarios", pages= [
             {nombre:"Administración",activa:false},
-            {nombre:"Perfiles",activa:true}
+            {nombre:"Usuarios",activa:true}
             ])
     <div class="row">
         <div class="col-sm-12">
-            <div class="card-box table-responsive">
-           <button type="button" class="pull-right btn btn-default btn-sm waves-effect waves-light"  data-toggle="modal" data-target="#proceso-modal">Importar Perfiles</button>
-            <button type="button" class="pull-right btn btn-default btn-sm waves-effect waves-light"  data-toggle="modal" data-target="#proceso-modal">Nuevo Perfil</button>
-            
-                <h4 class="m-t-0 header-title">
-                    <b>Perfiles de cargo</b>
-                </h4>
-                    <p class="text-muted font-14 m-b-30">
-                        Perfiles que se encuentran en la base de datos.
-                    </p>
-                      <!-- Table -->
-                    <table id="tblPersonas" class="table table-striped table-bordered">
-                          <thead>
-                            <tr>
-                                <th>Usuario</th>
-                                <th>Email</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                                @each(usuario in usuarios)
-                                     @!component('components.preguntaSimple',title="Perfiles", pages= [
-                                        
-                                    ])
-                                @endeach
-                                
-                          </tbody>
-                    </table>
-                    
+            <div class="card-box table-responsive" id="cardUsuarios">
+                <button type="button" class="pull-right btn btn-default btn-sm waves-effect waves-light"  data-toggle="modal" data-target="#proceso-modal">Nuevo Usuario</button>
+                    <h4 class="m-t-0 header-title">
+                        <b>Usuarios</b>
+                    </h4>
+                        <table id="tblPersonas" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Usuario</th>
+                                    <th>Email</th>
+                                    <th>Nombre</th>
+                                    <th>Empresa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    
+                                        <tr v-for="usuario in usuarios">
+                                            <td>@{{usuario.username}}</td>
+                                            <td>@{{usuario.email}}</td>
+                                            <td>@{{usuario.nombres}} @{{usuario.apellidoPaterno}} @{{usuario.apellidoMaterno}}</td>
+                                            <td>@{{usuario.nombreEmpresa}}</td>
+                                        </tr>
+                                    
+                                    
+                            </tbody>
+                        </table>
+                        
             </div> 
         </div>
     </div>

@@ -17,6 +17,7 @@ $("#btnBuscar").on('click',function() {
         //selected disabled hidden
         var cargos = $('#cmbCargo').val();
         var tr = $('#cmbCuadrante').val();
+        var jefatura = $('#cmbJefatura').val();
 
         $('.buscarCla').each(function(i, obj) {
             clasificaciones= $.merge(clasificaciones,$(this).val());
@@ -30,6 +31,7 @@ $("#btnBuscar").on('click',function() {
         clasificaciones:clasificaciones,  //nombreFiltro   //bb
         cargos:cargos,
         tr:tr,
+        jefatura:jefatura,
         identificador:rut,
         nombres:nombres,
         paterno:paterno,
@@ -84,7 +86,22 @@ $("#btnBuscar").on('click',function() {
                     }
                 }
                
-                $("#upcoming").append('<li class="task-warning ui-sortable-handle p-0" style="background-color: rgba(255,255,255,0.4); border:1px solid rgba(0,0,0,0.1);" id="'+total[index].cargo+'" name="'+total[index].rut+'" value="'+total[index].procesoOpinante+'"><div class="row"><div class="col-xs-2"><a href="/Talento/Talento/fichaTalento?idPersona='+total[index].idPersona+'" class="text-muted"><img src="'+foto+'" alt="task-user" class="thumb-sm img-circle"> </a>    </div><div class="col-xs-6"><h6><a href="/Talento/Talento/fichaTalento?idPersona='+total[index].idPersona+'" class=""><span style="width: 100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display: inline-block;">'+total[index].Colaborador+' '+total[index].apellidoPaterno+' '+total[index].apellidoMaterno+'</span></a></h6></div></div></li>');
+                $("#upcoming").append('<li class="task-warning ui-sortable-handle p-0" style="background-color: rgba(255,255,255,0.4); border:1px solid rgba(0,0,0,0.1);" \
+                                        id="'+total[index].cargo+'" name="'+total[index].rut+'" value="'+total[index].procesoOpinante+'">\
+                                        <div class="row">\
+                                            <div class="col-xs-2"><a href="/Talento/Talento/fichaTalento?idPersona='+total[index].idPersona+'" class="text-muted">\
+                                                <img src="'+foto+'" alt="task-user" class="thumb-sm img-circle"> </a>    \
+                                            </div>\
+                                            <div class="col-xs-10">\
+                                                <h6>\
+                                            <a href="/Talento/Talento/fichaTalento?idPersona='+total[index].idPersona+'" class="">\
+                                                <span style="width: 100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display: inline-block;">'+total[index].Colaborador+' '+total[index].apellidoPaterno+' '+total[index].apellidoMaterno+'</span>\
+                                                <span style="width: 100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display: inline-block;">\
+                                                  '+total[index].edd+' - TR Anterior ' +total[index].trAnterior +'\
+                                                 </span>\
+                                             </a></h6>\
+                                            </div>\
+                                        </div></li>');
             });
         }//$("."+Color+"").append('<li class="task-warning ui-sortable-handle" style="" id="'+cargo+'" name="'+rut+'"   value="'+idOpinante+'">' +'<input class="" id="clasificaciones" name="clasificaciones" type="hidden" value="'+clasificacionesHidden+'"><p class="m-b-0"><div class="clearfix"></div><div><p class="pull-right">'+atributos+'</p></div><a href="#" class="text-muted"><img src="'+foto+'" alt="task-user" class="thumb-sm img-circle pull-left"> <H6 class="pull-left">'+nombres+' '+apellidoPaterno+' '+apellidoMaterno+'</H6></a> </p></li>');
         },
