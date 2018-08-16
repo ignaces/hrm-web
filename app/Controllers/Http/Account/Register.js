@@ -2,6 +2,8 @@ const User = use('App/Models/User')
 const Hash = use('Hash')
 const Route = use('Route')
 
+const data = use('App/Utils/Data')
+
 class Register{
     index({view,request}){
         return view.render('account/register');
@@ -59,6 +61,55 @@ class Register{
             catch(error)
             {
 
+            }
+        }
+        
+
+  /*      var registerMessage = {
+            success: 'Registration Successful! Now go ahead and login'
+        }
+*/      
+    }
+
+    async doRegisterUsuariosPersonas({request, response}) {
+       
+        //console.log("TEST");
+        //return false;
+
+        const personas = request.input("personas");
+
+        for(var item in personas){
+            
+            const user = new User()
+            const objPersona = {};
+            const persona=personas[item];
+            
+            user.username = persona.identificador;
+            user.email = persona.email;
+            user.password = persona.password;
+
+            objPersona.identificador = persona.identificador;
+            objPersona.nombres = persona.nombres;
+            objPersona.apellidoPaterno = persona.apellidoPaterno;
+            objPersona.apellidoMaterno = persona.apellidoMaterno;
+            objPersona.email = persona.email;
+            objPersona.genero = persona.genero;
+            objPersona.usuario = persona.usuario;
+            objPersona.nacionalidad = persona.nacionalidad;
+            
+            try{
+                var respuesta = await user.save();
+                
+                console.log(user.$attributes.id);
+                objPersona.idUsuario = user.$attributes.id;
+                
+                //console.log(objPersona);
+                var registraPersona = await data.execApi(request.hostname(),'/Persona/Persona/addPersona',objPersona);
+                //console.log(registraPersona);
+            }
+            catch(error)
+            {
+                console.log(error);
             }
         }
         

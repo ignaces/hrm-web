@@ -55,7 +55,7 @@ class Desempeno {
         var resultEtapasProceso=await api.execApi(request.hostname(),'/Desempeno/Proceso/getEtapas',objEtapasProceso);
         var etapasProceso =resultEtapasProceso.body.data;
         
-        console.log(etapasProceso);
+        //console.log(etapasProceso);
         
          //Render
          return view.render('/administracion/modulos/desempeno/fichaProceso', {datosProceso,etapasProceso});
@@ -438,7 +438,7 @@ class Desempeno {
         var resultAcciones =await api.execApi(request.hostname(),'/Desempeno/Proceso/getAccionesTarea',objDatosAcciones);
         var datosAcciones =resultAcciones.body.data;
      
-        console.log(datosAcciones)
+       // console.log(datosAcciones)
 
          //Render
          return view.render('/administracion/modulos/desempeno/fichaTarea', {datosTarea,datosAcciones});
@@ -633,7 +633,7 @@ class Desempeno {
         var resultEstadosAcciones=await api.execApi(request.hostname(),'/Desempeno/Proceso/getEstadosEde',objEstadosAcciones);
         var datosEstados =resultEstadosAcciones.body.data;  
 
-        console.log(datosEstados)
+        //console.log(datosEstados)
 
          //Render
         return view.render('/administracion/modulos/desempeno/editarAccion',{idEtapaTarea,datosAcciones,datosActores,datosEstados,datosAccion});
@@ -696,6 +696,90 @@ class Desempeno {
     }
 
     //-----<< ACCION - TAREA
+
+    //-----<< PARTICIPANTES
+
+    async participantes ({view,request, response, auth, session}) {
+        
+        //Data
+        var idProceso = request.input("idProceso")
+        session.put('idProceso',idProceso); 
+      
+        //Datos Proceso
+            var objDatosProceso = {
+               "idProceso":idProceso,
+               idEstado:""
+            };
+            var resultProceso =await api.execApi(request.hostname(),'/Desempeno/Proceso/getProcesos',objDatosProceso);
+            var datosProceso =resultProceso.body.data;
+       
+             //console.log(datosProceso);
+
+
+        //Render
+        return view.render('/administracion/modulos/desempeno/participantes', {datosProceso});
+     }
+
+     async buscarParticipante({view,request, response}) {
+       
+        var idProceso= request.input("idEde");
+        var identificador= request.input("identificador");
+        var appat= request.input("appat")
+        
+        var obj = {
+            "idEde":idProceso,
+            "identificador":identificador,
+            "appat":appat,
+            "idPersona":""
+            
+        };
+
+        //console.log(obj)
+
+        var result = await api.execApi(request.hostname(),'/Desempeno/Participante/getParticipantes',obj);  
+        var resultP =result.body.data;
+
+        //console.log(resultP);
+
+        //Render
+        return resultP;
+      
+    }
+
+    async fichaParticipante ({view,request, response, auth, session}) {
+        
+        //Data
+        var idProceso = request.input("idProceso");
+        var idPersona =request.input("idPersona")
+        
+      
+        //Datos Proceso
+            var objDatosProceso = {
+               "idProceso":idProceso,
+               idEstado:""
+            };
+            var resultProceso =await api.execApi(request.hostname(),'/Desempeno/Proceso/getProcesos',objDatosProceso);
+            var datosProceso =resultProceso.body.data;
+       
+        //Datos Persona
+        var objPersona ={
+            "idEde":idProceso,
+            "identificador":"",
+            "appat":"",
+            "idPersona":idPersona
+        }
+        var resultPersona = await api.execApi(request.hostname(),'/Desempeno/Participante/getParticipantes',objPersona)
+        var datosPersona = resultPersona.body.data;
+
+        //console.log(datosPersona)
+
+        //Render
+        return view.render('/administracion/modulos/desempeno/fichaParticipante', {datosProceso,datosPersona});
+     }
+
+
+    //----->> PARTICIPANTES
+
 }
 
 module.exports = Desempeno
