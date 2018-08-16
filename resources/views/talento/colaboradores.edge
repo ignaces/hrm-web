@@ -13,20 +13,16 @@
 
 @section('content')
         
-            <div class"row">
-       
-   @!component('components.Talento.resultadoColaboradores',titulo="Widget", data={ total:total })
-        
-        
-   @!component('components.Talento.resultadoNineBox', {total:total,totalEvaluados:totalEvaluados})
-        
-        
-   @!component('components.Talento.caja',{titulo:'Organigrama - Sucesiones',link:'/Talento/Talento/organigrama',imagen:'/assets/images/talento/organigrama.png'})
-    
-   @!component('components.Talento.caja',{titulo:'Marketplace',link:'/Talento/Talento/marketPlace',imagen:'/assets/images/talento/seleccion.png'})
-    
-        </div>
-
+<div class"row">   
+    @!component('components.Talento.resultadoColaboradores',titulo="Widget", data={ total:total })    
+    @!component('components.Talento.resultadoNineBox', {total:total,totalEvaluados:totalEvaluados})    
+    @!component('components.Talento.caja',{titulo:'Organigrama - Sucesiones',link:'/Talento/Talento/organigrama',imagen:'/assets/images/talento/organigrama.png'})
+    @!component('components.Talento.caja',{titulo:'Marketplace',link:'/Talento/Talento/marketPlace',imagen:'/assets/images/talento/seleccion.png'})
+    <span class="clearfix"></span>
+</div>
+<div class="row">
+    @!component('components.Talento.caja',{titulo:'Talent Book',link:'#',imagen:'/assets/images/talento/seleccion.png'})
+</div>
        
 
 
