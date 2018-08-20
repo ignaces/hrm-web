@@ -65,7 +65,8 @@
                                 </div>    
                             </div>
                         </div>
-                        <div class="row" v-if="posicion.critico==1">
+                        <!--<div class="row" v-if="posicion.critico==1">-->
+                            <div class="row">
                             <div class="panel panel-border panel-primary">
                                 <div class="panel-heading">
                                     <h2 class="panel-title">Estrategia Sucesión</h2>
@@ -75,8 +76,8 @@
                                         <div class="form-group row">
                                         <label class="col-3 col-form-label">Potencial sucesor identificado</label>
                                         <div class="col-6">
-                                            <select class="select2 form-control" id="cmbSucesor">
-                                                <option>Seleccione o escriba</option>
+                                            <select class="select form-control" id="cmbSucesor">
+                                                <option>Seleccione</option>
                                                 @each(colaborador in colaboradoresList)
                                                     <option value="{{colaborador.idProcesoPersona}}">{{colaborador.Colaborador}} {{colaborador.apellidoPaterno}} {{colaborador.apellidoMaterno}}</option>
                                                 @endeach    
@@ -85,8 +86,8 @@
                                         <div class="col-3">
                                             <select class="form-control">
                                                 <option selected disabled  value="-1">Seleccione a cuantos años...</option>
-                                                <option value="1">1 año</option>
-                                                <option value="2">2 años</option>
+                                                <option value="1">Ahora</option>
+                                                <option value="2">De 1 a 2 años</option>
                                                 <option value="3">Más de 2 años</option>
                                             </select>
                                         </div>

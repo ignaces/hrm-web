@@ -353,42 +353,40 @@ class Talento {
     async fichaTalento ({view,request, response, auth, session}) {
         try{
             var personaLogueada =  session.get('personaLogueada')
-        
+            
             var idPersona = request.input('idPersona')
             var showAll = true
             if(personaLogueada.id==idPersona){
                 showAll=false;
             }
-
             var obj = {
                 "idPersona":idPersona,
                 "idProceso":session.get('procesoOrganigrama')
             };
-            
             var resultPersona =  await data.execApi(request.hostname(),'/Talento/Persona/getPersona',obj);;//data.execApi(request.hostname(),'/Talento/Talento/getPersona',obj);
             var resultadosPersona =  await data.execApi(request.hostname(),'/Talento/Persona/getResultados',{idPersona:idPersona});
             var result = await data.execApi(request.hostname(),'/Talento/Talento/getCurriculumCategoria',obj);
             var categoria = result.body;
             var persona = resultPersona.body[0];
-
             var result2 = await data.execApi(request.hostname(),'/Talento/Talento/getCurriculumPersona',obj);
             var curriculum = result2.body;
             var objCurriculum = [];
             persona.resultados=resultadosPersona.body;
-        
             if(persona.fotoPersona=="" || persona.fotoPersona==null){
                 persona.fotoPersona="/assets/images/icons/businessman.svg"
             }
+            
             categoria.forEach(element => {
-
                 var objItems = [];
-
-                for(var c in curriculum){
-                    if(curriculum[c]["id"] == element.id)
-                    {
-                        objItems.push(curriculum[c]);
+                if(curriculum.length > 0)
+                {
+                    for(var c in curriculum){
+                        if(c != null && curriculum[c]["id"] == element.id)
+                        {
+                            objItems.push(curriculum[c]);
+                        }
                     }
-                }
+                
 
                 var objList = {
                     "nombreCategoria": element.nombre,
@@ -397,18 +395,25 @@ class Talento {
                     "totalItems": objItems.length
                 }
                 objCurriculum.push(objList)
+                }
             });
-
+            
             var objEncuestaLista = {
                 idPersona:idPersona
             }
             var resultEncuestaLista = await data.execApi(request.hostname(),'/Encuesta/Medicion/getListaEncuesta',objEncuestaLista);
             var lista = resultEncuestaLista.body;
+            
+            var idEncuestaPersona = 0
+            if(lista.data.length > 0)
+            {
+                idEncuestaPersona = lista.data[0].id 
+            }
 
-            var idEncuestaPersona = lista.data[0].id 
             var objEnc = {
                 idEncuestaPersona:idEncuestaPersona
             }
+            //console.log("OK2")
             var result = await data.execApi(request.hostname(),'/Encuesta/Medicion/getInstrumento',objEnc);
             var instrumento = result.body;
 
