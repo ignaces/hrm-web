@@ -205,8 +205,10 @@
                                                             <h3 class="text-white"><span data-plugin="counterup">${{valoresMetas.ventas}}</span></h3>
                                                             <p class="m-0 text-white"> 
 
+                                                                @if(valoresMetas.porcentajeAprox < 100)
                                                                     Te faltan ${{valoresMetas.diferencia}} 
-                                                                
+                                                                @endif
+
                                                                 @if(valoresMetas.porcentajeAprox >= 100)
                                                                     ¡Felicidades! <br>Llegaste a la meta!
                                                                 @endif
@@ -226,7 +228,9 @@
                                                             <h3 class="text-white"><span data-plugin="counterup">${{valoresMetas.ventas}}</span></h3>
                                                             <p class="m-0 text-white"> 
 
+                                                                @if(valoresMetas.porcentajeAprox < 100)
                                                                     Te faltan ${{valoresMetas.diferencia}} 
+                                                                @endif
                                                                 
                                                                 @if(valoresMetas.porcentajeAprox >= 100)
                                                                     ¡Felicidades! <br>Llegaste a la meta!
