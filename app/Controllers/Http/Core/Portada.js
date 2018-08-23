@@ -5,7 +5,7 @@ const data = use('App/Utils/Data')
 class Portada {
      async welcome  ({ view,request, response, auth, session }) {
         
-        
+
         var idPersona = session.get('idPersona', 'fall')
         var all =  session.get('personaLogueada')
         //var idOpinante = all.id
@@ -19,10 +19,12 @@ class Portada {
             "idOpinante": idOpinante
         };
 */
-        var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getProcesos',obj);
+        //var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getProcesos',obj);
+        
         //var resultadoTalento = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getTalentos',objTalento);
 
-        var procesos = result.body.data.procesos;
+        //var procesos = result.body.data.procesos;
+        var procesos = "";
         //var talentos = resultadoTalento.body;
         //var rstl = session.put('totalCol',talentos.Total)
         //console.log(rstl);
@@ -31,14 +33,20 @@ class Portada {
             
         }
         
-        var resultpos = await data.execApiPost(request.hostname(),'/Incentivos/Incentivos/getPuntosDeVenta', obj);
+        try{
+            var resultpos = await data.execApiPost(request.hostname(),'/Incentivos/Incentivos/getPuntosDeVenta', obj);
+        }catch(error)
+        {
+            console.log(error);
+        }
+        //console.log(resultpos);
         var puntosDeVenta = resultpos.body;
 
         obj={
             idPersona: idPersona,
             idPuntoDeVenta: ""    
         }
-
+        
         var resultcheckin = await data.execApiPost(request.hostname(),'/Incentivos/Incentivos/getCheckIn', obj);
         
         var checkin = "";
