@@ -120,17 +120,37 @@ class Talento {
     }
 
     
-    async getColaboradoresClasidicados ({view,request, response, auth, session}) {
+    async getColaboradoresClasificados ({view,request, response, auth, session}) {
         var all =  session.get('personaLogueada')
         var idOpinante = all.id
         
         var idTalentoProceso = session.get('talentoProceso');
- 
+        //clasificaciones
+        var clasificaciones = request.input("clasificaciones");
+        //cargosselectedoption
+        var cargos = request.input("cargos");
+        var tr = request.input("tr");
+        var jefatura = request.input("jefatura");
+
+        //datos personas
+        var identificador = request.input("identificador");
+        var nombres = request.input("nombres");
+        var paterno = request.input("paterno");
+        var materno = request.input("materno");
+
         var obj = {
             "idTalentoProceso":idTalentoProceso,
-            "idOpinante":idOpinante
+            "idOpinante":idOpinante,
+            "clasificaciones":clasificaciones,
+            "cargos":cargos,
+            "tr":tr,
+            "jefatura":jefatura,
+            "identificador":identificador,
+            "nombres":nombres,
+            "paterno":paterno,
+            "materno":materno
         };
- 
+        
         var result = await data.execApi(request.hostname(),'/Talento/Talento/colaboradoresEvaluados',obj);
         var colaboradoresEva = result.body;
 

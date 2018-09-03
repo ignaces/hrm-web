@@ -57,12 +57,44 @@ var setCuadrante = function(idOpinante,idCuadrante,justificacion){
 
 var loadCuadrantes=function(){
     clearCuadrantes();
+    var clasificaciones =[];
+
+
+        var rut = $("#rut").val();
+        var nombres = $("#nombres").val();
+        var paterno = $("#paterno").val();
+        var materno = $("#materno").val();
+        //selected disabled hidden
+        var cargos = $('#cmbCargo').val();
+        var tr = $('#cmbCuadrante').val();
+        var jefatura = $('#cmbJefatura').val();
+
+        $('.buscarCla').each(function(i, obj) {
+            clasificaciones= $.merge(clasificaciones,$(this).val());
+        });
+        /*console.log(clasificaciones)
+        console.log(cargos)
+        console.log(idTr)*/
+
+    
+    var obj = { 
+        clasificaciones:clasificaciones,  //nombreFiltro   //bb
+        cargos:cargos,
+        tr:tr,
+        jefatura:jefatura,
+        identificador:rut,
+        nombres:nombres,
+        paterno:paterno,
+        materno:materno
+        //arr:arr,
+        //idTalentoOpinante:idTalentoOpinante
+    };
     $.ajax({
         async: false,
         type: "GET",
-        url: "/Talento/Talento/getColaboradoresClasidicados",
+        url: "/Talento/Talento/getColaboradoresClasificados",
         contentType: "application/json; charset=utf-8",
-        data: {},
+        data: obj,
         dataType: "json", 
         success: function (colaboradores) {
             
@@ -175,7 +207,7 @@ $(document).ready(function() {
     $("#spinner").hide();
     
     $("#btnBuscar").on('click',function() {
-        
+        loadCuadrantes();
         buscar();
 
         
@@ -309,7 +341,7 @@ function buscar(){
 
 function actualizar(){
 
-    console.log("actualizar");
+    
     //clasificaciones filtro 
     
     var clasificaciones =[];
