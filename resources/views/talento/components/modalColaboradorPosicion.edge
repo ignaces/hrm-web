@@ -55,6 +55,16 @@
                                 </div>    
                             </div>
                         </div>
+                        <div class="row" v-if="posicion.sucesores.length>0">
+                            <div class="panel panel-border panel-primary">
+                                <div class="panel-heading">
+                                    <h2 class="panel-title">Sucesor para  @{{posicion.Cargo}}</h2>
+                                </div>
+                                <div class="panel-body">
+                                   @!component('components.Talento.sucesor',{sucesores:'[]'})
+                                </div>    
+                            </div>
+                        </div>
                         <div class="row" v-if="posicion.colaboradores.length>0">
                             <div class="panel panel-border panel-primary">
                                 <div class="panel-heading">

@@ -82,6 +82,23 @@ class Persona {
        
         response.json(posiciones);
     }
+    async getSucesores ({view,request, response, auth, session}) {
+        
+        var idPosicion = request.input('idPosicion')
+        var idPersona = request.input('idPersona')
+        var obj = {
+            "idPosicion":idPosicion,
+            "idProceso":session.get('procesoOrganigrama')
+        };
+        
+        var result =  await data.execApi(request.hostname(),'/Talento/Persona/getSucesores',obj);
+        
+       
+        var posiciones = result.body;
+
+       
+        response.json(posiciones);
+    }
     async getPdfFicha({ view, request, response, auth ,session}) {
         
         var idPersona = request.input("idPersona");

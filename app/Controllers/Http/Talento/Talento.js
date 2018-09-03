@@ -350,6 +350,21 @@ class Talento {
         return orgChart;
 
     }
+    async delSucesor({view,request, response, auth, session}){
+        var persona =  session.get('personaLogueada')
+        var idSucesion = request.input('idSucesion');
+        
+        var obj = {
+            "idProceso":session.get('procesoOrganigrama'),
+            "idPersonaOpinante":persona.id,
+            "idSucesion":idSucesion
+        };
+        
+        var result = await data.execApi(request.hostname(),'/Talento/Organigrama/delSucesor',obj);
+        var orgChart = result.body;
+        return orgChart;
+
+    }
     async fichaTalento ({view,request, response, auth, session}) {
         try{
             var personaLogueada =  session.get('personaLogueada')
