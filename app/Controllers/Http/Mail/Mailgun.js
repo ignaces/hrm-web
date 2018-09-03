@@ -59,8 +59,6 @@ class Mailgun {
                 ["Email", "Asunto","Estado", "Fecha"] 
             ];
             for(var evento in eventos){
-                console.log(new Date(eventos[evento].timestamp*1000))
-                
                 var fila = [
                     eventos[evento].recipient,
                     eventos[evento].message.headers.subject,

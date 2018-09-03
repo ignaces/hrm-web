@@ -2,7 +2,10 @@
 var cColaboradores = new Vue({
     el: '#cColaboradores',
     data: {
-        posicion: {colaboradores:[]},
+        posicion: {
+            colaboradores:[],
+            sucesores:[]
+        },
         colaboradoresList:[]
     },
     methods:{
@@ -14,6 +17,24 @@ var cColaboradores = new Vue({
                 url: "/Talento/Talento/setSucesor",
                 contentType: "application/json; charset=utf-8",
                 data: {idProcesoPersona:idProcesoPersona,idPosicion:idPosicion},
+                dataType: "json", 
+                async:false,
+                success: function (msg) {
+                    getOrganigrama();
+                    $("#modalColaborador").modal("hide");
+    
+                }
+    
+            });  
+        },
+        delSucesor:function(idSucesion){
+            
+            
+            $.ajax({
+                type: "GET",
+                url: "/Talento/Talento/delSucesor",
+                contentType: "application/json; charset=utf-8",
+                data: {idSucesion:idSucesion},
                 dataType: "json", 
                 async:false,
                 success: function (msg) {
@@ -150,7 +171,7 @@ var cargaOrganigrama = function (organigrama){
         customize: custom 
     });
 }
-var getSucesores  = function(idPosicion){
+var getPosiblesSucesores  = function(idPosicion){
     
     $.ajax({
         type: "GET",
@@ -162,6 +183,23 @@ var getSucesores  = function(idPosicion){
         success: function (msg) {
             
             cColaboradores.posicion.colaboradores = msg;
+            
+
+        }
+    });   
+}
+var getSucesores  = function(idPosicion){
+    
+    $.ajax({
+        type: "GET",
+        url: "/Talento/Persona/getSucesores",
+        contentType: "application/json; charset=utf-8",
+        data: {idPosicion:idPosicion},
+        dataType: "json", 
+        async:false,
+        success: function (msg) {
+            
+            cColaboradores.posicion.sucesores = msg;
             
 
         }
@@ -190,6 +228,7 @@ function clickHandler(sender, args) {
         cColaboradores.posicion.id=args.node.id;
         cColaboradores.posicion.colaboradores=[];
         getSucesores(cColaboradores.posicion.id);
+        getPosiblesSucesores(cColaboradores.posicion.id);
         
         $("#modalColaborador").modal('show');
 
@@ -209,7 +248,7 @@ function clickHandler(sender, args) {
 function renderNodeHandler(sender, args) {
     for (i = 0; i < args.content.length; i++) {
         var texto ="";
-        console.log(args.node.data["talentReview"])
+        
         if (args.content[i].indexOf(args.node.data["talentReview"]) != -1) {
             if(args.node.data["talentReview"]!=undefined){
                 
