@@ -98,6 +98,7 @@ var loadCuadrantes=function(){
         dataType: "json", 
         success: function (colaboradores) {
             
+            
            for(var i in colaboradores){
                 var Color = colaboradores[i].idTalentoCuadrante;
                 
@@ -274,7 +275,7 @@ function buscar(){
 
 
                 swal({ 
-                    title: "No hay coincidencias",
+                    title: "No hay coincidencias en el pool de colaboradores",
                     text: "",
                     type: "error" 
                     }
@@ -286,7 +287,7 @@ function buscar(){
                 //alert("Hay "+Object.keys(total).length+" Coincidencias");
                 
                 sweetAlert({
-                    title: "Hay "+Object.keys(total).length+" coincidencias",
+                    title: "Hay "+Object.keys(total).length+" coincidencias  en el pool de colaboradores",
                     text: "",
                     type: "success"
                 }
