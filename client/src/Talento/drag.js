@@ -147,6 +147,119 @@ var loadCuadrantes=function(){
         }
     });
 }
+var buscarCuadrantes=function(){
+    clearCuadrantes();
+    var clasificaciones =[];
+
+
+        var rut = $("#rut").val();
+        var nombres = $("#nombres").val();
+        var paterno = $("#paterno").val();
+        var materno = $("#materno").val();
+        //selected disabled hidden
+        var cargos = $('#cmbCargo').val();
+        var tr = $('#cmbCuadrante').val();
+        var jefatura = $('#cmbJefatura').val();
+
+        $('.buscarCla').each(function(i, obj) {
+            clasificaciones= $.merge(clasificaciones,$(this).val());
+        });
+        /*console.log(clasificaciones)
+        console.log(cargos)
+        console.log(idTr)*/
+
+    
+    var obj = { 
+        clasificaciones:clasificaciones,  //nombreFiltro   //bb
+        cargos:cargos,
+        tr:tr,
+        jefatura:jefatura,
+        identificador:rut,
+        nombres:nombres,
+        paterno:paterno,
+        materno:materno
+        //arr:arr,
+        //idTalentoOpinante:idTalentoOpinante
+    };
+    $.ajax({
+        async: false,
+        type: "GET",
+        url: "/Talento/Talento/getColaboradoresClasificados",
+        contentType: "application/json; charset=utf-8",
+        data: obj,
+        dataType: "json", 
+        success: function (colaboradores) {
+            
+            if(Object.keys(colaboradores).length == 0)
+            {
+                //alert("No Hay Coincidencias");
+
+
+                swal({ 
+                    title: "No hay coincidencias en la matriz",
+                    text: "",
+                    type: "error" 
+                    }
+                );
+            }
+            else
+            {   
+                sweetAlert({
+                    title: "Hay "+Object.keys(colaboradores).length+" coincidencias en la matriz",
+                    text: "",
+                    type: "success"
+                }
+            );
+
+                for(var i in colaboradores){
+                        var Color = colaboradores[i].idTalentoCuadrante;
+                        
+                        var idOpinante = colaboradores[i].idOpinante;
+                        
+                        
+                        var nombre = colaboradores[i].nombres+ " " +colaboradores[i].apellidoPaterno+ " " +colaboradores[i].apellidoMaterno;
+                        var cargo = colaboradores[i].Cargo;
+                        var rut = colaboradores[i].identificador;
+                        var foto = colaboradores[i].foto;
+                        var genero = colaboradores[i].genero;
+                        var idPersona = colaboradores[i].idPersona;
+
+                        var edd = colaboradores[i].edd;
+
+                        var trAnterior = colaboradores[i].trAnterior;
+                        
+                        if(foto==''){
+                            if(genero=="M"){
+                                foto="/assets/images/users/maleuser.png"
+                            }else{
+                                foto="/assets/images/users/femaleuser.png"
+                            }
+                        }
+                    
+                        var body = '<li class="task-warning ui-sortable-handle p-0" style="background-color: rgba(255,255,255,0.4); border:1px solid rgba(0,0,0,0.1);" \
+                                    id="'+cargo+'" name="'+rut+'" value="'+idOpinante+'" edd="'+edd+'">\
+                                        <div class="row">\
+                                            <div class="col-xs-2">\
+                                                <a href="/Talento/Talento/fichaTalento?idPersona='+idPersona+'" class="text-muted">\
+                                                    <img src="'+foto+'" alt="task-user" class="thumb-sm img-circle"> \
+                                                </a>    \
+                                            </div>\
+                                            <div class="col-xs-10">\
+                                                <h6>\
+                                                    <a href="/Talento/Talento/fichaTalento?idPersona='+idPersona+'" class="">\
+                                                        <span style="width: 100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display: inline-block;">'+nombre+'</span>\
+                                                        <span style="width: 100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display: inline-block;">'+edd+' - TR Anterior '+trAnterior+'</span>\
+                                                    </a>\
+                                                </h6>\
+                                            </div>\
+                                        </div>\
+                                    </li>'
+                        $("."+Color+"").append(body);
+                }
+            }
+        }
+    });
+}
 var clearCuadrantes = function(){
     for(var i in cuadrantes){
 
@@ -208,8 +321,14 @@ $(document).ready(function() {
     $("#spinner").hide();
     
     $("#btnBuscar").on('click',function() {
-        loadCuadrantes();
+        
         buscar();
+
+        
+    });
+    $("#btnMatriz").on('click',function() {
+        buscarCuadrantes();
+        
 
         
     });
