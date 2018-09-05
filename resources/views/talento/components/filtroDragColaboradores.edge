@@ -14,99 +14,104 @@
                                     </div>
                                     <div id="bg-inverse" class="panel-collapse collapse in">
                                         <div class="portlet-body">
-                                        <div class="row">
-                                        <div class="col-sm-3">
-                                        <label >Identificador</label>
-                                        <div><input id="rut" type="text" class="form-control" value=""></div>
-										 </div>
-                                        <div class="col-sm-3">
-                                         <label >Nombres</label>
-                                        <div><input id="nombres" type="text" class="form-control" value=""></div>
-                                        </div>
-										 
-										 <div class="col-sm-3">
-									   <label >Apellido Paterno</label>
-                                        <div><input id="paterno" type="text" class="form-control" value=""></div>
-									   </div>
-									   <div class="col-sm-3">
-									   <label >Apellido Materno</label>
-                                        <div><input id="materno" type="text" class="form-control" value=""></div>
-									   </div>
-									   </div>
-										<div class="row">
-										@each(clasificaciones in clasificacionesPorEmpresa.clasificaciones)
-									   <div class="col-sm-3">
-									    <div class="form-group">
-                                            <label class="control-label">{{clasificaciones.nombrePadre}}</label>
-                                            <div class="">
-                                    
-                                                <select id="buscar" class="select2 form-control select2-multiple buscarCla" multiple="multiple" multiple data-placeholder="Selecciona una o más {{clasificaciones.nombrePadre}}">
-                                                      <option value="-1" selected>Todos</option>
-                                                    @each(claHijo in clasificaciones.clasificacionHijo)
-                                                        <option value="{{claHijo.id}}">{{claHijo.nombreHijo}}</option>
-                                                    @endeach
-                                                </select>
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                        <label >Identificador</label>
+                                                        <div><input id="rut" type="text" class="form-control" value=""></div>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                            <label >Nombres</label>
+                                                            <div><input id="nombres" type="text" class="form-control" value=""></div>
+                                                    </div>
                                                 
-                                        </div>
-                                        </div>
-									   </div>
-									   @endeach
+                                                    <div class="col-sm-3">
+                                                            <label >Apellido Paterno</label>
+                                                            <div><input id="paterno" type="text" class="form-control" value=""></div>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                            <label >Apellido Materno</label>
+                                                            <div><input id="materno" type="text" class="form-control" value=""></div>
+                                                    </div>
+                                            </div>
+										<div class="row">
+                                                    @each(clasificaciones in clasificacionesPorEmpresa.clasificaciones)
+                                                            <div class="col-sm-3">
+                                                                        <div class="form-group">
+                                                                            <label class="control-label">{{clasificaciones.nombrePadre}}</label>
+                                                                            <div class="">
+                                                                    
+                                                                                <select id="buscar" class="select2 form-control select2-multiple buscarCla" multiple="multiple" multiple data-placeholder="Selecciona una o más {{clasificaciones.nombrePadre}}">
+                                                                                    <option value="-1" selected>Todos</option>
+                                                                                    @each(claHijo in clasificaciones.clasificacionHijo)
+                                                                                        <option value="{{claHijo.id}}">{{claHijo.nombreHijo}}</option>
+                                                                                    @endeach
+                                                                                </select>
+                                                                                
+                                                                            </div>
+                                                                        </div>
+                                                            </div>
+                                                @endeach
                                        
-                                        <div class="col-sm-3">
-                                            <div class="form-group">
-                                                            <label class="control-label">Cargos</label>
-                                                    
-                                                                <select id="cmbCargo" class="select2 form-control select2-multiple buscar" multiple="multiple" multiple data-placeholder="Selecciona uno más cargos...">
-                                                                    <option value="-1" selected>Todos</option>
-                                                                    @each(cargos in cargosPorEmpresa)
-                                                                    <option value="{{cargos.idCargo}}">{{cargos.nombreCargos}}</option>
-                                                                    @endeach
-                                                                </select>
-                                                    
-                                                    
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="form-group">
-                                                            <label class="control-label">TR</label>
-                                                    
-                                                                <select id="cmbCuadrante" class="select2 form-control select2-multiple buscar" multiple="multiple" multiple data-placeholder="Choose ...">
-                                                                    <option value="-1" selected>Todos</option>
-                                                                    @each(cuadrante in cuadrantes)
-                                                                    <option value="{{cuadrante.idCuadrante}}">{{cuadrante.nombreCuadrante}}</option>
-                                                                    @endeach
-                                                                </select>
-                                                    
-                                                    
-                                            </div>
-                                        </div>
+                                                <div class="col-sm-3">
+                                                    <div class="form-group">
+                                                                    <label class="control-label">Cargos</label>
+                                                            
+                                                                        <select id="cmbCargo" class="select2 form-control select2-multiple buscar" multiple="multiple" multiple data-placeholder="Selecciona uno más cargos...">
+                                                                            <option value="-1" selected>Todos</option>
+                                                                            @each(cargos in cargosPorEmpresa)
+                                                                            <option value="{{cargos.idCargo}}">{{cargos.nombreCargos}}</option>
+                                                                            @endeach
+                                                                        </select>
+                                                            
+                                                            
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="form-group">
+                                                                    <label class="control-label">TR</label>
+                                                            
+                                                                        <select id="cmbCuadrante" class="select2 form-control select2-multiple buscar" multiple="multiple" multiple data-placeholder="Choose ...">
+                                                                            <option value="-1" selected>Todos</option>
+                                                                            @each(cuadrante in cuadrantes)
+                                                                            <option value="{{cuadrante.idCuadrante}}">{{cuadrante.nombreCuadrante}}</option>
+                                                                            @endeach
+                                                                        </select>
+                                                            
+                                                            
+                                                    </div>
+                                                </div>
 
-                                        <div class="col-sm-3">
-                                            <div class="form-group">
-                                                            <label class="control-label">Jefatura Directa</label>
-                                                    
-                                                                <select id="cmbJefatura" class="select2 form-control select2-multiple buscar" multiple="multiple" multiple data-placeholder="Choose ...">
-                                                                    <option value="-1" selected>Todos</option>
-                                                                    @each(jefe in jefatura)
-                                                                    <option value="{{jefe.id}}">{{jefe.nombres}} {{jefe.apellidoPaterno}} {{jefe.apellidoMaterno}}</option>
-                                                                    @endeach
-                                                                </select>
-                                                    
-                                                    
-                                            </div>
-                                        </div>
+                                                <div class="col-sm-3">
+                                                    <div class="form-group">
+                                                                    <label class="control-label">Jefatura Directa</label>
+                                                            
+                                                                        <select id="cmbJefatura" class="select2 form-control select2-multiple buscar" multiple="multiple" multiple data-placeholder="Choose ...">
+                                                                            <option value="-1" selected>Todos</option>
+                                                                            @each(jefe in jefatura)
+                                                                            <option value="{{jefe.id}}">{{jefe.nombres}} {{jefe.apellidoPaterno}} {{jefe.apellidoMaterno}}</option>
+                                                                            @endeach
+                                                                        </select>
+                                                            
+                                                            
+                                                    </div>
+                                                </div>
                                         
 									   </div>
-									   <div class="row">
-									   <div class="col-md-10 col-md-offset-11">
-									   <span class="input-group-btn">
-                                                    <button type="button" id="btnBuscar" class="btn waves-effect waves-light btn-primary">Buscar</button>
-                                                   <img id="spinner" src="/assets/plugins/slick-slider/ajax-loader.gif" alt="Loading"> </span>
-									   </div>
-									   </div>
+                                        <div class="row">
+                                                    <div class="col-md-10 col-md-offset-10">
+                                                            <div class="button-list">
+                                                                  
+                                                                    <button type="button" id="btnBuscar" class="btn waves-effect waves-light btn-primary">Filtrar Listado</button>
+
+                                                                    <button type="button" id="btnMatriz" class="btn waves-effect waves-light btn-primary">Filtrar Matriz</button>
+                                                                
+                                                            </div>
+                                                        
+                                                    </div>
                                         </div>
-                                    </div>
                                 </div>
+                            </div>
+                        </div>
 
 
             
