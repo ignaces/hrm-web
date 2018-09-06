@@ -30,11 +30,11 @@ class Portada {
         //console.log(rstl);
        
         obj={
-            
+            idPersona: idPersona
         }
         
         try{
-            var resultpos = await data.execApiPost(request.hostname(),'/Incentivos/Incentivos/getPuntosDeVenta', obj);
+            var resultpos = await data.execApiPost(request.hostname(),'/Incentivos/Incentivos/getPuntosDeVentaPersona', obj);
         }catch(error)
         {
             console.log(error);

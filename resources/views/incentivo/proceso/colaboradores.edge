@@ -171,7 +171,7 @@
                                                                         name: 'Alcanzado',
                                                                         type: 'gauge',
                                                                         detail: {formatter:'{value}%'},
-                                                                        data: [{value: {{valoresMetas.porcentajeAprox}}, name: 'Alcanzado'}],
+                                                                        data: [{value: {{valoresMetas.porcentaje}}, name: 'Alcanzado'}],
                                                                         max: 160
                                                                     }
                                                                 ]
@@ -204,7 +204,8 @@
                                                             <p class="m-0 text-uppercase font-bold font-secondary text-overflow text-white" title="Statistics">Acumulado Mensual</p>
                                                             <h3 class="text-white"><span data-plugin="counterup">${{valoresMetas.ventas}}</span></h3>
                                                             <p class="m-0 text-white"> 
-
+                                                                    {{valoresMetas.mensajeDiferencia}}
+                                                                <!--
                                                                 @if(valoresMetas.porcentajeAprox < 100)
                                                                     Te faltan ${{valoresMetas.diferencia}} 
                                                                 @endif
@@ -212,7 +213,7 @@
                                                                 @if(valoresMetas.porcentajeAprox >= 100)
                                                                     ¡Felicidades! <br>Llegaste a la meta!
                                                                 @endif
-
+                                                                -->
 
                                                                 &nbsp;
                                                             </p>
@@ -225,9 +226,10 @@
                                                         <i class="fa fa-check-square-o widget-two-icon text-white"></i>
                                                         <div class="wigdet-two-content">
                                                             <p class="m-0 text-uppercase font-bold font-secondary text-overflow text-white" title="Statistics">Acumulado Diario</p>
-                                                            <h3 class="text-white"><span data-plugin="counterup">${{valoresMetas.ventas}}</span></h3>
+                                                            <h3 class="text-white"><span data-plugin="counterup">${{valoresMetas.ventaDiaria}}</span></h3>
                                                             <p class="m-0 text-white"> 
-
+                                                                {{valoresMetas.mensajeDiferenciaDiaria}}
+                                                                <!--
                                                                 @if(valoresMetas.porcentajeAprox < 100)
                                                                     Te faltan ${{valoresMetas.diferencia}} 
                                                                 @endif
@@ -235,7 +237,7 @@
                                                                 @if(valoresMetas.porcentajeAprox >= 100)
                                                                     ¡Felicidades! <br>Llegaste a la meta!
                                                                 @endif
-
+                                                                -->
 
                                                                 &nbsp;
                                                             </p>
