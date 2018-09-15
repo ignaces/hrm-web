@@ -100,12 +100,12 @@ class Register{
             try{
                 var respuesta = await user.save();
                 
-                console.log(user.$attributes.id);
+                //console.log(user.$attributes.id);
                 objPersona.idUsuario = user.$attributes.id;
                 
-                //console.log(objPersona);
+                console.log(objPersona);
                 var registraPersona = await data.execApi(request.hostname(),'/Persona/Persona/addPersona',objPersona);
-                //console.log(registraPersona);
+                console.log(registraPersona);
             }
             catch(error)
             {
