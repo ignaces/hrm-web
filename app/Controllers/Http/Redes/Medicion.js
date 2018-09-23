@@ -57,7 +57,7 @@ class Medicion {
       async save({view,request,response}){
         
         var obj = {req:request.all()};
-        const rPreguntas = await data.execApi(request.hostname(),'/Redes/Instrumento/save',request.all());
+        const rPreguntas = await data.execApiPost(request.hostname(),'/Redes/Instrumento/save',request.all());
         
         return view.render('redes/fin')
       }
