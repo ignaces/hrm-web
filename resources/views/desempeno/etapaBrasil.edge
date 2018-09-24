@@ -1,0 +1,357 @@
+@layout('layouts/horizontal')
+
+
+@section('pluginsCss2')
+        <link href="/assets/plugins/ede/infobox/infobox.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/plugins/ede/socialWidget/socialWidget.css" rel="stylesheet" type="text/css" />             
+         <link href="/assets/plugins/ede/progressbar/progressbar.css" rel="stylesheet" type="text/css" />   
+         
+@endsection
+
+@section('content')
+<div class="row" >
+        <div class="col-md-2">
+    <div class="col-md-12 col-xs-12">
+      <div class="text-center card-box  undefined">
+          <div class="clearfix"></div>
+          <div class="member-card">
+              <div class="thumb-lg member-thumb m-b-10 center-block">
+                  <img src="/assets/images/ede/ede.png" class="img-circle img-thumbnail" alt="undefined">
+              </div>
+  
+              <div class="">
+                  <h5 class="m-b-3">Desempenho Brasil</h5>
+                  <h6 class="text-muted"></h6>
+              </div>
+              
+              <div class="m-t-5">
+                  <div class="row">
+                      <div class="col-xs-12">
+                          <div class="m-t-2 m-b-5">
+                              <h6 class="m-b-0 text-muted">Fecha de Cierre</h6>
+                              <h6 class="m-b-0 text-muted">02/03/2019</h6>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+  
+          </div>
+  
+      </div>
+  
+  </div> 
+  
+    <div class="row">
+  <div class="col-md-12">
+  <div class="box box-widget widget-user-2">
+          <div class="col-md-12 text-center">
+              <div class="card-box ribbon-box">
+                  <div class="clearfix"></div>
+                  <div class="member-card">
+                       <div style="margin: 0 auto;">
+                          <img src='/assets/images/users/avatar-6.jpg' class="img-circle img-thumbnail" alt="colaborador/a" width="96px">
+                       </div>
+                       
+                       <div class="">
+                          <h5 class="m-b-">Erasmus Raymond Melton</h5>						
+                          <p class="text-muted font-12"></p>
+                       </div>
+                  </div>
+              </div>
+          </div>
+  </div>
+  <div class="box box-widget widget-user-2">
+              <div class="col-md-12 text-center">
+              <div class="card-box ribbon-box">
+      
+          <ul class="nav nav-stacked">
+              <li><a href="/Desempeno/Metas/metasColaborador">Metas</a></li>
+              <li><a href="/Desempeno/Equipo/equipo">Equipo</a></li>
+              <li><a href="/Desempeno/Informes/informe">Informes</a></li>
+              <li><a href="/Desempeno/Planes/planesColaborador">Planes</a></li>
+              <!--<li><a href="">Ayuda</a></li>-->
+              <li><a href="javascript:window.history.back();">Volver</a></li>
+          </ul>
+       </div>
+       </div>
+  </div>
+  </div>
+  </div>
+  
+        </div>
+        <div class="col-md-10">
+            <div class="row">
+                <div class="portlet">
+                    <div class="portlet-heading">
+                         <h4 class="portlet-title text-dark">
+                            Mi Proceso
+                        </h4>
+                        <div class="portlet-widgets">
+                            <a data-toggle="collapse" data-parent="#accordion1" href="#evaluado"><i class="mdi mdi-minus"></i></a>                  
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                  
+                    <div id="evaluado" class="panel-collapse collapse in">
+                         <div class="portlet-body">
+                            
+    
+  
+                            <div class="row">
+                                    <div class="col-md-12">
+                                        <!-- -->
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="table-responsive">
+                                                      <table class="table table-hover m-0 mails table-actions-bar table-colored table-inverse ">
+                                                          <thead>
+                                                                <tr>                                      
+                                                                    <th>Colaborador</th>
+                                                                    <th>Actividad</th>
+                                                                    <th>Estado</th>
+                                                                    <th>Informe</th>
+                                                                    <th>Acción</th>
+                                                                </tr>
+                                                          </thead>
+                                                          <tbody>
+                                                                <tr>
+                                                                    <td rowspan="undefined">
+                                                                        <div class="text-center">
+                                                                            <div class="clearfix"></div>
+                                                                            <div class="member-card">
+                                                                                <div class="center-block">
+                                                                                    <img src="/assets/images/users/avatar-6.jpg" class="img-circle img-thumbnail" alt="profile-image" width="48px">
+                                                                                </div>
+                                                                                <div class="">
+                                                                                    <h5 class="m-b-5">ERASUMUS RAYMNOND MELTON</h5>
+                                                                                    <p class="text-muted">	
+                                                                                            TECNICO MANUTENÇÃO</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="col-md-3">
+                                                                            <img src="/assets/images/ede/ede.png" alt="tarea" title="Evaluacion de Desempeño" class="img-circle thumb-md" />
+                                                                        </div>
+                                                                        <div class="col-md-9">
+                                                                            <h5 class="m-b-0 m-t-0">Desempenho Brasil</h5>
+                                                                            <p class="m-b-0"><small>Avaliação De Desempenho                                                                                </small></p>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="label label-default"> <i class="fa fa-check-circle-o"></i> No Iniciado</div>
+                                                                    </td>
+                                                                    <td>
+                                                                            <button type="button" class="btn btn-default btn-xs btn-rounded btn-bordered waves-effect w-md" disabled><i class="fa fa-ban"></i> No Disponible</button>   
+                                                                            <!--<a href="/Desempeno/Informe/meta?idProceso=126f48d0-171c-11e8-bf12-bc764e100f2b&amp;idEtapa=76aad0d8-52fe-11e8-8fb3-bc764e100f2b&amp;idAccionPersona=96a9dac9-7adb-11e8-80db-bc764e10787e&amp;codigoActor=EVAL" class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-bar-chart-o"></i> Ver Informe</a> !-->
+                                                                    </td>
+                                                                    <td>
+                                                                            <a href="/Desempeno/Proceso/autoEvalBrasil" class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md"><i class="fa fa-primary"></i> Iniciar</a>                                                         
+                                                                    </td>
+                                                                </tr>
+                                                          </tbody>
+                                                      </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                         </div>
+                    </div>
+             
+      
+                         </div>
+                    </div>
+              
+          
+          
+  
+          
+          
+            <div class="row">
+                <div class="portlet">
+                    <div class="portlet-heading">
+                         <h4 class="portlet-title text-dark">
+                            Mi Equipo
+                        </h4>
+                        <div class="portlet-widgets">
+                            <a data-toggle="collapse" data-parent="#accordion1" href="#equipo"><i class="mdi mdi-minus"></i></a>                  
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                  
+                    <div id="equipo" class="panel-collapse collapse in">
+                         <div class="portlet-body">
+                           
+    
+                          
+                                   <div class="row">
+                                        <div class="col-md-12">
+                                            <!-- -->
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="table-responsive">
+                                                          <table class="table table-hover m-0 mails table-actions-bar table-colored table-inverse ">
+                                                              <thead>
+                                                                    <tr>                                      
+                                                                        <th>Colaborador</th>
+                                                                        <th>Actividad</th>
+                                                                        <th>Estado</th>
+                                                                        <th>Informe</th>
+                                                                        <th>Acción</th>
+                                                                    </tr>
+                                                              </thead>
+                                                              <tbody>
+                                                                    <tr>
+                                                                        <td rowspan="undefined">
+                                                                            <div class="text-center">
+                                                                                <div class="clearfix"></div>
+                                                                                <div class="member-card">
+                                                                                    <div class="center-block">
+                                                                                        <img src="/assets/images/icons/businessman.svg" class="img-circle img-thumbnail" alt="profile-image" width="48px">
+                                                                                    </div>
+                                                                                    <div class="">
+                                                                                        <h5 class="m-b-5">PEDRO VALTER FONTES</h5>
+                                                                                        <p class="text-muted">TECNICO MANUTENÇÃO</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div class="col-md-3">
+                                                                                <img src="/assets/images/ede/ede.png" alt="tarea" title="Evaluacion de Desempeño" class="img-circle thumb-md" />
+                                                                            </div>
+                                                                            <div class="col-md-9">
+                                                                                <h5 class="m-b-0 m-t-0">Desempenho Brasil</h5>
+                                                                                <p class="m-b-0"><small>Avaliação De Desempenho</small></p>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                                <div class="label label-success"> <i class="fa fa-check-circle-o"></i> Finalizado</div>
+                                                                        </td>
+                                                                        <td>
+                                                                                 
+                                                                                <a href="/Desempeno/Proceso/informeBrasil" class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-bar-chart-o"></i> Ver Informe</a>
+                                                                        </td>
+                                                                        <td>
+                                                                                <button type="button" class="btn btn-default btn-xs btn-rounded btn-bordered waves-effect w-md" disabled><i class="fa fa-ban"></i> No Disponible</button>  
+                                                                        </td>
+                                                                    </tr>
+  
+                                                                    <tr>
+                                                                            <td rowspan="undefined">
+                                                                                <div class="text-center">
+                                                                                    <div class="clearfix"></div>
+                                                                                    <div class="member-card">
+                                                                                        <div class="center-block">
+                                                                                            <img src="/assets/images/icons/businessman.svg" class="img-circle img-thumbnail" alt="profile-image" width="48px">
+                                                                                        </div>
+                                                                                        <div class="">
+                                                                                            <h5 class="m-b-5">FELIPE FERNANDES LEAO</h5>
+                                                                                            <p class="text-muted">TECNICO MANUTENÇÃO</p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="col-md-3">
+                                                                                    <img src="/assets/images/ede/ede.png" alt="tarea" title="Evaluacion de Desempeño" class="img-circle thumb-md" />
+                                                                                </div>
+                                                                                <div class="col-md-9">
+                                                                                    <h5 class="m-b-0 m-t-0">Desempenho Brasil</h5>
+                                                                                    <p class="m-b-0"><small>Avaliação De Desempenho</small></p>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="label label-default"> <i class="fa fa-check-circle-o"></i>Iniciado</div>
+                                                                            </td>
+                                                                            <td>
+                                                                                    <button type="button" class="btn btn-default btn-xs btn-rounded btn-bordered waves-effect w-md" disabled><i class="fa fa-ban"></i> No Disponible</button>   
+                                                                                    <!--<a href="/Desempeno/Informe/meta?idProceso=126f48d0-171c-11e8-bf12-bc764e100f2b&amp;idEtapa=76aad0d8-52fe-11e8-8fb3-bc764e100f2b&amp;idAccionPersona=96a9dac9-7adb-11e8-80db-bc764e10787e&amp;codigoActor=EVAL" class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-bar-chart-o"></i> Ver Informe</a> !-->
+                                                                            </td>
+                                                                            <td>
+                                                                                    <a href="/Desempeno/Proceso/evalBrasil" class="btn btn-warning btn-xs btn-rounded btn-bordered waves-effect w-md"><i class="fa fa-primary"></i> En Proceso</a>                                     
+                                                                            </td>
+                                                                        </tr>
+  
+                                                              </tbody>
+                                                          </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+  
+                         </div>
+                    </div>
+                </div>
+            </div>
+          
+          
+          
+        </div>
+    </div>
+        </div>
+    </div>
+    </div>
+              </div> <!-- container -->
+  
+              <footer class="footer text-left">
+                      <img src="/themes/horizontal/assets/images/innovum_logo.png" alt="" height="50">
+                      2018 © 
+              </footer>
+  
+          </div>
+          <!-- END wrapper -->
+  
+  
+  
+      
+        <script>
+              var resizefunc = [];
+          </script>
+          
+          <!-- jQuery  -->
+          <script src="/assets/js/jquery.min.js"></script>
+          <script src="/assets/js/bootstrap.min.js"></script>
+          <script src="/assets/js/metisMenu.min.js"></script>
+          <script src="/assets/js/waves.js"></script>
+          <script src="/assets/js/jquery.slimscroll.js"></script>
+          <script src="/assets/plugins/bootstrap-select/js/bootstrap-select.min.js" type="text/javascript"></script>
+          <script src="/assets/js/dist/notificacionesSistema.min.js"></script>
+           
+  
+          <!-- App js -->
+          <script src="/themes/horizontal/assets/js/jquery.core.js"></script>
+          <script src="/themes/horizontal/assets/js/jquery.app.js"></script>
+          <script src="/assets/plugins/tooltipster/tooltipster.bundle.min.js"></script>
+          <script src="/themes/horizontal/assets/js/modernizr.min.js"></script>
+          <script src="/assets/js/dist/easter.min.js"></script>
+  
+  
+  
+          <script>
+          $(document).ready(()=>{
+              //$("body").toggleClass("enlarged");
+          });
+          </script>
+            <script>
+        (function() {
+          'use strict';
+  
+          if (!('serviceWorker' in navigator)) {
+            console.log('Service worker not supported');
+            return;
+          }
+          navigator.serviceWorker.register('/assets/js/sw.js')
+          .then(function() {
+            console.log('Registered');
+          })
+          .catch(function(error) {
+            console.log('Registration failed:', error);
+          });
+  
+        })();
+      </script>
+@endsection
