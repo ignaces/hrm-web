@@ -12,7 +12,7 @@ module.exports = {
         var alias = Env.get('HOSTALIAS', 'localhost')
         var clienteDefault = Env.get('CLIENTE_DEFAULT', null)
         var cliente = hostname.split(".")[0]
-        if(hostname==alias){
+        if(hostname==alias || hostname=='127.0.0.1'){
             cliente = "localhost";
         }
 
@@ -53,7 +53,7 @@ module.exports = {
         var alias = Env.get('HOSTALIAS', 'localhost')
 
         var cliente = hostname.split(".")[0]
-        if(hostname==alias){
+        if(hostname==alias || hostname=='127.0.0.1'){
             cliente = "localhost";
         }
         obj.cliente = cliente;
