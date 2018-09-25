@@ -1,5 +1,12 @@
 'use strict'
 const got = use('got')
+const XLSX = require('xlsx');
+const Helpers = use('Helpers');
+const fs = use('fs');
+const Antl = use('Antl');
+var safeUrl = require('safe-url');
+var wget = require('node-wget-promise');
+const readFile = Helpers.promisify(fs.readFile);
 const data = use('App/Utils/Data')
 
 class Visualizador {
@@ -53,6 +60,7 @@ class Visualizador {
         var graph = await data.execApi(request.hostname(),'/Redes/Medicion/getGraph',obj);
         var participantes = await data.execApi(request.hostname(),'/Redes/Medicion/getParticipantes',participantes);
         var preguntas = await data.execApi(request.hostname(),'/Redes/Medicion/getPreguntas',preguntas);
+        var clasificaciones = await data.execApi(request.hostname(),'/Redes/Medicion/getClasificaciones', {});
         
         //console.log(preguntas.body);
         //console.log(graph.body.nodes);
@@ -69,7 +77,68 @@ class Visualizador {
             sentido = request.input("sentido");
         }
 
-        return view.render('redes/visualizacion',{graph:graph.body, participantes:participantes.body, idCodigo:idCodigo, sentido:sentido, idAplicacion: idAplicacion, preguntas: preguntas.body, idPersona: idPersona, idRelacion: idRelacion, sentido: sentido});
+        return view.render('redes/visualizacion',{graph:graph.body, participantes:participantes.body, idCodigo:idCodigo, sentido:sentido, idAplicacion: idAplicacion, preguntas: preguntas.body, idPersona: idPersona, idRelacion: idRelacion, sentido: sentido, clasificaciones: clasificaciones.body});
+    }
+
+    
+    async resultadosDownload({ view, request, response }) {
+
+
+        var proceso = request.input("idAplicacion")
+
+        var obj = {
+            proceso: proceso
+        };
+
+        var participantes = {};
+        
+        var participantes = await data.execApi(request.hostname(),'/Redes/Medicion/getParticipantes',participantes);
+        
+        var cabecera = {};
+
+        var wb = {
+            SheetNames: [],
+            Sheets: {}
+        }
+
+        var registros = result.body.data.procesos;
+        var ws_name = "Resultados";
+
+        /* make worksheet */
+        var ws_data = [ 
+            cabecera
+        ];
+        for (var fila in registros) {
+
+            var registro = [];
+            for (var campo in cabecera) {
+
+                registro.push(registros[fila][cabecera[campo]]);
+            }
+
+            ws_data.push(registro);
+
+        }
+
+        var ws = XLSX.utils.aoa_to_sheet(ws_data);
+
+        /* Add the sheet name to the list */
+        wb.SheetNames.push(ws_name);
+
+        /* Load the worksheet object */
+        wb.Sheets[ws_name] = ws;
+
+        XLSX.writeFile(wb, 'tmp/resultados.xlsx');
+
+        response.implicitEnd = false
+
+        response.type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+        response.attachment(
+            Helpers.tmpPath('resultados.xlsx'),
+            'resultados.xlsx'
+        )
+
     }
 }
 module.exports = Visualizador;
