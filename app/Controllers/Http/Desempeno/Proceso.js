@@ -192,6 +192,10 @@ class Proceso {
         return view.render('desempeno/informeBrasil');
     }
 
+    async informeEjecutivos ({view,request, response}) {
+        return view.render('desempeno/informeEjecutivos');
+    }
+
     async portadaEjecutivos({view,request, response}) {
         return view.render('desempeno/portadaEjecutivos');
     }
