@@ -183,7 +183,7 @@ class Proceso {
     async etapaBrasil ({view,request, response}) {
         return view.render('desempeno/etapaBrasil');
     }
-
+ 
     async autoEvalBrasil ({view,request, response}) {
         return view.render('desempeno/autoEvalBrasil');
     }
