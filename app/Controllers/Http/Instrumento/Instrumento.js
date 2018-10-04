@@ -142,21 +142,10 @@ class Instrumento {
 
     async getRespuestaCS({request,response, session}){
 
-        var idOpinante = request.input("idOpinante")
-        var idPregunta = request.input("idPregunta")
-        var idAlternativa = request.input("idAlternativa")
-        var justificacion = request.input("justificacion")
-        
-        var obj = {
-            "idOpinante":idOpinante,
-            "idPregunta":idPregunta,
-            "idAlternativa":idAlternativa,
-            "justificacion":justificacion,
-            };
         //console.log(obj)
-        var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getRespuestaCS',obj);
-        console.log (result)
-        return {data:result}
+        var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getRespuestaCS', {});
+        console.log (result.body)
+        return result.body;
     } 
 
     async cerrarInstrumento({request,response}){
