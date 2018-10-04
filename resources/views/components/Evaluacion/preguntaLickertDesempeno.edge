@@ -24,17 +24,18 @@
                                         <div class="col-lg-12">
                                             <p class="text"> 
                                                 <i><b>{{criterio.nombre}}</b></i>
+                                                
                                             </p>
                                         </div>
                                         
                                         @each(alternativa in criterio.escala)
-                                            <div class="col-dinamico" style="width:{{100/criterio.escala.length}}%; float: left;">
+                                            <div class="col-dinamico" style="width:33%; float: left;">
                                                 @if(alternativa.estaSeleccionada==1)
-                                                    <input checked class="hidden radio-label option-button r_alternativa" type="radio" name="rd_{{data.pregunta.id}}" id="rd_{{data.pregunta.id}}_{{alternativa.id}}_{{alternativa.requiereJustificacion}}_{{data.idEncuestaPersona}}"/>
+                                                    <input checked class="hidden radio-label option-button r_alternativa" type="radio" name="rd_{{$parent.criterio.id}}" id="rd_{{$parent.criterio.id}}_{{alternativa.id}}_{{alternativa.requiereJustificacion}}"/>
                                                 @else
-                                                    <input class="hidden radio-label option-button r_alternativa" type="radio" name="rd_{{data.pregunta.id}}" id="rd_{{data.pregunta.id}}_{{alternativa.id}}_{{alternativa.requiereJustificacion}}_{{data.idEncuestaPersona}}"/>
+                                                    <input class="hidden radio-label option-button r_alternativa" type="radio" name="rd_{{$parent.criterio.id}}" id="rd_{{$parent.criterio.id}}_{{alternativa.id}}_{{alternativa.requiereJustificacion}}"/>
                                                 @endif
-                                                <label class="button-label" style="height: auto; min-height: 240px !important;" for="rd_{{data.pregunta.id}}_{{alternativa.id}}_{{alternativa.requiereJustificacion}}_{{data.idEncuestaPersona}}">
+                                                <label class="button-label" style="height: auto; min-height: 240px !important;" for="rd_{{$parent.criterio.id}}_{{alternativa.id}}_{{alternativa.requiereJustificacion}}">
                                                     <span>{{alternativa.nombre}}</span>
                                                 </label>                         
                                             </div>
