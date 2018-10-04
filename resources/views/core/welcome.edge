@@ -5,10 +5,10 @@
     
     <script>
     $(document).ready(function(){
-        if("{{mensaje}}" != "")
-        {
+        //if("{{mensaje}}" != "")
+        //{
             $("#modalMensaje").modal('show');
-        }        
+        //}        
     });
         
     </script>
@@ -51,7 +51,7 @@
             </div>
         </div>
         
-        {{--
+        
         @if(procesos.length>0)
         <div class="row">
                 @!component('components.Acreditacion.cajaDnd',titulo = "Acreditación", procesos=procesos)
@@ -65,9 +65,8 @@
 
         <div class="row">
         @!component('components.Acreditacion.cajaAcreditacion',titulo = "Acreditación",titulo2 = "Gestión de Talento", procesos=procesos, talentos=talentos,condicion=condicion)
-        </div>      
-           --}}
-           <div class="row">
+        </div>    
+           <!--<div class="row">
            <div class="col-md-12">
                 <div class="portlet">
                     <div class="portlet-heading bg-custom">
@@ -114,7 +113,7 @@
 
                 </div>
             </div>
-           </div>
+           </div>-->
     </div>
     <!-- END Centro -->
     <!-- Columna Derecha -->
@@ -153,15 +152,17 @@
 </div>
 
 
-<div class="modal fade bs-example-modal-center" style="display:none;" tabindex="-1" id="modalMensaje" role="dialog" aria-labelledby="mySmallModalLabel">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+<div class="modal fade" style="display:none;margin-right: 250px !important;" tabindex="-1" id="modalMensaje" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-dialog" style="padding-right: 250px !important;">
+        <div class="modal-content" style="width: 900px;">
             <div class="modal-header">
                 <h5 class="modal-title mt-0">{{{mensajeTitulo}}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                
             </div>
-            <div class="modal-body">
+            <div class="modal-body-lg">
                 {{{mensaje}}}
+                <img src="/assets/images/empresa/comunicado ejecutivos_2017_ESP_alta.jpg"></img>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

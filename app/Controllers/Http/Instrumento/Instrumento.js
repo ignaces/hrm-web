@@ -109,6 +109,56 @@ class Instrumento {
         return {mensaje:"OK"}
     } 
 
+    async putRespuestaCS({request,response, session}){
+
+        var idOpinante = request.input("idOpinante")
+        var idPregunta = request.input("idPregunta")
+        var idAlternativa = request.input("idAlternativa")
+        var justificacion = request.input("justificacion")
+        
+        var obj = {
+            "idOpinante":idOpinante,
+            "idPregunta":idPregunta,
+            "idAlternativa":idAlternativa,
+            "justificacion":justificacion,
+            };
+            
+        var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/putRespuestaCS',obj);
+
+
+        var idPersona = session.get('idPersona', 'fall')
+
+        if(idPersona != 'fall'){
+            var objUpd = {
+                idDndOpinante:idOpinante,
+                idPersona: idPersona
+            }
+
+            var resultUpd = await data.execApi(request.hostname(),'/Acreditacion/Proceso/setOpinanteEvaluadoCS',objUpd);
+        }
+
+        return {mensaje:"OK"}
+    } 
+
+    async getRespuestaCS({request,response, session}){
+
+        var idOpinante = request.input("idOpinante")
+        var idPregunta = request.input("idPregunta")
+        var idAlternativa = request.input("idAlternativa")
+        var justificacion = request.input("justificacion")
+        
+        var obj = {
+            "idOpinante":idOpinante,
+            "idPregunta":idPregunta,
+            "idAlternativa":idAlternativa,
+            "justificacion":justificacion,
+            };
+        //console.log(obj)
+        var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getRespuestaCS',obj);
+        console.log (result)
+        return {data:result}
+    } 
+
     async cerrarInstrumento({request,response}){
 
         var idOpinante = request.input("idOpinante")
