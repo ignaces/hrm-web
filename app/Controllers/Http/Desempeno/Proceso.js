@@ -208,7 +208,6 @@ class Proceso {
             
             //var idOpinante = all.idOpinante
             
-            
             var idOpinante = '2e73960f-595e-11e8-8fb3-bc764e100f2b';
             //var codigo = all.codigo
             //var codigoComponente = all.codigoComponente
