@@ -52,11 +52,7 @@
         </div>
         
         
-        @if(procesos.length>0)
-        <div class="row">
-                @!component('components.Acreditacion.cajaDnd',titulo = "Acreditación", procesos=procesos)
-        </div>
-        @endif
+        
         @if(procesosEde.length>0)
          <div class="row">
              @!component('components.Desempeno.cajaDesempeno',titulo = "Gestión de Desempeño", procesos=procesosEde)

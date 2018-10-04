@@ -76,6 +76,7 @@
 
 $(document).ready(function(){
     //
+ 
     $.ajax({
             async: false,
             type: "GET",
@@ -84,35 +85,45 @@ $(document).ready(function(){
             data: '',
             dataType: "json",   
             success: function (msg) {
-                //console.log(msg);
-                //console.log(msg)
-                //console.log(msg.data)
+                $.each(msg.data.procesos, function(i, item) {
+                    $(".r_alternativa").each(function() {
+                    var id = $( this ).prop('id');
+                    var arr = id.split("_");
+                    var idPregunta = arr[1];
+                    var idAlternativa = arr[2];
+                    var requiereJustificacion = parseInt(arr[3]);
+                    var idOpinante =arr[4]; 
+                    var justificacion = "";
+                    var txtJustificacion = "#txt_"+idPregunta+"_"+idOpinante;
+
+                    
+
+                    //alert(id)
+                    console.log(id)
+                    console.log("rd_" + item.IdPregunta + "_" + item.IdAlternativa + "_0_" + item.IdOpinante)
+                    if(id == "rd_" + item.IdPregunta + "_" +item.IdAlternativa + "_0_" + item.IdOpinante)
+                    {
+                        $("#" + id ).prop( "checked", true );  
+                    }
+                });
+                    //console.log(item.Id)
+                    //console.log(i)
+                    //$("#rd_a446b617-94d4-11e8-80db-bc764e10787e_0_0e6d255e-94df-11e8-80db-bc764e10787e").prop( "checked", true );
+                    //if(id == "rd_" + item.IdPregunta + "_0_" + item.IdOpinante)
+                    //{
+                    //    $("#" + rd_" + item.IdPregunta + "_0_" + item.IdOpinante").prop( "checked", true );  
+                    //}
+
+                    //$("#" + rd_" + item.IdPregunta + "_0_" + item.IdOpinante").prop( "checked", true );  
+                });   
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                console.log(XMLHttpRequest);
-                console.log(textStatus);
-                console.log(errorThrown)
+                
             },
             timeout: 10000
         });
 
-    $(".r_alternativa").each(function() {
-        var id = $( this ).prop('id');
-        var arr = id.split("_");
-        var idPregunta = arr[1];
-        var idAlternativa = arr[2];
-        var requiereJustificacion = parseInt(arr[3]);
-        var idOpinante =arr[4]; 
-        var justificacion = "";
-        var txtJustificacion = "#txt_"+idPregunta+"_"+idOpinante;
-
-        //alert(id)
-        //if(id == "rd_a446b617-94d4-11e8-80db-bc764e10787e_5ae4a242-f6f9-11e7-bf12-bc764e100f2b_0_0e6d255e-94df-11e8-80db-bc764e10787e")
-        //{
-        //    $( this ).prop( "checked", true );  
-        //}
-    });
-
+    
 
     $( ".r_alternativa" ).click(function() {
         
