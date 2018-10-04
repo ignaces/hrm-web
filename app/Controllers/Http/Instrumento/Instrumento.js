@@ -153,9 +153,9 @@ class Instrumento {
             "idAlternativa":idAlternativa,
             "justificacion":justificacion,
             };
-            
+        //console.log(obj)
         var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getRespuestaCS',obj);
-
+        console.log (result)
         return {data:result}
     } 
 

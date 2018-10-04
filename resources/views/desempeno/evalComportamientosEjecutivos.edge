@@ -73,8 +73,29 @@
 <script src="/assets/plugins/jquery-toastr/jquery.toast.min.js" type="text/javascript"></script>
 
 <script>
+
 $(document).ready(function(){
     //
+    $.ajax({
+            async: false,
+            type: "GET",
+            url: "/Instrumento/Instrumento/getRespuestaCS",
+            contentType: "application/json; charset=utf-8",
+            data: '',
+            dataType: "json",   
+            success: function (msg) {
+                //console.log(msg);
+                //console.log(msg)
+                //console.log(msg.data)
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                console.log(XMLHttpRequest);
+                console.log(textStatus);
+                console.log(errorThrown)
+            },
+            timeout: 10000
+        });
+
     $(".r_alternativa").each(function() {
         var id = $( this ).prop('id');
         var arr = id.split("_");
@@ -84,29 +105,6 @@ $(document).ready(function(){
         var idOpinante =arr[4]; 
         var justificacion = "";
         var txtJustificacion = "#txt_"+idPregunta+"_"+idOpinante;
-
-        var obj = { 
-            idOpinante:idOpinante,
-            idPregunta:idPregunta,
-            idAlternativa:idAlternativa,
-            justificacion:justificacion
-         };
-        
-        $.ajax({
-            type: "GET",
-            url: "/Instrumento/Instrumento/getRespuestaCS",
-            contentType: "application/json; charset=utf-8",
-            data: obj,
-            dataType: "json",   
-            success: function (msg) {
-                console.log("OK?23");
-
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                
-            },
-            timeout: 10000
-        });
 
         //alert(id)
         //if(id == "rd_a446b617-94d4-11e8-80db-bc764e10787e_5ae4a242-f6f9-11e7-bf12-bc764e100f2b_0_0e6d255e-94df-11e8-80db-bc764e10787e")
