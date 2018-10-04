@@ -162,12 +162,12 @@ class Proceso {
             "idEtapa":idEtapa,
 	        "idPersonaActor":idPersona,
             "codigoActor":"SUPE",
-            "idAccionPersona":""
+            "idAccionPersona":"" 
         }
         var resultSupe=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluados',objSupe);
         var listaSupe =resultSupe.body.data;      
         //
-        //console.log(objSupe)
+        console.log(objSupe)
         
         return view.render('desempeno/etapa',{datosProceso,PersonaEde,datosMenu,etapa,listaEval,listaSupe});
     }
@@ -207,6 +207,8 @@ class Proceso {
     async evalEjecutivos ({view,request, response}) {
             
             //var idOpinante = all.idOpinante
+            
+            
             var idOpinante = '2e73960f-595e-11e8-8fb3-bc764e100f2b';
             //var codigo = all.codigo
             //var codigoComponente = all.codigoComponente

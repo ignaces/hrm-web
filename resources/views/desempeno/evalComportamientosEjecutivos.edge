@@ -101,7 +101,7 @@ $(document).ready(function(){
                     //alert(id)
                     console.log(id)
                     console.log("rd_" + item.IdPregunta + "_" + item.IdAlternativa + "_0_" + item.IdOpinante)
-                    if(id == "rd_" + item.IdPregunta + "_" +item.IdAlternativa + "_0_" + item.IdOpinante)
+                    if(id == "rd_" + item.IdPregunta + "_" +item.IdAlternativa + "_0_" + item.IdOpinante || id == "rd_" + item.IdPregunta + "_" +item.IdAlternativa + "_1_" + item.IdOpinante)
                     {
                         $("#" + id ).prop( "checked", true );  
                     }
@@ -137,18 +137,7 @@ $(document).ready(function(){
         var justificacion = "";
         var txtJustificacion = "#txt_"+idPregunta+"_"+idOpinante;
 
-        if(requiereJustificacion==1){
-            $(txtJustificacion).show();
-            $(txtJustificacion).attr("idAlternativa", idAlternativa);
-        }else{
-            $(txtJustificacion).val("");
-            $(txtJustificacion).hide();
-            $(txtJustificacion).attr("idAlternativa", "");
-        }
-
-        if($(txtJustificacion).val()){
-            justificacion=$(txtJustificacion).val()
-        }
+        
         putRespuesta(idOpinante, idPregunta, idAlternativa, justificacion, id);
     });
 
