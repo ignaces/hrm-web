@@ -205,7 +205,24 @@ class Proceso {
     }
 
     async evalEjecutivos ({view,request, response}) {
-        return view.render('desempeno/evalEjecutivos');
+            
+            //var idOpinante = all.idOpinante
+            var idOpinante = '2e73960f-595e-11e8-8fb3-bc764e100f2b';
+            //var codigo = all.codigo
+            //var codigoComponente = all.codigoComponente
+    
+            var obj = {
+                "idOpinante":idOpinante
+            };
+            //console.log(obj);
+
+            var result = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumentoEde',obj);
+
+            var instrumento = result.body;
+
+            console.log(instrumento);
+        
+        return view.render('desempeno/evalEjecutivos', {idOpinante: idOpinante, instrumento: instrumento});
     }
 
     async evalComportamientosEjecutivos ({view,request, response}) {
