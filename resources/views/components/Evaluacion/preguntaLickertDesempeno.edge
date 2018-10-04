@@ -28,7 +28,8 @@
                                         </div>
                                         
                                         @each(alternativa in criterio.escala)
-                                        <div class="col-dinamico" style="width:{{100/criterio.escala.length}}%">
+                                        {{data.competencia.actividadesClave}}
+                                        <div class="col-dinamico" style="width:{{100/alternativa.length}}%">
                                             @if(alternativa.estaSeleccionada==1)
                                                 <input checked class="hidden radio-label option-button r_alternativa" type="radio" name="rd_{{data.pregunta.id}}" id="rd_{{data.pregunta.id}}_{{alternativa.id}}_{{alternativa.requiereJustificacion}}_{{data.idEncuestaPersona}}"/>
                                             @else
