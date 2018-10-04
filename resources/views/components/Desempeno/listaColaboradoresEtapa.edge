@@ -66,7 +66,9 @@
                                  @endeach
 
                                  <!---->
-
+                                 @each(persona in lista)
+                                 @each(tarea in persona.tareas)
+                                 @if(tarea.tarea.nombreEtapaTarea=="Evaluacion de Desempeño y Desarrollo")
                                  <tr>
                                         <td rowspan="undefined">
                                             <div class="text-center">
@@ -96,6 +98,9 @@
                                                 <a href="/Desempeno/Proceso/evalComportamientosEjecutivos" class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md"><i class="fa fa-primary"></i> Iniciar</a>                                                         
                                         </td>
                                     </tr>
+                                    @endif
+                                    @endeach
+                                 @endeach
                           </tbody>
                       </table>
                 </div>
