@@ -162,12 +162,12 @@ class Proceso {
             "idEtapa":idEtapa,
 	        "idPersonaActor":idPersona,
             "codigoActor":"SUPE",
-            "idAccionPersona":""
+            "idAccionPersona":"" 
         }
         var resultSupe=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluados',objSupe);
         var listaSupe =resultSupe.body.data;      
         //
-        //console.log(objSupe)
+        console.log(objSupe)
         
         return view.render('desempeno/etapa',{datosProceso,PersonaEde,datosMenu,etapa,listaEval,listaSupe});
     }
