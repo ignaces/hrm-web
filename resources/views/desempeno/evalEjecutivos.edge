@@ -5,7 +5,7 @@
         <link href="/assets/plugins/ede/infobox/infobox.css" rel="stylesheet" type="text/css" />
         <link href="/assets/plugins/ede/socialWidget/socialWidget.css" rel="stylesheet" type="text/css" />             
          <link href="/assets/plugins/ede/progressbar/progressbar.css" rel="stylesheet" type="text/css" />   
-
+         <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
          <style>
                 .button-label {
                   display: inline-block;
@@ -97,12 +97,13 @@
         </div>
 </div>
 
-<div class="row">
+    <div class="row">
         <div class="col-md-12">
             <div class="panel panel-border panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title">Datos del Evaluado</h3>
                 </div>
+                
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-2"><span><b>Nombre</b></span></div>
@@ -110,6 +111,7 @@
                         <div class="col-md-2"><span><b>RUT</b></span></div>
                         <div class="col-md-4"><span>12345678-9</span></div>
                     </div>
+                
                     <div class="row">
                         <div class="col-md-2"><span><b>Email:</b></span></div>
                         <div class="col-md-4"><span>email@cencosud.com</span></div>
@@ -120,6 +122,7 @@
             </div> <!--<div class="panel panel-border panel-primary">-->          
         </div>
     </div>
+    
     
     @each(competencia in instrumento.competencias)
         @if($loop.first)
@@ -191,23 +194,27 @@
         }
         
         </style>
-<div class="col-lg-12">
-                        <div class="row">
-                                <div class="col-lg-12" >
-                                        <label for="comment">Comentario:</label>
-                                        <textarea class="form-control" rows="5" id="comment"></textarea>   
-                                </div>
+        
+        <div class="col-lg-12">
+                    <div class="panel panel-color panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Comentario:</h3>
                             </div>
-                         <br>           
-                        <div class="row">
-                                <div class="col-lg-12" style="text-align:center;">
-                                    <button type="button" id="instrumento_btn_guardar" class="btn btn-info waves-effect waves-light"> <i class="fa fa-save m-r-5"></i> <span>Guardar</span> </button>
-                                    <button type="button" id="instrumento_btn_finalizar" class="btn btn-success waves-effect waves-light"> <i class="fa fa-check m-r-5"></i> <span>Finalizar</span> </button>
-                                </div>
+                            <div class="panel-body">
+                                    <textarea class="form-control" rows="5" id="comment"></textarea>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div> 
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-12" style="text-align:center;">
+                    <button type="button" id="instrumento_btn_guardar" class="btn btn-info waves-effect waves-light"> <i class="fa fa-save m-r-5"></i> <span>Guardar</span> </button>
+                    <button type="button" id="instrumento_btn_finalizar" class="btn btn-success waves-effect waves-light"> <i class="fa fa-check m-r-5"></i> <span>Finalizar</span> </button>
             </div>
+        </div>
+
+        <div class="row">
+            <br><br>        
+        </div>
+    
 @endsection
