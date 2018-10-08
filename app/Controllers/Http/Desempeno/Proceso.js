@@ -49,8 +49,8 @@ class Proceso {
             "idProceso":idProceso,
             "idPersona":idPersona
         };
-        console.log(idProceso)
-        console.log(idPersona)
+        //console.log(idProceso)
+        //console.log(idPersona)
         var resultPersonaEde =await api.execApi(request.hostname(),'/Desempeno/Proceso/getProcesoPersona',objdatosPersona);
         var PersonaEde =resultPersonaEde.body.data;
         
@@ -168,8 +168,28 @@ class Proceso {
         var listaSupe =resultSupe.body.data;      
         //
         console.log(objSupe)
+
+        //Lista Asce
+        var objAsc={
+            "idEtapa":idEtapa,
+	        "idPersonaActor":idPersona,
+            "codigoActor":"ASC",
+            "idAccionPersona":"" 
+        }
+        var resultAsc=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluados',objAsc);
+        var listaAsc =resultAsc.body.data;  
+
+        //Lista Func
+        var objFunc={
+            "idEtapa":idEtapa,
+	        "idPersonaActor":idPersona,
+            "codigoActor":"DELE",
+            "idAccionPersona":"" 
+        }
+        var resultFunc=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluados',objFunc);
+        var listaFunc =resultFunc.body.data;  
         
-        return view.render('desempeno/etapa',{datosProceso,PersonaEde,datosMenu,etapa,listaEval,listaSupe});
+        return view.render('desempeno/etapa',{datosProceso,PersonaEde,datosMenu,etapa,listaEval,listaSupe, listaFunc});
     }
 
     async evalBrasil ({view,request, response}) {

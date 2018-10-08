@@ -71,6 +71,53 @@
         @endif
         {{-- EQUIPO --}}
 
+        @if(listaAsc.length > 0)
+        <div class="row">
+            <div class="portlet">
+                <div class="portlet-heading">
+                     <h4 class="portlet-title text-dark">
+                        <!--Mi Equipo--> Evaluación a mi Jefatura
+                    </h4>
+                    <div class="portlet-widgets">
+                        <a data-toggle="collapse" data-parent="#accordion1" href="#equipo"><i class="mdi mdi-minus"></i></a>                  
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                
+                <div id="equipo" class="panel-collapse collapse in">
+                     <div class="portlet-body">
+                         
+                               @!component('components.Desempeno.listaColaboradoresEtapa',lista=listaAsc)
+                         
+                     </div>
+                </div>
+            </div>
+        </div>
+        @endif
+
+        @if(listaFunc.length > 0)
+        <div class="row">
+            <div class="portlet">
+                <div class="portlet-heading">
+                     <h4 class="portlet-title text-dark">
+                        <!--Mi Equipo--> Evaluaciones Funcionales
+                    </h4>
+                    <div class="portlet-widgets">
+                        <a data-toggle="collapse" data-parent="#accordion1" href="#equipo"><i class="mdi mdi-minus"></i></a>                  
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                
+                <div id="equipo" class="panel-collapse collapse in">
+                     <div class="portlet-body">
+                         
+                               @!component('components.Desempeno.listaColaboradoresEtapa',lista=listaFunc)
+                         
+                     </div>
+                </div>
+            </div>
+        </div>
+        @endif
 
 </div>
 @endsection
