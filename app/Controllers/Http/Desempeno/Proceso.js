@@ -104,8 +104,8 @@ class Proceso {
     }
 
 
-    async etapa ({view,request, response, auth, session}) {
-        console.log("A");
+    async etapa ({view,request, response, auth, session, params}) {
+        //console.log("A");
         var idPersona = session.get('idPersona', 'fail')
         var idEtapa = request.input("idEtapa")
         var idProceso = session.get('idProceso')
@@ -226,24 +226,25 @@ class Proceso {
         return view.render('desempeno/etapaEjecutivos');
     }
 
-    async evalEjecutivos ({view,request, response}) {
+    async evalEjecutivos ({view,request, response, auth}) {
             
             //var idOpinante = all.idOpinante
             
-            var idOpinante = '2e73960f-595e-11e8-8fb3-bc764e100f2b';
+            var idOpinante = request.input("idOpinante");
+            //console.log(idOpinante);
             //var codigo = all.codigo
             //var codigoComponente = all.codigoComponente
     
             var obj = {
                 "idOpinante":idOpinante
             };
-            //console.log(obj);
+            console.log(obj);
 
             var result = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumentoEde',obj);
 
             var instrumento = result.body;
 
-            console.log(instrumento);
+            //console.log(instrumento);
         
         return view.render('desempeno/evalEjecutivos', {idOpinante: idOpinante, instrumento: instrumento});
     }
