@@ -105,7 +105,7 @@ class Proceso {
 
 
     async etapa ({view,request, response, auth, session}) {
-
+        console.log("A");
         var idPersona = session.get('idPersona', 'fail')
         var idEtapa = request.input("idEtapa")
         var idProceso = session.get('idProceso')
@@ -155,7 +155,7 @@ class Proceso {
         var listaEval =resultEval.body.data;      
         //
         
-        //console.log(objEval)
+        console.log(objEval)
         
          //Lista Supe
          var objSupe={
@@ -176,6 +176,7 @@ class Proceso {
             "codigoActor":"ASC",
             "idAccionPersona":"" 
         }
+        console.log(objAsc);
         var resultAsc=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluados',objAsc);
         var listaAsc =resultAsc.body.data;  
 
@@ -186,10 +187,11 @@ class Proceso {
             "codigoActor":"DELE",
             "idAccionPersona":"" 
         }
+        console.log(objFunc);
         var resultFunc=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluados',objFunc);
         var listaFunc =resultFunc.body.data;  
         
-        return view.render('desempeno/etapa',{datosProceso,PersonaEde,datosMenu,etapa,listaEval,listaSupe, listaFunc});
+        return view.render('desempeno/etapa',{datosProceso,PersonaEde,datosMenu,etapa,listaEval,listaSupe,listaAsc,listaFunc});
     }
 
     async evalBrasil ({view,request, response}) {
