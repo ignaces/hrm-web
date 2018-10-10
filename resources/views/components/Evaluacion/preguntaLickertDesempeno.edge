@@ -21,6 +21,7 @@
                                     @each(criterio in actividadesClave.criterios)
                                         <input type="hidden" class="pr_pregunta" id="{{criterio.id}}" />
                                         <div class="col-lg-12">
+                                                
                                             <p class="text"> 
                                                 <i><b>{{criterio.nombre}}</b></i>
                                             </p>
@@ -35,6 +36,11 @@
                                                 @endif
                                                 
                                                 <label class="button-label" style="height: auto; min-height: 240px !important;" for="rd_{{$parent.criterio.id}}_{{alternativa.id}}_{{alternativa.requiereJustificacion}}_{{data.idOpinante}}">
+                                                    @if(alternativa.mostrarNivel == "1")
+                                                        <p class="text" > 
+                                                            <b><h2 style="text-align: center;">{{alternativa.nivel}}</h2></b>
+                                                        </p>
+                                                    @endif
                                                     <span>{{alternativa.nombre}}</span>
                                                 </label>                         
                                             </div>

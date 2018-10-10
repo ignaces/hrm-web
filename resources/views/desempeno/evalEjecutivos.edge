@@ -133,6 +133,8 @@
         <input type="hidden" name="idProceso" value="{{idProceso}}">
         <input type="hidden" name="idEtapa" value="{{idEtapa}}">
     </form>
+    <!--escala-->
+    @!component('components.Evaluacion.escala',data={escala:escala}) 
 
     @each(competencia in instrumento.competencias)
         @if($loop.first)
