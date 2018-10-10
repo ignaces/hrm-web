@@ -256,6 +256,7 @@ class Proceso {
     async evalComportamientosEjecutivosEquipo ({view,request, response}) {
         return view.render('desempeno/evalComportamientosEjecutivosEquipo');
     }
+
 }
 
 module.exports = Proceso

@@ -109,7 +109,7 @@ class Instrumento {
         return {mensaje:"OK"}
     } 
 
-    async putRespuestaCS({request,response, session}){
+    async putRespuestaEde({request,response, session}){
 
         var idOpinante = request.input("idOpinante")
         var idPregunta = request.input("idPregunta")
@@ -122,10 +122,11 @@ class Instrumento {
             "idAlternativa":idAlternativa,
             "justificacion":justificacion,
             };
-            
-        var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/putRespuestaCS',obj);
+          
+        //console.log(obj);
+        var result = await data.execApi(request.hostname(),'/Desempeno/Proceso/putRespuesta',obj);
 
-
+        /*
         var idPersona = session.get('idPersona', 'fall')
 
         if(idPersona != 'fall'){
@@ -136,6 +137,21 @@ class Instrumento {
 
             var resultUpd = await data.execApi(request.hostname(),'/Acreditacion/Proceso/setOpinanteEvaluadoCS',objUpd);
         }
+        */
+        return {mensaje:"OK"}
+    } 
+
+    async putObservacionEde({request,response, session}){
+
+        var idOpinante  = request.input("idOpinante");
+        var observacion = request.input("observacion");
+
+        var obj = {
+            "idOpinante":idOpinante,
+            "observacion":observacion
+        };
+          
+        var result = await data.execApi(request.hostname(),'/Desempeno/Proceso/putObservacion',obj);
 
         return {mensaje:"OK"}
     } 

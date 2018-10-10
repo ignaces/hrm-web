@@ -29,11 +29,12 @@
                                         @each(alternativa in criterio.escala)
                                             <div class="col-dinamico" style="width:33%; float: left;">
                                                 @if(alternativa.estaSeleccionada==1)
-                                                    <input checked class="hidden radio-label option-button r_alternativa" type="radio" name="rd_{{$parent.criterio.id}}" id="rd_{{$parent.criterio.id}}_{{alternativa.id}}_{{alternativa.requiereJustificacion}}"/>
+                                                    <input checked class="hidden radio-label option-button r_alternativa" type="radio" name="rd_{{$parent.criterio.id}}" id="rd_{{$parent.criterio.id}}_{{alternativa.id}}_{{alternativa.requiereJustificacion}}_{{data.idOpinante}}"/>
                                                 @else
-                                                    <input class="hidden radio-label option-button r_alternativa" type="radio" name="rd_{{$parent.criterio.id}}" id="rd_{{$parent.criterio.id}}_{{alternativa.id}}_{{alternativa.requiereJustificacion}}"/>
+                                                    <input class="hidden radio-label option-button r_alternativa" type="radio" name="rd_{{$parent.criterio.id}}" id="rd_{{$parent.criterio.id}}_{{alternativa.id}}_{{alternativa.requiereJustificacion}}_{{data.idOpinante}}"/>
                                                 @endif
-                                                <label class="button-label" style="height: auto; min-height: 240px !important;" for="rd_{{$parent.criterio.id}}_{{alternativa.id}}_{{alternativa.requiereJustificacion}}">
+                                                
+                                                <label class="button-label" style="height: auto; min-height: 240px !important;" for="rd_{{$parent.criterio.id}}_{{alternativa.id}}_{{alternativa.requiereJustificacion}}_{{data.idOpinante}}">
                                                     <span>{{alternativa.nombre}}</span>
                                                 </label>                         
                                             </div>

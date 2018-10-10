@@ -27,6 +27,7 @@ $(document).ready(function(){
             justificacion=$(txtJustificacion).val()
         }
 
+        //console.log(idOpinante, idPregunta, idAlternativa, justificacion, id);
         putRespuesta(idOpinante, idPregunta, idAlternativa, justificacion, id);
     });
 
@@ -56,12 +57,12 @@ $(document).ready(function(){
         
         $.ajax({
             type: "GET",
-            url: "/Instrumento/Instrumento/putRespuesta",
+            url: "/Instrumento/Instrumento/putRespuestaEde",
             contentType: "application/json; charset=utf-8",
             data: obj,
             dataType: "json",   
             success: function (msg) {
-                console.log("OK?23");
+                //console.log("OK?23");
 
                 $.toast({
                     text: 'Respuesta guardada correctamente.',
@@ -94,33 +95,11 @@ $(document).ready(function(){
     
     $( "#instrumento_btn_guardar" ).click(function() {
 
-        $.ajax({
-            type: "GET",
-            url: "/Instrumento/Instrumento/putObservacionEde",
-            contentType: "application/json; charset=utf-8",
-            data: obj,
-            dataType: "json",   
-            success: function (msg) {
-                
-                swal(
-                    'Guardado',
-                    'Datos guardados correctamente.',
-                    'success'
-                );
-
-                
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                
-                swal(
-                    'Error',
-                    'Hubo un problema al guardar sus datos, inténtelo nuevamente. Si el problema persiste, por favor, comuníquese con la mesa de ayuda.',
-                    'error'
-                  );
-            },
-            timeout: 10000
-        });
-        
+        swal(
+            'Guardado',
+            'Datos guardados correctamente.',
+            'success'
+          );
     });
 
     $( "#instrumento_btn_finalizar" ).click(function() {
