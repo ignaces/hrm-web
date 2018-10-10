@@ -125,6 +125,9 @@
     
     <input type="hidden" name="idOpinante" id="idOpinante" value="{{idOpinante}}">
     
+    <!--escala-->
+    @!component('components.Evaluacion.escala',data={escala:escala}) 
+
     @each(competencia in instrumento.competencias)
         @if($loop.first)
             @!component('components.Evaluacion.preguntaLickertDesempeno',data={idOpinante:idOpinante,competencia:competencia,first:true})
