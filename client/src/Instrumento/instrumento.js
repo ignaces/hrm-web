@@ -93,7 +93,9 @@ $(document).ready(function(){
     
     
     $( "#instrumento_btn_guardar" ).click(function() {
-
+        var obj = {
+            idOPinante: $("#idOpinante").val(),
+        };
         $.ajax({
             type: "GET",
             url: "/Instrumento/Instrumento/putObservacionEde",

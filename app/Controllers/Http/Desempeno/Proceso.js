@@ -110,7 +110,7 @@ class Proceso {
         var idEtapa = request.input("idEtapa")
         var idProceso = session.get('idProceso')
         var datosProceso=session.get('dataProceso')
-
+        console.log(datosProceso);
         //Datos Persona
         var user={usuario:auth.user}
         var persona = session.get('personaLogueada')
@@ -167,7 +167,7 @@ class Proceso {
         var resultSupe=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluados',objSupe);
         var listaSupe =resultSupe.body.data;      
         //
-        console.log(objSupe)
+        //console.log(objSupe)
 
         //Lista Asce
         var objAsc={
@@ -176,7 +176,7 @@ class Proceso {
             "codigoActor":"ASC",
             "idAccionPersona":"" 
         }
-        console.log(objAsc);
+        //console.log(objAsc);
         var resultAsc=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluados',objAsc);
         var listaAsc =resultAsc.body.data;  
 
@@ -191,7 +191,7 @@ class Proceso {
         var resultFunc=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluados',objFunc);
         var listaFunc =resultFunc.body.data;  
         
-        return view.render('desempeno/etapa',{datosProceso,PersonaEde,datosMenu,etapa,listaEval,listaSupe,listaAsc,listaFunc});
+        return view.render('desempeno/etapa',{datosProceso,PersonaEde,datosMenu,etapa,listaEval,listaSupe,listaAsc,listaFunc, idEtapa: idEtapa});
     }
 
     async evalBrasil ({view,request, response}) {
@@ -230,7 +230,9 @@ class Proceso {
             
             //var idOpinante = all.idOpinante
             
-            var idOpinante = request.input("idOpinante");
+            var idOpinante  = request.input("idOpinante");
+            var idProceso   = request.input("idProceso");
+            var idEtapa     = request.input("idEtapa");
             //console.log(idOpinante);
             //var codigo = all.codigo
             //var codigoComponente = all.codigoComponente
@@ -246,7 +248,7 @@ class Proceso {
 
             //console.log(instrumento);
         
-        return view.render('desempeno/evalEjecutivos', {idOpinante: idOpinante, instrumento: instrumento});
+        return view.render('desempeno/evalEjecutivos', {idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa});
     }
 
     async evalComportamientosEjecutivos ({view,request, response}) {

@@ -58,11 +58,10 @@
                                             <button type="button" class="btn btn-default btn-xs btn-rounded btn-bordered waves-effect w-md" disabled><i class="fa fa-ban"></i> No Disponible</button>                                     
                                         @else
                                             <form method="GET" action="{{tarea.tarea.step_vinculo}}">
-                                                {{csrfToken}}
                                                 <input type="hidden" name="idOpinante" value="{{tarea.tarea.actor_idEtapaTareaActor}}">
-                                                <!--a href="{{tarea.tarea.step_link}}" class="btn btn-{{tarea.tarea.step_color}} btn-xs btn-rounded btn-bordered waves-effect w-md"><i class="{{tarea.tarea.step_icono}}"></i> {{tarea.tarea.step_texto}}</a-->   
+                                                <a href="{{tarea.tarea.step_link}}&idOpinante={{tarea.tarea.actor_idEtapaTareaActor}}" class="btn btn-{{tarea.tarea.step_color}} btn-xs btn-rounded btn-bordered waves-effect w-md"><i class="{{tarea.tarea.step_icono}}"></i> {{tarea.tarea.step_texto}}</a>   
                                                 
-                                                <button class="btn btn-{{tarea.tarea.step_color}} btn-xs btn-rounded btn-bordered waves-effect w-md"><i class="{{tarea.tarea.step_icono}}"></i> {{tarea.tarea.step_texto}}</button>
+                                                <!--button class="btn btn-{{tarea.tarea.step_color}} btn-xs btn-rounded btn-bordered waves-effect w-md"><i class="{{tarea.tarea.step_icono}}"></i> {{tarea.tarea.step_texto}}</button-->
                                             </form>
                                         @endif
 

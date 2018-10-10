@@ -141,17 +141,20 @@ class Instrumento {
         return {mensaje:"OK"}
     } 
 
-    async putObservacionEde({request,response, session}){
+    async saveEvaluacionEde({request,response, session}){
 
         var idOpinante  = request.input("idOpinante");
         var observacion = request.input("observacion");
+        var finaliza    = request.input("finaliza");
 
         var obj = {
             "idOpinante":idOpinante,
-            "observacion":observacion
+            "observacion":observacion,
+            "finaliza": finaliza
         };
           
-        var result = await data.execApi(request.hostname(),'/Desempeno/Proceso/putObservacion',obj);
+        //console.log(obj);
+        var result = await data.execApi(request.hostname(),'/Evaluacion/Instrumento/saveEvaluacionEde',obj);
 
         return {mensaje:"OK"}
     } 

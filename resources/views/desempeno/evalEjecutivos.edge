@@ -6,6 +6,8 @@
         <link href="/assets/plugins/ede/socialWidget/socialWidget.css" rel="stylesheet" type="text/css" />             
          <link href="/assets/plugins/ede/progressbar/progressbar.css" rel="stylesheet" type="text/css" />   
          <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+         <link href="/assets/plugins/spinkit/spinkit.css" rel="stylesheet">
+
          <style>
                 .button-label {
                   display: inline-block;
@@ -66,13 +68,15 @@
 @section('scripts')
     
 
-<script src="/assets/js/dist/InstrumentoDesempeno.min.js?v01s"></script>
+<script src="/assets/js/dist/InstrumentoDesempeno.min.js?v003s"></script>
 <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
 <script src="/assets/plugins/jquery-toastr/jquery.toast.min.js" type="text/javascript"></script>
-
+<script src="/assets/plugins/tinymce/tinymce.min.js"></script>
 @endsection
 
 @section('content')
+@!component('components.core.loading',data={})
+
 <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-border panel-primary">
@@ -125,6 +129,11 @@
     
     <input type="hidden" name="idOpinante" id="idOpinante" value="{{idOpinante}}">
     
+    <form method="GET" action="/Desempeno/Proceso/etapa" id="frmVolver">
+        <input type="hidden" name="idProceso" value="{{idProceso}}">
+        <input type="hidden" name="idEtapa" value="{{idEtapa}}">
+    </form>
+
     @each(competencia in instrumento.competencias)
         @if($loop.first)
             @!component('components.Evaluacion.preguntaLickertDesempeno',data={idOpinante:idOpinante,competencia:competencia,first:true})
@@ -133,68 +142,6 @@
         @endif                  
     @endeach
     
-<style>
-        .button-label {
-          display: inline-block;
-          padding: 1em 2em;
-          margin: 0.5em;
-          cursor: pointer;
-          color: #292929;
-          border-radius: 0.25em;
-          background: #efefef;
-          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0 -3px 0 rgba(0, 0, 0, 0.22);
-          -webkit-transition: 0.3s;
-          transition: 0.3s;
-          -webkit-user-select: none;
-             -moz-user-select: none;
-              -ms-user-select: none;
-                  user-select: none;
-        }
-        .button-label h1 {
-          font-size: 1em;
-          font-family: "Lato", sans-serif;
-        }
-        .button-label:hover {
-          background: #d6d6d6;
-          color: #101010;
-          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0 -3px 0 rgba(0, 0, 0, 0.32);
-        }
-        .button-label:active {
-          -webkit-transform: translateY(2px);
-                  transform: translateY(2px);
-          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0px -1px 0 rgba(0, 0, 0, 0.22);
-        }
-        @media (max-width: 40em) {
-          .button-label {
-            
-          }
-        
-        
-        }
-        
-        .option-button:checked + .button-label {
-          background: #ffa500;
-          color: #ffffff;
-        }
-        .option-button:checked + .button-label:hover {
-          background: #ff6500;
-          color: #ffffff;
-        }
-        
-        .question > .row:nth-child(odd){
-          background: #e6e6e6;
-        }
-        .col-dinamico{
-            padding-left: 10px;padding-right: 10px; float:left;position:relative;min-height:1px;
-        }
-
-        @media (max-width: 992px) {
-            .col-dinamico{
-                width:100% !important;
-            }
-        }
-        
-        </style>
         
         <div class="col-lg-12">
                     <div class="panel panel-color panel-primary">
@@ -202,7 +149,8 @@
                                 <h3 class="panel-title">Comentario</h3>
                             </div>
                             <div class="panel-body">
-                                    <textarea class="form-control" rows="5" id="observacion" name="observacion"></textarea>
+                                
+                                <textarea class="form-control" rows="8" id="observacion" name="observacion">{{instrumento.observacion}}</textarea>
                             </div>
                         </div>
         </div>
