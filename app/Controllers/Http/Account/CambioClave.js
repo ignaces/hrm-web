@@ -9,7 +9,7 @@ const User = use('App/Models/User')
 
 class CambioClave {
     async cambiar ({view,request, response, session}) {
-        return view.render('Account/CambioClave');
+        return view.render('account/cambioClave');
     }
 
     async updateUser({view,request, response, session, auth}){
