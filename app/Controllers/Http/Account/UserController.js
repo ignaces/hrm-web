@@ -65,7 +65,7 @@ class UserController {
 
             if(u[0].requiereCambioClave == 1)
             {
-              return response.redirect('account/cambioClave/cambiar')
+              return response.redirect('Account/CambioClave/cambiar')
             }
 
           }catch(err){
