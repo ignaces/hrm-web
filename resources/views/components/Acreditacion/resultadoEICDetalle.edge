@@ -1,0 +1,105 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet">
+            <div class="portlet-heading bg-primary">
+                <h5 class="portlet-title">{{titulo}}</h5>
+                <div class="clearfix"></div>
+            </div>
+            <div class="portlet-body">
+
+
+                @each(competencia in data.competencias)
+
+                <div id="bg-default" class="panel-collapse collapse in">
+                        <div class="portlet-body">
+                            <div class="panel panel-border panel-primary">
+                               
+                                <div class="panel-heading">
+                               
+                                
+                                    <h3 class="panel-title">
+                                        {{{competencia.nombre}}}
+                                    </h3>
+                                </div>
+                                
+                                <div class="panel-body question">
+
+
+
+                    @each(actividadClave in competencia.actividadesClave)
+                        @each(criterio in actividadClave.criterios)   
+
+
+                        
+
+
+
+
+
+
+                                                            <div class="col-lg-12">
+                                                                    <div class="portlet">
+                                                                        <div class="portlet-heading bg-primary">
+                                                                            <h3 class="portlet-title">
+                                                                                {{{criterio.nombre}}}
+                                                                            </h3>
+                                                                            <div class="portlet-widgets"> 
+                                                                            </div>
+                                                                            <div class="clearfix"></div>
+                                                                        </div><!--<div class="portlet-heading bg-primary">-->
+                                                                
+                                                                        <div id="bg-default" class="panel-collapse collapse in">
+                                                                            <div class="portlet-body">
+                                                                                
+                                                                                <div class="row">
+                                                                                    
+                                                                                    <div class="col-lg-12">
+                                                                                        
+                                                                                        <div class="row">
+                                                                                        <div class="button-wrap">
+                                                                                                @each(escala in criterio.escala)
+                                                                                                <div class="col-lg-3">
+                                                                                                    @if(escala.estaSeleccionada==1)
+                                                                                                        <input readonly checked class="hidden radio-label option-button r_alternativa" type="radio" name="rd_{{$parent.criterio.id}}" id="rd_{{$parent.criterio.id}}_{{escala.id}}"/>
+                                                                                                    @else
+                                                                                                        <input readonly class="hidden radio-label option-button r_alternativa" type="radio" name="rd_{{$parent.criterio.id}}" id="rd_{{$parent.criterio.id}}_{{escala.id}}"/>
+                                                                                                    @endif
+                                                                                                    <label readonly class="button-label">
+                                                                                                        <span>{{escala.nombre}}</span>
+                                                                                                    </label>                         
+                                                                                                </div>
+                                                                                    
+                                                                                                @endeach  
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    
+                                                                                </div>
+                                                                
+                                                                            </div><!--<div class="portlet-body">-->
+                                                                        </div><!--<div id="bg-default" class="panel-collapse collapse in">-->
+                                                                
+                                                                    </div><!--<div class="portlet">-->
+                                                                </div><!--<div class="col-lg-12">-->                     
+                                                          
+                                                   
+
+
+
+                                
+                              
+                    @endeach
+                    @endeach
+
+                    
+                </div><!--<div class="panel-body">-->
+                    </div><!-- <div class="panel panel-border panel-primary">-->
+                        
+                </div>  <!--<div class="portlet-body">-->  
+            </div>  
+        @endeach
+
+    </div>
+</div>
+</div>
+</div>
