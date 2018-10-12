@@ -27,8 +27,6 @@ class Informe {
         var resultado = await data.execApi(request.hostname(), '/Acreditacion/Proceso/getPersona', obj);
         var clasificacion = resultado.body;
 
-
- 
         var resultSintesis = await data.execApi(request.hostname(), '/Acreditacion/Informe/getResultadoSistesis', obj);
         var resultadoSintesis = resultSintesis.body.data;
 
@@ -40,7 +38,6 @@ class Informe {
 
         var resultDetalleSOT = await data.execApi(request.hostname(), '/Acreditacion/Informe/getResultadoDetalleSOT', obj);
         var resultadoDetalleSOT = resultDetalleSOT.body.data;
-
 
         var resultTCODetalle = await data.execApi(request.hostname(), '/Acreditacion/Informe/getInstrumentosTCO', obj);
         var resultadoTCODetalle = resultTCODetalle.body.data;
@@ -65,8 +62,6 @@ class Informe {
         var resultado = await data.execApi(request.hostname(), '/Acreditacion/Proceso/getPersona', obj);
         var clasificacion = resultado.body;
 
-
-
         var resultSintesis = await data.execApi(request.hostname(), '/Acreditacion/Informe/getResultadoSistesis', obj);
         var resultadoSintesis = resultSintesis.body.data;
 
@@ -78,7 +73,6 @@ class Informe {
 
         var resultDetalleSOT = await data.execApi(request.hostname(), '/Acreditacion/Informe/getResultadoDetalleSOT', obj);
         var resultadoDetalleSOT = resultDetalleSOT.body.data;
-
 
         var resultTCODetalle = await data.execApi(request.hostname(), '/Acreditacion/Informe/getInstrumentosTCO', obj);
         var resultadoTCODetalle = resultTCODetalle.body.data;
