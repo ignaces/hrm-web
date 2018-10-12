@@ -62,8 +62,12 @@
                 <div id="equipo" class="panel-collapse collapse in">
                      <div class="portlet-body">
                          
-                               @!component('components.Desempeno.listaColaboradoresEtapa',lista=listaSupe)
-                         
+                        @!component('components.Desempeno.listaColaboradoresEtapa',lista=listaSupe)
+                        
+                        <div class="clearfix"></div>
+                        <div class="row">
+                            <a href="/Desempeno/Proceso/evalGrupal" class="btn btn-success pull-right">Evaluar a Mi Equipo</a>
+                        </div>
                      </div>
                 </div>
             </div>

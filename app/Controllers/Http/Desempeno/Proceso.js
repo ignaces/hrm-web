@@ -198,6 +198,10 @@ class Proceso {
         return view.render('desempeno/evalBrasil');
     }
 
+    async evalGrupal ({view,request, response}) {
+        return view.render('desempeno/evaluacionGrupal');
+    }
+
     async portadaBrasil ({view,request, response}) {
         return view.render('desempeno/portadaBrasil');
     }
