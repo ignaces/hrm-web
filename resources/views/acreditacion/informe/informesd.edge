@@ -16,7 +16,7 @@
 
 
 
-<div class="row">
+<div class="row 1">
         <div class="col-md-6">
                 @!component('components.Acreditacion.sintesisResultado',titulo = "SÍNTESIS DE RESULTADOS", data = sintesis)
         </div>
@@ -71,15 +71,15 @@
 
         @if(conDetalle==1) 
                 @if(resultadoDetalleSOT.instrumento.length>0)
-                        @!component('components.Acreditacion.resultadoSOTDetalle',titulo = "SOT DETALLE", data=resultadoDetalleSOT.instrumento) 
+                        @!component('components.Acreditacion.resultadoSOTDetalle',titulo = "SET DE OBSERVACIONES EN TERRENO DETALLE", data=resultadoDetalleSOT.instrumento) 
                 @endif
                 @if(TCODetalle.instrumento.length>0)
                         @!component('components.Acreditacion.resultadoTCODetalle',titulo = "TEST DE CONOCIMIENTOS DETALLE", data=TCODetalle.instrumento) 
                 @endif
-                
-                
 
+                @!component('components.Acreditacion.resultadoEICDetalle',titulo = "ENTREVISTA DE INCIDENTES CRITICOS DETALLE", data=resultadoDetalleEIC.instrumento)                   
+                
         
         @endif
-
+<div class="clearfix"></div>
 @endsection

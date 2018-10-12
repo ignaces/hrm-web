@@ -27,8 +27,6 @@ class Informe {
         var resultado = await data.execApi(request.hostname(), '/Acreditacion/Proceso/getPersona', obj);
         var clasificacion = resultado.body;
 
-
- 
         var resultSintesis = await data.execApi(request.hostname(), '/Acreditacion/Informe/getResultadoSistesis', obj);
         var resultadoSintesis = resultSintesis.body.data;
 
@@ -41,13 +39,17 @@ class Informe {
         var resultDetalleSOT = await data.execApi(request.hostname(), '/Acreditacion/Informe/getResultadoDetalleSOT', obj);
         var resultadoDetalleSOT = resultDetalleSOT.body.data;
 
+        var resultDetalleEIC = await data.execApi(request.hostname(), '/Acreditacion/Informe/getResultadoDetalleEIC', obj);
+        var resultadoDetalleEIC = resultDetalleEIC.body.data;
 
         var resultTCODetalle = await data.execApi(request.hostname(), '/Acreditacion/Informe/getInstrumentosTCO', obj);
         var resultadoTCODetalle = resultTCODetalle.body.data;
 
+        //console.log(resultadoDetalleEIC);
+
         var cliente = request.hostname().split(".")[0]
 
-        return view.render('acreditacion/informe/informesd', { sintesis: resultadoSintesis, resultadoTCO, resultadoSOT, resultadoDetalleSOT, TCODetalle: resultadoTCODetalle, conDetalle, idProcesoPersona, clasificacion, cliente });
+        return view.render('acreditacion/informe/informesd', { sintesis: resultadoSintesis, resultadoTCO, resultadoSOT, resultadoDetalleSOT, TCODetalle: resultadoTCODetalle, conDetalle, idProcesoPersona, clasificacion, cliente, resultadoDetalleEIC });
     }
 
     async pdf({ view, request, response, auth }) {
@@ -65,8 +67,6 @@ class Informe {
         var resultado = await data.execApi(request.hostname(), '/Acreditacion/Proceso/getPersona', obj);
         var clasificacion = resultado.body;
 
-
-
         var resultSintesis = await data.execApi(request.hostname(), '/Acreditacion/Informe/getResultadoSistesis', obj);
         var resultadoSintesis = resultSintesis.body.data;
 
@@ -78,7 +78,6 @@ class Informe {
 
         var resultDetalleSOT = await data.execApi(request.hostname(), '/Acreditacion/Informe/getResultadoDetalleSOT', obj);
         var resultadoDetalleSOT = resultDetalleSOT.body.data;
-
 
         var resultTCODetalle = await data.execApi(request.hostname(), '/Acreditacion/Informe/getInstrumentosTCO', obj);
         var resultadoTCODetalle = resultTCODetalle.body.data;
