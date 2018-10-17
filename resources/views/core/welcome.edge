@@ -5,10 +5,10 @@
     
     <script>
     $(document).ready(function(){
-        //if("{{mensaje}}" != "")
-        //{
+        if("{{mensaje}}" != "")
+        {
             $("#modalMensaje").modal('show');
-        //}    
+        }    
 
         //$('#modalMensaje').on('hidden.bs.modal', function (e) {
             
@@ -68,6 +68,11 @@
         <div class="row">
         @!component('components.Acreditacion.cajaAcreditacion',titulo = "Acreditación",titulo2 = "Gestión de Talento", procesos=procesos, talentos=talentos,condicion=condicion)
         </div>    
+
+        <div class="row">
+            &nbsp;
+            <br><br>
+        </div>
            <!--<div class="row">
            <div class="col-md-12">
                 <div class="portlet">
@@ -145,31 +150,26 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-
+                    <div class="modal fade" style="display:none;margin-left: -250px !important;" tabindex="-1" id="modalMensaje" role="dialog" aria-labelledby="mySmallModalLabel">
+                            <div class="modal-dialog modal-dialog">
+                                <div class="modal-content" style="width: 900px;">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title mt-0">{{{mensajeTitulo}}}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        
+                                    </div>
+                                    <div class="modal-body-lg">
+                                        {{{mensaje}}}
+                                        
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                    </div>
             </div>
         </div>
 
     </div>
     <!-- END Columna Derecha -->
 </div>
-
-
-
-
-<div class="modal fade" tabindex="-1" id="modalCambioClave" role="dialog" aria-labelledby="mySmallModalLabel">
-        <div class="modal-dialog modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title mt-0">Debe Cambiar Clave</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    
-                </div>
-                <div class="modal-body-lg">
-                    Cambio de clave
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div>
-
 
 @endsection
