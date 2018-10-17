@@ -2,6 +2,17 @@ import _ from 'lodash';
 //holi
 $(document).ready(function(){
     
+    tinymce.init({
+        selector: "textarea",  // change this value according to your HTML
+        toolbar: false,
+        oninit : "setPlainText",
+        plugins : "paste",
+        paste_as_text: true,
+        menubar: false,
+        paste_convert_word_fake_lists: false,
+        invalid_elements: "span p div aacute eacute iacute oacute uacute br"
+    });
+    
     $( ".r_alternativa" ).click(function() {
         
         var id = $( this ).attr('id');
@@ -27,6 +38,7 @@ $(document).ready(function(){
             justificacion=$(txtJustificacion).val()
         }
 
+        //console.log(idOpinante, idPregunta, idAlternativa, justificacion, id);
         putRespuesta(idOpinante, idPregunta, idAlternativa, justificacion, id);
     });
 
@@ -54,14 +66,16 @@ $(document).ready(function(){
             justificacion:justificacion
          };
         
+         $("#hrm_blockAction").show();
+
         $.ajax({
             type: "GET",
-            url: "/Instrumento/Instrumento/putRespuesta",
+            url: "/Instrumento/Instrumento/putRespuestaEde",
             contentType: "application/json; charset=utf-8",
             data: obj,
             dataType: "json",   
             success: function (msg) {
-                console.log("OK?23");
+                //console.log("OK?23");
 
                 $.toast({
                     text: 'Respuesta guardada correctamente.',
@@ -72,6 +86,7 @@ $(document).ready(function(){
                     stack: 1
                 });
 
+                $("#hrm_blockAction").hide();
                 
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
@@ -83,6 +98,8 @@ $(document).ready(function(){
                     hideAfter: 3000,
                     stack: 1
                 });
+                
+                $("#hrm_blockAction").hide();
 
                 $("#"+idElementoHTML).prop('checked', false);
             },
@@ -93,12 +110,19 @@ $(document).ready(function(){
     
     
     $( "#instrumento_btn_guardar" ).click(function() {
+        tinymce.triggerSave();
+        
         var obj = {
-            idOPinante: $("#idOpinante").val(),
+            idOpinante: $("#idOpinante").val(),
+            observacion: $("#observacion").val(),
+            finaliza: 0
         };
+
+        $("#hrm_loadingPanel").show();
+
         $.ajax({
             type: "GET",
-            url: "/Instrumento/Instrumento/putObservacionEde",
+            url: "/Instrumento/Instrumento/saveEvaluacionEde",
             contentType: "application/json; charset=utf-8",
             data: obj,
             dataType: "json",   
@@ -110,7 +134,7 @@ $(document).ready(function(){
                     'success'
                 );
 
-                
+                $("#hrm_loadingPanel").hide();
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
                 
@@ -119,6 +143,8 @@ $(document).ready(function(){
                     'Hubo un problema al guardar sus datos, inténtelo nuevamente. Si el problema persiste, por favor, comuníquese con la mesa de ayuda.',
                     'error'
                   );
+
+                  $("#hrm_loadingPanel").hide();
             },
             timeout: 10000
         });
@@ -126,7 +152,8 @@ $(document).ready(function(){
     });
 
     $( "#instrumento_btn_finalizar" ).click(function() {
-        
+        tinymce.triggerSave();
+
         var checked;
         var vacios = true;
 
@@ -184,6 +211,18 @@ $(document).ready(function(){
             return false;
         }
 
+        var minChars = 100;
+
+        if($("#observacion").val().length < minChars)
+        {
+            swal(
+                'No has terminado',
+                'Debes ingresar un comentario con al menos '+minChars+' caracteres para poder finalizar.',
+                'warning'
+            );
+            return false;
+        }
+
         swal({
             title: '¿Esta seguro de finalizar?',
             text: "No podra volver a editar la evaluación",
@@ -196,27 +235,42 @@ $(document).ready(function(){
           }).then(function(result)  {
             if (result) {
                 
-                var obj = { 
-                    idOpinante:$("#idOpinante").val()
-                 };
+                var obj = {
+                    idOpinante: $("#idOpinante").val(),
+                    observacion: $("#observacion").val(),
+                    finaliza: 1
+                };
+
+                $("#hrm_loadingPanel").show();
 
                 $.ajax({
                     type: "GET",
-                    url: "/Instrumento/Instrumento/cerrarInstrumento",
+                    url: "/Instrumento/Instrumento/saveEvaluacionEde",
                     contentType: "application/json; charset=utf-8",
                     data: obj,
-                    dataType: "json", 
+                    dataType: "json",   
                     success: function (msg) {
-                        swal({
-                            title:'Finalizado',
-                            text:'Evaluación finalizado correctamente.',
-                            type:'success'
-                        }).then(function(result){
+                        
+                        swal(
+                            'Guardado',
+                            'Evaluación Finalizada Correctamente.',
+                            'success'
+                        ).then(function(result){
                             $('#frmVolver').submit();
                         });
+                        $("#hrm_loadingPanel").hide();
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                        
+                        swal(
+                            'Error',
+                            'Hubo un problema al guardar sus datos, inténtelo nuevamente. Si el problema persiste, por favor, comuníquese con la mesa de ayuda.',
+                            'error'
+                        );
 
-
-                    }
+                        $("#hrm_loadingPanel").hide();
+                    },
+                    timeout: 10000
                 });
             }
           });

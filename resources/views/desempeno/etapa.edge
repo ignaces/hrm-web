@@ -27,7 +27,7 @@
             <div class="portlet">
                 <div class="portlet-heading">
                      <h4 class="portlet-title text-dark">
-                        Mi Proceso
+                        <!--Mi Proceso--> Mi Autoevaluación 
                     </h4>
                     <div class="portlet-widgets">
                         <a data-toggle="collapse" data-parent="#accordion1" href="#evaluado"><i class="mdi mdi-minus"></i></a>                  
@@ -51,7 +51,7 @@
             <div class="portlet">
                 <div class="portlet-heading">
                      <h4 class="portlet-title text-dark">
-                        Mi Equipo
+                        <!--Mi Equipo--> Evaluación a mi equipo
                     </h4>
                     <div class="portlet-widgets">
                         <a data-toggle="collapse" data-parent="#accordion1" href="#equipo"><i class="mdi mdi-minus"></i></a>                  
@@ -62,15 +62,82 @@
                 <div id="equipo" class="panel-collapse collapse in">
                      <div class="portlet-body">
                          
-                               @!component('components.Desempeno.listaColaboradoresEtapa',lista=listaSupe)
-                         
+                        @!component('components.Desempeno.listaColaboradoresEtapa',lista=listaSupe)
+                        
+                        <div class="clearfix"></div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <hr>
+                                <a href="/Desempeno/Proceso/evalGrupal" class="btn btn-success pull-right"><i class="fa fa-group"></i> Evaluar a Mi Equipo</a>
+                            </div>
+                        </div>
                      </div>
                 </div>
             </div>
         </div>
         @endif
         {{-- EQUIPO --}}
+        
+        @if(listaAsc.length > 0)
+        <div class="row">
+            <div class="portlet">
+                <div class="portlet-heading">
+                     <h4 class="portlet-title text-dark">
+                        <!--Mi Equipo--> Evaluación a mi Jefatura
+                    </h4>
+                    <div class="portlet-widgets">
+                        <a data-toggle="collapse" data-parent="#accordion1" href="#equipo"><i class="mdi mdi-minus"></i></a>                  
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                
+                <div id="equipo" class="panel-collapse collapse in">
+                     <div class="portlet-body">
+                         
+                        @!component('components.Desempeno.listaColaboradoresEtapa',lista=listaAsc)
+                         
+                     </div>
+                </div>
+            </div>
+        </div>
+        @endif
 
+        @if(listaFunc.length > 0)
+        <div class="row">
+            <div class="portlet">
+                <div class="portlet-heading">
+                     <h4 class="portlet-title text-dark">
+                        <!--Mi Equipo--> Evaluaciones Funcionales
+                    </h4>
+                    <div class="portlet-widgets">
+                        <a data-toggle="collapse" data-parent="#accordion1" href="#equipo"><i class="mdi mdi-minus"></i></a>                  
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                
+                <div id="equipo" class="panel-collapse collapse in">
+                     <div class="portlet-body">
+                         
+                               @!component('components.Desempeno.listaColaboradoresEtapa',lista=listaFunc)
+                         
+                     </div>
+                </div>
+            </div>
+        </div>
+        @endif
+
+        <div class="row">
+            <div class="col-lg-12">
+                &nbsp;
+            </div>
+        </div>
+
+        <div class="row">
+                <div class="col-lg-12">
+                    &nbsp;
+                </div>
+            </div>
+    
 
 </div>
 @endsection

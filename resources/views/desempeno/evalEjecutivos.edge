@@ -1,0 +1,276 @@
+@layout('layouts/horizontal')
+
+
+@section('pluginsCss2')
+        <link href="/assets/plugins/ede/infobox/infobox.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/plugins/ede/socialWidget/socialWidget.css" rel="stylesheet" type="text/css" />             
+         <link href="/assets/plugins/ede/progressbar/progressbar.css" rel="stylesheet" type="text/css" />   
+         <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+         <link href="/assets/plugins/spinkit/spinkit.css" rel="stylesheet">
+
+         <style>
+                .button-label {
+                  display: inline-block;
+                  padding: 1em 2em;
+                  margin: 0.5em;
+                  cursor: pointer;
+                  color: #292929;
+                  border-radius: 0.25em;
+                  background: #efefef;
+                  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0 -3px 0 rgba(0, 0, 0, 0.22);
+                  -webkit-transition: 0.3s;
+                  transition: 0.3s;
+                  -webkit-user-select: none;
+                     -moz-user-select: none;
+                      -ms-user-select: none;
+                          user-select: none;
+                }
+                .button-label h1 {
+                  font-size: 1em;
+                  font-family: "Lato", sans-serif;
+                }
+                .button-label:hover {
+                  background: #d6d6d6;
+                  color: #101010;
+                  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0 -3px 0 rgba(0, 0, 0, 0.32);
+                }
+                .button-label:active {
+                  -webkit-transform: translateY(2px);
+                          transform: translateY(2px);
+                  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0px -1px 0 rgba(0, 0, 0, 0.22);
+                }
+                @media (max-width: 40em) {
+                  .button-label {
+                    
+                  }
+                
+                
+                }
+                
+                .option-button:checked + .button-label {
+                  background: #ffa500;
+                  color: #ffffff;
+                }
+                .option-button:checked + .button-label:hover {
+                  background: #ff6500;
+                  color: #ffffff;
+                }
+                
+                .question > .row:nth-child(odd){
+                  background: #e6e6e6;
+                }
+                
+                
+                </style>
+                
+@endsection
+
+@section('scripts')
+    
+
+<script src="/assets/js/dist/InstrumentoDesempeno.min.js?v003s"></script>
+<script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+<script src="/assets/plugins/jquery-toastr/jquery.toast.min.js" type="text/javascript"></script>
+<script src="/assets/plugins/tinymce/tinymce.min.js"></script>
+@endsection
+
+@section('content')
+@!component('components.Core.loading',data={})
+
+<div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-border panel-primary">
+                <div class="panel-heading">
+                    
+                </div>
+                <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                         <div class="pull-right">
+                            <button type="button" onclick="javascript:history.back()" class="btn btn-primary waves-effect waves-light"> 
+                                <i class="fa fa-arrow-left m-r-5"></i>
+                                <span>Volver</span>
+                            </button>
+                        </div>
+                       
+                    </div>
+                </div>
+                    
+                </div> <!--<div class="panel-body">-->
+            </div> <!--<div class="panel panel-border panel-primary">-->
+        </div>
+</div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-border panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Datos del Evaluado</h3>
+                </div>
+                
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-2"><span><b>Nombre</b></span></div>
+                        <div class="col-md-4"><span>Nombres Apellido Paterno Apellido Materno</span></div>
+                        <div class="col-md-2"><span><b>RUT</b></span></div>
+                        <div class="col-md-4"><span>12345678-9</span></div>
+                    </div>
+                
+                    <div class="row">
+                        <div class="col-md-2"><span><b>Email:</b></span></div>
+                        <div class="col-md-4"><span>email@cencosud.com</span></div>
+                        <div class="col-md-2"><span><b>Cargo</b></span></div>
+                        <div class="col-md-4"><span>Ejecutivo</span></div>
+                    </div>
+                </div> <!--<div class="panel-body">-->
+            </div> <!--<div class="panel panel-border panel-primary">-->          
+        </div>
+    </div>
+    
+    <input type="hidden" name="idOpinante" id="idOpinante" value="{{idOpinante}}">
+    
+    <form method="GET" action="/Desempeno/Proceso/etapa" id="frmVolver">
+        <input type="hidden" name="idProceso" value="{{idProceso}}">
+        <input type="hidden" name="idEtapa" value="{{idEtapa}}">
+    </form>
+    <!--escala-->
+    @!component('components.Evaluacion.escala',data={escala:escala}) 
+
+    @each(competencia in instrumento.competencias)
+        @if($loop.first)
+            @!component('components.Evaluacion.preguntaLickertDesempeno',data={idOpinante:idOpinante,competencia:competencia,first:true})
+        @else
+            @!component('components.Evaluacion.preguntaLickertDesempeno',data={idOpinante:idOpinante,competencia:competencia,first:false})
+        @endif                  
+    @endeach
+    
+        
+        <div class="col-lg-12">
+                    <div class="panel panel-color panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Comentario</h3>
+                            </div>
+                            <div class="panel-body">
+                                
+                                <textarea class="form-control" rows="8" id="observacion" name="observacion">{{instrumento.observacion}}</textarea>
+                            </div>
+                        </div>
+        </div>
+        
+        <div class="col-lg-12">
+                <div class="panel panel-color panel-primary">
+                    <div class="panel-heading ">
+                            <div class="pull-right">
+                                    <!--<p class="panel-sub-title text-muted">
+                                        <div class="badge badge-topbar bg-green"><i class="fa fa-percent"></i> 60% <i class="fa fa-check"></i></div>
+                                        <div class="badge bg-red"><i class="fa fa-flag-checkered"></i> 2<i class="fa fa-exclamation-circle"></i></div>
+                                    </p>-->
+                                </div>
+                                <h3 class="panel-title" >Promedio General por Grupo de Competencias</h3>
+                    </div> 
+                    <div class="panel-body">
+                        <table class="table m-0 table-colored-bordered table-bordered-primary">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Competencia</th><th scope="col">Promedio Autoevaluación</th><th scope="col">Promedio Evaluador</th><th scope="col">Promedio Evaluador Funcional</th>
+                                </tr>
+                            </thead>
+                            <tbody > 
+                            
+                            <tr>
+                                <td align="left">En mi cabeza el cliente siempre primero  </td><td align="center">A</td><td align="center">C</td> <td align="center">C</td>
+                            </tr><tr>
+                                <td align="left">Culturas fuertes centradas en las personas</td><td align="center">B</td><td align="center">C</td> <td align="center">C</td>
+                            </tr><tr>
+                                <td align="left">El Talento individual al servicio del equipo</td><td align="center">B</td><td align="center">B</td> <td align="center">B</td>
+                            </tr><tr>
+                                <td align="left">Mentalidad de Dueño</td><td align="center">B</td><td align="center">C</td> <td align="center">C</td>
+                            </tr><tr>
+                                <td align="left">Evolución y desafíos permanentes</td><td align="center">B</td><td align="center">C</td> <td align="center">C</td>
+                            </tr><tr>
+                                <td align="left">Entregamos Resultados y Avanzamos</td><td align="center">B</td><td align="center">B</td> <td align="center">B</td>
+                            </tr>
+                        </tbody></table>
+                    </div>
+                </div>           
+
+        </div> 
+
+        <div class="col-lg-12">
+                <div class="panel panel-color panel-primary">
+                    <div class="panel-heading">
+                            <div class="pull-right">
+                                    <!--<p class="panel-sub-title text-muted">
+                                        <div class="badge badge-topbar bg-green"><i class="fa fa-percent"></i> 60% <i class="fa fa-check"></i></div>
+                                        <div class="badge bg-red"><i class="fa fa-flag-checkered"></i> 2<i class="fa fa-exclamation-circle"></i></div>
+                                    </p>-->
+                                </div>
+                                <h3 class="panel-title" >Resultados</h3>
+                    </div> 
+                    <div class="panel-body">
+                            <table class="table " style="width: 100%;">
+                                    <tbody><tr>
+                                        <td height="30" width="40%">
+                                            &nbsp;</td>
+                                        <td bgcolor="#FF8724" style="font-weight: bold; color: #FFFFFF; text-align: center" width="30%">
+                                            Resultado</td>
+                                        <!--td bgcolor="#FF8724" 
+                                            style="font-weight: bold; color: #FFFFFF; text-align: center" width="30%">
+                                            Clasificación</td-->
+                                    </tr>
+                                    <tr>
+                                        <td height="20" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                            Resultado Competencias</td>
+                                        <!--td align="center" 
+                                            style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                            <span id="ctl00_Principal_LBPRRC">0.80</span>
+                                        </td-->
+                                        <td align="center" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                            <span id="ctl00_Principal_LBPRLC">C</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="style25" height="20" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                            Resultado Metas</td>
+                                        <!--td align="center" 
+                                            style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                            <span id="ctl00_Principal_LBPRRM">0.00</span>
+                                        </td-->
+                                        <td align="center" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                            <span id="ctl00_Principal_LBPRLM">B</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#F7F7DE" height="20" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                            Resultado Global</td>
+                                        <td align="center" bgcolor="#F7F7DE" colspan="2" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0; text-align: center;">
+                                            <span id="ctl00_Principal_LBPRRG">CB</span>
+                                        </td>
+                                    </tr>
+                                    <!--<tr>
+                                        <td bgcolor="#F7F7DE" height="20" 
+                                            style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                            Resultado Global Calibrado</td>
+                                         <td align="center" bgcolor="#F7F7DE" colspan="2" 
+                                            style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0; text-align: center;">
+                                            <span id="ctl00_Principal_LBPRGC">CB</span>
+                                        </td>
+                                    </tr>-->
+                                </tbody></table>
+                    </div>
+                </div>           
+
+        </div> 
+        
+        <div class="row">
+            <div class="col-lg-12" style="text-align:center;">
+                    <button type="button" id="instrumento_btn_guardar" class="btn btn-info waves-effect waves-light"> <i class="fa fa-save m-r-5"></i> <span>Guardar</span> </button>
+                    <button type="button" id="instrumento_btn_finalizar" class="btn btn-success waves-effect waves-light"> <i class="fa fa-check m-r-5"></i> <span>Finalizar</span> </button>
+            </div>
+        </div>
+
+        <div class="row">
+            <br><br>        
+        </div>
+    
+@endsection

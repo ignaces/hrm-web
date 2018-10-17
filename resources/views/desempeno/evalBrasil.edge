@@ -1,0 +1,554 @@
+@layout('layouts/horizontal')
+
+
+@section('pluginsCss2')
+
+        <link href="/assets/plugins/ede/infobox/infobox.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/plugins/ede/socialWidget/socialWidget.css" rel="stylesheet" type="text/css" />             
+         <link href="/assets/plugins/ede/progressbar/progressbar.css" rel="stylesheet" type="text/css" />   
+         <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+         <link href="/assets/plugins/jquery-toastr/jquery.toast.min.css" rel="stylesheet" />
+         <style>
+                .button-label {
+                  display: inline-block;
+                  padding: 1em 2em;
+                  margin: 0.5em;
+                  cursor: pointer;
+                  color: #292929;
+                  border-radius: 0.25em;
+                  background: #efefef;
+                  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0 -3px 0 rgba(0, 0, 0, 0.22);
+                  -webkit-transition: 0.3s;
+                  transition: 0.3s;
+                  -webkit-user-select: none;
+                     -moz-user-select: none;
+                      -ms-user-select: none;
+                          user-select: none;
+                }
+                .button-label h1 {
+                  font-size: 1em;
+                  font-family: "Lato", sans-serif;
+                }
+                .button-label:hover {
+                  background: #d6d6d6;
+                  color: #101010;
+                  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0 -3px 0 rgba(0, 0, 0, 0.32);
+                }
+                .button-label:active {
+                  -webkit-transform: translateY(2px);
+                          transform: translateY(2px);
+                  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0px -1px 0 rgba(0, 0, 0, 0.22);
+                }
+                @media (max-width: 40em) {
+                  .button-label {
+                    
+                  }
+                
+                
+                }
+                
+                .option-button:checked + .button-label {
+                  background: #ffa500;
+                  color: #ffffff;
+                }
+                .option-button:checked + .button-label:hover {
+                  background: #ff6500;
+                  color: #ffffff;
+                }
+                
+                .question > .row:nth-child(odd){
+                  background: #e6e6e6;
+                }
+                
+                
+                </style>
+@endsection
+
+
+@section('scripts')
+    
+
+<script src="/assets/js/dist/Instrumento.min.js?v30s"></script>
+<script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+<script src="/assets/plugins/jquery-toastr/jquery.toast.min.js" type="text/javascript"></script>
+
+@endsection
+
+@section('content')
+<div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-border panel-primary">
+                <div class="panel-heading">
+                    
+                </div>
+                <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                         <div class="pull-right">
+                            <button type="button" onclick="javascript:history.back()" class="btn btn-primary waves-effect waves-light"> 
+                                <i class="fa fa-arrow-left m-r-5"></i>
+                                <span>Volver</span>
+                            </button>
+                        </div>
+                       
+                    </div>
+                </div>
+                    
+                </div> <!--<div class="panel-body">-->
+            </div> <!--<div class="panel panel-border panel-primary">-->
+        </div>
+</div>
+
+<div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-border panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Datos del Evaluado</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-2"><span><b>Nombre</b></span></div>
+                        <div class="col-md-4"><span>Nombres</span></div>
+                        <div class="col-md-2"><span><b>RUT</b></span></div>
+                        <div class="col-md-4"><span>xxxxxxxx-x</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2"><h5>Email</h5></div>
+                        <div class="col-md-4"></div>
+                        <div class="col-md-2"><h5></h5></div>
+                        <div class="col-md-4"></div>
+                    </div>
+                </div> <!--<div class="panel-body">-->
+            </div> <!--<div class="panel panel-border panel-primary">-->          
+        </div>
+    </div>
+    {{--evaluacion--}}
+    <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-border panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row question">
+    
+    
+    <div class="col-lg-12">
+      <div class="portlet">
+          <div class="portlet-heading bg-primary">
+              <h3 class="portlet-title">
+                    Cliente sempre em primeiro lugar
+              </h3>
+              
+              
+              <div class="portlet-widgets"> 
+              </div>
+              <div class="clearfix"></div>
+              <p>
+                    <i>Melhoramos a qualidade de vida de nossos consumidores oferecendo experiências de compra memoráveis. Servimos com paixão ao cliente, fazendo com que se sinta especial, surpreendendo com inovação, resolvendo oportunamente os problemas e cuidando de cada detalhe. Atuamos e decidimos priorizando os interesses do cliente. Atuamos com a convicção que nossos colaboradores são clientes internos.
+              </p>
+          </div><!--<div class="portlet-heading bg-primary">-->
+                
+          <div id="bg-default" class="panel-collapse collapse in">
+              <div class="portlet-body">
+                  
+                  <div class="row">
+                      
+                      <div class="col-lg-12">
+                          
+                          <div class="row">
+                             <div class="button-wrap">
+                                  <input type="hidden" class="pr_pregunta" id="d2bce442-7b03-11e8-80db-bc764e10787e" />
+                                  <div class="col-lg-4">
+                                          <input class="hidden radio-label option-button r_alternativa" type="radio" name="rd_0" id="rd_0_1"/>
+                                      <label class="button-label" style="height:200px" for="rd_0_1">
+                                          <span>Nem sempre entendeu ou procurou entender as necessidades dos seus clientes internos ou externos para atendê-los em tempo hábil e de forma adequada. Suas ações não geraram melhorias na experiência do cliente interno e/ou externo.</span>
+                                      </label>                         
+                                  </div>
+                      
+                                  <div class="col-lg-4">
+                                          <input class="hidden radio-label option-button r_alternativa" type="radio" name="rd_0" id="rd_0_2"/>
+                                      <label class="button-label" style="height:200px" for="rd_0_2">
+                                          <span>Atuou consistentemente em coerência com as necessidades do cliente interno e/o externo. Seu trabalho teve impacto visivel e valorizado na experiência de seus clientes. Se colocou a serviço do cliente, antecipando-se as necessidades, fazendo tudo isso com cuidado e alegria.</span>
+                                      </label>                         
+                                  </div>
+                      
+                                  <div class="col-lg-4">
+                                          <input class="hidden radio-label option-button r_alternativa" type="radio" name="rd_0" id="rd_0_3"/>
+                                      <label class="button-label" style="height:200px" for="rd_0_3">
+                                          <span>Se destacou dentro dos 15-20% se comparado com seus pares, em orientação e atitude de serviço. Seu trabalho foi constantemente reconhecido por seus clientes e companheiros de trabalho.</span>
+                                      </label>                         
+                                  </div>
+                      
+                              </div>
+                          </div>
+                      </div>
+                      
+                  </div>
+  
+              </div><!--<div class="portlet-body">-->
+          </div><!--<div id="bg-default" class="panel-collapse collapse in">-->
+  
+      </div><!--<div class="portlet">-->
+  </div><!--<div class="col-lg-12">-->
+
+        <div class="col-lg-12">
+                <div class="portlet">
+                    <div class="portlet-heading bg-primary">
+                        <h3 class="portlet-title">
+                                Culturas fortes centradas nas pessoas
+                        </h3>
+                        <div class="portlet-widgets"> 
+                        </div>
+                        <div class="clearfix"></div>
+                        <p>
+                                <i>Tomamos decisões sempre pensando em nossa gente e cuidando das pessoas. Construimos um bom ambiente de trabalho que promove a confiança e a felicidade. Lideramos com proximidade e inspiração; sempre com objetivo de atrair, reter, desenvolver e promover o talento. Gerenciamos nossas equipes, utilizando os procesos, ferramentas e políticas de gestão de pessoas com rigor e displina. Valorizamos e promove a diversidade dentro de nossas empresas.
+                          </p>
+                    </div><!--<div class="portlet-heading bg-primary">-->
+            
+                    <div id="bg-default" class="panel-collapse collapse in">
+                        <div class="portlet-body">
+                            
+                            <div class="row">
+                                
+                                <div class="col-lg-12">
+                                    
+                                    <div class="row">
+                                       <div class="button-wrap">
+                                            <input type="hidden" class="pr_pregunta" id="d2bce442-7b03-11e8-80db-bc764e10787e" />
+                                            <div class="col-lg-4">
+                                                    <input class="hidden radio-label option-button r_alternativa" type="radio" name="rd_1" id="rd_1_1"/>
+                                                <label class="button-label" style="height:200px" for="rd_1_1">
+                                                    <span>Liderou sua equipe sem que sua liderança fosse caracterizada pela proximidade, inspiração e/ou transparência. As possíveis contribuições ao Clima laboral não marcaram uma diferença nos resultados. Sua gestão do talento não foi refletida no desenvolvimento de uma equipe de alto desempenho.</span>
+                                                </label>                         
+                                            </div>
+                                
+                                            <div class="col-lg-4">
+                                                    <input class="hidden radio-label option-button r_alternativa" type="radio" name="rd_1" id="rd_1_2"/>
+                                                <label class="button-label" style="height:200px" for="rd_1_2">
+                                                    <span>Sua contribuição foi chave para o Clima laboral para sua gerência alcançar os resultados esperados. Sua liderança foi percebida como inspiradora, próxima e transparente. Gerou melhorias visíveis no nível do talento da sua equipe, tomando decisões difíceis e/ou promovendo pessoas dentro ou fora de sua área/unidade. Cumpriu com rigor os processos e aplicou de forma correta as políticas de gestão de pessoas.</span>
+                                                </label>                         
+                                            </div>
+                                
+                                            <div class="col-lg-4">
+                                                    <input class="hidden radio-label option-button r_alternativa" type="radio" name="rd_1" id="rd_1_3"/>
+                                                <label class="button-label" style="height:200px" for="rd_1_3">
+                                                    <span>Suas contribuições o (a) posicionaram dentro dos 15-20% se comparado com seus pares, em termos de impacto na construção de uma cultura centrada nas pessoas. O impacto de sua liderança foi visível e serviu de modelo para outros colaboradores.</span>
+                                                </label>                         
+                                            </div>
+                                
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+            
+                        </div><!--<div class="portlet-body">-->
+                    </div><!--<div id="bg-default" class="panel-collapse collapse in">-->
+            
+                </div><!--<div class="portlet">-->
+            </div><!--<div class="col-lg-12">-->
+
+    
+            <div class="col-lg-12">
+                    <div class="portlet">
+                        <div class="portlet-heading bg-primary">
+                            <h3 class="portlet-title">
+                                    O talento individual a serviço da equipe
+                            </h3>
+                            <div class="portlet-widgets"> 
+                            </div>
+                            <div class="clearfix"></div>
+                            <p>
+                                    <i>Trabalhamos em equipe não apenas com a equipe direta, mas colaborando com outras Unidades de Negócio e áreas/setores com as quais nos relacionamos. Colocamos os objetivos coletivos acima dos objetivos individuais. Administramos divergências e conflitos construindo confiança através de conversações oportunas, transparentes e próximas. Abordamos todos os problemas da empresa fazendo parte da solução, propondo alternativas para resolver e avançar, nunca colocando a culpa no outro ou dando desculpas.
+                                </p>
+                        </div><!--<div class="portlet-heading bg-primary">-->
+                
+                        <div id="bg-default" class="panel-collapse collapse in">
+                            <div class="portlet-body">
+                                
+                                <div class="row">
+                                    
+                                    <div class="col-lg-12">
+                                        
+                                        <div class="row">
+                                            <div class="button-wrap">
+                                                <input type="hidden" class="pr_pregunta" id="d2bce442-7b03-11e8-80db-bc764e10787e" />
+                                                <div class="col-lg-4">
+                                                        <input class="hidden radio-label option-button r_alternativa" type="radio" name="rd_2" id="rd_2_1"/>
+                                                    <label class="button-label" style="height:200px" for="rd_2_1">
+                                                        <span>Contribuiu com os esforços da equipe, porém priorizou seus objetivos individuais em detrimento dos objetivos ou problemas comuns. Apesar de ter havido esforço ou melhorias, nem sempre deu ou recebeu bem o feedback, deixando espaço para avançar na construção de confiança com pares da equipe direta ou de outras áreas/setores.</span>
+                                                    </label>                         
+                                                </div>
+                                    
+                                                <div class="col-lg-4">
+                                                        <input class="hidden radio-label option-button r_alternativa" type="radio" name="rd_2" id="rd_2_2"/>
+                                                    <label class="button-label" style="height:200px" for="rd_2_2">
+                                                        <span>Se relacionou de forma colaborativa com pares da equipe direta e de outras áreas/setores, buscando sinergias e oportunidades. Ofereceu feedback oportuno e construtivo a outras áreas/setores. Recebeu feedback com abertura. Avançou no desenvolvimento da confiança. Alinhou as prioridades pessoais com as da equipe. Se apropriou dos desafios, sem desculpas ou sem colocar a culpa no outro.</span>
+                                                    </label>                         
+                                                </div>
+                                    
+                                                <div class="col-lg-4">
+                                                        <input class="hidden radio-label option-button r_alternativa" type="radio" name="rd_2" id="rd_2_3"/>
+                                                    <label class="button-label" style="height:200px" for="rd_2_3">
+                                                        <span>Foi referência de colaboração, abertura e trabalho em equipe. Suas ações o (a) posicionaram dentro dos 15-20% se comparado com seus pares, na construção da confiança. Seu trabalho teve um impacto visivel e valorizado pelos outros. Sua capacidade fez com que tenha sido procurado para ajudar a resolver conflitos e divergências.</span>
+                                                    </label>                         
+                                                </div>
+                                    
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                
+                            </div><!--<div class="portlet-body">-->
+                        </div><!--<div id="bg-default" class="panel-collapse collapse in">-->
+                
+                    </div><!--<div class="portlet">-->
+                </div><!--<div class="col-lg-12">-->
+
+                <div class="col-lg-12">
+                        <div class="portlet">
+                            <div class="portlet-heading bg-primary">
+                                <h3 class="portlet-title">
+                                        Evolução e desafios permanentes
+                                </h3>
+                                <div class="portlet-widgets"> 
+                                </div>
+                                <div class="clearfix"></div>
+                                <p>
+                                        <i>Construimos marcas transparentes e confiáveis, em sintonia com nosso entorno, sociedade e grupos de intesse, sustentando nossas promessas externas e internas em ações concretas. Desenvolvemos e acompanhamos tendências com eficácia, rapidez e flexibilidade. Desafiamos o status-quo (zona de conforto); provocamos a mudança e a inovação em nossos negócios. Questionamos os paradigmas que nos permitem evoluir com a velocidade requerida.
+                                    </p>
+                            </div><!--<div class="portlet-heading bg-primary">-->
+                    
+                            <div id="bg-default" class="panel-collapse collapse in">
+                                <div class="portlet-body">
+                                    
+                                    <div class="row">
+                                        
+                                        <div class="col-lg-12">
+                                            
+                                            <div class="row">
+                                                <div class="button-wrap">
+                                                    <input type="hidden" class="pr_pregunta" id="d2bce442-7b03-11e8-80db-bc764e10787e" />
+                                                    <div class="col-lg-4">
+                                                            <input class="hidden radio-label option-button r_alternativa" type="radio" name="rd_3" id="rd_3_1"/>
+                                                        <label class="button-label" style="height:200px" for="rd_3_1">
+                                                            <span>Seu trabalho proporcionou evoluções na sua área, sem necessariamente ter liderado a mudança. Seu trabalho pode ter facilitado mudanças e avanços, mas não foi percibido (a) como promotor (a) da inovação ou como um real agente de mudança.</span>
+                                                        </label>                         
+                                                    </div>
+                                        
+                                                    <div class="col-lg-4">
+                                                            <input class="hidden radio-label option-button r_alternativa" type="radio" name="rd_3" id="rd_3_2"/>
+                                                        <label class="button-label" style="height:200px" for="rd_3_2">
+                                                            <span>Suas reflexões, ideias, e/ou projetos permitiram avançar na construção de marcas em sintonia com o consumidor e a sociedade atual. Contribuiu também internamente para que a organização cresça. Introduziu inovações. Foi aberto e flexivel em escutar e adotar ideas inovadoras. Foi um (a) agente promotor (a) de mudanças, ajudando a avançar com maior rapidez. Se mostrou atento (a) a distintas tendêcias que afetam a sua área.</span>
+                                                        </label>                         
+                                                    </div>
+                                        
+                                                    <div class="col-lg-4">
+                                                            <input class="hidden radio-label option-button r_alternativa" type="radio" name="rd_3" id="rd_3_3"/>
+                                                        <label class="button-label" style="height:200px" for="rd_3_3">
+                                                            <span>Foi percibido (a) como visionáro (a), inovador (a) e promotor (a) de práticas de vanguarda. Suas contribuições e ideas trouxeram impacto visível e valorizado. Assumiu riscos pessoais com convicção. Se transformou em referência neste sentido se destacando dentro dos 15-20% se comparado com seus pares.</span>
+                                                        </label>                         
+                                                    </div>
+                                        
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                    
+                                </div><!--<div class="portlet-body">-->
+                            </div><!--<div id="bg-default" class="panel-collapse collapse in">-->
+                    
+                        </div><!--<div class="portlet">-->
+                    </div><!--<div class="col-lg-12">-->
+
+                    <div class="col-lg-12">
+                            <div class="portlet">
+                                <div class="portlet-heading bg-primary">
+                                    <h3 class="portlet-title">
+                                            Mentalidade de Dono
+                                    </h3>
+                                    <div class="portlet-widgets"> 
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <p>
+                                            <i>Cuidamos dos nossos clientes, equipes, recursos, mercadoria, fornecedores, lugar e ferramentas de trabalho.  Nos apropriamos dos desafios, cumprimos nossos compromisos e respondemos por nossos atos sempre de forma ética. Nos orientamos para resultados, mas sem colocar em risco a reputação e a sustentabilidade de nossas marcas para conseguir resultados em curto prazo. Promovemos a produtividade e a eficiência, buscando entender a causa raiz dos problemas e propondo soluções com resultados concretos.
+                                        </p>
+                                </div><!--<div class="portlet-heading bg-primary">-->
+                        
+                                <div id="bg-default" class="panel-collapse collapse in">
+                                    <div class="portlet-body">
+                                        
+                                        <div class="row">
+                                            
+                                            <div class="col-lg-12">
+                                                
+                                                <div class="row">
+                                                    <div class="button-wrap">
+                                                        <input type="hidden" class="pr_pregunta" id="d2bce442-7b03-11e8-80db-bc764e10787e" />
+                                                        <div class="col-lg-4">
+                                                                <input class="hidden radio-label option-button r_alternativa" type="radio" name="rd_4" id="rd_4_1"/>
+                                                            <label class="button-label" style="height:200px" for="rd_4_1">
+                                                                <span>Administrou os recursos da empresa conforme os planos definidos. Poderia ter gerado maiores avanços na producividade e eficiência ou balanceado de melhor forma o impacto a curto e longo prazo. Poderia ter assumido maior liderança e protagonismo.</span>
+                                                            </label>                         
+                                                        </div>
+                                            
+                                                        <div class="col-lg-4">
+                                                                <input class="hidden radio-label option-button r_alternativa" type="radio" name="rd_4" id="rd_4_2"/>
+                                                            <label class="button-label" style="height:200px" for="rd_4_2">
+                                                                <span>Atuou sempre cuidando todos os recursos da empresa como próprios. Suas ações e decisões geraram melhorias de produtividade e eficiência. Promoveu o valor de austeridade. Focou no curto mas também pensou a longo prazo. Cumpriu seus compromissos e foi coerente com seu discurso.</span>
+                                                            </label>                         
+                                                        </div>
+                                            
+                                                        <div class="col-lg-4">
+                                                                <input class="hidden radio-label option-button r_alternativa" type="radio" name="rd_4" id="rd_4_3"/>
+                                                            <label class="button-label" style="height:200px" for="rd_4_3">
+                                                                <span>Suas ações e decisões cuidaram de forma extraordinária da empresa, o (a) destacando como um modelo a seguir. Gerou melhorias surpreendentes e sustentáveis de produtividade e eficiência, através das quais a organização aprendeu lições. Seu trabalho construiu cultura.</span>
+                                                            </label>                         
+                                                        </div>
+                                            
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                        
+                                    </div><!--<div class="portlet-body">-->
+                                </div><!--<div id="bg-default" class="panel-collapse collapse in">-->
+                        
+                            </div><!--<div class="portlet">-->
+                        </div><!--<div class="col-lg-12">-->
+
+                                <div class="col-lg-12">
+                                        <div class="portlet">
+                                            <div class="portlet-heading bg-primary">
+                                                <h3 class="portlet-title">
+                                                        Entregamos Resultados e Avançamos
+                                                </h3>
+                                                <div class="portlet-widgets"> 
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <p>
+                                                        <i>Cumprimos com os objetivos quantitativos e qualitativos, estejam estes ou não declarados como KPI. Tomamos decisões em função da realidade do negócio, considerando seus resultados, compromissos e situação financeira. Trabalhamos para produzir resultados visiveis de alto impacto, que nos façam avançar como empresa e surpreender aos clientes internos e/ou externos. Priorizamos nossas ações conforme seu impacto, administrando proativamente as expectativas, avaliando custos, benefícios e causas externas, considerando a importância e a urgência. Cumprimos nossas promessas, assumimos o comando.
+                                                    </p>
+                                            </div><!--<div class="portlet-heading bg-primary">-->
+                                    
+                                            <div id="bg-default" class="panel-collapse collapse in">
+                                                <div class="portlet-body">
+                                                    
+                                                    <div class="row">
+                                                        
+                                                        <div class="col-lg-12">
+                                                            
+                                                            <div class="row">
+                                                                <div class="button-wrap">
+                                                                    <input type="hidden" class="pr_pregunta" id="d2bce442-7b03-11e8-80db-bc764e10787e" />
+                                                                    <div class="col-lg-4">
+                                                                            <input class="hidden radio-label option-button r_alternativa" type="radio" name="rd_5" id="rd_5_1"/>
+                                                                        <label class="button-label" style="height:200px" for="rd_5_1">
+                                                                            <span>Cumpriu parcialmente as expectativas na entrega dos seus objetivos quantitativos e qualitativos, deixando temas em aberto ou pendentes. Cumpriu parcialmente suas promessas. Embora suas contribuições e esforços puderam ter sido valorizadas, os resultados não cumpriram totalmente com as expectativas</span>
+                                                                        </label>                         
+                                                                    </div>
+                                                        
+                                                                    <div class="col-lg-4">
+                                                                            <input class="hidden radio-label option-button r_alternativa" type="radio" name="rd_5" id="rd_5_2"/>
+                                                                        <label class="button-label" style="height:200px" for="rd_5_2">
+                                                                            <span>Dado o contexto enfrentado durante o ano, cumpriu plenamente as expectativas para seus objetivos quantitativos e qualitativos. Priorizou de forma correta e decidiu em coerência com a realidade da empresa. Sua Unidade de Negócio/área/setor avançou conforme o que se esperava, sem deixar grandes temas abertos ou pendentes. Cumpriu totalmente suas promessas.</span>
+                                                                        </label>                         
+                                                                    </div>
+                                                        
+                                                                    <div class="col-lg-4">
+                                                                            <input class="hidden radio-label option-button r_alternativa" type="radio" name="rd_5" id="rd_5_3"/>
+                                                                        <label class="button-label" style="height:200px" for="rd_5_3">
+                                                                            <span>Dado o contexto enfrentado durante o ano, superou amplamente as expectativas para seus objetivos quantativos e qualitativos. Em comparação a outros Líderes suas contribuições o posicionam dentro dos 15-20% destacados. Seu trabalho mudou a história da sua Unidade de Negócio/área/setor.</span>
+                                                                        </label>                         
+                                                                    </div>
+                                                        
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                    
+                                                </div><!--<div class="portlet-body">-->
+                                            </div><!--<div id="bg-default" class="panel-collapse collapse in">-->
+                                    
+                                        </div><!--<div class="portlet">-->
+                                    </div><!--<div class="col-lg-12">-->
+
+                                <style>
+                                        .button-label {
+                                          display: inline-block;
+                                          padding: 1em 2em;
+                                          margin: 0.5em;
+                                          cursor: pointer;
+                                          color: #292929;
+                                          border-radius: 0.25em;
+                                          background: #efefef;
+                                          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0 -3px 0 rgba(0, 0, 0, 0.22);
+                                          -webkit-transition: 0.3s;
+                                          transition: 0.3s;
+                                          -webkit-user-select: none;
+                                             -moz-user-select: none;
+                                              -ms-user-select: none;
+                                                  user-select: none;
+                                        }
+                                        .button-label h1 {
+                                          font-size: 1em;
+                                          font-family: "Lato", sans-serif;
+                                        }
+                                        .button-label:hover {
+                                          background: #d6d6d6;
+                                          color: #101010;
+                                          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0 -3px 0 rgba(0, 0, 0, 0.32);
+                                        }
+                                        .button-label:active {
+                                          -webkit-transform: translateY(2px);
+                                                  transform: translateY(2px);
+                                          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0px -1px 0 rgba(0, 0, 0, 0.22);
+                                        }
+                                        @media (max-width: 40em) {
+                                          .button-label {
+                                            
+                                          }
+                                        
+                                        
+                                        }
+                                        
+                                        .option-button:checked + .button-label {
+                                          background: #ffa500;
+                                          color: #ffffff;
+                                        }
+                                        .option-button:checked + .button-label:hover {
+                                          background: #ff6500;
+                                          color: #ffffff;
+                                        }
+                                        
+                                        .question > .row:nth-child(odd){
+                                          background: #e6e6e6;
+                                        }
+                                        
+                                        
+                                        </style>
+
+                        </div>
+                        <div class="row">
+                                <div class="col-lg-12" >
+                                        <label for="comment">Comentario:</label>
+                                        <textarea class="form-control" rows="5" id="comment"></textarea>   
+                                </div>
+                            </div>
+                         <br>           
+                        <div class="row">
+                                <div class="col-lg-12" style="text-align:center;">
+                                    <button type="button" id="instrumento_btn_guardar" class="btn btn-info waves-effect waves-light"> <i class="fa fa-save m-r-5"></i> <span>Guardar</span> </button>
+                                    <button type="button" id="instrumento_btn_finalizar" class="btn btn-success waves-effect waves-light"> <i class="fa fa-check m-r-5"></i> <span>Finalizar</span> </button>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+@endsection
