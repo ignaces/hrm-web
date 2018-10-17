@@ -184,7 +184,7 @@ class Proceso {
         var objFunc={
             "idEtapa":idEtapa,
 	        "idPersonaActor":idPersona,
-            "codigoActor":"DELE",
+            "codigoActor":"FUNC",
             "idAccionPersona":"" 
         }
         console.log(objFunc);
