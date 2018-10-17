@@ -148,72 +148,7 @@
                 </div>
             </div>
         </div>
-        <!-- -->
-        <!--<div class="row">
-            <div class="col-md-2">
-                <div class="text-center card-box">
-                    <div class="clearfix"></div>
-                    <div class="member-card">
-                        <div class="thumb-md member-thumb m-b-10 center-block">
-                            <img src="{{persona.foto}}" class="img-circle img-thumbnail" alt="profile-image">
-                        </div>
-                        <div class="">
-                            <h5 class="m-b-5">{{persona.nombres}} {{persona.apellidoPaterno}} {{persona.apellidoMaterno}}</h5>
-                            <p class="text-muted">{{persona.nombreCargo}}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-10">
-                <div class="table-responsive">
-                <table class="table table-hover m-0 mails table-actions-bar table-colored table-inverse">
-                    <thead>
-                    <tr>                                      
-                        <th>Actividad</th>
-                        <th>Estado</th>
-                        <th>Informe</th>
-                        <th>Acción</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        @each(tarea in persona.tareas)
-                            <tr>
-                                <td>
-                                    <div class="col-md-3">
-                                        <img src="{{tarea.tarea.imgEtapaTarea}}" alt="tarea" title="{{tarea.tarea.nombreEtapaTarea}}" class="img-circle thumb-sm" />
-                                    </div>
-                                    <div class="col-md-9">
-                                        <h5 class="m-b-0 m-t-0">{{tarea.tarea.accion_nombre}}</h5>
-                                        <p class="m-b-0"><small>{{tarea.tarea.nombreEtapaTarea}}</small></p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="label label-{{tarea.tarea.accion_colorEstadoAccion}}"> <i class="{{tarea.tarea.accion_iconoEstadoAccion}}"></i> {{tarea.tarea.accion_textoEstadoAccion}}</div>
-                                </td>
-                                <td>
-                                    @if(tarea.tarea.informe_mostrar=="SI")
-                                        <a href="" class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-bar-chart-o"></i> Ver Informe</a>
-                                    @else
-                                        <button type="button" class="btn btn-default btn-xs btn-rounded btn-bordered waves-effect w-md" disabled><i class="fa fa-ban"></i> No Disponible</button>
-                                    @endif
-                                </td>
-                                <td>
-                                     @if(tarea.tarea.step_codigoSiguiente=="00") 
-                                        <button type="button" class="btn btn-default btn-xs btn-rounded btn-bordered waves-effect w-md" disabled><i class="fa fa-ban"></i> No Disponible</button>                                     
-                                    @else
-                                        <a href="{{tarea.tarea.step_link}}" class="btn btn-{{tarea.tarea.step_color}} btn-xs btn-rounded btn-bordered waves-effect w-md"><i class="{{tarea.tarea.step_icono}}"></i> {{tarea.tarea.step_texto}}</a>   
-                                        
-                                    @endif
-
-                                </td>
-                            </tr>
-                        @endeach
-                        
-                    </tbody>
-                </table>
-                </div>
-            </div>
-        </div>-->
+        
     </div>
 </div>
 
