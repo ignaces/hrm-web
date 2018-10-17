@@ -70,6 +70,79 @@
                                  @endeach
                                  @endeach
 
+                                 <!---->
+                                 @each(persona in listaFAKE)
+                                 @each(tarea in persona.tareas)
+                                 @if(tarea.tarea.evaluado_nombres_row=="Erasmus")
+                                 <tr>
+                                        <td rowspan="undefined">
+                                            <div class="text-center">
+                                                <div class="clearfix"></div>
+                                                <div class="member-card">
+                                                    
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="col-md-3">
+                                                <img src="/assets/images/ede/seleccionopinante.png" alt="tarea" title="Evaluacion de Desempeño" class="img-circle thumb-md" />
+                                            </div>
+                                            <div class="col-md-9">
+                                                <h5 class="m-b-0 m-t-0">Piloto Simulación Evaluación Conductas Críticas</h5>
+                                                <p class="m-b-0"><small>                                                                                </small></p>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="label label-danger"> <i class="fa fa-circle"></i> No Iniciado</div>
+                                        </td>
+                                        <td>
+                                                <button type="button" class="btn btn-default btn-xs btn-rounded btn-bordered waves-effect w-md" disabled><i class="fa fa-ban"></i> No Disponible</button>   
+                                                <!--<a href="/Desempeno/Informe/meta?idProceso=126f48d0-171c-11e8-bf12-bc764e100f2b&amp;idEtapa=76aad0d8-52fe-11e8-8fb3-bc764e100f2b&amp;idAccionPersona=96a9dac9-7adb-11e8-80db-bc764e10787e&amp;codigoActor=EVAL" class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-bar-chart-o"></i> Ver Informe</a> !-->
+                                        </td>
+                                        <td>
+                                                <a href="/Desempeno/Proceso/evalComportamientosEjecutivos" class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md"><i class="fa fa-primary"></i> Iniciar</a>                                                         
+                                        </td>
+                                    </tr>
+                                    @endif
+                                    @endeach
+                                 @endeach
+
+                                 <!---->
+                                 @each(persona in listaFAKE)
+                                 @each(tarea in persona.tareas)
+                                 @if(tarea.tarea.evaluado_nombres_row=="Leticia Andrea")
+                                 <tr>
+                                        <td rowspan="undefined">
+                                            <div class="text-center">
+                                                <div class="clearfix"></div>
+                                                <div class="member-card">
+                                                    
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="col-md-3">
+                                                <img src="/assets/images/ede/ede.png" alt="tarea" title="Evaluacion de Desempeño" class="img-circle thumb-md" />
+                                            </div>
+                                            <div class="col-md-9">
+                                                <h5 class="m-b-0 m-t-0">Piloto Simulación Evaluación Conductas Críticas</h5>
+                                                <p class="m-b-0"><small>                                                                               </small></p>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="label label-danger"> <i class="fa fa-circle"></i> No Iniciado</div>
+                                        </td>
+                                        <td>
+                                                <button type="button" class="btn btn-default btn-xs btn-rounded btn-bordered waves-effect w-md" disabled><i class="fa fa-ban"></i> No Disponible</button>   
+                                                <!--<a href="/Desempeno/Informe/meta?idProceso=126f48d0-171c-11e8-bf12-bc764e100f2b&amp;idEtapa=76aad0d8-52fe-11e8-8fb3-bc764e100f2b&amp;idAccionPersona=96a9dac9-7adb-11e8-80db-bc764e10787e&amp;codigoActor=EVAL" class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-bar-chart-o"></i> Ver Informe</a> !-->
+                                        </td>
+                                        <td>
+                                                <a href="/Desempeno/Proceso/evalComportamientosEjecutivosEquipo" class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md"><i class="fa fa-primary"></i> Iniciar</a>                                                         
+                                        </td>
+                                    </tr>
+                                    @endif
+                                    @endeach
+                                 @endeach
                           </tbody>
                       </table>
                 </div>
