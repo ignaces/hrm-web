@@ -187,7 +187,7 @@ class Proceso {
             "codigoActor":"FUNC",
             "idAccionPersona":"" 
         }
-        console.log(objFunc);
+        //console.log(objFunc);
         var resultFunc=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluados',objFunc);
         var listaFunc =resultFunc.body.data;  
         
