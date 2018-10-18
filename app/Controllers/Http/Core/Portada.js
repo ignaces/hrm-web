@@ -7,7 +7,7 @@ class Portada {
         
         var idPersona = session.get('idPersona', 'fall')
         var all =  session.get('personaLogueada')
-        
+        antl.switchLocale('es');
         if(all==null){
             return view.render('account/login');
         }
@@ -92,6 +92,7 @@ class Portada {
         
         return view.render('core/welcome',  {etag,user,procesos,persona,menu,talentos,condicion,procesosEde,mensaje:texto,mensajeTitulo,miperfil:perfilResult});
     }
+    
     async cambioIdioma  ({ view,request, response, auth, session ,antl}) {
         antl.switchLocale('pt');
         //console.log(antl)
