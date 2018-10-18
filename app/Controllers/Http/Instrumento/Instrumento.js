@@ -110,7 +110,7 @@ class Instrumento {
     } 
 
     async putRespuestaMeta({request,response, session}){
-
+        var idOpinante = request.input("idOpinante");
         var idPregunta = request.input("idPregunta")
         var idAlternativa = request.input("idAlternativa")
         var justificacion = request.input("justificacion")
