@@ -49,8 +49,8 @@ class Proceso {
             "idProceso":idProceso,
             "idPersona":idPersona
         };
-        console.log(idProceso)
-        console.log(idPersona)
+        //console.log(idProceso)
+        //console.log(idPersona)
         var resultPersonaEde =await api.execApi(request.hostname(),'/Desempeno/Proceso/getProcesoPersona',objdatosPersona);
         var PersonaEde =resultPersonaEde.body.data;
         
@@ -104,13 +104,14 @@ class Proceso {
     }
 
 
-    async etapa ({view,request, response, auth, session}) {
-
+    async etapa ({view,request, response, auth, session, params}) {
+        //console.log("A");
         var idPersona = session.get('idPersona', 'fail')
         var idEtapa = request.input("idEtapa")
         var idProceso = session.get('idProceso')
         var datosProceso=session.get('dataProceso')
-
+        session.put('idEtapa',idEtapa)
+        session.put('referer',`/Desempeno/Proceso/etapa?idEtapa=${idEtapa}`)
         //Datos Persona
         var user={usuario:auth.user}
         var persona = session.get('personaLogueada')
@@ -140,12 +141,9 @@ class Proceso {
         };
         var resultEtapa=await api.execApi(request.hostname(),'/Desempeno/Proceso/getEtapas',objEtapa);
         var etapa =resultEtapa.body.data;
-        //
-        //console.log("AA")
-        //console.log(idEtapa)
-        //console.log(idPersona)
+        
          //Lista EVAL
-         var objEval={
+        var objEval={
             "idEtapa":idEtapa,
 	        "idPersonaActor":idPersona,
             "codigoActor":"EVAL",
@@ -155,21 +153,128 @@ class Proceso {
         var listaEval =resultEval.body.data;      
         //
         
-        //console.log(objEval)
         
+               
          //Lista Supe
          var objSupe={
             "idEtapa":idEtapa,
 	        "idPersonaActor":idPersona,
             "codigoActor":"SUPE",
-            "idAccionPersona":""
+            "idAccionPersona":"" 
         }
         var resultSupe=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluados',objSupe);
         var listaSupe =resultSupe.body.data;      
         //
         //console.log(objSupe)
+
+        //Lista Asce
+        var objAsc={
+            "idEtapa":idEtapa,
+	        "idPersonaActor":idPersona,
+            "codigoActor":"ASC",
+            "idAccionPersona":"" 
+        }
+        //console.log(objAsc);
+        var resultAsc=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluados',objAsc);
+        var listaAsc =resultAsc.body.data;  
+
+        //Lista Func
+        var objFunc={
+            "idEtapa":idEtapa,
+	        "idPersonaActor":idPersona,
+            "codigoActor":"FUNC",
+            "idAccionPersona":"" 
+        }
+        //console.log(objFunc);
+        var resultFunc=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluados',objFunc);
+        var listaFunc =resultFunc.body.data;  
         
-        return view.render('desempeno/etapa',{datosProceso,PersonaEde,datosMenu,etapa,listaEval,listaSupe});
+        return view.render('desempeno/etapa',{datosProceso,PersonaEde,datosMenu,etapa,listaEval,listaSupe,listaAsc,listaFunc, idEtapa: idEtapa});
+    }
+
+    async evalBrasil ({view,request, response}) {
+        return view.render('desempeno/evalBrasil');
+    }
+
+    async evalGrupal ({view,request, response,session}) {
+        var idPersona = session.get('idPersona', 'fail')
+        var idEtapa = session.get("idEtapa")
+        var idProceso = session.get('idProceso')
+        var datosProceso=session.get('dataProceso')
+
+        var objEval={
+            "idEtapa":idEtapa,
+	        "idEvaluador":idPersona,
+            "idProceso":idProceso
+        }
+        var resultFunc=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluadosGrupal',objEval);
+        var eGrupal = resultFunc.body.data;
+        return view.render('desempeno/evaluacionGrupal',{competencias:eGrupal.competencias,evaluados:eGrupal.evaluados});
+    }
+
+    async portadaBrasil ({view,request, response}) {
+        return view.render('desempeno/portadaBrasil');
+    }
+
+    async etapaBrasil ({view,request, response}) {
+        return view.render('desempeno/etapaBrasil');
+    }
+ 
+    async autoEvalBrasil ({view,request, response}) {
+        return view.render('desempeno/autoEvalBrasil');
+    }
+
+    async informeBrasil ({view,request, response}) {
+        return view.render('desempeno/informeBrasil');
+    }
+
+    async informeEjecutivos ({view,request, response}) {
+        return view.render('desempeno/informeEjecutivos');
+    } 
+
+    async portadaEjecutivos({view,request, response}) {
+        return view.render('desempeno/portadaEjecutivos');
+    }
+
+    async etapaEjecutivos ({view,request, response}) {
+        return view.render('desempeno/etapaEjecutivos');
+    }
+
+    async evalEjecutivos ({view,request, response, auth}) {
+            
+            //var idOpinante = all.idOpinante
+            
+            var idOpinante  = request.input("idOpinante");
+            var idProceso   = request.input("idProceso");
+            var idEtapa     = request.input("idEtapa");
+            //console.log(idOpinante);
+            //var codigo = all.codigo
+            //var codigoComponente = all.codigoComponente
+    
+            var obj = {
+                "idOpinante":idOpinante
+            };
+            //console.log(obj);
+
+            var result = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumentoEde',obj);
+
+            var instrumento = result.body;
+
+            var result2 = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getEscala',obj);
+
+            //console.log(result2);
+            var escala = result2;
+            //console.log(escala.body.data);
+        
+        return view.render('desempeno/evalEjecutivos', {idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa, escala: escala.body.data});
+    }
+
+    async evalComportamientosEjecutivos ({view,request, response}) {
+        return view.render('desempeno/evalComportamientosEjecutivos');
+    }
+
+    async evalComportamientosEjecutivosEquipo ({view,request, response}) {
+        return view.render('desempeno/evalComportamientosEjecutivosEquipo');
     }
 
 }

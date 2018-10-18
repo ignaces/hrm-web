@@ -109,6 +109,81 @@ class Instrumento {
         return {mensaje:"OK"}
     } 
 
+    async putRespuestaMeta({request,response, session}){
+        var idOpinante = request.input("idOpinante");
+        var idPregunta = request.input("idPregunta")
+        var idAlternativa = request.input("idAlternativa")
+        var justificacion = request.input("justificacion")
+        
+        var obj = {
+            "idMeta":idPregunta,
+            "idAlternativa":idAlternativa,
+            "justificacion":justificacion,
+            };
+            
+        var result = await data.execApi(request.hostname(),'/Desempeno/Metas/putRespuesta',obj);
+        
+        return {mensaje:"OK"}
+    } 
+
+    async putRespuestaEde({request,response, session}){
+
+        var idOpinante = request.input("idOpinante")
+        var idPregunta = request.input("idPregunta")
+        var idAlternativa = request.input("idAlternativa")
+        var justificacion = request.input("justificacion")
+        
+        var obj = {
+            "idOpinante":idOpinante,
+            "idPregunta":idPregunta,
+            "idAlternativa":idAlternativa,
+            "justificacion":justificacion,
+            };
+          
+        //console.log(obj);
+        var result = await data.execApi(request.hostname(),'/Desempeno/Proceso/putRespuesta',obj);
+
+        /*
+        var idPersona = session.get('idPersona', 'fall')
+
+        if(idPersona != 'fall'){
+            var objUpd = {
+                idDndOpinante:idOpinante,
+                idPersona: idPersona
+            }
+
+            var resultUpd = await data.execApi(request.hostname(),'/Acreditacion/Proceso/setOpinanteEvaluadoCS',objUpd);
+        }
+        */
+        return {mensaje:"OK"}
+    } 
+
+    async saveEvaluacionEde({request,response, session}){
+
+        var idOpinante  = request.input("idOpinante");
+        var observacion = request.input("observacion");
+        var finaliza    = request.input("finaliza");
+
+        var obj = {
+            "idOpinante":idOpinante,
+            "observacion":observacion,
+            "finaliza": finaliza
+        };
+          
+        //console.log(obj);
+        var result = await data.execApi(request.hostname(),'/Evaluacion/Instrumento/saveEvaluacionEde',obj);
+
+        return {mensaje:"OK"}
+    } 
+
+    async getRespuestaCS({request,response, session}){
+
+        //console.log(obj)
+        var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getRespuestaCS', {});
+        console.log (result.body)
+        return result.body;
+    } 
+
     async cerrarInstrumento({request,response}){
 
         var idOpinante = request.input("idOpinante")

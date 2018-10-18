@@ -45,20 +45,18 @@ class Portada {
         
         var procesos = result.body.data.procesos;
         
-        var talentos = "";
+        var talentos = [];
 
         try{
             var resultadoTalento = await data.execApi(request.hostname(),'/Talento/Talento/getTalentos',objTalento);
             talentos = resultadoTalento.body.data.talentos;
             condicion = resultadoTalento.body.data1;
-
-            
-            //talentos = resultadoTalento.body;
+           
         }catch(e){
             
         }
         
-        console.log(talentos);
+        
         
         antl.switchLocale('es')
          

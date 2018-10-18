@@ -4,6 +4,10 @@ const data = use('App/Utils/Data')
 const User = use('App/Models/User')
 class UserController {
     
+      async cambioClave ({ view,request, auth ,response, session}) {
+        return response.redirect('/')
+      }
+
       async updateUser ({ view,request, auth ,response, session}) {
         
       }
@@ -52,7 +56,17 @@ class UserController {
             var usuario = rUsuario.body.data;
             session.put('usuario_roles_menu',usuario);
 
-            
+            var cambioClave = await data.execApi(request.hostname(),'/Core/Users/getRequiereCambioClave',{idUser:auth.user.id});
+
+            var u = cambioClave.body.data;
+
+            console.log('req cambio ' + u[0].requiereCambioClave);
+            session.put('requiere_cambio_clave', u[0].requiereCambioClave);
+
+            if(u[0].requiereCambioClave == 1)
+            {
+              return response.redirect('Account/CambioClave/cambiar')
+            }
 
           }catch(err){
             console.log(err)

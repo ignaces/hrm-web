@@ -1,0 +1,62 @@
+<div class="col-lg-12">
+        <div class="portlet">
+            <div class="portlet-heading bg-primary">
+                <h3 class="portlet-title">
+                        {{{data.metas.nombre}}}
+                </h3>
+                <div class="portlet-widgets"> 
+                </div>
+                <div class="clearfix"></div>
+            </div><!--<div class="portlet-heading bg-primary">-->
+    
+            <div id="bg-default" class="panel-collapse collapse in">
+                <div class="portlet-body">
+                    
+                    <div class="row">
+                        @each(actividadesClave in data.metas.actividadesClave)
+                           
+                            <div class="col-lg-12">
+                                <div class="row" class="c_pregunta" id="1|{{actividadesClave.id}}">
+                                <div class="button-wrap">
+                                        @each(criterio in actividadesClave.criterios)
+                                            <input type="hidden" class="pr_pregunta" id="{{data.metas.id}}" />
+                                            <div class="col-lg-12">
+                                                    
+                                                <p class="text"> 
+                                                    <i><b>{{criterio.nombre}}</b></i>
+                                                </p>
+                                            </div>
+                                            
+                                            @each(alternativa in criterio.escala)
+                                                <div class="col-dinamico" style="width:33%; float: left;">
+                                                    @if(alternativa.estaSeleccionada==1)
+                                                        <input checked class="hidden radio-label option-button r_alternativa" instrumento="metas" type="radio" name="rd_{{data.metas.id}}" id="rd_{{data.metas.id}}_{{alternativa.id}}_{{alternativa.requiereJustificacion}}_{{data.idOpinante}}"/>
+                                                    @else
+                                                        <input class="hidden radio-label option-button r_alternativa" instrumento="metas" type="radio" name="rd_{{data.metas.id}}" id="rd_{{data.metas.id}}_{{alternativa.id}}_{{alternativa.requiereJustificacion}}_{{data.idOpinante}}"/>
+                                                    @endif
+                                                    
+                                                    <label class="button-label" style="height: auto; min-height: 320px !important;" for="rd_{{data.metas.id}}_{{alternativa.id}}_{{alternativa.requiereJustificacion}}_{{data.idOpinante}}">
+                                                        @if(alternativa.mostrarNivel == "1")
+                                                            <p class="text" > 
+                                                                <b><h2 style="text-align: center;">{{alternativa.nivel}}</h2></b>
+                                                            </p>
+                                                        @endif
+                                                        <span>{{alternativa.nombre}}</span>
+                                                    </label>                         
+                                                </div>
+                                
+                                            @endeach  
+                                        @endeach
+                                    </div>
+                                </div>
+                            </div>
+    
+                        @endeach
+                        
+                    </div>
+    
+                </div><!--<div class="portlet-body">-->
+            </div><!--<div id="bg-default" class="panel-collapse collapse in">-->
+    
+        </div><!--<div class="portlet">-->
+    </div><!--<div class="col-lg-12">-->

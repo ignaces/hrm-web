@@ -28,6 +28,8 @@ module.exports = {
     Ficha:                    ['./client/src/Ficha/persona.js'],
     //Instrumento
     Instrumento:              ['./client/src/Instrumento/instrumento.js'],
+    //InstrumentoDesempeno
+    InstrumentoDesempeno:     ['./client/src/Instrumento/instrumentoDesempeno.js'],
     //Mail
     listaNotificacion:        ['./client/src/Mail/listaNotificacion.js'],
     configNotificacion:       ['./client/src/Mail/notificacion.js'],
