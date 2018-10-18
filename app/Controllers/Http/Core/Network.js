@@ -17,7 +17,7 @@
                   error=err;
               } else {
                   redes=networks;
-                // console.log(redes)
+                // //console.log(redes)
                 
               }
             });
@@ -40,7 +40,7 @@
                   error=err;
               } else {
                   redes=networks;
-                // console.log(redes)
+                // //console.log(redes)
                 
               }
             });
@@ -77,7 +77,7 @@
           var coneccion = "";
           await wifi.getCurrentConnections(function(err, currentConnections) {
             if (err) {
-                console.log(err);
+                //console.log(err);
             }
             
             for(var c in currentConnections){

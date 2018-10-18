@@ -14,10 +14,10 @@ class Evaluacion {
         var idEtapa = request.input("idEtapa");
         var idEdeTarea = request.input("idEdeTarea");
         var idTareaEtapa = request.input("idTareaEtapa");
-        // console.log(idEtapa);
-       // console.log(idEdeTarea);
-       // console.log(idTareaEtapa);
-        //console.log(dataProceso)
+        // //console.log(idEtapa);
+       // //console.log(idEdeTarea);
+       // //console.log(idTareaEtapa);
+        ////console.log(dataProceso)
         
         //Datos Etapa
         var objEtapa = {
@@ -59,7 +59,7 @@ class Evaluacion {
         var resultTareas=await api.execApi(request.hostname(),'/Desempeno/Proceso/getTareasEtapas',objTareas);
         var tarea =resultTareas.body.data;      
         //
-        // console.log(tarea)
+        // //console.log(tarea)
 
         
 

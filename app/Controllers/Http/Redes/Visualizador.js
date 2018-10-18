@@ -13,7 +13,7 @@ class Visualizador {
     async viewApps({view,request,response,params}){
         var obj={};
         var apps = await data.execApi(request.hostname(),'/Redes/Medicion/getAplicaciones',obj);
-        console.log(apps.body);
+        //console.log(apps.body);
 
         return view.render('redes/aplicaciones',{aplicaciones:apps.body});
     }
@@ -62,8 +62,8 @@ class Visualizador {
         var preguntas = await data.execApi(request.hostname(),'/Redes/Medicion/getPreguntas',preguntas);
         var clasificaciones = await data.execApi(request.hostname(),'/Redes/Medicion/getClasificaciones', {});
         
-        //console.log(preguntas.body);
-        //console.log(graph.body.nodes);
+        ////console.log(preguntas.body);
+        ////console.log(graph.body.nodes);
         var idCodigo = 0;
         var sentido = 0;
 

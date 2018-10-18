@@ -15,8 +15,8 @@ class CambioClave {
     async updateUser({view,request, response, session, auth}){
         var user = await User.find(auth.user.id);
         user.password = request.input('r_password');
-        console.log(user.username);
-        console.log(user.password);
+        //console.log(user.username);
+        //console.log(user.password);
         await user.save();
         
         var updRequiereCambioClave = await data.execApi(request.hostname(),'/Core/Users/updateRequiereCambioClave',{idUser:auth.user.id});
