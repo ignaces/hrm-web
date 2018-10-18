@@ -32,6 +32,10 @@
         <!--<script src="/assets/js/vue.min.js"></script>-->
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         @!section('pluginsCss2')
+
+        <script>
+            
+        </script>
   </head>
 
   <body>
@@ -77,6 +81,7 @@
                             <li class="has-submenu">
                                 <a href="/"><i class="fi-air-play"></i><span>Inicio</span></a>
                             </li>
+                            
                             @include('partials/menu')
                              @endloggedIn
                             <!--<li class="has-submenu">
@@ -102,6 +107,7 @@
                     <div class="menu-extras">
 
                         <ul class="nav navbar-nav navbar-right pull-right">
+                                
                             <!--<li class="navbar-c-items">
                                 <form role="search" class="navbar-left app-search pull-left hidden-xs">
                                      <input type="text" placeholder="Search..." class="form-control">
@@ -116,6 +122,7 @@
                                 <ul class="dropdown-menu dropdown-menu-right arrow-dropdown-menu arrow-menu-right user-list notify-list">
                                     <!--<li><a href="/Persona/Ficha/index"><i class="dripicons-user m-r-10"></i> Perfil</a></li>-->
                                     <!--<li><a href="/Persona/Ficha/historia"><i class="dripicons-clipboard m-r-10"></i>  Historia</a></li>-->
+                                    <!--<li><a href="#" id="cambioIdioma"><i class="dripicons-power m-r-10"></i> Cambiar Idioma</a></li>-->
                                     <li><a href="/logout"><i class="dripicons-power m-r-10"></i> Salir</a></li>
                                 </ul>
 
@@ -187,6 +194,24 @@
         <script>
         $(document).ready(()=>{
             //$("body").toggleClass("enlarged");
+            $( "#cambioIdioma" ).click(function() {
+                    
+                    $.ajax({
+                    async: false,
+                    type: "GET",
+                    url: "/Core/Portada/cambioIdioma",
+                    contentType: "application/json; charset=utf-8",
+                    data: '',
+                    dataType: "json",   
+                    success: function (msg) {
+                        location.reload();
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                        
+                    },
+                    timeout: 10000
+                });
+            });
         });
         </script>
         @!section('scripts')
