@@ -111,6 +111,7 @@ class Proceso {
         var idProceso = session.get('idProceso')
         var datosProceso=session.get('dataProceso')
         session.put('idEtapa',idEtapa)
+        session.put('referer',`/Desempeno/Proceso/etapa?idEtapa=${idEtapa}`)
         //Datos Persona
         var user={usuario:auth.user}
         var persona = session.get('personaLogueada')
