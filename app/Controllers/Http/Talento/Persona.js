@@ -201,7 +201,7 @@ class Persona {
                 encuestaFraseo
             });
         } catch(e){
-            console.log(e);
+            //console.log(e);
             return "";
         }
     }

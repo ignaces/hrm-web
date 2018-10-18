@@ -448,7 +448,7 @@ class Talento {
             var objEnc = {
                 idEncuestaPersona:idEncuestaPersona
             }
-            //console.log("OK2")
+            ////console.log("OK2")
             var result = await data.execApi(request.hostname(),'/Encuesta/Medicion/getInstrumento',objEnc);
             var instrumento = result.body;
 
@@ -467,7 +467,7 @@ class Talento {
                 encuestaFraseo
             });
         } catch(e){
-            console.log(e);
+            //console.log(e);
             return "";
         }
         
@@ -519,7 +519,7 @@ class Talento {
             });
 
         } catch(e){
-            console.log(e)
+            //console.log(e)
         }
     }
 

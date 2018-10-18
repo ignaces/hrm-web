@@ -15,7 +15,7 @@ class Desempeno {
         var resultProcesosActivos =await api.execApi(request.hostname(),'/Desempeno/Proceso/getProcesos',objDatosProcesoActivos);
         var datosProcesosActivos =resultProcesosActivos.body.data;
 
-        //console.log(datosProcesosActivos);
+        ////console.log(datosProcesosActivos);
 
         //Datos Procesos Inactivos
         var objDatosProcesoInactivos = {
@@ -25,7 +25,7 @@ class Desempeno {
         var resultProcesosInactivos =await api.execApi(request.hostname(),'/Desempeno/Proceso/getProcesos',objDatosProcesoInactivos);
         var datosProcesosInactivos =resultProcesosInactivos.body.data;
 
-        //console.log(datosProcesosInactivos);
+        ////console.log(datosProcesosInactivos);
 
         //Render
         return view.render('/administracion/modulos/desempeno/desempeno', {datosProcesosActivos, datosProcesosInactivos});
@@ -45,7 +45,7 @@ class Desempeno {
          var resultProceso =await api.execApi(request.hostname(),'/Desempeno/Proceso/getProcesos',objDatosProceso);
          var datosProceso =resultProceso.body.data;
  
-         //console.log(datosProceso);
+         ////console.log(datosProceso);
          
         //Etapas Proceso
         var objEtapasProceso = {
@@ -55,7 +55,7 @@ class Desempeno {
         var resultEtapasProceso=await api.execApi(request.hostname(),'/Desempeno/Proceso/getEtapas',objEtapasProceso);
         var etapasProceso =resultEtapasProceso.body.data;
         
-        //console.log(etapasProceso);
+        ////console.log(etapasProceso);
         
          //Render
          return view.render('/administracion/modulos/desempeno/fichaProceso', {datosProceso,etapasProceso});
@@ -128,7 +128,7 @@ class Desempeno {
             };
         var resultProceso =await api.execApi(request.hostname(),'/Desempeno/Proceso/getProcesos',objDatosProceso);
         var datosProceso =resultProceso.body.data;
-        //console.log(datosProceso);
+        ////console.log(datosProceso);
         
         //Tipo de Proceso
         var objDatosTipoProceso = {
@@ -136,7 +136,7 @@ class Desempeno {
             };
         var resultTipoProceso =await api.execApi(request.hostname(),'/Desempeno/Proceso/getTipoProceso',objDatosTipoProceso);
         var datosTipoProceso =resultTipoProceso.body.data;
-        //console.log(datosTipoProceso);
+        ////console.log(datosTipoProceso);
 
         //Modelos de Competencia
         var objDatosModelo = {
@@ -144,7 +144,7 @@ class Desempeno {
             };
         var resultModelo =await api.execApi(request.hostname(),'/Desempeno/Proceso/getModelosCompetencia',objDatosModelo);
         var datosModelo =resultModelo.body.data;
-        //console.log(datosModelo);
+        ////console.log(datosModelo);
 
          //Estados Proceso
          var objEstadosProceso = {
@@ -196,8 +196,8 @@ class Desempeno {
         //Data
         var idProceso = session.get('idProceso')
         var idEtapa = request.input("idEtapa")
-        //console.log(idProceso);
-        //console.log(idEtapa); 
+        ////console.log(idProceso);
+        ////console.log(idEtapa); 
 
         //Datos Proceso
         var objDatosProceso = {
@@ -214,7 +214,7 @@ class Desempeno {
             };
         var resultEtapa =await api.execApi(request.hostname(),'/Desempeno/Proceso/getEtapas',objDatosEtapa);
         var datosEtapa =resultEtapa.body.data;
-        console.log(datosEtapa);
+        //console.log(datosEtapa);
 
         //Tareas Etapa
         var objDatosTareas = {
@@ -223,9 +223,9 @@ class Desempeno {
             };
         var resultTareas =await api.execApi(request.hostname(),'/Desempeno/Proceso/getTareasEtapas',objDatosTareas);
         var datosTareas =resultTareas.body.data;
-        //console.log(idProceso);
-        //console.log(idEtapa);
-        //console.log(datosTareas);
+        ////console.log(idProceso);
+        ////console.log(idEtapa);
+        ////console.log(datosTareas);
 
          //Render
          return view.render('/administracion/modulos/desempeno/fichaEtapa', {datosProceso,datosEtapa,datosTareas});
@@ -244,7 +244,7 @@ class Desempeno {
         };
         var resultEtapa =await api.execApi(request.hostname(),'/Desempeno/Proceso/getEtapas',objDatosEtapa);
         var datosEtapa =resultEtapa.body.data;
-        console.log(datosEtapa)
+        //console.log(datosEtapa)
 
         //Estados Etapa
         var objEstadosProceso = {
@@ -438,7 +438,7 @@ class Desempeno {
         var resultAcciones =await api.execApi(request.hostname(),'/Desempeno/Proceso/getAccionesTarea',objDatosAcciones);
         var datosAcciones =resultAcciones.body.data;
      
-       // console.log(datosAcciones)
+       // //console.log(datosAcciones)
 
          //Render
          return view.render('/administracion/modulos/desempeno/fichaTarea', {datosTarea,datosAcciones});
@@ -545,7 +545,7 @@ class Desempeno {
         var resultTarea =await api.execApi(request.hostname(),'/Desempeno/Proceso/getTareasEtapas',objDatosTarea);
         var datosTarea =resultTarea.body.data;  
 
-        console.log(idEtapaTarea)
+        //console.log(idEtapaTarea)
         
         var idTarea = datosTarea[0].idTarea
 
@@ -604,7 +604,7 @@ class Desempeno {
         var resultAccion =await api.execApi(request.hostname(),'/Desempeno/Proceso/getAccionesTarea',objDatosAccion);
         var datosAccion=resultAccion.body.data;
 
-        console.log(datosAccion)
+        //console.log(datosAccion)
 
         var idEtapaTarea = datosAccion[0].idEtapaTarea
         var idTarea = datosAccion[0].idTarea
@@ -633,7 +633,7 @@ class Desempeno {
         var resultEstadosAcciones=await api.execApi(request.hostname(),'/Desempeno/Proceso/getEstadosEde',objEstadosAcciones);
         var datosEstados =resultEstadosAcciones.body.data;  
 
-        //console.log(datosEstados)
+        ////console.log(datosEstados)
 
          //Render
         return view.render('/administracion/modulos/desempeno/editarAccion',{idEtapaTarea,datosAcciones,datosActores,datosEstados,datosAccion});
@@ -713,7 +713,7 @@ class Desempeno {
             var resultProceso =await api.execApi(request.hostname(),'/Desempeno/Proceso/getProcesos',objDatosProceso);
             var datosProceso =resultProceso.body.data;
        
-             //console.log(datosProceso);
+             ////console.log(datosProceso);
 
 
         //Render
@@ -734,12 +734,12 @@ class Desempeno {
             
         };
 
-        //console.log(obj)
+        ////console.log(obj)
 
         var result = await api.execApi(request.hostname(),'/Desempeno/Participante/getParticipantes',obj);  
         var resultP =result.body.data;
 
-        //console.log(resultP);
+        ////console.log(resultP);
 
         //Render
         return resultP;
@@ -771,7 +771,7 @@ class Desempeno {
         var resultPersona = await api.execApi(request.hostname(),'/Desempeno/Participante/getParticipantes',objPersona)
         var datosPersona = resultPersona.body.data;
 
-        //console.log(datosPersona)
+        ////console.log(datosPersona)
 
         //Render
         return view.render('/administracion/modulos/desempeno/fichaParticipante', {datosProceso,datosPersona});
