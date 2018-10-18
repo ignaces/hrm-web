@@ -144,14 +144,15 @@
         @endif                  
     @endeach
 
-    @each(meta in instrumento.metas)
-        @if($loop.first)
-            @!component('components.Evaluacion.preguntaLickertMetas',data={idOpinante:idOpinante,metas:meta,first:true})
-        @else
-            @!component('components.Evaluacion.preguntaLickertMetas',data={idOpinante:idOpinante,metas:meta,first:false})
-        @endif                  
-    @endeach
-    
+    @if(instrumento.metas > 0)
+        @each(meta in instrumento.metas)
+            @if($loop.first)
+                @!component('components.Evaluacion.preguntaLickertMetas',data={idOpinante:idOpinante,metas:meta,first:true})
+            @else
+                @!component('components.Evaluacion.preguntaLickertMetas',data={idOpinante:idOpinante,metas:meta,first:false})
+            @endif                  
+        @endeach
+    @endif
         
         <div class="col-lg-12">
                     <div class="panel panel-color panel-primary">
