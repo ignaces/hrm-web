@@ -17,6 +17,8 @@ $(document).ready(function(){
         
         var id = $( this ).attr('id');
         
+        var tipo = $( this ).attr("instrumento");
+        //console.log(tipo);
         var arr = id.split("_");
         var idPregunta = arr[1];
         var idAlternativa = arr[2];
@@ -39,7 +41,18 @@ $(document).ready(function(){
         }
 
         //console.log(idOpinante, idPregunta, idAlternativa, justificacion, id);
-        putRespuesta(idOpinante, idPregunta, idAlternativa, justificacion, id);
+        if(tipo == "competencias")
+        {
+            putRespuesta(idOpinante, idPregunta, idAlternativa, justificacion, id);
+        }
+        
+        if(tipo == "metas")
+        {
+            //alert("AA");
+            putRespuestaMetas(idOpinante, idPregunta, idAlternativa, justificacion, id);
+        }
+        
+        
     });
 
     $( ".txt_justificacion" ).focusout(function() {  
@@ -106,6 +119,57 @@ $(document).ready(function(){
             timeout: 10000
         });
     };
+
+    var putRespuestaMetas = function(idOpinante, idPregunta, idAlternativa, justificacion, idElementoHTML){
+        var obj = { 
+            idOpinante:idOpinante,
+            idPregunta:idPregunta,
+            idAlternativa:idAlternativa,
+            justificacion:justificacion
+         };
+        
+         $("#hrm_blockAction").show();
+
+        $.ajax({
+            type: "GET",
+            url: "/Instrumento/Instrumento/putRespuestaMeta",
+            contentType: "application/json; charset=utf-8",
+            data: obj,
+            dataType: "json",   
+            success: function (msg) {
+                //console.log("OK?23");
+
+                $.toast({
+                    text: 'Respuesta guardada correctamente.',
+                    position: 'top-right',
+                    loaderBg: '#5ba035',
+                    icon: 'success',
+                    hideAfter: 3000,
+                    stack: 1
+                });
+
+                $("#hrm_blockAction").hide();
+                
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                $.toast({
+                    text: 'No se pudo guardar su respuesta. Intente nuevamente.',
+                    position: 'top-right',
+                    loaderBg: '#5ba035',
+                    icon: 'error',
+                    hideAfter: 3000,
+                    stack: 1
+                });
+                
+                $("#hrm_blockAction").hide();
+
+                $("#"+idElementoHTML).prop('checked', false);
+            },
+            timeout: 10000
+        });
+    };
+
+    
 
     
     

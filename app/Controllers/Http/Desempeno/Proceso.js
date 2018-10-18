@@ -120,12 +120,18 @@ class Proceso {
         var idEtapa = request.input("idEtapa")
         var idProceso = session.get('idProceso')
         var datosProceso=session.get('dataProceso')
+
+        //cencosud brasil
         if(idProceso == '8af63afd-c680-11e8-8771-bc764e100f2b')
         {
             antl.switchLocale('pt');
             console.log(antl)
         }
         console.log(datosProceso);
+
+        session.put('idEtapa',idEtapa)
+        session.put('referer',`/Desempeno/Proceso/etapa?idEtapa=${idEtapa}`)
+
         //Datos Persona
         var user={usuario:auth.user}
         var persona = session.get('personaLogueada')
@@ -155,6 +161,7 @@ class Proceso {
         };
         var resultEtapa=await api.execApi(request.hostname(),'/Desempeno/Proceso/getEtapas',objEtapa);
         var etapa =resultEtapa.body.data;
+<<<<<<< HEAD
         //
         console.log("AA")
         console.log(idEtapa)
@@ -167,8 +174,11 @@ class Proceso {
         var etag = `app_${cliente}`
 
 
+=======
+        
+>>>>>>> 58afd4e94e43a9b330c73dbb355367a126aaca79
          //Lista EVAL
-         var objEval={
+        var objEval={
             "idEtapa":idEtapa,
 	        "idPersonaActor":idPersona,
             "codigoActor":"EVAL",
@@ -178,8 +188,8 @@ class Proceso {
         var listaEval =resultEval.body.data;      
         //
         
-        console.log(objEval)
         
+               
          //Lista Supe
          var objSupe={
             "idEtapa":idEtapa,
@@ -221,8 +231,20 @@ class Proceso {
         return view.render('desempeno/evalBrasil');
     }
 
-    async evalGrupal ({view,request, response}) {
-        return view.render('desempeno/evaluacionGrupal');
+    async evalGrupal ({view,request, response,session}) {
+        var idPersona = session.get('idPersona', 'fail')
+        var idEtapa = session.get("idEtapa")
+        var idProceso = session.get('idProceso')
+        var datosProceso=session.get('dataProceso')
+
+        var objEval={
+            "idEtapa":idEtapa,
+	        "idEvaluador":idPersona,
+            "idProceso":idProceso
+        }
+        var resultFunc=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluadosGrupal',objEval);
+        var eGrupal = resultFunc.body.data;
+        return view.render('desempeno/evaluacionGrupal',{competencias:eGrupal.competencias,evaluados:eGrupal.evaluados});
     }
 
     async portadaBrasil ({view,request, response}) {
@@ -267,17 +289,17 @@ class Proceso {
             var obj = {
                 "idOpinante":idOpinante
             };
-            console.log(obj);
+            //console.log(obj);
 
             var result = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumentoEde',obj);
 
             var instrumento = result.body;
-            console.log("d")
+
             var result2 = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getEscala',obj);
 
-            console.log(result2);
+            //console.log(result2);
             var escala = result2;
-            console.log(escala.body.data);
+            //console.log(escala.body.data);
         
         return view.render('desempeno/evalEjecutivos', {idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa, escala: escala.body.data});
     }

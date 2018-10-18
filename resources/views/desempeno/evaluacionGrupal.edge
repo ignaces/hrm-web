@@ -71,7 +71,41 @@
 <script src="/assets/js/dist/Instrumento.min.js?v30s"></script>
 <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
 <script src="/assets/plugins/jquery-toastr/jquery.toast.min.js" type="text/javascript"></script>
-
+<script>
+var suma = function(obj){
+    var id = String(obj.id).split('_')[0];
+    var variables=0;
+    var sum = 0 ;
+    var conValor = 0 ;
+    var promedio = "";
+    jQuery('.'+id).each(function() { 
+        if(!$(this).attr('disabled')){
+            variables++;
+            if($(this).val()!="-"){
+                sum = sum + ($(this).val()*1);
+                conValor++;
+            }
+            
+        }
+        
+    });
+    if(conValor==variables){
+        var pr = sum/variables;
+        if(pr>=2.5 && pr<=3){
+            promedio="A";
+        }
+        if(pr>=1.7 && pr<2.5){
+            promedio="B";
+        }
+        if(pr>=0 && pr<1.7){
+            promedio="A";
+        }
+                
+        $("#C_"+id).html(promedio);
+    }
+    
+}
+</script>
 @endsection
 
 @section('content')
@@ -152,587 +186,69 @@
                                                     <thead>
                                                         <tr role="row">
                                                             <th class="" tabindex="0" rowspan="1" colspan="1" style="width: 180px; vertical-align: middle;">Nombre</th>
-                                                            
-                                                            <th class="" tabindex="0" rowspan="1" colspan="1" style="width: 220px; text-align: justify; vertical-align: top; font-size: 10px;"><p>En mi cabeza el cliente siempre primero</p></th>
-
-                                                            <th class="" tabindex="0" rowspan="1" colspan="1" style="width: 220px; text-align: justify; vertical-align: top; font-size: 10px;">Culturas fuertes centradas en las personas</th>
-                                                            <th class="" tabindex="0" rowspan="1" colspan="1" style="width: 220px; text-align: justify; vertical-align: top; font-size: 10px;">El talento individual al servicio del equipo</th>
-                                                            
-                                                            <th class="" tabindex="0" rowspan="1" colspan="1" style="width: 220px; text-align: justify; vertical-align: top; font-size: 10px;">Mentalidad de dueño</th>
-                                                            <th class="" tabindex="0" rowspan="1" colspan="1" style="width: 220px; text-align: justify; vertical-align: top; font-size: 10px;">Evolución y desafíos permanentes</th>
-                                                            <th class="" tabindex="0" rowspan="1" colspan="1" style="width: 220px; text-align: justify; vertical-align: top; font-size: 10px;">Entregamos resultados y avanzamos</th>
-
-                                                            <th class="" tabindex="0" rowspan="1" colspan="1" style="width: 220px; text-align: justify; vertical-align: top; font-size: 10px;">Competencia de Resultado</th>
-
+                                                            @each(competencia in competencias)
+                                                                <th class="" tabindex="0" rowspan="1" colspan="1" style="width: 220px; text-align: justify; vertical-align: middle; "><p>{{competencia.nombre}}</p></th>
+                                                            @endeach
                                                             <th class="" tabindex="0" rowspan="1" colspan="1" style="width: 220px; text-align: center; vertical-align: middle; ">Observación</th>
                                                             <th class="" tabindex="0" rowspan="1" colspan="1" style="width: 220px; text-align: center; vertical-align: middle; ">Resultado Competencias</th>
                                                             <th class="" tabindex="0" rowspan="1" colspan="1" style="width: 220px; text-align: center; vertical-align: middle; ">Resultado Meta</th>
                                                         </tr>
                                                         <tr>
                                                             <th></th>
-                                                                    <th>
-                                                                    <button type="button" class="btn btn-default" data-container="body" title="" data-toggle="popover" data-placement="bottom" data-content="Mejoramos la calidad de vida de nuestros consumidores a través de experiencias de compra memorables. Servimos con pasión al cliente, haciéndolo sentir especial, sorprendiendo con innovación, resolviendo oportunamente los problemas y cuidando obsesivamente cada detalle. Actuamos y decidimos priorizando los intereses del cliente. Actuamos con la convicción que nuestros colaboradores son clientes internos." data-original-title="">
+                                                            @each(competencia in competencias)
+                                                            <th>
+                                                            <button type="button" class="btn btn-default" data-container="body" title="" data-toggle="popover" data-placement="bottom" data-content="{{competencia.criterio}}" data-original-title="">
                                                                         Ver Criterio
                                                                     </button>
                                                                     </th>
-                                                                    <th>
-                                                                    <button type="button" class="btn btn-default" data-container="body" title="" data-toggle="popover" data-placement="bottom" data-content="Tomamos decisiones siempre pensando en nuestra gente y cuidando a las personas. Construimos climas laborales que promueven la confianza y la felicidad. Lideramos con cercanía e inspiración; aspirando siempre a atraer, retener, desarrollar, y promover el talento. Gestionamos a nuestros equipos, utilizando los procesos, herramientas y políticas de gestión de personas con rigurosidad y disciplina. Valoramos y promovemos la diversidad dentro de nuestras empresas." data-original-title="">
-                                                                        Ver Criterio
-                                                                    </button>
-                                                                    </th>
-                                                                    <th>
-                                                                    <button type="button" class="btn btn-default" data-container="body" title="" data-toggle="popover" data-placement="bottom" data-content="Trabajamos en equipo no sólo con el equipo directo, sino colaborando además con otras UN y áreas/sectores con las que nos relacionamos. Ponemos los objetivos colectivos por sobre los objetivos individuales. Gestionamos el disenso y los conflictos construyendo confianza, a través de conversaciones oportunas, transparentes y cercanas. Abordamos todos los problemas de la Compañía haciéndonos parte de la solución, proponiendo alternativas para resolver y avanzar, y nunca poniendo la culpa en el otro o anclándonos a excusas." data-original-title="">
-                                                                        Ver Criterio
-                                                                    </button>
-                                                                    </th>
-                                                                    <th>
-                                                                    <button type="button" class="btn btn-default" data-container="body" title="" data-toggle="popover" data-placement="bottom" data-content="Cuidamos a nuestros clientes, equipos, recursos, mercadería, proveedores, lugar y elementos de trabajo. Nos apropiamos de los desafíos, cumplimos nuestros compromisos, y respondemos por nuestros actos siempre de forma ética. Nos orientamos a resultados, pero no ponemos en riesgo la reputación y sustentabilidad de nuestras marcas por conseguir resultados en el corto plazo. Promovemos la productividad y eficiencia, buscando entender las causas raíz de los problemas y proponiendo soluciones con resultados concretos." data-original-title="">
-                                                                        Ver Criterio
-                                                                    </button>
-                                                                    </th>
-                                                                    <th>
-                                                                    <button type="button" class="btn btn-default" data-container="body" title="" data-toggle="popover" data-placement="bottom" data-content="Construimos marcas transparentes y confiables, en sintonía con nuestro entorno, sociedad y grupos de interés, sustentando nuestras promesas externas e internas en acciones concretas. Desarrollamos y acompañamos tendencias con eficacia, rapidez y flexibilidad. Desafiamos el status-quo; provocamos el cambio y la innovación en nuestros negocios. Cuestionamos los paradigmas que no nos permiten evolucionar a la velocidad requerida." data-original-title="">
-                                                                        Ver Criterio
-                                                                    </button>
-                                                                    </th>
-                                                                    <th>
-                                                                   
-                                                                    </th>
-                                                                    <th>
+                                                            @endeach
                                                                     
-                                                                    </th>
-                                                                    <th>
-                                                                    
-                                                                        </th>
+                                                                 
                                                                     <th></th>
                                                                     <th></th>
+                                                                    <th></th>
+                                                                    
                                                         </tr>
                                                         </thead>
                                                     
                                                     <tbody>
-                                                    <tr role="row" class="odd">
-                                                        <td style="text-align: left; vertical-align: middle;">Leticia Andrea Salazar Mateluna</td>
+                                                    
+                                                        @each(evaluado in evaluados)
+                                                        <tr role="row" class="odd">
+                                                        <td style="text-align: left; vertical-align: middle;">{{evaluado.nombres}}</td>
                                                         
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                                <select class="form-control" disabled>
+                                                        @each(competencia in evaluado.competencias)
+                                                            <td style="text-align: center; vertical-align: middle;">
+                                                                @if(competencia.disabled==true)
+                                                                    <select  class="form-control" disabled>
+                                                                @else
+                                                                <select id="{{$parent.evaluado.idOpinante}}_{{competencia.idCompetencia}}" class="form-control {{$parent.evaluado.idOpinante}}" onchange="suma(this)">
+                                                                @endif    
                                                                 <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
+                                                                @each(nivel in competencia.niveles)
+                                                                    <option value="{{nivel.valor}}">{{nivel.nombre}}</option>
+                                                                @endeach
+                                                                    
+                                                                </select>
+                                                            </td>
+                                                        @endeach
+                                                        
 
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
                                                         
                                                         <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <textarea>
+                                                            <textarea id="OBS_{{evaluado.idOpinante}}">
                                                                 
                                                             </textarea>
                                                         </td>
                                                         
-                                                        <td style="text-align: center; vertical-align: middle; font-weight: bold;">A</td>
-                                                        <td style="text-align: center; vertical-align: middle; font-weight: bold;">B</td>
+                                                    <td style="text-align: center; vertical-align: middle; font-weight: bold;" id="C_{{evaluado.idOpinante}}"></td>
+                                                    <td style="text-align: center; vertical-align: middle; font-weight: bold;" id="M_{{evaluado.idOpinante}}"></td>
                                                     </tr>
+                                                        @endeach
+                                                        
+                                                    
 
-                                                    <tr role="row" class="odd">
-                                                        <td style="text-align: left; vertical-align: middle;">Airi Satou</td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control" disabled>
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <textarea>
-                                                                
-                                                            </textarea>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle; font-weight: bold;">B</td>
-                                                        <td style="text-align: center; vertical-align: middle; font-weight: bold;">A</td>
-                                                    </tr>
-                                                    <tr role="row" class="odd">
-                                                            <td style="text-align: left; vertical-align: middle;">Sofía Hapgood</td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <textarea>
-                                                                
-                                                            </textarea>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle; font-weight: bold;">B</td>
-                                                        <td style="text-align: center; vertical-align: middle; font-weight: bold;">B</td>
-                                                    </tr>
-
-                                                    <tr role="row" class="odd">
-                                                            <td style="text-align: left; vertical-align: middle;">Werner Waltz</td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control" disabled>
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <textarea>
-                                                                
-                                                            </textarea>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle; font-weight: bold;">A</td>
-                                                        <td style="text-align: center; vertical-align: middle; font-weight: bold;">A</td>
-                                                    </tr>
-
-                                                    <tr role="row" class="odd">
-                                                            <td style="text-align: left; vertical-align: middle;">Sergio Vargas</td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control" disabled>
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <textarea>
-                                                                
-                                                            </textarea>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle; font-weight: bold;">C</td>
-                                                        <td style="text-align: center; vertical-align: middle; font-weight: bold;">C</td>
-                                                    </tr>
-
-                                                    <tr role="row" class="odd">
-                                                        <td style="text-align: center; vertical-align: middle;">Carla Soto</td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                                <select class="form-control" disabled>
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                
-                                                            </select>
-                                                        </td>
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <textarea>
-                                                                
-                                                            </textarea>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle; font-weight: bold;">C</td>
-                                                        <td style="text-align: center; vertical-align: middle; font-weight: bold;">A</td>
-                                                    </tr>
-
-                                                    <tr role="row" class="odd">
-                                                        <td style="text-align: center; vertical-align: middle;">Pablo Andrés Rosales</td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control">
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <select class="form-control" disabled>
-                                                                <option>-</option>
-                                                                <option>C</option>
-                                                                <option>B</option>
-                                                                <option>A</option>
-                                                            </select>
-                                                        </td>
-                                                        <td style="text-align: center; vertical-align: middle;">
-                                                            <textarea>
-                                                                
-                                                            </textarea>
-                                                        </td>
-                                                        
-                                                        <td style="text-align: center; vertical-align: middle; font-weight: bold;">A</td>
-                                                        <td style="text-align: center; vertical-align: middle; font-weight: bold;">B</td>
-                                                    </tr>
+                                                   
                                                 
                                                 </tbody>
                                                 </table>
