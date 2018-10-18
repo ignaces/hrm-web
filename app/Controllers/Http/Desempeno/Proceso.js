@@ -1,14 +1,20 @@
 'use strict'
 
 const api = use('App/Utils/Data')
-
+const Antl = use('Antl');
 
 class Proceso {
     
-    async portada ({view,request, response, auth, session}) {
+    async portada ({view,request, response, auth, session, antl}) {
         
         var idPersona = session.get('idPersona', 'fail')
         var idProceso = request.input("idProceso")
+        //cencosud brasil
+        if(idProceso == '8af63afd-c680-11e8-8771-bc764e100f2b')
+        {
+            antl.switchLocale('pt');
+            console.log(antl)
+        }
         //console.log(request.all());
         session.put('idProceso',idProceso);
         
@@ -72,9 +78,13 @@ class Proceso {
         var resultTareas=await api.execApi(request.hostname(),'/Desempeno/Proceso/getTareasEtapas',objTareas);
         var tareas =resultTareas.body.data;      
         //
-
-
-        return view.render('desempeno/portada',{etapasProceso,datosMenu,persona,PersonaEde,datosProceso,etapa,tareas});
+        var cliente = request.hostname().split(".")[0]
+        if(cliente=="localhost"){
+            cliente="hrmdev"
+        }
+        var etag = `app_${cliente}`
+        
+        return view.render('desempeno/portada',{etag, etapasProceso,datosMenu,persona,PersonaEde,datosProceso,etapa,tareas});
     }
 
 
@@ -104,12 +114,17 @@ class Proceso {
     }
 
 
-    async etapa ({view,request, response, auth, session, params}) {
+    async etapa ({view,request, response, auth, session, params, antl}) {
         //console.log("A");
         var idPersona = session.get('idPersona', 'fail')
         var idEtapa = request.input("idEtapa")
         var idProceso = session.get('idProceso')
         var datosProceso=session.get('dataProceso')
+        if(idProceso == '8af63afd-c680-11e8-8771-bc764e100f2b')
+        {
+            antl.switchLocale('pt');
+            console.log(antl)
+        }
         console.log(datosProceso);
         //Datos Persona
         var user={usuario:auth.user}
@@ -144,6 +159,14 @@ class Proceso {
         console.log("AA")
         console.log(idEtapa)
         console.log(idPersona)
+        var cliente = request.hostname().split(".")[0]
+        if(cliente=="localhost"){
+            cliente="hrmdev"
+        }
+
+        var etag = `app_${cliente}`
+
+
          //Lista EVAL
          var objEval={
             "idEtapa":idEtapa,
@@ -191,7 +214,7 @@ class Proceso {
         var resultFunc=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluados',objFunc);
         var listaFunc =resultFunc.body.data;  
         
-        return view.render('desempeno/etapa',{datosProceso,PersonaEde,datosMenu,etapa,listaEval,listaSupe,listaAsc,listaFunc, idEtapa: idEtapa});
+        return view.render('desempeno/etapa',{etag, datosProceso,PersonaEde,datosMenu,etapa,listaEval,listaSupe,listaAsc,listaFunc, idEtapa: idEtapa});
     }
 
     async evalBrasil ({view,request, response}) {

@@ -131,5 +131,8 @@ class UserController {
         return usuarios;
       }
 
+      async cambioIdioma  ({ view,request, response, auth, session ,antl}) {
+        console.log("qq")
+    }
 }
 module.exports = UserController

@@ -211,8 +211,8 @@ $(document).ready(function(){
             return false;
         }
 
-        var minChars = 100;
-
+        //var minChars = 100;
+        var minChars = 1;
         if($("#observacion").val().length < minChars)
         {
             swal(
