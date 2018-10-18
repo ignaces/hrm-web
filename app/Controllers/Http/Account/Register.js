@@ -28,7 +28,7 @@ class Register{
         /*var id = "1137";
         var user = await user.find(id);
 
-        console.log(user.username);
+        //console.log(user.username);
         user.password = '8609816-4';
         user.username = '8609816-4';
 
@@ -36,7 +36,7 @@ class Register{
 */
         /*
         const user = await User.find("1137");
-        console.log("uers:"+user.username);
+        //console.log("uers:"+user.username);
         user.password = '8609816-4';
         user.username = '8609816-4';
         await user.save();
@@ -73,7 +73,7 @@ class Register{
 
     async doRegisterUsuariosPersonas({request, response}) {
        
-        //console.log("TEST");
+        ////console.log("TEST");
         //return false;
 
         const personas = request.input("personas");
@@ -100,16 +100,16 @@ class Register{
             try{
                 var respuesta = await user.save();
                 
-                //console.log(user.$attributes.id);
+                ////console.log(user.$attributes.id);
                 objPersona.idUsuario = user.$attributes.id;
                 
-                console.log(objPersona);
+                //console.log(objPersona);
                 var registraPersona = await data.execApi(request.hostname(),'/Persona/Persona/addPersona',objPersona);
-                console.log(registraPersona);
+                //console.log(registraPersona);
             }
             catch(error)
             {
-                console.log(error);
+                //console.log(error);
             }
         }
         
@@ -121,7 +121,7 @@ class Register{
     }
     
     async registerPersona({request, response}) {
-        //console.log("...", request.all());
+        ////console.log("...", request.all());
         
         const user = new User()
             

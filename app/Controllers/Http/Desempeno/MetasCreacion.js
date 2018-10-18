@@ -33,11 +33,11 @@ class MetasCreacion {
             "idPersona": idPersona,
             "idPersonaSuperior": ""
         };
-        //console.log(objAuto)
+        ////console.log(objAuto)
         var resultPersonaAuto =await api.execApi(request.hostname(),'/Desempeno/Metas/getDataPersonasCreacionMetas',objAuto);
         var PersonaAuto =resultPersonaAuto.body.data;
         
-        //console.log("4")
+        ////console.log("4")
         
          //SUPERIOR
         var objSupe = {
@@ -167,7 +167,7 @@ class MetasCreacion {
         var idProceso = session.get("idProceso")
         var idProcesoEtapa=request.input("idProcesoEtapa")
         var idColaborador=request.input("idColaborador")
-        //console.log(idColaborador);
+        ////console.log(idColaborador);
         var datosProceso=session.get('dataProceso')
 
         var objEtapaProceso = {
@@ -186,8 +186,8 @@ class MetasCreacion {
         };
         var resultColaborador =await api.execApi(request.hostname(),'/Desempeno/Metas/getDataPersonasCreacionMetas',objColaborador);
         var colaborador =resultColaborador.body.data;
-        //console.log(colaborador);
-        //console.log(objColaborador);
+        ////console.log(colaborador);
+        ////console.log(objColaborador);
 
         //WIDGETS
         var widgets=[];
@@ -214,7 +214,7 @@ class MetasCreacion {
                 puedeCrear="SI"
             }
         }
-        //console.log(puedeCrear)
+        ////console.log(puedeCrear)
 
         //INSTRUCCIONES
 
@@ -224,7 +224,7 @@ class MetasCreacion {
         };
         var resultDataColumnas =await api.execApi(request.hostname(),'/Desempeno/Metas/getMetasColumnas',objDataColumnas);
         var dataColumnas =resultDataColumnas.body.data;
-        //console.log(dataColumnas);
+        ////console.log(dataColumnas);
 
         //METAS
         var objDataMetas = {
@@ -237,7 +237,7 @@ class MetasCreacion {
         };
         var resultDataMetas =await api.execApi(request.hostname(),'/Desempeno/Metas/getMetasColaborador',objDataMetas);
         var dataMetas =resultDataMetas.body.data;
-        //console.log(dataMetas);
+        ////console.log(dataMetas);
       
         return view.render('/desempeno/metas/creacion/listaMetas',{datosProceso,etapasProceso,widgets,colaborador,puedeCrear,dataMetas,dataColumnas});
     }
@@ -287,7 +287,7 @@ class MetasCreacion {
         };
         var resultDataColumnas =await api.execApi(request.hostname(),'/Desempeno/Metas/getMetasColumnas',objDataColumnas);
         var dataColumnas =resultDataColumnas.body.data;
-        //console.log(dataColumnas);
+        ////console.log(dataColumnas);
 
         return view.render('/desempeno/metas/creacion/nuevaMeta',{datosProceso,etapasProceso,colaborador,widgets,dataColumnas});
 
@@ -339,7 +339,7 @@ class MetasCreacion {
         };
         var resultDataColumnas =await api.execApi(request.hostname(),'/Desempeno/Metas/getMetasColumnas',objDataColumnas);
         var dataColumnas =resultDataColumnas.body.data;
-        //console.log(dataColumnas);
+        ////console.log(dataColumnas);
 
         //META
         var objDataMetas = {

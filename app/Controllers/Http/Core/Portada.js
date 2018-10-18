@@ -59,7 +59,7 @@ class Portada {
          
        
         var rstl = session.put('totalCol',talentos.Total)
-        //console.log(rstl);
+        ////console.log(rstl);
        
         obj={
             idProceso:"",
@@ -80,8 +80,8 @@ class Portada {
             cliente="hrmdev"
         }
         var etag = `app_${cliente}`
-console.log(antl)
-console.log(etag)
+//console.log(antl)
+//console.log(etag)
         var texto = "";
         var mensajeTitulo = "";
         if(mensajeResult.length > 0)
@@ -94,7 +94,7 @@ console.log(etag)
     }
     async cambioIdioma  ({ view,request, response, auth, session ,antl}) {
         antl.switchLocale('pt');
-        console.log(antl)
+        //console.log(antl)
     }
 }
 

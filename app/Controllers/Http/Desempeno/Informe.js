@@ -34,7 +34,7 @@ class Accion {
         }
         var resultEval = await api.execApi(request.hostname(), '/Desempeno/Proceso/getListaEvaluados', objEval);
         var listaEval = resultEval.body.data;
-       //console.log(listaEval)
+       ////console.log(listaEval)
         //
 
         var persona = {
@@ -85,14 +85,14 @@ class Accion {
         }
         var resultObservacion =await api.execApi(request.hostname(),'/Desempeno/Accion/getObservacionAccionColaborador',objObservacion);
         var dataObservacion =resultObservacion.body.data;
-        //console.log(dataObservacion);
+        ////console.log(dataObservacion);
 
         var textoObservacion="";
         if (dataObservacion.length > 0){
             textoObservacion=dataObservacion[0].observacion
         };
 
-        //console.log(idAccionPersona);
+        ////console.log(idAccionPersona);
 
         //RENDER
         return view.render('desempeno/metas/informe/meta', {dataVista, datosTarea, Perso, listaEval,dataMetas,dataColumnas,dataObservacion,textoObservacion});

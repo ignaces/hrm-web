@@ -45,7 +45,7 @@ class Vista extends Command {
 
 @endsection`
     
-              //console.log(Helpers.appRoot(`resources/views/${modulo.toLowerCase()}/${vista}.edge`))
+              ////console.log(Helpers.appRoot(`resources/views/${modulo.toLowerCase()}/${vista}.edge`))
     modulo = modulo.charAt(0).toLowerCase();
     contenedor = contenedor.charAt(0).toLowerCase();
     var path = Helpers.appRoot(`resources/views/${modulo}/${contenedor}`)
@@ -58,7 +58,7 @@ class Vista extends Command {
     }
     fs.writeFile(Helpers.appRoot(`resources/views/${modulo}/${vista}.edge`), texto, function(err) {
       if(err) {
-          return console.log(err);
+          return //console.log(err);
       }
   
       context.info(`Se creó la vista correctamente`)

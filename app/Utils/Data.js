@@ -7,7 +7,7 @@ const got = use('got')
 
 module.exports = {
     execApi: async (hostname,method,obj)=>{
-        //console.log(obj);
+        ////console.log(obj);
         var server = Env.get('API_SERVER', 'development')
         var alias = Env.get('HOSTALIAS', 'localhost')
         var clienteDefault = Env.get('CLIENTE_DEFAULT', null)
@@ -26,12 +26,12 @@ module.exports = {
             json:true,
             query:obj
         })
-        //console.log(obj)
+        ////console.log(obj)
         return result;
     },
 
     execApiLocal: async (hostname,method,obj)=>{
-        //console.log(obj);
+        ////console.log(obj);
         var server = Env.get('API_LOCAL', 'development')
 
         var cliente = hostname.split(".")[0]
@@ -43,7 +43,7 @@ module.exports = {
             query:obj
         })
 
-        //console.log(obj)
+        ////console.log(obj)
         return result;
     },
 
@@ -63,7 +63,7 @@ module.exports = {
             json:true,
             body:obj
         })
-        //console.log(obj)
+        ////console.log(obj)
         return result;
     }
 
