@@ -30,6 +30,7 @@
     "@adonisjs/redis": "^2.0.4",
     "@adonisjs/session": "^1.0.19",
     "@adonisjs/shield": "^1.0.4",
+    "chart.js": "^2.7.2",
     "got": "^7.1.0",
     "hard-source-webpack-plugin": "^0.8.1",
     "linq": "^3.0.9",
