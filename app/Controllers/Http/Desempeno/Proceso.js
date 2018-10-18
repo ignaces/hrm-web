@@ -122,7 +122,7 @@ class Proceso {
         var datosProceso=session.get('dataProceso')
 
         //cencosud brasil
-        if(idProceso == '8af63afd-c680-11e8-8771-bc764e100f2b')
+        if(idProceso == '8af63afd-c680-11e8-8771-bc764e100f2b') 
         {
             antl.switchLocale('pt');
             console.log(antl)
@@ -161,7 +161,7 @@ class Proceso {
         };
         var resultEtapa=await api.execApi(request.hostname(),'/Desempeno/Proceso/getEtapas',objEtapa);
         var etapa =resultEtapa.body.data;
-<<<<<<< HEAD
+
         //
         console.log("AA")
         console.log(idEtapa)
@@ -172,11 +172,6 @@ class Proceso {
         }
 
         var etag = `app_${cliente}`
-
-
-=======
-        
->>>>>>> 58afd4e94e43a9b330c73dbb355367a126aaca79
          //Lista EVAL
         var objEval={
             "idEtapa":idEtapa,
