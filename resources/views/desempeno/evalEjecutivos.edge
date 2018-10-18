@@ -68,7 +68,7 @@
 @section('scripts')
     
 
-<script src="/assets/js/dist/InstrumentoDesempeno.min.js?v003s"></script>
+<script src="/assets/js/dist/InstrumentoDesempeno.min.js?v006s"></script>
 <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
 <script src="/assets/plugins/jquery-toastr/jquery.toast.min.js" type="text/javascript"></script>
 <script src="/assets/plugins/tinymce/tinymce.min.js"></script>
@@ -141,6 +141,14 @@
             @!component('components.Evaluacion.preguntaLickertDesempeno',data={idOpinante:idOpinante,competencia:competencia,first:true})
         @else
             @!component('components.Evaluacion.preguntaLickertDesempeno',data={idOpinante:idOpinante,competencia:competencia,first:false})
+        @endif                  
+    @endeach
+
+    @each(meta in instrumento.metas)
+        @if($loop.first)
+            @!component('components.Evaluacion.preguntaLickertMetas',data={idOpinante:idOpinante,metas:meta,first:true})
+        @else
+            @!component('components.Evaluacion.preguntaLickertMetas',data={idOpinante:idOpinante,metas:meta,first:false})
         @endif                  
     @endeach
     

@@ -244,17 +244,19 @@ class Proceso {
             var obj = {
                 "idOpinante":idOpinante
             };
-            console.log(obj);
+            //console.log(obj);
 
             var result = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumentoEde',obj);
 
             var instrumento = result.body;
-            console.log("d")
+            
+            //console.log(instrumento.metas[0]);
+
             var result2 = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getEscala',obj);
 
-            console.log(result2);
+            //console.log(result2);
             var escala = result2;
-            console.log(escala.body.data);
+            //console.log(escala.body.data);
         
         return view.render('desempeno/evalEjecutivos', {idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa, escala: escala.body.data});
     }

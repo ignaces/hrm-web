@@ -109,6 +109,23 @@ class Instrumento {
         return {mensaje:"OK"}
     } 
 
+    async putRespuestaMeta({request,response, session}){
+
+        var idPregunta = request.input("idPregunta")
+        var idAlternativa = request.input("idAlternativa")
+        var justificacion = request.input("justificacion")
+        
+        var obj = {
+            "idMeta":idPregunta,
+            "idAlternativa":idAlternativa,
+            "justificacion":justificacion,
+            };
+            
+        var result = await data.execApi(request.hostname(),'/Desempeno/Metas/putRespuesta',obj);
+        
+        return {mensaje:"OK"}
+    } 
+
     async putRespuestaEde({request,response, session}){
 
         var idOpinante = request.input("idOpinante")
