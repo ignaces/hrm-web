@@ -110,7 +110,7 @@ class Proceso {
         var idEtapa = request.input("idEtapa")
         var idProceso = session.get('idProceso')
         var datosProceso=session.get('dataProceso')
-        console.log(datosProceso);
+        session.put('idEtapa',idEtapa)
         //Datos Persona
         var user={usuario:auth.user}
         var persona = session.get('personaLogueada')
@@ -140,12 +140,9 @@ class Proceso {
         };
         var resultEtapa=await api.execApi(request.hostname(),'/Desempeno/Proceso/getEtapas',objEtapa);
         var etapa =resultEtapa.body.data;
-        //
-        console.log("AA")
-        console.log(idEtapa)
-        console.log(idPersona)
+        
          //Lista EVAL
-         var objEval={
+        var objEval={
             "idEtapa":idEtapa,
 	        "idPersonaActor":idPersona,
             "codigoActor":"EVAL",
@@ -155,8 +152,8 @@ class Proceso {
         var listaEval =resultEval.body.data;      
         //
         
-        console.log(objEval)
         
+               
          //Lista Supe
          var objSupe={
             "idEtapa":idEtapa,
@@ -198,8 +195,20 @@ class Proceso {
         return view.render('desempeno/evalBrasil');
     }
 
-    async evalGrupal ({view,request, response}) {
-        return view.render('desempeno/evaluacionGrupal');
+    async evalGrupal ({view,request, response,session}) {
+        var idPersona = session.get('idPersona', 'fail')
+        var idEtapa = session.get("idEtapa")
+        var idProceso = session.get('idProceso')
+        var datosProceso=session.get('dataProceso')
+
+        var objEval={
+            "idEtapa":idEtapa,
+	        "idEvaluador":idPersona,
+            "idProceso":idProceso
+        }
+        var resultFunc=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluadosGrupal',objEval);
+        var eGrupal = resultFunc.body.data;
+        return view.render('desempeno/evaluacionGrupal',{competencias:eGrupal.competencias,evaluados:eGrupal.evaluados});
     }
 
     async portadaBrasil ({view,request, response}) {
