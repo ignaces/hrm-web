@@ -131,7 +131,6 @@ class Proceso {
         var resultMenu =await api.execApi(request.hostname(),'/Desempeno/Proceso/getMenuUsuario',objMenuContextual);
         var datosMenu =resultMenu.body.data;
         //
-        
 
         //Etapa
         var objEtapa = {
@@ -151,8 +150,8 @@ class Proceso {
             "codigoActor":"EVAL",
             "idAccionPersona":""
         }
-        var resultEval=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluados',objEval);
-        var listaEval =resultEval.body.data;      
+        var resultEval = await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluados',objEval);
+        var listaEval = resultEval.body.data;      
         //
         
         console.log(objEval)
