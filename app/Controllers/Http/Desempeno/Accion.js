@@ -33,7 +33,7 @@ class Accion {
         }
         var resultEval = await api.execApi(request.hostname(), '/Desempeno/Proceso/getListaEvaluados', objEval);
         var listaEval = resultEval.body.data;
-       //console.log(listaEval)
+       ////console.log(listaEval)
         //
 
         var persona = {
@@ -209,7 +209,7 @@ class Accion {
         }
         var resultEval = await api.execApi(request.hostname(), '/Desempeno/Proceso/getListaEvaluados', objEval);
         var listaEval = resultEval.body.data;
-       //console.log(listaEval)
+       ////console.log(listaEval)
         //
 
         var persona = {
@@ -301,7 +301,7 @@ class Accion {
         }
         var resultEval = await api.execApi(request.hostname(), '/Desempeno/Proceso/getListaEvaluados', objEval);
         var listaEval = resultEval.body.data;
-    //console.log(listaEval)
+    ////console.log(listaEval)
         //
 
         var persona = {
@@ -353,7 +353,7 @@ class Accion {
         }
         var resultObservacion =await api.execApi(request.hostname(),'/Desempeno/Accion/getObservacionAccionColaborador',objObservacion);
         var dataObservacion =resultObservacion.body.data;
-        console.log(objObservacion);
+        //console.log(objObservacion);
 
         var textoObservacion="";
         if (dataObservacion.length > 0){
@@ -408,7 +408,7 @@ class Accion {
             //obMail.send(cliente+ ' metas publicadas', 'jonathan.olivares@fch.cl', 'Notificación', html, request.hostname());
         }
 
-        console.log(cliente);
+        //console.log(cliente);
     }
 
 

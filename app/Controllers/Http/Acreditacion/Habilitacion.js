@@ -25,7 +25,7 @@ class Habilitacion {
         var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getProcesos',objInactivos);
         
         var procesosInactivos = result.body.data.procesos;
-       console.log(procesosActivos)
+       //console.log(procesosActivos)
         return view.render('acreditacion/habilitacion/index', {procesosActivos, procesosInactivos});
     }   
 }

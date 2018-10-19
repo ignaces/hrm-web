@@ -7,7 +7,7 @@ class Portada {
         
         var idPersona = session.get('idPersona', 'fall')
         var all =  session.get('personaLogueada')
-        
+        antl.switchLocale('es');
         if(all==null){
             return view.render('account/login');
         }
@@ -56,13 +56,10 @@ class Portada {
             
         }
         
-        
-        
-        antl.switchLocale('es')
          
        
         var rstl = session.put('totalCol',talentos.Total)
-        //console.log(rstl);
+        ////console.log(rstl);
        
         obj={
             idProceso:"",
@@ -83,7 +80,8 @@ class Portada {
             cliente="hrmdev"
         }
         var etag = `app_${cliente}`
-
+//console.log(antl)
+//console.log(etag)
         var texto = "";
         var mensajeTitulo = "";
         if(mensajeResult.length > 0)
@@ -93,7 +91,12 @@ class Portada {
         }
         
         return view.render('core/welcome',  {etag,user,procesos,persona,menu,talentos,condicion,procesosEde,mensaje:texto,mensajeTitulo,miperfil:perfilResult});
-    }   
+    }
+    
+    async cambioIdioma  ({ view,request, response, auth, session ,antl}) {
+        antl.switchLocale('pt');
+        //console.log(antl)
+    }
 }
 
 module.exports = Portada

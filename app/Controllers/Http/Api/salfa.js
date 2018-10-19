@@ -6,7 +6,7 @@ class salfa {
 
     async InformeResultado ({request,response}) {
         var val = request.input("idProceso");
-        //console.log(val)
+        ////console.log(val)
         if(val == '')
         {
             response.json("Error");

@@ -18,7 +18,7 @@ class Instrumento {
                 "idOpinante":idOpinante,
                 "tipoInstrumento":codigo
             };
-            console.log(obj)
+            //console.log(obj)
             var result = await data.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumento',obj);
 
             var instrumento = result.body;
@@ -37,7 +37,7 @@ class Instrumento {
                 "vista": request.url()
             }
 
-            //console.log(objetoInstruccion)
+            ////console.log(objetoInstruccion)
 
             var instruccion = await data.execApi(request.hostname(),'/Core/Core/getInstruccion',objetoInstruccion);
             var instruccionResult = instruccion.body.data;
@@ -69,7 +69,7 @@ class Instrumento {
                 }
             );
         } catch(e){
-            console.log(e);
+            //console.log(e);
             return null;
         }
         
@@ -109,6 +109,23 @@ class Instrumento {
         return {mensaje:"OK"}
     } 
 
+    async putRespuestaMeta({request,response, session}){
+        var idOpinante = request.input("idOpinante");
+        var idPregunta = request.input("idPregunta")
+        var idAlternativa = request.input("idAlternativa")
+        var justificacion = request.input("justificacion")
+        
+        var obj = {
+            "idMeta":idPregunta,
+            "idAlternativa":idAlternativa,
+            "justificacion":justificacion,
+            };
+            
+        var result = await data.execApi(request.hostname(),'/Desempeno/Metas/putRespuesta',obj);
+        
+        return {mensaje:"OK"}
+    } 
+
     async putRespuestaEde({request,response, session}){
 
         var idOpinante = request.input("idOpinante")
@@ -123,7 +140,7 @@ class Instrumento {
             "justificacion":justificacion,
             };
           
-        //console.log(obj);
+        ////console.log(obj);
         var result = await data.execApi(request.hostname(),'/Desempeno/Proceso/putRespuesta',obj);
 
         /*
@@ -153,7 +170,7 @@ class Instrumento {
             "finaliza": finaliza
         };
           
-        //console.log(obj);
+        ////console.log(obj);
         var result = await data.execApi(request.hostname(),'/Evaluacion/Instrumento/saveEvaluacionEde',obj);
 
         return {mensaje:"OK"}
@@ -161,9 +178,9 @@ class Instrumento {
 
     async getRespuestaCS({request,response, session}){
 
-        //console.log(obj)
+        ////console.log(obj)
         var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getRespuestaCS', {});
-        console.log (result.body)
+        //console.log (result.body)
         return result.body;
     } 
 

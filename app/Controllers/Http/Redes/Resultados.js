@@ -58,8 +58,8 @@ class Resultados {
         var preguntas = await data.execApi(request.hostname(),'/Redes/Medicion/getPreguntas',preguntas);
         var clasificaciones = await data.execApi(request.hostname(),'/Redes/Medicion/getClasificaciones', {});
         
-        //console.log(preguntas.body);
-        //console.log(graph.body.nodes);
+        ////console.log(preguntas.body);
+        ////console.log(graph.body.nodes);
         var idCodigo = 0;
         var sentido = 0;
 
@@ -75,11 +75,11 @@ class Resultados {
 
         var persona = [];
         
-        //console.log(graph.body.nodes);
+        ////console.log(graph.body.nodes);
         for(var itemParticipante in graph.body.nodes)
         {
             //arrParticipantes["nombre"][itemParticipante.];
-            //console.log(graph.body.nodes[itemParticipante].id);
+            ////console.log(graph.body.nodes[itemParticipante].id);
             var personaObj = {};
             personaObj.id               = graph.body.nodes[itemParticipante].id;
             personaObj.nombre           = graph.body.nodes[itemParticipante].properties.nombre;
@@ -88,7 +88,7 @@ class Resultados {
             personaObj.area             = graph.body.nodes[itemParticipante].properties.area;
             persona[graph.body.nodes[itemParticipante].id] = personaObj;
 
-            //console.log(persona[graph.body.nodes[itemParticipante].id]);
+            ////console.log(persona[graph.body.nodes[itemParticipante].id]);
         }
 
         var respuesta = [];
@@ -96,7 +96,7 @@ class Resultados {
         for(var itemRespuestas in graph.body.edges)
         {
             //arrParticipantes["nombre"][itemParticipante.];
-            //console.log(graph.body.nodes[itemParticipante].id);
+            ////console.log(graph.body.nodes[itemParticipante].id);
             var respuestaObj = {};
             
             respuestaObj.nombreResponde           = persona[graph.body.edges[itemRespuestas].startNode].nombre;
@@ -110,7 +110,7 @@ class Resultados {
 
             for(var itemPreguntas in preguntas.body.preguntas)
             {
-                //console.log(preguntas.body.preguntas[itemPreguntas].id+' -> '+graph.body.edges[itemRespuestas].properties.pregunta);
+                ////console.log(preguntas.body.preguntas[itemPreguntas].id+' -> '+graph.body.edges[itemRespuestas].properties.pregunta);
 
                 if(preguntas.body.preguntas[itemPreguntas].id == graph.body.edges[itemRespuestas].properties.pregunta)
                 {
@@ -125,12 +125,12 @@ class Resultados {
             respuestaObj.areaRespuesta              = persona[graph.body.edges[itemRespuestas].endNode].area;
             
             respuesta.push(respuestaObj);
-            //console.log(graph.body.edges[itemRespuestas].startNode);
-            //console.log(respuestaObj);
+            ////console.log(graph.body.edges[itemRespuestas].startNode);
+            ////console.log(respuestaObj);
         }
         
         var cabecera = Object.keys(respuestaObj);
-        //console.log(cabecera);
+        ////console.log(cabecera);
 
         var wb = {
             SheetNames: [],
@@ -139,14 +139,14 @@ class Resultados {
 
         var registros = respuesta;
         var ws_name = "Resultados";
-        //console.log(registros);
+        ////console.log(registros);
         /* make worksheet */
         var ws_data = [ 
             cabecera
         ];
 
         for (var fila in registros) {
-            //console.log(fila);
+            ////console.log(fila);
             var registro = [];
             for (var campo in cabecera) {
                 
@@ -156,7 +156,7 @@ class Resultados {
             ws_data.push(registro);
 
         }
-        console.log(ws_data);
+        //console.log(ws_data);
 
         var ws = XLSX.utils.aoa_to_sheet(ws_data);
 

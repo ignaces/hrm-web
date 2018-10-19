@@ -4,8 +4,8 @@ const data = use('App/Utils/Data')
 class Acreditacion {
     async acreditacion  ({ view,request, response, auth }) {
         
-        //console.log(auth.user.username)
-        //console.log(auth.user.id)
+        ////console.log(auth.user.username)
+        ////console.log(auth.user.id)
         var obj = {
             "idProceso":""
             
@@ -23,7 +23,7 @@ class Acreditacion {
         var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getProcesos',objInactivos);
         
         var procesosInactivos = result.body.data.procesos;
-        //console.log(procesosInactivos);
+        ////console.log(procesosInactivos);
         return view.render('/administracion/modulos/acreditacion/acreditacion', {procesosActivos, procesosInactivos});
     }
 
@@ -39,7 +39,7 @@ class Acreditacion {
         var obj = {
             "idPersonaProceso":idPersonaProceso
         };
-        console.log(obj)
+        //console.log(obj)
         var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getPersonaProceso',obj);
 
         var personaProceso = result.body.data.personaProceso[0];
@@ -90,7 +90,7 @@ class Acreditacion {
         };
         
         var result = await data.execApiPost(request.hostname(),'/Acreditacion/Proceso/addPersonaProceso',obj);
-        //console.log(result);
+        ////console.log(result);
     }
 
     async setOpinanteEvaluado({request, response, auth})
@@ -102,9 +102,9 @@ class Acreditacion {
             idPersona: idPersona,
             idDndOpinante: idDndOpinante
         };
-        //console.log(obj);
+        ////console.log(obj);
         var result = await data.execApiPost(request.hostname(),'/Acreditacion/Proceso/setOpinanteEvaluado',obj);
-        //console.log(result);
+        ////console.log(result);
     }
 }
 

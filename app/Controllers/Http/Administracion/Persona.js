@@ -4,8 +4,8 @@ const data = use('App/Utils/Data')
     class Persona {
         async registrarPersona  ({ view,request, response, session }) {
         
-            //console.log(auth.user.username)
-            //console.log(auth.user.id)//
+            ////console.log(auth.user.username)
+            ////console.log(auth.user.id)//
             var objeto = {
                 tabla:"Genero"
             };
@@ -13,7 +13,7 @@ const data = use('App/Utils/Data')
             var resultado = await data.execApi(request.hostname(),'/Utils/Listar/getCombo',objeto);
             var comboGenero = resultado.body;
             
-            //console.log(comboGenero.data);
+            ////console.log(comboGenero.data);
             return view.render('administracion/persona/registrarPersona', {comboGenero:comboGenero.data} );
         }
 
@@ -21,8 +21,8 @@ const data = use('App/Utils/Data')
 
         async doRegisterPersona  ({ view,request, response, session }) {
         
-            //console.log(auth.user.username)
-            //console.log(request.all());
+            ////console.log(auth.user.username)
+            ////console.log(request.all());
             var identificador = request.input("identificador");
             var nombres = request.input("nombres");
             var ap_pat = request.input("ap_pat");
@@ -39,7 +39,7 @@ const data = use('App/Utils/Data')
                             email:email,
                             password:identificador
                         };
-                //console.log(objetoUsuario);
+                ////console.log(objetoUsuario);
 
                 usuario = await data.execApiLocal(request.hostname(),'/Account/Register/registerPersona',objetoUsuario);
             }
@@ -60,8 +60,8 @@ const data = use('App/Utils/Data')
             var resultado = await data.execApi(request.hostname(),'/Persona/Persona/addPersona',objeto);
             var respuesta = resultado.body;
             
-            //console.log(respuesta.estado);
-            //console.log(respuesta.data);   
+            ////console.log(respuesta.estado);
+            ////console.log(respuesta.data);   
             //return view.render('administracion/persona/registrarPersona', {estado:respuesta.estado, datos:respuesta.data} );
             
             
@@ -73,10 +73,10 @@ const data = use('App/Utils/Data')
         
             var emailPre   = request.input("email");
             var obj     = { email: emailPre };
-            //console.log(obj);
+            ////console.log(obj);
 
             var resultado   = await data.execApiPost(request.hostname(),'/Usuario/Usuario/getUsuarioByEmail',obj);
-            //console.log(resultado.body);
+            ////console.log(resultado.body);
             response.json(resultado.body);
         }
     }

@@ -26,7 +26,7 @@ class MidYear {
             "idPersona": idPersona,
             "idPersonaSuperior": ""
         };
-        //console.log(objAuto)
+        ////console.log(objAuto)
         var resultPersonaAuto =await api.execApi(request.hostname(),'/Desempeno/Metas/getDataPersonasCreacionMetas',objAuto);
         var PersonaAuto =resultPersonaAuto.body.data;
 
