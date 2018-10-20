@@ -197,7 +197,8 @@ $(document).ready(function(){
                     'Datos guardados correctamente.',
                     'success'
                 );
-
+                
+                $("#lblCompetencia").html(msg.data.nivel);
                 $("#hrm_loadingPanel").hide();
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 

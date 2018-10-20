@@ -173,7 +173,7 @@ class Instrumento {
         ////console.log(obj);
         var result = await data.execApi(request.hostname(),'/Evaluacion/Instrumento/saveEvaluacionEde',obj);
 
-        return {mensaje:"OK"}
+        return {mensaje:"OK",data:result.body.data}
     } 
 
     async getRespuestaCS({request,response, session}){

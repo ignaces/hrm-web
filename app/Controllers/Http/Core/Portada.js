@@ -1,13 +1,14 @@
 'use strict'
 
 const data = use('App/Utils/Data')
-
+const Antl = use('Antl')
 class Portada {
      async welcome  ({ view,request, response, auth, session ,antl}) {
         
         var idPersona = session.get('idPersona', 'fall')
         var all =  session.get('personaLogueada')
-        antl.switchLocale('es');
+        Antl.bootLoader();
+        Antl.switchLocale('es');
         if(all==null){
             return view.render('account/login');
         }
