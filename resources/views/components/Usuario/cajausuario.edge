@@ -4,7 +4,7 @@
         <div class="clearfix"></div>
         <div class="member-card">
                 @if(miperfil.length>0)
-                    <a href="{{miperfil[0].ruta}}">
+                    <!--<a href="{{miperfil[0].ruta}}">
                         <div style="margin: 0 auto;">              
                         <img src='{{persona.imageUser}}' class="img-circle img-thumbnail" alt="colaborador/a" width="88px" >              
                         </div>
@@ -12,7 +12,14 @@
                             <h5 class="m-b-">{{persona.nombres}} {{persona.apellidoPaterno}} {{persona.apellidoMaterno}}</h5>
                             <p class="text-muted font-12">{{persona.cargo}}</p>
                         </div>                                                   
-                    </a>
+                    </a>-->
+                    <div style="margin: 0 auto;">              
+                    <img src='{{persona.imageUser}}' class="img-circle img-thumbnail" alt="colaborador/a" width="88px" >              
+                    </div>
+                    <div class="">
+                        <h5 class="m-b-">{{persona.nombres}} {{persona.apellidoPaterno}} {{persona.apellidoMaterno}}</h5>
+                        <p class="text-muted font-12">{{persona.cargo}}</p>
+                    </div>     
                 @else
                 <div style="margin: 0 auto;">              
                   <img src='{{persona.imageUser}}' class="img-circle img-thumbnail" alt="colaborador/a" width="88px" >              

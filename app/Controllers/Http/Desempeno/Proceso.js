@@ -11,12 +11,15 @@ class Proceso {
         var idPersona = session.get('idPersona', 'fail')
         var idProceso = request.input("idProceso")
         //cencosud brasil
+        antl.switchLocale('es');
         if(idProceso == '8af63afd-c680-11e8-8771-bc764e100f2b')
         {
             antl.switchLocale('pt');
             ////console.log(antl)
         }
-        //////console.log(request.all());
+        
+
+        //console.log(request.all());
         session.put('idProceso',idProceso);
         
         //Datos Proceso
@@ -83,9 +86,19 @@ class Proceso {
         if(cliente=="localhost"){
             cliente="hrmdev"
         }
-        var etag = `app_${cliente}`
         
-        return view.render('desempeno/portada',{etag, etapasProceso,datosMenu,persona,PersonaEde,datosProceso,etapa,tareas});
+        var mensaje = await api.execApi(request.hostname(),'/Core/Empresa/getMensaje',{});
+        var mensajeResult =mensaje.body.data;
+
+        var etag = `app_${cliente}`
+        var texto = "";
+        var mensajeTitulo = "";
+        if(mensajeResult.length > 0)
+        {
+            texto = mensajeResult[0].texto;
+            mensajeTitulo = mensajeResult[0].titulo;
+        }
+        return view.render('desempeno/portada',{etag, etapasProceso,datosMenu,persona,PersonaEde,datosProceso,etapa,tareas,mensaje:texto,mensajeTitulo});
     }
 
 
@@ -239,6 +252,7 @@ class Proceso {
         }
         var resultFunc=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluadosGrupal',objEval);
         var eGrupal = resultFunc.body.data;
+        
         return view.render('desempeno/evaluacionGrupal',{competencias:eGrupal.competencias,evaluados:eGrupal.evaluados});
     }
 
@@ -289,14 +303,19 @@ class Proceso {
             var result = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumentoEde',obj);
 
             var instrumento = result.body;
-
+            
             var result2 = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getEscala',obj);
 
             //////console.log(result2);
             var escala = result2;
             //////console.log(escala.body.data);
         
-        return view.render('desempeno/evalEjecutivos', {idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa, escala: escala.body.data});
+            var result3 = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getPromedioGeneral',obj);
+
+            //console.log(result2);
+            var promedioGeneral = result3;
+            console.log(promedioGeneral.body)
+        return view.render('desempeno/evalEjecutivos', {idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa, escala: escala.body.data, promedioGeneral: promedioGeneral.body});
     }
 
     async evalComportamientosEjecutivos ({view,request, response}) {
