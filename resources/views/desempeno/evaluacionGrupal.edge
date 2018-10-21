@@ -68,7 +68,7 @@
 @section('scripts')
     
 
-<script src="/assets/js/dist/Instrumento.min.js?v30s"></script>
+<script src="/assets/js/dist/InstrumentoGlobal.min.js?v30s"></script>
 <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
 <script src="/assets/plugins/jquery-toastr/jquery.toast.min.js" type="text/javascript"></script>
 <script>
@@ -89,19 +89,12 @@ var suma = function(obj){
         }
         
     });
+
     if(conValor==variables){
-        var pr = sum/variables;
-        if(pr>=2.5 && pr<=3){
-            promedio="A";
-        }
-        if(pr>=1.7 && pr<2.5){
-            promedio="B";
-        }
-        if(pr>=0 && pr<1.7){
-            promedio="A";
-        }
-                
-        $("#C_"+id).html(promedio);
+        /*calcular
+            $("#C_"+id).html(promedio);
+        */
+        
     }
     
 }
@@ -132,45 +125,7 @@ var suma = function(obj){
             </div> <!--<div class="panel panel-border panel-primary">-->
         </div>
 </div>
-  <!--escala-->
-  <!--<div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-border panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Escala de Evaluacion</h3>
-                </div>
-                
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-4">
-                        <span>
-                            <b><h1 style="text-align: center;">C</h1></b>
-                        </span>
-                        <span>
-                            <b><p style="text-align: center;" >Mayormente No</p></b>
-                        </span>
-                    </div>
-                    <div class="col-md-4">
-                        <span>
-                            <b><h1 style="text-align: center;">B</h1></b>
-                        </span>
-                        <span>
-                            <b><p style="text-align: center;" >A Veces</p></b>
-                        </span>
-                    </div>
-                    <div class="col-md-4">
-                        <span>
-                            <b><h1 style="text-align: center;">A</h1></b>
-                        </span>
-                        <span>
-                            <b><p style="text-align: center;" >Mayormente Si</p></b>
-                        </span>
-                    </div>
-            </div>
-            </div>
-            </div>
-        </div>
-    </div>-->
+  
     
 {{--evaluacion--}}
     <div class="row">
@@ -222,15 +177,15 @@ var suma = function(obj){
                                                                 @if(competencia.disabled==true)
                                                                     <select  class="form-control" disabled>
                                                                 @else
-                                                                <select id="{{$parent.evaluado.idOpinante}}_{{competencia.idCompetencia}}" class="form-control {{$parent.evaluado.idOpinante}}" onchange="suma(this)">
+                                                                <select id="{{$parent.evaluado.idOpinante}}_{{competencia.idCriterio}}" class="form-control {{$parent.evaluado.idOpinante}} r_alternativa">
                                                                 @endif    
                                                                 <option>-</option>
                                                                 @each(nivel in competencia.niveles)
                                                                 
                                                                     @if(nivel.selected==true)
-                                                                        <option selected value="{{nivel.valor}}">{{nivel.nombre}}</option>
+                                                                        <option selected value="{{nivel.id}}">{{nivel.nombre}}</option>
                                                                     @else
-                                                                        <option value="{{nivel.valor}}">{{nivel.nombre}}</option>
+                                                                        <option value="{{nivel.id}}">{{nivel.nombre}}</option>
                                                                     @endif
                                                                     
                                                                 @endeach
@@ -242,9 +197,7 @@ var suma = function(obj){
 
                                                         
                                                         <td style="text-align: center; vertical-align: middle;">
-                                                            <textarea id="OBS_{{evaluado.idOpinante}}">
-                                                                
-                                                            </textarea>
+                                                            <textarea id="OBS_{{evaluado.idOpinante}}" class="txt_justificacion">{{evaluado.observacion}}</textarea>
                                                         </td>
                                                         
                                                     <td style="text-align: center; vertical-align: middle; font-weight: bold;" id="C_{{evaluado.idOpinante}}">{{evaluado.resultado.competencias.nivel}}</td>

@@ -140,7 +140,7 @@ class Instrumento {
             "justificacion":justificacion,
             };
           
-        ////console.log(obj);
+        
         var result = await data.execApi(request.hostname(),'/Desempeno/Proceso/putRespuesta',obj);
 
         /*
@@ -155,7 +155,7 @@ class Instrumento {
             var resultUpd = await data.execApi(request.hostname(),'/Acreditacion/Proceso/setOpinanteEvaluadoCS',objUpd);
         }
         */
-        return {mensaje:"OK"}
+        return result.body;
     } 
 
     async saveEvaluacionEde({request,response, session}){
