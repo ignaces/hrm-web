@@ -11,6 +11,7 @@ class Proceso {
         var idPersona = session.get('idPersona', 'fail')
         var idProceso = request.input("idProceso")
         //cencosud brasil
+        antl.switchLocale('es');
         if(idProceso == '8af63afd-c680-11e8-8771-bc764e100f2b')
         {
             antl.switchLocale('pt');
@@ -239,6 +240,7 @@ class Proceso {
         }
         var resultFunc=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluadosGrupal',objEval);
         var eGrupal = resultFunc.body.data;
+        
         return view.render('desempeno/evaluacionGrupal',{competencias:eGrupal.competencias,evaluados:eGrupal.evaluados});
     }
 
@@ -289,7 +291,7 @@ class Proceso {
             var result = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumentoEde',obj);
 
             var instrumento = result.body;
-
+            
             var result2 = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getEscala',obj);
 
             //////console.log(result2);

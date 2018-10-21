@@ -197,7 +197,10 @@ $(document).ready(function(){
                     'Datos guardados correctamente.',
                     'success'
                 );
-
+                
+                $("#lblCompetencia").html(msg.data.resultadoCompetencias.nivel);
+                $("#lblMetas").html(msg.data.resultadoMetas.nivel);
+                $("#lblGlobal").html(msg.data.resultadoGlobal.nivel);
                 $("#hrm_loadingPanel").hide();
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 

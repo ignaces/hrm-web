@@ -17,7 +17,7 @@ const Route = use('Route')
 const Helpers = use('Helpers')
 const {ioc} = require('@adonisjs/fold')
 var util = require('util')
-
+const Antl = use('Antl')
 //Route.on('/').render('welcome').middleware('autenticacion')
 
 Route.get('/', 'Core/Portada.welcome').middleware('autenticacion')
@@ -72,7 +72,6 @@ Route.any('/:module/:controller/:action',  ({view ,request, response,params,auth
     const controller = params.controller
     
     const action = params.action
-    
     
     const controllerPath = `App/Controllers/Http/${module}`
     
