@@ -1,13 +1,14 @@
 'use strict'
 
 const data = use('App/Utils/Data')
-
+const Antl = use('Antl')
 class Portada {
      async welcome  ({ view,request, response, auth, session ,antl}) {
         
         var idPersona = session.get('idPersona', 'fall')
         var all =  session.get('personaLogueada')
-        
+        Antl.bootLoader();
+        Antl.switchLocale('es');
         if(all==null){
             return view.render('account/login');
         }
@@ -59,7 +60,7 @@ class Portada {
          
        
         var rstl = session.put('totalCol',talentos.Total)
-        //console.log(rstl);
+        ////console.log(rstl);
        
         obj={
             idProceso:"",
@@ -80,8 +81,8 @@ class Portada {
             cliente="hrmdev"
         }
         var etag = `app_${cliente}`
-console.log(antl)
-console.log(etag)
+//console.log(antl)
+//console.log(etag)
         var texto = "";
         var mensajeTitulo = "";
         if(mensajeResult.length > 0)
@@ -92,9 +93,10 @@ console.log(etag)
         
         return view.render('core/welcome',  {etag,user,procesos,persona,menu,talentos,condicion,procesosEde,mensaje:texto,mensajeTitulo,miperfil:perfilResult});
     }
+    
     async cambioIdioma  ({ view,request, response, auth, session ,antl}) {
         antl.switchLocale('pt');
-        console.log(antl)
+        //console.log(antl)
     }
 }
 

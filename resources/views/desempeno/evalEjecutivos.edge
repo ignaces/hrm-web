@@ -513,8 +513,53 @@
                             </div>
                         </div>
         </div>
+<<<<<<< HEAD
         
         @!component('components.Desempeno.cajaPromedioGeneral',data={promedioGeneral:promedioGeneral})
+=======
+        <!--ESTO DEBE SER UNA COMPONENTE QUE MUESTRE LAS COMPETENCIAS CON SU VALOR POR ANGULO 
+            ¿DEPENDIENDO DE SI ESTÁ COMPLETO O NO? FALTA DISEÑO SE DEJA CON style="display:none"
+        -->
+        <div class="col-lg-12" style="display:none">
+                <div class="panel panel-color panel-primary">
+                    <div class="panel-heading ">
+                            <div class="pull-right">
+                                    <!--<p class="panel-sub-title text-muted">
+                                        <div class="badge badge-topbar bg-green"><i class="fa fa-percent"></i> 60% <i class="fa fa-check"></i></div>
+                                        <div class="badge bg-red"><i class="fa fa-flag-checkered"></i> 2<i class="fa fa-exclamation-circle"></i></div>
+                                    </p>-->
+                                </div>
+                                <h3 class="panel-title" >Promedio General por Grupo de Competencias</h3>
+                    </div> 
+                    <div class="panel-body">
+                        <table class="table m-0 table-colored-bordered table-bordered-primary">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Competencia</th><th scope="col">Promedio Autoevaluación</th><th scope="col">Promedio Evaluador</th><th scope="col">Promedio Evaluador Funcional</th>
+                                </tr>
+                            </thead>
+                            <tbody > 
+                            
+                            <tr>
+                                <td align="left">En mi cabeza el cliente siempre primero  </td><td align="center">A</td><td align="center">C</td> <td align="center">C</td>
+                            </tr>
+                            <tr>
+                                <td align="left">Culturas fuertes centradas en las personas</td><td align="center">B</td><td align="center">C</td> <td align="center">C</td>
+                            </tr><tr>
+                                <td align="left">El Talento individual al servicio del equipo</td><td align="center">B</td><td align="center">B</td> <td align="center">B</td>
+                            </tr><tr>
+                                <td align="left">Mentalidad de Dueño</td><td align="center">B</td><td align="center">C</td> <td align="center">C</td>
+                            </tr><tr>
+                                <td align="left">Evolución y desafíos permanentes</td><td align="center">B</td><td align="center">C</td> <td align="center">C</td>
+                            </tr><tr>
+                                <td align="left">Entregamos Resultados y Avanzamos</td><td align="center">B</td><td align="center">B</td> <td align="center">B</td>
+                            </tr>
+                        </tbody></table>
+                    </div>
+                </div>           
+
+        </div> 
+>>>>>>> d98e43e36e15205b13a48bc31f5988c808ec0bab
 
         <div class="col-lg-12">
                 <div class="panel panel-color panel-primary">
@@ -546,7 +591,7 @@
                                             <span id="ctl00_Principal_LBPRRC">0.80</span>
                                         </td-->
                                         <td align="center" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
-                                            <span id="ctl00_Principal_LBPRLC">C</span>
+                                            <span id="lblCompetencia">{{instrumento.resultadoCompetencias.nivel}}</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -557,14 +602,14 @@
                                             <span id="ctl00_Principal_LBPRRM">0.00</span>
                                         </td-->
                                         <td align="center" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
-                                            <span id="ctl00_Principal_LBPRLM">B</span>
+                                            <span id="lblMetas">{{instrumento.resultadoMetas.nivel}}</span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td bgcolor="#F7F7DE" height="20" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
                                             Resultado Global</td>
                                         <td align="center" bgcolor="#F7F7DE" colspan="2" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0; text-align: center;">
-                                            <span id="ctl00_Principal_LBPRRG">CB</span>
+                                            <span id="lblGlobal">{{instrumento.resultadoGlobal.nivel}}</span>
                                         </td>
                                     </tr>
                                     <!--<tr>

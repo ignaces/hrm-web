@@ -60,7 +60,7 @@ class UserController {
 
             var u = cambioClave.body.data;
 
-            console.log('req cambio ' + u[0].requiereCambioClave);
+            //console.log('req cambio ' + u[0].requiereCambioClave);
             session.put('requiere_cambio_clave', u[0].requiereCambioClave);
 
             if(u[0].requiereCambioClave == 1)
@@ -69,7 +69,7 @@ class UserController {
             }
 
           }catch(err){
-            console.log(err)
+            //console.log(err)
           }
           
 
@@ -127,12 +127,12 @@ class UserController {
         });
         
         const usuarios = result.body
-        console.log(usuarios)
+        //console.log(usuarios)
         return usuarios;
       }
 
       async cambioIdioma  ({ view,request, response, auth, session ,antl}) {
-        console.log("qq")
+        //console.log("qq")
     }
 }
 module.exports = UserController

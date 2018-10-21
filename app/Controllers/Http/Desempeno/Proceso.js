@@ -5,15 +5,17 @@ const Antl = use('Antl');
 
 class Proceso {
     
+    
     async portada ({view,request, response, auth, session, antl}) {
         
         var idPersona = session.get('idPersona', 'fail')
         var idProceso = request.input("idProceso")
         //cencosud brasil
+        antl.switchLocale('es');
         if(idProceso == '8af63afd-c680-11e8-8771-bc764e100f2b')
         {
             antl.switchLocale('pt');
-            console.log(antl)
+            ////console.log(antl)
         }
         
 
@@ -29,7 +31,7 @@ class Proceso {
         var datosProceso =resultProceso.body.data[0];
 
         session.put('dataProceso',datosProceso)
-        console.log(datosProceso);
+        ////console.log(datosProceso);
 
         //Etapas Proceso
         var objEtapasProceso = {
@@ -38,7 +40,7 @@ class Proceso {
         };
         var resultEtapasProceso=await api.execApi(request.hostname(),'/Desempeno/Proceso/getEtapas',objEtapasProceso);
         var etapasProceso =resultEtapasProceso.body.data;
-        console.log(etapasProceso);
+        ////console.log(etapasProceso);
 
         //Menu Contextual
         var objMenuContextual = {
@@ -48,7 +50,7 @@ class Proceso {
         var resultMenu =await api.execApi(request.hostname(),'/Desempeno/Proceso/getMenuUsuario',objMenuContextual);
         var datosMenu =resultMenu.body.data;
         //
-        //console.log(datosMenu);
+        //////console.log(datosMenu);
         //Datos Persona
         var user={usuario:auth.user}
         var persona = session.get('personaLogueada')
@@ -57,8 +59,8 @@ class Proceso {
             "idProceso":idProceso,
             "idPersona":idPersona
         };
-        //console.log(idProceso)
-        //console.log(idPersona)
+        //////console.log(idProceso)
+        //////console.log(idPersona)
         var resultPersonaEde =await api.execApi(request.hostname(),'/Desempeno/Proceso/getProcesoPersona',objdatosPersona);
         var PersonaEde =resultPersonaEde.body.data;
         
@@ -127,7 +129,7 @@ class Proceso {
 
 
     async etapa ({view,request, response, auth, session, params, antl}) {
-        //console.log("A");
+        //////console.log("A");
         var idPersona = session.get('idPersona', 'fail')
         var idEtapa = request.input("idEtapa")
         var idProceso = session.get('idProceso')
@@ -137,9 +139,9 @@ class Proceso {
         if(idProceso == '8af63afd-c680-11e8-8771-bc764e100f2b') 
         {
             antl.switchLocale('pt');
-            console.log(antl)
+            ////console.log(antl)
         }
-        console.log(datosProceso);
+        ////console.log(datosProceso);
 
         session.put('idEtapa',idEtapa)
         session.put('referer',`/Desempeno/Proceso/etapa?idEtapa=${idEtapa}`)
@@ -164,7 +166,6 @@ class Proceso {
         var resultMenu =await api.execApi(request.hostname(),'/Desempeno/Proceso/getMenuUsuario',objMenuContextual);
         var datosMenu =resultMenu.body.data;
         //
-        
 
         //Etapa
         var objEtapa = {
@@ -175,9 +176,9 @@ class Proceso {
         var etapa =resultEtapa.body.data;
 
         //
-        console.log("AA")
-        console.log(idEtapa)
-        console.log(idPersona)
+        ////console.log("AA")
+        ////console.log(idEtapa)
+        ////console.log(idPersona)
         var cliente = request.hostname().split(".")[0]
         if(cliente=="localhost"){
             cliente="hrmdev"
@@ -191,8 +192,8 @@ class Proceso {
             "codigoActor":"EVAL",
             "idAccionPersona":""
         }
-        var resultEval=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluados',objEval);
-        var listaEval =resultEval.body.data;      
+        var resultEval = await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluados',objEval);
+        var listaEval = resultEval.body.data;      
         //
         
         
@@ -207,7 +208,7 @@ class Proceso {
         var resultSupe=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluados',objSupe);
         var listaSupe =resultSupe.body.data;      
         //
-        //console.log(objSupe)
+        //////console.log(objSupe)
 
         //Lista Asce
         var objAsc={
@@ -216,7 +217,7 @@ class Proceso {
             "codigoActor":"ASC",
             "idAccionPersona":"" 
         }
-        //console.log(objAsc);
+        //////console.log(objAsc);
         var resultAsc=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluados',objAsc);
         var listaAsc =resultAsc.body.data;  
 
@@ -227,7 +228,7 @@ class Proceso {
             "codigoActor":"FUNC",
             "idAccionPersona":"" 
         }
-        //console.log(objFunc);
+        //////console.log(objFunc);
         var resultFunc=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluados',objFunc);
         var listaFunc =resultFunc.body.data;  
         
@@ -251,6 +252,7 @@ class Proceso {
         }
         var resultFunc=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluadosGrupal',objEval);
         var eGrupal = resultFunc.body.data;
+        
         return view.render('desempeno/evaluacionGrupal',{competencias:eGrupal.competencias,evaluados:eGrupal.evaluados});
     }
 
@@ -289,24 +291,24 @@ class Proceso {
             var idOpinante  = request.input("idOpinante");
             var idProceso   = request.input("idProceso");
             var idEtapa     = request.input("idEtapa");
-            //console.log(idOpinante);
+            //////console.log(idOpinante);
             //var codigo = all.codigo
             //var codigoComponente = all.codigoComponente
     
             var obj = {
                 "idOpinante":idOpinante
             };
-            //console.log(obj);
+            //////console.log(obj);
 
             var result = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumentoEde',obj);
 
             var instrumento = result.body;
-
+            
             var result2 = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getEscala',obj);
 
-            //console.log(result2);
+            //////console.log(result2);
             var escala = result2;
-            //console.log(escala.body.data);
+            //////console.log(escala.body.data);
         
             var result3 = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getPromedioGeneral',obj);
 

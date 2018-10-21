@@ -198,7 +198,6 @@ import _ from 'lodash';
                     type: 'success'
                 }).then(function(result)  {
                     if (result) {
-                        alert("ddsda")
                         location.reload();
                     };
                     $("#hrm_loadingPanel").hide();
@@ -343,6 +342,5 @@ import _ from 'lodash';
           });
     });
 
-    /*$('.table-responsive').DataTable();*/
-
-}); */
+    /*$('.table-responsive').DataTable();
+});*/

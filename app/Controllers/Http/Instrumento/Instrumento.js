@@ -18,7 +18,7 @@ class Instrumento {
                 "idOpinante":idOpinante,
                 "tipoInstrumento":codigo
             };
-            console.log(obj)
+            //console.log(obj)
             var result = await data.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumento',obj);
 
             var instrumento = result.body;
@@ -37,7 +37,7 @@ class Instrumento {
                 "vista": request.url()
             }
 
-            //console.log(objetoInstruccion)
+            ////console.log(objetoInstruccion)
 
             var instruccion = await data.execApi(request.hostname(),'/Core/Core/getInstruccion',objetoInstruccion);
             var instruccionResult = instruccion.body.data;
@@ -69,7 +69,7 @@ class Instrumento {
                 }
             );
         } catch(e){
-            console.log(e);
+            //console.log(e);
             return null;
         }
         
@@ -140,7 +140,7 @@ class Instrumento {
             "justificacion":justificacion,
             };
           
-        //console.log(obj);
+        
         var result = await data.execApi(request.hostname(),'/Desempeno/Proceso/putRespuesta',obj);
 
         /*
@@ -155,7 +155,7 @@ class Instrumento {
             var resultUpd = await data.execApi(request.hostname(),'/Acreditacion/Proceso/setOpinanteEvaluadoCS',objUpd);
         }
         */
-        return {mensaje:"OK"}
+        return result.body;
     } 
 
     async saveEvaluacionEde({request,response, session}){
@@ -170,17 +170,17 @@ class Instrumento {
             "finaliza": finaliza
         };
           
-        //console.log(obj);
+        ////console.log(obj);
         var result = await data.execApi(request.hostname(),'/Evaluacion/Instrumento/saveEvaluacionEde',obj);
 
-        return {mensaje:"OK"}
+        return {mensaje:"OK",data:result.body.data}
     } 
 
     async getRespuestaCS({request,response, session}){
 
-        //console.log(obj)
+        ////console.log(obj)
         var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getRespuestaCS', {});
-        console.log (result.body)
+        //console.log (result.body)
         return result.body;
     } 
 

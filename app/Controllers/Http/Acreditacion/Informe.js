@@ -45,7 +45,7 @@ class Informe {
         var resultTCODetalle = await data.execApi(request.hostname(), '/Acreditacion/Informe/getInstrumentosTCO', obj);
         var resultadoTCODetalle = resultTCODetalle.body.data;
 
-        //console.log(resultadoDetalleEIC);
+        ////console.log(resultadoDetalleEIC);
 
         var cliente = request.hostname().split(".")[0]
 
@@ -95,7 +95,7 @@ class Informe {
 
         //var result = await got(`http://192.168.3.4:8080?url=${server}/Acreditacion/Informe/pdf?procesoPersona=${idPersona}&cd=${conDetalle}`);
         var url = `http://192.168.3.4:8080/?url=http%3A%2F%2F${server}%2FAcreditacion%2FInforme%2Fpdf%3FprocesoPersona%3D${idPersona}%26cd%3D${conDetalle}`;
-        //console.log(url);
+        ////console.log(url);
 
         var file = await wget(url, { output: 'tmp/reporte.pdf' });
 
@@ -172,7 +172,7 @@ class Informe {
             }
         }).toArray();
 
-        //console.log(clasificaciones);
+        ////console.log(clasificaciones);
 
         return view.render('acreditacion/informe/dashboard', { personas, detalle, idProceso, clasificaciones });
 

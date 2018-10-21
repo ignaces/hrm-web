@@ -54,7 +54,7 @@ class Meta {
         var resultEval=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluados',objEval);
         var listaEval =resultEval.body.data;      
         //
-        console.log(listaEval)
+        //console.log(listaEval)
 
          //Lista Supe
          var objSupe={
@@ -65,7 +65,7 @@ class Meta {
         var resultSupe=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluados',objSupe);
         var listaSupe =resultSupe.body.data;      
         //
-        console.log(listaSupe)
+        //console.log(listaSupe)
 
         return view.render('desempeno/etapa',{datosProceso,PersonaEde,datosMenu,etapa,listaEval,listaSupe});
     }
