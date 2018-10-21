@@ -1,6 +1,6 @@
 import _ from 'lodash';
 //holi
-$(document).ready(function(){
+/*$(document).ready(function(){
     
     tinymce.init({
         selector: "textarea",  // change this value according to your HTML
@@ -192,17 +192,17 @@ $(document).ready(function(){
             dataType: "json",   
             success: function (msg) {
                 
-                swal(
-                    'Guardado',
-                    'Datos guardados correctamente.',
-                    'success'
-                );
-                
-                $("#lblCompetencia").html(msg.data.resultadoCompetencias.nivel);
-                $("#lblMetas").html(msg.data.resultadoMetas.nivel);
-                $("#lblGlobal").html(msg.data.resultadoGlobal.nivel);
-                $("#hrm_loadingPanel").hide();
-            },
+                swal({
+                    title: 'Guardado',
+                    text:  'Datos guardados correctamente.',
+                    type: 'success'
+                }).then(function(result)  {
+                    if (result) {
+                        location.reload();
+                    };
+                    $("#hrm_loadingPanel").hide();
+                })
+            }, 
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
                 
                 swal(
@@ -215,7 +215,6 @@ $(document).ready(function(){
             },
             timeout: 10000
         });
-        
     });
 
     $( "#instrumento_btn_finalizar" ).click(function() {
@@ -343,6 +342,5 @@ $(document).ready(function(){
           });
     });
 
-    /*$('.table-responsive').DataTable();*/
-
-}); 
+    /*$('.table-responsive').DataTable();
+});*/
