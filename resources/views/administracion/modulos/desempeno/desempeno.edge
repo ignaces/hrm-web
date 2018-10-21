@@ -30,12 +30,12 @@
     </div>
     <div class="row">
         @if(datosProcesosActivos.length>0)
-            @!component('components.desempeno.admin.admin_cajaDesempeno',titulo = "Procesos Activos", procesos=datosProcesosActivos)        
+            @!component('components.Desempeno.admin.admin_cajaDesempeno',titulo = "Procesos Activos", procesos=datosProcesosActivos)        
         @endif
     </div>
     <div class="row">
         @if(datosProcesosInactivos.length>0)
-             @!component('components.desempeno.admin.admin_cajaDesempeno',titulo = "Procesos Inactivos", procesos=datosProcesosInactivos) 
+             @!component('components.Desempeno.admin.admin_cajaDesempeno',titulo = "Procesos Inactivos", procesos=datosProcesosInactivos) 
         @endif
     </div>
 
