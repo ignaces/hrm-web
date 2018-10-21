@@ -7,14 +7,94 @@
          <link href="/assets/plugins/ede/progressbar/progressbar.css" rel="stylesheet" type="text/css" />    
 @endsection
 
+@section('scripts')
+    
+    <script>
+        $(document).ready(function(){
+            
+            $(".bHistorico").click(function(){
+                var id = $( this ).attr('id').split('_')[1];
+                    
+                $.ajax({
+                    type: "GET",
+                    url: "/Desempeno/Proceso/getHistoricos",
+                    contentType: "application/json; charset=utf-8",
+                    data: {idEvaluado:id},
+                    dataType: "json",   
+                    success: function (msg) {
+                             comHistoricos.archivos=msg;
+                
+                        $("#modalHistorico").modal("show")
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                        
+                        swal(
+                            'Error',
+                            'No pudimos mostrar los archivos intenta más tarde',
+                            'error'
+                        );
 
+                        $("#hrm_loadingPanel").hide();
+                    },
+                    timeout: 10000
+                });
+               
+            });
+        });
+    var comHistoricos = new Vue({
+        el: '#mHistoricos',
+        data: {
+            archivos: []
+        },
+        methods:{
+            download:function(id){
+                
+            },
+        }
+    });
+
+    </script>
+@endsection
 @section('content')
 
+<div id="modalHistorico" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="full-width-modalLabel" aria-hidden="true" style="display: none;">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            <h4 class="modal-title" id="full-width-modalLabel">Historicos</h4>
+                                        </div>
+                                        <div class="modal-body" id="mHistoricos">
+                                            <div class="table-responsive">
+                                                <table class="table m-0 table-colored table-primary">
+                                                    <thead>
+                                                    <tr >
+                                                        <th>Año</th>
+                                                        <th>Archivo</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr v-for="archivo in archivos">
+                                                            <th scope="row">@{{archivo.periodo}}</th>
+                                                            <td>
+                                                                <button v-on:click="download(archivo.id)" class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-file-pdf-o"></i> Descargar</button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cerrar</button>
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div><!-- /.modal -->
 
 <div class="row" >
     <div class="col-md-2">
        @!component('components.Desempeno.widgetInfoEtapa',datos=etapa,nombreProceso=dataProceso.nombre)
-      @!component('components.Desempeno.widgetUser',datos=data,datamenu=datosMenu,persona=PersonaEde)
+       @!component('components.Desempeno.widgetUser',datos=data,datamenu=datosMenu,persona=PersonaEde)
     </div>
     <div class="col-md-10">
         

@@ -238,6 +238,27 @@ class Proceso {
     async evalBrasil ({view,request, response}) {
         return view.render('desempeno/evalBrasil');
     }
+    async getHistoricos ({view,request, response}) {
+        var idEvaluado=request.input("idEvaluado");
+        
+        var archivos=[
+            {
+                id:"121212",
+                periodo:"2017"
+            },
+            {
+                id:"121212",
+                periodo:"2016"
+            }
+            ,
+            {
+                id:"121212",
+                periodo:"2015"
+            }
+        ];
+        return archivos;
+    }
+    
 
     async evalGrupal ({view,request, response,session}) {
         var idPersona = session.get('idPersona', 'fail')
