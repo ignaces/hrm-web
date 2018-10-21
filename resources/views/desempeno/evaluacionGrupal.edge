@@ -226,7 +226,13 @@ var suma = function(obj){
                                                                 @endif    
                                                                 <option>-</option>
                                                                 @each(nivel in competencia.niveles)
-                                                                    <option value="{{nivel.valor}}">{{nivel.nombre}}</option>
+                                                                
+                                                                    @if(nivel.selected==true)
+                                                                        <option selected value="{{nivel.valor}}">{{nivel.nombre}}</option>
+                                                                    @else
+                                                                        <option value="{{nivel.valor}}">{{nivel.nombre}}</option>
+                                                                    @endif
+                                                                    
                                                                 @endeach
                                                                     
                                                                 </select>
@@ -241,8 +247,8 @@ var suma = function(obj){
                                                             </textarea>
                                                         </td>
                                                         
-                                                    <td style="text-align: center; vertical-align: middle; font-weight: bold;" id="C_{{evaluado.idOpinante}}"></td>
-                                                    <td style="text-align: center; vertical-align: middle; font-weight: bold;" id="M_{{evaluado.idOpinante}}"></td>
+                                                    <td style="text-align: center; vertical-align: middle; font-weight: bold;" id="C_{{evaluado.idOpinante}}">{{evaluado.resultado.competencias.nivel}}</td>
+                                                    <td style="text-align: center; vertical-align: middle; font-weight: bold;" id="M_{{evaluado.idOpinante}}">{{evaluado.resultado.metas.nivel}}</td>
                                                     </tr>
                                                         @endeach
                                                         
