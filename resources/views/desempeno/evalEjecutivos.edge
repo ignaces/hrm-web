@@ -266,15 +266,16 @@
             dataType: "json",   
             success: function (msg) {
                 
+                $("#hrm_loadingPanel").hide();
                 swal({
                     title: 'Guardado',
                     text:  'Datos guardados correctamente.',
                     type: 'success'
                 }).then(function(result)  {
                     if (result) {
+
                         location.reload();
                     };
-                    $("#hrm_loadingPanel").hide();
                 })
             }, 
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
