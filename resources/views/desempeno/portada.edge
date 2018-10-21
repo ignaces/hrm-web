@@ -11,7 +11,10 @@
 @section('scripts2')
     <script>
         $(document).ready(function(){
+            if("{{mensaje}}" != "")
+            {
                 $("#modalMensaje").modal('show');
+            }
         });
     </script>
 
@@ -59,7 +62,6 @@
                 </div>
                 <div class="modal-body-lg">
                     {{{mensaje}}}
-                    <img src="/assets/images/empresa/comunicado ejecutivos_2017_ESP_alta.jpg"></img>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->

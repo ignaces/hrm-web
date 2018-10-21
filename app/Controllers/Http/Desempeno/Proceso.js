@@ -15,6 +15,8 @@ class Proceso {
             antl.switchLocale('pt');
             console.log(antl)
         }
+        
+
         //console.log(request.all());
         session.put('idProceso',idProceso);
         
@@ -82,9 +84,19 @@ class Proceso {
         if(cliente=="localhost"){
             cliente="hrmdev"
         }
-        var etag = `app_${cliente}`
         
-        return view.render('desempeno/portada',{etag, etapasProceso,datosMenu,persona,PersonaEde,datosProceso,etapa,tareas});
+        var mensaje = await api.execApi(request.hostname(),'/Core/Empresa/getMensaje',{});
+        var mensajeResult =mensaje.body.data;
+
+        var etag = `app_${cliente}`
+        var texto = "";
+        var mensajeTitulo = "";
+        if(mensajeResult.length > 0)
+        {
+            texto = mensajeResult[0].texto;
+            mensajeTitulo = mensajeResult[0].titulo;
+        }
+        return view.render('desempeno/portada',{etag, etapasProceso,datosMenu,persona,PersonaEde,datosProceso,etapa,tareas,mensaje:texto,mensajeTitulo});
     }
 
 
@@ -296,7 +308,12 @@ class Proceso {
             var escala = result2;
             //console.log(escala.body.data);
         
-        return view.render('desempeno/evalEjecutivos', {idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa, escala: escala.body.data});
+            var result3 = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getPromedioGeneral',obj);
+
+            //console.log(result2);
+            var promedioGeneral = result3;
+            console.log(promedioGeneral.body)
+        return view.render('desempeno/evalEjecutivos', {idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa, escala: escala.body.data, promedioGeneral: promedioGeneral.body});
     }
 
     async evalComportamientosEjecutivos ({view,request, response}) {
