@@ -48,7 +48,13 @@
         },
         methods:{
             download:function(archivo){
-                
+                /*{
+                id:"ejecutivos_2017",
+                periodo:"2017",
+                identificador:identificador
+            }*/
+            // link al reporte
+                window.location.href="http://hrmassets.enovum.cl/cs/files/ede/rh/"+archivo.id+"/"+archivo.identificador+".pdf"
             },
         }
     });
