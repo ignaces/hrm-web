@@ -87,16 +87,21 @@ class Proceso {
             cliente="hrmdev"
         }
         
-        var mensaje = await api.execApi(request.hostname(),'/Core/Empresa/getMensaje',{});
+        var objMensaje = {
+            "idProceso":idProceso
+        };
+
+        var mensaje = await api.execApi(request.hostname(),'/Desempeno/Proceso/getMensaje', objMensaje);
         var mensajeResult =mensaje.body.data;
 
         var etag = `app_${cliente}`
         var texto = "";
         var mensajeTitulo = "";
+        console.log(mensajeResult[0])
         if(mensajeResult.length > 0)
         {
-            texto = mensajeResult[0].texto;
-            mensajeTitulo = mensajeResult[0].titulo;
+            texto = mensajeResult[0].mensaje;
+            mensajeTitulo = "";
         }
         return view.render('desempeno/portada',{etag, etapasProceso,datosMenu,persona,PersonaEde,datosProceso,etapa,tareas,mensaje:texto,mensajeTitulo});
     }
@@ -291,7 +296,8 @@ class Proceso {
             var idOpinante  = request.input("idOpinante");
             var idProceso   = request.input("idProceso");
             var idEtapa     = request.input("idEtapa");
-            //////console.log(idOpinante);
+            var codigo     = request.input("codigoActor");
+            console.log(codigo);
             //var codigo = all.codigo
             //var codigoComponente = all.codigoComponente
     
@@ -310,12 +316,16 @@ class Proceso {
             var escala = result2;
             //////console.log(escala.body.data);
         
-            var result3 = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getPromedioGeneral',obj);
+            var objPromedio = {
+                "idOpinante":idOpinante,
+                "codigoActor": codigo
+            };
+            var result3 = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getPromedioGeneral',objPromedio);
 
             //console.log(result2);
             var promedioGeneral = result3;
-            console.log(promedioGeneral.body)
-        return view.render('desempeno/evalEjecutivos', {idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa, escala: escala.body.data, promedioGeneral: promedioGeneral.body});
+            console.log(promedioGeneral.body[0].codigoActor)
+        return view.render('desempeno/evalEjecutivos', {idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa, escala: escala.body.data, promedioGeneral: promedioGeneral.body, codigoActor: promedioGeneral.body[0].codigoActor});
     }
 
     async evalComportamientosEjecutivos ({view,request, response}) {
