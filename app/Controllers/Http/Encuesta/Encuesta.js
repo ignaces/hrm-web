@@ -45,6 +45,7 @@
           porcentaje = Math.round(porcentaje);
           instrumento.avance= `${porcentaje}`;
           instrumento.pp='components.Evaluacion.preguntaLickertGrilla';
+          
           return view.render('encuesta/instrumento',  {idEncuestaPersona:idEncuestaPersona,instrumento:instrumento});
         }
 

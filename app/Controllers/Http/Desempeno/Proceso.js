@@ -243,6 +243,45 @@ class Proceso {
     async evalBrasil ({view,request, response}) {
         return view.render('desempeno/evalBrasil');
     }
+    async getHistoricos ({view,request, response}) {
+        var idEvaluado=request.input("idEvaluado");
+
+        var obj={
+            "idProcesoPersona":idEvaluado
+        }
+        console.log(obj);
+
+        var result=await api.execApi(request.hostname(),'/Desempeno/Reporte/getIdentificador',obj);
+        var persona =result.body.data; 
+        
+        var identificador = "";
+        if(persona.length>0)
+        {
+            identificador = persona[0].identificador;
+        }
+
+        console.log(persona);
+        var archivos=[
+            {
+                id:"ejecutivos_2017",
+                periodo:"2017",
+                identificador:identificador
+            }/*,
+            {
+                id:"121212",
+                periodo:"2016"
+            }
+            ,
+            {
+                id:"121212",
+                periodo:"2015"
+            }*/
+            
+        ];
+        console.log(archivos);
+        return archivos;
+    }
+    
 
     async evalGrupal ({view,request, response,session}) {
         var idPersona = session.get('idPersona', 'fail')
