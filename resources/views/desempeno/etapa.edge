@@ -47,7 +47,7 @@
             archivos: []
         },
         methods:{
-            download:function(id){
+            download:function(archivo){
                 
             },
         }
@@ -77,7 +77,7 @@
                                                         <tr v-for="archivo in archivos">
                                                             <th scope="row">@{{archivo.periodo}}</th>
                                                             <td>
-                                                                <button v-on:click="download(archivo.id)" class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-file-pdf-o"></i> Descargar</button>
+                                                                <button v-on:click="download(archivo)" class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-file-pdf-o"></i> Descargar</button>
                                                             </td>
                                                         </tr>
                                                     </tbody>
