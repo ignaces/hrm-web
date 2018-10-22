@@ -1,25 +1,3 @@
-<style>
-		/* unvisited link */
-		a:link {
-			color: red;
-		}
-		
-		/* visited link */
-		a:visited {
-			color: green;
-		}
-		
-		/* mouse over link */
-		a:hover {
-			color: hotpink;
-		}
-		
-		/* selected link */
-		a:active {
-			color: blue;
-		}
-		</style>
-
 <div class="row">
 <div class="col-md-12">
 <div class="box box-widget widget-user-2">
@@ -50,7 +28,12 @@
             <li><a href="{{menu.link}}">{{menu.nombre}}</a></li>
 			 @endeach
 			<!--<li><a href="">Ayuda</a></li>-->
-			<li><a href="javascript:window.history.back();" style="color: white;" >Volver</a></li>
+			<li>
+				<button type="button" onclick="javascript:history.back()" class="btn btn-primary waves-effect waves-light"> 
+						<i class="fa fa-arrow-left m-r-5"></i>
+						<span>Volver</span>
+				</button>
+			</li>
 		</ul>
 	 </div>
      </div>

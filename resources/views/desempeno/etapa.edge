@@ -63,6 +63,7 @@
 @endsection
 @section('content')
 
+
 <div id="modalHistorico" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="full-width-modalLabel" aria-hidden="true" style="display: none;">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -98,6 +99,7 @@
                             </div><!-- /.modal -->
 
 <div class="row" >
+    
     <div class="col-md-2">
        @!component('components.Desempeno.widgetInfoEtapa',datos=etapa,nombreProceso=dataProceso.nombre)
        @!component('components.Desempeno.widgetUser',datos=data,datamenu=datosMenu,persona=PersonaEde)
