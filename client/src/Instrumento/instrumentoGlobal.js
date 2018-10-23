@@ -107,37 +107,7 @@ $(document).ready(function(){
         save(obj)
     });
 });
-var finish = function(obj){
-    $.ajax({
-        type: "GET",
-        url: "/Instrumento/Instrumento/saveEvaluacionEde",
-        contentType: "application/json; charset=utf-8",
-        data: obj,
-        dataType: "json",   
-        success: function (msg) {
-            
-            swal(
-                'Guardado',
-                'Evaluación Finalizada Correctamente.',
-                'success'
-            ).then(function(result){
-                $('#frmVolver').submit();
-            });
-            $("#hrm_loadingPanel").hide();
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) { 
-            
-            swal(
-                'Error',
-                'Hubo un problema al guardar sus datos, inténtelo nuevamente. Si el problema persiste, por favor, comuníquese con la mesa de ayuda.',
-                'error'
-            );
 
-            $("#hrm_loadingPanel").hide();
-        },
-        timeout: 10000
-    });
-}
 var save = function(obj){
     $.ajax({
         type: "GET",
@@ -189,7 +159,6 @@ var putRespuesta = function(idOpinante, idPregunta, idAlternativa, justificacion
         dataType: "json",   
         success: function (msg) {
             //console.log("OK?23");
-            console.log(msg.data.resultados)
             $("#C_"+idOpinante).html(msg.data.resultados.competencias.nivel);
             $("#M_"+idOpinante).html(msg.data.resultados.metas.nivel);
             $.toast({

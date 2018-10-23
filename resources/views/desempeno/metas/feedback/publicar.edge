@@ -117,13 +117,24 @@
                                     <h3 class="panel-title text-white">Modelo de Competencias</h3>
                                 </div>
                                 <div class="panel-body">
-                                @each(competencia in instrumento.competencias)
-                                    @if($loop.first)
-                                        @!component('components.Evaluacion.preguntaLickertDesempenoRO',data={idOpinante:idOpinante,competencia:competencia,first:true})
-                                    @else
-                                        @!component('components.Evaluacion.preguntaLickertDesempenoRO',data={idOpinante:idOpinante,competencia:competencia,first:false})
-                                    @endif                  
-                                @endeach
+                                @if(instrumento.competencias.length >0)
+                                    @each(competencia in instrumento.competencias)
+                                        @if($loop.first)
+                                            @!component('components.Evaluacion.preguntaLickertDesempenoRO',data={idOpinante:idOpinante,competencia:competencia,first:true})
+                                        @else
+                                            @!component('components.Evaluacion.preguntaLickertDesempenoRO',data={idOpinante:idOpinante,competencia:competencia,first:false})
+                                        @endif                  
+                                    @endeach
+                                @else
+                                    <p class="text-center center">
+                                        <div class="alert alert-icon alert-warning alert-dismissible fade in" role="alert">
+                                                
+                                                <i class="mdi mdi-alert"></i>
+                                                <strong>Actualmente no existen competencias para el perfil de este colaborador.</strong>
+                                            </div>
+                                    <p>
+                                @endif
+
                                 </div>
                             </div>
                         </div>
