@@ -129,6 +129,7 @@ var putRespuesta = function(idOpinante, idPregunta, idAlternativa, justificacion
         dataType: "json",   
         success: function (msg) {
             //console.log("OK?23");
+            console.log(msg.data.resultados)
             $("#C_"+idOpinante).html(msg.data.resultados.competencias.nivel);
             $("#M_"+idOpinante).html(msg.data.resultados.metas.nivel);
             $.toast({
