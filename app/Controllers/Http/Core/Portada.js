@@ -28,7 +28,7 @@ class Portada {
         var miPerfil = await data.execApi(request.hostname(),'/Core/Componentes/getComponente',{componente:'MI_PERFIL'});
         var perfilResult = miPerfil.body.data;
 
-        
+
         
         if(perfilResult.length>0){
             perfilResult[0].ruta = perfilResult[0].ruta.replace("#idPersona",all.id)
@@ -57,19 +57,20 @@ class Portada {
             
         }
         
-         
        
         var rstl = session.put('totalCol',talentos.Total)
         ////console.log(rstl);
        
         obj={
             idProceso:"",
-            idEstado:"ACTIVO"
+            idEstado:"ACTIVO",
+            idPersona:idPersona
         }
         
-        var reultEde=await data.execApi(request.hostname(),'/Desempeno/Proceso/getProcesos',obj);
+        var reultEde=await data.execApi(request.hostname(),'/Desempeno/Proceso/getProcesosPersona',obj);
+        console.log(reultEde);
         var procesosEde =reultEde.body.data;
-
+        
         var user={usuario:auth.user}
         
         var persona = session.get('personaLogueada')

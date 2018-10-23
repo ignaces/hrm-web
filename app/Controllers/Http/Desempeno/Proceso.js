@@ -249,7 +249,7 @@ class Proceso {
         var obj={
             "idProcesoPersona":idEvaluado
         }
-        console.log(obj);
+        
 
         var result=await api.execApi(request.hostname(),'/Desempeno/Reporte/getIdentificador',obj);
         var persona =result.body.data; 
@@ -260,7 +260,7 @@ class Proceso {
             identificador = persona[0].identificador;
         }
 
-        console.log(persona);
+        
         var archivos=[
             {
                 id:"ejecutivos_2017",
@@ -278,7 +278,7 @@ class Proceso {
             }*/
             
         ];
-        console.log(archivos);
+        
         return archivos;
     }
     
@@ -408,8 +408,8 @@ class Proceso {
             var idOpinante  = request.input("idOpinante");
             var idProceso   = request.input("idProceso");
             var idEtapa     = request.input("idEtapa");
-            var codigo      = request.input("codigoActor");
-            console.log(codigo);
+            var codigo     = request.input("codigoActor");
+            
             //var codigo = all.codigo
             //var codigoComponente = all.codigoComponente
     
