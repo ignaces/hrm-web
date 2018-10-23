@@ -27,6 +27,66 @@ $(document).ready(function(){
             
         });
 
+        $( ".bFinalizar" ).click(function() {
+                
+            var id = $(this).attr('id');
+            
+
+            swal({
+                title: '¿Esta seguro de finalizar?',
+                text: "",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, finalizar',
+                cancelButtonText: 'Cancelar'
+              }).then(function(result)  {
+                if (result) {
+                    
+                    var obj = {
+                        idOpinante: id,
+                        observacion: $("#OBS_"+id).val(),
+                        finaliza: 1
+                    };
+    
+                    $("#hrm_loadingPanel").show();
+    
+                    $.ajax({
+                        type: "GET",
+                        url: "/Instrumento/Instrumento/saveEvaluacionEde",
+                        contentType: "application/json; charset=utf-8",
+                        data: obj,
+                        dataType: "json",   
+                        success: function (msg) {
+                            
+                            swal(
+                                'Guardado',
+                                'Evaluación Finalizada Correctamente.',
+                                'success'
+                            ).then(function(result){
+                                $('#frmVolver').submit();
+                            });
+                            $("#hrm_loadingPanel").hide();
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                            
+                            swal(
+                                'Error',
+                                'Hubo un problema al guardar sus datos, inténtelo nuevamente. Si el problema persiste, por favor, comuníquese con la mesa de ayuda.',
+                                'error'
+                            );
+    
+                            $("#hrm_loadingPanel").hide();
+                        },
+                        timeout: 10000
+                    });
+                }
+              });
+            
+            
+        });
+
     $( ".txt_justificacion" ).focusout(function() {  
         var id = $( this ).attr('id');
         var idAlternativa = $( this ).attr('idAlternativa');
