@@ -99,6 +99,7 @@ class Accion {
     }
 
     async pdf({ view, request, response, auth, session}) {
+        
         //var idOpinante = all.idOpinante
         //var idPersona = session.get('idPersona', 'fail')    
         var idOpinante  = request.input("idOpinante");
@@ -152,7 +153,7 @@ class Accion {
             "idPersona":idPersona
         };
         //////console.log(idProceso)
-        //////console.log(idPersona)
+        console.log(idPersona)
         var resultPersonaEde =await api.execApi(request.hostname(),'/Desempeno/Proceso/getProcesoPersona',objdatosPersona);
         var PersonaEde;
         var persona =resultPersonaEde.body.data;
@@ -170,6 +171,7 @@ class Accion {
             competenciasSpider.push(e.competencia);
             valoresSpiderAuto.push(e.valorAuto);
         });
+        
         return view.render('desempeno/informe/informeEjecutivospdf', {datosMenu,persona,PersonaEde,etapa, idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa, escala: escala.body.data, promedioGeneral: promedioGeneral.body, competenciasSpider:competenciasSpider, valoresSpiderAuto:valoresSpiderAuto });
     
     }
