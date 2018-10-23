@@ -16,7 +16,7 @@ class UserController {
 
         session.clear();
         await auth.logout();
-        
+
         const { username, password } = request.all()
         await auth.attempt(username, password)
 
@@ -25,15 +25,9 @@ class UserController {
         };
         
         if(auth.user.is_admin!=1){
+          var rPersona = await data.execApi(request.hostname(),'/Persona/Persona/getPersonaByIdUser',{idUser:auth.user.id});
+          var persona = rPersona.body.data;
           
-          try{
-            var rPersona = await data.execApi(request.hostname(),'/Persona/Persona/getPersonaByIdUser',{idUser:auth.user.id});
-            var persona = rPersona.body.data;
-          
-          }catch(e)
-          {
-            console.log(e);
-          }
           //var result = await data.execApi(request.hostname(),'/Persona/Persona/getIdPersona',obj);
 
           
@@ -84,7 +78,7 @@ class UserController {
           session.put('personaLogueada',persona);
           session.put('idPersona', "");
         }
-        
+
         return response.redirect('/')
       }
 
