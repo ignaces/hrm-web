@@ -12,6 +12,64 @@
     <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
     <link href="/assets/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
     <link href="/assets/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" />
+
+    <style>
+            .button-label {
+              display: inline-block;
+              padding: 1em 2em;
+              margin: 0.5em;
+              cursor: pointer;
+              color: #292929;
+              border-radius: 0.25em;
+              background: #efefef;
+              box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0 -3px 0 rgba(0, 0, 0, 0.22);
+              -webkit-transition: 0.3s;
+              transition: 0.3s;
+              -webkit-user-select: none;
+                 -moz-user-select: none;
+                  -ms-user-select: none;
+                      user-select: none;
+            }
+            .button-label h1 {
+              font-size: 1em;
+              font-family: "Lato", sans-serif;
+            }
+            /*
+            .button-label:hover {
+              background: #d6d6d6;
+              color: #101010;
+              box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0 -3px 0 rgba(0, 0, 0, 0.32);
+            }
+            .button-label:active {
+              -webkit-transform: translateY(2px);
+                      transform: translateY(2px);
+              box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0px -1px 0 rgba(0, 0, 0, 0.22);
+            }
+            */
+            @media (max-width: 40em) {
+              .button-label {
+                
+              }
+            
+            
+            }
+            /*
+            .option-button:checked + .button-label {
+              background: #ffa500;
+              color: #ffffff;
+            }
+            .option-button:checked + .button-label:hover {
+              background: #ff6500;
+              color: #ffffff;
+            }
+            */
+            
+            .question > .row:nth-child(odd){
+              background: #e6e6e6;
+            }
+            
+            
+            </style>
 @endsection
 
 @section('content')
@@ -32,8 +90,8 @@
             <div class="col-lg-12">
                 <div class="row">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">{{listaEval[0].tareas[0].tarea.accion_nombre}}</h3>
+                        <div class="panel-heading bg-primary">
+                            <h3 class="panel-title text-white">{{listaEval[0].tareas[0].tarea.accion_nombre}}</h3>
                         </div>
                         <div class="panel-body">
                             <p>
@@ -55,8 +113,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Observación</h3>
+                        <div class="panel-heading bg-primary">
+                            <h3 class="panel-title text-white">Observación</h3>
                         </div>
                         <div class="panel-body">
                             <form role="form">
@@ -91,7 +149,40 @@
             </div>
             {{-- //OBSERVACION --}}
         </div>
+        
+        <div class="row">
+            &nbsp;
+        </div>
+        <div class="row">
+                &nbsp;
+        </div>
+        
+        
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading bg-success">
+                            <h3 class="panel-title text-white">Modelo de Competencias</h3>
+                        </div>
+                        <div class="panel-body">
+                        @each(competencia in instrumento.competencias)
+                            @if($loop.first)
+                                @!component('components.Evaluacion.preguntaLickertDesempenoRO',data={idOpinante:idOpinante,competencia:competencia,first:true})
+                            @else
+                                @!component('components.Evaluacion.preguntaLickertDesempenoRO',data={idOpinante:idOpinante,competencia:competencia,first:false})
+                            @endif                  
+                        @endeach
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    &nbsp;
+                </div>
+                <div class="row">
+                    &nbsp;
+                </div>
+
     </div>
+
     {{-- //DERECHA --}}
 </div>
 {{-- //CUERPO --}}

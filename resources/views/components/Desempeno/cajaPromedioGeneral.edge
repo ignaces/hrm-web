@@ -18,13 +18,19 @@
                                 <tr>
                                     <th scope="col">Competencia</th>
                                     <th style="text-align:center">Promedio Autoevaluación</th>
+                                    @if(data.codigoActor == 'SUPE')
+                                    <th style="text-align:center">Promedio Promedio Evaluador</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody > 
                                     @each(p in data.promedioGeneral)
                                         <tr>
                                             <td align="left">{{p.competencia}}</td>
-                                            <td align="center">{{p.nivel}}</td>
+                                            <td align="center">{{p.nivelAuto}}</td>
+                                            @if(data.codigoActor == 'SUPE')
+                                            <td align="center">{{p.nivelSup}}</td>
+                                            @endif
                                         </tr>
                                     @endeach
                         </tbody></table>

@@ -6,8 +6,8 @@ const mail = use('App/Controllers/Http/Mail/Mailgun')
 class Accion {
 
     //---->> PUBLICAR METAS
-
     async publicar({ view, request, response, auth, session }) {
+       
         
         var idPersona = session.get('idPersona', 'fail')
         var idEtapa = request.input("idEtapa")
@@ -90,7 +90,6 @@ class Accion {
         if (dataObservacion.lenght > 0){
             textoObservacion=dataObservacion[0].observacion
         };
-
 
         //RENDER
         return view.render('desempeno/metas/feedback/publicar', {dataVista, datosTarea, Perso, listaEval,dataMetas,dataColumnas,dataObservacion,textoObservacion});
@@ -268,9 +267,31 @@ class Accion {
             textoObservacion=dataObservacion[0].observacion
         };
 
+        var idOpinante  = request.input("idOpinante");
+        
+        var codigo     = request.input("codigoActor");
+        
+        //var codigo = all.codigo
+        //var codigoComponente = all.codigoComponente
+    
+        var obj = {
+            "idOpinante":idOpinante
+        };
+        //////console.log(obj);
 
+        try{
+            var result = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumentoEde',obj);
+        }
+        catch(e)
+        {
+            console.log(e);
+        }
+        
+
+        var instrumento = result.body;
+        
         //RENDER
-        return view.render('desempeno/metas/feedback/publicar', {dataVista, datosTarea, Perso, listaEval,dataMetas,dataColumnas,dataObservacion,textoObservacion});
+        return view.render('desempeno/metas/feedback/publicar', {dataVista, datosTarea, Perso, listaEval,dataMetas,dataColumnas,dataObservacion,textoObservacion, instrumento: instrumento});
     }
 
     //----> CONFIRMAR METAS
