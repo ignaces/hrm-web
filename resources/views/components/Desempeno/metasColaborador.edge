@@ -2,7 +2,7 @@
   @each(dimension in datos)
     <div class="col-lg-12">
         <div class="panel panel-default">
-            <div class="panel-heading">
+            <div class="panel-heading bg-primary">
                 
                 <div class="pull-right">
                     <!--<p class="panel-sub-title text-muted">
@@ -10,7 +10,7 @@
                         <div class="badge {{dimension.resNumeroColor}}"><i class="fa fa-flag-checkered"></i> {{dimension.numeroMetas}}<i class="{{dimension.resNumeroIcono}}"></i></div>
                     </p>-->
                 </div>
-                <h3 class="panel-title">{{dimension.nombre}}</h3>
+                <h3 class="panel-title text-white">{{dimension.nombre}}</h3>
             </div>
             <div class="panel-body">
                 <!-- Tabla Metas -->
@@ -57,4 +57,13 @@
         </div>
     </div>
      @endeach
+@else
+    <p class="text-center center">
+            <div class="alert alert-icon alert-warning alert-dismissible fade in" role="alert">
+                    
+                    <i class="mdi mdi-alert"></i>
+                    <strong>Actualmente no existen metas cargadas para este colaborador.</strong>
+                </div>
+        
+    <p>
 @endif
