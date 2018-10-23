@@ -1,7 +1,7 @@
 'use strict'
 
 const api = use('App/Utils/Data')
-
+var wget = require('node-wget-promise');
 class Accion {
 
     //---->> PUBLICAR METAS
@@ -98,8 +98,107 @@ class Accion {
         return view.render('desempeno/metas/informe/meta', {dataVista, datosTarea, Perso, listaEval,dataMetas,dataColumnas,dataObservacion,textoObservacion});
     }
 
-   
+    async pdf({ view, request, response, auth, session}) {
+        
+        //var idOpinante = all.idOpinante
+        //var idPersona = session.get('idPersona', 'fail')    
+        var idOpinante  = request.input("idOpinante");
+        var idProceso   = request.input("idProceso");
+        var idEtapa     = request.input("idEtapa");
+        var codigo     = request.input("codigoActor");
+        var idAccionPersona     = request.input("idAccionPersona");
+        var idPersona = request.input("idPersona");
+        var competenciasSpider = [];
+        var valoresSpiderAuto = [];
+        var obj = {
+            "idOpinante":idOpinante
+        };
+        //////console.log(obj);
 
+        var result = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumentoEde',obj);
+
+        var instrumento = result.body;
+        
+        var result2 = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getEscala',obj);
+
+        //////console.log(result2);
+        var escala = result2;
+        //////console.log(escala.body.data);
+    
+        var objPromedio = {
+            "idOpinante":idOpinante,
+            "codigoActor": codigo
+        };
+        var result3 = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getPromedioGeneral',objPromedio);
+
+        //console.log(result2);
+        var promedioGeneral = result3;
+        //console.log(promedioGeneral.body[0].codigoActor)
+
+        //Menu Contextual
+        var objMenuContextual = {
+            "idProceso":idProceso,
+            idEstado:"1"
+        };
+        var resultMenu =await api.execApi(request.hostname(),'/Desempeno/Proceso/getMenuUsuario',objMenuContextual);
+        var datosMenu =resultMenu.body.data;
+        //
+
+        //Datos Persona
+        var user={usuario:auth.user}
+       // var persona = session.get('personaLogueada')
+
+        var objdatosPersona = {
+            "idProceso":idProceso,
+            "idPersona":idPersona
+        };
+        //////console.log(idProceso)
+        console.log(idPersona)
+        var resultPersonaEde =await api.execApi(request.hostname(),'/Desempeno/Proceso/getProcesoPersona',objdatosPersona);
+        var PersonaEde;
+        var persona =resultPersonaEde.body.data;
+
+        //Etapa
+        var objEtapa = {
+            "idProceso":idProceso,
+            "idEtapa":idEtapa
+        };
+        var resultEtapa=await api.execApi(request.hostname(),'/Desempeno/Proceso/getEtapas',objEtapa);
+        var etapa =resultEtapa.body.data;
+        
+        promedioGeneral.body.forEach(e => {
+            
+            competenciasSpider.push(e.competencia);
+            valoresSpiderAuto.push(e.valorAuto);
+        });
+        
+        return view.render('desempeno/informe/informeEjecutivospdf', {datosMenu,persona,PersonaEde,etapa, idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa, escala: escala.body.data, promedioGeneral: promedioGeneral.body, competenciasSpider:competenciasSpider, valoresSpiderAuto:valoresSpiderAuto });
+    
+    }
+
+    async getPdf({ view, request, response, auth }) {
+        var conDetalle = request.input("cd");
+        var idPersona = request.input("procesoPersona");
+        var server = request.hostname().split(".")[0]+'.enovum.cl';//request.hostname();
+
+        //var result = await got(`http://192.168.3.4:8080?url=${server}/Acreditacion/Informe/pdf?procesoPersona=${idPersona}&cd=${conDetalle}`);
+        // var url = `http://192.168.3.4:8080/?url=http%3A%2F%2F${server}%2FAcreditacion%2FInforme%2Fpdf%3FprocesoPersona%3D${idPersona}%26cd%3D${conDetalle}`;
+       
+        var url = `http://192.168.3.4:8080/?url=http{server}%2FDesempeno%2FInforme%2Fpdf%3FidProceso%3Dca95dced-c680-11e8-8771-bc764e100f2b%26idEtapa%3D1f05c0a0-c70e-11e8-8771-bc764e100f2b%26idAccionPersona%3Dc007bb5c-d596-11e8-8771-bc764e100f2b%26codigoActor%3DEVAL%26idOpinante%3D2d15dfea-d597-11e8-8771-bc764e100f2b`;
+        ////console.log(url);
+
+        var file = await wget(url, { output: 'tmp/reporte.pdf' });
+
+        response.type = "application/pdf";
+
+        response.attachment(
+            Helpers.tmpPath('reporte.pdf'),
+            'reporte.pdf'
+        )
+
+
+
+    }
 
 
 

@@ -15,13 +15,14 @@
                         </a>
                     </div>
                      @endeach
-                     <div class="pull-right">
-                        <button type="button" onclick="javascript:history.back()" class="btn btn-primary waves-effect waves-light"> 
-                            <i class="fa fa-arrow-left m-r-5"></i>
-                            <span>Volver</span>
-                        </button>
-                    </div>
-                   
+                     @if(showVolver == "1")
+                        <div class="pull-right">
+                            <button type="button" onclick="javascript:history.back()" class="btn btn-primary waves-effect waves-light"> 
+                                <i class="fa fa-arrow-left m-r-5"></i>
+                                <span>Volver</span>
+                            </button>
+                        </div>
+                    @endif
                 </div>
             </div>
                 
