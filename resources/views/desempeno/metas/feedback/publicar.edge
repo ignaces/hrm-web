@@ -109,12 +109,32 @@
                 </div>
             </div>
             {{-- //METAS --}}
+
+            <div class="col-lg-12">
+                    <div class="row">
+                            <div class="panel panel-default">
+                                <div class="panel-heading bg-success">
+                                    <h3 class="panel-title text-white">Modelo de Competencias</h3>
+                                </div>
+                                <div class="panel-body">
+                                @each(competencia in instrumento.competencias)
+                                    @if($loop.first)
+                                        @!component('components.Evaluacion.preguntaLickertDesempenoRO',data={idOpinante:idOpinante,competencia:competencia,first:true})
+                                    @else
+                                        @!component('components.Evaluacion.preguntaLickertDesempenoRO',data={idOpinante:idOpinante,competencia:competencia,first:false})
+                                    @endif                  
+                                @endeach
+                                </div>
+                            </div>
+                        </div>
+            </div>
+
             {{-- OBSERVACION --}}
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-default">
                         <div class="panel-heading bg-primary">
-                            <h3 class="panel-title text-white">Observación</h3>
+                            <h3 class="panel-title text-white">Retroalimentación</h3>
                         </div>
                         <div class="panel-body">
                             <form role="form">
@@ -151,23 +171,7 @@
         </div>
         
         
-        
-                <div class="row">
-                    <div class="panel panel-default">
-                        <div class="panel-heading bg-success">
-                            <h3 class="panel-title text-white">Modelo de Competencias</h3>
-                        </div>
-                        <div class="panel-body">
-                        @each(competencia in instrumento.competencias)
-                            @if($loop.first)
-                                @!component('components.Evaluacion.preguntaLickertDesempenoRO',data={idOpinante:idOpinante,competencia:competencia,first:true})
-                            @else
-                                @!component('components.Evaluacion.preguntaLickertDesempenoRO',data={idOpinante:idOpinante,competencia:competencia,first:false})
-                            @endif                  
-                        @endeach
-                        </div>
-                    </div>
-                </div>
+                
                 <div class="row">
                     &nbsp;
                 </div>
