@@ -300,7 +300,7 @@ class Accion {
 
 
     async confirmar({ view, request, response, auth, session }) {
-        console.log("AA");
+        //console.log("AA");
         var idPersona = session.get('idPersona', 'fail')
         var idEtapa = request.input("idEtapa")
         var idAccionPersona = request.input("idAccionPersona")
