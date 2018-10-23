@@ -292,7 +292,7 @@ class Accion {
         var instrumento = result.body;
         
         //RENDER
-        return view.render('Desempeno/metas/feedback/visualizar', {dataVista, datosTarea, Perso, listaEval,dataMetas,dataColumnas,dataObservacion,textoObservacion, instrumento: instrumento});
+        return view.render('desempeno/metas/feedback/visualizar', {dataVista, datosTarea, Perso, listaEval,dataMetas,dataColumnas,dataObservacion,textoObservacion, instrumento: instrumento});
     }
 
 
@@ -404,7 +404,7 @@ class Accion {
         var instrumento = result.body;
         
         //RENDER
-        return view.render('Desempeno/metas/feedback/publicar', {dataVista, datosTarea, Perso, listaEval,dataMetas,dataColumnas,dataObservacion,textoObservacion, instrumento: instrumento});
+        return view.render('desempeno/metas/feedback/publicar', {dataVista, datosTarea, Perso, listaEval,dataMetas,dataColumnas,dataObservacion,textoObservacion, instrumento: instrumento});
     }
 
     //----> CONFIRMAR METAS
@@ -519,7 +519,7 @@ class Accion {
         var instrumento = result.body;
 
         //RENDER
-        return view.render('Desempeno/metas/feedback/confirmar', {dataVista, datosTarea, Perso, listaEval,dataMetas,dataColumnas,dataObservacion,textoObservacion, instrumento: instrumento});
+        return view.render('desempeno/metas/feedback/confirmar', {dataVista, datosTarea, Perso, listaEval,dataMetas,dataColumnas,dataObservacion,textoObservacion, instrumento: instrumento});
 
 
     }
