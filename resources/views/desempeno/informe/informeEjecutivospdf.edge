@@ -1,4 +1,4 @@
-@layout('layouts/horizontal')
+@layout('layouts/nomenu')
 
 
 @section('pluginsCss2')
@@ -18,25 +18,18 @@
             {
                 border: 2px solid #ffa91c !important;
             }
+
+            .panel-primary > .panel-heading {
+                background-color: #ffa91c !important;
+            }
+
         </style>
 @endsection
 
 @section('content')
 <div class="row" >
-        <div class="col-md-2">
-    
-                @!component('components.Desempeno.widgetInfoEtapa',datos=etapa,nombreProceso=dataProceso.nombre)
-  
-  <div class="row">
-        @!component('components.Desempeno.widgetUser',datos=data,datamenu=datosMenu,persona=PersonaEde)
-  </div>
-  
-        </div>
-
-        
-
                 <div class="col-md-10">
-                        @!component('components.Core.botonera',botones=[{showVolver:"0", texto:"PDF", icono:"fa fa-file-pdf-o", link:"/Desempeno/Informe/getPdf?idProceso=" + idProceso + "&idEtapa=" + idEtapa + "&idPersona="+idPersona+"&idAccionPersona="+idAccionPersona+"&codigoActor="+codigoActor+"&idOpinante="+idOpinante}] ) 
+                        
                     <div class="panel panel-border">
                         <div class="panel-heading">
                             <h3 class="panel-title" style="color: white;">Datos del Evaluado</h3>
@@ -60,13 +53,10 @@
 
         <div class="col-md-10">
             <div class="row">
-
                     <div class="panel panel-default">
-                        
                             <div class="panel-heading">
                                 <h3 class="panel-title" style="color: white;">Informe Individual Evaluación de Desempeño  : Desempeño Ejecutivos 2018</h3>
-                                
-                            </div>
+                             </div>
                             
                             <div class="panel-body">
                                 <p>
@@ -544,11 +534,7 @@
     </div>
               </div> <!-- container -->
   
-              <footer class="footer text-left">
-                      <img src="/themes/horizontal/assets/images/innovum_logo.png" alt="" height="50">
-                      2018 © 
-              </footer>
-  
+              
           </div>
           <!-- END wrapper -->
   

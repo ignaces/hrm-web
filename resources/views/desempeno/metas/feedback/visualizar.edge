@@ -12,7 +12,6 @@
     <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
     <link href="/assets/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
     <link href="/assets/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" />
-
     <style>
             .button-label {
               display: inline-block;
@@ -69,7 +68,7 @@
             }
             
             
-            </style>    
+            </style>
 @endsection
 
 @section('content')
@@ -109,58 +108,10 @@
                 </div>
             </div>
             {{-- //METAS --}}
-            {{-- OBSERVACION --}}
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading bg-primary">
-                            <h3 class="panel-title text-white">Observación</h3>
-                        </div>
-                        <div class="panel-body">
-                            <form role="form">
-                                {{ csrfField() }}
-                                <input type="hidden" id="idProceso" value="{{dataVista.idProceso}}">
-                                <input type="hidden" id="idEtapa" value="{{dataVista.idEtapa}}">
-                                <input type="hidden" id="idAccionPersona" value="{{dataVista.idAccionPersona}}">
-                                <input type="hidden" id="codigoActor" value="{{dataVista.codigoActor}}">
-                                <input type="hidden" id="idObservacionAccion" value="{{dataObservacion[0].idObservacion}}">
-                                <input type="hidden" id="idEtapaTareaAccionProcesoPersona" value="{{listaEval[0].tareas[0].tarea.evaluado_idEtapaTareaAccionPersona}}">
-                                <input type="hidden" id="idEtapaTareaActor" value="{{listaEval[0].tareas[0].tarea.actor_idEtapaTareaActor}}">
-                                <input type="hidden" id="idAccionEstado" value="{{listaEval[0].tareas[0].tarea.evaluado_idEdeAccionEstado}}">
-                                <div class="form-group">
-                                    <textarea id="observacion" class="form-control" readonly maxlength="225" rows="4" placeholder="">{{{textoObservacion}}}</textarea>
-                                </div>
-                            </form>
-                            <div class="row">
-                                <div class="mt-3" style="text-align:center;">
-                                <br>
-                                <div>
-                                    ¿Recibio Feedback de su Líder?
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" id="rdoConfirmarSI" name="rdoConfirmar" class="custom-control-input" value="SI">
-                                        <label class="custom-control-label" for="rdoConfirmarSI">Si</label>
-                                        <br>
-                                        <input type="radio" id="rdoConfirmarNO" name="rdoConfirmar" class="custom-control-input" value="NO">
-                                        <label class="custom-control-label" for="rdoConfirmarNO">NO</label>
-                                    
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row pull-right">
-                           
-                                <div class="col-md-12">
-                                    <button type="button" id="btnConfirmar" class="btn btn-success btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-save"></i> Confirmar y Finalizar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {{-- //OBSERVACION --}}
+            
         </div>
 
         <div class="row">
-            <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading bg-success">
                         <h3 class="panel-title text-white">Modelo de Competencias</h3>
@@ -176,7 +127,6 @@
                     </div>
                 </div>
             </div>
-        </div>
             <div class="row">
                 &nbsp;
             </div>
