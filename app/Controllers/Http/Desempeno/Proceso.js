@@ -249,7 +249,7 @@ class Proceso {
         var obj={
             "idProcesoPersona":idEvaluado
         }
-        console.log(obj);
+        
 
         var result=await api.execApi(request.hostname(),'/Desempeno/Reporte/getIdentificador',obj);
         var persona =result.body.data; 
@@ -260,7 +260,7 @@ class Proceso {
             identificador = persona[0].identificador;
         }
 
-        console.log(persona);
+        
         var archivos=[
             {
                 id:"ejecutivos_2017",
@@ -278,7 +278,7 @@ class Proceso {
             }*/
             
         ];
-        console.log(archivos);
+        
         return archivos;
     }
     
@@ -316,8 +316,78 @@ class Proceso {
         return view.render('desempeno/informeBrasil');
     }
 
-    async informeEjecutivos ({view,request, response}) {
-        return view.render('desempeno/informeEjecutivos');
+    async informeEjecutivos ({view,request, response, auth, session, antl}) {
+        //var idOpinante = all.idOpinante
+        var idPersona = session.get('idPersona', 'fail')    
+        var idOpinante  = request.input("idOpinante");
+        var idProceso   = request.input("idProceso");
+        var idEtapa     = request.input("idEtapa");
+        var codigo     = request.input("codigoActor");
+        
+        var competenciasSpider = [];
+        var valoresSpiderAuto = [];
+        var obj = {
+            "idOpinante":idOpinante
+        };
+        //////console.log(obj);
+
+        var result = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumentoEde',obj);
+
+        var instrumento = result.body;
+        
+        var result2 = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getEscala',obj);
+
+        //////console.log(result2);
+        var escala = result2;
+        //////console.log(escala.body.data);
+    
+        var objPromedio = {
+            "idOpinante":idOpinante,
+            "codigoActor": codigo
+        };
+        var result3 = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getPromedioGeneral',objPromedio);
+
+        //console.log(result2);
+        var promedioGeneral = result3;
+        //console.log(promedioGeneral.body[0].codigoActor)
+
+        //Menu Contextual
+        var objMenuContextual = {
+            "idProceso":idProceso,
+            idEstado:"1"
+        };
+        var resultMenu =await api.execApi(request.hostname(),'/Desempeno/Proceso/getMenuUsuario',objMenuContextual);
+        var datosMenu =resultMenu.body.data;
+        //
+
+        //Datos Persona
+        var user={usuario:auth.user}
+        var persona = session.get('personaLogueada')
+
+        var objdatosPersona = {
+            "idProceso":idProceso,
+            "idPersona":idPersona
+        };
+        //////console.log(idProceso)
+        //////console.log(idPersona)
+        var resultPersonaEde =await api.execApi(request.hostname(),'/Desempeno/Proceso/getProcesoPersona',objdatosPersona);
+        var PersonaEde =resultPersonaEde.body.data;
+        
+
+        //Etapa
+        var objEtapa = {
+            "idProceso":idProceso,
+            "idEtapa":idEtapa
+        };
+        var resultEtapa=await api.execApi(request.hostname(),'/Desempeno/Proceso/getEtapas',objEtapa);
+        var etapa =resultEtapa.body.data;
+        
+        promedioGeneral.body.forEach(e => {
+            
+            competenciasSpider.push(e.competencia);
+            valoresSpiderAuto.push(e.valorAuto);
+        });
+        return view.render('desempeno/informeEjecutivos', {datosMenu,persona,PersonaEde,etapa, idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa, escala: escala.body.data, promedioGeneral: promedioGeneral.body, competenciasSpider:competenciasSpider, valoresSpiderAuto:valoresSpiderAuto });
     } 
 
     async portadaEjecutivos({view,request, response}) {
@@ -336,7 +406,7 @@ class Proceso {
             var idProceso   = request.input("idProceso");
             var idEtapa     = request.input("idEtapa");
             var codigo     = request.input("codigoActor");
-            console.log(codigo);
+            
             //var codigo = all.codigo
             //var codigoComponente = all.codigoComponente
     
@@ -363,8 +433,12 @@ class Proceso {
 
             //console.log(result2);
             var promedioGeneral = result3;
-            console.log(promedioGeneral.body[0].codigoActor)
-        return view.render('desempeno/evalEjecutivos', {idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa, escala: escala.body.data, promedioGeneral: promedioGeneral.body, codigoActor: promedioGeneral.body[0].codigoActor});
+            console.log(promedioGeneral.body[0])
+            promedioGeneral.body.forEach(e => {
+                console.log(e.competencia)
+            });
+
+        return view.render('desempeno/evalEjecutivos', { idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa, escala: escala.body.data, promedioGeneral: promedioGeneral.body, codigoActor: promedioGeneral.body[0].codigoActor});
     }
 
     async evalComportamientosEjecutivos ({view,request, response}) {

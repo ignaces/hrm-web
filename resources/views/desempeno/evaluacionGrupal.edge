@@ -147,6 +147,7 @@ var suma = function(obj){
                                                             <th class="" tabindex="0" rowspan="1" colspan="1" style="width: 220px; text-align: center; vertical-align: middle; ">Observación</th>
                                                             <th class="" tabindex="0" rowspan="1" colspan="1" style="width: 220px; text-align: center; vertical-align: middle; ">Resultado Competencias</th>
                                                             <th class="" tabindex="0" rowspan="1" colspan="1" style="width: 220px; text-align: center; vertical-align: middle; ">Resultado Meta</th>
+                                                            <th class="" tabindex="0" rowspan="1" colspan="1" style="width: 220px; text-align: center; vertical-align: middle; "></th>
                                                         </tr>
                                                         <tr>
                                                             <th></th>
@@ -159,6 +160,7 @@ var suma = function(obj){
                                                             @endeach
                                                                     
                                                                  
+                                                                    <th></th>
                                                                     <th></th>
                                                                     <th></th>
                                                                     <th></th>
@@ -202,6 +204,12 @@ var suma = function(obj){
                                                         
                                                     <td style="text-align: center; vertical-align: middle; font-weight: bold;" id="C_{{evaluado.idOpinante}}">{{evaluado.resultado.competencias.nivel}}</td>
                                                     <td style="text-align: center; vertical-align: middle; font-weight: bold;" id="M_{{evaluado.idOpinante}}">{{evaluado.resultado.metas.nivel}}</td>
+                                                    <td style="text-align: center; vertical-align: middle; font-weight: bold;">
+
+                                                            <button type="button" id="{{evaluado.idOpinante}}" class="btn btn-danger waves-effect waves-light bFinalizar"> 
+                                                                    <span>Finalizar</span>
+                                                                </button>
+                                                    </td>
                                                     </tr>
                                                         @endeach
                                                         

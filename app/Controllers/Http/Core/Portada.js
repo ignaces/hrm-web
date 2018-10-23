@@ -64,12 +64,14 @@ class Portada {
        
         obj={
             idProceso:"",
-            idEstado:"ACTIVO"
+            idEstado:"ACTIVO",
+            idPersona:idPersona
         }
         
-        var reultEde=await data.execApi(request.hostname(),'/Desempeno/Proceso/getProcesos',obj);
-        var procesosEde =reultEde.body.data;
+        var reultEde=await data.execApi(request.hostname(),'/Desempeno/Proceso/getProcesosPersona',obj);
 
+        var procesosEde =reultEde.body.data;
+        
         var user={usuario:auth.user}
         
         var persona = session.get('personaLogueada')
