@@ -197,6 +197,7 @@ class Proceso {
             "codigoActor":"EVAL",
             "idAccionPersona":""
         }
+        console.log(objEval);
         var resultEval = await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluados',objEval);
         var listaEval = resultEval.body.data;      
         //
