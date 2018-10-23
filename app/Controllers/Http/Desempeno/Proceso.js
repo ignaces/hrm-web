@@ -324,7 +324,8 @@ class Proceso {
         var idProceso   = request.input("idProceso");
         var idEtapa     = request.input("idEtapa");
         var codigo     = request.input("codigoActor");
-        
+        var idAccionPersona     = request.input("idAccionPersona");
+
         var competenciasSpider = [];
         var valoresSpiderAuto = [];
         var obj = {
@@ -388,8 +389,10 @@ class Proceso {
             competenciasSpider.push(e.competencia);
             valoresSpiderAuto.push(e.valorAuto);
         });
-        return view.render('desempeno/informeEjecutivos', {datosMenu,persona,PersonaEde,etapa, idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa, escala: escala.body.data, promedioGeneral: promedioGeneral.body, competenciasSpider:competenciasSpider, valoresSpiderAuto:valoresSpiderAuto });
+        return view.render('desempeno/informeEjecutivos', {idPersona: persona.id, idAccionPersona:idAccionPersona, codigoActor:codigo,datosMenu,persona,PersonaEde,etapa, idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa, escala: escala.body.data, promedioGeneral: promedioGeneral.body, competenciasSpider:competenciasSpider, valoresSpiderAuto:valoresSpiderAuto });
     } 
+
+    
 
     async portadaEjecutivos({view,request, response}) {
         return view.render('desempeno/portadaEjecutivos');
