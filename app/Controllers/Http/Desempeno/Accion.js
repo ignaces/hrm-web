@@ -6,6 +6,7 @@ const mail = use('App/Controllers/Http/Mail/Mailgun')
 class Accion {
 
     //---->> PUBLICAR METAS
+    /*
     async publicar({ view, request, response, auth, session }) {
        
         
@@ -94,6 +95,7 @@ class Accion {
         //RENDER
         return view.render('desempeno/metas/feedback/publicar', {dataVista, datosTarea, Perso, listaEval,dataMetas,dataColumnas,dataObservacion,textoObservacion});
     }
+    */
 
    
 
@@ -298,13 +300,14 @@ class Accion {
 
 
     async confirmar({ view, request, response, auth, session }) {
+        //console.log("AA");
         var idPersona = session.get('idPersona', 'fail')
         var idEtapa = request.input("idEtapa")
         var idAccionPersona = request.input("idAccionPersona")
         var codigoActor = request.input("codigoActor")
         var idProceso = session.get('idProceso')
         var datosProceso = session.get('dataProceso')
-
+        
         //DataVista
         var dataVista = {
             "idProceso" : idProceso,
@@ -324,7 +327,7 @@ class Accion {
         var listaEval = resultEval.body.data;
     ////console.log(listaEval)
         //
-
+            
         var persona = {
             "foto": listaEval[0].foto,
             "nombres": listaEval[0].nombres,
