@@ -10,6 +10,9 @@
         async intro  ({ view,request, response, auth, session }) {
           var idEncuestaAplicacion = request.input("idEncuestaAplicacion")  ;
           var codigo = request.input("codigo");
+          var referer = session.get("referer");
+
+
           var obj = {
             idEncuestaAplicacion:idEncuestaAplicacion,
             codigo:codigo
@@ -18,18 +21,19 @@
           var validacion = result.body;
          
           if(validacion.continua){
-            return view.render('encuesta/intro',  {encuestaPersona:validacion.encuestaPersona});
+            return view.render('encuesta/intro',  {encuestaPersona:validacion.encuestaPersona,referer});
           }else{
             var mensaje= validacion.mensaje;
             
             
-            return view.render('encuesta/index',  {idEncuestaAplicacion:idEncuestaAplicacion,mensaje:mensaje});
+            return view.render('encuesta/index',  {idEncuestaAplicacion:idEncuestaAplicacion,mensaje:mensaje,referer});
           }
           
         }
      
         async instrumento ({ view,request, response, auth, session}){
           var idEncuestaPersona = request.input("idEncuestaPersona");
+          var referer = session.get("referer");
           
          var instrumento ={}
          var obj = {
@@ -46,10 +50,14 @@
           instrumento.avance= `${porcentaje}`;
           instrumento.pp='components.Evaluacion.preguntaLickertGrilla';
           
-          return view.render('encuesta/instrumento',  {idEncuestaPersona:idEncuestaPersona,instrumento:instrumento});
+          return view.render('encuesta/instrumento',  {idEncuestaPersona:idEncuestaPersona,instrumento:instrumento,referer});
         }
 
         async fin({view,request, response, auth, session}){
+          var referer = session.get("referer");
+          if(referer!=null){
+            response.redirect(referer);
+          }
           return view.render('encuesta/fin',  {});
         }
       }

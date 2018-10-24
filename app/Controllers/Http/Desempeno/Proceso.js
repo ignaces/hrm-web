@@ -97,7 +97,7 @@ class Proceso {
         var etag = `app_${cliente}`
         var texto = "";
         var mensajeTitulo = "";
-        console.log(mensajeResult[0])
+       // console.log(mensajeResult[0])
         if(mensajeResult.length > 0)
         {
             texto = mensajeResult[0].mensaje;
@@ -135,6 +135,7 @@ class Proceso {
 
     async etapa ({view,request, response, auth, session, params, antl}) {
         //////console.log("A");
+        //var idPersona = session.get('idPersona', 'fail')
         var idPersona = session.get('idPersona', 'fail')
         var idEtapa = request.input("idEtapa")
         var idProceso = session.get('idProceso')
@@ -149,7 +150,7 @@ class Proceso {
         ////console.log(datosProceso);
 
         session.put('idEtapa',idEtapa)
-        session.put('referer',`/Desempeno/Proceso/etapa?idEtapa=${idEtapa}`)
+        session.put('referer',`/Desempeno/Proceso/etapa?idEtapa=${idEtapa}&idProceso=${idProceso}`)
 
         //Datos Persona
         var user={usuario:auth.user}
@@ -327,15 +328,18 @@ class Proceso {
 
     async informeEjecutivos ({view,request, response, auth, session, antl}) {
         //var idOpinante = all.idOpinante
-        var idPersona = session.get('idPersona', 'fail')    
+        //var idPersona = session.get('idPersona', 'fail')    
+        var idPersona = request.input('idPersona')   
         var idOpinante  = request.input("idOpinante");
         var idProceso   = request.input("idProceso");
         var idEtapa     = request.input("idEtapa");
         var codigo     = request.input("codigoActor");
+        console.log(codigo)
         var idAccionPersona     = request.input("idAccionPersona");
 
         var competenciasSpider = [];
         var valoresSpiderAuto = [];
+        var valoresSpiderSup = [];
         var obj = {
             "idOpinante":idOpinante
         };
@@ -371,8 +375,8 @@ class Proceso {
         //
 
         //Datos Persona
-        var user={usuario:auth.user}
-        var persona = session.get('personaLogueada')
+        //var user={usuario:auth.user}
+        //var persona = session.get('personaLogueada')
 
         var objdatosPersona = {
             "idProceso":idProceso,
@@ -381,9 +385,8 @@ class Proceso {
         //////console.log(idProceso)
         //////console.log(idPersona)
         var resultPersonaEde =await api.execApi(request.hostname(),'/Desempeno/Proceso/getProcesoPersona',objdatosPersona);
-        var PersonaEde =resultPersonaEde.body.data;
-        
-
+        var persona =resultPersonaEde.body.data;
+        var PersonaEde; 
         //Etapa
         var objEtapa = {
             "idProceso":idProceso,
@@ -393,11 +396,12 @@ class Proceso {
         var etapa =resultEtapa.body.data;
         
         promedioGeneral.body.forEach(e => {
-            
             competenciasSpider.push(e.competencia);
             valoresSpiderAuto.push(e.valorAuto);
+            valoresSpiderSup.push(e.valorSup);
         });
-        return view.render('desempeno/informeEjecutivos', {idPersona: persona.id, idAccionPersona:idAccionPersona, codigoActor:codigo,datosMenu,persona,PersonaEde,etapa, idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa, escala: escala.body.data, promedioGeneral: promedioGeneral.body, competenciasSpider:competenciasSpider, valoresSpiderAuto:valoresSpiderAuto });
+
+        return view.render('desempeno/informeEjecutivos', {idPersona: persona.id, idAccionPersona:idAccionPersona, codigoActor:codigo,datosMenu,persona,PersonaEde,etapa, idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa, escala: escala.body.data, promedioGeneral: promedioGeneral.body, competenciasSpider:competenciasSpider, valoresSpiderAuto:valoresSpiderAuto, valoresSpiderSup: valoresSpiderSup });
     } 
 
     
