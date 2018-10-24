@@ -19,7 +19,10 @@
                                     <th scope="col">Competencia</th>
                                     <th style="text-align:center">Promedio Autoevaluación</th>
                                     @if(data.codigoActor == 'SUPE')
-                                    <th style="text-align:center">Promedio Promedio Evaluador</th>
+                                    <th style="text-align:center">Promedio Evaluador</th>
+                                    @endif
+                                    @if(data.codigoActor == 'FUNC')
+                                    <th style="text-align:center">Promedio Evaluador Funcional</th>
                                     @endif
                                 </tr>
                             </thead>
@@ -28,13 +31,18 @@
                                         <tr>
                                             <td align="left">{{p.competencia}}</td>
                                             <td align="center">{{p.nivelAuto}}</td>
-                                            @if(data.codigoActor == 'SUPE')
+                                            @if(data.codigoActor == 'SUPE' || data.codigoActor == 'FUNC')
                                             <td align="center">{{p.nivelSup}}</td>
                                             @endif
                                         </tr>
                                     @endeach
+                                    
                         </tbody></table>
                     </div>
                 </div>           
 
         </div> 
+
+
+
+        

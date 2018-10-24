@@ -298,7 +298,7 @@ class Proceso {
         var resultFunc=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluadosGrupal',objEval);
         var eGrupal = resultFunc.body.data;
         
-        return view.render('desempeno/evaluacionGrupal',{competencias:eGrupal.competencias,evaluados:eGrupal.evaluados});
+        return view.render('desempeno/evaluacionGrupal',{competencias:eGrupal.competencias,evaluados:eGrupal.evaluados,idProceso,idEtapa});
     }
 
     async portadaBrasil ({view,request, response}) {
@@ -431,18 +431,36 @@ class Proceso {
         
             var objPromedio = {
                 "idOpinante":idOpinante,
-                "codigoActor": codigo
+                "codigoActor": codigo,
+                "idProceso": idProceso
             };
             var result3 = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getPromedioGeneral',objPromedio);
 
             //console.log(result2);
-            var promedioGeneral = result3;
-            console.log(promedioGeneral.body[0])
-            promedioGeneral.body.forEach(e => {
-                console.log(e.competencia)
-            });
+            var codigoAct = "";
+            var promedioGeneral;
 
-        return view.render('desempeno/evalEjecutivos', { idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa, escala: escala.body.data, promedioGeneral: promedioGeneral.body, codigoActor: promedioGeneral.body[0].codigoActor});
+            
+            
+            try{
+                promedioGeneral = result3;
+
+                if(promedioGeneral.body[0].codigoActor != undefined)
+                {
+                    codigoAct = promedioGeneral.body[0].codigoActor
+                }
+                else
+                {
+                    codigoAct = "";
+                }
+
+            }
+                catch(e)
+            {}
+           
+            
+
+        return view.render('desempeno/evalEjecutivos', { idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa, escala: escala.body.data, promedioGeneral: promedioGeneral.body, codigoActor: codigoAct});
     }
 
     async evalComportamientosEjecutivos ({view,request, response}) {
