@@ -430,18 +430,33 @@ class Proceso {
         
             var objPromedio = {
                 "idOpinante":idOpinante,
-                "codigoActor": codigo
+                "codigoActor": codigo,
+                "idProceso": idProceso
             };
             var result3 = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getPromedioGeneral',objPromedio);
 
             //console.log(result2);
-            var promedioGeneral = result3;
-            console.log(promedioGeneral.body[0])
-            promedioGeneral.body.forEach(e => {
-                console.log(e.competencia)
-            });
+            var codigoAct = "";
+            var promedioGeneral;
+            console.log(promedioGeneral.body[0].codigoActor)
 
-        return view.render('desempeno/evalEjecutivos', { idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa, escala: escala.body.data, promedioGeneral: promedioGeneral.body, codigoActor: promedioGeneral.body[0].codigoActor});
+            if(promedioGeneral.body[0].codigoActor != undefined)
+            {
+                codigoAct = promedioGeneral.body[0].codigoActor
+            }
+            else
+            {
+                codigoAct = "";
+            }
+            try{
+                promedioGeneral = result3;
+            }
+                catch(e)
+            {}
+           
+            
+
+        return view.render('desempeno/evalEjecutivos', { idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa, escala: escala.body.data, promedioGeneral: promedioGeneral.body, codigoActor: codigoAct});
     }
 
     async evalComportamientosEjecutivos ({view,request, response}) {
