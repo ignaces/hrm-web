@@ -126,7 +126,7 @@
                 
                 <div id="evaluado" class="panel-collapse collapse in">
                      <div class="portlet-body">
-                          @!component('components.Desempeno.listaColaboradoresEtapa',lista=listaEval)
+                          @!component('components.Desempeno.listaColaboradoresEtapa',lista=listaEval, params=params, angulo='EVAL')
                      </div>
                 </div>
             </div>
@@ -169,7 +169,7 @@
                             @endif
                             
 
-                        @!component('components.Desempeno.listaColaboradoresEtapa',lista=listaSupe)
+                        @!component('components.Desempeno.listaColaboradoresEtapa',lista=listaSupe, params=params, angulo='SUPE')
                         
                      </div>
                 </div>
@@ -194,7 +194,7 @@
                 <div id="ascendente" class="panel-collapse collapse in">
                      <div class="portlet-body">
                          
-                        @!component('components.Desempeno.listaColaboradoresEtapa',lista=listaAsc)
+                        @!component('components.Desempeno.listaColaboradoresEtapa',lista=listaAsc, params=params, angulo='ASC')
                          
                      </div>
                 </div>
@@ -218,7 +218,7 @@
                 <div id="funcional" class="panel-collapse collapse in">
                      <div class="portlet-body">
                          
-                               @!component('components.Desempeno.listaColaboradoresEtapa',lista=listaFunc)
+                               @!component('components.Desempeno.listaColaboradoresEtapa',lista=listaFunc, params=params, angulo='FUNC')
                          
                      </div>
                 </div>
