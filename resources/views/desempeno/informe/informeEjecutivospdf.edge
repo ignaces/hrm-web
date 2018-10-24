@@ -567,9 +567,9 @@
   
   
           <script>
-          $(document).ready(()=>{
-              var labelsSpider = "{{competenciasSpider}}".split(",");
-              var dataSpiderAuto = "{{valoresSpiderAuto}}".split(",");
+          (function() {
+            var labelsSpider = "{{competenciasSpider}}".split(",");
+            var dataSpiderAuto = "{{valoresSpiderAuto}}".split(",");
             var ctx = document.getElementById('myRadarChart').getContext('2d');
 
             var myRadarChart = new Chart(ctx, {
@@ -599,8 +599,8 @@
                     }
                 }
             });
-            
-          });
+            })();
+           
           </script>
        
 @endsection
