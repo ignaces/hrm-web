@@ -244,9 +244,21 @@ class Proceso {
             "idEtapa":idEtapa
         }
         //////console.log(objFunc);
-        var resultParams=await api.execApi(request.hostname(),'/Desempeno/Proceso/getSysParametros',objFunc);
-        var listaParams =resultParams.body.data;
-        //console.log(listaParams);
+        
+        var listaParams;
+        try
+        {
+            var resultParams=await api.execApi(request.hostname(),'/Desempeno/Proceso/getSysParametros',objFunc);
+            listaParams = resultParams.body.data;
+            //console.log(listaParams);
+        }
+        catch(e)
+        {
+
+        }
+        
+
+        console.log(listaParams);
         return view.render('desempeno/etapa',{etag, datosProceso,PersonaEde,datosMenu,etapa,listaEval,listaSupe,listaAsc,listaFunc, idEtapa: idEtapa, params: listaParams});
     }
 
