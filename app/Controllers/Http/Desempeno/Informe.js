@@ -187,13 +187,13 @@ class Accion {
         var idOpinante = request.input("idOpinante");
 
         var server = request.hostname().split(".")[0]+'.enovum.cl';//request.hostname();
-        server = "csdev.enovum.cl";
+//        server = "csdev.enovum.cl";
         //var result = await got(`http://192.168.3.4:8080?url=${server}/Acreditacion/Informe/pdf?procesoPersona=${idPersona}&cd=${conDetalle}`);
         // var url = `http://192.168.3.4:8080/?url=http%3A%2F%2F${server}%2FAcreditacion%2FInforme%2Fpdf%3FprocesoPersona%3D${idPersona}%26cd%3D${conDetalle}`;
        
-        var url = `http://192.168.3.4:8080/?url=http%3A%2F%2F${server}%2FDesempeno%2FInforme%2Fpdf%3FidProceso%3D${idProceso}%26idEtapa%3D${idEtapa}%26idAccionPersona%3D${idAccionPersona}%26codigoActor%3D${codigoActor}%26idOpinante%3D2${idOpinante}%26idPersona%3D2${idPersona}`;
+        var url = `http://192.168.3.4:8080/?url=http%3A%2F%2F${server}%2FDesempeno%2FInforme%2Fpdf%3FidProceso%3D${idProceso}%26idEtapa%3D${idEtapa}%26idAccionPersona%3D${idAccionPersona}%26codigoActor%3D${codigoActor}%26idOpinante%3D2${idOpinante}%26idPersona%3D${idPersona}`;
         
-console.log(url)
+
         var file = await wget(url, { output: 'tmp/reporte.pdf' });
 
         response.type = "application/pdf";
