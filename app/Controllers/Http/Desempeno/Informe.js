@@ -114,6 +114,7 @@ class Accion {
         var obj = {
             "idOpinante":idOpinante
         };
+        
         //////console.log(obj);
 
         var result = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumentoEde',obj);
@@ -156,15 +157,18 @@ class Accion {
         
         
         var resultPersonaEde =await api.execApi(request.hostname(),'/Desempeno/Proceso/getProcesoPersona',objdatosPersona);
-        var PersonaEde;
-        var persona =resultPersonaEde.body.data;
+        
+        
+        var persona =resultPersonaEde.body.data[0];
 
         //Etapa
         var objEtapa = {
             "idProceso":idProceso,
             "idEtapa":idEtapa
         };
+
         var resultEtapa=await api.execApi(request.hostname(),'/Desempeno/Proceso/getEtapas',objEtapa);
+        
         var etapa =resultEtapa.body.data;
         
         promedioGeneral.body.forEach(e => {
@@ -172,8 +176,8 @@ class Accion {
             competenciasSpider.push(e.competencia);
             valoresSpiderAuto.push(e.valorAuto);
         });
-        
-        return view.render('desempeno/informe/informeEjecutivospdf', {datosMenu,persona,PersonaEde,etapa, idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa, escala: escala.body.data, promedioGeneral: promedioGeneral.body, competenciasSpider:competenciasSpider, valoresSpiderAuto:valoresSpiderAuto });
+        console.log(instrumento.competencias)
+        return view.render('desempeno/informe/informeEjecutivospdf', {datosMenu,persona,etapa, idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa, escala: escala.body.data, promedioGeneral: promedioGeneral.body, competenciasSpider:competenciasSpider, valoresSpiderAuto:valoresSpiderAuto });
     
     }
 
@@ -191,7 +195,7 @@ class Accion {
         //var result = await got(`http://192.168.3.4:8080?url=${server}/Acreditacion/Informe/pdf?procesoPersona=${idPersona}&cd=${conDetalle}`);
         // var url = `http://192.168.3.4:8080/?url=http%3A%2F%2F${server}%2FAcreditacion%2FInforme%2Fpdf%3FprocesoPersona%3D${idPersona}%26cd%3D${conDetalle}`;
        
-        var url = `http://192.168.3.4:8080/?url=http%3A%2F%2F${server}%2FDesempeno%2FInforme%2Fpdf%3FidProceso%3D${idProceso}%26idEtapa%3D${idEtapa}%26idAccionPersona%3D${idAccionPersona}%26codigoActor%3D${codigoActor}%26idOpinante%3D2${idOpinante}%26idPersona%3D${idPersona}`;
+        var url = `http://192.168.3.4:8080/?url=http%3A%2F%2F${server}%2FDesempeno%2FInforme%2Fpdf%3FidProceso%3D${idProceso}%26idEtapa%3D${idEtapa}%26idAccionPersona%3D${idAccionPersona}%26codigoActor%3D${codigoActor}%26idOpinante%3D${idOpinante}%26idPersona%3D${idPersona}`;
         
 
         var file = await wget(url, { output: 'tmp/reporte.pdf' });
