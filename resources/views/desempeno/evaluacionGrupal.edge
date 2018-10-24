@@ -206,9 +206,17 @@ var suma = function(obj){
                                                     <td style="text-align: center; vertical-align: middle; font-weight: bold;" id="M_{{evaluado.idOpinante}}">{{evaluado.resultado.metas.nivel}}</td>
                                                     <td style="text-align: center; vertical-align: middle; font-weight: bold;">
 
+                                                        @if(evaluado.codigoEstado=="EVALFINALIZADO")
+                                                            <div class="btn btn-success"> 
+                                                                    <span>Finalizado</span>
+                                                            </div>
+                                                        
+                                                        @else
                                                             <button type="button" id="{{evaluado.idOpinante}}" class="btn btn-danger waves-effect waves-light bFinalizar"> 
                                                                     <span>Finalizar</span>
-                                                                </button>
+                                                            </button>
+                                                        @endif
+                                                            
                                                     </td>
                                                     </tr>
                                                         @endeach
