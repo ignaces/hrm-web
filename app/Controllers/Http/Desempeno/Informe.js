@@ -153,8 +153,8 @@ class Accion {
             "idProceso":idProceso,
             "idPersona":idPersona
         };
-        //////console.log(idProceso)
-        console.log(idPersona)
+        
+        
         var resultPersonaEde =await api.execApi(request.hostname(),'/Desempeno/Proceso/getProcesoPersona',objdatosPersona);
         var PersonaEde;
         var persona =resultPersonaEde.body.data;
@@ -178,16 +178,22 @@ class Accion {
     }
 
     async getPdf({ view, request, response, auth }) {
-        var conDetalle = request.input("cd");
-        var idPersona = request.input("procesoPersona");
+        
+        var idPersona = request.input("idPersona");
+        var idEtapa = request.input("idEtapa");
+        var idProceso = request.input("idProceso");
+        var idAccionPersona = request.input("idAccionPersona");
+        var codigoActor = request.input("codigoActor");
+        var idOpinante = request.input("idOpinante");
+
         var server = request.hostname().split(".")[0]+'.enovum.cl';//request.hostname();
-        server="csdev.enovum.cl";
+        server = "csdev.enovum.cl";
         //var result = await got(`http://192.168.3.4:8080?url=${server}/Acreditacion/Informe/pdf?procesoPersona=${idPersona}&cd=${conDetalle}`);
         // var url = `http://192.168.3.4:8080/?url=http%3A%2F%2F${server}%2FAcreditacion%2FInforme%2Fpdf%3FprocesoPersona%3D${idPersona}%26cd%3D${conDetalle}`;
        
-        var url = `http://192.168.3.4:8080/?url=http%3A%2F%2F${server}%2FDesempeno%2FInforme%2Fpdf%3FidProceso%3Dca95dced-c680-11e8-8771-bc764e100f2b%26idEtapa%3D1f05c0a0-c70e-11e8-8771-bc764e100f2b%26idAccionPersona%3Dc007bb5c-d596-11e8-8771-bc764e100f2b%26codigoActor%3DEVAL%26idOpinante%3D2d15dfea-d597-11e8-8771-bc764e100f2b`;
+        var url = `http://192.168.3.4:8080/?url=http%3A%2F%2F${server}%2FDesempeno%2FInforme%2Fpdf%3FidProceso%3D${idProceso}%26idEtapa%3D${idEtapa}%26idAccionPersona%3D${idAccionPersona}%26codigoActor%3D${codigoActor}%26idOpinante%3D2${idOpinante}%26idPersona%3D2${idPersona}`;
         
-
+console.log(url)
         var file = await wget(url, { output: 'tmp/reporte.pdf' });
 
         response.type = "application/pdf";
@@ -201,7 +207,7 @@ class Accion {
 
     }
 
-
+    
 
 }
 
