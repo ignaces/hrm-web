@@ -68,7 +68,7 @@ class Portada {
         }
         
         var reultEde=await data.execApi(request.hostname(),'/Desempeno/Proceso/getProcesosPersona',obj);
-        console.log(reultEde);
+  
         var procesosEde =reultEde.body.data;
         
         var user={usuario:auth.user}
