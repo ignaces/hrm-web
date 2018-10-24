@@ -176,8 +176,8 @@ class Accion {
             competenciasSpider.push(e.competencia);
             valoresSpiderAuto.push(e.valorAuto);
         });
-        console.log(instrumento.competencias)
-        return view.render('desempeno/informe/informeEjecutivospdf', {datosMenu,persona,etapa, idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa, escala: escala.body.data, promedioGeneral: promedioGeneral.body, competenciasSpider:competenciasSpider, valoresSpiderAuto:valoresSpiderAuto });
+        var server = request.hostname().split(".")[0]+'.enovum.cl';
+        return view.render('desempeno/informe/informeEjecutivospdf', {server,datosMenu,persona,etapa, idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa, escala: escala.body.data, promedioGeneral: promedioGeneral.body, competenciasSpider:competenciasSpider, valoresSpiderAuto:valoresSpiderAuto });
     
     }
 
