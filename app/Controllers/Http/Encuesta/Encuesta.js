@@ -54,6 +54,10 @@
         }
 
         async fin({view,request, response, auth, session}){
+          var referer = session.get("referer");
+          if(referer!=null){
+            response.redirect(referer);
+          }
           return view.render('encuesta/fin',  {});
         }
       }
