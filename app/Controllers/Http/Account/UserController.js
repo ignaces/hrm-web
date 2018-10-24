@@ -13,7 +13,7 @@ class UserController {
       }
 
       async login ({ view,request, auth ,response, session}) {
-
+        
         session.clear();
         await auth.logout();
 
@@ -30,7 +30,7 @@ class UserController {
           
           //var result = await data.execApi(request.hostname(),'/Persona/Persona/getIdPersona',obj);
 
-          
+
           if(!persona){
             persona={};
             persona.imageUser="/assets/images/icons/businessman.svg"
@@ -52,8 +52,11 @@ class UserController {
           }
           
           try{
+           
             var rUsuario = await data.execApi(request.hostname(),'/Core/Users/getMenuUser',{idUser:auth.user.id});
             var usuario = rUsuario.body.data;
+            
+
             session.put('usuario_roles_menu',usuario);
 
             var cambioClave = await data.execApi(request.hostname(),'/Core/Users/getRequiereCambioClave',{idUser:auth.user.id});
