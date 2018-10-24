@@ -44,13 +44,13 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-2"><span><b>Nombre</b></span></div>
-                                <div class="col-md-4"><span>{{persona.nombres}} {{persona.apellidoPaterno}} {{persona.apellidoMaterno}}</span></div>
+                                <div class="col-md-4"><span>{{persona[0].nombres}} {{persona[0].apellidoPaterno}} {{persona[0].apellidoMaterno}}</span></div>
                                 <div class="col-md-2"><span><b>RUT</b></span></div>
-                                <div class="col-md-4"><span>{{persona.identificador}}</span></div>
+                                <div class="col-md-4"><span>{{persona[0].identificador}}</span></div>
                             </div>
                             <div class="row">
                                 <div class="col-md-2"><span><b>Email</b></span></div>
-                                <div class="col-md-4"><span>{{persona.email}}</span></div>
+                                <div class="col-md-4"><span>{{persona[0].email}}</span></div>
                                 <div class="col-md-2"><h5></h5></div>
                                 <div class="col-md-4"></div>
                             </div>
@@ -107,8 +107,12 @@
                                                                                                             <thead>
                                                                                                                     <tr>
                                                                                                                         <th>Autoevaluación</th> 
-                                                                                                                        <!--<th>Superior</th> 
-                                                                                                                        <th>Funcional</th>--> 
+                                                                                                                        @if(codigoActor == 'SUPE')
+                                                                                                                            <th>Superior</th>
+                                                                                                                        @endif
+                                                                                                                        @if(codigoActor == 'FUNC')
+                                                                                                                            <th>Funcional</th>
+                                                                                                                        @endif
                                                                                                                     </tr>
                                                                                                             </thead>
                                                                                                             <tbody>
@@ -116,7 +120,14 @@
                                                                                                                         @each(p in promedioGeneral)
                                                                                                                                        
                                                                                                                             @if(p.id == $parent.$parent.$parent.$parent.competencia.id )
-                                                                                                                                <td style="text-align: center;">{{p.nivelAuto}}</td>
+                                                                                                                                    <td style="text-align: center;">{{p.nivelAuto}}</td>
+
+                                                                                                                                @if(codigoActor == 'SUPE')
+                                                                                                                                    <td style="text-align: center;">{{p.nivelSup}}</td>
+                                                                                                                                @endif
+                                                                                                                                @if(codigoActor == 'FUNC')
+                                                                                                                                    <td style="text-align: center;">{{p.nivelSup}}</td>
+                                                                                                                                @endif
                                                                                                                                 <!--<td style="text-align: center;">B</td>
                                                                                                                                 <td style="text-align: center;">B</td>-->
                                                                                                                             @endif
@@ -224,7 +235,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td height="20" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
-                                                            Resultado Competencias</td>
+                                                            Evaluación Competencias Conductuales</td>
                                                         <!--td align="center" 
                                                             style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
                                                             <span id="ctl00_Principal_LBPRRC">0.80</span>
@@ -235,7 +246,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td class="style25" height="20" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
-                                                            Resultado Metas</td>
+                                                            Evaluación de Resultados</td>
                                                         <!--td align="center" 
                                                             style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
                                                             <span id="ctl00_Principal_LBPRRM">0.00</span>
@@ -531,7 +542,7 @@
                                                 </div>
                                                 <h3 class="panel-title" style="color: #fff;">Gráfico de Competencias</h3>
                                     </div> 
-                                    <div class="panel-body" style="margin-left:150px; width: 800px !important;height: 100% !important;">
+                                    <div class="panel-body" style="margin-left:250px; width: 800px !important;height: 100% !important;">
                                             <canvas id="myRadarChart" height="100%"></canvas>
                                     </div>
                                 </div>           
@@ -580,37 +591,71 @@
   
           <script>
           $(document).ready(()=>{
-              var labelsSpider = "{{competenciasSpider}}".split(",");
-              var dataSpiderAuto = "{{valoresSpiderAuto}}".split(",");
-            var ctx = document.getElementById('myRadarChart').getContext('2d');
+                var labelsSpider = "{{competenciasSpider}}".split(",");
+                var dataSpiderAuto = "{{valoresSpiderAuto}}".split(",");
+                var dataSpiderSup = "{{valoresSpiderSup}}".split(",");
+                var ctx = document.getElementById('myRadarChart').getContext('2d');
 
-            var myRadarChart = new Chart(ctx, {
-                type: 'radar',
-                data: {
-                    labels: labelsSpider,
-                    datasets: [{
-                        label: "Autoevaluacion",
-                        backgroundColor: "rgba(200,0,0,0.2)",
-                        data: dataSpiderAuto
-                    }
-                    /*, {
-                        label: "Evaluacion",
-                        backgroundColor: "rgba(0,0,200,0.2)",
-                        data: [3, 3, 1, 2, 3, 3]
-                    }*/
-                    ]
-                    },
-                options:{
-                    layout: {
-                        padding: {
-                            left: 150,
-                            right: 0,
-                            top: -0,
-                            bottom: 0
+                if("{{codigoActor}}" == "EVAL")
+                {
+                    var myRadarChart = new Chart(ctx, {
+                        type: 'radar',
+                        data: {
+                            labels: labelsSpider,
+                            datasets: [{
+                                label: "Autoevaluacion",
+                                backgroundColor: "rgba(200,0,0,0.2)",
+                                data: dataSpiderAuto
+                            }
+                            /*, {
+                                label: "Evaluacion",
+                                backgroundColor: "rgba(0,0,200,0.2)",
+                                data: [3, 3, 1, 2, 3, 3]
+                            }*/
+                            ]
+                            },
+                        options:{
+                            layout: {
+                                padding: {
+                                    left: 150,
+                                    right: 0,
+                                    top: -0,
+                                    bottom: 0
+                                }
+                            }
                         }
-                    }
+                    });
                 }
-            });
+                else
+                {
+                    var myRadarChart = new Chart(ctx, {
+                        type: 'radar',
+                        data: {
+                            labels: labelsSpider,
+                            datasets: [{
+                                            label: "Autoevaluacion",
+                                            backgroundColor: "rgba(200,0,0,0.2)",
+                                            data: dataSpiderAuto
+                                        }
+                                        , {
+                                            label: "Evaluacion",
+                                            backgroundColor: "rgba(0,0,200,0.2)",
+                                            data: dataSpiderSup
+                                        }
+                            ]
+                            },
+                        options:{
+                            layout: {
+                                padding: {
+                                    left: 150,
+                                    right: 0,
+                                    top: -0,
+                                    bottom: 0
+                                }
+                            }
+                        }
+                    });
+                }
             
           });
           </script>
