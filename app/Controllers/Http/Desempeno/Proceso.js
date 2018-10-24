@@ -439,18 +439,21 @@ class Proceso {
             //console.log(result2);
             var codigoAct = "";
             var promedioGeneral;
-            
 
-            if(promedioGeneral.body[0].codigoActor != undefined)
-            {
-                codigoAct = promedioGeneral.body[0].codigoActor
-            }
-            else
-            {
-                codigoAct = "";
-            }
+            
+            
             try{
                 promedioGeneral = result3;
+
+                if(promedioGeneral.body[0].codigoActor != undefined)
+                {
+                    codigoAct = promedioGeneral.body[0].codigoActor
+                }
+                else
+                {
+                    codigoAct = "";
+                }
+
             }
                 catch(e)
             {}
