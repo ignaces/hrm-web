@@ -2,6 +2,7 @@
 
 const api = use('App/Utils/Data')
 var wget = require('node-wget-promise');
+const Helpers = use('Helpers');
 class Accion {
 
     //---->> PUBLICAR METAS
@@ -180,12 +181,12 @@ class Accion {
         var conDetalle = request.input("cd");
         var idPersona = request.input("procesoPersona");
         var server = request.hostname().split(".")[0]+'.enovum.cl';//request.hostname();
-
+        server="csdev.enovum.cl";
         //var result = await got(`http://192.168.3.4:8080?url=${server}/Acreditacion/Informe/pdf?procesoPersona=${idPersona}&cd=${conDetalle}`);
         // var url = `http://192.168.3.4:8080/?url=http%3A%2F%2F${server}%2FAcreditacion%2FInforme%2Fpdf%3FprocesoPersona%3D${idPersona}%26cd%3D${conDetalle}`;
        
-        var url = `http://192.168.3.4:8080/?url=http{server}%2FDesempeno%2FInforme%2Fpdf%3FidProceso%3Dca95dced-c680-11e8-8771-bc764e100f2b%26idEtapa%3D1f05c0a0-c70e-11e8-8771-bc764e100f2b%26idAccionPersona%3Dc007bb5c-d596-11e8-8771-bc764e100f2b%26codigoActor%3DEVAL%26idOpinante%3D2d15dfea-d597-11e8-8771-bc764e100f2b`;
-        ////console.log(url);
+        var url = `http://192.168.3.4:8080/?url=http%3A%2F%2F${server}%2FDesempeno%2FInforme%2Fpdf%3FidProceso%3Dca95dced-c680-11e8-8771-bc764e100f2b%26idEtapa%3D1f05c0a0-c70e-11e8-8771-bc764e100f2b%26idAccionPersona%3Dc007bb5c-d596-11e8-8771-bc764e100f2b%26codigoActor%3DEVAL%26idOpinante%3D2d15dfea-d597-11e8-8771-bc764e100f2b`;
+        
 
         var file = await wget(url, { output: 'tmp/reporte.pdf' });
 
