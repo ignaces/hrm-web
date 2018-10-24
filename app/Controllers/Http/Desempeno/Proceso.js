@@ -298,7 +298,7 @@ class Proceso {
         var resultFunc=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluadosGrupal',objEval);
         var eGrupal = resultFunc.body.data;
         
-        return view.render('desempeno/evaluacionGrupal',{competencias:eGrupal.competencias,evaluados:eGrupal.evaluados});
+        return view.render('desempeno/evaluacionGrupal',{competencias:eGrupal.competencias,evaluados:eGrupal.evaluados,idProceso,idEtapa});
     }
 
     async portadaBrasil ({view,request, response}) {
@@ -439,7 +439,7 @@ class Proceso {
             //console.log(result2);
             var codigoAct = "";
             var promedioGeneral;
-            console.log(promedioGeneral.body[0].codigoActor)
+            
 
             if(promedioGeneral.body[0].codigoActor != undefined)
             {
