@@ -97,7 +97,7 @@ class Proceso {
         var etag = `app_${cliente}`
         var texto = "";
         var mensajeTitulo = "";
-        console.log(mensajeResult[0])
+       // console.log(mensajeResult[0])
         if(mensajeResult.length > 0)
         {
             texto = mensajeResult[0].mensaje;
@@ -149,7 +149,7 @@ class Proceso {
         ////console.log(datosProceso);
 
         session.put('idEtapa',idEtapa)
-        session.put('referer',`/Desempeno/Proceso/etapa?idEtapa=${idEtapa}`)
+        session.put('referer',`/Desempeno/Proceso/etapa?idEtapa=${idEtapa}&idProceso=${idProceso}`)
 
         //Datos Persona
         var user={usuario:auth.user}
