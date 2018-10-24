@@ -536,7 +536,15 @@ class Accion {
             "valor":valor
             
         };
+        //console.log("VALOR: "+valor);
         var result = await api.execApi(request.hostname(),'/Desempeno/Accion/addConfirmacionAccion',obj);  
+
+        //ESTO ES BAJO LA LOGICA DE BANMEDICA, PARAMETRIZAR SEGUN CADA CLIENTE.
+        if(valor == "NO")
+        {
+            console.log("DIJO QUE NO");
+            this.sendNotificacionJefe(request,idEtapaTareaAccionProcesoPersona);
+        }
 
         return{mensaje:"ok"} 
     
@@ -555,6 +563,9 @@ class Accion {
 
         if(correo.email != ""){
             var obMail = new mail();
+
+            var rechazo =   request.input("");
+
             var html = `<p>Estimado(a) COLABORADOR</p>
                 <p>&nbsp;</p>
                 <p>Tu jefatura indic&oacute; que ya realizaron la reuni&oacute;n de retroalimentaci&oacute;n.</p>
@@ -564,7 +575,36 @@ class Accion {
             obMail.send(cliente+ ' metas publicadas', correo.email, 'Notificación', html, request.hostname());
             //obMail.send(cliente+ ' metas publicadas', 'jonathan.olivares@fch.cl', 'Notificación', html, request.hostname());
         }
+        //console.log(cliente);
+    }
 
+    //ESTO ESTA AQUI SOLO PARA SALVAR LA SITUACION BANMEDICA, HAY QUE PARAMETRIZAR Y DEJAR
+    //UN SOLO ENVIO DE CORREOS PARAMETRIZABLE
+        
+    async sendNotificacionJefe(request, idMatriz){
+        var cliente = request.hostname().split(".")[0];
+
+        var obj = {
+            "idEdeEtapaTareaAccionProcesoPersona":idMatriz
+        };
+
+        var result = await api.execApi(request.hostname(),'/Desempeno/Proceso/getEmailJefeEvaluado',obj);  
+        var correo = result.body.data[0];
+
+        if(correo.email != ""){
+            var obMail = new mail();
+
+            var rechazo =   request.input("");
+
+            var html = `<p>Estimado(a) JEFE</p>
+                <p>&nbsp;</p>
+                <p>Uno de tus colaboradores indic&oacute; que no se reali&oacute; la reuni&oacute;n de retroalimentaci&oacute;n.</p>
+                <p>Para continuar con el proceso, debes ingresar a&nbsp;<a href="http://`+cliente+`.enovum.cl">http://`+cliente+`.enovum.cl</a>&nbsp;para volver a revisar los objetivos y volver a solicitar la confirmaci&oacute;n de reuni&oacute;n y asi continuar el proceso de retroalimentaci&oacute;n.</p>
+                <p>Saludos.</p>
+                <p>Gerencia de Personas.</p>`;
+            //obMail.send(cliente+ ' metas publicadas', correo.email, 'Notificación', html, request.hostname());
+            obMail.send(cliente+ ' metas publicadas', 'julio.montana@fch.cl', 'Notificación', html, request.hostname());
+        }
         //console.log(cliente);
     }
 
