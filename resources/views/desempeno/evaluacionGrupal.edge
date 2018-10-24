@@ -112,7 +112,7 @@ var suma = function(obj){
                 <div class="row">
                     <div class="col-lg-12">
                          <div class="pull-right">
-                            <button type="button" onclick="javascript:history.back()" class="btn btn-primary waves-effect waves-light"> 
+                            <button type="button" onclick="javascript:window.location.href='/Desempeno/Proceso/etapa?idProceso={{idProceso}}&idEtapa={{idEtapa}}'" class="btn btn-primary waves-effect waves-light"> 
                                 <i class="fa fa-arrow-left m-r-5"></i>
                                 <span>Volver</span>
                             </button>
@@ -206,9 +206,17 @@ var suma = function(obj){
                                                     <td style="text-align: center; vertical-align: middle; font-weight: bold;" id="M_{{evaluado.idOpinante}}">{{evaluado.resultado.metas.nivel}}</td>
                                                     <td style="text-align: center; vertical-align: middle; font-weight: bold;">
 
+                                                        @if(evaluado.codigoEstado=="EVALFINALIZADO")
+                                                            <div class="btn btn-success"> 
+                                                                    <span>Finalizado</span>
+                                                            </div>
+                                                        
+                                                        @else
                                                             <button type="button" id="{{evaluado.idOpinante}}" class="btn btn-danger waves-effect waves-light bFinalizar"> 
                                                                     <span>Finalizar</span>
-                                                                </button>
+                                                            </button>
+                                                        @endif
+                                                            
                                                     </td>
                                                     </tr>
                                                         @endeach
