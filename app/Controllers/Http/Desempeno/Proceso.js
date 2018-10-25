@@ -237,9 +237,29 @@ class Proceso {
         }
         //////console.log(objFunc);
         var resultFunc=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluados',objFunc);
-        var listaFunc =resultFunc.body.data;  
+        var listaFunc =resultFunc.body.data;
         
-        return view.render('desempeno/etapa',{etag, datosProceso,PersonaEde,datosMenu,etapa,listaEval,listaSupe,listaAsc,listaFunc, idEtapa: idEtapa});
+        //
+        var objFunc={
+            "idEtapa":idEtapa
+        }
+        //////console.log(objFunc);
+        
+        var listaParams;
+        try
+        {
+            var resultParams=await api.execApi(request.hostname(),'/Desempeno/Proceso/getSysParametros',objFunc);
+            listaParams = resultParams.body.data;
+            //console.log(listaParams);
+        }
+        catch(e)
+        {
+
+        }
+        
+
+        console.log(listaParams);
+        return view.render('desempeno/etapa',{etag, datosProceso,PersonaEde,datosMenu,etapa,listaEval,listaSupe,listaAsc,listaFunc, idEtapa: idEtapa, params: listaParams});
     }
 
     async evalBrasil ({view,request, response}) {
