@@ -14,6 +14,9 @@ $(document).ready(function () {
         var idEtapaTareaActor = $("#idEtapaTareaActor").val();
         var idAccionEstado = $("#idAccionEstado").val();
         var valor = $('input[name=rdoConfirmar]:checked').val();
+        var codigoCab = "EMAILRECHAZOFEEDCAB";
+        var codigoCuerpo = "EMAILRECHAZOFEED";
+        
         var csrf = $('input[name=_csrf]').val();
 
         var obj = {   
@@ -26,6 +29,8 @@ $(document).ready(function () {
             idEtapaTareaActor:idEtapaTareaActor,
             idAccionEstado:idAccionEstado,
             valor:valor,
+            codigoCab: codigoCab,
+            codigoCuerpo: codigoCuerpo,
             _csrf:csrf
         };
         
