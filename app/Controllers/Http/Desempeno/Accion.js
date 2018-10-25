@@ -213,9 +213,9 @@ class Accion {
             "codigoActor": codigoActor,
             "idAccionPersona": idAccionPersona
         }
-        //var resultEval = await api.execApi(request.hostname(), '/Desempeno/Proceso/getListaEvaluados', objEval);
-        //var listaEval = resultEval.body.data;
-    ////console.log(listaEval)
+        var resultEval = await api.execApi(request.hostname(), '/Desempeno/Proceso/getListaEvaluados', objEval);
+        var listaEval = resultEval.body.data;
+        ////console.log(listaEval)
         //
 
         var persona = {
