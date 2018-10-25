@@ -33,9 +33,17 @@
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         @!section('pluginsCss2')
 
-        <script>
-            
-        </script>
+                
+            <script src="https://global.localizecdn.com/localize.js"></script>
+
+            <script>!function(a){if(!a.Localize){a.Localize={};for(var e=["translate","untranslate","phrase","initialize","translatePage","setLanguage","getLanguage","detectLanguage","getAvailableLanguages","untranslatePage","bootstrap","prefetch","on","off"],t=0;t<e.length;t++)a.Localize[e[t]]=function(){}}}(window);</script>
+
+            <script>
+            Localize.initialize({
+            key: 'bbmO1B3dKlKLg',
+            rememberLanguage: true
+            });
+            </script>
   </head>
 
   <body>
@@ -225,6 +233,8 @@
             gtag('config', 'UA-125528496-1');
             </script>
           <script>
+
+
    /*   (function() {
         'use strict';
 

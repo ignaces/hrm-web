@@ -62,7 +62,8 @@ $(document).ready(function () {
         var idAccionEstado = $("#idAccionEstado").val();
         var observacion = $("#observacion").val();
         var csrf = $('input[name=_csrf]').val();
-
+        var codigoCab = "EMAILPUBMETCAB";
+        var codigoCuerpo = "EMAILPUBMET";
         var obj = {
             idProceso:idProceso,
             idEtapa:idEtapa,
@@ -73,6 +74,8 @@ $(document).ready(function () {
             idEtapaTareaActor:idEtapaTareaActor,
             idAccionEstado:idAccionEstado,
             observacion:observacion,
+            codigoCab: codigoCab,
+            codigoCuerpo: codigoCuerpo,
             _csrf:csrf
         };
         return obj;
