@@ -20,6 +20,7 @@
                           <tbody>
                            @each(persona in lista)
                                  @each(tarea in persona.tareas)
+                                 
                                 <tr>
                                     <td rowspan="{{persona.tareas.length}}">
                                         <div class="text-center">
@@ -65,7 +66,7 @@
                                             @each(angulos in params)
                                                 @if(angulos.codigo == 'BTNHISTORICOAUTO')
                                                     @if(angulos.valor == '1')
-                                                        <button  class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md waves-light bHistorico" id="H_{{tarea.tarea.idEvaluado}}"><i class="fa fa-bar-chart-o"></i> Ver Históricos</button>
+                                                        <button  class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md waves-light bHistorico" id="H_{{$parent.tarea.tarea.idEvaluado}}"><i class="fa fa-bar-chart-o"></i> Ver Históricos</button>
                                                     @else
                                                         <button type="button" class="btn btn-default btn-xs btn-rounded btn-bordered waves-effect w-md" disabled=""><i class="fa fa-ban"></i> No Disponible</button>
                                                     @endif        
@@ -77,7 +78,7 @@
                                             @each(angulos in params)
                                                 @if(angulos.codigo == 'BTNHISTORICODESC')
                                                     @if(angulos.valor == '1')
-                                                        <button  class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md waves-light bHistorico" id="H_{{tarea.tarea.idEvaluado}}"><i class="fa fa-bar-chart-o"></i> Ver Históricos</button>
+                                                        <button  class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md waves-light bHistorico" id="H_{{$parent.tarea.tarea.idEvaluado}}"><i class="fa fa-bar-chart-o"></i> Ver Históricos</button>
                                                     @else
                                                         <button type="button" class="btn btn-default btn-xs btn-rounded btn-bordered waves-effect w-md" disabled=""><i class="fa fa-ban"></i> No Disponible</button>
                                                     @endif        
@@ -89,7 +90,7 @@
                                             @each(angulos in params)
                                                 @if(angulos.codigo == 'BTNHISTORICOASC')
                                                     @if(angulos.valor == '1')
-                                                        <button  class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md waves-light bHistorico" id="H_{{tarea.tarea.idEvaluado}}"><i class="fa fa-bar-chart-o"></i> Ver Históricos</button>
+                                                        <button  class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md waves-light bHistorico" id="H_{{$parent.tarea.tarea.idEvaluado}}"><i class="fa fa-bar-chart-o"></i> Ver Históricos</button>
                                                     @else
                                                         <button type="button" class="btn btn-default btn-xs btn-rounded btn-bordered waves-effect w-md" disabled=""><i class="fa fa-ban"></i> No Disponible</button>
                                                     @endif        
@@ -101,7 +102,7 @@
                                             @each(angulos in params)
                                                 @if(angulos.codigo == 'BTNHISTORICOFUNC')
                                                     @if(angulos.valor == '1')
-                                                        <button  class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md waves-light bHistorico" id="H_{{tarea.tarea.idEvaluado}}"><i class="fa fa-bar-chart-o"></i> Ver Históricos</button>
+                                                        <button  class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md waves-light bHistorico" id="H_{{$parent.tarea.tarea.idEvaluado}}"><i class="fa fa-bar-chart-o"></i> Ver Históricos</button>
                                                     @else
                                                         <button type="button" class="btn btn-default btn-xs btn-rounded btn-bordered waves-effect w-md" disabled=""><i class="fa fa-ban"></i> No Disponible</button>
                                                     @endif        
