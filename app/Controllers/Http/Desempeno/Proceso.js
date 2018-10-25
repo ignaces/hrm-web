@@ -240,6 +240,7 @@ class Proceso {
         var listaFunc =resultFunc.body.data;
         
         //
+        console.log(idEtapa)
         var objFunc={
             "idEtapa":idEtapa
         }
