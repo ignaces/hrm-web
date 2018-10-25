@@ -24,6 +24,29 @@
         <link href="/assets/plugins/tooltipster/tooltipster.bundle.min.css" rel="stylesheet" type="text/css" />   
         @!section('pluginsCss')     
         
+
+            
+        @if(request.hostname()=="csdev.enovum.cl" || request.hostname() =="cs.enovum.cl")
+            <script src="https://global.localizecdn.com/localize.js"></script>
+            <script>!function(a){if(!a.Localize){a.Localize={};for(var e=["translate","untranslate","phrase","initialize","translatePage","setLanguage","getLanguage","detectLanguage","getAvailableLanguages","untranslatePage","bootstrap","prefetch","on","off"],t=0;t<e.length;t++)a.Localize[e[t]]=function(){}}}(window);</script>
+            <script>
+            Localize.initialize({
+            key: 'bbmO1B3dKlKLg',
+            rememberLanguage: true
+            });
+
+            </script>
+        @endif
+             <script async src="https://www.googletagmanager.com/gtag/js?id=UA-125528496-1"></script>
+             <script>
+             window.dataLayer = window.dataLayer || [];
+             function gtag(){dataLayer.push(arguments);}
+             gtag('js', new Date());
+ 
+             gtag('config', 'UA-125528496-1');
+             </script>
+             
+           
   </head>
 
   <body>
