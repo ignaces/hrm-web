@@ -213,8 +213,19 @@ class Accion {
             "codigoActor": codigoActor,
             "idAccionPersona": idAccionPersona
         }
-        var resultEval = await api.execApi(request.hostname(), '/Desempeno/Proceso/getListaEvaluados', objEval);
-        var listaEval = resultEval.body.data;
+        
+        try{
+            var resultEval = await api.execApi(request.hostname(), '/Desempeno/Proceso/getListaEvaluados', objEval);
+            var listaEval = resultEval.body.data;
+        }
+        catch(e)
+        {   
+            var obj = {
+                "mensaje": "Al invocar getListaEvaluados",
+                "idPersonaActor": idPersona
+            }
+            var result = await api.execApi(request.hostname(),'/Desempeno/Accion/addLog',obj);
+        }
         ////console.log(listaEval)
         //
 
@@ -237,16 +248,38 @@ class Accion {
             "idEtapa": "",
             "idTareaEtapa": idEtapaTarea
         };
-        var resultTarea = await api.execApi(request.hostname(), '/Desempeno/Proceso/getTareasEtapas', objDatosTarea);
-        var datosTarea = resultTarea.body.data;
+
+        try{
+            var resultTarea = await api.execApi(request.hostname(), '/Desempeno/Proceso/getTareasEtapas', objDatosTarea);
+            var datosTarea = resultTarea.body.data;
+        }
+        catch(e)
+        {   
+            var obj = {
+                "mensaje": "Al invocar getTareasEtapas",
+                "idPersonaActor": idPersona
+            }
+            var result = await api.execApi(request.hostname(),'/Desempeno/Accion/addLog',obj);
+        }
 
         //COLUMNAS
         var objDataColumnas = {
             "idProceso":idProceso
         };
-        var resultDataColumnas =await api.execApi(request.hostname(),'/Desempeno/Metas/getMetasColumnas',objDataColumnas);
-        var dataColumnas =resultDataColumnas.body.data;
 
+        try{
+            var resultDataColumnas =await api.execApi(request.hostname(),'/Desempeno/Metas/getMetasColumnas',objDataColumnas);
+            var dataColumnas =resultDataColumnas.body.data;
+        }
+        catch(e)
+        {   
+            var obj = {
+                "mensaje": "Al invocar getMetasColumnas",
+                "idPersonaActor": idPersona
+            }
+            var result = await api.execApi(request.hostname(),'/Desempeno/Accion/addLog',obj);
+        }
+        
         //METAS
         var objDataMetas = {
             "idProceso":idProceso,
@@ -255,9 +288,19 @@ class Accion {
             "eliminada":0
 
         };
-        var resultDataMetas =await api.execApi(request.hostname(),'/Desempeno/Metas/getMetasColaborador',objDataMetas);
-        var dataMetas =resultDataMetas.body.data;
         
+        try{
+            var resultDataMetas =await api.execApi(request.hostname(),'/Desempeno/Metas/getMetasColaborador',objDataMetas);
+            var dataMetas =resultDataMetas.body.data;
+        }
+        catch(e)
+        {   
+            var obj = {
+                "mensaje": "Al invocar getMetasColaborador",
+                "idPersonaActor": idPersona
+            }
+            var result = await api.execApi(request.hostname(),'/Desempeno/Accion/addLog',obj);
+        }
         
         //OBSERVACION
         var objObservacion = {
@@ -265,17 +308,29 @@ class Accion {
             "idEtapaTareaAccionProcesoPersona":listaEval[0].tareas[0].tarea.evaluado_idEtapaTareaAccionPersona,
             "idEtapaTareaActor":listaEval[0].tareas[0].tarea.actor_idEtapaTareaActor
         }
-
-        var resultObservacion =await api.execApi(request.hostname(),'/Desempeno/Accion/getObservacionAccion',objObservacion);
+        var resultObservacion =await api.execApi(request.hostname(),'/Desempeno/Accion/getObservacionAccionColaborador',objObservacion);
         var dataObservacion =resultObservacion.body.data;
+        //console.log(objObservacion);
 
         var textoObservacion="";
         if (dataObservacion.length > 0){
             textoObservacion=dataObservacion[0].observacion
         };
 
+        try{
+            var resultDataMetas =await api.execApi(request.hostname(),'/Desempeno/Metas/getMetasColaborador',objDataMetas);
+            var dataMetas =resultDataMetas.body.data;
+        }
+        catch(e)
+        {   
+            var obj = {
+                "mensaje": "Al invocar getMetasColaborador",
+                "idPersonaActor": idPersona
+            }
+            var result = await api.execApi(request.hostname(),'/Desempeno/Accion/addLog',obj);
+        }
+
         var idOpinante  = request.input("idOpinante");
-        
         var codigo     = request.input("codigoActor");
         
         //var codigo = all.codigo
@@ -290,8 +345,12 @@ class Accion {
             var result = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumentoEde',obj);
         }
         catch(e)
-        {
-            console.log(e);
+        {   
+            var obj = {
+                "mensaje": "Al invocar getInstrumentoEde",
+                "idPersonaActor": idPersona
+            }
+            var result = await api.execApi(request.hostname(),'/Desempeno/Accion/addLog',obj);
         }
         
 
@@ -325,8 +384,19 @@ class Accion {
             "codigoActor": codigoActor,
             "idAccionPersona": idAccionPersona
         }
-        var resultEval = await api.execApi(request.hostname(), '/Desempeno/Proceso/getListaEvaluados', objEval);
-        var listaEval = resultEval.body.data;
+        
+        try{
+            var resultEval = await api.execApi(request.hostname(), '/Desempeno/Proceso/getListaEvaluados', objEval);
+            var listaEval = resultEval.body.data;
+        }
+        catch(e)
+        {   
+            var obj = {
+                "mensaje": "Al invocar getListaEvaluados",
+                "idPersonaActor": idPersona
+            }
+            var result = await api.execApi(request.hostname(),'/Desempeno/Accion/addLog',obj);
+        }
        ////console.log(listaEval)
         //
 
@@ -349,15 +419,38 @@ class Accion {
             "idEtapa": "",
             "idTareaEtapa": idEtapaTarea
         };
-        var resultTarea = await api.execApi(request.hostname(), '/Desempeno/Proceso/getTareasEtapas', objDatosTarea);
-        var datosTarea = resultTarea.body.data;
+
+
+        try{
+            var resultTarea = await api.execApi(request.hostname(), '/Desempeno/Proceso/getTareasEtapas', objDatosTarea);
+            var datosTarea = resultTarea.body.data;
+        }
+        catch(e)
+        {   
+            var obj = {
+                "mensaje": "Al invocar getTareasEtapas",
+                "idPersonaActor": idPersona
+            }
+            var result = await api.execApi(request.hostname(),'/Desempeno/Accion/addLog',obj);
+        }
 
         //COLUMNAS
         var objDataColumnas = {
             "idProceso":idProceso
         };
-        var resultDataColumnas =await api.execApi(request.hostname(),'/Desempeno/Metas/getMetasColumnas',objDataColumnas);
-        var dataColumnas =resultDataColumnas.body.data;
+
+        try{
+            var resultDataColumnas =await api.execApi(request.hostname(),'/Desempeno/Metas/getMetasColumnas',objDataColumnas);
+            var dataColumnas =resultDataColumnas.body.data;
+        }
+        catch(e)
+        {   
+            var obj = {
+                "mensaje": "Al invocar getMetasColumnas",
+                "idPersonaActor": idPersona
+            }
+            var result = await api.execApi(request.hostname(),'/Desempeno/Accion/addLog',obj);
+        }
 
         //METAS
         var objDataMetas = {
@@ -367,8 +460,19 @@ class Accion {
             "eliminada":0
 
         };
-        var resultDataMetas =await api.execApi(request.hostname(),'/Desempeno/Metas/getMetasColaborador',objDataMetas);
-        var dataMetas =resultDataMetas.body.data;
+        
+        try{
+            var resultDataMetas =await api.execApi(request.hostname(),'/Desempeno/Metas/getMetasColaborador',objDataMetas);
+            var dataMetas =resultDataMetas.body.data;
+        }
+        catch(e)
+        {   
+            var obj = {
+                "mensaje": "Al invocar getMetasColaborador",
+                "idPersonaActor": idPersona
+            }
+            var result = await api.execApi(request.hostname(),'/Desempeno/Accion/addLog',obj);
+        }
         
         
         //OBSERVACION
@@ -378,13 +482,34 @@ class Accion {
             "idEtapaTareaActor":listaEval[0].tareas[0].tarea.actor_idEtapaTareaActor
         }
 
-        var resultObservacion =await api.execApi(request.hostname(),'/Desempeno/Accion/getObservacionAccion',objObservacion);
-        var dataObservacion =resultObservacion.body.data;
+        try
+        {
+            var resultObservacion =await api.execApi(request.hostname(),'/Desempeno/Accion/getObservacionAccion',objObservacion);
+            var dataObservacion =resultObservacion.body.data;
+        }
+        catch(e)
+        {   
+            var obj = {
+                "mensaje": "Al invocar getObservacionAccion",
+                "idPersonaActor": idPersona
+            }
+            var result = await api.execApi(request.hostname(),'/Desempeno/Accion/addLog',obj);
+        }
 
         var textoObservacion="";
-        if (dataObservacion.length > 0){
-            textoObservacion=dataObservacion[0].observacion
-        };
+        try{
+            if (dataObservacion.length > 0){
+                textoObservacion=dataObservacion[0].observacion
+            };
+        }
+        catch(e)
+        {   
+            var obj = {
+                "mensaje": "Mensaje vacío",
+                "idPersonaActor": idPersona
+            }
+            var result = await api.execApi(request.hostname(),'/Desempeno/Accion/addLog',obj);
+        }
 
         var idOpinante  = request.input("idOpinante");
         
@@ -402,8 +527,12 @@ class Accion {
             var result = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumentoEde',obj);
         }
         catch(e)
-        {
-            console.log(e);
+        {   
+            var obj = {
+                "mensaje": "Al invocar getInstrumentoEde",
+                "idPersonaActor": idPersona
+            }
+            var result = await api.execApi(request.hostname(),'/Desempeno/Accion/addLog',obj);
         }
         
 
@@ -440,8 +569,19 @@ class Accion {
             "codigoActor": codigoActor,
             "idAccionPersona": idAccionPersona
         }
-        var resultEval = await api.execApi(request.hostname(), '/Desempeno/Proceso/getListaEvaluados', objEval);
-        var listaEval = resultEval.body.data;
+        
+        try{
+            var resultEval = await api.execApi(request.hostname(), '/Desempeno/Proceso/getListaEvaluados', objEval);
+            var listaEval = resultEval.body.data;
+        }
+        catch(e)
+        {   
+            var obj = {
+                "mensaje": "Al invocar getListaEvaluados",
+                "idPersonaActor": idPersona
+            }
+            var result = await api.execApi(request.hostname(),'/Desempeno/Accion/addLog',obj);
+        }
     ////console.log(listaEval)
         //
             
@@ -464,15 +604,37 @@ class Accion {
             "idEtapa": "",
             "idTareaEtapa": idEtapaTarea
         };
-        var resultTarea = await api.execApi(request.hostname(), '/Desempeno/Proceso/getTareasEtapas', objDatosTarea);
-        var datosTarea = resultTarea.body.data;
+        
+        try{
+            var resultTarea = await api.execApi(request.hostname(), '/Desempeno/Proceso/getTareasEtapas', objDatosTarea);
+            var datosTarea = resultTarea.body.data;
+        }
+        catch(e)
+        {   
+            var obj = {
+                "mensaje": "Al invocar getTareasEtapas",
+                "idPersonaActor": idPersona
+            }
+            var result = await api.execApi(request.hostname(),'/Desempeno/Accion/addLog',obj);
+        }
 
         //COLUMNAS
         var objDataColumnas = {
             "idProceso":idProceso
         };
-        var resultDataColumnas =await api.execApi(request.hostname(),'/Desempeno/Metas/getMetasColumnas',objDataColumnas);
-        var dataColumnas =resultDataColumnas.body.data;
+        
+        try{
+            var resultDataColumnas =await api.execApi(request.hostname(),'/Desempeno/Metas/getMetasColumnas',objDataColumnas);
+            var dataColumnas =resultDataColumnas.body.data;
+        }
+        catch(e)
+        {   
+            var obj = {
+                "mensaje": "Al invocar getMetasColumnas",
+                "idPersonaActor": idPersona
+            }
+            var result = await api.execApi(request.hostname(),'/Desempeno/Accion/addLog',obj);
+        }
 
         //METAS
         var objDataMetas = {
@@ -482,9 +644,19 @@ class Accion {
             "eliminada":0
 
         };
-        var resultDataMetas =await api.execApi(request.hostname(),'/Desempeno/Metas/getMetasColaborador',objDataMetas);
-        var dataMetas =resultDataMetas.body.data;
         
+        try{
+            var resultDataMetas =await api.execApi(request.hostname(),'/Desempeno/Metas/getMetasColaborador',objDataMetas);
+            var dataMetas =resultDataMetas.body.data;
+        }
+        catch(e)
+        {   
+            var obj = {
+                "mensaje": "Al invocar getMetasColaborador",
+                "idPersonaActor": idPersona
+            }
+            var result = await api.execApi(request.hostname(),'/Desempeno/Accion/addLog',obj);
+        }
         
         //OBSERVACION
         var objObservacion = {
@@ -500,7 +672,7 @@ class Accion {
         if (dataObservacion.length > 0){
             textoObservacion=dataObservacion[0].observacion
         };
-
+        
         var idOpinante  = request.input("idOpinante");
         
         var codigo     = request.input("codigoActor");
@@ -517,8 +689,12 @@ class Accion {
             var result = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumentoEde',obj);
         }
         catch(e)
-        {
-            console.log(e);
+        {   
+            var obj = {
+                "mensaje": "Al invocar getInstrumentoEde",
+                "idPersonaActor": idPersona
+            }
+            var result = await api.execApi(request.hostname(),'/Desempeno/Accion/addLog',obj);
         }
         
 
