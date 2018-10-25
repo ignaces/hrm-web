@@ -109,6 +109,7 @@ class Accion {
         var codigo     = request.input("codigoActor");
         var idAccionPersona     = request.input("idAccionPersona");
         var idPersona = request.input("idPersona");
+        console.log(idPersona)
         var competenciasSpider = [];
         var valoresSpiderAuto = [];
         var obj = {
@@ -160,7 +161,7 @@ class Accion {
         
         
         var persona =resultPersonaEde.body.data[0];
-
+        console.log(persona)
         //Etapa
         var objEtapa = {
             "idProceso":idProceso,
@@ -177,7 +178,7 @@ class Accion {
             valoresSpiderAuto.push(e.valorAuto);
         });
         var server = request.hostname().split(".")[0]+'.enovum.cl';
-        return view.render('desempeno/informe/informeEjecutivospdf', {server,datosMenu,persona,etapa, idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa, escala: escala.body.data, promedioGeneral: promedioGeneral.body, competenciasSpider:competenciasSpider, valoresSpiderAuto:valoresSpiderAuto });
+        return view.render('desempeno/informe/informeEjecutivospdf', {server,datosMenu,persona,etapa, idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa, escala: escala.body.data, promedioGeneral: promedioGeneral.body, competenciasSpider:competenciasSpider, valoresSpiderAuto:valoresSpiderAuto, codigoActor: codigo });
     
     }
 
