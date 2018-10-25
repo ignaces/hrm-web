@@ -780,11 +780,6 @@ class Accion {
         var correoCuerpo = resultCuerpo.body.data[0];
         //console.log(resultCuerpo.body.data[0].valor);
 
-        console.log(email.email);
-        console.log(resultCab.body.data[0].valor);
-        console.log(resultCuerpo.body.data[0].valor);
-        console.log(request.hostname());
-
         if(email != ""){
             var obMail = new mail();
             //console.log(resultCab.body.data[0].valor);
