@@ -746,11 +746,11 @@ class Accion {
             var objEmail = {
                 "idEdeEtapaTareaAccionProcesoPersona":idEtapaTareaAccionProcesoPersona
             };
-
+            console.log(objEmail);
             var result = await api.execApi(request.hostname(),'/Desempeno/Proceso/getEmailJefeEvaluado',objEmail);  
             var correo = result.body.data[0];
-            console.log(correo);
-            this.sendNotificacion(request,idEtapaTareaAccionProcesoPersona,codigoCab,codigoCuerpo,idEtapa, correo.email);
+            //console.log(correo);
+            this.sendNotificacion(request,idEtapaTareaAccionProcesoPersona,codigoCab,codigoCuerpo,idEtapa, correo);
         }
 
         return{mensaje:"ok"} 
@@ -760,7 +760,7 @@ class Accion {
 
     async sendNotificacion(request, idMatriz, codigoCab, codigoCuerpo, idEtapa, email){
         var cliente = request.hostname().split(".")[0];
-        //console.log(idEtapa);
+        console.log(email.email);
         
         var objEmailCab = {
             "idEtapa":idEtapa,
