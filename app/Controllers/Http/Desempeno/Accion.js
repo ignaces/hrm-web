@@ -760,7 +760,7 @@ class Accion {
 
     async sendNotificacion(request, idMatriz, codigoCab, codigoCuerpo, idEtapa, email){
         var cliente = request.hostname().split(".")[0];
-        console.log(email.email);
+        //console.log(email.email);
         
         var objEmailCab = {
             "idEtapa":idEtapa,
@@ -779,13 +779,24 @@ class Accion {
         var resultCuerpo = await api.execApi(request.hostname(),'/Core/Core/getEmail',objEmailCuerpo);  
         var correoCuerpo = resultCuerpo.body.data[0];
         //console.log(resultCuerpo.body.data[0].valor);
-
+        
         if(email != ""){
-            var obMail = new mail();
-            //console.log(resultCab.body.data[0].valor);
-            obMail.send(cliente+ ' metas publicadas', email.email, resultCab.body.data[0].valor, resultCuerpo.body.data[0].valor, request.hostname());
-            //obMail.send(cliente+ ' metas publicadas', 'julio.montana@fch.cl', resultCab.body.data[0].valor, resultCuerpo.body.data[0].valor, request.hostname());
+            var obj = {
+                tag: cliente+ ' metas publicadas',
+                to:email.email,
+                subject:resultCab.body.data[0].valor,
+                body:resultCuerpo.body.data[0].valor
+            }; 
+
+            var result = await api.execApiPost(request.hostname(),'/Mail/Mailgun/send',obj);
         }
+        
+        //if(email != ""){
+        //    var obMail = new mail();
+            //console.log(resultCab.body.data[0].valor);
+        //    obMail.send(cliente+ ' metas publicadas', email.email, resultCab.body.data[0].valor, resultCuerpo.body.data[0].valor, request.hostname());
+            //obMail.send(cliente+ ' metas publicadas', 'julio.montana@fch.cl', resultCab.body.data[0].valor, resultCuerpo.body.data[0].valor, request.hostname());
+        //}
         //console.log(cliente);
     }
 }
