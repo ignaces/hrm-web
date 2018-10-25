@@ -36,17 +36,17 @@
                 
             
 
-            @if(theme(request.hostname())=="csdev" || theme(request.hostname()) =="cs")
-                <script src="https://global.localizecdn.com/localize.js"></script>
-                <script>!function(a){if(!a.Localize){a.Localize={};for(var e=["translate","untranslate","phrase","initialize","translatePage","setLanguage","getLanguage","detectLanguage","getAvailableLanguages","untranslatePage","bootstrap","prefetch","on","off"],t=0;t<e.length;t++)a.Localize[e[t]]=function(){}}}(window);</script>
-                <script>
-                Localize.initialize({
-                key: 'bbmO1B3dKlKLg',
-                rememberLanguage: true
-                });
+        @if(request.hostname()=="csdev.enovum.cl" || request.hostname() =="cs.enovum.cl")
+        <script src="https://global.localizecdn.com/localize.js"></script>
+        <script>!function(a){if(!a.Localize){a.Localize={};for(var e=["translate","untranslate","phrase","initialize","translatePage","setLanguage","getLanguage","detectLanguage","getAvailableLanguages","untranslatePage","bootstrap","prefetch","on","off"],t=0;t<e.length;t++)a.Localize[e[t]]=function(){}}}(window);</script>
+        <script>
+        Localize.initialize({
+        key: 'bbmO1B3dKlKLg',
+        rememberLanguage: true
+        });
 
-                </script>
-            @endif
+        </script>
+    @endif
   </head>
 
   <body>
