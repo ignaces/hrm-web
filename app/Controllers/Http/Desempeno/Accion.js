@@ -127,7 +127,10 @@ class Accion {
         var idEtapaTareaAccionProcesoPersona= request.input('idEtapaTareaAccionProcesoPersona');
         var idEtapaTareaActor= request.input('idEtapaTareaActor');
         var observacion= request.input('observacion');
-        
+        var codigoCab = request.input('codigoCab');
+        var codigoCuerpo = request.input('codigoCuerpo');
+        var idEtapa = request.input('idEtapa');
+
         var obj = {
             "idEtapaTareaAccionProcesoPersona":idEtapaTareaAccionProcesoPersona,
             "idEtapaTareaActor":idEtapaTareaActor,
@@ -135,7 +138,7 @@ class Accion {
         };
 
         var result = await api.execApi(request.hostname(),'/Desempeno/Accion/addObservacionAccionFinalizar',obj);  
-        this.sendNotificacion(request,idEtapaTareaAccionProcesoPersona);
+        this.sendNotificacion(request,idEtapaTareaAccionProcesoPersona,codigoCab,codigoCuerpo,idEtapa);
         return{mensaje:"ok"} 
       
     }
@@ -166,7 +169,10 @@ class Accion {
         var idEtapaTareaAccionProcesoPersona= request.input('idEtapaTareaAccionProcesoPersona');
         var idEtapaTareaActor= request.input('idEtapaTareaActor');
         var observacion= request.input('observacion');
-        
+        var codigoCab = request.input('codigoCab');
+        var codigoCuerpo = request.input('codigoCuerpo');
+        var idEtapa = request.input('idEtapa');
+
         var obj = {
             "idObservacionAccion":idObservacionAccion,
             "idEtapaTareaAccionProcesoPersona":idEtapaTareaAccionProcesoPersona,
@@ -176,7 +182,7 @@ class Accion {
         };
 
         var result = await api.execApi(request.hostname(),'/Desempeno/Accion/updObservacionAccionFinalizar',obj);  
-        this.sendNotificacion(request,idEtapaTareaAccionProcesoPersona);
+        this.sendNotificacion(request,idEtapaTareaAccionProcesoPersona,codigoCab,codigoCuerpo,idEtapa);
         return{mensaje:"ok"}       
     }
 
@@ -207,7 +213,7 @@ class Accion {
             "codigoActor": codigoActor,
             "idAccionPersona": idAccionPersona
         }
-        var resultEval = await api.execApi(request.hostname(), '/Desempeno/Proceso/getListaEvaluados', objEval);
+        //var resultEval = await api.execApi(request.hostname(), '/Desempeno/Proceso/getListaEvaluados', objEval);
         var listaEval = resultEval.body.data;
     ////console.log(listaEval)
         //
@@ -529,7 +535,10 @@ class Accion {
         var idEtapaTareaAccionProcesoPersona= request.input('idEtapaTareaAccionProcesoPersona');
         var idEtapaTareaActor= request.input('idEtapaTareaActor');
         var valor= request.input('valor');
-        
+        var codigoCab = request.input('codigoCab');
+        var codigoCuerpo = request.input('codigoCuerpo');
+        var idEtapa = request.input('idEtapa');
+
         var obj = {
             "idEtapaTareaAccionProcesoPersona":idEtapaTareaAccionProcesoPersona,
             "idEtapaTareaActor":idEtapaTareaActor,
@@ -542,8 +551,7 @@ class Accion {
         //ESTO ES BAJO LA LOGICA DE BANMEDICA, PARAMETRIZAR SEGUN CADA CLIENTE.
         if(valor == "NO")
         {
-            console.log("DIJO QUE NO");
-            this.sendNotificacionJefe(request,idEtapaTareaAccionProcesoPersona);
+            this.sendNotificacion(request,idEtapaTareaAccionProcesoPersona,codigoCab,codigoCuerpo,idEtapa);
         }
 
         return{mensaje:"ok"} 
@@ -551,9 +559,9 @@ class Accion {
     }
 
 
-    async sendNotificacion(request, idMatriz){
+    async sendNotificacion(request, idMatriz, codigoCab, codigoCuerpo, idEtapa){
         var cliente = request.hostname().split(".")[0];
-
+        //console.log(idEtapa);
         var obj = {
             "idEdeEtapaTareaAccionProcesoPersona":idMatriz
         };
@@ -561,54 +569,32 @@ class Accion {
         var result = await api.execApi(request.hostname(),'/Desempeno/Proceso/getEmailPorIdMatriz',obj);  
         var correo = result.body.data[0];
 
-        if(correo.email != ""){
-            var obMail = new mail();
-
-            var rechazo =   request.input("");
-
-            var html = `<p>Estimado(a) COLABORADOR</p>
-                <p>&nbsp;</p>
-                <p>Tu jefatura indic&oacute; que ya realizaron la reuni&oacute;n de retroalimentaci&oacute;n.</p>
-                <p>Para continuar con el proceso, debes ingresar a&nbsp;<a href="http://`+cliente+`.enovum.cl">http://`+cliente+`.enovum.cl</a>&nbsp;para confirmar la reuni&oacute;n y asi finalizar tu proceso de evaluaci&oacute;n de desempe&ntilde;o.</p>
-                <p>Saludos.</p>
-                <p>Gerencia de Personas.</p>`;
-            obMail.send(cliente+ ' metas publicadas', correo.email, 'Notificación', html, request.hostname());
-            //obMail.send(cliente+ ' metas publicadas', 'jonathan.olivares@fch.cl', 'Notificación', html, request.hostname());
-        }
-        //console.log(cliente);
-    }
-
-    //ESTO ESTA AQUI SOLO PARA SALVAR LA SITUACION BANMEDICA, HAY QUE PARAMETRIZAR Y DEJAR
-    //UN SOLO ENVIO DE CORREOS PARAMETRIZABLE
-        
-    async sendNotificacionJefe(request, idMatriz){
-        var cliente = request.hostname().split(".")[0];
-
-        var obj = {
-            "idEdeEtapaTareaAccionProcesoPersona":idMatriz
+        var objEmailCab = {
+            "idEtapa":idEtapa,
+            "codigo": codigoCab
         };
+        
+        var resultCab = await api.execApi(request.hostname(),'/Core/Core/getEmail',objEmailCab);  
+        var correoCab = resultCab.body.data[0];
 
-        var result = await api.execApi(request.hostname(),'/Desempeno/Proceso/getEmailJefeEvaluado',obj);  
-        var correo = result.body.data[0];
+        var objEmailCuerpo = {
+            "idEtapa":idEtapa,
+            "codigo": codigoCuerpo
+        };
+        //console.log(correoCab);
+
+        var resultCuerpo = await api.execApi(request.hostname(),'/Core/Core/getEmail',objEmailCuerpo);  
+        var correoCuerpo = resultCuerpo.body.data[0];
+        //console.log(resultCuerpo.body.data[0].valor);
 
         if(correo.email != ""){
             var obMail = new mail();
-
-            var rechazo =   request.input("");
-
-            var html = `<p>Estimado(a) JEFE</p>
-                <p>&nbsp;</p>
-                <p>Uno de tus colaboradores indic&oacute; que no se reali&oacute; la reuni&oacute;n de retroalimentaci&oacute;n.</p>
-                <p>Para continuar con el proceso, debes ingresar a&nbsp;<a href="http://`+cliente+`.enovum.cl">http://`+cliente+`.enovum.cl</a>&nbsp;para volver a revisar los objetivos y volver a solicitar la confirmaci&oacute;n de reuni&oacute;n y asi continuar el proceso de retroalimentaci&oacute;n.</p>
-                <p>Saludos.</p>
-                <p>Gerencia de Personas.</p>`;
-            //obMail.send(cliente+ ' metas publicadas', correo.email, 'Notificación', html, request.hostname());
-            obMail.send(cliente+ ' metas publicadas', 'julio.montana@fch.cl', 'Notificación', html, request.hostname());
+            //console.log(resultCab.body.data[0].valor);
+            obMail.send(cliente+ ' metas publicadas', correo.email, resultCab.body.data[0].valor, resultCuerpo.body.data[0].valor, request.hostname());
+            //obMail.send(cliente+ ' metas publicadas', 'julio.montana@fch.cl', resultCab.body.data[0].valor, resultCuerpo.body.data[0].valor, request.hostname());
         }
         //console.log(cliente);
     }
-
-
 }
 
 module.exports = Accion
