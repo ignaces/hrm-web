@@ -60,10 +60,11 @@
                                     </td>
                                     <td>
                                         <!-- Cabros esto está hecho así por la necesidad del momento para Cencosud! -->
+                                        
                                         @if(angulo == 'EVAL')
                                             @each(angulos in params)
                                                 @if(angulos.codigo == 'BTNHISTORICOAUTO')
-                                                    @if(angulos.codigo == '1')
+                                                    @if(angulos.valor == '1')
                                                         <button  class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md waves-light bHistorico" id="H_{{tarea.tarea.idEvaluado}}"><i class="fa fa-bar-chart-o"></i> Ver Históricos</button>
                                                     @else
                                                         <button type="button" class="btn btn-default btn-xs btn-rounded btn-bordered waves-effect w-md" disabled=""><i class="fa fa-ban"></i> No Disponible</button>
@@ -75,7 +76,7 @@
                                         @if(angulo == 'SUPE')
                                             @each(angulos in params)
                                                 @if(angulos.codigo == 'BTNHISTORICODESC')
-                                                    @if(angulos.codigo == '1')
+                                                    @if(angulos.valor == '1')
                                                         <button  class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md waves-light bHistorico" id="H_{{tarea.tarea.idEvaluado}}"><i class="fa fa-bar-chart-o"></i> Ver Históricos</button>
                                                     @else
                                                         <button type="button" class="btn btn-default btn-xs btn-rounded btn-bordered waves-effect w-md" disabled=""><i class="fa fa-ban"></i> No Disponible</button>
@@ -87,7 +88,7 @@
                                         @if(angulo == 'ASC')
                                             @each(angulos in params)
                                                 @if(angulos.codigo == 'BTNHISTORICOASC')
-                                                    @if(angulos.codigo == '1')
+                                                    @if(angulos.valor == '1')
                                                         <button  class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md waves-light bHistorico" id="H_{{tarea.tarea.idEvaluado}}"><i class="fa fa-bar-chart-o"></i> Ver Históricos</button>
                                                     @else
                                                         <button type="button" class="btn btn-default btn-xs btn-rounded btn-bordered waves-effect w-md" disabled=""><i class="fa fa-ban"></i> No Disponible</button>
@@ -99,7 +100,7 @@
                                         @if(angulo == 'FUNC')
                                             @each(angulos in params)
                                                 @if(angulos.codigo == 'BTNHISTORICOFUNC')
-                                                    @if(angulos.codigo == '1')
+                                                    @if(angulos.valor == '1')
                                                         <button  class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md waves-light bHistorico" id="H_{{tarea.tarea.idEvaluado}}"><i class="fa fa-bar-chart-o"></i> Ver Históricos</button>
                                                     @else
                                                         <button type="button" class="btn btn-default btn-xs btn-rounded btn-bordered waves-effect w-md" disabled=""><i class="fa fa-ban"></i> No Disponible</button>
