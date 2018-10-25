@@ -138,7 +138,15 @@ class Accion {
         };
 
         var result = await api.execApi(request.hostname(),'/Desempeno/Accion/addObservacionAccionFinalizar',obj);  
-        this.sendNotificacion(request,idEtapaTareaAccionProcesoPersona,codigoCab,codigoCuerpo,idEtapa);
+
+        var objEmail = {
+            "idEdeEtapaTareaAccionProcesoPersona":idEtapaTareaAccionProcesoPersona
+        };
+        var result = await api.execApi(request.hostname(),'/Desempeno/Proceso/getEmailPorIdMatriz',objEmail);  
+        var correo = result.body.data[0];
+        console.log(correo);
+
+        this.sendNotificacion(request,idEtapaTareaAccionProcesoPersona,codigoCab,codigoCuerpo,idEtapa, correo);
         return{mensaje:"ok"} 
       
     }
@@ -182,7 +190,15 @@ class Accion {
         };
 
         var result = await api.execApi(request.hostname(),'/Desempeno/Accion/updObservacionAccionFinalizar',obj);  
-        this.sendNotificacion(request,idEtapaTareaAccionProcesoPersona,codigoCab,codigoCuerpo,idEtapa);
+        
+        var objEmail = {
+            "idEdeEtapaTareaAccionProcesoPersona":idEtapaTareaAccionProcesoPersona
+        };
+        var result = await api.execApi(request.hostname(),'/Desempeno/Proceso/getEmailPorIdMatriz',objEmail);  
+        var correo = result.body.data[0];
+        console.log(correo);
+        
+        this.sendNotificacion(request,idEtapaTareaAccionProcesoPersona,codigoCab,codigoCuerpo,idEtapa, correo);
         return{mensaje:"ok"}       
     }
 
@@ -727,7 +743,14 @@ class Accion {
         //ESTO ES BAJO LA LOGICA DE BANMEDICA, PARAMETRIZAR SEGUN CADA CLIENTE.
         if(valor == "NO")
         {
-            this.sendNotificacion(request,idEtapaTareaAccionProcesoPersona,codigoCab,codigoCuerpo,idEtapa);
+            var objEmail = {
+                "idEdeEtapaTareaAccionProcesoPersona":idEtapaTareaAccionProcesoPersona
+            };
+
+            var result = await api.execApi(request.hostname(),'/Desempeno/Proceso/getEmailJefeEvaluado',objEmail);  
+            var correo = result.body.data[0];
+            console.log(correo);
+            this.sendNotificacion(request,idEtapaTareaAccionProcesoPersona,codigoCab,codigoCuerpo,idEtapa, correo.email);
         }
 
         return{mensaje:"ok"} 
@@ -735,16 +758,10 @@ class Accion {
     }
 
 
-    async sendNotificacion(request, idMatriz, codigoCab, codigoCuerpo, idEtapa){
+    async sendNotificacion(request, idMatriz, codigoCab, codigoCuerpo, idEtapa, email){
         var cliente = request.hostname().split(".")[0];
         //console.log(idEtapa);
-        var obj = {
-            "idEdeEtapaTareaAccionProcesoPersona":idMatriz
-        };
-
-        var result = await api.execApi(request.hostname(),'/Desempeno/Proceso/getEmailPorIdMatriz',obj);  
-        var correo = result.body.data[0];
-
+        
         var objEmailCab = {
             "idEtapa":idEtapa,
             "codigo": codigoCab
@@ -763,10 +780,15 @@ class Accion {
         var correoCuerpo = resultCuerpo.body.data[0];
         //console.log(resultCuerpo.body.data[0].valor);
 
-        if(correo.email != ""){
+        console.log(email.email);
+        console.log(resultCab.body.data[0].valor);
+        console.log(resultCuerpo.body.data[0].valor);
+        console.log(request.hostname());
+
+        if(email != ""){
             var obMail = new mail();
             //console.log(resultCab.body.data[0].valor);
-            obMail.send(cliente+ ' metas publicadas', correo.email, resultCab.body.data[0].valor, resultCuerpo.body.data[0].valor, request.hostname());
+            obMail.send(cliente+ ' metas publicadas', email.email, resultCab.body.data[0].valor, resultCuerpo.body.data[0].valor, request.hostname());
             //obMail.send(cliente+ ' metas publicadas', 'julio.montana@fch.cl', resultCab.body.data[0].valor, resultCuerpo.body.data[0].valor, request.hostname());
         }
         //console.log(cliente);
