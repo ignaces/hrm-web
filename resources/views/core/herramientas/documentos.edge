@@ -14,6 +14,7 @@
 @section('content')
 @!component('components.Core.botonera')
   <div class="row">
+                @if(datosDocs.length > 0)
                     @each(categoria in datosDocs)
                     <div class="col-sm-12">
                         <div class="card-box">
@@ -28,6 +29,9 @@
                         </div>
                     </div><!-- end col -->
                     @endeach
+                @else
+                    Aún no se han cargado documentos.
+                @endif
                 </div>
    
 @endsection
