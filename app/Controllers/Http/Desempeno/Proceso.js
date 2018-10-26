@@ -149,6 +149,29 @@ class Proceso {
         }
         ////console.log(datosProceso);
 
+        //upd estado encuesta
+        var idEncuestaPersona = request.input("idEncuestaPersona")
+        var codigoEstado = request.input("codigoEstado")
+
+        console.log(idEncuestaPersona)
+        console.log(codigoEstado)
+        
+        try
+        {
+            var objUpdEncuesta = {
+                "idEncuestaPersona":idEncuestaPersona,
+                "codigoEstado":codigoEstado
+            };
+
+            console.log(objUpdEncuesta)
+            //llamar servicio update
+            var updEncuesta =await api.execApi(request.hostname(),'/Desempeno/Proceso/updEncuesta',objUpdEncuesta);
+        }
+        catch(e)
+        {
+
+        }
+
         session.put('idEtapa',idEtapa)
         session.put('referer',`/Desempeno/Proceso/etapa?idEtapa=${idEtapa}&idProceso=${idProceso}`)
 
