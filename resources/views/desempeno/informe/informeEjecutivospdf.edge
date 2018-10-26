@@ -102,6 +102,9 @@
                                                                                                                         <th>Superior</th>
                                                                                                                         <th>Funcional</th>
                                                                                                                     @endif
+                                                                                                                    @if(codigoActor == 'FUNC')
+                                                                                                                        <th>Funcional</th>
+                                                                                                                    @endif
                                                                                                                 </tr>
                                                                                                             </thead>
 
@@ -116,7 +119,9 @@
                                                                                                                                     <td style="text-align: center;">{{p.nivelSup}}</td>
                                                                                                                                     <td style="text-align: center;">{{p.nivelFunc}}</td>
                                                                                                                                 @endif
-                                                                                                                        
+                                                                                                                                @if(codigoActor == 'FUNC')
+                                                                                                                                    <td style="text-align: center;">{{p.nivelSup}}</td>
+                                                                                                                                @endif
                                                                                                                             @endif
 
 
