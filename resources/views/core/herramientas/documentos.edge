@@ -14,7 +14,7 @@
 @section('content')
 @!component('components.Core.botonera')
   <div class="row">
-                @if(datosDocs.length > 0)
+                @if(datosDocs.length > 0 && datosDocs)
                     @each(categoria in datosDocs)
                     <div class="col-sm-12">
                         <div class="card-box">
