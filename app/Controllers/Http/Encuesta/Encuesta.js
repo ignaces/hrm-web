@@ -49,13 +49,15 @@
           porcentaje = Math.round(porcentaje);
           instrumento.avance= `${porcentaje}`;
           instrumento.pp='components.Evaluacion.preguntaLickertGrilla';
-          
+          session.put("idEncuestaPersona",idEncuestaPersona)
           return view.render('encuesta/instrumento',  {idEncuestaPersona:idEncuestaPersona,instrumento:instrumento,referer});
         }
 
         async fin({view,request, response, auth, session}){
+          var idEncuestaPersona = request.input("idEncuestaPersona");
           var referer = session.get("referer");
           if(referer!=null){
+            referer = `${referer}&idEncuestaPersona=${idEncuestaPersona}&codigoEstado=FINALIZADO`
             response.redirect(referer);
           }
           return view.render('encuesta/fin',  {});
