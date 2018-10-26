@@ -260,8 +260,10 @@
             
         </div>
     </div>
-    <input type="hidden" id="idEncuestaPersona" name="idEncuestaPersona" value="{{idEncuestaPersona}}"/>
+    
     <input type="hidden" id="idFacsimil" name="idFacsimil" value="{{instrumento.idFacsimil}}"/>
     </div>
-    <form id="frmVolver" action="/Encuesta/Encuesta/fin"></form>
+    <form id="frmVolver" action="/Encuesta/Encuesta/fin">
+        <input type="hidden" id="idEncuestaPersona" name="idEncuestaPersona" value="{{idEncuestaPersona}}"/>
+    </form>
 @endsection
