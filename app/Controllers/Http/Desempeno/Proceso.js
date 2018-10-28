@@ -106,6 +106,23 @@ class Proceso {
         return view.render('desempeno/portada',{etag, etapasProceso,datosMenu,persona,PersonaEde,datosProceso,etapa,tareas,mensaje:texto,mensajeTitulo});
     }
 
+    async getDocumetosProceso({view,request,response,auth,session}){
+        var idProceso = session.get("idProceso");
+
+        var cliente = request.hostname().split(".")[0]
+
+        if(cliente=="localhost"){
+            cliente="hrmdev"
+        }
+
+        var objProc = {
+            "idProceso":idProceso
+        };
+
+        var datosDocsProc = await api.execApi(cliente,'/Desempeno/Proceso/getDocumentosProceso',objProc);
+    
+        return view.render('desempeno/documentos/docprocesos',{datosDocsProc:datosDocsProc.body.data});
+    }
 
     async getTareasEtapa({view,request, response, auth, session}){
 

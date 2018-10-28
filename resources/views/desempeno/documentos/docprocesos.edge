@@ -1,0 +1,30 @@
+@layout('layouts/horizontal')
+
+@section('scripts')
+        
+@endsection
+
+@section('pluginsCss')
+        
+@endsection
+
+@section('content')
+@!component('components.Core.botonera')
+  <div class="row">
+        @each(categoria in datosDocsProc)
+        <div class="col-sm-12">
+            <div class="card-box">
+            <h4 class="header-title m-b-30">{{categoria.categoria}}</h4>
+
+                <div class="row">
+                    @each(doc in categoria.documentos)
+                        @!component('core.components.file',{doc})
+                    @endeach
+                </div>
+
+            </div>
+        </div><!-- end col -->
+        @endeach
+    </div>
+   
+@endsection
