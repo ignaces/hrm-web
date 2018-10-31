@@ -54,6 +54,7 @@
         }
 
         async fin({view,request, response, auth, session}){
+          var idEncuestaPersona = request.input("idEncuestaPersona");
           var referer = session.get("referer");
           if(referer!=null){
             referer = `${referer}&idEncuestaPersona=${idEncuestaPersona}&codigoEstado=FINALIZADO`
