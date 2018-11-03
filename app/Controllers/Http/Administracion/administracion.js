@@ -114,11 +114,11 @@ class Administracion {
         
         if(origen == "ficha")
         {
-            response.redirect('/administracion/Administracion/verDatosPersonaProceso?idProceso='+idProceso+'&idPersona='+idPersona);
+            response.redirect('/Administracion/administracion/verDatosPersonaProceso?idProceso='+idProceso+'&idPersona='+idPersona);
         }
         else
         {
-            response.redirect('/administracion/Administracion/verPersonasProceso?idProceso='+idProceso);
+            response.redirect('/Administracion/administracion/verPersonasProceso?idProceso='+idProceso);
         }
         
     }
@@ -144,7 +144,7 @@ class Administracion {
             console.log(e);
         }
         
-        response.redirect('/administracion/Administracion/verDatosPersonaProceso?idProceso='+idProceso+'&idPersona='+idPersona);
+        response.redirect('/Administracion/administracion/verDatosPersonaProceso?idProceso='+idProceso+'&idPersona='+idPersona);
         
     }
     
@@ -176,7 +176,7 @@ class Administracion {
             console.log(e);
         }
         
-        response.redirect('/administracion/Administracion/verDatosPersonaProceso?idProceso='+idProceso+'&idPersona='+idPersona);
+        response.redirect('/Administracion/administracion/verDatosPersonaProceso?idProceso='+idProceso+'&idPersona='+idPersona);
         
     }
 
@@ -186,7 +186,7 @@ class Administracion {
         var idProceso = request.input("idProceso");
         var email = request.input("emailPersona");
         var origen = request.input("origen");
-        
+
         try
         {
             var cliente = request.hostname().split(".")[0];
@@ -210,11 +210,11 @@ class Administracion {
         
         if(origen == "ficha")
         {
-            response.redirect('/administracion/Administracion/verDatosPersonaProceso?idProceso='+idProceso+'&idPersona='+idPersona);
+            response.redirect('/Administracion/administracion/verDatosPersonaProceso?idProceso='+idProceso+'&idPersona='+idPersona);
         }
         else
         {
-            response.redirect('/administracion/Administracion/verPersonasProceso?idProceso='+idProceso);
+            response.redirect('/Administracion/administracion/verPersonasProceso?idProceso='+idProceso);
         }
 
         

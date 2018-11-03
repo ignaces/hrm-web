@@ -79,7 +79,7 @@
                                             <td>{{persona.apellidoPaterno}}</td>
                                             <td>{{persona.apellidoMaterno}}</td>
                                             <td>
-                                                <form action="/administracion/Administracion/resetearPassPorIdPersona" id="submitPass" method="GET">
+                                                <form action="/Administracion/administracion/resetearPassPorIdPersona" id="submitPass" method="GET">
                                                         
                                                         
                                                         <input type="hidden" name="idPersona" value="{{persona.idPersona}}">
@@ -87,7 +87,7 @@
                                                         <input type="hidden" name="origen" value="listado">
                                                 </form>
                                                 
-                                                <form action="/administracion/Administracion/enviarNotificacion" id="notificarCambioClave_{{persona.idPersona}}" method="GET">
+                                                <form action="/Administracion/administracion/enviarNotificacion" id="notificarCambioClave_{{persona.idPersona}}" method="GET">
                                                     <input type="hidden" name="idPersona" value="{{datosEvaluador.idPersonaEvaluador}}">
                                                     <input type="hidden" name="idProceso" value="{{idProceso}}">
                                                     <input type="hidden" name="emailPersona" value="{{persona.email}}">
