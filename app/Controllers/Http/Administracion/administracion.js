@@ -94,7 +94,7 @@ class Administracion {
         
         for(var i = 0; i<datosClasificacionesPersona.length; i++)
         {
-            setClasificacionesPersona[datosClasificacionesPersona[i].padre] = datosClasificacionesPersona[i].idEdeClasificacion;
+            setClasificacionesPersona[datosClasificacionesPersona[i].codigoPadre] = datosClasificacionesPersona[i].idEdeClasificacion;
         }
         //console.log(setClasificacionesPersona);
         return view.render('/administracion/personaProceso', {datosEvaluador,datosPersonasProceso,datosEvaluadorProceso,datosClasificacionesPadres, datosClasificacionesHijos, setClasificacionesPersona, idProceso,linkVolver});
