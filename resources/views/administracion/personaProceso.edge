@@ -1,0 +1,322 @@
+@layout('layouts/horizontal')
+
+@section('pluginsCss2')
+    <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+@endsection
+
+@section('scripts')
+        <script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+        
+        <script>
+            $("#enviarNotificacionCambioClave").click(function(){
+                
+                if($("#emailPersona").val() == "")
+                {
+                    swal({
+                        title: 'El correo no puede ser vacío',
+                        tpye: 'error',
+                        text: "",
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Ok'
+                    });
+
+                    return false;
+                }
+                
+                swal({
+                    title: '¿Desea Enviar Notificacion a '+$("#emailPersona").val()+'?',
+                    text: "",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Enviar',
+                    cancelButtonText: 'Cancelar'
+                }).then(function(result)  {
+                    if (result) {
+                        $("#notificarCambioClave").submit();
+                    }
+                });
+            }); 
+        </script>
+@endsection 
+
+@section('content')
+@!component('components.Core.botonera')
+ <div class="row">
+    <div class="col-lg-12 col-md-12">
+        <div class="portlet">
+            <div class="portlet-heading bg-primary">
+                <h3 class="portlet-title">
+                    Persona
+                </h3>
+                <div class="clearfix"></div>
+            </div>
+            <div id="bg-primary" class="panel-collapse collapse in">
+                <div class="portlet-body">
+                        
+                        <br>
+                        <div class="table-responsive">
+                                <table class="table m-0 table-colored table-primary">
+                                    <thead>
+                                    <tr>
+                                            
+                                        <th>Identificador</th>
+                                        <th>Nombres</th>
+                                        <th>Apellido Paterno</th>
+                                        <th>Apellido Materno</th>
+                                        <th>Email</th>
+                                        
+                                        <th width="200">Acciones</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>                                            
+                                            <tr>
+                                                <form action="/Administracion/administracion/updDatosPersona" method="GET" id="updDatosPersona">
+                                                    <td>{{datosEvaluador.IdentificadorEvaluador}}</td>
+                                                    <td>
+                                                        <input type="hidden" name="idPersona" value="{{datosEvaluador.idPersonaEvaluador}}">
+                                                        <input type="hidden" name="idProceso" value="{{idProceso}}">
+                                                        <input type="text" class="form-control" name="nombresPersona" value="{{datosEvaluador.NombreEvaluador}}"> 
+                                                    </td>
+                                                    <td><input type="text" class="form-control" name="apellidoPaternoPersona" value="{{datosEvaluador.ApellidoPaternoEvaluador}}"></td>
+                                                    <td><input type="text" class="form-control" name="apellidoMaternoPersona" value="{{datosEvaluador.ApellidoMaternoEvaluador}}"></td>
+                                                    <td><input type="text" class="form-control" name="emailPersona" id="emailPersona" value="{{datosEvaluador.emailEvaluador}}"></td>
+                                                </form>    
+                                                    <td>
+                                                        <form action="/Administracion/administracion/resetearPassPorIdPersona" id="submitPass" method="GET">
+                                                            <input type="hidden" name="idPersona" value="{{datosEvaluador.idPersonaEvaluador}}">
+                                                            <input type="hidden" name="idProceso" value="{{idProceso}}">
+                                                            <input type="hidden" name="origen" value="ficha">
+                                                        </form>
+
+                                                        <form action="/Administracion/administracion/enviarNotificacion" id="notificarCambioClave" method="GET">
+                                                            <input type="hidden" name="idPersona" value="{{datosEvaluador.idPersonaEvaluador}}">
+                                                            <input type="hidden" name="idProceso" value="{{idProceso}}">
+                                                            <input type="hidden" name="emailPersona" value="{{datosEvaluador.emailEvaluador}}">
+                                                            <input type="hidden" name="origen" value="ficha">
+                                                        </form>
+
+
+                                                        <a class="btn btn-success" name="#" onclick="$('#updDatosPersona').submit();"> <i class="fa fa-save"></i> </a>
+                                                        <button class="btn btn-warning" onClick="$('#submitPass').submit();"> <i class="fa fa-key"></i></button>
+                                                        <button class="btn btn-warning" id="enviarNotificacionCambioClave"> <i class="fa fa-envelope"></i> </button>
+                                                            
+                                                    </td>
+                                                
+                                            </tr>
+                                            
+                                    
+                                    </tbody>
+                                </table>
+                                
+                                <br>
+                                <b>Clasificaciones</b>
+                                <br>
+                                <br>
+                                
+                                <form action="/Administracion/administracion/updClasificacionPersona" method="GET" id="formClasificacionesPersona">
+                                    <input type="hidden" name="idProceso" value="{{idProceso}}">
+                                    <input type="hidden" name="idPersona" value="{{datosEvaluador.idPersonaEvaluador}}">
+                                    <table class="table m-0 table-colored table-primary">
+                                        <thead>
+                                        <tr>
+                                            @each(claPadre in datosClasificacionesPadres)   
+                                            <th>{{claPadre.nombre}}</th>
+                                            @endeach
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                                
+                                        <tr>
+                                            @each(claPadre in datosClasificacionesPadres)   
+                                            <td>
+                                                <input type="hidden" name="padre_{{claPadre.codigo}}" value="{{claPadre.codigo}}">
+                                                <select name="valor_{{claPadre.codigo}}" class="form-control">
+                                                <option value="0">--Selecione--</option>
+                                                @each(claHijo in datosClasificacionesHijos)
+                                                    @if($parent.claPadre.id == claHijo.idPadre)
+                                                        @if(setClasificacionesPersona.CLABRAREA == claHijo.id || setClasificacionesPersona.CLABRBAND == claHijo.id || setClasificacionesPersona.CLABRDIRE == claHijo.id || setClasificacionesPersona.CLABRREG == claHijo.id || setClasificacionesPersona.CLABRINTER == claHijo.id || setClasificacionesPersona.CLABRLOJ == claHijo.id || setClasificacionesPersona.CLAEJEDIVI == claHijo.id || setClasificacionesPersona.CLAEJEGERD == claHijo.id || setClasificacionesPersona.CLAEJEGRH == claHijo.id || setClasificacionesPersona.CLAEJEPAIS == claHijo.id)
+                                                            <option value="{{claHijo.id}}" selected='selected'>{{claHijo.nombre}}</option>
+                                                        @else
+                                                            <option value="{{claHijo.id}}">{{claHijo.nombre}}</option>
+                                                        @endif
+                                                    @endif
+                                                @endeach
+                                            </td>
+                                            @endeach
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="row text-center">
+                                        <button class="btn btn-success" onclick="$('#formClasificacionesPersona').submit();">Guardar Clasificaciones</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="portlet">
+                    <div class="portlet-heading bg-warning">
+                        <h3 class="portlet-title">
+                            Evaluaciones realizadas por: {{datosEvaluador.NombreEvaluador}} {{datosEvaluador.ApellidoPaternoEvaluador}}
+                        </h3>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div id="bg-primary" class="panel-collapse collapse in">
+                        <div class="portlet-body">
+                                
+                                    <div class="table-responsive">
+                                            <table class="table m-0 table-colored table-primary">
+                                                <thead>
+                                                <tr>
+                                                        
+                                                    <th>Identificador</th>
+                                                    <th>Nombres</th>
+                                                    <th>Apellido Paterno</th>
+                                                    <th>Apellido Materno</th>
+                                                    <th>Tipo Evaluacion</th>
+                                                    <th>Estado Evaluacion</th>
+                                                    
+                                                    <th width="300">Acciones</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                        
+                                                @each(persona in datosEvaluadorProceso)
+                                                    <tr>
+                                                        <td>{{persona.IdentificadorEvaluado}}</td>
+                                                        <td>{{persona.NombreEvaluado}}</td>
+                                                        <td>{{persona.ApellidoPaternoEvaluado}}</td>
+                                                        <td>{{persona.ApellidoMaternoEvaluado}}</td>
+                                                        <td>{{persona.Angulo}}</td>
+                                                        <td>{{persona.Estado}}</td>
+                                                        <td>
+                                                                <form action="/Administracion/administracion/cambiaEstadoEvaluacion" method="GET">
+                                                                    <input type="hidden" name="idEvaluacion" value="{{persona.idEdeEtapaTareaAccionProcesoPersona}}">
+                                                                    <input type="hidden" name="idProceso" value="{{idProceso}}">
+                                                                    <input type="hidden" name="idPersona" value="{{persona.idPersonaEvaluador}}">
+                                                                    
+                                                                    <a class="btn btn-primary" target="_blank" href="/Desempeno/Proceso/informeEjecutivos?idProceso={{idProceso}}&idEtapa=&idAccionPersona={{persona.idEdeEtapaTareaAccionProcesoPersona}}&codigoActor=SUPE&idPersona={{persona.idPersona}}&idOpinante={{persona.idEdeEtapaTareaActor}}"> <i class="fa fa-file-o"></i> </a>
+                                                        
+                                                                    <button class="btn btn-primary"> Reabrir Evaluación </button>
+                                                                </form>
+                                                        
+                                                                
+                                                        </td>
+                                                    </tr>
+                                                @endeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @if(datosPersonasProceso.length != 'undefined')
+        <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="portlet">
+                        <div class="portlet-heading bg-success">
+                            <h3 class="portlet-title">
+                                Evaluaciones que se realizan a: {{datosEvaluador.NombreEvaluador}}
+                            </h3>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div id="bg-primary" class="panel-collapse collapse in">
+                            <div class="portlet-body">
+                                    
+                                        <div class="table-responsive">
+                                                <table class="table m-0 table-colored table-primary">
+                                                    <thead>
+                                                    <tr>
+                                                            
+                                                        <th>Identificador</th>
+                                                        <th>Nombres</th>
+                                                        <th>Apellido Paterno</th>
+                                                        <th>Apellido Materno</th>
+                                                        <th>Tipo Evaluacion</th>
+                                                        <th>Estado Evaluacion</th>
+                                                        
+                                                        <th width="400">Acciones</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                            
+                                                    @each(persona in datosPersonasProceso)
+                                                        <tr>
+                                                            <td>{{persona.IdentificadorEvaluador}}</td>
+                                                            <td>   
+                                                                    <form action="/Administracion/administracion/updEvaluador" id="evaluador_{{persona.idEdeEtapaTareaAccionProcesoPersona}}" method="GET">
+                                                                        <input type="hidden" name="idEvaluacion" value="{{persona.idEdeEtapaTareaAccionProcesoPersona}}">
+                                                                        <input type="hidden" name="idTareaActor" value="{{persona.idEdeEtapaTareaActor}}">
+                                                                        
+                                                                        <input type="hidden" name="idProceso" value="{{idProceso}}">
+                                                                        <input type="hidden" name="idPersona" value="{{persona.idPersona}}">
+                                                                        
+                                                                        <select name="idEvaluador" id="idEvaluador" class="form-control">    
+                                                                        
+                                                                            <option value="-">--Seleccione--</option>
+                                                                        
+                                                                        @each(evaluador in datosPersonasEvaluadoras)
+                                                                            
+                                                                            @if(evaluador.id == $parent.persona.idPersonaEvaluador)
+                                                                                <option value="{{evaluador.id}}" selected="selected">
+                                                                                    {{evaluador.IdentificadorEvaluador}} - {{evaluador.nombres}} {{evaluador.apellidoPaterno}} {{evaluador.apellidoMaterno}}
+                                                                                </option>
+                                                                            @else
+                                                                                <option value="{{evaluador.id}}">
+                                                                                    {{evaluador.IdentificadorEvaluador}} - {{evaluador.nombres}} {{evaluador.apellidoPaterno}} {{evaluador.apellidoMaterno}}
+                                                                                </option>
+                                                                            @endif
+                                                                        @endeach
+                                                                    </select>
+                                                                    </form>
+                                                            </td>
+                                                            <td>{{persona.ApellidoPaternoEvaluador}}</td>
+                                                            <td>{{persona.ApellidoMaternoEvaluador}}</td>
+                                                            <td>{{persona.Angulo}}</td>
+                                                            <td>{{persona.Estado}}</td>
+                                                            <td>
+                                                                    <form action="/Administracion/administracion/cambiaEstadoEvaluacion" id="eval_{{persona.idEdeEtapaTareaAccionProcesoPersona}}" method="GET">
+                                                                        <input type="hidden" name="idEvaluacion" value="{{persona.idEdeEtapaTareaAccionProcesoPersona}}">
+                                                                        <input type="hidden" name="idProceso" value="{{idProceso}}">
+                                                                        <input type="hidden" name="idPersona" value="{{persona.idPersona}}">
+                                                                    </form>
+        
+                                                                    <a class="btn btn-primary" target="_blank" href="/Desempeno/Proceso/informeEjecutivos?idProceso={{idProceso}}&idEtapa=&idAccionPersona={{persona.idEdeEtapaTareaAccionProcesoPersona}}&codigoActor=SUPE&idPersona={{persona.idPersona}}&idOpinante={{persona.idEdeEtapaTareaActor}}"> <i class="fa fa-file-o"></i> </a>
+                                                                    <button class="btn btn-primary" onclick="$('#evaluador_{{persona.idEdeEtapaTareaAccionProcesoPersona}}').submit();"> Cambiar Evaluador</button>
+                                                                    <button class="btn btn-primary" onclick="$('#eval_{{persona.idEdeEtapaTareaAccionProcesoPersona}}').submit();"> Reabrir Evaluación </button>
+                                                            </td>
+                                                        </tr>
+                                                    @endeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+
+        <div>
+            &nbsp;
+        </div>
+        <div>
+            &nbsp;
+        </div>
+    
+
+
+@endsection  
