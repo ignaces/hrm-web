@@ -51,7 +51,7 @@ $(document).ready(function(){
                         cancelButtonText: 'Cancelar'
                         }).then(function(result)  {
                         if (result) {
-                            save(id,$("#OBS_"+id).val(),1);
+                            save(idOpinante,$("#OBS_"+id).val(),1);
                         }
                     });
                 }
