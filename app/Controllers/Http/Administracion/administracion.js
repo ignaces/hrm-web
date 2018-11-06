@@ -96,8 +96,13 @@ class Administracion {
         {
             setClasificacionesPersona[datosClasificacionesPersona[i].codigoPadre] = datosClasificacionesPersona[i].idEdeClasificacion;
         }
+
+        var personasEvaluadoras =await api.execApi(request.hostname(),'/Desempeno/Proceso/getPersonasEvaluadoras',obj);
+        
+        var datosPersonasEvaluadoras = personasEvaluadoras.body.data; 
+
         //console.log(setClasificacionesPersona);
-        return view.render('/administracion/personaProceso', {datosEvaluador,datosPersonasProceso,datosEvaluadorProceso,datosClasificacionesPadres, datosClasificacionesHijos, setClasificacionesPersona, idProceso,linkVolver});
+        return view.render('/administracion/personaProceso', {datosEvaluador,datosPersonasProceso,datosEvaluadorProceso,datosClasificacionesPadres, datosClasificacionesHijos, setClasificacionesPersona, idProceso,linkVolver, datosPersonasEvaluadoras });
     }
 
     async resetearPassPorIdPersona ({ view,request, response, auth }) 
@@ -253,6 +258,37 @@ class Administracion {
         }
         return false;
         //response.redirect('/administracion/Administracion/verDatosPersonaProceso?idProceso='+idProceso+'&idPersona='+idPersona);
+    }
+
+    async updEvaluador({ view,request, response, auth })
+    {
+        var idPersona = request.input("idPersona");
+        var idProceso = request.input("idProceso");
+        var idEvaluacion = request.input("idEvaluacion");
+        var idEvaluador = request.input("idEvaluador");
+        var idTareaActor = request.input("idTareaActor");
+        
+        var obj = {
+            "idProceso":idProceso,
+            "idEvaluacion": idEvaluacion,
+            "idTareaActor": idTareaActor,
+            "idEvaluador": idEvaluador
+        };
+        //console.log(obj);
+        //return false;
+        
+        try
+        {
+            var resultPersonasProceso =await api.execApi(request.hostname(),'/Desempeno/Proceso/updEvaluador',obj);
+        
+        }
+        catch(e)
+        {
+            console.log(e);
+        }
+        
+        
+        response.redirect('/Administracion/administracion/verDatosPersonaProceso?idProceso='+idProceso+'&idPersona='+idPersona);
     }
 
 

@@ -247,7 +247,7 @@
                                                         <th>Tipo Evaluacion</th>
                                                         <th>Estado Evaluacion</th>
                                                         
-                                                        <th width="300">Acciones</th>
+                                                        <th width="400">Acciones</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -255,25 +255,47 @@
                                                     @each(persona in datosPersonasProceso)
                                                         <tr>
                                                             <td>{{persona.IdentificadorEvaluador}}</td>
-                                                            <td>{{persona.NombreEvaluador}}</td>
+                                                            <td>   
+                                                                    <form action="/Administracion/administracion/updEvaluador" id="evaluador_{{persona.idEdeEtapaTareaAccionProcesoPersona}}" method="GET">
+                                                                        <input type="hidden" name="idEvaluacion" value="{{persona.idEdeEtapaTareaAccionProcesoPersona}}">
+                                                                        <input type="hidden" name="idTareaActor" value="{{persona.idEdeEtapaTareaActor}}">
+                                                                        
+                                                                        <input type="hidden" name="idProceso" value="{{idProceso}}">
+                                                                        <input type="hidden" name="idPersona" value="{{persona.idPersona}}">
+                                                                        
+                                                                        <select name="idEvaluador" id="idEvaluador" class="form-control">    
+                                                                        
+                                                                            <option value="-">--Seleccione--</option>
+                                                                        
+                                                                        @each(evaluador in datosPersonasEvaluadoras)
+                                                                            
+                                                                            @if(evaluador.id == $parent.persona.idPersonaEvaluador)
+                                                                                <option value="{{evaluador.id}}" selected="selected">
+                                                                                    {{evaluador.IdentificadorEvaluador}} - {{evaluador.nombres}} {{evaluador.apellidoPaterno}} {{evaluador.apellidoMaterno}}
+                                                                                </option>
+                                                                            @else
+                                                                                <option value="{{evaluador.id}}">
+                                                                                    {{evaluador.IdentificadorEvaluador}} - {{evaluador.nombres}} {{evaluador.apellidoPaterno}} {{evaluador.apellidoMaterno}}
+                                                                                </option>
+                                                                            @endif
+                                                                        @endeach
+                                                                    </select>
+                                                                    </form>
+                                                            </td>
                                                             <td>{{persona.ApellidoPaternoEvaluador}}</td>
                                                             <td>{{persona.ApellidoMaternoEvaluador}}</td>
                                                             <td>{{persona.Angulo}}</td>
                                                             <td>{{persona.Estado}}</td>
                                                             <td>
-                                                                    <form action="/Administracion/administracion/cambiaEstadoEvaluacion" method="GET">
+                                                                    <form action="/Administracion/administracion/cambiaEstadoEvaluacion" id="eval_{{persona.idEdeEtapaTareaAccionProcesoPersona}}" method="GET">
                                                                         <input type="hidden" name="idEvaluacion" value="{{persona.idEdeEtapaTareaAccionProcesoPersona}}">
                                                                         <input type="hidden" name="idProceso" value="{{idProceso}}">
                                                                         <input type="hidden" name="idPersona" value="{{persona.idPersona}}">
-        
-                                                                        <a class="btn btn-primary" target="_blank" href="/Desempeno/Proceso/informeEjecutivos?idProceso={{idProceso}}&idEtapa=&idAccionPersona={{persona.idEdeEtapaTareaAccionProcesoPersona}}&codigoActor=SUPE&idPersona={{persona.idPersona}}&idOpinante={{persona.idEdeEtapaTareaActor}}"> <i class="fa fa-file-o"></i> </a>
-                                                                        <button class="btn btn-primary"> Reabrir Evaluación </button>
-        
-                                                                        
                                                                     </form>
         
-                                                                    
-                                                                
+                                                                    <a class="btn btn-primary" target="_blank" href="/Desempeno/Proceso/informeEjecutivos?idProceso={{idProceso}}&idEtapa=&idAccionPersona={{persona.idEdeEtapaTareaAccionProcesoPersona}}&codigoActor=SUPE&idPersona={{persona.idPersona}}&idOpinante={{persona.idEdeEtapaTareaActor}}"> <i class="fa fa-file-o"></i> </a>
+                                                                    <button class="btn btn-primary" onclick="$('#evaluador_{{persona.idEdeEtapaTareaAccionProcesoPersona}}').submit();"> Cambiar Evaluador</button>
+                                                                    <button class="btn btn-primary" onclick="$('#eval_{{persona.idEdeEtapaTareaAccionProcesoPersona}}').submit();"> Reabrir Evaluación </button>
                                                             </td>
                                                         </tr>
                                                     @endeach
