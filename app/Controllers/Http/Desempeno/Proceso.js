@@ -365,6 +365,23 @@ class Proceso {
         return view.render('desempeno/evaluacionGrupal',{competencias:eGrupal.competencias,evaluados:eGrupal.evaluados,idProceso,idEtapa});
     }
 
+    async evalGrupalP ({view,request, response,session}) {
+        var idPersona = session.get('idPersona', 'fail')
+        var idEtapa = session.get("idEtapa")
+        var idProceso = session.get('idProceso')
+
+        var objEval={
+            "idEtapa":idEtapa,
+	        "idPersona":idPersona,
+            "idProceso":idProceso
+        }
+        var resultFunc=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluadosGrupalP',objEval);
+
+        var eGrupal = resultFunc.body.data;
+
+        return view.render('desempeno/evaluacionGrupalP',{evaluados:eGrupal.evaluados,idProceso,idEtapa});
+    }
+
     async portadaBrasil ({view,request, response}) {
         return view.render('desempeno/portadaBrasil');
     }

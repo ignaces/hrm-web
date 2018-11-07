@@ -26,6 +26,17 @@ class Instrumento {
         porcentaje = Math.round(porcentaje);
         return {mensaje:"OK",avance:`${porcentaje}`}
     }
+
+    async validaCierre({request,response}){
+        var idEncuestaPersona = request.input("idEncuestaPersona");
+
+        var obj={
+            idEncuestaPersona:idEncuestaPersona
+        }
+        var result = await data.execApi(request.hostname(),'/Encuesta/Instrumento/validaCierre',obj);
+
+    return {mensaje:result.body.mensaje}
+}
     
     async cerrarInstrumento({request,response}){
             var idEncuestaPersona = request.input("idEncuestaPersona");
