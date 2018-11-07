@@ -4,7 +4,7 @@
 @section('pluginsCss2')
         <link href="/assets/plugins/ede/infobox/infobox.css" rel="stylesheet" type="text/css" />
         <link href="/assets/plugins/ede/socialWidget/socialWidget.css" rel="stylesheet" type="text/css" />             
-         <link href="/assets/plugins/ede/progressbar/progressbar.css" rel="stylesheet" type="text/css" />    
+        <link href="/assets/plugins/ede/progressbar/progressbar.css" rel="stylesheet" type="text/css" />    
 @endsection
 
 @section('scripts')
@@ -147,10 +147,8 @@
                     </div>
                     <div class="clearfix"></div>
                 </div>
-                
                 <div id="equipo" class="panel-collapse collapse in">
                      <div class="portlet-body">
-                        
                         <div class="clearfix"></div>
                             @if(params.length > 0)
                                 @each(parametros in params)
@@ -160,17 +158,23 @@
                                                 <a href="/Desempeno/Proceso/evalGrupal" class="btn btn-success pull-right"><i class="fa fa-group"></i> Evaluación Masiva</a>
                                             </div>
                                         </div>
-
                                         <div class="row">
-                                                &nbsp;
+                                            &nbsp;
+                                        </div>
+                                    @endif
+                                    @if(parametros.codigo == 'BTNGRUPALP' && parametros.valor == '1')
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <a href="/Desempeno/Proceso/evalGrupalP" class="btn btn-success pull-right"><i class="fa fa-group"></i> Evaluación Masiva</a>
                                             </div>
+                                        </div>
+                                        <div class="row">
+                                            &nbsp;
+                                        </div>
                                     @endif
                                 @endeach
                             @endif
-                            
-
                         @!component('components.Desempeno.listaColaboradoresEtapa',lista=listaSupe, params=params, angulo='SUPE')
-                        
                      </div>
                 </div>
             </div>

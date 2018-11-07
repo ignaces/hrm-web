@@ -11,8 +11,8 @@
           var idEncuestaAplicacion = request.input("idEncuestaAplicacion")  ;
           var codigo = request.input("codigo");
           var referer = session.get("referer");
-
-
+          var codigoActor = request.input("codigoActor");
+          console.log(codigoActor)
           var obj = {
             idEncuestaAplicacion:idEncuestaAplicacion,
             codigo:codigo
@@ -21,12 +21,12 @@
           var validacion = result.body;
          
           if(validacion.continua){
-            return view.render('encuesta/intro',  {encuestaPersona:validacion.encuestaPersona,referer});
+            return view.render('encuesta/intro',  {codigoActor: codigoActor,encuestaPersona:validacion.encuestaPersona,referer});
           }else{
             var mensaje= validacion.mensaje;
             
             
-            return view.render('encuesta/index',  {idEncuestaAplicacion:idEncuestaAplicacion,mensaje:mensaje,referer});
+            return view.render('encuesta/index',  {codigoActor: codigoActor,idEncuestaAplicacion:idEncuestaAplicacion,mensaje:mensaje,referer});
           }
           
         }
@@ -34,7 +34,8 @@
         async instrumento ({ view,request, response, auth, session}){
           var idEncuestaPersona = request.input("idEncuestaPersona");
           var referer = session.get("referer");
-          
+          var codigoActor = request.input("codigoActor");
+          console.log(codigoActor)
          var instrumento ={}
          var obj = {
             idEncuestaPersona:idEncuestaPersona
@@ -50,14 +51,15 @@
           instrumento.avance= `${porcentaje}`;
           instrumento.pp='components.Evaluacion.preguntaLickertGrilla';
           session.put("idEncuestaPersona",idEncuestaPersona)
-          return view.render('encuesta/instrumento',  {idEncuestaPersona:idEncuestaPersona,instrumento:instrumento,referer});
+          return view.render('encuesta/instrumento',  {codigoActor: codigoActor, idEncuestaPersona:idEncuestaPersona,instrumento:instrumento,referer});
         }
 
         async fin({view,request, response, auth, session}){
           var idEncuestaPersona = request.input("idEncuestaPersona");
+          var codigoActor = request.input("codigoActor");
           var referer = session.get("referer");
           if(referer!=null){
-            referer = `${referer}&idEncuestaPersona=${idEncuestaPersona}&codigoEstado=FINALIZADO`
+            referer = `${referer}&idEncuestaPersona=${idEncuestaPersona}&codigoEstado=FINALIZADO&codigoActor=${codigoActor}`
             response.redirect(referer);
           }
           return view.render('encuesta/fin',  {});
