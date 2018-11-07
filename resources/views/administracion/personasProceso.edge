@@ -49,15 +49,23 @@
         <div class="portlet">
             <div class="portlet-heading bg-primary">
                 <h3 class="portlet-title">
-                    Participantes
+                    Participantes del Proceso
                 </h3>
                 <div class="clearfix"></div>
             </div>
             <div id="bg-primary" class="panel-collapse collapse in">
                 <div class="portlet-body">
-                        <br>
+                            <div class="col-lg-6">
                             <i>Para buscar a un usuario utilizando el buscador del navegador, presiona <b>CTRL + F</b></i>
-                        <br>
+                            </div>
+                            <div class="col-lg-6">
+                                <form action="/Administracion/administracion/sabanaAvanceDownload" method="GET" id="formDownload">
+                                    <input type="hidden" name="idProceso" value="{{idProceso}}">
+                                    <input type="hidden" name="idEvaluador" value="">
+                                </form>
+                                <button class="btn btn-success pull-right" onclick="$('#formDownload').submit();"><i class="fa fa-excel"></i> Descarga Reporte Avance</button>
+                            </div>
+                        <br><br>
                         <div class="table-responsive">
                                 <table class="table m-0 table-colored table-primary">
                                     <thead>
@@ -67,6 +75,7 @@
                                         <th>Nombres</th>
                                         <th>Apellido Paterno</th>
                                         <th>Apellido Materno</th>
+                                        <th>Proceso</th>
                                         <th width="300">Acciones</th>
                                     </tr>
                                     </thead>
@@ -77,6 +86,7 @@
                                             <td>{{persona.nombres}}</td>
                                             <td>{{persona.apellidoPaterno}}</td>
                                             <td>{{persona.apellidoMaterno}}</td>
+                                            <td>{{persona.nombreProceso}}</td>
                                             <td>
                                                 <form action="/Administracion/administracion/resetearPassPorIdPersona" id="submitPass" method="GET">
                                                         

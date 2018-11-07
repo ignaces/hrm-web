@@ -2,6 +2,15 @@
 
 const got = use('got')
 const api = use('App/Utils/Data')
+const XLSX = require('xlsx');
+const Helpers = use('Helpers');
+const fs = use('fs');
+const Antl = use('Antl');
+var safeUrl = require('safe-url');
+var wget = require('node-wget-promise');
+const readFile = Helpers.promisify(fs.readFile);
+var Enumerable = require('linq');
+
 
 class Administracion {
      administrador  ({ view,request, response, auth }) {
@@ -289,6 +298,74 @@ class Administracion {
         
         
         response.redirect('/Administracion/administracion/verDatosPersonaProceso?idProceso='+idProceso+'&idPersona='+idPersona);
+    }
+
+    async sabanaAvanceDownload({ view, request, response }) {
+
+
+        var idProceso = request.input("idProceso")
+        var idEvaluador = request.input("idEvaluador");
+
+        var obj = {
+            "idProceso": idProceso,
+            "idEvaluador": idEvaluador
+        };
+
+        try
+        {
+            var result = await api.execApi(request.hostname(), '/Desempeno/Proceso/getSabanaAvance', obj);
+
+            var cabecera = Object.keys(result.body.data[0]);
+
+            var wb = {
+                SheetNames: [],
+                Sheets: {}
+            }
+
+            var registros = result.body.data;
+            var ws_name = "Avance";
+
+            /* make worksheet */
+            var ws_data = [ 
+                cabecera
+            ];
+            for (var fila in registros) {
+
+                var registro = [];
+                for (var campo in cabecera) {
+
+                    registro.push(registros[fila][cabecera[campo]]);
+                }
+
+                ws_data.push(registro);
+
+            }
+
+            var ws = XLSX.utils.aoa_to_sheet(ws_data);
+
+            /* Add the sheet name to the list */
+            wb.SheetNames.push(ws_name);
+
+            /* Load the worksheet object */
+            wb.Sheets[ws_name] = ws;
+
+            XLSX.writeFile(wb, 'tmp/reporte_avance.xlsx');
+
+            response.implicitEnd = false
+
+            response.type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+            response.attachment(
+                Helpers.tmpPath('reporte_avance.xlsx'),
+                'reporte_avance.xlsx'
+            )
+        }
+        catch(e)
+        {
+            console.log(e);
+        }
+        
+
     }
 
 
