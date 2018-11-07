@@ -31,7 +31,8 @@ module.exports = {
     //InstrumentoDesempeno
     InstrumentoDesempeno:     ['./client/src/Instrumento/instrumentoDesempeno.js'],
     //InstrumentoGlobal
-    InstrumentoGlobal:     ['./client/src/Instrumento/instrumentoGlobal.js'],
+    InstrumentoGlobal:        ['./client/src/Instrumento/instrumentoGlobal.js'],
+    InstrumentoGlobalP:       ['./client/src/Instrumento/instrumentoGlobalP.js'],
     //Mail
     listaNotificacion:        ['./client/src/Mail/listaNotificacion.js'],
     configNotificacion:       ['./client/src/Mail/notificacion.js'],
