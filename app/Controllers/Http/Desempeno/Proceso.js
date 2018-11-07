@@ -157,7 +157,7 @@ class Proceso {
         var idEtapa = request.input("idEtapa")
         var idProceso = session.get('idProceso')
         var datosProceso=session.get('dataProceso')
-
+        var codigoActor = request.input("codigoActor")
         //cencosud brasil
         if(idProceso == '8af63afd-c680-11e8-8771-bc764e100f2b') 
         {
@@ -172,12 +172,14 @@ class Proceso {
 
         console.log(idEncuestaPersona)
         console.log(codigoEstado)
-        
+        console.log(codigoActor)
         try
         {
             var objUpdEncuesta = {
                 "idEncuestaPersona":idEncuestaPersona,
-                "codigoEstado":codigoEstado
+                "codigoEstado":codigoEstado,
+                "idProceso":idProceso,
+                "codigoActor":codigoActor
             };
 
             console.log(objUpdEncuesta)
