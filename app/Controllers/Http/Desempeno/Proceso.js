@@ -406,7 +406,7 @@ class Proceso {
         var idProceso   = request.input("idProceso");
         var idEtapa     = request.input("idEtapa");
         var codigo     = request.input("codigoActor");
-        console.log(codigo)
+        console.log(idProceso)
         var idAccionPersona     = request.input("idAccionPersona");
 
         var competenciasSpider = [];
@@ -429,7 +429,8 @@ class Proceso {
     
         var objPromedio = {
             "idOpinante":idOpinante,
-            "codigoActor": codigo
+            "codigoActor": codigo,
+            "idProceso": idProceso
         };
         var result3 = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getPromedioGeneral',objPromedio);
 
