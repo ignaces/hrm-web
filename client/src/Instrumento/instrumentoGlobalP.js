@@ -98,9 +98,6 @@ var putRespuesta = function(idOpinante, idPregunta, idAlternativa, justificacion
         data: obj,
         dataType: "json",   
         success: function (msg) {
-            //console.log("OK?23");
-            /*$("#C_"+idOpinante).html(msg.data.resultados.competencias.nivel);
-            $("#M_"+idOpinante).html(msg.data.resultados.metas.nivel);*/
             $.toast({
                 text: 'Respuesta guardada correctamente.',
                 position: 'top-right',
@@ -109,7 +106,7 @@ var putRespuesta = function(idOpinante, idPregunta, idAlternativa, justificacion
                 hideAfter: 3000,
                 stack: 1
             });
-            $("#hrm_blockAction").hide();
+            $("#hrm_blockAction").hide();            
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) { 
             $.toast({
@@ -161,6 +158,7 @@ var save = function(idOpinante, observacion, finaliza){
                     ).then(function(result){
                         $('#frmVolver').submit();
                     });
+                    location.reload();
                     $("#hrm_loadingPanel").hide();
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) { 
