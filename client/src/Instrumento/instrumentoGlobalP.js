@@ -106,7 +106,7 @@ var putRespuesta = function(idOpinante, idPregunta, idAlternativa, justificacion
                 hideAfter: 3000,
                 stack: 1
             });
-            $("#hrm_blockAction").hide();
+            $("#hrm_blockAction").hide();            
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) { 
             $.toast({
@@ -158,6 +158,7 @@ var save = function(idOpinante, observacion, finaliza){
                     ).then(function(result){
                         $('#frmVolver').submit();
                     });
+                    location.reload();
                     $("#hrm_loadingPanel").hide();
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) { 
