@@ -31,7 +31,7 @@ $(document).ready(function(){
             justificacion=$(txtJustificacion).val()
         }
        
-        putRespuesta(idOpinante, idPregunta, idAlternativa, justificacion, isChecked);
+        putRespuesta(idOpinante, idPregunta, idAlternativa, justificacion, isChecked,id);
     });
 
     $( ".txt_pregunta" ).focusout(function() {  
@@ -48,7 +48,7 @@ $(document).ready(function(){
             justificacion=$("#txt_"+idPregunta).val()
         }
        
-        putRespuesta(idOpinante, idPregunta, idAlternativa, justificacion, true);
+        putRespuesta(idOpinante, idPregunta, idAlternativa, justificacion, true,id);
     });
 
     $( ".txt_justificacion" ).focusout(function() {  
@@ -61,10 +61,10 @@ $(document).ready(function(){
         var idOpinante =arr[4]; 
         var justificacion = ( $(this).val() ) ? $(this).val() : ""; //Si existe valor en el txt se utiliza, de lo contrario se setea en ""
        
-        putRespuesta(idOpinante, idPregunta, idAlternativa, justificacion, true);
+        putRespuesta(idOpinante, idPregunta, idAlternativa, justificacion, true,id);
     });
 
-    var putRespuesta = function(idOpinante, idPregunta, idAlternativa, justificacion, isChecked){
+    var putRespuesta = function(idOpinante, idPregunta, idAlternativa, justificacion, isChecked,idElementoHTML){
         var obj= { 
             idOpinante:idOpinante,
             isChecked:isChecked,
@@ -93,7 +93,20 @@ $(document).ready(function(){
                     hideAfter: 3000,
                     stack: 1
                 });
-            }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                $.toast({
+                    text: 'No se pudo guardar su respuesta. Intente nuevamente.',
+                    position: 'top-right',
+                    loaderBg: '#5ba035',
+                    icon: 'error',
+                    hideAfter: 3000,
+                    stack: 1
+                });
+console.log(idElementoHTML)
+                $("#"+idElementoHTML).prop('checked', false);
+            },
+            timeout: 10000
         });
     };
 
