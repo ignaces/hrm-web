@@ -31,7 +31,7 @@ class CambioClave {
         await auth.logout()
 
 
-        response.redirect('../../login');
+        response.redirect('/login');
 
 
     }
