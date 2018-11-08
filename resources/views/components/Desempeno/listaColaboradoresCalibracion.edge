@@ -1,0 +1,91 @@
+@if(lista.length > 0)
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                      <table class="table table-hover m-0 mails table-actions-bar table-colored table">
+                          <thead>
+                                <tr class="bg-gray">                                      
+                                    <th>Colaborador</th>
+                                    <th>Actividad</th>
+                                    <th>Informe</th>
+                                    <th>Resultado evaluación</th>
+                                    <th>Calibración</th>
+                                </tr>
+                          </thead>
+                          <tbody>
+                           @each(persona in lista)
+                                 @each(tarea in persona.tareas)
+                                 
+                                <tr>
+                                    <td rowspan="{{persona.tareas.length}}">
+                                        <div class="text-center">
+                                            <div class="clearfix"></div>
+                                            <div class="member-card">
+                                                <div class="center-block">
+                                                    <img src="{{tarea.tarea.evaluado_foto_row}}" class="img-circle img-thumbnail" alt="profile-image" width="48px">
+                                                </div>
+                                                <div class="">
+                                                    <h5 class="m-b-5">{{tarea.tarea.evaluado_nombres_row}} {{tarea.tarea.evaluado_apellidoPaterno_row}} {{tarea.tarea.evaluado_apellidoMaterno_row}}</h5>
+                                                    @if(tarea.tarea.evaluado_nombreCargo_row != null)
+                                                        <p class="text-muted">{{tarea.tarea.evaluado_nombreCargo_row}}</p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="col-md-3">
+                                            <img src="{{tarea.tarea.imgEtapaTarea}}" alt="tarea" title="{{tarea.tarea.nombreEtapaTarea}}" class="img-circle thumb-md" />
+                                        </div>
+                                        <div class="col-md-9">
+                                            <h5 class="m-b-0 m-t-0">{{tarea.tarea.accion_nombre}}</h5>
+                                            <p class="m-b-0"><small>{{tarea.tarea.nombreEtapaTarea}}</small></p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        @if(tarea.tarea.informe_mostrar=="SI")
+                                            <input type="hidden" name="idOpinante" value="{{tarea.tarea.actor_idEtapaTareaActor}}">
+                                            <a href="{{tarea.tarea.informe_vinculo}}&idOpinante={{tarea.tarea.actor_idEtapaTareaActor}}" class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-bar-chart-o"></i> Ver Informe</a>
+                                            <!--<a href="/Desempeno/Proceso/informeEjecutivos?idProceso=ca95dced-c680-11e8-8771-bc764e100f2b&idEtapa=1f05c0a0-c70e-11e8-8771-bc764e100f2b&idAccionPersona=c007bb5c-d596-11e8-8771-bc764e100f2b&codigoActor=EVAL&codigo=D603A67A&idOpinante=2d15dfea-d597-11e8-8771-bc764e100f2b" class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-bar-chart-o"></i> Ver Informe</a>-->
+                                        @else
+                                           <button type="button" class="btn btn-default btn-xs btn-rounded btn-bordered waves-effect w-md" disabled><i class="fa fa-ban"></i> No Disponible</button>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <div class="text-center">AB</div>
+                                    </td>
+                                    <td>
+                                        <div class="col-md-12">
+                                            <select>
+                                                <option value="AA">AA</option>
+                                                <option value="AB">AB</option>
+                                                <option value="AC">AC</option>
+        
+                                                <option value="BA">BA</option>
+                                                <option value="BB">BB</option>
+                                                <option value="BC">BC</option>
+        
+                                                <option value="CA">CA</option>
+                                                <option value="CB">CB</option>
+                                                <option value="CC">CC</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                </tr>
+                                 @endeach
+                                 @endeach
+
+                                
+                          </tbody>
+                      </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@endif
