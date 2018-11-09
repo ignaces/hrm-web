@@ -8,8 +8,13 @@
 @endsection
 
 @section('scripts')
-    
     <script>
+        $(document).ready(function () {
+            $('#btnMatriz').on('click', function(e) {
+                e.preventDefault();
+                $('#modalMatriz').modal('show');
+            });
+        });
         $(document).ready(function(){
             
             $(".bHistorico").click(function(){
@@ -97,6 +102,10 @@
                                     </div><!-- /.modal-content -->
                                 </div><!-- /.modal-dialog -->
                             </div><!-- /.modal -->
+
+                            <div class="modal fade" style="display:none;!important;" tabindex="-1" id="modalMatriz" role="dialog" aria-labelledby="mySmallModalLabel">
+                                    @!component('components.Desempeno.modalMatrizComparativa',matrizEval=matrizEval,matrizCalib=matrizCalib)    
+                            </div>
 
 <div class="row" >
     
@@ -223,6 +232,39 @@
                      <div class="portlet-body">
                          
                                @!component('components.Desempeno.listaColaboradoresEtapa',lista=listaFunc, params=params, angulo='FUNC')
+                         
+                     </div>
+                </div>
+            </div>
+        </div>
+        @endif
+        {{-- CALIBRACION --}}
+        
+        @if(listaCal.length > 0)
+        <div class="row">
+            <div class="portlet">
+                <div class="portlet-heading bg-primary">
+                     <h4 class="portlet-title">
+                        <!--Mi Equipo--> Equipo para la calibración
+                    </h4>
+                    <div class="portlet-widgets">
+                        <a data-toggle="collapse" data-parent="#accordion2" href="#ascendente"><i class="mdi mdi-minus"></i></a>                  
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                
+                <div id="ascendente" class="panel-collapse collapse in">
+                     <div class="portlet-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button id="btnMatriz" class="btn btn-success pull-right" type="submit"><i class="fa fa-table"></i> Ver Matriz Comparativa</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                    &nbsp;
+                            </div>
+                         
+                        @!component('components.Desempeno.listaColaboradoresCalibracion',lista=listaCal, params=params)
                          
                      </div>
                 </div>
