@@ -255,7 +255,46 @@ class Proceso {
             "idAccionPersona":"" 
         }
         var resultSupe=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluados',objSupe);
-        var listaSupe =resultSupe.body.data;      
+        var listaSupe =resultSupe.body.data;    
+        
+        /* BEGIN TEST CALAIBRACION */
+        var objCal={
+            "idEtapa":idEtapa ,
+	        "idPersonaActor":idPersona,
+            "codigoActor":"SUPE",
+            "idAccionPersona":""
+        }
+        var resultCal=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluados',objCal);
+        var listaCal =resultSupe.body.data;
+
+        var matrizEval = {
+            "AA":0,
+            "AB":0,
+            "AC":4,
+            "BA":0,
+            "BB":8,
+            "BC":2,
+            "CA":0,
+            "CB":0,
+            "CC":1
+        }
+        var matrizCalib = {
+            "AA":1,
+            "AB":0,
+            "AC":4,
+            "BA":3,
+            "BB":3,
+            "BC":3,
+            "CA":0,
+            "CB":0,
+            "CC":1
+        }
+        if(idEtapa === '5ccf2775-c74a-11e8-8771-bc764e100f2b'){
+            objCal.idEtapa = "1f05c0a0-c70e-11e8-8771-bc764e100f2b";
+            resultCal=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluados',objCal);
+            listaCal =resultCal.body.data; 
+        }
+        /* END TEST CALAIBRACION */  
         //
         //////console.log(objSupe)
 
@@ -302,7 +341,7 @@ class Proceso {
         
 
         console.log(listaParams);
-        return view.render('desempeno/etapa',{etag, datosProceso,PersonaEde,datosMenu,etapa,listaEval,listaSupe,listaAsc,listaFunc, idEtapa: idEtapa, params: listaParams});
+        return view.render('desempeno/etapa',{etag, datosProceso,PersonaEde,datosMenu,etapa,listaEval,listaSupe,listaAsc,listaFunc,listaCal, idEtapa: idEtapa, params: listaParams, matrizEval:matrizEval,matrizCalib:matrizCalib});
     }
 
     async evalBrasil ({view,request, response}) {
