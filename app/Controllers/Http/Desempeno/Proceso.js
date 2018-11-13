@@ -259,13 +259,13 @@ class Proceso {
         
         /* BEGIN TEST CALAIBRACION */
         var objCal={
-            "idEtapa":idEtapa ,
-	        "idPersonaActor":idPersona,
+            "idEtapa":"" ,
+	        "idPersonaActor":"",
             "codigoActor":"SUPE",
             "idAccionPersona":""
         }
-        var resultCal=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluados',objCal);
-        var listaCal =resultSupe.body.data;
+        var resultCal;
+        var listaCal;
 
         var matrizEval = {
             "AA":0,
@@ -290,9 +290,11 @@ class Proceso {
             "CC":1
         }
         if(idEtapa === '5ccf2775-c74a-11e8-8771-bc764e100f2b'){
-            objCal.idEtapa = "1f05c0a0-c70e-11e8-8771-bc764e100f2b";
+            objCal.idEtapa = '1f05c0a0-c70e-11e8-8771-bc764e100f2b';
+            objCal.idPersonaActor = idPersona;
             resultCal=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluados',objCal);
-            listaCal =resultCal.body.data; 
+            listaCal =resultCal.body.data;
+            console.log('TAMAÑO:'+listaCal.length+' idEtapa:'+objCal.idEtapa); 
         }
         /* END TEST CALAIBRACION */  
         //
