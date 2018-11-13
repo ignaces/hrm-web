@@ -1,0 +1,243 @@
+<table style="border: 2px none #C0C0C0;" width="50%" align="{{alineacion}}">
+        <tbody>
+        <tr>
+            <td align="center">
+                @if(tipo == 'EVA')
+                <strong><div>Matriz&nbsp;&nbsp;de&nbsp;&nbsp;Resultados&nbsp;&nbsp;Evaluación</div></strong>
+                @endif
+                @if(tipo == 'CAL')
+                <strong><div>Matriz&nbsp;&nbsp;de&nbsp;&nbsp;Resultados&nbsp;&nbsp;Calibrados</div></strong>
+                @endif
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <table >
+                    <tbody><tr>
+                        <td class="style14" rowspan="3" width="20">
+                        </td>
+                        <td class="style14" width="40">
+                            A</td>
+                        <td bgcolor="Yellow" class="style14" height="100" width="100">
+                            <table width="100%">
+                                <tbody><tr>
+                                    <td class="style15" height="10">
+
+                                        <strong style="margin-left: 5px; margin-top: 5px;">AC</strong></td>
+                                </tr>
+                                <tr>
+                                    <td height="60" width="100%" style="text-align: center;">
+                                        @if(matriz.AC != 0)
+                                            <h3><font>{{matriz.AC}}</font></h3>
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="10" width="100%">
+                                        <strong style="margin-left: 5px; margin-top: 5px;">
+                                        <span id="ctl00_Principal_LBLAC" class="style21"></span>
+                                        </strong></td>
+                                </tr>
+                            </tbody></table>
+                        </td>
+                        <td bgcolor="#66FF33" class="style14" height="100" width="100">
+                            <table width="100%">
+                                <tbody><tr>
+                                    <td class="style15" height="10">
+                                        <strong style="margin-left: 5px; margin-top: 5px;">AB</strong></td>
+                                </tr>
+                                <tr>
+                                    <td height="60" width="100%" style="text-align: center;">
+                                        @if(matriz.AB != 0)
+                                            <h3><font>{{matriz.AB}}</font></h3>
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="10" width="100%">
+                                        <strong style="margin-left: 5px; margin-top: 5px;">
+                                        <span id="ctl00_Principal_LBLAB" class="style21"></span>
+                                        </strong></td>
+                                </tr>
+                            </tbody></table>
+                        </td>
+                        <td bgcolor="#009933" class="style14" height="100" width="100">
+                            <table width="100%">
+                                <tbody><tr>
+                                    <td class="style15" height="10" style="color: #fff;">
+                                        <strong style="margin-left: 5px; margin-top: 5px;">AA</strong></td>
+                                </tr>
+                                <tr>
+                                    <td height="60" width="100%" style="text-align: center;">
+                                        @if(matriz.AA != 0)
+                                            <h3><font color="white">{{matriz.AA}}</font></h3>
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="10" width="100%">
+                                        <strong style="margin-left: 5px; margin-top: 5px;">
+                                        <span id="ctl00_Principal_LBLAA" class="style21"></span>
+                                        </strong></td>
+                                </tr>
+                            </tbody></table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="style14">
+                            B</td>
+                        <td bgcolor="Yellow" class="style14" height="100">
+                            <table width="100%">
+                                <tbody><tr>
+                                    <td class="style15" height="10">
+                                        <strong style="margin-left: 5px; margin-top: 5px;">BC</strong></td>
+                                </tr>
+                                <tr>
+                                    <td height="60" width="100%" style="text-align: center;">
+                                        @if(matriz.BC != 0)
+                                            <h3><font>{{matriz.BC}}</font></h3>
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="10" width="100%" class="style21">
+                                        <strong style="margin-left: 5px; margin-top: 5px;">
+                                        <span id="ctl00_Principal_LBLBC" class="style21"></span>
+                                        </strong></td>
+                                </tr>
+                            </tbody></table>
+                        </td>
+                        <td bgcolor="Yellow" class="style14">
+                            <table width="100%">
+                                <tbody><tr>
+                                    <td class="style15" height="10">
+                                        <strong style="margin-left: 5px; margin-top: 5px;">BB</strong></td>
+                                </tr>
+                                <tr>
+                                    <td height="60" width="100%" style="text-align: center;">
+                                        @if(matriz.BB != 0)
+                                            <h3><font>{{matriz.BB}}</font></h3>
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="style21" height="10" width="100%">
+                                        <strong style="margin-left: 5px; margin-top: 5px;">
+                                        <span id="ctl00_Principal_LBLBB" class="style21"></span>
+                                        </strong></td>
+                                </tr>
+                            </tbody></table>
+                        </td>
+                        <td bgcolor="#66FF33" class="style14">
+                            <table width="100%">
+                                <tbody><tr>
+                                    <td class="style15" height="10">
+                                        <strong style="margin-left: 5px; margin-top: 5px;">BA</strong></td>
+                                </tr>
+                                <tr>
+                                    <td height="60" width="100%" style="text-align: center;">
+                                        @if(matriz.BA != 0)
+                                            <h3><font>{{matriz.BA}}</font></h3>
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="style21" height="10" width="100%">
+                                        <strong style="margin-left: 5px; margin-top: 5px;">
+                                        <span id="ctl00_Principal_LBLBA" class="style21"></span>
+                                        </strong></td>
+                                </tr>
+                            </tbody></table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="style14">
+                            C</td>
+                        <td bgcolor="#CC0000" class="style14" height="100">
+                            <table width="100%">
+                                <tbody><tr>
+                                    <td class="style15" height="10" style="color: #fff;">
+                                        <strong style="margin-left: 5px; margin-top: 5px;">CC</strong></td>
+                                </tr>
+                                <tr>
+                                    <td height="60" width="100%" style="text-align: center;">
+                                        @if(matriz.CC != 0)
+                                            <h3><font color="white">{{matriz.CC}}</font></h3>
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="10" width="100%">
+                                        <strong style="margin-left: 5px; margin-top: 5px;">
+                                        <span id="ctl00_Principal_LBLCC" class="style21"></span>
+                                        </strong></td>
+                                </tr>
+                            </tbody></table>
+                        </td>
+                        <td bgcolor="Yellow" class="style14">
+                            <table width="100%">
+                                <tbody><tr>
+                                    <td class="style15" height="10">
+                                        <strong style="margin-left: 5px; margin-top: 5px;">CB</strong></td>
+                                </tr>
+                                <tr>
+                                    <td height="60" width="100%" style="text-align: center;">
+                                        @if(matriz.CB != 0)
+                                            <h3><font>{{matriz.CB}}</font></h3>
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="10" width="100%" style="text-align: center;">
+                                    
+                                    </td>
+                                </tr>
+                            </tbody></table>
+                        </td>
+                        <td bgcolor="Yellow" class="style14">
+                            <table width="100%">
+                                <tbody><tr>
+                                    <td class="style15" height="10">
+                                        <strong style="margin-left: 5px; margin-top: 5px;">CA</strong></td>
+                                </tr>
+                                <tr>
+                                    <td height="60" width="100%" style="text-align: center;">
+                                        @if(matriz.CA != 0)
+                                            <h3><font>{{matriz.CA}}</font></h3>
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="10" width="100%">
+                                        <strong style="margin-left: 5px; margin-top: 5px;">
+                                        <span id="ctl00_Principal_LBLCA" class="style21"></span>
+                                        </strong></td>
+                                </tr>
+                            </tbody></table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="style14">
+                            &nbsp;</td>
+                        <td class="style14">
+                            &nbsp;</td>
+                        <td class="style14" height="40" style="text-align: center;">
+                            C</td>
+                        <td class="style14" style="text-align: center;">
+                            B</td>
+                        <td class="style14" style="text-align: center;">
+                            A</td>
+                    </tr>
+                    <tr>
+                        <td class="style14">
+                            &nbsp;</td>
+                        <td class="style14">
+                            &nbsp;</td>
+                        <td class="style14" colspan="3" height="40" style="text-align: center;">
+                            &nbsp;</td>
+                    </tr>
+                </tbody></table>
+            </td>
+        </tr>
+    </tbody>
+</table>
