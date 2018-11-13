@@ -45,11 +45,12 @@ class Informe {
         var resultTCODetalle = await data.execApi(request.hostname(), '/Acreditacion/Informe/getInstrumentosTCO', obj);
         var resultadoTCODetalle = resultTCODetalle.body.data;
 
-        ////console.log(resultadoDetalleEIC);
+        var resultResumenFinal = await data.execApi(request.hostname(), '/Acreditacion/Informe/getGlosaResultadoFinal', obj);
+        var resultadoResumenFinal = resultResumenFinal.body.data;
 
         var cliente = request.hostname().split(".")[0]
 
-        return view.render('acreditacion/informe/informesd', { sintesis: resultadoSintesis, resultadoTCO, resultadoSOT, resultadoDetalleSOT, TCODetalle: resultadoTCODetalle, conDetalle, idProcesoPersona, clasificacion, cliente, resultadoDetalleEIC });
+        return view.render('acreditacion/informe/informesd', { sintesis: resultadoSintesis, resultadoTCO, resultadoSOT, resultadoDetalleSOT, TCODetalle: resultadoTCODetalle, conDetalle, idProcesoPersona, clasificacion, cliente, resultadoDetalleEIC, resultadoResumenFinal });
     }
 
     async pdf({ view, request, response, auth }) {

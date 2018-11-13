@@ -111,7 +111,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                              <div class="pull-right">
-                                <button type="button" onclick="javascript:window.location.href='{{referer}}&idEncuestaPersona={{idEncuestaPersona}}&codigoEstado=ENPROCESO'" class="btn btn-primary waves-effect waves-light"> 
+                                <button type="button" onclick="javascript:window.location.href='{{referer}}&idEncuestaPersona={{idEncuestaPersona}}&codigoEstado=ENPROCESO&codigoActor={{codigoActor}}'" class="btn btn-primary waves-effect waves-light"> 
                                     <i class="fa fa-arrow-left m-r-5"></i>
                                     <span>Volver</span>
                                 </button>
@@ -265,5 +265,6 @@
     </div>
     <form id="frmVolver" action="/Encuesta/Encuesta/fin">
         <input type="hidden" id="idEncuestaPersona" name="idEncuestaPersona" value="{{idEncuestaPersona}}"/>
+        <input type="hidden" id="codigoActor" name="codigoActor" value="{{codigoActor}}"/>
     </form>
 @endsection

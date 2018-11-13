@@ -42,23 +42,7 @@
                 </div>
         </div>
 </div>
-<!--
-        <div class="row text-center">
-                <div class="col-md-12">
-                        <div class="portlet">
-                                <div class="portlet-heading bg-primary">
-                                        <h5 class="portlet-title">RESULTADO FINAL</h5>
-                                        <div class="clearfix"></div>
-                                </div>
-                                <div id="bg-default" class="panel-collapse collapse in show">
-                                        <div class="portlet-body">
-                                                <p>De acuerdo a la evaluación realizada y los resultados obtenidos, se determina que <strong>Carlos Herrera Sazo Espina</strong> se encuentra como <strong>NO ACREDITADO</strong> para el perfil <strong>Maestro Empalme BT PMT</strong>.</p>
-                                        </div>
-                                </div>
-                        </div>
-                </div>
-        </div>
-        -->
+        @!component('components.Acreditacion.resultadoFinal',titulo="RESULTADO FINAL",persona ={clasificacion:clasificacion}, data=resultadoTCO, resultado=resultadoResumenFinal) 
         
         @if(resultadoTCO != "")
                 @!component('components.Acreditacion.resultadoTCO',titulo = "TEST DE CONOCIMIENTOS", data=resultadoTCO) 

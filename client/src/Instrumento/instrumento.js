@@ -61,7 +61,7 @@ $(document).ready(function(){
             data: obj,
             dataType: "json",   
             success: function (msg) {
-                console.log("OK?23");
+                
 
                 $.toast({
                     text: 'Respuesta guardada correctamente.',
