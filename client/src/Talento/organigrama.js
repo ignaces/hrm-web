@@ -151,6 +151,7 @@ var cargaOrganigrama = function (organigrama){
         enableDetailsView: false,
         enableEdit: false,
         scale: 0.5,
+        maxDepth:8000,
         dataSource: source,
         clickNodeEvent: clickHandler,  
         secondParentIdField: "secondParenId",
