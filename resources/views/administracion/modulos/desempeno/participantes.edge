@@ -1,13 +1,50 @@
 @layout('layouts/horizontal')
 
 @section('scripts')
+
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/metisMenu.min.js"></script>
+    <script src="/assets/js/waves.js"></script>
+    <script src="/assets/js/jquery.slimscroll.js"></script>
+
+    <script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="/assets/plugins/datatables/dataTables.bootstrap.js"></script>
+    <script src="/assets/plugins/datatables/dataTables.buttons.min.js"></script>
+    <script src="/assets/plugins/datatables/buttons.bootstrap.min.js"></script>
+    <script src="/assets/plugins/datatables/jszip.min.js"></script>
+    <script src="/assets/plugins/datatables/pdfmake.min.js"></script>
+    <script src="/assets/plugins/datatables/vfs_fonts.js"></script>
+    <script src="/assets/plugins/datatables/buttons.html5.min.js"></script>
+    <script src="/assets/plugins/datatables/buttons.print.min.js"></script>
+    <script src="/assets/plugins/datatables/dataTables.fixedHeader.min.js"></script>
+    <script src="/assets/plugins/datatables/dataTables.keyTable.min.js"></script>
+    <script src="/assets/plugins/datatables/dataTables.responsive.min.js"></script>
+    <script src="/assets/plugins/datatables/responsive.bootstrap.min.js"></script>
+    <script src="/assets/plugins/datatables/dataTables.scroller.min.js"></script>
+    <script src="/assets/plugins/datatables/dataTables.colVis.js"></script>
+    <script src="/assets/plugins/datatables/dataTables.fixedColumns.min.js"></script>
+
     <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
     <script src="/assets/plugins/parsleyjs/parsley.min.js"></script>
-    
+
     <script src="/assets/plugins/select2/js/select2.min.js" type="text/javascript"></script>
     <script src="/assets/plugins/bootstrap-select/js/bootstrap-select.min.js" type="text/javascript"></script>
-    <script src=/assets/js/dist/procesosEde.min.js></script>
-    <script src=/assets/js/dist/participantes.min.js></script>
+    <script src="/assets/js/dist/procesosEde.min.js"></script>
+
+    <script>
+$(document).ready(function() {
+    $('#datatable').DataTable({
+        "searching": false,
+        "ordering": false,
+        "language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"},
+        "processing": true,
+        "serverSide": true,
+        "ajax": "/Desempeno/ParticipanteController/getParticipanteListByProcesoId"
+    });
+});
+    </script>
+
 @endsection
 
 @section('pluginsCss')
@@ -21,10 +58,11 @@
     @!component('components.breadcrumb',title="Procesos de Desempeño", pages= [
         {nombre:"Administración",activa:false},
         {nombre:"Desempeño",activa:false},
-        {nombre:"Partricipantes",activa:true}
+        {nombre:"Participantes",activa:true}
     ])
 
     {{ csrfField() }}
+
     <input type="hidden" id="idProceso" value="{{datosProceso[0].idProceso}}">
     <div class="row">
         <div class="col-md-12">
@@ -52,7 +90,7 @@
                 </div>
             
                 <div id="participantes" class="panel-collapse collapse in">
-                        <div class="portlet-body">
+                    <div class="portlet-body">
                             <div class="row">
                                 <div class="col-md-6">
                                     <form role="form">
@@ -89,27 +127,75 @@
                         Participantes
                     </h3>
                     <div class="portlet-widgets">
-                        <a data-toggle="collapse" data-parent="#accordion1" href="#resultado"><i class="mdi mdi-minus"></i></a>
+                        <a data-toggle="collapse" data-parent="#accordion1" href="#resultado">
+                            <i class="mdi mdi-minus"></i>
+                        </a>
                     </div>
                     <div class="clearfix"></div>
                 </div>
-            
+                
+                <!--
                 <div id="resultado" class="panel-collapse collapse in">
-                        <div class="portlet-body">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="row">
-                                        @!component('administracion.modulos.desempeno.components.tablaParticipante')
-                                    </div>
+                    <div class="portlet-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    
                                 </div>
                             </div>
                         </div>
+                    </div>
                 </div>
+            -->
+
+                        <div class="panel-collapse collapse in">
+                            <div class="portlet-body">
+                                <div class="row">
+                                    <ul class="list-group">
+                                        <div class="table-responsive">
+                                            <table id="datatable" class="table table-colored-bordered table-hover" >
+                                                <thead style="background-color: #44500c">
+                                                    <tr>
+                                                        <th></th>
+                                                        <th>Nombres</th>
+                                                        <th>Apellido Paterno</th>
+                                                        <th>Apellido Materno</th>
+                                                        <th>Identificador</th>
+                                                        <th>Pais</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <!--
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>Identificador</th>
+                                                        <th>Nombres</th>
+                                                        <th>Email</th>
+                                                        <th>Pais</th>
+                                                    </tr>
+                                                </tfoot>
+                                            -->
+                                            </table>
+                                        </div>
+                                    </ul>
+                                </div>
+                                <!--
+                                <div class="row pull-right">
+                                    <div class="col-md-12">
+                                    <a href="agregarEtapa?idProceso={{datosProceso[0].idProceso}}" class="btn btn-warning btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-edit"></i> Agregar Etapa</a>
+                                    <button type="button" class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-reorder"></i> Reordenar</button>
+                                    </div>
+                                </div>
+                                -->
+                                <br/>
+                            </div>
+                        </div>
+
+
+
+
             </div>
         </div>
     </div>
 
 @endsection
-
-
-

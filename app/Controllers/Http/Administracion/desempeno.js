@@ -116,7 +116,7 @@ class Desempeno {
       
     }
 
-     async editarProceso ({view,request, response, auth, session}) {
+    async editarProceso ({view,request, response, auth, session}) {
         
         //DATA
         var idProceso=request.input("idProceso")
@@ -699,6 +699,7 @@ class Desempeno {
 
     //-----<< PARTICIPANTES
 
+    /*
     async participantes ({view,request, response, auth, session}) {
         
         //Data
@@ -719,6 +720,7 @@ class Desempeno {
         //Render
         return view.render('/administracion/modulos/desempeno/participantes', {datosProceso});
      }
+     */
 
      async buscarParticipante({view,request, response}) {
        
