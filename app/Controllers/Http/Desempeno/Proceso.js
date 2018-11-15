@@ -423,6 +423,23 @@ class Proceso {
         return view.render('desempeno/evaluacionGrupalP',{evaluados:eGrupal.evaluados,idProceso,idEtapa});
     }
 
+    async getInformeComparativo ({view,request,response,session}) {
+        var idPersona = session.get('idPersona', 'fail')
+        var idEtapa = session.get("idEtapa")
+        var idProceso = session.get('idProceso')
+
+        var objEval={
+            "idEtapa":idEtapa,
+	        "idPersona":idPersona,
+            "idProceso":idProceso
+        }
+        var result=await api.execApi(request.hostname(),'/Desempeno/Proceso/getInformeComparativo',objEval);
+
+        var ev = result.body.data;
+
+        return view.render('desempeno/InformeComparativo',{evaluaciones:ev});
+    }
+
     async portadaBrasil ({view,request, response}) {
         return view.render('desempeno/portadaBrasil');
     }
