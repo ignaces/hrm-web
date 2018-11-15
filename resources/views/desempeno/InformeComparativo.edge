@@ -171,7 +171,7 @@
                                         <p>SABE</p>
                                     </th>
                                     <th class="" tabindex="0" rowspan="1" colspan="3" style="width: 220px; text-align: center; vertical-align: middle; ">
-                                        <p>EXIJE</p>
+                                        <p>EXIGE</p>
                                     </th>
                                 </tr>
                                 <tr role="row">
@@ -226,7 +226,7 @@
                                 @each(eval in evaluaciones)  
                                     @if(eval.conducta!==null && eval.conducta!=='Preguntas globales')
                                         <tr role="row" class="odd">
-                                            <td rowspan="4" style="text-align: left; vertical-align: middle;">{{eval.conducta}}</td>                                        
+                                        <td rowspan="{{eval.cuentaAngulos}}" style="text-align: left; vertical-align: middle;">{{eval.conducta}}</td>                                        
                                         </tr>
                                         @each(angulo in eval.angulos)
                                             <tr role="row" class="odd">
