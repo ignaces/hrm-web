@@ -130,7 +130,8 @@ class Accion {
     
         var objPromedio = {
             "idOpinante":idOpinante,
-            "codigoActor": codigo
+            "codigoActor": codigo,
+            "idProceso": idProceso
         };
         var result3 = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getPromedioGeneral',objPromedio);
 

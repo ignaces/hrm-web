@@ -48,7 +48,7 @@
                                         <ul class="nav nav-stacked">
                                             <li><a href=""><i class="fa fa-cogs"></i> Parámetros</a></li>
                                             <li><a href=""><i class="fa fa-file-text"></i> Instrumentos</a></li>
-                                            <li><a href="participantes?idProceso={{datosProceso[0].idProceso}}"><i class="fa fa-users"></i> Participantes</a></li>
+                                            <li><a href="/Desempeno/ParticipanteController/index?proceso_id={{datosProceso[0].idProceso}}"><i class="fa fa-users"></i> Participantes</a></li>
                                             <li><a href=""><i class="fa fa-send"></i> Notificaciones</a></li>
                                             <li><a href=""><i class="fa fa-tachometer"></i> Reportes</a></li>
                                             <li><a href=""><i class="fa fa-warning"></i> Log</a></li>
@@ -60,7 +60,7 @@
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
             {{-- /MENU ADMINISTRACIÓN --}}
         </div>
         {{-- /IZQUIERDA --}}
@@ -131,6 +131,7 @@
                             </div>
                             <div class="clearfix"></div>
                         </div>
+                        
                         <div id="datos" class="panel-collapse collapse in">
                             <div class="portlet-body">
                                 <div class="row">
