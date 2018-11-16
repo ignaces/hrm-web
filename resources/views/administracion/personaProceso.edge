@@ -9,6 +9,7 @@
         <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
         
         <script>
+            
             $("#enviarNotificacionCambioClave").click(function(){
                 
                 if($("#emailPersona").val() == "")
@@ -73,7 +74,7 @@
                                     </thead>
                                     <tbody>                                            
                                             <tr>
-                                                <form action="/Administracion/administracion/updDatosPersona" method="GET" id="updDatosPersona">
+                                                <form action="/Administracion/Administracion/updDatosPersona" method="GET" id="updDatosPersona">
                                                     <td>{{datosEvaluador.IdentificadorEvaluador}}</td>
                                                     <td>
                                                         <input type="hidden" name="idPersona" value="{{datosEvaluador.idPersonaEvaluador}}">
@@ -116,7 +117,7 @@
                                 <br>
                                 <br>
                                 
-                                <form action="/Administracion/administracion/updClasificacionPersona" method="GET" id="formClasificacionesPersona">
+                                <form action="/Administracion/Administracion/updClasificacionPersona" method="GET" id="formClasificacionesPersona">
                                     <input type="hidden" name="idProceso" value="{{idProceso}}">
                                     <input type="hidden" name="idPersona" value="{{datosEvaluador.idPersonaEvaluador}}">
                                     <table class="table m-0 table-colored table-primary">
@@ -199,7 +200,7 @@
                                                         <td>{{persona.Angulo}}</td>
                                                         <td>{{persona.Estado}}</td>
                                                         <td>
-                                                                <form action="/Administracion/administracion/cambiaEstadoEvaluacion" method="GET">
+                                                                <form action="/Administracion/Administracion/cambiaEstadoEvaluacion" method="GET">
                                                                     <input type="hidden" name="idEvaluacion" value="{{persona.idEdeEtapaTareaAccionProcesoPersona}}">
                                                                     <input type="hidden" name="idProceso" value="{{idProceso}}">
                                                                     <input type="hidden" name="idPersona" value="{{persona.idPersonaEvaluador}}">
@@ -256,7 +257,7 @@
                                                         <tr>
                                                             <td>{{persona.IdentificadorEvaluador}}</td>
                                                             <td>   
-                                                                    <form action="/Administracion/administracion/updEvaluador" id="evaluador_{{persona.idEdeEtapaTareaAccionProcesoPersona}}" method="GET">
+                                                                    <form action="/Administracion/Administracion/updEvaluador" id="evaluador_{{persona.idEdeEtapaTareaAccionProcesoPersona}}" method="GET">
                                                                         <input type="hidden" name="idEvaluacion" value="{{persona.idEdeEtapaTareaAccionProcesoPersona}}">
                                                                         <input type="hidden" name="idTareaActor" value="{{persona.idEdeEtapaTareaActor}}">
                                                                         
@@ -287,7 +288,7 @@
                                                             <td>{{persona.Angulo}}</td>
                                                             <td>{{persona.Estado}}</td>
                                                             <td>
-                                                                    <form action="/Administracion/administracion/cambiaEstadoEvaluacion" id="eval_{{persona.idEdeEtapaTareaAccionProcesoPersona}}" method="GET">
+                                                                    <form action="/Administracion/Administracion/cambiaEstadoEvaluacion" id="eval_{{persona.idEdeEtapaTareaAccionProcesoPersona}}" method="GET">
                                                                         <input type="hidden" name="idEvaluacion" value="{{persona.idEdeEtapaTareaAccionProcesoPersona}}">
                                                                         <input type="hidden" name="idProceso" value="{{idProceso}}">
                                                                         <input type="hidden" name="idPersona" value="{{persona.idPersona}}">

@@ -259,43 +259,39 @@ class Proceso {
         
         /* BEGIN TEST CALAIBRACION */
         var objCal={
-            "idEtapa":"" ,
-	        "idPersonaActor":"",
-            "codigoActor":"SUPE",
+            "idEtapa":idEtapa ,
+	        "idPersonaActor":idPersona,
+            "codigoActor":"CALI",
             "idAccionPersona":""
         }
         var resultCal;
         var listaCal;
 
-        var matrizEval = {
+        
+        var matrizCalib = {
             "AA":0,
             "AB":0,
-            "AC":4,
+            "AC":0,
             "BA":0,
-            "BB":8,
-            "BC":2,
+            "BB":0,
+            "BC":0,
             "CA":0,
             "CB":0,
-            "CC":1
+            "CC":0
         }
-        var matrizCalib = {
-            "AA":1,
-            "AB":0,
-            "AC":4,
-            "BA":3,
-            "BB":3,
-            "BC":3,
-            "CA":0,
-            "CB":0,
-            "CC":1
-        }
-        if(idEtapa === '5ccf2775-c74a-11e8-8771-bc764e100f2b'){
-            objCal.idEtapa = '1f05c0a0-c70e-11e8-8771-bc764e100f2b';
-            objCal.idPersonaActor = idPersona;
-            resultCal=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluados',objCal);
-            listaCal =resultCal.body.data;
-            console.log('TAMAÑO:'+listaCal.length+' idEtapa:'+objCal.idEtapa); 
-        }
+        var selectCalibracion = [
+            "AA",
+            "AB",
+            "AC",
+            "BA",
+            "BB",
+            "BC",
+            "CA",
+            "CB",
+            "CC"]          
+        resultCal=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaCalibracion',objCal);
+        listaCal =resultCal.body.data;
+        var matrizEval = resultCal.body.matriz;
         /* END TEST CALAIBRACION */  
         //
         //////console.log(objSupe)
@@ -343,7 +339,11 @@ class Proceso {
         
 
         console.log(listaParams);
-        return view.render('desempeno/etapa',{etag, datosProceso,PersonaEde,datosMenu,etapa,listaEval,listaSupe,listaAsc,listaFunc,listaCal, idEtapa: idEtapa, params: listaParams, matrizEval:matrizEval,matrizCalib:matrizCalib});
+        
+        return view.render('desempeno/etapa',
+        {etag, datosProceso,PersonaEde,datosMenu,
+            etapa,listaEval,listaSupe,listaAsc,listaFunc,
+            listaCal, idEtapa: idEtapa, params: listaParams, matrizEval:matrizEval,matrizCalib:matrizCalib,selectCalibracion:selectCalibracion,idProceso});
     }
 
     async evalBrasil ({view,request, response}) {
@@ -437,7 +437,7 @@ class Proceso {
 
         var ev = result.body.data;
 
-        return view.render('desempeno/InformeComparativo',{evaluaciones:ev});
+        return view.render('desempeno/InformeComparativo',{evaluaciones:ev,idProceso,idEtapa});
     }
 
     async portadaBrasil ({view,request, response}) {
