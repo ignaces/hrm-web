@@ -9,6 +9,11 @@ class ParticipanteController {
     async index ({view, request, response, auth, session}) {
         var proceso_id = request.input('proceso_id');
 
+        var objeto = {
+            tabla:"Genero"
+        };
+        var resultado = await api.execApi(request.hostname(),'/Utils/Listar/getCombo',objeto);
+        var comboGenero = resultado.body;
         //> lista de participantes
         //var obj = {'proceso_id' : proceso_id}
         //var participante_list_temp = await api.execApi(request.hostname(), '/Desempeno/Participante/getParticipanteListByProcesoId', obj);
@@ -17,7 +22,9 @@ class ParticipanteController {
         //<
 
         //return view.render('/administracion/modulos/desempeno/participantes', {proceso_id, participante_list});
-        return view.render('/administracion/modulos/desempeno/participantes', {proceso_id});
+        return view.render(
+            '/administracion/modulos/desempeno/participantes',
+            {proceso_id, comboGenero:comboGenero.data});
     }
 
     async getParticipanteListByProcesoId({view, request, response}) {

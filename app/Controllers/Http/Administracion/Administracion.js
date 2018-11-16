@@ -281,7 +281,8 @@ class Administracion {
             "idProceso":idProceso,
             "idEvaluacion": idEvaluacion,
             "idTareaActor": idTareaActor,
-            "idEvaluador": idEvaluador
+            "idEvaluador": idEvaluador,
+            "idEvaluado": idPersona
         };
         //console.log(obj);
         //return false;
