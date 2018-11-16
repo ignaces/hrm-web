@@ -56,23 +56,23 @@
                                         @endif
                                     </td>
                                     <td>
-                                    <div class="text-center">BC</div>
+                                    <div class="text-center">{{tarea.resultadoGlobal.nivel}}</div>
                                     </td>
                                     <td>
                                         <div class="col-md-12">
+                                            @if(tarea.resultadoGlobal.nivel == "No Disponible")
                                             <select>
-                                                <option value="AA">AA</option>
-                                                <option value="AB">AB</option>
-                                                <option value="AC">AC</option>
-        
-                                                <option value="BA">BA</option>
-                                                <option value="BB">BB</option>
-                                                <option value="BC">BC</option>
-        
-                                                <option value="CA">CA</option>
-                                                <option value="CB">CB</option>
-                                                <option value="CC">CC</option>
+                                                    <option value="No Disponible">No Disponible</option>
                                             </select>
+                                            @else
+                                            {{selectCalibracion[0]}}
+                                            <select>
+                                                
+                                                @each(sel in selectCalibracion)
+                                                    <option value="{{selectCalibracion[sel]}}">selectCalibracion[sel]</option>
+                                                @endeach
+                                            </select>
+                                            @endif
                                         </div>
                                     </td>
                                 </tr>

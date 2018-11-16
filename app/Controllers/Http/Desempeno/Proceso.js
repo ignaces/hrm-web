@@ -288,7 +288,17 @@ class Proceso {
             "CA":0,
             "CB":0,
             "CC":1
-        }          
+        }
+        var selectCalibracion = [
+            "AA",
+            "AB",
+            "AC",
+            "BA",
+            "BB",
+            "BC",
+            "CA",
+            "CB",
+            "CC"]          
         resultCal=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaCalibracion',objCal);
         listaCal =resultCal.body.data;
         /* END TEST CALAIBRACION */  
@@ -342,7 +352,7 @@ class Proceso {
         return view.render('desempeno/etapa',
         {etag, datosProceso,PersonaEde,datosMenu,
             etapa,listaEval,listaSupe,listaAsc,listaFunc,
-            listaCal, idEtapa: idEtapa, params: listaParams, matrizEval:matrizEval,matrizCalib:matrizCalib});
+            listaCal, idEtapa: idEtapa, params: listaParams, matrizEval:matrizEval,matrizCalib:matrizCalib,selectCalibracion:selectCalibracion});
     }
 
     async evalBrasil ({view,request, response}) {
