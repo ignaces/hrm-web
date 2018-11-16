@@ -267,27 +267,17 @@ class Proceso {
         var resultCal;
         var listaCal;
 
-        var matrizEval = {
+        
+        var matrizCalib = {
             "AA":0,
             "AB":0,
-            "AC":4,
+            "AC":0,
             "BA":0,
-            "BB":8,
-            "BC":2,
+            "BB":0,
+            "BC":0,
             "CA":0,
             "CB":0,
-            "CC":1
-        }
-        var matrizCalib = {
-            "AA":1,
-            "AB":0,
-            "AC":4,
-            "BA":3,
-            "BB":3,
-            "BC":3,
-            "CA":0,
-            "CB":0,
-            "CC":1
+            "CC":0
         }
         var selectCalibracion = [
             "AA",
@@ -301,6 +291,7 @@ class Proceso {
             "CC"]          
         resultCal=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaCalibracion',objCal);
         listaCal =resultCal.body.data;
+        var matrizEval = resultCal.body.matriz;
         /* END TEST CALAIBRACION */  
         //
         //////console.log(objSupe)
