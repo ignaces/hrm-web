@@ -343,7 +343,7 @@ class Proceso {
         
 
         console.log(listaParams);
-        return view.render('desempeno/etapa',{etag, datosProceso,PersonaEde,datosMenu,etapa,listaEval,listaSupe,listaAsc,listaFunc,listaCal, idEtapa: idEtapa, params: listaParams, matrizEval:matrizEval,matrizCalib:matrizCalib});
+        return view.render('desempeno/etapa',{etag, datosProceso,PersonaEde,datosMenu,etapa,listaEval,listaSupe,listaAsc,listaFunc,listaCal, idEtapa: idEtapa, params: listaParams, matrizEval:matrizEval,matrizCalib:matrizCalib,idProceso});
     }
 
     async evalBrasil ({view,request, response}) {
@@ -437,7 +437,7 @@ class Proceso {
 
         var ev = result.body.data;
 
-        return view.render('desempeno/InformeComparativo',{evaluaciones:ev});
+        return view.render('desempeno/InformeComparativo',{evaluaciones:ev,idProceso,idEtapa});
     }
 
     async portadaBrasil ({view,request, response}) {
