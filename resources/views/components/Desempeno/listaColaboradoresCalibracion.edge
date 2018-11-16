@@ -65,11 +65,10 @@
                                                     <option value="No Disponible">No Disponible</option>
                                             </select>
                                             @else
-                                            {{selectCalibracion[0]}}
                                             <select>
                                                 
                                                 @each(sel in selectCalibracion)
-                                                    <option value="{{selectCalibracion[sel]}}">selectCalibracion[sel]</option>
+                                                    <option value="{{sel}}">{{sel}}</option>
                                                 @endeach
                                             </select>
                                             @endif
