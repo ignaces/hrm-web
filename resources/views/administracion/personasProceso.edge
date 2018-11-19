@@ -59,13 +59,16 @@
                             <i>Para buscar a un usuario utilizando el buscador del navegador, presiona <b>CTRL + F</b></i>
                             </div>
                             <div class="col-lg-6">
-                                <form action="/Administracion/administracion/sabanaAvanceDownload" method="GET" id="formDownload">
+                                
+                                <form action="/Administracion/Administracion/sabanaAvanceDownload" method="GET" id="formDownload">
                                     <input type="hidden" name="idProceso" value="{{idProceso}}">
                                     <input type="hidden" name="idEvaluador" value="">
                                 </form>
                                 <button class="btn btn-success pull-right" onclick="$('#formDownload').submit();"><i class="fa fa-excel"></i> Descarga Reporte Avance</button>
                             </div>
-                        <br><br>
+                        <br>
+                        <br>
+                        
                         <div class="table-responsive">
                                 <table class="table m-0 table-colored table-primary">
                                     <thead>
@@ -88,7 +91,7 @@
                                             <td>{{persona.apellidoMaterno}}</td>
                                             <td>{{persona.nombreProceso}}</td>
                                             <td>
-                                                <form action="/Administracion/administracion/resetearPassPorIdPersona" id="submitPass" method="GET">
+                                                <form action="/Administracion/Administracion/resetearPassPorIdPersona" id="submitPass" method="GET">
                                                         
                                                         
                                                         <input type="hidden" name="idPersona" value="{{persona.idPersona}}">
@@ -96,7 +99,7 @@
                                                         <input type="hidden" name="origen" value="listado">
                                                 </form>
                                                 
-                                                <form action="/Administracion/administracion/enviarNotificacion" id="notificarCambioClave_{{persona.idPersona}}" method="GET">
+                                                <form action="/Administracion/Administracion/enviarNotificacion" id="notificarCambioClave_{{persona.idPersona}}" method="GET">
                                                     <input type="hidden" name="idPersona" value="{{datosEvaluador.idPersonaEvaluador}}">
                                                     <input type="hidden" name="idProceso" value="{{idProceso}}">
                                                     <input type="hidden" name="emailPersona" value="{{persona.email}}">
@@ -124,4 +127,5 @@
     <div>
         &nbsp;
     </div>
+    
 @endsection  
