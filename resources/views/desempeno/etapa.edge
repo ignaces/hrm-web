@@ -256,9 +256,9 @@
                     </div>
                     <div class="clearfix"></div>
                 </div>
-                
-                <div id="ascendente" class="panel-collapse collapse in">
-                     <div class="portlet-body">
+                <form>
+                    <div id="ascendente" class="panel-collapse collapse in">
+                        <div class="portlet-body">
                             <div class="row">
                                 <div class="col-lg-12">
                                     <button id="btnMatriz" class="btn btn-success pull-right" type="submit"><i class="fa fa-table"></i> Ver Matriz Comparativa</button>
@@ -267,10 +267,10 @@
                             <div class="row">
                                     &nbsp;
                             </div>
-                        @!component('components.Desempeno.listaColaboradoresCalibracion',lista=listaCal,selectCalibracion=selectCalibracion, params=params)
-                         
-                     </div>
-                </div>
+                            @!component('components.Desempeno.listaColaboradoresCalibracion',lista=listaCal,selectCalibracion=selectCalibracion, params=params)                         
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
         @endif
