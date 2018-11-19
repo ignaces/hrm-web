@@ -3,7 +3,7 @@ const Database = use('Database')
 const Env = use('Env')
 const Helpers = use('Helpers')
 const got = use('got')
-
+const Logger = use('Logger')
 
 module.exports = {
     execApi: async (hostname,method,obj)=>{
@@ -21,11 +21,15 @@ module.exports = {
         }
         obj.cliente = cliente;
         
-        var result = await got(`${server}${method}`,
-        {
-            json:true,
-            query:obj
-        })
+        try{
+            var result = await got(`${server}${method}`,
+            {
+                json:true,
+                query:obj
+            })
+            }catch(e){
+             Logger.debug(`metodo:${method},datos:${obj},mensaje:${e.message}`)
+            }
         ////console.log(obj)
         return result;
     },
