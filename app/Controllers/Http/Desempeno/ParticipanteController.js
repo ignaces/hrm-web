@@ -1,5 +1,4 @@
 'use strict'
-
 const api = use('App/Utils/Data');
 const Antl = use('Antl');
 
@@ -12,22 +11,54 @@ class ParticipanteController {
         var objeto = {
             tabla:"Genero"
         };
-        var resultado = await api.execApi(request.hostname(),'/Utils/Listar/getCombo',objeto);
-        var comboGenero = resultado.body;
-        //> lista de participantes
-        //var obj = {'proceso_id' : proceso_id}
-        //var participante_list_temp = await api.execApi(request.hostname(), '/Desempeno/Participante/getParticipanteListByProcesoId', obj);
-        //console.log(participantes_list_temp);
-        //var participante_list = participante_list_temp.body.data;
-        //<
 
-        //return view.render('/administracion/modulos/desempeno/participantes', {proceso_id, participante_list});
-        return view.render(
-            '/administracion/modulos/desempeno/participantes',
-            {proceso_id, comboGenero:comboGenero.data});
+        var void_obj = {};
+
+        try {
+            var resultado = await api.execApi(request.hostname(), '/Utils/Listar/getCombo', objeto);
+
+            try {
+                var pais_list_temp = await api.execApi(request.hostname(), '/Entity/PaisController/getAll', void_obj);
+                var pais_list = pais_list_temp.body.data;
+            } catch (e) {
+                console.log('error al obtener lista de paises =[' + e + ']');
+            }
+
+            try {
+                var proceso_list_temp = await api.execApi(
+                    request.hostname(), '/Entity/EdeProcesoController/getAll', void_obj);
+                var proceso_list = proceso_list_temp.body.data;
+            } catch (e) {
+                console.log('error al obtener lista de procesos =[' + e + ']');
+            }
+
+            try {
+                var accion_list_temp = await api.execApi(
+                    request.hostname(), '/Entity/EdeAccionController/getAll', void_obj);
+                var accion_list = accion_list_temp.body.data;
+            } catch (e) {
+                console.log('error al obtener lista de acciones =[' + e + ']');
+            }
+
+            var comboGenero = resultado.body;
+            //> lista de participantes
+            //var obj = {'proceso_id' : proceso_id}
+            //var participante_list_temp = await api.execApi(request.hostname(), '/Desempeno/Participante/getParticipanteListByProcesoId', obj);
+            //console.log(participantes_list_temp);
+            //var participante_list = participante_list_temp.body.data;
+            //<
+
+            //return view.render('/administracion/modulos/desempeno/participantes', {proceso_id, participante_list});
+            return view.render(
+                '/administracion/modulos/desempeno/participantes',
+                {proceso_list, accion_list, pais_list, proceso_id, comboGenero:comboGenero.data});
+        } catch (e) {
+            console.log(e);
+        }
+
     }
 
-    async getParticipanteListByProcesoId({view, request, response}) {
+    async getParticipanteListByProcesoId({request, response}) {
         var obj = {
             "data_start" : request.input("start"),
             "data_lenght" : request.input("length"),
@@ -63,6 +94,10 @@ class ParticipanteController {
         }
 
         return result_json;
+    }
+
+    async addParticipante({view, request, response}) {
+        return '{"result":"ok"}';
     }
 
 }
