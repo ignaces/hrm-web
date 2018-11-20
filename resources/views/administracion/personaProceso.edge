@@ -86,13 +86,13 @@
                                                     <td><input type="text" class="form-control" name="emailPersona" id="emailPersona" value="{{datosEvaluador.emailEvaluador}}"></td>
                                                 </form>    
                                                     <td>
-                                                        <form action="/Administracion/administracion/resetearPassPorIdPersona" id="submitPass" method="GET">
+                                                        <form action="/Administracion/Administracion/resetearPassPorIdPersona" id="submitPass" method="GET">
                                                             <input type="hidden" name="idPersona" value="{{datosEvaluador.idPersonaEvaluador}}">
                                                             <input type="hidden" name="idProceso" value="{{idProceso}}">
                                                             <input type="hidden" name="origen" value="ficha">
                                                         </form>
 
-                                                        <form action="/Administracion/administracion/enviarNotificacion" id="notificarCambioClave" method="GET">
+                                                        <form action="/Administracion/Administracion/enviarNotificacion" id="notificarCambioClave" method="GET">
                                                             <input type="hidden" name="idPersona" value="{{datosEvaluador.idPersonaEvaluador}}">
                                                             <input type="hidden" name="idProceso" value="{{idProceso}}">
                                                             <input type="hidden" name="emailPersona" value="{{datosEvaluador.emailEvaluador}}">
