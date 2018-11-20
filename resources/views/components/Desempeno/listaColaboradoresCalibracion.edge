@@ -61,15 +61,19 @@
                                     <td>
                                         <div class="col-md-12">
                                             @if(tarea.resultadoGlobal.nivel == "No Disponible")
-                                            <select id = "sel_{{tarea.tarea.idEvaluado}}">
-                                                    <option value="No Disponible">No Disponible</option>
-                                            </select>
+                                                <select id = "sel_{{tarea.tarea.idEvaluado}}">
+                                                        <option value="No Disponible">No Disponible</option>
+                                                </select>
                                             @else
-                                            <select id = "sel_{{tarea.tarea.idEvaluado}}">
-                                                @each(sel in selectCalibracion)
-                                                    <option value="{{sel}}">{{sel}}</option>
-                                                @endeach
-                                            </select>
+                                                <select id = "sel_{{tarea.tarea.idEvaluado}}">
+                                                    @each(sel in selectCalibracion)
+                                                        @if(sel == $parent.tarea.resultadoGlobal.nivel)
+                                                            <option value="{{sel}}" selected>{{sel}}</option>
+                                                        @else
+                                                            <option value="{{sel}}">{{sel}}</option>
+                                                        @endif
+                                                    @endeach
+                                                </select>
                                             @endif
                                         </div>
                                     </td>
