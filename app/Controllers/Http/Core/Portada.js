@@ -58,7 +58,7 @@ class Portada {
         }
         
        
-        var rstl = session.put('totalCol',talentos.Total)
+        //var rstl = session.put('totalCol',talentos.Total)
         ////console.log(rstl);
        
         obj={

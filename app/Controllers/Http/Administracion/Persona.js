@@ -1,84 +1,156 @@
 'use strict'
+
 const data = use('App/Utils/Data')
-
-    class Persona {
-        async registrarPersona  ({ view,request, response, session }) {
-        
-            ////console.log(auth.user.username)
-            ////console.log(auth.user.id)//
-            var objeto = {
-                tabla:"Genero"
-            };
-            
-            var resultado = await data.execApi(request.hostname(),'/Utils/Listar/getCombo',objeto);
-            var comboGenero = resultado.body;
-            
-            ////console.log(comboGenero.data);
-            return view.render('administracion/persona/registrarPersona', {comboGenero:comboGenero.data} );
-        }
-
-
-
-        async doRegisterPersona  ({ view,request, response, session }) {
-        
-            ////console.log(auth.user.username)
-            ////console.log(request.all());
-            var identificador = request.input("identificador");
-            var nombres = request.input("nombres");
-            var ap_pat = request.input("ap_pat");
-            var ap_mat = request.input("ap_mat");
-            var genero = request.input("genero");
-            var email = request.input("email");
-
-            var creaUsuario = request.input("usuario");
-            var usuario = {};
-            if(creaUsuario == "true")
-            {
-                var objetoUsuario = {
-                            identificador:identificador,
-                            email:email,
-                            password:identificador
-                        };
-                ////console.log(objetoUsuario);
-
-                usuario = await data.execApiLocal(request.hostname(),'/Account/Register/registerPersona',objetoUsuario);
-            }
-            var idUsuario = -1;
-            if(usuario.body!=undefined){
-                idUsuario= usuario.body.usuario.id;
-            }
-            var objeto = {
-                "identificador": identificador,
-                "nombres": nombres,
-                "apellidoPaterno": ap_pat,
-                "apellidoMaterno": ap_mat,
-                "genero": genero,
-                "email": email,
-                "idUsuario": idUsuario
-            };
-            
-            var resultado = await data.execApi(request.hostname(),'/Persona/Persona/addPersona',objeto);
-            var respuesta = resultado.body;
-            
-            ////console.log(respuesta.estado);
-            ////console.log(respuesta.data);   
-            //return view.render('administracion/persona/registrarPersona', {estado:respuesta.estado, datos:respuesta.data} );
-            
-            
-
-            response.json(respuesta.estado, respuesta.data);
-        }
-
-        async userExiste({ request, response, session }) {
-        
-            var emailPre   = request.input("email");
-            var obj     = { email: emailPre };
-            ////console.log(obj);
-
-            var resultado   = await data.execApiPost(request.hostname(),'/Usuario/Usuario/getUsuarioByEmail',obj);
-            ////console.log(resultado.body);
-            response.json(resultado.body);
-        }
-    }
+var Enumerable = require('linq')
+class Persona {
+    async find({request,response}){
+    
+        const text =request.input('nombre');
+        const cliente =request.input('cliente') ;
+        const query =  `call getPersonas('${text}')`;
+        const usp   = await data.execQuery(cliente,query);
       
-    module.exports = Persona
+      
+      
+      //const usp   = yield Database.schema.raw("SELECT * from users;");
+      //response.json(usp[0]);--
+      
+      response.json(usp[0][0]);
+    }
+
+    async getIdPersona({request,response}){
+      
+        var idUser = request.input('idUser');
+        const cliente =request.input('cliente') ;
+        const query =  `call pers_getIdPersonaByIdUsuario('${idUser}')`;
+        const respuesta   = await data.execQuery(cliente,query);
+        
+        response.json({
+            "estado": {
+                "codigo": "OK",
+                "mensaje": ""
+            },
+            "paginacion": "",
+            "data": respuesta[0][0]
+        });
+        
+        //response.json(respuesta[0][0]);
+    }
+    
+    async getPersonaByIdUser ({request,response}){
+        var idUser = request.input('idUser');
+        const cliente =request.input('cliente') ;
+        
+        const query = `call pers_getPersonaByIdUsuario('${idUser}')`;
+
+        const respuesta   = await data.execQuery(cliente,query);
+        
+        response.json({
+            "estado": {
+                "codigo": "OK",
+                "mensaje": ""
+            },
+            "paginacion": "",
+            "data": respuesta[0][0][0]
+        });
+    }
+
+    async getPersonaByIdentificador ({request,response}){
+        
+        var identificador = request.input('identificador');
+        const cliente =request.input('cliente') ;
+        
+        const query = `call pers_getPersonaByIdentificador('${identificador}')`;
+
+        const respuesta   = await data.execQuery(cliente,query);
+        
+        response.json({
+            "estado": {
+                "codigo": "OK",
+                "mensaje": ""
+            },
+            "paginacion": "",
+            "data": respuesta[0][0]
+        });
+    }
+    
+    async getPersona({request,response}){
+    
+        var idPersona = request.input('idPersona');
+        var identificador = "";
+        
+        const cliente = request.input('cliente');
+
+        if(request.input('identificador'))
+        {
+            var identificador = request.input('identificador');
+        }
+        
+        const query =  `call pers_getPersona('${idPersona}')`;
+        console.log(query)
+        //const query =  `call pers_getClasificacion('${idPersona}')`;
+        const usp   = await data.execQuery(cliente,query);
+       
+        
+       if(usp[0]==undefined){
+           return response.json({})
+       }
+       if (usp[0][0][0]==undefined){
+        return response.json({})
+       }
+        const Clasificaciones = Enumerable.from(usp[0][0]).select(function(Clasificacion){
+            return{
+               nombre:Clasificacion.Clasificacion,
+               valor:Clasificacion.Valor
+
+            }
+        })
+        
+        var persona = {
+            identificador:usp[0][0][0].identificador,
+            nombres:usp[0][0][0].nombres,
+            apellidoPaterno:usp[0][0][0].apellidoPaterno,
+            apellidoMaterno:usp[0][0][0].apellidoMaterno,
+            email:usp[0][0][0].email,
+            clasificaciones:Clasificaciones.toArray()      
+        };
+        
+      response.json(persona);
+    }
+
+    async addPersona ({request,response}){
+        const cliente =request.input('cliente') ;
+        const identificador =request.input('identificador') ;
+        const nombres =request.input('nombres');
+        const apellidoPaterno =request.input('apellidoPaterno') ;
+        const apellidoMaterno =request.input('apellidoMaterno') ;
+        const genero =request.input('genero') ;
+        const email =request.input('email') ;
+        const idUsuario =request.input('idUsuario') ;
+        const nacionalidad = request.input('nacionalidad');
+        const imagen =request.input('imagen') ;
+        
+        const query = `call pers_addPersona('${identificador}', '${nombres}', '${apellidoPaterno}', '${apellidoMaterno}', '${genero}', '${email}',${idUsuario}, '${nacionalidad}','${imagen}')`;
+        
+        try{
+        //return false;
+        const respuesta   = await data.execQuery(cliente,query);
+        } catch (e) {
+        
+            response.json({
+                "estado": {
+                    "codigo": "ERROR",
+                    "mensaje": e.message
+                },
+                "paginacion": "",
+                "data": respuesta[0]
+            });
+        } 
+        
+    }
+    
+    
+    
+}
+
+module.exports = Persona
