@@ -14,7 +14,7 @@
     <script src="/assets/plugins/datatables/buttons.bootstrap.min.js"></script>
     <script src="/assets/plugins/datatables/jszip.min.js"></script>
     <script src="/assets/plugins/datatables/pdfmake.min.js"></script>
-    <script src="/assets/plugins/datatables/vfs_fonts.js"></script>
+    <script src="/assets/plugins/datatables/vfs-fonts.js"></script>
     <script src="/assets/plugins/datatables/buttons.html5.min.js"></script>
     <script src="/assets/plugins/datatables/buttons.print.min.js"></script>
     <script src="/assets/plugins/datatables/dataTables.fixedHeader.min.js"></script>
@@ -34,6 +34,188 @@
 
     <script>
 $(document).ready(function() {
+
+$('#form-crud-input-proceso').change(function() {
+    $('#form-crud-input-etapa option').remove();
+    $('#form-crud-input-tarea option').remove();
+    $('#form-crud-input-accion option').remove();
+    if ($('#form-crud-input-proceso').val() == '') {
+        return false;
+    } else {
+        var csrf = $('input[name=_csrf]').val();
+        var obj = {
+            _csrf:csrf,
+            'edeproceso_id' : $('#form-crud-input-proceso').val()
+        };
+        $.ajax({
+            type: "POST",
+            url: "/Entity/EdeEtapaController/getByEdeProceso",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(obj),
+            dataType: "json",
+            success: function (result) {
+                var o = new Option('--Seleccione--', '');
+                $(o).html('--Seleccione--');
+                $('#form-crud-input-etapa').append(o);
+                for (var i in result) {
+                    var o = new Option(result[i].nombre, result[i].id);
+                    $(o).html(result[i].nombre);
+                    $('#form-crud-input-etapa').append(o);
+                }
+            }
+        });
+    }
+});
+
+$('#form-crud-input-etapa').change(function() {
+    $('#form-crud-input-tarea option').remove();
+    $('#form-crud-input-accion option').remove();
+    if ($('#form-crud-input-etapa').val() == '') {
+        return false;
+    } else {
+        var csrf = $('input[name=_csrf]').val();
+        var obj = {
+            _csrf:csrf,
+            'ede_etapa_id' : $('#form-crud-input-etapa').val()
+        };
+        $.ajax({
+            type: "POST",
+            url: "/Entity/EdeEtapaTareaController/getByEdeEtapaId",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(obj),
+            dataType: "json",
+            success: function (result) {
+                console.log(JSON.stringify(result));
+                var o = new Option('--Seleccione--', '');
+                $(o).html('--Seleccione--');
+                $('#form-crud-input-tarea').append(o);
+                for (var i in result) {
+                    var o = new Option(result[i].nombre, result[i].id);
+                    $(o).html(result[i].nombre);
+                    $('#form-crud-input-tarea').append(o);
+                }
+            }
+        });
+    }
+});
+
+$('#form-crud-input-tarea').change(function() {
+    $('#form-crud-input-accion option').remove();
+    if ($('#form-crud-input-tarea').val() == '') {
+        return false;
+    } else {
+        var csrf = $('input[name=_csrf]').val();
+        var obj = {
+            _csrf:csrf,
+            'ede_tarea_id' : $('#form-crud-input-tarea').val()
+        };
+        $.ajax({
+            type: "POST",
+            url: "/Entity/EdeEtapaTareaController/getByEdeEtapaId",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(obj),
+            dataType: "json",
+            success: function (result) {
+                console.log(JSON.stringify(result));
+                var o = new Option('--Seleccione--', '');
+                $(o).html('--Seleccione--');
+                $('#form-crud-input-tarea').append(o);
+                for (var i in result) {
+                    var o = new Option(result[i].nombre, result[i].id);
+                    $(o).html(result[i].nombre);
+                    $('#form-crud-input-tarea').append(o);
+                }
+            }
+        });
+    }
+});
+
+$("#input-persona-identificador").blur(function() {
+
+    if ($('#input-persona-identificador').val() == '') {
+
+        return false;
+
+    } else {
+        var csrf = $('input[name=_csrf]').val();
+        var obj = {
+            persona_identificador: $('#input-persona-identificador').val(),
+            _csrf:csrf
+        };
+
+        $.ajax({
+            type: "POST",
+            url: "/Administracion/Persona/getPersonaByIdentificador",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(obj),
+            dataType: "json",
+            success: function (result) {
+                if (result.data == null) {
+                    $('#input-persona-nombres').val('');
+                    $('#input-persona-apellido-paterno').val('');
+                    $('#input-persona-apellido-materno').val('');
+                    $('#input-persona-genero').val('');
+                    $('#input-persona-email').val('');
+                    $('#input-persona-fecha-nacimiento').val('');
+                    $('#input-persona-pais').val('');
+                } else {
+                    $('#input-persona-nombres').val(result.data[0].nombres);
+                    $('#input-persona-apellido-paterno').val(result.data[0].apellidoPaterno);
+                    $('#input-persona-apellido-materno').val(result.data[0].apellidoMaterno);
+                    $('#input-persona-genero').val(result.data[0].genero_desc);
+                    $('#input-persona-email').val(result.data[0].email);
+                    $('#input-persona-fecha-nacimiento').val(result.data[0].fechaNacimiento);
+                    $('#input-persona-pais').val(result.data[0].pais_desc);
+                }
+            }
+        });
+    }
+});
+
+$("#btnAgregarEtapa").click(function() {
+
+    var persona_identificador = $("#idProceso").val();
+    var persona_nombres = $("#idProceso").val();
+    var persona_apellido_paterno = $("#idProceso").val();
+    var persona_apellido_materno = $("#idProceso").val();
+    var persona_genero_id = $("#idProceso").val();
+    var persona_email = $("#idProceso").val();
+    var persona_fecha_nacimiento = $("#idProceso").val();
+    var persona_pais = $("#idProceso").val();
+
+    var obj = {
+        persona_identificador:persona_identificador,
+        persona_nombres:persona_nombres,
+        persona_apellido_paterno:persona_apellido_paterno,
+        persona_apellido_materno:persona_apellido_materno,
+        persona_genero_id:persona_genero_id,
+        persona_email:persona_email,
+        persona_fecha_nacimiento:persona_fecha_nacimiento,
+        persona_pais:persona_nacionalidad_id,
+        _csrf:csrf
+    };
+
+$.ajax({    
+    type: "POST",
+    url: "/Administracion/Desempeno/addEtapa",
+    contentType: "application/json; charset=utf-8",
+    data: JSON.stringify(obj),
+    dataType: "json", 
+    success: function (msg) {
+       
+        swal({
+            title:'Exito',
+            text:'La Etapa se agregó correctamente',
+            type:'success'
+        }).then(function(result){
+            window.location = "/Administracion/Desempeno/fichaproceso?idProceso="+idProceso;
+        });
+     
+    }
+}); 
+}); 
+
+
 
 var table  = $('#datatable').DataTable({
     "ordering": false,
@@ -131,55 +313,80 @@ $('#inputSearchCol1').on('keyup', function(){
                 <div class="panel-collapse collapse in">
                     <div class="portlet-body">
 
+                        <form action="#" id="form-crud" name="form-crud">
+                            
                             <div class="row">
-                                    <div class="col-md-6">
-                                            <div class="form-group">
-                                                    <label for="identificador">Proceso</label>
-                                                        @!component('components.Utils.listarCombos', data={id:"registroGenero", comboGenero:comboGenero, requerido:"true"})
-                                                </div>                                    </div>
-                                    <div class="col-md-6">
-                                            <div class="form-group">
-                                                    <label for="identificador">Tarea</label>
-                                                    @!component('components.Utils.listarCombos', data={id:"registroGenero", comboGenero:comboGenero, requerido:"true"})
-                                                </div>                                    </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="form-crud-input-proceso">Proceso<span class="text-danger">*</span></label>
+                                        <select class="form-control" id="form-crud-input-proceso" required>
+                                            <option value="">--Seleccione--</option>
+                                            @each(proceso in proceso_list)
+                                            <option value="{{proceso.id}}">{{proceso.nombre}}</option>
+                                            @endeach
+                                        </select>
+                                    </div>
                                 </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="form-crud-input-etapa">Etapa<span class="text-danger">*</span></label>
+                                        <select class="form-control" id="form-crud-input-etapa" required>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="form-crud-input-tarea">Tarea<span class="text-danger">*</span></label>
+                                        <select class="form-control" id="form-crud-input-tarea" required>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="form-crud-input-accion">Acci&oacute;n<span class="text-danger">*</span></label>
+                                        <select class="form-control" id="form-crud-input-accion" required>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
 
-                                
                             <div class="row">
                                     <div class="col-md-12">
                                             <hr/>
                             </div>
                                 </div>
 
+
+
                             <div class="row">
                                 <div class="col-md-2">
                                         <div class="form-group">
-                                            <label for="identificador">Identificador<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="identificador" placeholder="Identificador">
+                                            <label for="input-persona-identificador">Identificador<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="input-persona-identificador" required placeholder="Identificador">
                                         </div>
                                 </div>
                                 <div class="col-md-2">
                                         <div class="form-group">
-                                            <label for="appat">Nombres<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="appat" placeholder="Nombres" disabled="true">
+                                            <label for="input-persona-nombres">Nombres<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="input-persona-nombres" required placeholder="Nombres" readonly>
                                         </div>
                                 </div>
                                 <div class="col-md-2">
                                         <div class="form-group">
-                                            <label for="appat">Apellido Paterno<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="appat" placeholder="Apellido Paterno" disabled="true">
+                                            <label for="input-persona-apellido-paterno">Apellido Paterno<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="input-persona-apellido-paterno" required placeholder="Apellido Paterno" readonly>
                                         </div>
                                 </div>
                                 <div class="col-md-2">
                                         <div class="form-group">
-                                            <label for="appat">Apellido Materno<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="appat" placeholder="Apellido Materno" disabled="true">
+                                            <label for="input-persona-apellido-materno">Apellido Materno<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="input-persona-apellido-materno" required placeholder="Apellido Materno" readonly>
                                         </div>
                                 </div>
                                 <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="identificador">Email<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="identificador" placeholder="Email" disabled="true">
+                                                <label for="input-persona-email">Email<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="input-persona-email" required placeholder="Email" readonly>
                                             </div>
                                     </div>
                             </div>
@@ -187,26 +394,49 @@ $('#inputSearchCol1').on('keyup', function(){
                             <div class="row">
                                     <div class="col-md-2">
                                             <div class="form-group">
-                                                <label for="appat">Nacimiento<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="appat" placeholder="Nacimiento" disabled="true">
+                                                <label for="input-persona-fecha-nacimiento">Nacimiento<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="input-persona-fecha-nacimiento" required placeholder="Nacimiento" readonly>
                                             </div>
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-group">
-                                                <label for="registroGenero">Género<span class="text-danger">*</span></label>
-                                                @!component('components.Utils.listarCombos', data={id:"registroGenero", comboGenero:comboGenero, requerido:"true"})
+                                                <label for="input-persona-genero">Género<span class="text-danger">*</span></label>
+                                                <!--
+                                                component('components.Utils.listarCombos', data={id:"input-persona-genero-id", comboGenero:comboGenero, requerido:"true"})
+                                                <select class="form-control" id="input-persona-nacionalidad" required readonly>
+                                                    each(pais in pais_list)
+                                                        <option value="{{pais.codigo}}">{{pais.nombre}}</option>
+                                                    endeach
+                                                </select>
+                                                -->
+                                                <input type="text" class="form-control" id="input-persona-genero" required placeholder="Genero" readonly>
                                             </div>
                                     </div>
                                     <div class="col-md-2">
                                             <div class="form-group">
-                                                <label for="appat">Pais<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="appat" placeholder="Pais" disabled="true">
+                                                <label for="input-persona-pais">Pais<span class="text-danger">*</span></label>
+                                                <!--
+                                                <select class="form-control" id="input-persona-nacionalidad" required readonly>
+                                                    each(pais in pais_list)
+                                                        <option value="{{pais.codigo}}">{{pais.nombre}}</option>
+                                                    endeach
+                                                </select>
+                                                -->
+                                                <input type="text" class="form-control" id="input-persona-pais" required placeholder="Pais" readonly>
                                             </div>
                                     </div>
-                                    <div class="col-md-6">
-                                            <button type="button" id="btnBuscarParticipante" class="btn btn-warning btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-search"></i> Buscar</button>
+                                    <div class="col-md-4">
+                                    </div>
+                                    <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label style="width:100%;">&nbsp;</label>
+                                                <button type="submit" style="float:right" id="button-add-participante" name="button-add-participante"
+                                                class="btn btn-primary btn-rounded w-md waves-effect waves-light">Agregar</button>
+                                            </div>
                                         </div>
                                 </div>
+
+                                </form>
                         </div>
                 </div>
             </div>
@@ -245,14 +475,24 @@ $('#inputSearchCol1').on('keyup', function(){
                             <div class="portlet-body">
 
                                     <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-3">
                                                     <div class="form-group">
                                                             <label for="identificador">Proceso</label>
                                                                 @!component('components.Utils.listarCombos', data={id:"registroGenero", comboGenero:comboGenero, requerido:"true"})
                                                         </div>                                    </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-3">
+                                                    <div class="form-group">
+                                                            <label for="identificador">Etapa</label>
+                                                            @!component('components.Utils.listarCombos', data={id:"registroGenero", comboGenero:comboGenero, requerido:"true"})
+                                                        </div>                                    </div>
+                                            <div class="col-md-3">
                                                     <div class="form-group">
                                                             <label for="identificador">Tarea</label>
+                                                                @!component('components.Utils.listarCombos', data={id:"registroGenero", comboGenero:comboGenero, requerido:"true"})
+                                                        </div>                                    </div>
+                                            <div class="col-md-3">
+                                                    <div class="form-group">
+                                                            <label for="identificador">Accion</label>
                                                             @!component('components.Utils.listarCombos', data={id:"registroGenero", comboGenero:comboGenero, requerido:"true"})
                                                         </div>                                    </div>
                                         </div>
@@ -266,8 +506,7 @@ $('#inputSearchCol1').on('keyup', function(){
                                 <div class="row">
                                     <ul class="list-group">
                                         <div class="table-responsive">
-                                            <!--<table id="datatable" class="table table-colored-bordered table-hover" >-->
-                                            <table id="datatable" class="table table-striped table-bordered dataTable no-footer" >
+                                            <table id="datatable" class="table table-colored-bordered table-hover" >
                                                     
 
                                                 <thead style="background-color: #44500c">
