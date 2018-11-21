@@ -24,3 +24,5 @@ try {
     return {mensaje:"ok"}
     }
 }
+
+module.exports = CalibracionController
