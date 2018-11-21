@@ -26,10 +26,18 @@ module.exports = {
             {
                 json:true,
                 query:obj
-            })
-            }catch(e){
-             Logger.debug(`metodo:${method},datos:${obj},mensaje:${e.message}`)
+            });
+
+        }catch(e){
+            var result ={
+                body:{
+                    data:[]
+                }
             }
+            
+            Logger.debug(`metodo:${method},datos:${obj},mensaje:${e.message}`)
+            return result;
+        }
         ////console.log(obj)
         return result;
     },
