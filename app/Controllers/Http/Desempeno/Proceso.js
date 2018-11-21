@@ -257,7 +257,7 @@ class Proceso {
         var resultSupe=await api.execApi(request.hostname(),'/Desempeno/Proceso/getListaEvaluados',objSupe);
         var listaSupe =resultSupe.body.data;    
         
-        /* BEGIN TEST CALAIBRACION */
+        /* BEGIN CALAIBRACION */
         var objCal={
             "idEtapa":idEtapa ,
 	        "idPersonaActor":idPersona,
@@ -281,9 +281,8 @@ class Proceso {
         listaCal =resultCal.body.data;
         var matrizEval = resultCal.body.matrizE;
         var matrizCalib = resultCal.body.matrizC;
-        /* END TEST CALAIBRACION */  
-        //
-        //////console.log(objSupe)
+        /* END CALAIBRACION */  
+        
 
         //Lista Asce
         var objAsc={
