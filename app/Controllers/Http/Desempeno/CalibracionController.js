@@ -6,7 +6,6 @@ const Antl = use('Antl');
 class CalibracionController {
     async updateCalibracion({request, response}) {
 try {
-        console.log('******entro hrm updateCalibracion');
         var idEdeEtapaTareaActor= request.input("idEdeEtapaTareaActor");
         var calibracion= request.input("calibracion");
         
@@ -16,7 +15,6 @@ try {
         };
 
         var result = await api.execApi(request.hostname(),'/Desempeno/Proceso/updateCalibracion',obj);  
-        console.log('******salio hrm updateCalibracion');
     } catch (e) {
         console.log(e);
         
