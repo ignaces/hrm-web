@@ -180,7 +180,7 @@ module.exports = {
     |--------------------------------------------------------------------------
     |
     | Using `console` driver for logging. This driver writes to `stdout`
-    | and `stderr`test
+    | and `stderr`tests
     |ss
     */
     console: {
