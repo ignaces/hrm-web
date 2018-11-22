@@ -128,11 +128,11 @@ class Administracion {
         
         if(origen == "ficha")
         {
-            response.redirect('/Administracion/administracion/verDatosPersonaProceso?idProceso='+idProceso+'&idPersona='+idPersona);
+            response.redirect('/Administracion/Administracion/verDatosPersonaProceso?idProceso='+idProceso+'&idPersona='+idPersona);
         }
         else
         {
-            response.redirect('/Administracion/administracion/verPersonasProceso?idProceso='+idProceso);
+            response.redirect('/Administracion/Administracion/verPersonasProceso?idProceso='+idProceso);
         }
         
     }
@@ -158,7 +158,7 @@ class Administracion {
             console.log(e);
         }
         
-        response.redirect('/Administracion/administracion/verDatosPersonaProceso?idProceso='+idProceso+'&idPersona='+idPersona);
+        response.redirect('/Administracion/Administracion/verDatosPersonaProceso?idProceso='+idProceso+'&idPersona='+idPersona);
         
     }
     
@@ -190,7 +190,7 @@ class Administracion {
             console.log(e);
         }
         
-        response.redirect('/Administracion/administracion/verDatosPersonaProceso?idProceso='+idProceso+'&idPersona='+idPersona);
+        response.redirect('/Administracion/Administracion/verDatosPersonaProceso?idProceso='+idProceso+'&idPersona='+idPersona);
         
     }
 
@@ -224,11 +224,11 @@ class Administracion {
         
         if(origen == "ficha")
         {
-            response.redirect('/Administracion/administracion/verDatosPersonaProceso?idProceso='+idProceso+'&idPersona='+idPersona);
+            response.redirect('/Administracion/Administracion/verDatosPersonaProceso?idProceso='+idProceso+'&idPersona='+idPersona);
         }
         else
         {
-            response.redirect('/Administracion/administracion/verPersonasProceso?idProceso='+idProceso);
+            response.redirect('/Administracion/Administracion/verPersonasProceso?idProceso='+idProceso);
         }
 
         
@@ -298,7 +298,7 @@ class Administracion {
         }
         
         
-        response.redirect('/Administracion/administracion/verDatosPersonaProceso?idProceso='+idProceso+'&idPersona='+idPersona);
+        response.redirect('/Administracion/Administracion/verDatosPersonaProceso?idProceso='+idProceso+'&idPersona='+idPersona);
     }
 
     async sabanaAvanceDownload({ view, request, response }) {

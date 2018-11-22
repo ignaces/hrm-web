@@ -100,6 +100,7 @@ class ParticipanteController {
         return '{"result":"ok"}';
     }
 
+    
 }
 
 module.exports = ParticipanteController

@@ -1,5 +1,32 @@
 @if(lista.length > 0)
-
+<script>
+    function onChangeSelectedItem(id, idEdeEtapaTareaActor) {
+            var csrf = $('input[name=_csrf]').val();
+            var obj = {
+                idEdeEtapaTareaActor : idEdeEtapaTareaActor,
+                calibracion : $('#' + id).val(),
+                _csrf : csrf
+            }
+            $.ajax({    
+                type: "POST",
+                url: "/Desempeno/CalibracionController/updateCalibracion",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(obj),
+                dataType: "json", 
+                success: function (msg) {
+                    swal({
+                        title:'Exito',
+                        text:'La calibración se agregó correctamente',
+                        type:'success'
+                    }).then(function(result){
+                        location.reload();
+                    });
+                
+                }
+            }); 
+            /*alert("You selected: " + calib + " actor_idEtapaTareaActor:" + idEdeEtapaTareaActor);*/
+        }
+</script>
 <div class="row">
     <div class="col-md-12">
         <!-- -->
@@ -56,18 +83,18 @@
                                         @endif
                                     </td>
                                     <td>
-                                    <div class="text-center">{{tarea.resultadoGlobal.nivel}}</div>
+                                    <div class="text-center">{{tarea.tarea.resultadoEvaluacion}}</div>
                                     </td>
                                     <td>
                                         <div class="col-md-12">
-                                            @if(tarea.resultadoGlobal.nivel == "No Disponible")
+                                            @if(tarea.tarea.resultadoEvaluacion == undefined)
                                                 <select id = "sel_{{tarea.tarea.idEvaluado}}">
                                                         <option value="No Disponible">No Disponible</option>
                                                 </select>
                                             @else
-                                                <select id = "sel_{{tarea.tarea.idEvaluado}}">
+                                                <select id = "sel_{{tarea.tarea.idEvaluado}}" onchange="onChangeSelectedItem('sel_{{tarea.tarea.idEvaluado}}','{{tarea.tarea.actor_idEtapaTareaActor}}')">
                                                     @each(sel in selectCalibracion)
-                                                        @if(sel == $parent.tarea.resultadoGlobal.nivel)
+                                                        @if(sel == $parent.tarea.tarea.resultadoCalibracion)
                                                             <option value="{{sel}}" selected>{{sel}}</option>
                                                         @else
                                                             <option value="{{sel}}">{{sel}}</option>
