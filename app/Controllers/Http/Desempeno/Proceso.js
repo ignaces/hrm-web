@@ -229,7 +229,7 @@ class Proceso {
         //////(idPersona)
         var cliente = request.hostname().split(".")[0]
         if(cliente=="localhost"){
-            cliente="cs"
+            cliente="hrmdev"
         }
 
         var etag = `app_${cliente}`
