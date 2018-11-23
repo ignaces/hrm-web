@@ -466,7 +466,6 @@ class Proceso {
         var result = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumentoEde',obj);
 
         var instrumento = result.body;
-        
         var result2 = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getEscala',obj);
 
         ////////(result2);

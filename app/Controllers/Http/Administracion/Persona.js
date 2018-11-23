@@ -56,7 +56,7 @@ class Persona {
     }
 
     async getPersonaByIdentificador ({request,response}){
-        
+        console.log('access app =[hrm] class =[Persona] method =[getPersonaByIdentificador]');
         var identificador = request.input('identificador');
         const cliente =request.input('cliente') ;
         
@@ -72,6 +72,7 @@ class Persona {
             "paginacion": "",
             "data": respuesta[0][0]
         });
+        console.log('exit app =[hrm] class =[Persona] method =[getPersonaByIdentificador]');
     }
     
     async getPersona({request,response}){
@@ -149,8 +150,24 @@ class Persona {
         
     }
     
-    
-    
+    async getPersonaByIdentificadorV2 ({request,response}){
+        console.log('access app =[hrm] class =[Persona] method =[getPersonaByIdentificadorV2]');
+        var obj = {
+            "persona_identificador" : request.input("persona_identificador")
+        };
+        try {
+            var persona_temp = await data.execApi(
+                request.hostname(),'/Persona/Persona/getPersonaByIdentificador', obj);
+            var persona = persona_temp.body;
+            console.log('exit app =[hrm] class =[Persona] method =[getPersonaByIdentificadorV2]');
+            return persona;
+        } catch (e) {
+            console.log('error =[' + e + ']');
+        }
+        console.log('exit app =[hrm] class =[Persona] method =[getPersonaByIdentificadorV2]');
+        return null;
+    }
+
 }
 
 module.exports = Persona

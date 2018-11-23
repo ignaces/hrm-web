@@ -30,15 +30,191 @@
 
     <script src="/assets/plugins/select2/js/select2.min.js" type="text/javascript"></script>
     <script src="/assets/plugins/bootstrap-select/js/bootstrap-select.min.js" type="text/javascript"></script>
-    <script src="/assets/js/dist/procesosEde.min.js"></script>
 
     <script>
+
+function function_crud(operation) {
+    /*
+    $('#input-persona-nombres').val('');
+    $('#input-persona-apellido-paterno').val('');
+    $('#input-persona-apellido-materno').val('');
+    $('#input-persona-genero').val('');
+    $('#input-persona-email').val('');
+    $('#input-persona-fecha-nacimiento').val('');
+    $('#input-persona-pais').val('');
+*/
+    //if ($('#form-crud-input-proceso').val() == '') { return false; }
+    //if ($('#form-crud-input-etapa').val() == '') { return false; }
+    //if ($('#form-crud-input-tarea').val() == '') { return false; }
+    //if ($('#form-crud-input-accion').val() == '') { return false; }
+    if ($('#form-crud-input-persona-identificador').val() == '') { return false; }
+
+        var csrf = $('input[name=_csrf]').val();
+        var obj = {
+            persona_identificador: $('#form-crud-input-persona-identificador').val(),
+            _csrf:csrf
+        };
+
+        swal({
+            title: 'Procesando, favor espere.',
+            html:'<div class="progress m-b-20"><div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div>',
+            footer: '',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            showConfirmButton: false,
+            showCloseButton: false
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "/Administracion/Persona/getPersonaByIdentificadorV2",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(obj),
+            dataType: "json",
+            success: function (result) {
+
+                swal.close();
+
+                if (result.data == null) {
+                    if (operation == 'remove') {
+                        swal({
+                        type: 'error',
+                        text: 'Persona no existe.'
+                    });
+                }
+                    if (operation == 'add') {
+                        swal({
+                            html: ''+
+'<div class="row">'+
+'<div class="col-md-12 form-group"><label>Persona no existe en registros, favor ingresar datos.</label></div>'+
+'</div>'+
+
+'<form action="#" id="form-crud-form-add" name="form-crud-form-add">'+
+
+'<div class="row">'+
+'<div class="col-md-4 form-group"><label for="input-persona-nombres">Nombres<span class="text-danger">*</span></label></div>'+
+'<div class="col-md-8 form-group"><input type="text" class="form-control" id="input-persona-nombres" required placeholder="Nombres"></div>'+
+'</div>'+
+
+'<div class="row">'+
+'<div class="col-md-4 form-group"><label for="input-persona-apellido-paterno">Apellido Paterno<span class="text-danger">*</span></label></div>'+
+'<div class="col-md-8 form-group"><input type="text" class="form-control" id="input-persona-apellido-paterno" required placeholder="Apellido Paterno"></div>'+
+'</div>'+
+
+'<div class="row">'+
+'<div class="col-md-4 form-group"><label for="input-persona-apellido-materno">Apellido Materno<span class="text-danger">*</span></label></div>'+
+'<div class="col-md-8 form-group"><input type="text" class="form-control" id="input-persona-apellido-materno" required placeholder="Apellido Materno"></div>'+
+'</div>'+
+
+'<div class="row">'+
+'<div class="col-md-4 form-group"><label for="input-persona-email">Email</label></div>'+
+'<div class="col-md-8 form-group"><input type="text" class="form-control" id="input-persona-email" placeholder="Email"></div>'+
+'</div>'+
+
+'<div class="row">'+
+'<div class="col-md-4 form-group"><label for="input-persona-fecha-nacimiento">Nacimiento</label></div>'+
+'<div class="col-md-8 form-group"><input type="text" class="form-control" id="input-persona-fecha-nacimiento" placeholder="Nacimiento"></div>'+
+'</div>'+
+/*
+'<div class="row">'+
+'<div class="col-md-6 form-group">'+
+'<button type="submit" id="form-crud-form-add-button-save" name="form-crud-form-add-button-save" class="btn btn-primary btn-rounded w-md waves-effect waves-light">Guardar</button>'+
+'</div>'+
+'<div class="col-md-6 form-group">'+
+'<button onclick="alert("dfsdf");" class="btn btn-warning btn-rounded w-md waves-effect waves-light">Guardar</button>'+
+'</div>'+
+*/
+'</form>',
+
+    showCancelButton: true,
+    showLoaderOnConfirm: true,
+    confirmButtonText: 'Guardar',
+    cancelButtonText: 'Cancelar',
+    confirmButtonClass: 'btn btn-primary btn-rounded w-md waves-effect waves-light',
+    cancelButtonClass: 'btn btn-warning btn-rounded w-md waves-effect waves-light',
+    allowOutsideClick: false,
+    preConfirm: function(result) {
+    return new Promise(function(resolve, reject) {
+
+
+    $('#form-crud-form-add').parsley().validate();
+        if ($('#form-crud-form-add').parsley().isValid()) {
+            var html = [];
+            html.push('<tr>');
+            html.push('<td>' + $('#form-crud-input-persona-identificador').val() + '</td>');
+            html.push('<td>' + $('#input-persona-nombres').val() + '</td>');
+            html.push('<td>' + $('#input-persona-apellido-paterno').val() + '</td>');
+            html.push('<td>' + $('#input-persona-apellido-materno').val() + '</td>');
+            html.push('<td>' + $('#input-persona-email').val() + '</td>');
+            html.push('<td>' + $('#input-persona-fecha-nacimiento').val() + '</td>');
+            html.push('<td>' + 'null' + '</td>');
+            html.push('<td>' + 'null' + '</td>');
+            html.push('<td><img class="icon-colored" src="/assets/images/icons/add_database.svg" title="Agregar" style="height:24px;width:24px;margin:0px;"></td>');
+            html.push('<td style="display:none;">' + 'ADD' + '</td>');
+            html.push('</tr>');
+            $(html.join("")).appendTo
+            ('#table-crud > tbody'); 
+            $('#form-crud-input-persona-identificador').val('');
+            resolve();
+        } else {
+            reject();
+        }
+
+
+        
+    });
+  }
+});
+
+
+
+
+
+                    }
+                } else {
+            var opIcon = '';
+            var opCode = '';
+            if (operation == 'add') {
+                opCode = 'ADD';
+                opIcon = '<img class="icon-colored" src="/assets/images/icons/add_database.svg" title="Agregar" style="height:24px;width:24px;margin:0px;">';
+            }
+            if (operation == 'remove') {
+                opCode = 'REM';
+                opIcon = '<img class="icon-colored" src="/assets/images/icons/delete_database.svg" title="Quitar" style="height:24px;width:24px;margin:0px;">';
+            }
+            var html = [];
+            html.push('<tr>');
+            html.push('<td>' + result.data[0].identificador + '</td>');
+            html.push('<td>' + result.data[0].nombres + '</td>');
+            html.push('<td>' + result.data[0].apellidoPaterno + '</td>');
+            html.push('<td>' + result.data[0].apellidoMaterno + '</td>');
+            html.push('<td>' + result.data[0].email + '</td>');
+            html.push('<td>' + result.data[0].fechaNacimiento + '</td>');
+            html.push('<td>' + result.data[0].genero_desc + '</td>');
+            html.push('<td>' + result.data[0].pais_desc + '</td>');
+            html.push('<td>' + opIcon + '</td>');
+            html.push('<td style="display:none;">' + opCode + '</td>');
+            html.push('</tr>');
+            $(html.join("")).appendTo('#table-crud > tbody'); 
+            $('#form-crud-input-persona-identificador').val('');
+            swal.close();
+
+
+
+                }
+            }
+        });
+}
+
 $(document).ready(function() {
 
 $('#form-crud-input-proceso').change(function() {
     $('#form-crud-input-etapa option').remove();
     $('#form-crud-input-tarea option').remove();
     $('#form-crud-input-accion option').remove();
+
+    $("#table-crud > tbody").empty();
+
     if ($('#form-crud-input-proceso').val() == '') {
         return false;
     } else {
@@ -70,6 +246,9 @@ $('#form-crud-input-proceso').change(function() {
 $('#form-crud-input-etapa').change(function() {
     $('#form-crud-input-tarea option').remove();
     $('#form-crud-input-accion option').remove();
+
+    $("#table-crud > tbody").empty();
+
     if ($('#form-crud-input-etapa').val() == '') {
         return false;
     } else {
@@ -101,17 +280,20 @@ $('#form-crud-input-etapa').change(function() {
 
 $('#form-crud-input-tarea').change(function() {
     $('#form-crud-input-accion option').remove();
+
+    $("#table-crud > tbody").empty();
+
     if ($('#form-crud-input-tarea').val() == '') {
         return false;
     } else {
         var csrf = $('input[name=_csrf]').val();
         var obj = {
             _csrf:csrf,
-            'ede_tarea_id' : $('#form-crud-input-tarea').val()
+            'ede_etapa_tarea_id' : $('#form-crud-input-tarea').val()
         };
         $.ajax({
             type: "POST",
-            url: "/Entity/EdeEtapaTareaController/getByEdeEtapaId",
+            url: "/Entity/EdeEtapaTareaAccionController/getByEdeEtapaTareaId",
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(obj),
             dataType: "json",
@@ -119,57 +301,50 @@ $('#form-crud-input-tarea').change(function() {
                 console.log(JSON.stringify(result));
                 var o = new Option('--Seleccione--', '');
                 $(o).html('--Seleccione--');
-                $('#form-crud-input-tarea').append(o);
+                $('#form-crud-input-accion').append(o);
                 for (var i in result) {
                     var o = new Option(result[i].nombre, result[i].id);
                     $(o).html(result[i].nombre);
-                    $('#form-crud-input-tarea').append(o);
+                    $('#form-crud-input-accion').append(o);
                 }
             }
         });
     }
 });
 
-$("#input-persona-identificador").blur(function() {
+$("#form-crud-button-add").click(function() {
+    function_crud('add');
+});
 
-    if ($('#input-persona-identificador').val() == '') {
+$("#form-crud-button-remove").click(function() {
+    function_crud('remove');
+});
 
-        return false;
+$("#form-crud-button-confirm").click(function() {
+    alert('entro');
 
-    } else {
-        var csrf = $('input[name=_csrf]').val();
-        var obj = {
-            persona_identificador: $('#input-persona-identificador').val(),
-            _csrf:csrf
+    var obj= { participantes : [] };
+
+    $('#table-crud > tbody > tr').each(function() {
+        var obj_temp = {
+            identificador : $(this).find('td:eq(' + '0' + ')').text(),
+            nombres : $(this).find('td:eq(' + '1' + ')').text(),
+            apellido_paterno : $(this).find('td:eq(' + '2' + ')').text(),
+            apellido_materno : $(this).find('td:eq(' + '3' + ')').text(),
+            email : $(this).find('td:eq(' + '4' + ')').text(),
+            fecha_nacimiento : '2018-01-01',
+            genero_id : 'da68141f-0f3a-11e8-bf12-bc764e100f2b',
+            pais_id : 'f0606913-7b05-11e8-80db-bc764e10787e',
+            operacion: $(this).find('td:eq(' + '9' + ')').text()
         };
+        obj.participantes.push(obj_temp);
+    });
+    console.log(JSON.stringify(obj));
 
-        $.ajax({
-            type: "POST",
-            url: "/Administracion/Persona/getPersonaByIdentificador",
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(obj),
-            dataType: "json",
-            success: function (result) {
-                if (result.data == null) {
-                    $('#input-persona-nombres').val('');
-                    $('#input-persona-apellido-paterno').val('');
-                    $('#input-persona-apellido-materno').val('');
-                    $('#input-persona-genero').val('');
-                    $('#input-persona-email').val('');
-                    $('#input-persona-fecha-nacimiento').val('');
-                    $('#input-persona-pais').val('');
-                } else {
-                    $('#input-persona-nombres').val(result.data[0].nombres);
-                    $('#input-persona-apellido-paterno').val(result.data[0].apellidoPaterno);
-                    $('#input-persona-apellido-materno').val(result.data[0].apellidoMaterno);
-                    $('#input-persona-genero').val(result.data[0].genero_desc);
-                    $('#input-persona-email').val(result.data[0].email);
-                    $('#input-persona-fecha-nacimiento').val(result.data[0].fechaNacimiento);
-                    $('#input-persona-pais').val(result.data[0].pais_desc);
-                }
-            }
-        });
-    }
+});
+
+$("#form-crud-button-cancel").click(function() {
+    $("#table-crud > tbody").empty();
 });
 
 $("#btnAgregarEtapa").click(function() {
@@ -301,7 +476,7 @@ $('#inputSearchCol1').on('keyup', function(){
             <div class="portlet">
 
                 <div class="portlet-heading bg-primary">
-                        <h3 class="portlet-title">Agregar</h3>
+                        <h3 class="portlet-title">Agregar / Quitar</h3>
                     <div class="portlet-widgets">
                         <a data-toggle="collapse" data-parent="#accordion1" href="#participantes">
                             <i class="mdi mdi-minus"></i>
@@ -351,92 +526,96 @@ $('#inputSearchCol1').on('keyup', function(){
                             </div>
 
                             <div class="row">
+                                <div class="col-md-12">
+                                    <hr/>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="form-crud-input-persona-identificador">Identificador<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="form-crud-input-persona-identificador" required placeholder="Identificador">
+                                        </div>
+                                </div>
+                                <div class="col-md-6">
+                                </div>                                    
+                                <div class="col-md-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label style="width:100%;">&nbsp;</label>
+                                            <button style="float:right;" type="submit" id="form-crud-button-add" name="button-add-participante"
+                                            class="btn btn-primary btn-rounded w-md waves-effect waves-light">Agregar</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label style="width:100%;">&nbsp;</label>
+                                            <button style="float:right;" type="submit" id="form-crud-button-remove" name="button-add-participante"
+                                            class="btn btn-warning btn-rounded w-md waves-effect waves-light">Quitar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+
+                                <div class="row">
                                     <div class="col-md-12">
-                                            <hr/>
-                            </div>
+                                        <hr/>
+                                    </div>
                                 </div>
 
+                                
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label style="width:100%;">Participantes modificados</label>
+                                    </div>
+                                </div>
 
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table id="table-crud" class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Identificador</th>
+                                                    <th>Nombres</th>
+                                                    <th>Ap. Paterno</th>
+                                                    <th>Ap. Materno</th>
+                                                    <th>Email</th>
+                                                    <th>Nacimiento</th>
+                                                    <th>Genero</th>
+                                                    <th>Pais</th>
+                                                    <th>Operaci&oacute;n</th>
+                                                    <th style="display:none;">op-code</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
 
-                            <div class="row">
-                                <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label for="input-persona-identificador">Identificador<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="input-persona-identificador" required placeholder="Identificador">
-                                        </div>
-                                </div>
-                                <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label for="input-persona-nombres">Nombres<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="input-persona-nombres" required placeholder="Nombres" readonly>
-                                        </div>
-                                </div>
-                                <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label for="input-persona-apellido-paterno">Apellido Paterno<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="input-persona-apellido-paterno" required placeholder="Apellido Paterno" readonly>
-                                        </div>
-                                </div>
-                                <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label for="input-persona-apellido-materno">Apellido Materno<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="input-persona-apellido-materno" required placeholder="Apellido Materno" readonly>
-                                        </div>
-                                </div>
-                                <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="input-persona-email">Email<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="input-persona-email" required placeholder="Email" readonly>
-                                            </div>
-                                    </div>
-                            </div>
-
-                            <div class="row">
-                                    <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label for="input-persona-fecha-nacimiento">Nacimiento<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="input-persona-fecha-nacimiento" required placeholder="Nacimiento" readonly>
-                                            </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                                <label for="input-persona-genero">Género<span class="text-danger">*</span></label>
-                                                <!--
-                                                component('components.Utils.listarCombos', data={id:"input-persona-genero-id", comboGenero:comboGenero, requerido:"true"})
-                                                <select class="form-control" id="input-persona-nacionalidad" required readonly>
-                                                    each(pais in pais_list)
-                                                        <option value="{{pais.codigo}}">{{pais.nombre}}</option>
-                                                    endeach
-                                                </select>
-                                                -->
-                                                <input type="text" class="form-control" id="input-persona-genero" required placeholder="Genero" readonly>
-                                            </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label for="input-persona-pais">Pais<span class="text-danger">*</span></label>
-                                                <!--
-                                                <select class="form-control" id="input-persona-nacionalidad" required readonly>
-                                                    each(pais in pais_list)
-                                                        <option value="{{pais.codigo}}">{{pais.nombre}}</option>
-                                                    endeach
-                                                </select>
-                                                -->
-                                                <input type="text" class="form-control" id="input-persona-pais" required placeholder="Pais" readonly>
-                                            </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                    </div>
-                                    <div class="col-md-2">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                    </div>                                    
+                                    <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label style="width:100%;">&nbsp;</label>
-                                                <button type="submit" style="float:right" id="button-add-participante" name="button-add-participante"
-                                                class="btn btn-primary btn-rounded w-md waves-effect waves-light">Agregar</button>
+                                                <button style="float:right;" type="submit" id="form-crud-button-confirm" name="form-crud-button-confirm"
+                                                class="btn btn-primary btn-rounded w-md waves-effect waves-light">Confirmar</button>
                                             </div>
                                         </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label style="width:100%;">&nbsp;</label>
+                                                <button style="float:right;" type="submit" id="form-crud-button-cancel" name="form-crud-button-cancel"
+                                                class="btn btn-warning btn-rounded w-md waves-effect waves-light">Cancelar</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-
-                                </form>
                         </div>
                 </div>
             </div>
