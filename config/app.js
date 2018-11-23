@@ -180,8 +180,8 @@ module.exports = {
     |--------------------------------------------------------------------------
     |
     | Using `console` driver for logging. This driver writes to `stdout`
-    | and `stderr`
-    |
+    | and `stderr`tests
+    |ss
     */
     console: {
       driver: 'console',
@@ -204,7 +204,7 @@ module.exports = {
       driver: 'file',
       name: 'adonis-app',
       filename: 'adonis.log',
-      level: 'info'
+      level: 'debug'
     }
   }
 }

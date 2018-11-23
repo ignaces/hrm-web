@@ -2,12 +2,20 @@
 
 
 @section('pluginsCss2')
+
+<link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+
+
         <link href="/assets/plugins/ede/infobox/infobox.css" rel="stylesheet" type="text/css" />
         <link href="/assets/plugins/ede/socialWidget/socialWidget.css" rel="stylesheet" type="text/css" />             
         <link href="/assets/plugins/ede/progressbar/progressbar.css" rel="stylesheet" type="text/css" />    
 @endsection
 
 @section('scripts')
+<script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+
+
+
     <script>
         $(document).ready(function () {
             $('#btnMatriz').on('click', function(e) {
@@ -63,11 +71,11 @@
             },
         }
     });
-
     </script>
 @endsection
 @section('content')
 
+{{ csrfField() }}
 
 <div id="modalHistorico" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="full-width-modalLabel" aria-hidden="true" style="display: none;">
                                 <div class="modal-dialog">
@@ -136,7 +144,7 @@
                 <div id="evaluado" class="panel-collapse collapse in">
                      <div class="portlet-body">
                         @if(idProceso=='bb319eeb-d22e-11e8-8771-bc764e100f2b')
-                            @!component('components.Desempeno.listaColaboradoresEtapa',lista=listaEval, params=params, angulo='EVAL', codComp='0')
+                            @!component('components.Desempeno.listaColaboradoresEtapa',lista=listaEval, params=params, angulo='EVAL', codComp='1')
                         @else
                             @!component('components.Desempeno.listaColaboradoresEtapa',lista=listaEval, params=params, angulo='EVAL')
                         @endif
