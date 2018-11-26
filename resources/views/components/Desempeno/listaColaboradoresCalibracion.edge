@@ -83,11 +83,15 @@
                                         @endif
                                     </td>
                                     <td>
-                                    <div class="text-center">{{tarea.tarea.resultadoEvaluacion}}</div>
+                                        @if(tarea.tarea.resultadoEvaluacion == undefined || tarea.tarea.resultadoEvaluacion == null)
+                                            <div class="text-center">No Disponible</div>
+                                        @else
+                                            <div class="text-center">{{tarea.tarea.resultadoEvaluacion}}</div> 
+                                        @endif
                                     </td>
                                     <td>
                                         <div class="col-md-12">
-                                            @if(tarea.tarea.resultadoEvaluacion == undefined)
+                                            @if(tarea.tarea.resultadoEvaluacion == undefined || tarea.tarea.resultadoEvaluacion == null)
                                                 <select id = "sel_{{tarea.tarea.idEvaluado}}">
                                                         <option value="No Disponible">No Disponible</option>
                                                 </select>
