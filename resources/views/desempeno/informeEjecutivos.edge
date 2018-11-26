@@ -300,7 +300,7 @@
                         </div> 
                         
                         
-                        @if(instrumento.resultadoCalibracion.nivel == undefined || instrumento.resultadoCalibracion.nivel == null)
+                        @if(instrumento.resultadoCalibracion.nivel == "No Disponible" || instrumento.resultadoCalibracion.nivel == undefined || instrumento.resultadoCalibracion.nivel == null)
                             @!component('components.Desempeno.widgetMatrizComparativaInformeEjecutivos',nivel=instrumento.resultadoGlobal.nivel)
                         @else
                             @!component('components.Desempeno.widgetMatrizComparativaInformeEjecutivos',nivel=instrumento.resultadoCalibracion.nivel) 
