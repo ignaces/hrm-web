@@ -230,7 +230,7 @@
                                         </tr>
                                         @each(angulo in eval.angulos)
                                             <tr role="row" class="odd">
-                                                @if(angulo.tipo == 'YO' || angulo.tipo == 'MI JEFE')
+                                                @if(angulo.tipo == 'YO' || angulo.tipo == 'MI JEFE' || angulo.tipo == 'MI EQUIPO')
                                                     <td style="text-align: left; vertical-align: middle;">{{angulo.tipo}}</td>
                                                 @else
                                                     <td style="text-align: left; vertical-align: middle;">**********</td>
@@ -240,7 +240,7 @@
                                                         @if(alt.alternativa!==null)
                                                             <td class="" tabindex="0" rowspan="1" colspan="1" style="width: 220px; text-align: center; vertical-align: middle; ">
                                                                 @if(alt.alternativa==$parent.feed.respuesta)
-                                                                <p>X</p>
+                                                                    <p>X</p>
                                                                 @endif
                                                             </td>
                                                         @endif
