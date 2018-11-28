@@ -11,6 +11,7 @@ module.exports = {
         var server = Env.get('API_SERVER', 'development')
         var alias = Env.get('HOSTALIAS', 'localhost')
         var clienteDefault = Env.get('CLIENTE_DEFAULT', null)
+        
         var cliente = hostname.split(".")[0]
         if(hostname==alias || hostname=='127.0.0.1'){
             cliente = "localhost";
@@ -20,6 +21,8 @@ module.exports = {
             cliente=clienteDefault;
         }
         obj.cliente = cliente;
+
+        //var idPersona = session.get('idPersona', 'fail')
         
         try{
             var result = await got(`${server}${method}`,
