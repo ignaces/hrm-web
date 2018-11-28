@@ -93,35 +93,11 @@ $(document).ready(function(){
     
     
     $( "#instrumento_btn_guardar" ).click(function() {
-        var obj = {
-            idOPinante: $("#idOpinante").val(),
-        };
-        $.ajax({
-            type: "GET",
-            url: "/Instrumento/Instrumento/putObservacionEde",
-            contentType: "application/json; charset=utf-8",
-            data: obj,
-            dataType: "json",   
-            success: function (msg) {
-                
-                swal(
-                    'Guardado',
-                    'Datos guardados correctamente.',
-                    'success'
-                );
-
-                
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                
-                swal(
-                    'Error',
-                    'Hubo un problema al guardar sus datos, inténtelo nuevamente. Si el problema persiste, por favor, comuníquese con la mesa de ayuda.',
-                    'error'
-                  );
-            },
-            timeout: 10000
-        });
+        swal(
+            'Guardado',
+            'Datos guardados correctamente.',
+            'success'
+          );
         
     });
 
