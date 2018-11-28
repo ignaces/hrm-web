@@ -13,6 +13,7 @@ module.exports = {
     //Administracion
     Menu:                     ['./client/src/Administracion/menu.js'],
     RegistrarPersona:         ['./client/src/Administracion/registrarPersona.js'],
+    EvaluadorMasivo:         ['./client/src/Administracion/evaluadorMasivo.js'],
     //Core
     CoreNetwork:              ['./client/src/Core/network.js'],
     //Ede
