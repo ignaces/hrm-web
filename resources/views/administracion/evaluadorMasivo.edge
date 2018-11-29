@@ -1,5 +1,9 @@
 @layout('layouts/horizontal')
 
+@section('pluginsCss2')
+    <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+@endsection 
+
 @section('scripts')
     <script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script>
 
@@ -9,18 +13,26 @@
 
     <!--Echart Chart-->
     <script type="text/javascript" src="/assets/plugins/echart/echarts-all.js"></script>
-
-    <script type="text/javascript" src="/assets/plugins/xlsx/xlsx.full.min.js"></script>
+    
     <script src="/assets/js/dist/evaluadorMasivo.min.js"></script>
+    <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+
     <!--Leer XLS-->
+    <script type="text/javascript" src="/assets/plugins/xlsx/xlsx.full.min.js"></script>
     <script>
-        
         var oFileIn;
         var oJS;
         var comCarga = new Vue({
             el: '#mCarga',
             data: {
                 cargaArchivo: []
+            }
+        });
+
+        var comResp = new Vue({
+            el: '#mResp',
+            data: {
+                respArchivo: []
             }
         });
 
@@ -61,7 +73,13 @@
                         });                    
                     }
                 };
-                comCarga.cargaArchivo=c;
+                comResp.respArchivo=[];
+
+                if(c.length > 0) {
+                    comCarga.cargaArchivo=c;
+                } else{
+                    comCarga.cargaArchivo=[];
+                }
             };
                 // Tell JS To Start Reading The File.. You could delay this if desired
             reader.readAsBinaryString(oFile);
@@ -71,7 +89,7 @@
 @endsection  
 
 @section('content')
-    @!component('components.Core.botonera')
+    <!--@!component('components.Core.botonera')-->
     <div class="row">
         <div class="col-lg-12 col-md-12">
             <div class="portlet">
@@ -82,7 +100,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="card-box">
-                            <h4>Seleccion de Etapa<h4>
+                            <h4>Seleccion de Etapa</h4>
                             <select  class="form-control r_etapa" >
                                 <option value="" disabled selected>Seleccione una Etapa...</option>
                                 @each(etapa in etapasProceso)
@@ -120,12 +138,13 @@
                         </form>
                     </div>
                 </div>
-                <div class="card-box table-responsive" id="mCarga">
+                <div class="card-box table-responsive" id="mCarga" v-if="cargaArchivo.length > 0">
+                    <h4>Archivo a Cargar</h4>
                     <table id="myTable" class="table table-striped table-bordered dataTable no-footer m-0 table-colored table-primary" role="grid" aria-describedby="datatable_info">
                         <thead>
                             <tr role="row">
-                                <th class="" tabindex="0" rowspan="2" colspan="1" style="width: 180px; vertical-align: middle;">Evaluador</th>
                                 <th class="" tabindex="0" rowspan="2" colspan="1" style="width: 180px; vertical-align: middle;">Evaluado</th>
+                                <th class="" tabindex="0" rowspan="2" colspan="1" style="width: 180px; vertical-align: middle;">Evaluador</th>
                                 <th class="" tabindex="0" rowspan="2" colspan="1" style="width: 180px; vertical-align: middle;">Angulo</th>
                                 <th class="" tabindex="0" rowspan="2" colspan="1" style="width: 180px; vertical-align: middle;">Perfil</th>
                             </tr>
@@ -136,6 +155,25 @@
                                 <td style="text-align: left; vertical-align: middle;">@{{carga.identificadorEvaluador}}</td>
                                 <td style="text-align: left; vertical-align: middle;">@{{carga.codigoAngulo}}</td>
                                 <td style="text-align: left; vertical-align: middle;">@{{carga.perfil}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-box table-responsive" id="mResp" v-if="respArchivo.length > 0">
+                    <h4>Log Carga</h4>
+                    <table id="myTable" class="table table-striped table-bordered dataTable no-footer m-0 table-colored table-primary" role="grid" aria-describedby="datatable_info">
+                        <thead>
+                            <tr role="row">
+                                <th class="" tabindex="0" rowspan="2" colspan="1" style="width: 180px; vertical-align: middle;">Evaluado</th>
+                                <th class="" tabindex="0" rowspan="2" colspan="1" style="width: 180px; vertical-align: middle;">Evaluador Asignado</th>
+                                <th class="" tabindex="0" rowspan="2" colspan="1" style="width: 180px; vertical-align: middle;">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="carga in respArchivo">
+                                <td style="text-align: left; vertical-align: middle;">@{{carga.identificadorEvaluado}}</td>
+                                <td style="text-align: left; vertical-align: middle;">@{{carga.identificadorEvaluador}}</td>
+                                <td style="text-align: left; vertical-align: middle;">@{{carga.mensaje}}</td>
                             </tr>
                         </tbody>
                     </table>
