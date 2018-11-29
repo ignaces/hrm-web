@@ -10,18 +10,33 @@ $(document).ready(function() {
 
     $( ".bFinalizarCarga" ).click(function() {
         var id = $(this).attr('idpro');
-        carga(id);
+
+        swal({
+            title: '¿Esta seguro realizar la Carga?',
+            text: "Una vez ejecutada la carga los datos seran modificados",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, Cargar',
+            cancelButtonText: 'Cancelar'
+        }).then(function(result)  {
+            if (result) {
+                carga(id);
+            }
+        });
     });
 
 });
 
-function carga(id){
+var carga = function(id){
     var obj = {
         idProceso:id,
         idEtapa:selectedOptionvalue,
         jsonEvaluados:comCarga.cargaArchivo
     };
 
+    $("#hrm_loadingPanel").show();
     $.ajax({
         type: "GET",
         url: "/Administracion/Administracion/cargaEvaluadorMasivo",
@@ -29,9 +44,28 @@ function carga(id){
         data: obj,
         dataType: "json",   
         success: function (msg) {
+            var b = [];
 
-            alert(msg.mensaje);
+            for (var element in msg.mensaje) {
+                var a = msg.mensaje;
 
+                b.push({
+                    identificadorEvaluado:a[element].identificadorEvaluado,
+                    identificadorEvaluador:a[element].identificadorEvaluador,
+                    mensaje:a[element].mensaje
+                }); 
+            }
+
+            comResp.respArchivo=b;
+            comCarga.cargaArchivo= [];
+
+            swal({
+                title:'Finalizado',
+                text:'Carga masiva realizada satisfactoriamente.',
+                type:'success'
+            });
+
+            $("#hrm_loadingPanel").hide();
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) { 
             
@@ -43,6 +77,5 @@ function carga(id){
             $("#hrm_loadingPanel").hide();
         },
         timeout: 10000
-    });        
-
+    });
 }
