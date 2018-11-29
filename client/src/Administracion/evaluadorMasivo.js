@@ -30,52 +30,78 @@ $(document).ready(function() {
 });
 
 var carga = function(id){
-    var obj = {
-        idProceso:id,
-        idEtapa:selectedOptionvalue,
-        jsonEvaluados:comCarga.cargaArchivo
-    };
 
-    $("#hrm_loadingPanel").show();
-    $.ajax({
-        type: "GET",
-        url: "/Administracion/Administracion/cargaEvaluadorMasivo",
-        contentType: "application/json; charset=utf-8",
-        data: obj,
-        dataType: "json",   
-        success: function (msg) {
-            var b = [];
-
-            for (var element in msg.mensaje) {
-                var a = msg.mensaje;
-
-                b.push({
-                    identificadorEvaluado:a[element].identificadorEvaluado,
-                    identificadorEvaluador:a[element].identificadorEvaluador,
-                    mensaje:a[element].mensaje
-                }); 
-            }
-
-            comResp.respArchivo=b;
-            comCarga.cargaArchivo= [];
-
-            swal({
-                title:'Finalizado',
-                text:'Carga masiva realizada satisfactoriamente.',
-                type:'success'
-            });
-
-            $("#hrm_loadingPanel").hide();
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) { 
-            
+    var carga = comCarga.cargaArchivo;
+    if (id == "" || id == undefined){
+        swal(
+            'Error',
+            'Proceso no Identificado.',
+            'error'
+        );
+    }else{
+        if (selectedOptionvalue == "" || selectedOptionvalue == undefined){
             swal(
                 'Error',
-                'Hubo un problema al guardar sus datos, inténtelo nuevamente. Si el problema persiste, por favor, comuníquese con la mesa de ayuda.',
+                'Etapa no Seleccionada.',
                 'error'
             );
-            $("#hrm_loadingPanel").hide();
-        },
-        timeout: 10000
-    });
+        } else{
+            if(carga.length == 0 || carga.length == undefined){
+                swal(
+                    'Error',
+                    'Archivo no Cargado.',
+                    'error'
+                );
+            } else{
+                var obj = {
+                    idProceso:id,
+                    idEtapa:selectedOptionvalue,
+                    jsonEvaluados:carga
+                };
+            
+                $("#hrm_loadingPanel").show();
+                $.ajax({
+                    type: "GET",
+                    url: "/Administracion/Administracion/cargaEvaluadorMasivo",
+                    contentType: "application/json; charset=utf-8",
+                    data: obj,
+                    dataType: "json",   
+                    success: function (msg) {
+                        var b = [];
+            
+                        for (var element in msg.mensaje) {
+                            var a = msg.mensaje;
+            
+                            b.push({
+                                identificadorEvaluado:a[element].identificadorEvaluado,
+                                identificadorEvaluador:a[element].identificadorEvaluador,
+                                mensaje:a[element].mensaje
+                            }); 
+                        }
+            
+                        comResp.respArchivo=b;
+                        comCarga.cargaArchivo=[];
+            
+                        swal({
+                            title:'Finalizado',
+                            text:'Carga masiva realizada satisfactoriamente.',
+                            type:'success'
+                        });
+            
+                        $("#hrm_loadingPanel").hide();
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                        
+                        swal(
+                            'Error',
+                            'Hubo un problema al guardar sus datos, inténtelo nuevamente. Si el problema persiste, por favor, comuníquese con la mesa de ayuda.',
+                            'error'
+                        );
+                        $("#hrm_loadingPanel").hide();
+                    },
+                    timeout: 10000
+                });
+            }
+        }
+    }    
 }
