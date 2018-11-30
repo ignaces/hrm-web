@@ -86,11 +86,19 @@ var showErrors = function(errors){
     var comEmpresas = new Vue({
         el: '#empresasEncuestas',
         data: {
+            search:'',
             empresas: []
         },
         directives:{
             scroll:{
                 componentUpdated:scrollInit
+            }
+        },
+        computed: {
+            filteredList() {
+            return this.empresas.filter(empresa => {
+                return empresa.nombre.toLowerCase().includes(this.search.toLowerCase())
+            })
             }
         },
         methods:{

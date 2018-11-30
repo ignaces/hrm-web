@@ -44,7 +44,7 @@ class Encuesta {
                 
 
                 var encuesta = request.input("encuesta");
-                var encuestas = await data.execApiPost(request.hostname(),'/Engagement/Encuesta/addAplicacion',{});  
+                var encuestas = await data.execApiPost(request.hostname(),'/Engagement/Encuesta/addAplicacion',{encuesta:encuesta});  
                 
         }
 
