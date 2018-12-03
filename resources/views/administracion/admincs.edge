@@ -28,28 +28,28 @@
             </div>
             <div id="bg-primary" class="panel-collapse collapse in">
                 <div class="portlet-body">
-                    
-                        <div class="table-responsive">
-                                <table class="table m-0 table-colored table-primary">
-                                    <thead>
+                    <div class="table-responsive">
+                        <table class="table m-0 table-colored table-primary">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>Proceso</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                @each(proceso in datosProcesosActivos)
                                     <tr>
-                                        <th></th>
-                                        <th>Proceso</th>
-                                        <th></th>
+                                        <td style="text-align: center;"><img src='{{proceso.proceso_imagen}}' class="rounded-circle" width="40"></td>
+                                        <td>{{proceso.proceso_nombre}}</td>
+                                        <td style="text-align: right;"><a class="btn btn-primary" href="verPersonasProceso?idProceso={{proceso.idProceso}}" target="_blank"> Ver Participantes</a></td>
+                                        <td style="text-align: right;"><a class="btn btn-primary" href="/Administracion/Administracion/evaluadorMasivo?idProceso={{proceso.idProceso}}" target="_blank"> Prueba evaluadorMasivo</a></td>
                                     </tr>
-                                    </thead>
-                                    <tbody>
-                                    @each(proceso in datosProcesosActivos)
-                                        <tr>
-                                            <td style="text-align: center;"><img src='{{proceso.proceso_imagen}}' class="rounded-circle" width="40"></td>
-                                            <td>{{proceso.proceso_nombre}}</td>
-                                            <td style="text-align: right;"><a class="btn btn-primary" href="verPersonasProceso?idProceso={{proceso.idProceso}}" target="_blank"> Ver Participantes</a></td>
-                                        </tr>
-                                    @endeach
-                                    </tbody>
-                                </table>
-                            </div>
-
+                                @endeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

@@ -38,7 +38,7 @@
                     
                         <div class="row">
                             @each(item in procesosActivos)
-                                <a href="/Administracion/acreditacion/personas?idProceso={{item.idProceso}}" >
+                                <a href="/Administracion/Acreditacion/personas?idProceso={{item.idProceso}}" >
                                     @!component('components.Acreditacion.procesosAcre',titulo = "Acreditación", proceso=item)
                                 </a>
                             @endeach
