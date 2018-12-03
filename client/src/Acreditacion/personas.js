@@ -79,7 +79,7 @@ $(document).ready(function () {
 
             $.ajax({
                 type: "GET",
-                url: "/Administracion/acreditacion/addPersonaProceso",
+                url: "/Administracion/Acreditacion/addPersonaProceso",
                 contentType: "application/json; charset=utf-8",
                 data: obj,
                 dataType: "json", 
@@ -92,7 +92,7 @@ $(document).ready(function () {
                         confirmButtonText: "Aceptar",
                     }).then( function (result){
                         
-                        location.href = "/Administracion/acreditacion/personas?idProceso="+$("#idProceso").val();
+                        location.href = "/Administracion/Acreditacion/personas?idProceso="+$("#idProceso").val();
                     })
                 }
             });

@@ -2,13 +2,13 @@
 const api = use('App/Utils/Data');
 
 class EdeEtapaTareaController {
-    async getByEdeEtapaId({request, response}) {
+    async getBy$EdeEtapaId({request, response}) {
         var obj = {
             "ede_etapa_id" : request.input("ede_etapa_id")
         };
         try {
             var ede_etapa_tarea_list_temp = await api.execApi(
-                request.hostname(),'/Entity/EdeEtapaTareaController/getByEdeEtapaId', obj);
+                request.hostname(),'/Entity/EdeEtapaTareaController/getBy$EdeEtapaId', obj);
             var ede_etapa_tarea_list = ede_etapa_tarea_list_temp.body.data;
             return ede_etapa_tarea_list;
         } catch (e) {
