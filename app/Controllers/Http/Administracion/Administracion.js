@@ -22,6 +22,38 @@ class Administracion {
         return view.render('/administracion/administrador');
     }
 
+    async evaluadorMasivo  ({ view,request, response, auth }) {
+        
+        var idProceso = request.input("idProceso")
+
+        var objEtapasProceso = {
+            "idProceso":idProceso,
+            "idEtapa":""
+        };
+
+        var resultEtapasProceso=await api.execApi(request.hostname(),'/Desempeno/Proceso/getEtapas',objEtapasProceso);
+        var etapasProceso =resultEtapasProceso.body.data;
+
+        return view.render('/administracion/evaluadorMasivo',{etapasProceso,idProceso});
+    }
+
+    async cargaEvaluadorMasivo({request,response}){
+
+        var idProceso = request.input('idProceso');
+        var idEtapa = request.input('idEtapa');
+        var json = request.input('jsonEvaluados');
+
+        var obj = {
+            "idProceso":idProceso,
+            "idEtapa":idEtapa,
+            "json":JSON.stringify(json)
+        };
+
+        var resultCarga = await api.execApi(request.hostname(),'/Core/Administracion/cargaEvaluadorMasiva',obj);
+
+        return {mensaje:resultCarga.body.mensaje}
+    }
+
     async admincs  ({ view,request, response, auth }) {
         
         ////console.log(auth.user.username)
