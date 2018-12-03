@@ -36,7 +36,7 @@ $(document).ready(function () {
             
             $.ajax({
                 type: "GET",
-                url: "/administracion/acreditacion/setOpinanteEvaluado",
+                url: "/Administracion/Acreditacion/setOpinanteEvaluado",
                 contentType: "application/json; charset=utf-8",
                 data: obj,
                 dataType: "json", 
