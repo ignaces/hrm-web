@@ -111,8 +111,24 @@ class ParticipanteController {
         return result_json;
     }
 
-    async addParticipante({view, request, response}) {
-        return '{"result":"ok"}';
+    async createDelete({request, response}) {
+        var result_json = null;
+        try {
+            var obj = request.input('participantes');
+            for (var index = 0; index < obj.length; ++index) {
+                if (obj[index].operacion == 'CREATE') {
+                    var result = await api.execApi(
+                        request.hostname(),'/Desempeno/Participante/create', obj[index]);
+                }
+                if (obj[index].operacion == 'DELETE') {
+                    var result = await api.execApi(
+                        request.hostname(),'/Desempeno/Participante/delete', obj[index]);
+                }
+            }
+        } catch (e) {
+
+        }
+        return result_json;
     }
 
     
