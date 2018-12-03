@@ -1,5 +1,9 @@
 <div class="row" id="empresasEncuestas" v-scroll><!--INICIO FILA EMPRESAS-->
-            <div class="col-md-6 col-lg-3" v-for="empresa in empresas"><!--INICIO TARJETA EMPRESA-->
+ <div v-if="filteredList.length>0" class="search-wrapper">
+    <input type="text" v-model="search" placeholder="Buscar.."/>
+
+  </div>
+            <div class="col-md-6 col-lg-6" v-for="empresa in filteredList"><!--INICIO TARJETA EMPRESA-->
                         <div class="company-card card-box">
                         <div class="dropdown pull-right">
                                 <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
@@ -23,31 +27,7 @@
 
                             <hr>
                             <div class="row color-scroll" style="height: 150px;" v-if="empresa.encuestas.length>0">
-                            <!--INICIO TARJETA ENCUESTA-->
-                            <div class="card-box m-l-10 m-r-10"  v-for="encuesta in empresa.encuestas"  >
-                              <h4 class="header-title m-t-0">@{{encuesta.nombre}}</h4>
-
-                                <div class="text-center">
-                                    <div class="row">
-                                        <div class="col-xs-4" v-for="estado in encuesta.estados">
-                                            <div class="m-t-20 m-b-20">
-                                                <p class="text-uppercase font-11 font-600">@{{estado.texto}}</p>
-                                                <h5 :class="'m-b-0 text-' + estado.class">@{{estado.porcentaje}}%  (@{{estado.cantidad}})</h5>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                    <div class="row">
-                                        
-                                        <button v-on:click="getExcel(encuesta.id)" class="btn btn-purple waves-effect waves-light"> <i class="fa fa-file-excel-o"></i> <span>Avance</span> </button>
-                                        <button v-on:click="getExcelResultados(encuesta.id)" class="btn btn-success waves-effect waves-light"> <i class="fa fa-file-excel-o"></i> <span>Resultados</span> </button>
-                                        <button v-on:click="ver(encuesta.id)" class="btn btn-primary waves-effect waves-light"> <i class="fa fa-eye"></i> <span>Ver Más</span> </button>
-                                    </div>
-                                </div>
-                            
-                            </div>
-                            <!--FIN TARJETA ENCUESTA-->
-                            
+                                @!component('engagement.components.cardEncuesta')
                             </div>
                             
 

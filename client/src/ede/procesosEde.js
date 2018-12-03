@@ -18,7 +18,7 @@ var initTiny = function(){
                        formData.append('file', blobInfo.blob(), blobInfo.filename());
                        $.ajax({
                            type: "POST",
-                           url: "http://hrmassets.enovum.cl/Files/File/upload",
+                           url: "https://hrmassets.enovum.cl/Files/File/upload",
                            contentType: "application/json; charset=utf-8",
                            data: formData,
                            processData: false,

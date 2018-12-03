@@ -5,7 +5,7 @@
     <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
        <script src="/assets/plugins/bootstrap-filestyle/js/bootstrap-filestyle.min.js" type="text/javascript"></script>
     <script src="/assets/plugins/tinymce/tinymce.min.js"></script>
-    <script src=/assets/js/dist/configNotificacion.min.js></script>
+    <script src=/assets/js/dist/configNotificacion.min.js?v=1></script>
    
 @endsection
 
@@ -21,7 +21,7 @@
         {nombre:"Notificacion",activa:true}
     ])
         {{ csrfField() }}
-        <input type="hidden" id="idNotificacion" value="{{notificacion.id}}"
+        <input type="hidden" id="idNotificacion" value="{{notificacion.id}}" />
        <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-border panel-primary">

@@ -1,0 +1,37 @@
+<div class="card-box m-l-10 m-r-10"  v-for="encuesta in empresa.encuestas"  >
+    <h4 class="header-title m-t-0">@{{encuesta.nombre}}</h4>
+
+    <div class="text-center">
+        <div class="row">
+            <div class="col-xs-4" v-for="estado in encuesta.estados">
+                <div class="m-t-20 m-b-20">
+                    <p class="text-uppercase font-11 font-600">@{{estado.texto}}</p>
+                    <h5 :class="'m-b-0 text-' + estado.class">@{{estado.porcentaje}}%  (@{{estado.cantidad}})</h5>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="row">
+            <div class="btn-group m-b-10">                
+            <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle waves-effect" data-toggle="dropdown" aria-expanded="false"> Reportes <span class="caret"></span> </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" v-on:click="getExcel(encuesta.id)">Avance</a></li>
+                        <li><a href="#" v-on:click="getExcelResultados(encuesta.id)" >Descarga resultados</a></li>
+                    </ul>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle waves-effect" data-toggle="dropdown" aria-expanded="false"> Acciones <span class="caret"></span> </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Editar</a></li>
+                        <li><a href="#">Agregar Personas</a></li>
+                        <li><a href="#">Eliminar</a></li>
+                    </ul>
+                </div>
+                <button type="button" v-on:click="ver(encuesta.id)" class="btn btn-default waves-effect">Ver más</button>
+            </div>
+        </div>
+    </div>
+
+</div>
