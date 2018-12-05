@@ -1,7 +1,12 @@
 
 $(document).ready(function () {
     $(".inputCumplimiento").blur(function(input){
-        
+        if(input.target.value>120){
+            input.target.value=120;
+        }
+        if(input.target.value<0){
+            input.target.value=0;
+        }
         var obj ={
             id:input.target.id,
             value:input.target.value
