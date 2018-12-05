@@ -20,6 +20,7 @@ module.exports = {
     etapasProceso:            ['./client/src/ede/etapasProceso.js'],
     procesosEde:              ['./client/src/ede/procesosEde.js'],
     metaFeedbackPublicar:     ['./client/src/ede/metaFeedbackPublicar.js'],
+    metaEvaluar:              ['./client/src/ede/metaEvaluar.js'],
     metaFeedbackConfirmar:    ['./client/src/ede/metaFeedbackConfirmar.js'],
     //participantes:            ['./client/src/ede/participantes.js'],
     //Encuesta
