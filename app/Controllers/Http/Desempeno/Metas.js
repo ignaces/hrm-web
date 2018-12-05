@@ -252,7 +252,8 @@ class Meta {
         return view.render('desempeno/metas/evaluacion/evaluar', {dataVista, datosTarea, Perso, listaEval,dataMetas,dataColumnas,dataObservacion,textoObservacion, instrumento: instrumento});
     }
 
-    async saveCumplimiento({request, response,session}) {
+    async saveCumplimiento({request, response,session}) 
+    {
         try {
                 var idMeta= request.input("id");
                 var valor= request.input("value");
