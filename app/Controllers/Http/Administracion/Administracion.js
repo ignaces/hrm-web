@@ -10,7 +10,7 @@ var safeUrl = require('safe-url');
 var wget = require('node-wget-promise');
 const readFile = Helpers.promisify(fs.readFile);
 var Enumerable = require('linq');
-
+const User = use('App/Models/User');
 
 class Administracion {
      administrador  ({ view,request, response, auth }) {
@@ -93,6 +93,8 @@ class Administracion {
 
         var idProceso = request.input("idProceso");
         var idPersona = request.input("idPersona");
+        var msgOK = request.input("msgReset");
+        
         var linkVolver = '/administracion/Administracion/verPersonasProceso?idProceso='+idProceso;
         var obj = {
             "idProceso":idProceso,
@@ -143,7 +145,7 @@ class Administracion {
         var datosPersonasEvaluadoras = personasEvaluadoras.body.data; 
 
         //console.log(setClasificacionesPersona);
-        return view.render('/administracion/personaProceso', {datosEvaluador,datosPersonasProceso,datosEvaluadorProceso,datosClasificacionesPadres, datosClasificacionesHijos, setClasificacionesPersona, idProceso,linkVolver, datosPersonasEvaluadoras });
+        return view.render('/administracion/personaProceso', {datosEvaluador,datosPersonasProceso,datosEvaluadorProceso,datosClasificacionesPadres, datosClasificacionesHijos, setClasificacionesPersona, idProceso,linkVolver, datosPersonasEvaluadoras, msgReset:msgOK });
     }
 
     async resetearPassPorIdPersona ({ view,request, response, auth }) 
@@ -151,21 +153,37 @@ class Administracion {
         var idPersona = request.input("idPersona");
         var idProceso = request.input("idProceso");
         var origen = request.input("origen");
-
+        var identificador = request.input("identificador");
+        var idUser = request.input("idUser");
+        //console.log(identificador)
         var obj = {
             "idPersona":idPersona
         };
 
-        var resultPersonasProceso =await api.execApi(request.hostname(),'/Persona/Persona/resetPassByPersonaId',obj);
+        //var resultPersonasProceso =await api.execApi(request.hostname(),'/Persona/Persona/resetPassByPersonaId',obj);
         
+        
+        var user = await User.find(idUser);
+        user.password = identificador;
+        //console.log(user.username);
+        //console.log(user.password);
+        await user.save();
+        
+        var updRequiereCambioClave = await api.execApi(request.hostname(),'/Core/Users/updateRequiereCambioClave',{idUser:idUser, estado:1});
+
         if(origen == "ficha")
         {
-            response.redirect('/Administracion/Administracion/verDatosPersonaProceso?idProceso='+idProceso+'&idPersona='+idPersona);
+            response.redirect('/Administracion/Administracion/verDatosPersonaProceso?msgReset=OK&idProceso='+idProceso+'&idPersona='+idPersona);
         }
         else
         {
             response.redirect('/Administracion/Administracion/verPersonasProceso?idProceso='+idProceso);
         }
+
+        
+        //session.clear();
+        //await auth.logout()
+
         
     }
 
@@ -174,7 +192,7 @@ class Administracion {
         var idPersona = request.input("idPersona");
         var idProceso = request.input("idProceso");
         var idEvaluacion = request.input("idEvaluacion");
-        
+         
         var obj = {
             "idProceso":idProceso,
             "idEvaluacion": idEvaluacion

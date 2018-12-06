@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
     $(".inputCumplimiento").blur(function(input){
         if(input.target.value>120){
@@ -7,9 +6,11 @@ $(document).ready(function () {
         if(input.target.value<0){
             input.target.value=0;
         }
+        var idOpinante = $("#idOpinante").val();
         var obj ={
             id:input.target.id,
-            value:input.target.value
+            value:input.target.value,
+            idOpinante:idOpinante
         }
         
         $.ajax({    
@@ -25,11 +26,7 @@ $(document).ready(function () {
     });
     $("#btnGrabar").click(function(){
 
-        var obj = obtenerDatos(false);
-        var url = "/Desempeno/Accion/addObservacionAccion";
-        var redirect = "/Desempeno/Accion/publicar?idProceso="+obj.idProceso+"&idEtapa="+obj.idEtapa+"&idAccionPersona="+obj.idAccionPersona+"&codigoActor="+obj.codigoActor
-        var mensajeExito = 'La Observación se guardó correctamente';
-        sendRequest(obj,url,redirect,mensajeExito);
+        
     });
 
     $("#btnGrabarFinalizar").click(function(){
