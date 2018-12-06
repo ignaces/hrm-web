@@ -192,7 +192,7 @@ class Administracion {
         var idPersona = request.input("idPersona");
         var idProceso = request.input("idProceso");
         var idEvaluacion = request.input("idEvaluacion");
-        
+         
         var obj = {
             "idProceso":idProceso,
             "idEvaluacion": idEvaluacion
