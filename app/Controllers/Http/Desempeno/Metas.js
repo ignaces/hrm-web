@@ -257,12 +257,12 @@ class Meta {
         try {
                 var idMeta= request.input("id");
                 var valor= request.input("value");
-                var data = session.get('dataVista')
+                var idOpinante = request.input("idOpinante");
                 
                 var obj = {
                     "idMeta":idMeta,
                     "valor":valor,
-                    "idOpinante":data.idOpinante
+                    "idOpinante":idOpinante
                 };
         
                 var result = await api.execApi(request.hostname(),'/Desempeno/Metas/saveCumplimiento',obj);  

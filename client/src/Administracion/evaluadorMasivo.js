@@ -84,7 +84,7 @@ var carga = function(id){
             
                         swal({
                             title:'Finalizado',
-                            text:'Carga masiva realizada satisfactoriamente.',
+                            text:'Carga masiva realizada, el estatus se muestra a continuación.',
                             type:'success'
                         });
             
