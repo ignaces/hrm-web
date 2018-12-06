@@ -93,7 +93,7 @@ class Administracion {
 
         var idProceso = request.input("idProceso");
         var idPersona = request.input("idPersona");
-        var linkVolver = '/administracion/Administracion/verPersonasProceso?idProceso='+idProceso;
+        var linkVolver = '/Administracion/Administracion/verPersonasProceso?idProceso='+idProceso;
         var obj = {
             "idProceso":idProceso,
             "idPersona":idPersona,
