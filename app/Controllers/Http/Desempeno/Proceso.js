@@ -481,7 +481,11 @@ class Proceso {
 
         ////(result2);
         var promedioGeneral = result3;
+        /*console.log(promedioGeneral.body)
         ////(promedioGeneral.body[0].codigoActor)
+        promedioGeneral.body.forEach(e => {
+            console.log(e.competencia);
+        });*/
 
         //Menu Contextual
         var objMenuContextual = {
@@ -566,6 +570,7 @@ class Proceso {
             };
             var result3 = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getPromedioGeneral',objPromedio);
 
+            //console.log(result3)
             ////(result2);
             var codigoAct = "";
             var promedioGeneral;
@@ -574,7 +579,20 @@ class Proceso {
             
             try{
                 promedioGeneral = result3;
-
+                
+                var objNiveles = {
+                    "idOpinante":idOpinante,
+                    "resultado": 2.3333333,
+                    "idProceso": idProceso
+                };
+                //console.log(objNiveles)
+                var result4 = ''//await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getNivelPromedioCompetencia',objNiveles);
+                //console.log(result4.body[0].nivel)
+                /*
+                console.log(e.competencia);
+                console.log(request.hostname() + '/Evaluacion/Instrumento/getNivelPromedioCompetencia')
+                
+*/
                 if(promedioGeneral.body[0].codigoActor != undefined)
                 {
                     codigoAct = promedioGeneral.body[0].codigoActor
@@ -600,6 +618,27 @@ class Proceso {
     async evalComportamientosEjecutivosEquipo ({view,request, response}) {
         return view.render('desempeno/evalComportamientosEjecutivosEquipo');
     }
+
+    async getNivelPromedioCompetencia({request,response, session}){
+        var idOpinante  = request.input("idOpinante");
+        var resultado  = request.input("resultado");
+        var objNiveles = {
+            "idOpinante":idOpinante,
+            "resultado": resultado
+        };
+
+        //console.log(objNiveles)
+        try{
+            var result =  await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getNivelPromedioCompetencia',objNiveles);
+            return result.body.data[0];
+        }
+        catch(e)
+        {
+            console.log(e)
+        }
+       // console.log (result.body[0].nivel)
+        //return result.body;
+    } 
 
 }
 
