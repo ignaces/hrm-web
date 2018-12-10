@@ -86,7 +86,7 @@
 
 <script>
     $(document).ready(function(){
-    
+        
     tinymce.init({
         selector: "textarea",  // change this value according to your HTML
         toolbar: false,
@@ -430,6 +430,37 @@
 
     /*$('.table-responsive').DataTable();*/
 
+    $("#tblPromedio tbody tr").each(function (index) {
+        $(this).children("td").each(function (index2) {
+            //alert($(this).text());
+            //{
+//alert($("#idOpinante").val());
+            //}
+            var objNiveles = {
+                "idOpinante":$("#idOpinante").val(),
+                "resultado": $(this).text()
+            };
+            var nombreNivel = "";
+            if(!isNaN($(this).text())){
+                $.ajax({
+                    async: false,
+                    type: "GET",
+                    url: "/Desempeno/Proceso/getNivelPromedioCompetencia",
+                    contentType: "application/json; charset=utf-8",
+                    data: objNiveles,
+                    dataType: "json",   
+                    success: function (msg) {
+                        //$(this).html("sdsfsdf")  
+                        //alert(msg.nivel)
+                        nombreNivel = msg.nivel;
+                    }
+
+                });
+                    $(this).html(nombreNivel)  
+            }
+
+        });
+    });
 }); 
     </script>
 @endsection
