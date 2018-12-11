@@ -1,0 +1,428 @@
+@layout('layouts/horizontal')
+
+
+@section('pluginsCss2')
+        <link href="/assets/plugins/ede/infobox/infobox.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/plugins/ede/socialWidget/socialWidget.css" rel="stylesheet" type="text/css" />             
+         <link href="/assets/plugins/ede/progressbar/progressbar.css" rel="stylesheet" type="text/css" />   
+         
+         <style>
+            .panel-heading{
+                background-color: #ffa91c !important;
+            }
+            .table-colored-bordered.table-bordered-primary thead th{
+                background-color: #ffa91c !important;
+            }
+            
+            .table-colored-bordered.table-bordered-primary
+            {
+                border: 2px solid #ffa91c !important;
+            }
+        </style>
+@endsection
+
+
+@section('scripts')
+    <script>
+    $(document).ready(function(){
+        //alert("{{idOpinante}}")
+        $("#tblPromedio tbody tr").each(function (index) {
+            $(this).children("td").each(function (index2) {
+                var objNiveles = {
+                    "idOpinante":"{{idOpinante}}",
+                    "resultado": $(this).text()
+                };
+                var nombreNivel = "";
+                if(!isNaN($(this).text())){
+                    $.ajax({
+                        async: false,
+                        type: "GET",
+                        url: "/Desempeno/Proceso/getNivelPromedioCompetencia",
+                        contentType: "application/json; charset=utf-8",
+                        data: objNiveles,
+                        dataType: "json",   
+                        success: function (msg) {
+                            //$(this).html("sdsfsdf")  
+                            //alert(msg.nivel)
+                            nombreNivel = msg.nivel;
+                        }
+
+                    });
+                    $(this).html(nombreNivel)  
+                }
+            });
+        });
+
+        $("#tblPromedioComp tbody tr").each(function (index) {
+            $(this).children("td").each(function (index2) {
+                var objNiveles = {
+                    "idOpinante":"{{idOpinante}}",
+                    "resultado": $(this).text()
+                };
+                var nombreNivel = "";
+                if(!isNaN($(this).text())){
+                    $.ajax({
+                        async: false,
+                        type: "GET",
+                        url: "/Desempeno/Proceso/getNivelPromedioCompetencia",
+                        contentType: "application/json; charset=utf-8",
+                        data: objNiveles,
+                        dataType: "json",   
+                        success: function (msg) {
+                            //$(this).html("sdsfsdf")  
+                            //alert(msg.nivel)
+                            nombreNivel = msg.nivel;
+                        }
+
+                    });
+                    $(this).html(nombreNivel)  
+                }
+            });
+        });
+
+          /*("#tblPromedio tbody tr").each(function (index) {
+              $(this).children("td").each(function (index2) {
+                var objNiveles = {
+                    "idOpinante":$("#idOpinante").val(),
+                    "resultado": $(this).text()
+                };
+                var nombreNivel = "";
+                if(!isNaN($(this).text())){
+                    $.ajax({
+                        async: false,
+                        type: "GET",
+                        url: "/Desempeno/Proceso/getNivelPromedioCompetencia",
+                        contentType: "application/json; charset=utf-8",
+                        data: objNiveles,
+                        dataType: "json",   
+                        success: function (msg) {
+                            //$(this).html("sdsfsdf")  
+                            //alert(msg.nivel)
+                            nombreNivel = msg.nivel;
+                        }
+
+                    });
+                    $(this).html(nombreNivel)  
+                }
+
+                  });
+              });*/
+
+    });
+    </script>
+     
+@endsection
+@section('content')
+<div class="row" >
+        <div class="col-md-2">
+    
+                @!component('components.Desempeno.widgetInfoEtapa',datos=etapa,nombreProceso=dataProceso.nombre)
+  
+  <div class="row">
+        @!component('components.Desempeno.widgetUser',datos=data,datamenu=datosMenu,persona=PersonaEde)
+  </div>
+  
+        </div>
+
+        
+
+                <div class="col-md-10">
+                        @!component('components.Core.botonera',botones=[{showVolver:"0", texto:"PDF", icono:"fa fa-file-pdf-o", link:"/Desempeno/Informe/getPdf?idProceso=" + idProceso + "&idEtapa=" + idEtapa + "&idPersona="+persona[0].id+"&idAccionPersona="+idAccionPersona+"&codigoActor="+codigoActor+"&idOpinante="+idOpinante}] ) 
+                    <div class="panel panel-border">
+                        <div class="panel-heading">
+                            <h3 class="panel-title" style="color: white;">Datos del Evaluado</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-2"><span><b>Nombre</b></span></div>
+                                <div class="col-md-4"><span>{{persona[0].nombres}} {{persona[0].apellidoPaterno}} {{persona[0].apellidoMaterno}}</span></div>
+                                <div class="col-md-2"><span><b>RUT</b></span></div>
+                                <div class="col-md-4"><span>{{persona[0].identificador}}</span></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2"><span><b>Email</b></span></div>
+                                <div class="col-md-4"><span>{{persona[0].email}}</span></div>
+                                <div class="col-md-2"><h5></h5></div>
+                                <div class="col-md-4"></div>
+                            </div>
+                        </div> <!--<div class="panel-body">-->
+                    </div> <!--<div class="panel panel-border panel-primary">-->          
+                </div>
+
+        <div class="col-md-10">
+            <div class="row">
+
+                    <div class="panel panel-default">
+                        
+                            <div class="panel-heading">
+                                <h3 class="panel-title" style="color: white;">Informe Individual Evaluación de Desempeño  : Desempeño Ejecutivos 2018</h3>
+                                
+                            </div>
+                            
+                            <div class="panel-body">
+                                <p>
+                              
+                                        @each(competencia in instrumento.competencias)
+                                        <div class="col-lg-12">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading bg-warning">
+                                                            <div class="pull-right">
+                                                                    <!--<p class="panel-sub-title text-muted">
+                                                                        <div class="badge badge-topbar bg-green"><i class="fa fa-percent"></i> 60% <i class="fa fa-check"></i></div>
+                                                                        <div class="badge bg-red"><i class="fa fa-flag-checkered"></i> 2<i class="fa fa-exclamation-circle"></i></div>
+                                                                    </p>-->
+                                                                </div>
+                                                                <h3 class="panel-title" style="color: #fff;">{{competencia.nombre}}</h3>
+                                                    </div> 
+                                                    <div class="panel-body">
+                                                            <!-- Tabla Metas -->
+                                                            <div class="table-responsive">
+                                                                    <table class="table">
+                                                                    <tbody>
+                                                                            @each(actividadesClave in competencia.actividadesClave)
+                                                                            
+                                                                                @each(criterio in actividadesClave.criterios)
+                                                                                    
+                                                                                    @if($loop.first)
+                                                                                                <tr>
+                                                                                                    
+                                                                                                    <td colspan="1" style="text-align: justify;">
+                                                                                                            {{criterio.nombre}}
+                                                                                                    </td>
+                                                                                                    <td rowspan="3">
+                                                                                                        <table class="table m-0 table-colored-bordered table-bordered-warning" id="tblPromedioComp">
+                                                                                                            <thead>
+                                                                                                                    <tr>
+                                                                                                                        <th>Autoevaluación</th> 
+                                                                                                                        @if(codigoActor == 'SUPE')
+                                                                                                                            <th>Superior</th>
+                                                                                                                            <th>Funcional</th>
+                                                                                                                        @endif
+                                                                                                                        @if(codigoActor == 'FUNC')
+                                                                                                                            <th>Funcional</th>
+                                                                                                                        @endif
+                                                                                                                    </tr>
+                                                                                                            </thead>
+                                                                                                            <tbody>
+                                                                                                                    <tr>
+                                                                                                                        @each(p in promedioGeneral)
+                                                                                                                                       
+                                                                                                                            @if(p.id == $parent.$parent.$parent.competencia.id )
+                                                                                                                                    <td style="text-align: center;">{{p.nivelAuto}}</td>
+
+                                                                                                                                @if(codigoActor == 'SUPE')
+                                                                                                                                    <td style="text-align: center;">{{p.nivelSup}}</td>
+                                                                                                                                    <td style="text-align: center;">{{p.nivelFunc}}</td>
+                                                                                                                                @endif
+                                                                                                                                @if(codigoActor == 'FUNC')
+                                                                                                                                    <td style="text-align: center;">{{p.nivelSup}}</td>
+                                                                                                                                @endif
+                                                                                                                            @endif
+
+                                                                                                                        @endeach
+                                                                                                                    </tr>
+                                                                                                            </tbody>
+                                                                                                        </table>
+                                                        
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                            @else
+                                                                                                <tr>
+                                                                                                    <td style="text-align: justify;">
+                                                                                                            {{criterio.nombre}}
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                            @endif  
+                                                                                           
+                                                                                @endeach
+
+                                                                            @endeach
+                                                                    
+                                                                </tbody>
+                                                            </table>
+                                                            </div>
+                                                    </div>
+                                                </div>           
+                            
+                                                </div> 
+                                    @endeach
+                                   
+
+                        <div class="col-lg-12">
+                                <div class="panel panel-default">
+                                    <!--<div class="panel-heading bg-warning">
+                                            <div class="pull-right">
+                                                    <p class="panel-sub-title text-muted">
+                                                        <div class="badge badge-topbar bg-green"><i class="fa fa-percent"></i> 60% <i class="fa fa-check"></i></div>
+                                                        <div class="badge bg-red"><i class="fa fa-flag-checkered"></i> 2<i class="fa fa-exclamation-circle"></i></div>
+                                                    </p>
+                                                </div>
+                                                <h3 class="panel-title" style="color: #fff;">Comentario Evaluador</h3>
+                                    </div> -->
+                                    <div class="panel-body">
+                                            <!-- Tabla Metas -->
+                                            <h5>Autoevaluación</h5>
+                                            <div class="form-group">
+                                                    <textarea readonly="" id="observacion" class="form-control" maxlength="225" rows="4" placeholder="">{{instrumento.observacion}}
+                                                        </textarea>
+                                            </div>
+                                            
+                                            <!--<div class="row">&nbsp;</div>
+                                            <h5>Superior</h5>
+                                            <div class="form-group">
+                                                    <textarea readonly="" id="observacion" class="form-control" maxlength="225" rows="4" placeholder="">Comentarios para evaluado superior
+                                                        </textarea>
+                                            </div>
+                                            
+                                            <div class="row">&nbsp;</div>
+                                            <h5>Superior Funcional</h5>
+                                            <div class="form-group">
+                                                    <textarea readonly="" id="observacion" class="form-control" maxlength="225" rows="4" placeholder="">Comentarios para evaluado superior funcional
+                                                        </textarea>
+                                            </div>-->
+
+                                            
+                                    </div>
+                                </div>           
+            
+                        </div> 
+                        @!component('components.Desempeno.cajaPromedioGeneral',data={promedioGeneral:promedioGeneral, codigoActor: codigoActor})
+                        
+                        <div class="col-lg-12">
+                                <div class="panel panel-color panel-primary">
+                                    <div class="panel-heading">
+                                            <div class="pull-right">
+                                                    <!--<p class="panel-sub-title text-muted">
+                                                        <div class="badge badge-topbar bg-green"><i class="fa fa-percent"></i> 60% <i class="fa fa-check"></i></div>
+                                                        <div class="badge bg-red"><i class="fa fa-flag-checkered"></i> 2<i class="fa fa-exclamation-circle"></i></div>
+                                                    </p>-->
+                                                </div>
+                                                <h3 class="panel-title" >Resultados</h3>
+                                    </div> 
+                                    <div class="panel-body">
+                                            <table class="table " style="width: 100%;">
+                                                    <tbody><tr>
+                                                        <td height="30" width="40%">
+                                                            &nbsp;</td>
+                                                        <td bgcolor="#FF8724" style="font-weight: bold; color: #FFFFFF; text-align: center" width="30%">
+                                                            Resultado</td>
+                                                        <!--td bgcolor="#FF8724" 
+                                                            style="font-weight: bold; color: #FFFFFF; text-align: center" width="30%">
+                                                            Clasificación</td-->
+                                                    </tr>
+                                                    <tr>
+                                                        <td height="20" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                                            Evaluación Competencias Conductuales</td>
+                                                        <!--td align="center" 
+                                                            style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                                            <span id="ctl00_Principal_LBPRRC">0.80</span>
+                                                        </td-->
+                                                        <td align="center" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                                            <span id="lblCompetencia">{{instrumento.resultadoCompetencias.nivel}}</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="style25" height="20" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                                            Evaluación de Resultados</td>
+                                                        <!--td align="center" 
+                                                            style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                                            <span id="ctl00_Principal_LBPRRM">0.00</span>
+                                                        </td-->
+                                                        <td align="center" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                                            <span id="lblMetas">{{instrumento.resultadoMetas.nivel}}</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        {{--
+                                                        @if(instrumento.resultadoCalibracion.nivel == "No Disponible")
+                                                            <td bgcolor="#F7F7DE" height="20" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                                                Resultado Global</td>
+                                                            <td align="center" bgcolor="#F7F7DE" colspan="2" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0; text-align: center;">
+                                                                <span id="lblGlobal">{{instrumento.resultadoGlobal.nivel}}</span>
+                                                            </td>
+                                                        @else
+                                                            <td class="style25" height="20" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                                                Resultado Global</td>
+                                                            <td align="center" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                                                <span id="lblMetas">{{instrumento.resultadoGlobal.nivel}}</span>
+                                                            </td>
+                                                        @endif--}}
+                                                        <td class="style25" height="20" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                                                Resultado Global</td>
+                                                            <td align="center" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                                                <span id="lblMetas">{{instrumento.resultadoGlobal.nivel}}</span>
+                                                            </td>
+                                                    </tr>
+                                                    {{--
+                                                    <tr>
+                                                        @if(instrumento.resultadoCalibracion.nivel != "No Disponible")
+                                                            <td bgcolor="#F7F7DE" height="20" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                                                Resultado Calibrado</td>
+                                                            <td align="center" bgcolor="#F7F7DE" colspan="2" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0; text-align: center;">
+                                                                <span id="lblGlobal">{{instrumento.resultadoCalibracion.nivel}}</span>
+                                                            </td>
+                                                        @else
+                                                        <td class="style25" height="20" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                                                Resultado Calibrado</td>
+                                                            <td align="center" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                                                <span id="lblMetas">{{instrumento.resultadoCalibracion.nivel}}</span>
+                                                            </td>
+                                                        @endif
+                                                    </tr>--}}
+                                                    <!--<tr>
+                                                        <td bgcolor="#F7F7DE" height="20" 
+                                                            style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                                            Resultado Global Calibrado</td>
+                                                         <td align="center" bgcolor="#F7F7DE" colspan="2" 
+                                                            style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0; text-align: center;">
+                                                            <span id="ctl00_Principal_LBPRGC">CB</span>
+                                                        </td>
+                                                    </tr>-->
+                                                </tbody></table>
+                                    </div>
+                                </div>        
+                        </div> 
+                        
+                        {{--
+                        @if(instrumento.resultadoCalibracion.nivel == "No Disponible" || instrumento.resultadoCalibracion.nivel == undefined || instrumento.resultadoCalibracion.nivel == null)
+                            @!component('components.Desempeno.widgetMatrizComparativaInformeEjecutivos',nivel=instrumento.resultadoGlobal.nivel)
+                        @else
+                            @!component('components.Desempeno.widgetMatrizComparativaInformeEjecutivos',nivel=instrumento.resultadoCalibracion.nivel) 
+                        @endif
+
+                        <div class="col-lg-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading bg-warning">
+                                            <div class="pull-right">
+                                                    <!--<p class="panel-sub-title text-muted">
+                                                        <div class="badge badge-topbar bg-green"><i class="fa fa-percent"></i> 60% <i class="fa fa-check"></i></div>
+                                                        <div class="badge bg-red"><i class="fa fa-flag-checkered"></i> 2<i class="fa fa-exclamation-circle"></i></div>
+                                                    </p>-->
+                                                </div>
+                                                <h3 class="panel-title" style="color: #fff;">Gráfico de Competencias</h3>
+                                    </div> 
+                                    <div class="panel-body" style="margin-left:250px; width: 800px !important;height: 100% !important;">
+                                            <canvas id="myRadarChart" height="100%"></canvas>
+                                    </div>
+                                </div>           
+            
+                        </div> --}}
+
+    </div>
+        </div>
+    </div>
+    </div>
+              </div> <!-- container -->
+  
+              <footer class="footer text-left">
+                      <img src="/themes/horizontal/assets/images/innovum_logo.png" alt="" height="50">
+                      2018 © 
+              </footer>
+  
+          </div>
+          <!-- END wrapper -->
+  
+  
+  
+      
+@endsection
