@@ -39,7 +39,7 @@ Route.get('/Desempeno/Informe/pdf','Desempeno/Informe.pdf')
 Route.get('/Account/Register/doRegisterPersonas','/Account/Register.doRegisterPersonas')
 Route.get('/Account/Register/updateUser','/Account/Register.updateUser')
 
-Route.get('/Api/salfa/process','/Api/salfa.process')
+Route.get('/Api/salfa/InformeResultado','/Api/salfa.InformeResultado')
 
 Route.get('/Talento/Persona/fichaPdf','Talento/Persona.fichaPdf')
 
