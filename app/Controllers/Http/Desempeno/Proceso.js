@@ -9,7 +9,7 @@ class Proceso {
     async portada ({view,request, response, auth, session, antl}) {
         
         var idPersona = session.get('idPersona', 'fail')
-        var idProceso = request.input("idProceso")..
+        var idProceso = request.input("idProceso")
         //cencosud brasil
         antl.switchLocale('es');
         if(idProceso == '8af63afd-c680-11e8-8771-bc764e100f2b')
