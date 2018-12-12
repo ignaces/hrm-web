@@ -526,7 +526,87 @@ class Proceso {
         return view.render('desempeno/informeEjecutivos', {idPersona: persona.id, idAccionPersona:idAccionPersona, codigoActor:codigo,datosMenu,persona,PersonaEde,etapa, idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa, escala: escala.body.data, promedioGeneral: promedioGeneral.body, competenciasSpider:competenciasSpider, valoresSpiderAuto:valoresSpiderAuto, valoresSpiderSup: valoresSpiderSup });
     } 
 
+    async informeCriterio ({view,request, response, auth, session, antl}) {
+        //var idOpinante = all.idOpinante
+        //var idPersona = session.get('idPersona', 'fail')    
+        var idPersona = request.input('idPersona')   
+        var idOpinante  = request.input("idOpinante");
+        var idProceso   = request.input("idProceso");
+        var idEtapa     = request.input("idEtapa");
+        var codigo     = request.input("codigoActor");
+        //(idProceso)
+        var idAccionPersona     = request.input("idAccionPersona");
+
+        var competenciasSpider = [];
+        var valoresSpiderAuto = [];
+        var valoresSpiderSup = [];
+        var obj = {
+            "idOpinante":idOpinante
+        };
+        ////////(obj);
+
+        var result = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumentoEde',obj);
+
+        var instrumento = result.body;
+        var result2 = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getEscala',obj);
+
+        ////////(result2);
+        var escala = result2;
+        ////////(escala.body.data);
     
+        var objPromedio = {
+            "idOpinante":idOpinante,
+            "codigoActor": codigo,
+            "idProceso": idProceso
+        };
+        var result3 = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getPromedioGeneral',objPromedio);
+
+        ////(result2);
+        var promedioGeneral = result3;
+        /*console.log(promedioGeneral.body)
+        ////(promedioGeneral.body[0].codigoActor)
+        promedioGeneral.body.forEach(e => {
+            console.log(e.competencia);
+        });*/
+
+        //Menu Contextual
+        var objMenuContextual = {
+            "idProceso":idProceso,
+            idEstado:"1"
+        };
+        var resultMenu =await api.execApi(request.hostname(),'/Desempeno/Proceso/getMenuUsuario',objMenuContextual);
+        var datosMenu =resultMenu.body.data;
+        //
+
+        //Datos Persona
+        //var user={usuario:auth.user}
+        //var persona = session.get('personaLogueada')
+
+        var objdatosPersona = {
+            "idProceso":idProceso,
+            "idPersona":idPersona
+        };
+        ////////(idProceso)
+        ////////(idPersona)
+        var resultPersonaEde =await api.execApi(request.hostname(),'/Desempeno/Proceso/getProcesoPersona',objdatosPersona);
+        var persona =resultPersonaEde.body.data;
+        var PersonaEde; 
+        //Etapa
+        var objEtapa = {
+            "idProceso":idProceso,
+            "idEtapa":idEtapa
+        };
+        var resultEtapa=await api.execApi(request.hostname(),'/Desempeno/Proceso/getEtapas',objEtapa);
+        var etapa =resultEtapa.body.data;
+        
+        promedioGeneral.body.forEach(e => {
+            competenciasSpider.push(e.competencia);
+            valoresSpiderAuto.push(e.valorAuto);
+            valoresSpiderSup.push(e.valorSup);
+        });
+
+        return view.render('desempeno/informeCriterio', {idPersona: persona.id, idAccionPersona:idAccionPersona, codigoActor:codigo,datosMenu,persona,PersonaEde,etapa, idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa, escala: escala.body.data, promedioGeneral: promedioGeneral.body, competenciasSpider:competenciasSpider, valoresSpiderAuto:valoresSpiderAuto, valoresSpiderSup: valoresSpiderSup });
+    } 
 
     async portadaEjecutivos({view,request, response}) {
         return view.render('desempeno/portadaEjecutivos');
