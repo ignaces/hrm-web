@@ -103,7 +103,7 @@
                                                                                                             {{alternativa.nombre}}
                                                                                                     </td>
                                                                                                     <td rowspan="3">
-                                                                                                        <table class="table m-0 table-colored-bordered table-bordered-warning">
+                                                                                                        <table class="table m-0 table-colored-bordered table-bordered-warning" id="tblPromedioComp">
                                                                                                             <thead>
                                                                                                                     <tr>
                                                                                                                         <th>Autoevaluación</th> 
@@ -366,6 +366,62 @@
   
           <script>
           $(document).ready(()=>{
+
+            $("#tblPromedio tbody tr").each(function (index) {
+            $(this).children("td").each(function (index2) {
+                var objNiveles = {
+                    "idOpinante":"{{idOpinante}}",
+                    "resultado": $(this).text()
+                };
+                var nombreNivel = "";
+                if(!isNaN($(this).text())){
+                    $.ajax({
+                        async: false,
+                        type: "GET",
+                        url: "/Desempeno/Proceso/getNivelPromedioCompetencia",
+                        contentType: "application/json; charset=utf-8",
+                        data: objNiveles,
+                        dataType: "json",   
+                        success: function (msg) {
+                            //$(this).html("sdsfsdf")  
+                            //alert(msg.nivel)
+                            nombreNivel = msg.nivel;
+                        }
+
+                    });
+                    $(this).html(nombreNivel)  
+                }
+            });
+        });
+
+        $("#tblPromedioComp tbody tr").each(function (index) {
+            $(this).children("td").each(function (index2) {
+                var objNiveles = {
+                    "idOpinante":"{{idOpinante}}",
+                    "resultado": $(this).text()
+                };
+                var nombreNivel = "";
+                if(!isNaN($(this).text())){
+                    $.ajax({
+                        async: false,
+                        type: "GET",
+                        url: "/Desempeno/Proceso/getNivelPromedioCompetencia",
+                        contentType: "application/json; charset=utf-8",
+                        data: objNiveles,
+                        dataType: "json",   
+                        success: function (msg) {
+                            //$(this).html("sdsfsdf")  
+                            //alert(msg.nivel)
+                            nombreNivel = msg.nivel;
+                        }
+
+                    });
+                    $(this).html(nombreNivel)  
+                }
+            });
+        });
+
+
                 var labelsSpider = "{{competenciasSpider}}".split(",");
                 var dataSpiderAuto = "{{valoresSpiderAuto}}".split(",");
                 var dataSpiderSup = "{{valoresSpiderSup}}".split(",");
