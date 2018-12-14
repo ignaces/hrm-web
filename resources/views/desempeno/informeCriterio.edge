@@ -264,7 +264,80 @@
                                                         <div class="form-group">
                                                                 <p>
                                                                 {{-- Panel METAS --}}
-                                                                @!component('components.Desempeno.metasColaborador',datos=dataMetas, columnas=dataColumnas,edit=true) 
+                                                                @if(dataMetas.length > 0)
+  @each(dimension in dataMetas)
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                
+                <div class="pull-right">
+                    <!--<p class="panel-sub-title text-muted">
+                        <div class="badge badge-topbar {{dimension.resPonderacionColor}}"><i class="fa fa-percent"></i> {{dimension.ponderacionMetas}}% <i class="{{dimension.resPonderacionIcono}}"></i></div>
+                        <div class="badge {{dimension.resNumeroColor}}"><i class="fa fa-flag-checkered"></i> {{dimension.numeroMetas}}<i class="{{dimension.resNumeroIcono}}"></i></div>
+                    </p>-->
+                </div>
+                <h3 class="panel-title">{{dimension.nombre}}</h3>
+            </div>
+            <div class="panel-body">
+                <!-- Tabla Metas -->
+                <div class="table-responsive">
+                    <table class="table m-0 table-colored-bordered table-bordered-success">
+                        <thead>
+                        <tr>
+                            <th>Objetivo</th>
+                            <th>Indicador</th>
+                            <th>Métrica</th>
+                            <th>Ponderación</th>
+                            <th>Cumplimiento</th>
+                           <!-- <th>Estado</th>-->
+                            <!--<th>Acciones</th>-->
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @each(meta in dimension.metas)
+                        <tr>
+                      
+                                    <td>{{{meta.meta.Objetivo}}}</td>
+                                    <td>{{{meta.meta.Indicador}}}</td>
+                                    <td>{{{meta.meta.Métrica}}}</td>
+ 
+
+                            <td align="center">{{meta.meta.ponderacion}}%</td>
+                           <!-- <td><div class="label label-{{meta.meta.validadaColor}}"> <i class="{{meta.meta.validadaIcono}}"></i> {{meta.meta.validadaTexto}}</div></td>-->
+                           <!-- <td>
+                                @if(meta.meta.editable==1)
+                                   <a href="" class="btn btn-success btn-xs btn-rounded btn-bordered waves-effect w-md"><i class="fa fa-edit"></i> Editar</a>
+                                @endif
+                                @if(meta.meta.eliminable==1)
+                                   <a href="" class="btn btn-danger btn-xs btn-rounded btn-bordered waves-effect w-md"><i class="fa fa-times"></i> Eliminar</a>
+                                @endif
+                            </td>-->
+                                <td>
+                                    @if(meta.meta.valor != null)
+                                    {{meta.meta.valor}} %
+                                    @endif
+                                </td>
+                        </tr>
+                        @endeach                   
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Tabla Metas -->
+            </div>
+        </div>
+    </div>
+     @endeach
+@else
+    <p class="text-center center">
+            <div class="alert alert-icon alert-warning alert-dismissible fade in" role="alert">
+                    
+                    <i class="mdi mdi-alert"></i>
+                    <strong>Actualmente no existen metas cargadas para este colaborador.</strong>
+                </div>
+        
+    <p>
+@endif
+                                                                
                                                                 {{-- //Panel METAS --}}
                                                                 </p>
                                                         </div>
