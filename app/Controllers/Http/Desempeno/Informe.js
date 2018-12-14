@@ -185,16 +185,12 @@ class Accion {
 
     
     async pdfCriterio({ view, request, response, auth, session}) {
-        //var idOpinante = all.idOpinante
-        //var idPersona = session.get('idPersona', 'fail')    
-        var idPersona = request.input('idPersona')   
         var idOpinante  = request.input("idOpinante");
         var idProceso   = request.input("idProceso");
         var idEtapa     = request.input("idEtapa");
         var codigo     = request.input("codigoActor");
-        //(idProceso)
         var idAccionPersona     = request.input("idAccionPersona");
-
+        var idPersona = request.input("idPersona");
         var competenciasSpider = [];
         var valoresSpiderAuto = [];
         var valoresSpiderSup = [];
