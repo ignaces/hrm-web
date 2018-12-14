@@ -183,6 +183,99 @@ class Accion {
     
     }
 
+    
+    async pdfCriterio({ view, request, response, auth, session}) {
+        //var idOpinante = all.idOpinante
+        //var idPersona = session.get('idPersona', 'fail')    
+        var idPersona = request.input('idPersona')   
+        var idOpinante  = request.input("idOpinante");
+        var idProceso   = request.input("idProceso");
+        var idEtapa     = request.input("idEtapa");
+        var codigo     = request.input("codigoActor");
+        //(idProceso)
+        var idAccionPersona     = request.input("idAccionPersona");
+
+        var competenciasSpider = [];
+        var valoresSpiderAuto = [];
+        var valoresSpiderSup = [];
+        var obj = {
+            "idOpinante":idOpinante
+        };
+        ////////(obj);
+
+        var result = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumentoEdeReporteCriterio',obj);
+
+        var instrumento = result.body;
+        var result2 = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getEscala',obj);
+
+        ////////(result2);
+        var escala = result2;
+        ////////(escala.body.data);
+    
+        var objPromedio = {
+            "idOpinante":idOpinante,
+            "codigoActor": codigo,
+            "idProceso": idProceso
+        };
+        var result3 = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getPromedioGeneral',objPromedio);
+
+        ////(result2);
+        var promedioGeneral = result3;
+        /*console.log(promedioGeneral.body)
+        ////(promedioGeneral.body[0].codigoActor)
+        promedioGeneral.body.forEach(e => {
+            console.log(e.competencia);
+        });*/
+
+        //Menu Contextual
+        var objMenuContextual = {
+            "idProceso":idProceso,
+            idEstado:"1"
+        };
+        var resultMenu =await api.execApi(request.hostname(),'/Desempeno/Proceso/getMenuUsuario',objMenuContextual);
+        var datosMenu =resultMenu.body.data;
+        //
+
+        //Datos Persona
+        //var user={usuario:auth.user}
+        //var persona = session.get('personaLogueada')
+
+        var objdatosPersona = {
+            "idProceso":idProceso,
+            "idPersona":idPersona
+        };
+
+        ////////(idProceso)
+        ////////(idPersona)
+        var resultPersonaEde =await api.execApi(request.hostname(),'/Desempeno/Proceso/getProcesoPersona',objdatosPersona);
+        var persona =resultPersonaEde.body.data;
+        var PersonaEde; 
+        console.log(persona)
+        //Etapa
+        var objEtapa = {
+            "idProceso":idProceso,
+            "idEtapa":idEtapa
+        };
+        var resultEtapa=await api.execApi(request.hostname(),'/Desempeno/Proceso/getEtapas',objEtapa);
+        var etapa =resultEtapa.body.data;
+        
+        promedioGeneral.body.forEach(e => {
+            competenciasSpider.push(e.competencia);
+            valoresSpiderAuto.push(e.valorAuto);
+            valoresSpiderSup.push(e.valorSup);
+        });
+
+        var objMetas = {
+            "idProceso":idProceso,
+            "idPersona":idPersona
+        };
+
+        var resultMetas=await api.execApi(request.hostname(),'/Desempeno/Metas/getMetasColaboradorReporte',objMetas);
+        var dataMetas =resultMetas.body.data;
+        var server = request.hostname().split(".")[0]+'.enovum.cl';
+        return view.render('desempeno/informe/informeCriteriopdf', {server,datosMenu,persona,etapa, idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa, escala: escala.body.data, promedioGeneral: promedioGeneral.body, competenciasSpider:competenciasSpider, valoresSpiderAuto:valoresSpiderAuto, codigoActor: codigo, dataMetas });
+    
+    }
     async getPdf({ view, request, response, auth }) {
         
         var idPersona = request.input("idPersona");
@@ -213,7 +306,35 @@ class Accion {
 
     }
 
-    
+    async getPdfCriterio({ view, request, response, auth }) {
+        
+        var idPersona = request.input("idPersona");
+        var idEtapa = request.input("idEtapa");
+        var idProceso = request.input("idProceso");
+        var idAccionPersona = request.input("idAccionPersona");
+        var codigoActor = request.input("codigoActor");
+        var idOpinante = request.input("idOpinante");
+
+        var server = request.hostname().split(".")[0]+'.enovum.cl';//request.hostname();
+//        server = "csdev.enovum.cl";
+        //var result = await got(`http://192.168.3.4:8080?url=${server}/Acreditacion/Informe/pdf?procesoPersona=${idPersona}&cd=${conDetalle}`);
+        // var url = `http://192.168.3.4:8080/?url=http%3A%2F%2F${server}%2FAcreditacion%2FInforme%2Fpdf%3FprocesoPersona%3D${idPersona}%26cd%3D${conDetalle}`;
+       
+        var url = `http://192.168.3.4:8080/?url=http%3A%2F%2F${server}%2FDesempeno%2FInforme%2Fpdf%3FidProceso%3D${idProceso}%26idEtapa%3D${idEtapa}%26idAccionPersona%3D${idAccionPersona}%26codigoActor%3D${codigoActor}%26idOpinante%3D${idOpinante}%26idPersona%3D${idPersona}`;
+        
+
+        var file = await wget(url, { output: 'tmp/reporte.pdf' });
+
+        response.type = "application/pdf";
+
+        response.attachment(
+            Helpers.tmpPath('reporte.pdf'),
+            'reporte.pdf'
+        )
+
+
+
+    }
 
 }
 
