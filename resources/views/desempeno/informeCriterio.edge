@@ -122,34 +122,8 @@
                 }
             });
         });
-
-          /*("#tblPromedio tbody tr").each(function (index) {
-              $(this).children("td").each(function (index2) {
-                var objNiveles = {
-                    "idOpinante":$("#idOpinante").val(),
-                    "resultado": $(this).text()
-                };
-                var nombreNivel = "";
-                if(!isNaN($(this).text())){
-                    $.ajax({
-                        async: false,
-                        type: "GET",
-                        url: "/Desempeno/Proceso/getNivelPromedioCompetencia",
-                        contentType: "application/json; charset=utf-8",
-                        data: objNiveles,
-                        dataType: "json",   
-                        success: function (msg) {
-                            //$(this).html("sdsfsdf")  
-                            //alert(msg.nivel)
-                            nombreNivel = msg.nivel;
-                        }
-
-                    });
-                    $(this).html(nombreNivel)  
-                }
-
-                  });
-              });*/
+        
+        $(".tFunc").hide();
 
     });
     </script>
