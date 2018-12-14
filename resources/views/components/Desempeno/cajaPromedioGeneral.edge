@@ -20,11 +20,11 @@
                                     <th style="text-align:center">Promedio Autoevaluación</th>
                                     @if(data.codigoActor == 'SUPE')
                                         <th style="text-align:center">Promedio Evaluador</th>
-                                        <th style="text-align:center">Promedio Evaluador Funcional</th>
+                                        <th style="text-align:center" class="tFunc">Promedio Evaluador Funcional</th>
                                     @endif
 
                                     @if(data.codigoActor == 'FUNC')
-                                        <th style="text-align:center">Promedio Evaluador Funcional</th>
+                                        <th style="text-align:center" class="tFunc">Promedio Evaluador Funcional</th>
                                     @endif
                                 </tr>
                             </thead>
@@ -35,10 +35,10 @@
                                             <td align="center">{{p.nivelAuto}}</td>
                                             @if(data.codigoActor == 'SUPE')
                                                 <td align="center">{{p.nivelSup}}</td>
-                                                <td align="center">{{p.nivelFunc}}</td>
+                                                <td align="center" class="tFunc">{{p.nivelFunc}}</td>
                                             @endif
                                             @if(data.codigoActor == 'FUNC')
-                                                <td align="center">{{p.nivelSup}}</td>
+                                                <td align="center" class="tFunc">{{p.nivelSup}}</td>
                                             @endif
                                         </tr>
                                     @endeach
