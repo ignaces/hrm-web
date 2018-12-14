@@ -587,7 +587,6 @@ class Proceso {
             "idPersona":idPersona
         };
 
-        console.log(objdatosPersona)
         ////////(idProceso)
         ////////(idPersona)
         var resultPersonaEde =await api.execApi(request.hostname(),'/Desempeno/Proceso/getProcesoPersona',objdatosPersona);
