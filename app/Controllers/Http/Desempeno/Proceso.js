@@ -545,7 +545,7 @@ class Proceso {
         };
         ////////(obj);
 
-        var result = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumentoEde',obj);
+        var result = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumentoEdeReporteCriterio',obj);
 
         var instrumento = result.body;
         var result2 = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getEscala',obj);
@@ -586,11 +586,14 @@ class Proceso {
             "idProceso":idProceso,
             "idPersona":idPersona
         };
+
+        console.log(objdatosPersona)
         ////////(idProceso)
         ////////(idPersona)
         var resultPersonaEde =await api.execApi(request.hostname(),'/Desempeno/Proceso/getProcesoPersona',objdatosPersona);
         var persona =resultPersonaEde.body.data;
         var PersonaEde; 
+        console.log(persona)
         //Etapa
         var objEtapa = {
             "idProceso":idProceso,
@@ -605,7 +608,15 @@ class Proceso {
             valoresSpiderSup.push(e.valorSup);
         });
 
-        return view.render('desempeno/informeCriterio', {idPersona: persona.id, idAccionPersona:idAccionPersona, codigoActor:codigo,datosMenu,persona,PersonaEde,etapa, idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa, escala: escala.body.data, promedioGeneral: promedioGeneral.body, competenciasSpider:competenciasSpider, valoresSpiderAuto:valoresSpiderAuto, valoresSpiderSup: valoresSpiderSup });
+        var objMetas = {
+            "idProceso":idProceso,
+            "idPersona":idPersona
+        };
+
+        var resultMetas=await api.execApi(request.hostname(),'/Desempeno/Metas/getMetasColaboradorReporte',objMetas);
+        var dataMetas =resultMetas.body.data;
+        console.log(dataMetas)
+        return view.render('desempeno/informeCriterio', {idPersona: persona.id, idAccionPersona:idAccionPersona, codigoActor:codigo,datosMenu,persona,PersonaEde,etapa, idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa, escala: escala.body.data, promedioGeneral: promedioGeneral.body, competenciasSpider:competenciasSpider, valoresSpiderAuto:valoresSpiderAuto, valoresSpiderSup: valoresSpiderSup , dataMetas});
     } 
 
     async portadaEjecutivos({view,request, response}) {
