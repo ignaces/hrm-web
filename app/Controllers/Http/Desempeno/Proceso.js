@@ -615,7 +615,6 @@ class Proceso {
 
         var resultMetas=await api.execApi(request.hostname(),'/Desempeno/Metas/getMetasColaboradorReporte',objMetas);
         var dataMetas =resultMetas.body.data;
-        console.log(dataMetas)
         return view.render('desempeno/informeCriterio', {idPersona: persona.id, idAccionPersona:idAccionPersona, codigoActor:codigo,datosMenu,persona,PersonaEde,etapa, idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa, escala: escala.body.data, promedioGeneral: promedioGeneral.body, competenciasSpider:competenciasSpider, valoresSpiderAuto:valoresSpiderAuto, valoresSpiderSup: valoresSpiderSup , dataMetas});
     } 
 
