@@ -1,24 +1,67 @@
 @layout('layouts/horizontal')
 
 
-@section('pluginsCss2')
-        <link href="/assets/plugins/ede/infobox/infobox.css" rel="stylesheet" type="text/css" />
-        <link href="/assets/plugins/ede/socialWidget/socialWidget.css" rel="stylesheet" type="text/css" />             
-         <link href="/assets/plugins/ede/progressbar/progressbar.css" rel="stylesheet" type="text/css" />   
-         
+@section('pluginsCss')
+<link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+<link href="/assets/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+<link href="/assets/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" />
+
          <style>
-            .panel-heading{
-                background-color: #ffa91c !important;
-            }
-            .table-colored-bordered.table-bordered-primary thead th{
-                background-color: #ffa91c !important;
-            }
-            
-            .table-colored-bordered.table-bordered-primary
-            {
-                border: 2px solid #ffa91c !important;
-            }
-        </style>
+                .button-label {
+                  display: inline-block;
+                  padding: 1em 2em;
+                  margin: 0.5em;
+                  color: #292929;
+                  border-radius: 0.25em;
+                  background: #efefef;
+                  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0 -3px 0 rgba(0, 0, 0, 0.22);
+                  -webkit-transition: 0.3s;
+                  transition: 0.3s;
+                  -webkit-user-select: none;
+                     -moz-user-select: none;
+                      -ms-user-select: none;
+                          user-select: none;
+                }
+                .button-label h1 {
+                  font-size: 1em;
+                  font-family: "Lato", sans-serif;
+                }
+                /*
+                .button-label:hover {
+                  background: #d6d6d6;
+                  color: #101010;
+                  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0 -3px 0 rgba(0, 0, 0, 0.32);
+                }
+                .button-label:active {
+                  -webkit-transform: translateY(2px);
+                          transform: translateY(2px);
+                  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0px -1px 0 rgba(0, 0, 0, 0.22);
+                }
+                */
+                @media (max-width: 40em) {
+                  .button-label {
+                    
+                  }
+                
+                
+                }
+                /*
+                .option-button:checked + .button-label {
+                  background: #ffa500;
+                  color: #ffffff;
+                }
+                .option-button:checked + .button-label:hover {
+                  background: #ff6500;
+                  color: #ffffff;
+                }
+                */
+                
+                .question > .row:nth-child(odd){
+                  background: #e6e6e6;
+                }
+                
+                
+                </style>
 @endsection
 
 
@@ -130,7 +173,7 @@
                         @!component('components.Core.botonera',botones=[{showVolver:"0", texto:"PDF", icono:"fa fa-file-pdf-o", link:"/Desempeno/Informe/getPdf?idProceso=" + idProceso + "&idEtapa=" + idEtapa + "&idPersona="+persona[0].id+"&idAccionPersona="+idAccionPersona+"&codigoActor="+codigoActor+"&idOpinante="+idOpinante}] ) 
                     <div class="panel panel-border">
                         <div class="panel-heading">
-                            <h3 class="panel-title" style="color: white;">Datos del Evaluado</h3>
+                            <h3 class="panel-title" >Datos del Evaluado</h3>
                         </div>
                         <div class="panel-body">
                             <div class="row">
@@ -155,7 +198,7 @@
                     <div class="panel panel-default">
                         
                             <div class="panel-heading">
-                                <h3 class="panel-title" style="color: white;">Informe Individual Evaluación de Desempeño  : Desempeño Ejecutivos 2018</h3>
+                                <h3 class="panel-title">Informe Individual Evaluación de Desempeño  : Desempeño 2018</h3>
                                 
                             </div>
                             
@@ -172,7 +215,7 @@
                                                                         <div class="badge bg-red"><i class="fa fa-flag-checkered"></i> 2<i class="fa fa-exclamation-circle"></i></div>
                                                                     </p>-->
                                                                 </div>
-                                                                <h3 class="panel-title" style="color: #fff;">{{competencia.nombre}}</h3>
+                                                                <h3 class="panel-title" style="color: white;">{{competencia.nombre}}</h3>
                                                     </div> 
                                                     <div class="panel-body">
                                                             <!-- Tabla Metas -->
@@ -190,7 +233,7 @@
                                                                                                             {{criterio.nombre}}
                                                                                                     </td>
                                                                                                     <td rowspan="3">
-                                                                                                        <table class="table m-0 table-colored-bordered table-bordered-warning" id="tblPromedioComp">
+                                                                                                        <table class="table m-0 table-colored-bordered table-bordered-success" id="tblPromedioComp">
                                                                                                             <thead>
                                                                                                                     <tr>
                                                                                                                         <th>Autoevaluación</th> 
@@ -264,7 +307,80 @@
                                                         <div class="form-group">
                                                                 <p>
                                                                 {{-- Panel METAS --}}
-                                                                @!component('components.Desempeno.metasColaborador',datos=dataMetas, columnas=dataColumnas,edit=true) 
+                                                                @if(dataMetas.length > 0)
+  @each(dimension in dataMetas)
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                
+                <div class="pull-right">
+                    <!--<p class="panel-sub-title text-muted">
+                        <div class="badge badge-topbar {{dimension.resPonderacionColor}}"><i class="fa fa-percent"></i> {{dimension.ponderacionMetas}}% <i class="{{dimension.resPonderacionIcono}}"></i></div>
+                        <div class="badge {{dimension.resNumeroColor}}"><i class="fa fa-flag-checkered"></i> {{dimension.numeroMetas}}<i class="{{dimension.resNumeroIcono}}"></i></div>
+                    </p>-->
+                </div>
+                <h3 class="panel-title">{{dimension.nombre}}</h3>
+            </div>
+            <div class="panel-body">
+                <!-- Tabla Metas -->
+                <div class="table-responsive">
+                    <table class="table m-0 table-colored-bordered table-bordered-success">
+                        <thead>
+                        <tr>
+                            <th>Objetivo</th>
+                            <th>Indicador</th>
+                            <th>Métrica</th>
+                            <th>Ponderación</th>
+                            <th>Cumplimiento</th>
+                           <!-- <th>Estado</th>-->
+                            <!--<th>Acciones</th>-->
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @each(meta in dimension.metas)
+                        <tr>
+                      
+                                    <td>{{{meta.meta.Objetivo}}}</td>
+                                    <td>{{{meta.meta.Indicador}}}</td>
+                                    <td>{{{meta.meta.Métrica}}}</td>
+ 
+
+                            <td align="center">{{meta.meta.ponderacion}}%</td>
+                           <!-- <td><div class="label label-{{meta.meta.validadaColor}}"> <i class="{{meta.meta.validadaIcono}}"></i> {{meta.meta.validadaTexto}}</div></td>-->
+                           <!-- <td>
+                                @if(meta.meta.editable==1)
+                                   <a href="" class="btn btn-success btn-xs btn-rounded btn-bordered waves-effect w-md"><i class="fa fa-edit"></i> Editar</a>
+                                @endif
+                                @if(meta.meta.eliminable==1)
+                                   <a href="" class="btn btn-danger btn-xs btn-rounded btn-bordered waves-effect w-md"><i class="fa fa-times"></i> Eliminar</a>
+                                @endif
+                            </td>-->
+                                <td>
+                                    @if(meta.meta.valor != null)
+                                    {{meta.meta.valor}} %
+                                    @endif
+                                </td>
+                        </tr>
+                        @endeach                   
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Tabla Metas -->
+            </div>
+        </div>
+    </div>
+     @endeach
+@else
+    <p class="text-center center">
+            <div class="alert alert-icon alert-warning alert-dismissible fade in" role="alert">
+                    
+                    <i class="mdi mdi-alert"></i>
+                    <strong>Actualmente no existen metas cargadas para este colaborador.</strong>
+                </div>
+        
+    <p>
+@endif
+                                                                
                                                                 {{-- //Panel METAS --}}
                                                                 </p>
                                                         </div>
