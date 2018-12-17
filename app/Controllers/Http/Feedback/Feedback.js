@@ -43,6 +43,20 @@
         
         } 
 
+        async crearPlan  ({ view,request, response, auth, session }) {
+
+            var idFeedbackOpinante=request.input("idOpinante");
+            
+            //var result = await data.execApi(request.hostname(),'/Feedback/Persona/getFeedback',{idOpinante:idOpinante});
+
+            //const fb = result.body.data;
+
+            console.log(idFeedbackOpinante)
+
+            return view.render('feedback/crearPlan',  {idFeedbackOpinante:idFeedbackOpinante});
+        
+        } 
+
         async saveFeedback  ({ view,request, response, auth, session }) {
 
             var idOpinante=request.input("idOpinante");
