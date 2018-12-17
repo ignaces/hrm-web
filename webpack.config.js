@@ -22,6 +22,8 @@ module.exports = {
     metaFeedbackPublicar:     ['./client/src/ede/metaFeedbackPublicar.js'],
     metaEvaluar:              ['./client/src/ede/metaEvaluar.js'],
     metaFeedbackConfirmar:    ['./client/src/ede/metaFeedbackConfirmar.js'],
+    //Feedback
+    feedbackSave:             ['./client/src/Feedback/Feedback.js'],
     //participantes:            ['./client/src/ede/participantes.js'],
     //Encuesta
     ingresoEncuesta:          ['./client/src/Encuesta/ingreso.js'],

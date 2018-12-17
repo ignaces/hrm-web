@@ -8,6 +8,8 @@
             var idProceso=request.input("idProceso");
             var idEtapa=request.input("idEtapa");
             var persona = session.get('personaLogueada')
+
+            session.put("datosVista",{idProceso:idProceso,idEtapa:idEtapa});
             var objdatosPersona = {
                 "idProceso":idProceso,
                 "idPersona":persona.id
@@ -33,26 +35,26 @@
         }
         async realizar  ({ view,request, response, auth, session }) {
 
-            var idOpinante=request.input("idOpinante");
-            
+            var idOpinante = request.input("idOpinante");
+            var datosVista = session.get("datosVista");
             var result = await data.execApi(request.hostname(),'/Feedback/Persona/getFeedback',{idOpinante:idOpinante});
 
             const fb = result.body.data;
 
-            return view.render('feedback/feedback',  {feedback:fb});
+            return view.render('feedback/feedback',  {feedback:fb,datosVista,idOpinante});
         
         } 
 
         async saveFeedback  ({ view,request, response, auth, session }) {
 
             var idOpinante=request.input("idOpinante");
-            var idOpinante=request.input("observacion");
+            var observacion=request.input("observacion");
             
-            var result = await data.execApi(request.hostname(),'/Feedback/Persona/saveFeedback',{idOpinante:idOpinante});
+            var result = await data.execApi(request.hostname(),'/Feedback/Persona/saveFeedback',{idOpinante:idOpinante,observacion:observacion});
 
             const fb = result.body.data;
 
-            return view.render('feedback/feedback',  {feedback:fb});
+            return fb;
         
         } 
 

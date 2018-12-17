@@ -8,16 +8,21 @@
 
         <link href="/assets/plugins/ede/infobox/infobox.css" rel="stylesheet" type="text/css" />
         <link href="/assets/plugins/ede/socialWidget/socialWidget.css" rel="stylesheet" type="text/css" />             
-        <link href="/assets/plugins/ede/progressbar/progressbar.css" rel="stylesheet" type="text/css" />    
+        <link href="/assets/plugins/ede/progressbar/progressbar.css" rel="stylesheet" type="text/css" /> 
+           
 @endsection
 
 @section('scripts')
 <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+<script src=/assets/js/dist/feedbackSave.min.js></script>
 @endsection
 @section('content')
-
+<form id="frmVolver" action="/Feedback/Feedback/index">    
+    <input type="hidden" id="idProceso" name="idProceso" value="{{datosVista.idProceso}}" />
+    <input type="hidden" id="idEtapa" name="idEtapa" value="{{dataVista.idEtapa}}" />
+</form>
 {{ csrfField() }}
-
+<input type="hidden" id="idOpinante" name="idOpinante" value="{{idOpinante}}" />
 
 <div class="row" >
     
@@ -39,7 +44,7 @@
                                             <h3 class="panel-title text-white">Observación:</h3>
                                         </div>
                                 <div class="panel-body">
-                                        <textarea id="txtObservacion" class="form-control" maxlength="225" rows="3" ></textarea>
+                                        <textarea id="txtObservacion" class="form-control inputObservacion" maxlength="225" rows="3" ></textarea>
                                     <div class="row pull-right">
 
                                         <div class="col-md-12">
