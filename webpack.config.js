@@ -13,7 +13,7 @@ module.exports = {
     //Administracion
     Menu:                     ['./client/src/Administracion/menu.js'],
     RegistrarPersona:         ['./client/src/Administracion/registrarPersona.js'],
-    EvaluadorMasivo:         ['./client/src/Administracion/evaluadorMasivo.js'],
+    EvaluadorMasivo:          ['./client/src/Administracion/evaluadorMasivo.js'],
     //Core
     CoreNetwork:              ['./client/src/Core/network.js'],
     //Ede
@@ -24,6 +24,7 @@ module.exports = {
     metaFeedbackConfirmar:    ['./client/src/ede/metaFeedbackConfirmar.js'],
     //Feedback
     feedbackSave:             ['./client/src/Feedback/Feedback.js'],
+    feedbackCrearPlan:        ['./client/src/Feedback/FeedbackCrearPlan.js'],
     //participantes:            ['./client/src/ede/participantes.js'],
     //Encuesta
     ingresoEncuesta:          ['./client/src/Encuesta/ingreso.js'],
