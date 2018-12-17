@@ -592,7 +592,7 @@ class Proceso {
         var resultPersonaEde =await api.execApi(request.hostname(),'/Desempeno/Proceso/getProcesoPersona',objdatosPersona);
         var persona =resultPersonaEde.body.data;
         var PersonaEde; 
-        console.log(persona)
+        
         //Etapa
         var objEtapa = {
             "idProceso":idProceso,
