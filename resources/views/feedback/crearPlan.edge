@@ -2,59 +2,149 @@
 
 @section('pluginsCss2')
     <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
-    <link href="/assets/plugins/ede/infobox/infobox.css" rel="stylesheet" type="text/css" />
-    <link href="/assets/plugins/ede/socialWidget/socialWidget.css" rel="stylesheet" type="text/css" />             
-    <link href="/assets/plugins/ede/progressbar/progressbar.css" rel="stylesheet" type="text/css" />    
+    <link rel="stylesheet" href="/assets/plugins/infobox/infobox.css">
+    <link rel="stylesheet" href="/assets/plugins/socialWidget/socialWidget.css">
 @endsection
 
 @section('scripts')
+    <script src="/assets/getOrgChart/js/getorgchart.js"></script>
     <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
-    <script src=/assets/js/dist/feedbackCrearPlan.min.js></script>
+    <script src="/assets/plugins/moment/moment.js"></script>
+    <script src="/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="/assets/plugins/bootstrap-datepicker/locales/es.js"></script>
+    <script src="/assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+    <script>
+        var acciones = {{{toJSON(fbAcciones)}}};
+
+        var idFeedbackOpinante="{{idFeedbackOpinante}}";
+
+        var cAcciones = new Vue({
+            el: '#app',
+            data:{
+                acciones:acciones
+            },
+            methods: {
+                editAccion: function(accion){
+                    cForm.accion = accion;
+                    //cForm.getAcciones(accion.idTipoAccion);
+                    cForm.accion.edit=true;
+
+                    $("#modalAccion").modal("show");
+                },
+                saveEdit: function(ev, number){
+                    this.toggleEdit(ev, number);
+                },
+                deleteAccion:function(accion){
+                    var obj = {
+                        idFeedbackOpinante:idFeedbackOpinante,
+                        accion:accion
+                    };
+
+                    $.ajax({
+                        type: "GET",
+                        url: "/Feedback/Feedback/deleteAccion",
+                        contentType: "application/json; charset=utf-8",
+                        data: obj,
+                        dataType: "json", 
+                        //async:false,
+                        success: function (msg) {
+                            cAcciones.acciones=msg;
+                            //$("#modalAccion").modal("hide");
+                        }
+                    });   
+                }
+            }
+        });
+
+        var cForm = new Vue({
+            el: '#formulario',
+            data: {
+                accion: {
+                    id:'',
+                    accion: '',
+                    objetivo:'',
+                    fechaTermino:'',
+                    edit: false
+                }            
+            },            
+            methods: {
+                saveAccion:function () {
+                    var url = "/Feedback/Feedback/addAccion"
+                    if(cForm.accion.edit){
+                        url="/Feedback/Feedback/saveAccion"
+                    }
+                    var obj = {
+                        idFeedbackOpinante:idFeedbackOpinante,
+                        accion:cForm.accion
+                    };
+
+                    $.ajax({
+                        type: "GET",
+                        url: url,
+                        contentType: "application/json; charset=utf-8",
+                        data: obj,
+                        dataType: "json", 
+                        //async:false,
+                        success: function (msg) {
+                            cAcciones.acciones=msg;
+                            $("#modalAccion").modal("hide");
+                        }
+                    });   
+                }
+            }
+        });
+
+        $(document).ready(function(){
+            $("#btnNewAccion").click(function(){
+                cForm.accion={
+                    id:'',
+                    accion: '',
+                    objetivo:'',
+                    fechaTermino:'',
+                    edit: false
+                }
+            })
+        });
+
+    </script>
+
 @endsection
 @section('content')
-    {{ csrfField() }}
+    @!component('components.Core.botonera')
+    @!component('feedback.components.modalAccionCrearPlan')
 
+    <form id="frmVolver" action="/Feedback/Feedback/index">    
+        <input type="hidden" id="idProceso" name="idProceso" value="{{datosVista.idProceso}}" />
+        <input type="hidden" id="idEtapa" name="idEtapa" value="{{datosVista.idEtapa}}" />
+    </form>
+
+    <input type="hidden" id="idFeedbackOpinante" name="idFeedbackOpinante" value="{{idFeedbackOpinante}}">
     <div class="row" >
         <div class="col-md-2">
             @!component('components.Desempeno.widgetInfoEtapa',datos=etapa,nombreProceso=dataProceso.nombre)
             @!component('components.Desempeno.widgetUser',datos=data,datamenu=datosMenu,persona=PersonaEde)
         </div>
-
         <div class="col-md-10">
-            <div class="row">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading bg-primary">
-                                <h3 class="panel-title text-white">Crear Plan</h3>
-                            </div>
-                            <div class="panel-body">
-                                <label>Dato1</label>    
-                                <input id="" class="form-control form-group">
-                                <label>Dato2</label>    
-                                <input id="" class="form-control form-group">
-                            </div>
-    
-                            <div class="panel-body" >
-                                <button type="button" class="btn btn-primary waves-effect waves-light bFinalizarCarga"> 
-                                    <span>Crear</span>
-                                </button>
-                            </div>
+            <div class="panel panel-border panel-purple">
+                <div class="panel-heading">
+                        
+                    <h2 class="panel-title">Acciones
+                        <div class="dropdown pull-right">
+                            <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
+                                <h3 class="m-0 text-muted"><i class="mdi mdi-dots-horizontal"></i></h3>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#" data-toggle="modal" data-target="#modalAccion" id="btnNewAccion">Nueva Acción</a></li>
+                            </ul>
                         </div>
-                    </div>
+                    </h2>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    &nbsp;
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    &nbsp;
-                </div>
+                <div class="panel-body">
+                    @!component('feedback.components.accion',persona=persona)
+                </div>    
             </div>
         </div>
-
+                
     </div>
 @endsection

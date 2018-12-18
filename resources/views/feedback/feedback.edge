@@ -19,7 +19,7 @@
 @section('content')
 <form id="frmVolver" action="/Feedback/Feedback/index">    
     <input type="hidden" id="idProceso" name="idProceso" value="{{datosVista.idProceso}}" />
-    <input type="hidden" id="idEtapa" name="idEtapa" value="{{dataVista.idEtapa}}" />
+    <input type="hidden" id="idEtapa" name="idEtapa" value="{{datosVista.idEtapa}}" />
 </form>
 {{ csrfField() }}
 <input type="hidden" id="idOpinante" name="idOpinante" value="{{idOpinante}}" />

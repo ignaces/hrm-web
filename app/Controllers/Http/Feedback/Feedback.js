@@ -48,14 +48,13 @@
         async crearPlan  ({ view,request, response, auth, session }) {
 
             var idFeedbackOpinante=request.input("idOpinante");
+            var datosVista = session.get("datosVista");
+
+            var result = await data.execApi(request.hostname(),'/Feedback/Persona/getAcciones',{idFeedbackOpinante:idFeedbackOpinante});
+
+            const fbAcciones = result.body.data;
             
-            //var result = await data.execApi(request.hostname(),'/Feedback/Persona/getFeedback',{idOpinante:idOpinante});
-
-            //const fb = result.body.data;
-
-            console.log(idFeedbackOpinante)
-
-            return view.render('feedback/crearPlan',  {idFeedbackOpinante:idFeedbackOpinante});
+            return view.render('feedback/crearPlan',  {idFeedbackOpinante:idFeedbackOpinante,datosVista,fbAcciones:fbAcciones});
         
         } 
 
@@ -72,7 +71,67 @@
         
         } 
 
-       
+        /*async guardarPlan  ({ view,request, response, auth, session }) {
+
+            var idFeedbackOpinante = request.input("idFeedbackOpinante");
+            var txtNomPlan = request.input("txtNomPlan");
+            var txtAccion = request.input("txtAccion");
+            var txtObjetivo = request.input("txtObjetivo");
+            var fechaInicio = request.input("fechaInicio");
+
+            var obj = {
+                idFeedbackOpinante:idFeedbackOpinante,
+                txtNomPlan:txtNomPlan,
+                txtAccion:txtAccion,
+                txtObjetivo:txtObjetivo,
+                fechaInicio:fechaInicio
+            };
+
+            var result = await data.execApi(request.hostname(),'/Feedback/Persona/savePlanFeedback',obj);
+
+            const fb = result.body.data;
+
+            return fb;
+        
+        }*/ 
+
+        async addAccion ({ view,request, response, auth, session }) {
+
+            var idFeedbackOpinante = request.input("idFeedbackOpinante");
+            var accion = request.input("accion");
+
+            var obj = {
+                idFeedbackOpinante:idFeedbackOpinante,
+                objAccion:accion
+            }
+
+            var result = await data.execApiPost(request.hostname(),'/Feedback/Persona/addAccion',obj);
+
+            var fb = result.body.data;
+
+            return fb;
+        
+        } 
+
+        async deleteAccion ({ view,request, response, auth, session }) {
+
+            var idFeedbackOpinante = request.input("idFeedbackOpinante");
+            var accion = request.input("accion");
+
+            var obj = {
+                idFeedbackOpinante:idFeedbackOpinante,
+                objAccion:accion
+            }
+
+            console.log(obj)
+
+            var result = await data.execApiPost(request.hostname(),'/Feedback/Persona/deleteAccion',obj);
+
+            var fb = result.body.data;
+
+            return fb;
+        
+        }       
         
     }
       
