@@ -51,10 +51,14 @@
             var datosVista = session.get("datosVista");
 
             var result = await data.execApi(request.hostname(),'/Feedback/Persona/getAcciones',{idFeedbackOpinante:idFeedbackOpinante});
+            var restado = await data.execApi(request.hostname(),'/Feedback/Persona/getEstadoPlan',{idFeedbackOpinante:idFeedbackOpinante});
 
             const fbAcciones = result.body.data;
-            
-            return view.render('feedback/crearPlan',  {idFeedbackOpinante:idFeedbackOpinante,datosVista,fbAcciones:fbAcciones});
+            const fbEstado = restado.body.data;
+
+            const estado = fbEstado[0].codigo;
+                       
+            return view.render('feedback/crearPlan',  {idFeedbackOpinante:idFeedbackOpinante,datosVista,fbAcciones:fbAcciones, estado:estado});
         
         } 
 
@@ -71,29 +75,23 @@
         
         } 
 
-        /*async guardarPlan  ({ view,request, response, auth, session }) {
+        async updateAccion ({ view,request, response, auth, session }) {
 
             var idFeedbackOpinante = request.input("idFeedbackOpinante");
-            var txtNomPlan = request.input("txtNomPlan");
-            var txtAccion = request.input("txtAccion");
-            var txtObjetivo = request.input("txtObjetivo");
-            var fechaInicio = request.input("fechaInicio");
+            var accion = request.input("accion");
 
             var obj = {
                 idFeedbackOpinante:idFeedbackOpinante,
-                txtNomPlan:txtNomPlan,
-                txtAccion:txtAccion,
-                txtObjetivo:txtObjetivo,
-                fechaInicio:fechaInicio
-            };
+                objAccion:accion
+            }
 
-            var result = await data.execApi(request.hostname(),'/Feedback/Persona/savePlanFeedback',obj);
+            var result = await data.execApiPost(request.hostname(),'/Feedback/Persona/updateAccion',obj);
 
-            const fb = result.body.data;
+            var fb = result.body.data;
 
             return fb;
         
-        }*/ 
+        } 
 
         async addAccion ({ view,request, response, auth, session }) {
 
@@ -122,8 +120,6 @@
                 idFeedbackOpinante:idFeedbackOpinante,
                 objAccion:accion
             }
-
-            console.log(obj)
 
             var result = await data.execApiPost(request.hostname(),'/Feedback/Persona/deleteAccion',obj);
 

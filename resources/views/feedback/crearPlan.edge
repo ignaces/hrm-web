@@ -27,7 +27,6 @@
             methods: {
                 editAccion: function(accion){
                     cForm.accion = accion;
-                    //cForm.getAcciones(accion.idTipoAccion);
                     cForm.accion.edit=true;
 
                     $("#modalAccion").modal("show");
@@ -72,7 +71,7 @@
                 saveAccion:function () {
                     var url = "/Feedback/Feedback/addAccion"
                     if(cForm.accion.edit){
-                        url="/Feedback/Feedback/saveAccion"
+                        url="/Feedback/Feedback/updateAccion"
                     }
                     var obj = {
                         idFeedbackOpinante:idFeedbackOpinante,
@@ -130,19 +129,21 @@
                 <div class="panel-heading">
                         
                     <h2 class="panel-title">Acciones
-                        <div class="dropdown pull-right">
-                            <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
-                                <h3 class="m-0 text-muted"><i class="mdi mdi-dots-horizontal"></i></h3>
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#" data-toggle="modal" data-target="#modalAccion" id="btnNewAccion">Nueva Acción</a></li>
-                            </ul>
-                        </div>
+                        @if(estado=="INI")
+                            <div class="dropdown pull-right">
+                                <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
+                                    <h3 class="m-0 text-muted"><i class="mdi mdi-dots-horizontal"></i></h3>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#" data-toggle="modal" data-target="#modalAccion" id="btnNewAccion">Nueva Acción</a></li>
+                                </ul>
+                            </div>
+                        @endif
                     </h2>
                 </div>
                 <div class="panel-body">
-                    @!component('feedback.components.accion',persona=persona)
-                </div>    
+                    @!component('feedback.components.accion',persona=persona,estado=estado)
+                </div>   
             </div>
         </div>
                 
