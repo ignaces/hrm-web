@@ -1,0 +1,70 @@
+
+@if(lista.length > 0)
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                      <table class="table table-hover m-0 mails table-actions-bar table-colored table">
+                          <thead>
+                                <tr class="bg-gray">                                      
+                                    <th>Colaborador</th>
+                                    <th>Estado</th>
+                                    <th>Acción</th>
+                                    
+                                </tr>
+                          </thead>
+                          <tbody>
+                           @each(persona in lista)
+                                <tr>
+                                    <td rowspan="1" class="text-left">
+                                        <div class="text-center">
+                                            <div class="clearfix"></div>
+                                            <div class="member-card">
+                                                <div class="center-block">
+                                                    <img src="{{persona.foto}}" class="img-circle img-thumbnail" alt="profile-image" width="48px">
+                                                </div>
+                                                <div class="">
+                                                    <h5 class="m-b-5">{{persona.nombres}} {{persona.apellidoPaterno}} {{persona.apellidoMaterno}}</h5>
+                                                    @if(tarea.tarea.evaluado_nombreCargo_row != null)
+                                                        <p class="text-muted">{{tarea.tarea.evaluado_nombreCargo_row}}</p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                    <div class="label label-{{persona.color}}"> <i class=""></i> {{persona.estado}}</div>
+                                    </td>
+                                    
+                                    <td>
+                                        @if(persona.codigoEstado=="FINALIZADO") 
+                                        <form method="GET" action="/Feedback/Feedback/crearPlan">
+                                            <input type="hidden" name="idOpinante" value="{{persona.idOpinante}}">
+                                            <button type="submit" class="btn btn-warning btn-xs btn-rounded btn-bordered waves-effect w-md"><i class="{{tarea.tarea.step_icono}}"></i> PDA</a>   
+                                        </form>
+                                        @else
+                                            <form method="GET" action="/Feedback/Feedback/realizar">
+                                                
+                                                <input type="hidden" name="idOpinante" value="{{persona.idOpinante}}">
+                                                <button type="submit" class="btn btn-warning btn-xs btn-rounded btn-bordered waves-effect w-md"><i class="{{tarea.tarea.step_icono}}"></i> Realizar Feedback</a>   
+                                            </form>
+                                        @endif
+
+                                    </td>
+                                </tr>
+                                 
+                                 @endeach
+
+                                
+                          </tbody>
+                      </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@endif

@@ -1,0 +1,78 @@
+@layout('layouts/horizontal')
+
+
+@section('pluginsCss2')
+
+<link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+
+
+        <link href="/assets/plugins/ede/infobox/infobox.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/plugins/ede/socialWidget/socialWidget.css" rel="stylesheet" type="text/css" />             
+        <link href="/assets/plugins/ede/progressbar/progressbar.css" rel="stylesheet" type="text/css" /> 
+           
+@endsection
+
+@section('scripts')
+<script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+<script src=/assets/js/dist/feedbackSave.min.js></script>
+@endsection
+@section('content')
+<form id="frmVolver" action="/Feedback/Feedback/index">    
+    <input type="hidden" id="idProceso" name="idProceso" value="{{datosVista.idProceso}}" />
+    <input type="hidden" id="idEtapa" name="idEtapa" value="{{datosVista.idEtapa}}" />
+</form>
+{{ csrfField() }}
+<input type="hidden" id="idOpinante" name="idOpinante" value="{{idOpinante}}" />
+
+<div class="row" >
+    
+    <div class="col-md-2">
+       @!component('components.Desempeno.widgetInfoEtapa',datos=etapa,nombreProceso=dataProceso.nombre)
+       @!component('components.Desempeno.widgetUser',datos=data,datamenu=datosMenu,persona=PersonaEde)
+    </div>
+    <div class="col-md-10">
+        
+            <div class="row">
+                   
+                   
+        
+                    {{-- OBSERVACION --}}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                    <div class="panel-heading bg-primary">
+                                            <h3 class="panel-title text-white">Observación:</h3>
+                                        </div>
+                                <div class="panel-body">
+                                        <textarea id="txtObservacion" class="form-control inputObservacion" maxlength="225" rows="3" ></textarea>
+                                    <div class="row pull-right">
+
+                                        <div class="col-md-12">
+                                     
+                                                <button type="button" id="btnGrabarFinalizar" class="btn btn-success btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-save"></i> Grabar y Finalizar</button>
+                                          
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- //OBSERVACION --}}
+                </div>
+        
+        <div class="row">
+            <div class="col-lg-12">
+                &nbsp;
+            </div>
+        </div>
+
+        <div class="row">
+                <div class="col-lg-12">
+                    &nbsp;
+                </div>
+        </div>
+    </div>
+
+@endsection
+
+
