@@ -15,7 +15,12 @@
 
             @if(etapa.estado_codigo=="ABIERTA")
                 <!--<button type="button" class="btn btn-{{etapa.colorEstado}} m-t-20 btn-rounded btn-bordered waves-effect w-md waves-light btn-xs btnEtapa" id="{{etapa.id}}_{{etapa.idEdeProceso}}"><i class='{{etapa.iconoEstado}}'></i> {{etapa.textoEstado}}</button>-->
-                <a href="/Desempeno/Proceso/etapa?idProceso={{etapa.idProceso}}&idEtapa={{etapa.idEtapa}}" class="btn btn-{{etapa.estado_color}} m-t-20 btn-rounded btn-bordered waves-effect w-md waves-light btn-xs"><i class='{{etapa.estado_icono}}'></i> {{etapa.estado_texto}}</a>
+                @if(etapa.etapa_link!=null)
+                    <a href="{{etapa.etapa_link}}?idProceso={{etapa.idProceso}}&idEtapa={{etapa.idEtapa}}" class="btn btn-{{etapa.estado_color}} m-t-20 btn-rounded btn-bordered waves-effect w-md waves-light btn-xs"><i class='{{etapa.estado_icono}}'></i> {{etapa.estado_texto}}</a>
+                @else
+                    <a href="/Desempeno/Proceso/etapa?idProceso={{etapa.idProceso}}&idEtapa={{etapa.idEtapa}}" class="btn btn-{{etapa.estado_color}} m-t-20 btn-rounded btn-bordered waves-effect w-md waves-light btn-xs"><i class='{{etapa.estado_icono}}'></i> {{etapa.estado_texto}}</a>
+                @endif
+                
             @else
                 <a href="#" class="btn btn-{{etapa.estado_color}} m-t-20 btn-rounded btn-bordered waves-effect w-md waves-light btn-xs" disabled><i class='{{etapa.estado_icono}}'></i> {{etapa.estado_texto}}</a>
             @endif 
