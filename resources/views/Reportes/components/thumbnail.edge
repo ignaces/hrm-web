@@ -12,7 +12,11 @@
                             </div>
                             <div class="text-center">
                                 <div class="row">
-                                    <a href="/Reporte/Library/Show?rp={{reporte.idReporte}}" class="btn btn-primary waves-effect waves-light"> <i class="fa fa-eye"></i> <span>Ver</span> </a>
+                                    @if(reporte.nombre=="Avance")
+                                        <a href="{{reporte.link}}" class="btn btn-primary waves-effect waves-light"> <i class="fa fa-eye"></i> <span>Ver</span> </a>
+                                    @else
+                                        <a href="/Reporte/Library/Show?rp={{reporte.idReporte}}" class="btn btn-primary waves-effect waves-light"> <i class="fa fa-eye"></i> <span>Ver</span> </a>
+                                    @endif
                                 </div>
                             </div>
 
