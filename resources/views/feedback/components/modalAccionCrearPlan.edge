@@ -1,0 +1,55 @@
+<div class="modal fade bs-example-modal-lg" id="modalAccion" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myLargeModalLabel">Plan de Accion</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="p-20">
+                            <form class="form-horizontal" role="form" id="formulario">
+                                <div class="form-group row">
+                                    <label for="txtAccion" class="col-3 col-form-label">Acción</label>
+                                    <div class="col-9">
+                                        <input type="hidden" v-model="accion.id" value="{{datosVista.idProceso}}" />
+                                        <textarea id="txtAccion" class="form-control" v-model="accion.accion" maxlength="225" rows="3" ></textarea>
+                                    </div>
+                                </div>  
+                                <div class="form-group row">
+                                    <label for="txtObjetivo" class="col-3 col-form-label">Objetivo</label>
+                                    <div class="col-9">
+                                        <textarea id="txtObjetivo" class="form-control" v-model="accion.objetivo" maxlength="225" rows="3" placeholder="Este es el objetivo de la acción"></textarea>
+                                    </div>
+                                </div>
+                                <!--<div class="form-group row">
+                                    <label class="col-3 col-form-label">Competencia</label>
+                                    <div class="col-9">
+                                        <select id="cmbCompetencia" class="form-control" v-model="accion.idCompetencia">
+                                            <option selected disabled value="-1">Seleccione una competencia...</option>
+                                            <option v-for="competencia in competenciasPredeterminadas" v-bind:value="competencia.id">
+                                                @{{ competencia.nombre }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>-->  
+                               <div class="form-group row">
+                                    <label>Fecha fin</label>
+                                    <div class="input-daterange input-group" id="date-range" >
+                                        <input type="date" class="form-control" v-model="accion.fechaTermino" name="end" id="end"/>
+                                    </div>
+                                </div>
+                                <div class="form-group m-b-0 row">
+                                    <div class="offset-3 col-9">
+                                        <button type="button" v-on:click="saveAccion" class="btn btn-info waves-effect waves-light">Guardar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

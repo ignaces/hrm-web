@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="col-md-12" id="app">
+        <div class="card-box"  v-if="acciones.length==0">
+            <p>No hay aciones creadas.  Para crear una nueva acción haz click en los tres puntos (<i class="mdi mdi-dots-horizontal"></i>) en la esquina derecha de este panel.</p>
+        </div>
+        <div class="card-box" v-for="accion in acciones" v-if="acciones.length>0">
+            @if(estado=="INI")
+                <div class="dropdown pull-right">
+                    <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
+                        <h3 class="m-0 text-muted"><i class="mdi mdi-dots-horizontal"></i></h3>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#" v-on:click="editAccion(accion)">Editar</a></li>
+                        <li><a href="#" v-on:click="deleteAccion(accion)">Eliminar</a></li>
+                    </ul>
+                </div>
+            @endif
+            <div class="clearfix p-t-50">
+                <h5 class="text-primary">Acción:</h5>
+                <small>
+                    @{{accion.accion}}
+                </small>
+            </div>
+            <div class="clearfix p-t-50">
+                <h5 class="text-primary">Objetivo:</h5>
+                <small>
+                    @{{accion.objetivo}}
+                </small>
+            </div>
+
+            <!--
+            <div class="clearfix p-t-50">
+                <h5 class="text-primary">Competencia:</h5>
+
+                <small>
+                    @{{accion.competencia}}
+                </small>
+            </div>
+            -->
+            <div class="row">
+                <div class="clearfix p-t-50 col-md-6">
+                    <h5 class="text-primary">Fecha Fin:</h5>
+                    <small>
+                        @{{accion.plazo}}
+                    </small>
+                </div>
+            </div>
+        </div>
+        @if(estado=="INI")
+            <div class="form-group m-b-0 row" v-if="acciones.length>0">
+                <div class="offset-3 col-9">
+                    <button type="button" id="finalizarPlan" class="btn btn-info waves-effect waves-light">Finalizar</button>
+                </div>
+            </div>
+        @endif
+    </div>
+</div><!--fin accion-->
