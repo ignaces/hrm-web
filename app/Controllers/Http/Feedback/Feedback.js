@@ -127,6 +127,21 @@
 
             return fb;
         
+        }
+        async finalizarPlan ({ view,request, response, auth, session }) {
+
+            var idFeedbackOpinante = request.input("idFeedbackOpinante");
+
+            var obj = {
+                idFeedbackOpinante:idFeedbackOpinante,
+            }
+
+            var result = await data.execApiPost(request.hostname(),'/Feedback/Persona/finalizarPlan',obj);
+
+            var fb = result.body.data;
+
+            return fb;
+        
         }       
         
     }

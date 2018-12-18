@@ -104,6 +104,42 @@
                     edit: false
                 }
             })
+
+            $("#finalizarPlan").click(function(){
+                swal({
+                    title: '¿Esta seguro de finalizar?',
+                    text: "No podra volver a editar",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si, finalizar',
+                    cancelButtonText: 'Cancelar'
+                }).then(function(result)  {
+                    if (result) {
+                        var obj = { 
+                            idFeedbackOpinante:idFeedbackOpinante
+                        };
+
+                        $.ajax({
+                            type: "GET",
+                            url: "/Feedback/Feedback/finalizarPlan",
+                            contentType: "application/json; charset=utf-8",
+                            data: obj,
+                            dataType: "json", 
+                            success: function (msg) {
+                                swal({
+                                    title:'Finalizado',
+                                    text:'Feedback finalizado correctamente.',
+                                    type:'success'
+                                }).then(function(result){
+                                    $('#frmVolver').submit();
+                                });
+                            }
+                        });
+                    }
+                })
+            }); 
         });
 
     </script>
