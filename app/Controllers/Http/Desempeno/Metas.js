@@ -276,7 +276,7 @@ class Meta {
         try{
             var data = session.get('dataVista')
             var obj = {
-                "idAccionPersona":data.idAccionPersona,
+                "idAccionPersona":request.input("idAccionPersona"),
                 "idOpinante":request.input("idOpinante")//data.idOpinante,
             };
             var result = await api.execApi(request.hostname(),'/Desempeno/Metas/finalizar',obj);  
