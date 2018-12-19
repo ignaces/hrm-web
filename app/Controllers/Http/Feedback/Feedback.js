@@ -110,7 +110,6 @@
             return fb;
         
         } 
-
         async deleteAccion ({ view,request, response, auth, session }) {
 
             var idFeedbackOpinante = request.input("idFeedbackOpinante");

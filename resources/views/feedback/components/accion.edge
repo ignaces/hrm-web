@@ -27,7 +27,6 @@
                     @{{accion.objetivo}}
                 </small>
             </div>
-
             <!--
             <div class="clearfix p-t-50">
                 <h5 class="text-primary">Competencia:</h5>
@@ -49,7 +48,7 @@
         @if(estado=="INI")
             <div class="form-group m-b-0 row" v-if="acciones.length>0">
                 <div class="offset-3 col-9">
-                    <button type="button" id="finalizarPlan" class="btn btn-info waves-effect waves-light">Finalizar</button>
+                    <button type="button" id="finalizarPlan" v-on:click="finalizarPlan" class="btn btn-info waves-effect waves-light">Finalizar</button>
                 </div>
             </div>
         @endif
