@@ -95,15 +95,47 @@
                 }
             });
         });
+        
+        $('div[class="nota"]').each(function(index,item){
+            //if(parseInt($(item).data('index'))>2){
+            //    $(item).html('Testimonial '+(index+1)+' by each loop');
+            //}
+            //console.log($(item).html());
 
+            var objNiveles = {
+                    "idOpinante":"{{idOpinante}}",
+                    "resultado": $(item).html()
+                };
+                var nombreNivel = "";
+                if(!isNaN($(item).html())){
+                    $.ajax({
+                        async: false,
+                        type: "GET",
+                        url: "/Desempeno/Proceso/getNivelPromedioCompetencia",
+                        contentType: "application/json; charset=utf-8",
+                        data: objNiveles,
+                        dataType: "json",   
+                        success: function (msg) {
+                            //$(this).html("sdsfsdf")  
+                            //alert(msg.nivel)
+                            nombreNivel = msg.nivel;
+                        }
+
+                    });
+                    $(item).html(nombreNivel)  
+                }
+
+
+        });
+        /*
         $("#tblPromedioComp tbody tr").each(function (index) {
             $(this).children("td").each(function (index2) {
                 var objNiveles = {
                     "idOpinante":"{{idOpinante}}",
-                    "resultado": $(this).text()
+                    "resultado": $(".nota").text()
                 };
                 var nombreNivel = "";
-                if(!isNaN($(this).text())){
+                if(!isNaN($(".nota").text())){
                     $.ajax({
                         async: false,
                         type: "GET",
@@ -122,7 +154,7 @@
                 }
             });
         });
-        
+        */
         $(".tFunc").hide();
 
     });
@@ -221,10 +253,10 @@
                                                                                                                         @each(p in promedioGeneral)
                                                                                                                                        
                                                                                                                             @if(p.id == $parent.$parent.$parent.competencia.id )
-                                                                                                                                    <td style="text-align: center;">{{p.nivelAuto}}</td>
+                                                                                                                                    <td style="text-align: center;"><div class="nota">{{p.nivelAuto}}</div></td>
 
                                                                                                                                 @if(codigoActor == 'SUPE')
-                                                                                                                                    <td style="text-align: center;">{{p.nivelSup}}</td>
+                                                                                                                                    <td style="text-align: center;"><div class="nota">{{p.nivelSup}}</div></td>
                                                                                                                                 @endif
                                                                                                                             @endif
 
@@ -394,7 +426,7 @@
                                 </div>           
             
                         </div> 
-                        @!component('components.Desempeno.cajaPromedioGeneral',data={promedioGeneral:promedioGeneral, codigoActor: codigoActor})
+                        @!component('components.Desempeno.cajaPromedioGeneralCriterio',data={promedioGeneral:promedioGeneral, codigoActor: codigoActor})
                         
                         
                         <div class="col-lg-12">
@@ -427,7 +459,7 @@
                                                             <span id="ctl00_Principal_LBPRRC">0.80</span>
                                                         </td-->
                                                         <td align="center" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
-                                                            <span id="lblCompetencia">{{instrumento.resultadoCompetencias.nivel}}</span>
+                                                            <span id="lblCompetencia">{{instrumento.resultadoCompetencias.nivel}} ({{instrumento.resultadoCompetencias.promedio}})</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -438,7 +470,7 @@
                                                             <span id="ctl00_Principal_LBPRRM">0.00</span>
                                                         </td-->
                                                         <td align="center" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
-                                                            <span id="lblMetas">{{instrumento.resultadoMetas.nivel}}</span>
+                                                            <span id="lblMetas">{{instrumento.resultadoMetas.nivel}} ({{instrumento.resultadoMetas.promedioResultado}})</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -459,7 +491,7 @@
                                                         <td class="style25" height="20" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
                                                                 Resultado Global</td>
                                                             <td align="center" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
-                                                                <span id="lblMetas">{{instrumento.resultadoGlobal.nivel}}</span>
+                                                                <span id="lblMetas">{{instrumento.resultadoGlobal.nivel}} ({{instrumento.resultadoGlobal.total}})</span>
                                                             </td>
                                                     </tr>
                                                     {{--
