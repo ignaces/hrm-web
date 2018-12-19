@@ -1,19 +1,32 @@
 $("#btnGrabarFinalizar").click(function(){
 
     var vacios=false;
+    var txt="";
+    var largo=0;
     $(".inputObservacion").each(function() {
-        var txt = $(this).prop('value');
+        txt = $(this).prop('value');
         
         if(txt== ""){
             vacios = true;
         }    
-        
+        var trimed=txt.replace(/\s+/g, '');
+
+        largo=trimed.length;
     });
     
     if (vacios) {
         swal(
             'No has terminado',
             'Debes ingresar una observación.',
+            'warning'
+        );
+        return false;
+    }
+
+    if (largo<100) {
+        swal(
+            'No has terminado',
+            'Debes ingresar una observación de al menos 100 caracteres.',
             'warning'
         );
         return false;
