@@ -94,7 +94,7 @@
                                                                                                             {{alternativa.nombre}}
                                                                                                     </td>
                                                                                                     <td rowspan="3">
-                                                                                                        <table class="table m-0 table-colored-bordered table-bordered-warning">
+                                                                                                            <table class="table m-0 table-colored-bordered table-bordered-warning" id="tblPromedioComp">
                                                                                                             <thead>
                                                                                                                 <tr>
                                                                                                                     <th>Autoevaluación</th> 
@@ -581,76 +581,148 @@
   
   
           <script>
-          (function() {
-            var labelsSpider = "{{competenciasSpider}}".split(",");
-            var dataSpiderAuto = "{{valoresSpiderAuto}}".split(",");
-            var dataSpiderSup = "{{valoresSpiderSup}}".split(",");
-            var ctx = document.getElementById('myRadarChart').getContext('2d');
-
-            if("{{codigoActor}}" == "EVAL")
-            {
-                var myRadarChart = new Chart(ctx, {
-                    type: 'radar',
-                    data: {
-                        labels: labelsSpider,
-                        datasets: [{
-                            label: "Autoevaluacion",
-                            backgroundColor: "rgba(200,0,0,0.2)",
-                            data: dataSpiderAuto
-                        }
-                        /*, {
-                            label: "Evaluacion",
-                            backgroundColor: "rgba(0,0,200,0.2)",
-                            data: [3, 3, 1, 2, 3, 3]
-                        }*/
-                        ]
-                        },
-                    options:{
-                        layout: {
-                            padding: {
-                                left: 150,
-                                right: 0,
-                                top: -0,
-                                bottom: 0
-                            }
-                        }
-                    }
+                $(document).ready(()=>{
+      
+                  $("#tblPromedio tbody tr").each(function (index) {
+                  $(this).children("td").each(function (index2) {
+                      var objNiveles = {
+                          "idOpinante":"{{idOpinante}}",
+                          "resultado": $(this).text()
+                      };
+                      var nombreNivel = "";
+                      if(!isNaN($(this).text())){
+                          $.ajax({
+                              async: false,
+                              type: "GET",
+                              url: "/Desempeno/Proceso/getNivelPromedioCompetencia",
+                              contentType: "application/json; charset=utf-8",
+                              data: objNiveles,
+                              dataType: "json",   
+                              success: function (msg) {
+                                  //$(this).html("sdsfsdf")  
+                                  //alert(msg.nivel)
+                                  nombreNivel = msg.nivel;
+                              }
+      
+                          });
+                          $(this).html(nombreNivel)  
+                      }
+                  });
+              });
+      
+              $("#tblPromedioComp tbody tr").each(function (index) {
+                  $(this).children("td").each(function (index2) {
+                      var objNiveles = {
+                          "idOpinante":"{{idOpinante}}",
+                          "resultado": $(this).text()
+                      };
+                      var nombreNivel = "";
+                      if(!isNaN($(this).text())){
+                          $.ajax({
+                              async: false,
+                              type: "GET",
+                              url: "/Desempeno/Proceso/getNivelPromedioCompetencia",
+                              contentType: "application/json; charset=utf-8",
+                              data: objNiveles,
+                              dataType: "json",   
+                              success: function (msg) {
+                                  //$(this).html("sdsfsdf")  
+                                  //alert(msg.nivel)
+                                  nombreNivel = msg.nivel;
+                              }
+      
+                          });
+                          $(this).html(nombreNivel)  
+                      }
+                  });
+              });
+      
+      
+                      var labelsSpider = "{{competenciasSpider}}".split(",");
+                      var dataSpiderAuto = "{{valoresSpiderAuto}}".split(",");
+                      var dataSpiderSup = "{{valoresSpiderSup}}".split(",");
+                      var ctx = document.getElementById('myRadarChart').getContext('2d');
+      
+                      if("{{codigoActor}}" == "EVAL")
+                      {
+                          var myRadarChart = new Chart(ctx, {
+                              type: 'radar',
+                              data: {
+                                  labels: labelsSpider,
+                                  datasets: [{
+                                      label: "Autoevaluacion",
+                                      backgroundColor: "rgba(200,0,0,0.2)",
+                                      data: dataSpiderAuto
+                                  }
+                                  /*, {
+                                      label: "Evaluacion",
+                                      backgroundColor: "rgba(0,0,200,0.2)",
+                                      data: [3, 3, 1, 2, 3, 3]
+                                  }*/
+                                  ]
+                                  },
+                              options:{
+                                  layout: {
+                                      padding: {
+                                          left: 150,
+                                          right: 0,
+                                          top: -0,
+                                          bottom: 0
+                                      }
+                                  }
+                              }
+                          });
+                      }
+                      else
+                      {
+                          var myRadarChart = new Chart(ctx, {
+                              type: 'radar',
+                              data: {
+                                  labels: labelsSpider,
+                                  datasets: [{
+                                                  label: "Autoevaluacion",
+                                                  backgroundColor: "rgba(200,0,0,0.2)",
+                                                  data: dataSpiderAuto
+                                              }
+                                              , {
+                                                  label: "Evaluacion",
+                                                  backgroundColor: "rgba(0,0,200,0.2)",
+                                                  data: dataSpiderSup
+                                              }
+                                  ]
+                                  },
+                              options:{
+                                  layout: {
+                                      padding: {
+                                          left: 150,
+                                          right: 0,
+                                          top: -0,
+                                          bottom: 0
+                                      }
+                                  }
+                              }
+                          });
+                      }
+                  
                 });
-            }
-            else
-            {
-                var myRadarChart = new Chart(ctx, {
-                    type: 'radar',
-                    data: {
-                        labels: labelsSpider,
-                        datasets: [{
-                                        label: "Autoevaluacion",
-                                        backgroundColor: "rgba(200,0,0,0.2)",
-                                        data: dataSpiderAuto
-                                    }
-                                    , {
-                                        label: "Evaluacion",
-                                        backgroundColor: "rgba(0,0,200,0.2)",
-                                        data: dataSpiderSup
-                                    }
-                        ]
-                        },
-                    options:{
-                        layout: {
-                            padding: {
-                                left: 150,
-                                right: 0,
-                                top: -0,
-                                bottom: 0
-                            }
-                        }
-                    }
+                </script>
+                  <script>
+              (function() {
+                'use strict';
+        
+                if (!('serviceWorker' in navigator)) {
+                  console.log('Service worker not supported');
+                  return;
+                }
+                navigator.serviceWorker.register('/assets/js/sw.js')
+                .then(function() {
+                  console.log('Registered');
+                })
+                .catch(function(error) {
+                  console.log('Registration failed:', error);
                 });
-            }
-
-
-            })();
-           
-          </script>
+        
+              })();
+            </script>
        
 @endsection
