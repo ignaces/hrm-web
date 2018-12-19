@@ -6,6 +6,7 @@ class Library {
         var persona =  session.get('personaLogueada')
         var idEmpresa = persona.idEmpresa;
         var result = await data.execApi(request.hostname(),'/Reportes/Reportes/list',{idEmpresa:idEmpresa});
+        
         return view.render('Reportes/index',  {reportes:result.body});
     }
     async Show ({view,request,response}){
