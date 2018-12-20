@@ -70,7 +70,27 @@ class Register{
         }
 */      
     }
+    async setSuplantador({request, response}) {
+       
+        ////console.log("TEST");
+        //return false;
 
+        const identificador = request.input("identificador");
+
+       
+            
+            try{
+             
+                var registraPersona = await data.execApi(request.hostname(),'/Usuario/Usuario/setSuplantador',{identificador:identificador});
+                //console.log(registraPersona);
+            }
+            catch(error)
+            {
+                //console.log(error);
+            }
+            return "OK";
+              
+    }
     async doRegisterUsuariosPersonas({request, response}) {
        
         ////console.log("TEST");
