@@ -368,58 +368,64 @@
           $(document).ready(()=>{
 
             $("#tblPromedio tbody tr").each(function (index) {
-            $(this).children("td").each(function (index2) {
-                var objNiveles = {
-                    "idOpinante":"{{idOpinante}}",
-                    "resultado": $(this).text()
-                };
-                var nombreNivel = "";
-                if(!isNaN($(this).text())){
-                    $.ajax({
-                        async: false,
-                        type: "GET",
-                        url: "/Desempeno/Proceso/getNivelPromedioCompetencia",
-                        contentType: "application/json; charset=utf-8",
-                        data: objNiveles,
-                        dataType: "json",   
-                        success: function (msg) {
-                            //$(this).html("sdsfsdf")  
-                            //alert(msg.nivel)
-                            nombreNivel = msg.nivel;
-                        }
+                console.log("ajaasdas")
+                $(this).children("td").each(function (index2) {
+                    var objNiveles = {
+                        "idOpinante":"{{idOpinante}}",
+                        "resultado": $(this).text()
+                    };
+                    var nombreNivel = "";
+                    if(!isNaN($(this).text())){
+                        $.ajax({
+                            async: false,
+                            type: "GET",
+                            url: "/Desempeno/Proceso/getNivelPromedioCompetencia",
+                            contentType: "application/json; charset=utf-8",
+                            data: objNiveles,
+                            dataType: "json",   
+                            success: function (msg) {
+                                //$(this).html("sdsfsdf")  
+                                //alert(msg.nivel)
+                                console.log(msg.nivel)
+                                nombreNivel = msg.nivel;
+                            }
 
-                    });
-                    $(this).html(nombreNivel)  
-                }
+                        });
+                        console.log(nombreNivel)
+                        $(this).html(nombreNivel)  
+                    }
+                });
             });
-        });
 
-        $("#tblPromedioComp tbody tr").each(function (index) {
-            $(this).children("td").each(function (index2) {
-                var objNiveles = {
-                    "idOpinante":"{{idOpinante}}",
-                    "resultado": $(this).text()
-                };
-                var nombreNivel = "";
-                if(!isNaN($(this).text())){
-                    $.ajax({
-                        async: false,
-                        type: "GET",
-                        url: "/Desempeno/Proceso/getNivelPromedioCompetencia",
-                        contentType: "application/json; charset=utf-8",
-                        data: objNiveles,
-                        dataType: "json",   
-                        success: function (msg) {
-                            //$(this).html("sdsfsdf")  
-                            //alert(msg.nivel)
-                            nombreNivel = msg.nivel;
-                        }
+            $("#tblPromedioComp tbody tr").each(function (index) {
+                console.log("sdfsdfs")
+                $(this).children("td").each(function (index2) {
+                    var objNiveles = {
+                        "idOpinante":"{{idOpinante}}",
+                        "resultado": $(this).text()
+                    };
+                    var nombreNivel = "";
+                    if(!isNaN($(this).text())){
+                        $.ajax({
+                            async: false,
+                            type: "GET",
+                            url: "/Desempeno/Proceso/getNivelPromedioCompetencia",
+                            contentType: "application/json; charset=utf-8",
+                            data: objNiveles,
+                            dataType: "json",   
+                            success: function (msg) {
+                                //$(this).html("sdsfsdf")  
+                                //alert(msg.nivel)
+                                console.log(msg.nivel)
+                                nombreNivel = msg.nivel;
+                            }
 
-                    });
-                    $(this).html(nombreNivel)  
-                }
+                        });
+                        console.log(nombreNivel)
+                        $(this).html(nombreNivel)  
+                    }
+                });
             });
-        });
 
 
                 var labelsSpider = "{{competenciasSpider}}".split(",");
