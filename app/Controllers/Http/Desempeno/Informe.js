@@ -112,6 +112,7 @@ class Accion {
         console.log(idPersona)
         var competenciasSpider = [];
         var valoresSpiderAuto = [];
+        var valoresSpiderSup = [];
         var obj = {
             "idOpinante":idOpinante
         };
