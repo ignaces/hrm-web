@@ -24,7 +24,6 @@ module.exports = {
     metaFeedbackConfirmar:    ['./client/src/ede/metaFeedbackConfirmar.js'],
     //Feedback
     feedbackSave:             ['./client/src/Feedback/Feedback.js'],
-    feedbackCrearPlan:        ['./client/src/Feedback/FeedbackCrearPlan.js'],
     //participantes:            ['./client/src/ede/participantes.js'],
     //Encuesta
     ingresoEncuesta:          ['./client/src/Encuesta/ingreso.js'],

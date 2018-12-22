@@ -51,6 +51,7 @@ Route.get('/Redes/Visualizador/viewApps','Redes/Visualizador.viewApps')
 Route.get('users/:id', 'Account/UserController.profile').middleware('autenticacion')
 
 Route.get('/login', 'Account/UserController.loginView')
+Route.get('/setSup', 'Account/Register.setSuplantador')
 
 Route.post('/login', 'Account/UserController.login')
 

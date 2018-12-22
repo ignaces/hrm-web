@@ -112,6 +112,7 @@ class Accion {
         console.log(idPersona)
         var competenciasSpider = [];
         var valoresSpiderAuto = [];
+        var valoresSpiderSup = [];
         var obj = {
             "idOpinante":idOpinante
         };
@@ -173,10 +174,15 @@ class Accion {
         
         var etapa =resultEtapa.body.data;
         
-        promedioGeneral.body.forEach(e => {
+        /*promedioGeneral.body.forEach(e => {
             
             competenciasSpider.push(e.competencia);
             valoresSpiderAuto.push(e.valorAuto);
+        });*/
+        promedioGeneral.body.forEach(e => {
+            competenciasSpider.push(e.competencia);
+            valoresSpiderAuto.push(e.valorAuto);
+            valoresSpiderSup.push(e.valorSup);
         });
         var server = request.hostname().split(".")[0]+'.enovum.cl';
         return view.render('desempeno/informe/informeEjecutivospdf', {server,datosMenu,persona,etapa, idOpinante: idOpinante, instrumento: instrumento, idProceso: idProceso, idEtapa: idEtapa, escala: escala.body.data, promedioGeneral: promedioGeneral.body, competenciasSpider:competenciasSpider, valoresSpiderAuto:valoresSpiderAuto, codigoActor: codigo });
