@@ -1,37 +1,20 @@
 
+var changeCheckbox = document.querySelector('.js-check-change');
+
+changeCheckbox.onchange = function() {
+  var checked=changeCheckbox.checked;
+  if(checked){
+    $("#divPregunta").show();
+}else{
+    $("#divPregunta").hide();
+}
+
+};
+
+
 $("#btnGrabarFinalizar").click(function(){
 
-    var vacios=false;
-    var txt="";
-    var largo=0;
-    $(".inputObservacion").each(function() {
-        txt = $(this).prop('value');
-        
-        if(txt== ""){
-            vacios = true;
-        }    
-        var trimed=txt.replace(/\s+/g, '');
-
-        largo=trimed.length;
-    });
     
-    if (vacios) {
-        swal(
-            'No has terminado',
-            'Debes ingresar una observación.',
-            'warning'
-        );
-        return false;
-    }
-
-    if (largo<100) {
-        swal(
-            'No has terminado',
-            'Debes ingresar una observación de al menos 100 caracteres.',
-            'warning'
-        );
-        return false;
-    }
 
     swal({
         title: '¿Esta seguro de finalizar?',
@@ -48,15 +31,19 @@ $("#btnGrabarFinalizar").click(function(){
             if($("#chkPresencial").is(':checked')){
                 presencial=true;
             }
+            var acuerdo=false;
+            if($("#chkAcuerdo").is(':checked')){
+                acuerdo=true;
+            }
             var obj = { 
               idOpinante:$("#idOpinante").val(),
-              observacion:$("#txtObservacion").val(),
+              acuerdo:acuerdo,
               presencial:presencial
             };
 
             $.ajax({
                 type: "GET",
-                url: "/Feedback/Feedback/saveFeedback",
+                url: "/Feedback/Feedback/saveConfirmacion",
                 contentType: "application/json; charset=utf-8",
                 data: obj,
                 dataType: "json", 
@@ -66,7 +53,7 @@ $("#btnGrabarFinalizar").click(function(){
                         text:'Feedback finalizado correctamente.',
                         type:'success'
                     }).then(function(result){
-                        $('#frmVolver').submit();
+                        $("#frmfin").submit();
                     });
 
 
