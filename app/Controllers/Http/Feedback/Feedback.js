@@ -64,13 +64,49 @@
             return view.render('feedback/crearPlan',  {idFeedbackOpinante:idFeedbackOpinante,datosVista,fbAcciones:fbAcciones, estado:estado,competencias:competencias});
         
         } 
+        async confirmar({view,request, response, auth, session}){
+
+            var idFeedbackOpinante=request.input("iop");
+            return view.render('feedback/confirmar',  {idFeedbackOpinante:idFeedbackOpinante});
+
+        }
+        async fin({view,request, response, auth, session}){
+
+            
+            return view.render('feedback/fin',  {});
+
+        }
 
         async saveFeedback  ({ view,request, response, auth, session }) {
 
             var idOpinante=request.input("idOpinante");
             var observacion=request.input("observacion");
+            var presencial=request.input("presencial");
             
-            var result = await data.execApi(request.hostname(),'/Feedback/Persona/saveFeedback',{idOpinante:idOpinante,observacion:observacion});
+            var result = await data.execApi(request.hostname(),'/Feedback/Persona/saveFeedback',
+            {
+                idOpinante:idOpinante,
+                observacion:observacion,
+                presencial:presencial
+            });
+
+            const fb = result.body.data;
+
+            return fb;
+        
+        } 
+        async saveConfirmacion  ({ view,request, response, auth, session }) {
+
+            var idOpinante=request.input("idOpinante");
+            var acuerdo=request.input("acuerdo");
+            var presencial=request.input("presencial");
+            
+            var result = await data.execApi(request.hostname(),'/Feedback/Persona/saveConfirmacion',
+            {
+                idOpinante:idOpinante,
+                acuerdo:acuerdo,
+                presencial:presencial
+            });
 
             const fb = result.body.data;
 

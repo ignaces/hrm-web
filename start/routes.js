@@ -26,7 +26,7 @@ Route.get('/google/callback', 'Account/ExternalLogin.callback')
 Route.get('/game', 'Game/Guess.render').middleware('auth')
 Route.get('/medirRedes/:codigo', 'Redes/Medicion.medir')
 Route.post('/finRedes', 'Redes/Medicion.save')
-
+Route.get('/confirmarFeedback','Feedback/Feedback.confirmar');
 Route.get('/Redes/Medicion/identificar','Redes/Medicion.identificar')
 
 Route.post('/Redes/Medicion/medirPersona','Redes/Medicion.medirPersona')
@@ -34,7 +34,7 @@ Route.post('/Redes/Medicion/medirPersona','Redes/Medicion.medirPersona')
 Route.get('/Acreditacion/Informe/pdf','Acreditacion/Informe.pdf')
 
 Route.get('/Desempeno/Informe/pdf','Desempeno/Informe.pdf')
-
+Route.get('/Feedback/Feedback/fin','Feedback/Feedback.fin')
 
 Route.get('/Account/Register/doRegisterPersonas','/Account/Register.doRegisterPersonas')
 Route.get('/Account/Register/updateUser','/Account/Register.updateUser')

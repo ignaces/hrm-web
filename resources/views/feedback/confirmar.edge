@@ -1,15 +1,15 @@
-@layout('layouts/horizontal')
+@layout('layouts/nomenu')
 
 
-@section('pluginsCss2')
+@section('pluginsCss')
 
 <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
 
 
-        <link href="/assets/plugins/ede/infobox/infobox.css" rel="stylesheet" type="text/css" />
-        <link href="/assets/plugins/ede/socialWidget/socialWidget.css" rel="stylesheet" type="text/css" />             
-        <link href="/assets/plugins/ede/progressbar/progressbar.css" rel="stylesheet" type="text/css" /> 
-        <link rel="stylesheet" href="/assets/plugins/switchery/switchery.min.css">
+<link href="/assets/plugins/ede/infobox/infobox.css" rel="stylesheet" type="text/css" />
+<link href="/assets/plugins/ede/socialWidget/socialWidget.css" rel="stylesheet" type="text/css" />             
+<link href="/assets/plugins/ede/progressbar/progressbar.css" rel="stylesheet" type="text/css" /> 
+<link rel="stylesheet" href="/assets/plugins/switchery/switchery.min.css">
            
 @endsection
 @section('scripts2')
@@ -17,24 +17,21 @@
 @endsection
 @section('scripts')
 <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
-<script src=/assets/js/dist/feedbackSave.min.js></script>
+<script src=/assets/js/dist/confirmarFeedback.min.js></script>
 
 @endsection
 @section('content')
-<form id="frmVolver" action="/Feedback/Feedback/index">    
-    <input type="hidden" id="idProceso" name="idProceso" value="{{datosVista.idProceso}}" />
-    <input type="hidden" id="idEtapa" name="idEtapa" value="{{datosVista.idEtapa}}" />
+<form id="frmfin" action="/Feedback/Feedback/fin">    
+    
+    
 </form>
 {{ csrfField() }}
-<input type="hidden" id="idOpinante" name="idOpinante" value="{{idOpinante}}" />
+<input type="hidden" id="idOpinante" name="idOpinante" value="{{idFeedbackOpinante}}" />
 
 <div class="row" >
     
-    <div class="col-md-2">
-       @!component('components.Desempeno.widgetInfoEtapa',datos=etapa,nombreProceso=dataProceso.nombre)
-       @!component('components.Desempeno.widgetUser',datos=data,datamenu=datosMenu,persona=PersonaEde)
-    </div>
-    <div class="col-md-10">
+    
+    <div class="col-md-12">
         
             <div class="row">
                    
@@ -45,20 +42,18 @@
                         <div class="col-md-12">
                             <div class="panel panel-default">
                                     <div class="panel-heading bg-primary">
-                                            <h3 class="panel-title text-white">Comentario de retroalimentación:</h3>
+                                            <h3 class="panel-title text-white">¿Recibió feedback presencial por parte de su jefatura?</h3>
                                         </div>
                                 <div class="panel-body">
-                                        <p>A continuación puedes ingresar comentarios respecto a las fortalezas y/o aspectos que pueden ser oportunidades de mejora en el desempeño actual de tu colaborador.</p>
-                                        <textarea id="txtObservacion" pattern="\s*(\S\s*){10000,}" class="form-control inputObservacion"  rows="3" ></textarea>
-                                    
+                                        No <input type="checkbox" id="chkPresencial" class="js-switch js-check-change"  data-plugin="switchery" data-color="#2b3d51" data-size="large"/> Sí
+                                        
                                 </div>
                             </div>
                         </div>
                     </div>
                     {{-- //OBSERVACION --}}
             </div>
-
-            <div class="row">
+            <div class="row"  id="divPregunta" style="display:none">
                    
                    
         
@@ -67,10 +62,10 @@
                         <div class="col-md-12">
                             <div class="panel panel-default">
                                     <div class="panel-heading bg-primary">
-                                            <h3 class="panel-title text-white">¿Se reunió presencialmente con su colaborador?</h3>
+                                            <h3 class="panel-title text-white">¿Está de acuerdo con la evaluación y retroalimentación recibida?</h3>
                                         </div>
                                 <div class="panel-body">
-                                        No <input type="checkbox" id="chkPresencial"  data-plugin="switchery" data-color="#2b3d51" data-size="large"/> Sí
+                                        No <input type="checkbox" id="chkAcuerdo"  data-plugin="switchery" data-color="#2b3d51" data-size="large"/> Sí
                                         
                                 </div>
                             </div>
