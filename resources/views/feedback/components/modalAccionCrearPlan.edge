@@ -10,6 +10,17 @@
                     <div class="col-md-12">
                         <div class="p-20">
                             <form class="form-horizontal" role="form" id="formulario">
+                                    <div class="form-group row">
+                                            <label class="col-3 col-form-label">Nombre de la competencia a mejorar</label>
+                                            <div class="col-9">
+                                                <select id="cmbCompetencia" class="form-control" v-model="accion.idCompetencia">
+                                                    <option selected disabled value="-1">Seleccione una competencia...</option>
+                                                    <option v-for="competencia in competencias" v-bind:value="competencia.id">
+                                                        @{{ competencia.nombre }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
                                 <div class="form-group row">
                                     <label for="txtAccion" class="col-3 col-form-label">Acción</label>
                                     <div class="col-9">
@@ -18,24 +29,14 @@
                                     </div>
                                 </div>  
                                 <div class="form-group row">
-                                    <label for="txtObjetivo" class="col-3 col-form-label">Objetivo</label>
+                                    <label for="txtObjetivo" class="col-3 col-form-label">Objetivo de aprendizaje</label>
                                     <div class="col-9">
                                         <textarea id="txtObjetivo" class="form-control" v-model="accion.objetivo" maxlength="225" rows="3" placeholder="Este es el objetivo de la acción"></textarea>
                                     </div>
                                 </div>
-                                <!--<div class="form-group row">
-                                    <label class="col-3 col-form-label">Competencia</label>
-                                    <div class="col-9">
-                                        <select id="cmbCompetencia" class="form-control" v-model="accion.idCompetencia">
-                                            <option selected disabled value="-1">Seleccione una competencia...</option>
-                                            <option v-for="competencia in competenciasPredeterminadas" v-bind:value="competencia.id">
-                                                @{{ competencia.nombre }}
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>-->  
+                                
                                <div class="form-group row">
-                                    <label>Fecha fin</label>
+                                    <label>Fecha de compromiso</label>
                                     <div class="input-daterange input-group" id="date-range" >
                                         <input type="date" class="form-control" v-model="accion.fechaTermino" name="end" id="end"/>
                                     </div>

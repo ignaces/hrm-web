@@ -30,6 +30,7 @@
 
             const colaboradores = result.body.data;
 
+            
             return view.render('feedback/index',  {lista:colaboradores,datosProceso,PersonaEde,etapa});
         
         }
@@ -57,8 +58,10 @@
             const fbEstado = restado.body.data;
 
             const estado = fbEstado[0].codigo;
-                       
-            return view.render('feedback/crearPlan',  {idFeedbackOpinante:idFeedbackOpinante,datosVista,fbAcciones:fbAcciones, estado:estado});
+            var resultComp = await data.execApi(request.hostname(),'/Feedback/Persona/getCompetenciasOpinante',{idFeedbackOpinante:idFeedbackOpinante});
+            var competencias = resultComp.body.data;
+            
+            return view.render('feedback/crearPlan',  {idFeedbackOpinante:idFeedbackOpinante,datosVista,fbAcciones:fbAcciones, estado:estado,competencias:competencias});
         
         } 
 
@@ -97,7 +100,7 @@
 
             var idFeedbackOpinante = request.input("idFeedbackOpinante");
             var accion = request.input("accion");
-
+            
             var obj = {
                 idFeedbackOpinante:idFeedbackOpinante,
                 objAccion:accion

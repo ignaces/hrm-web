@@ -94,12 +94,14 @@
         var cForm = new Vue({
             el: '#formulario',
             data: {
+                competencias:{{{toJSON(competencias)}}},
                 accion: {
                     id:'',
                     accion: '',
                     objetivo:'',
                     plazo:'',
-                    edit: false
+                    edit: false,
+                    idCompetencia:''
                 }            
             },            
             methods: {
