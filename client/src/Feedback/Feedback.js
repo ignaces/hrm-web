@@ -43,10 +43,14 @@ $("#btnGrabarFinalizar").click(function(){
         cancelButtonText: 'Cancelar'
       }).then(function(result)  {
         if (result) {
-            
+            var presencial=false;
+            if($("#chkPresencial").is(':checked')){
+                presencial=true;
+            }
             var obj = { 
               idOpinante:$("#idOpinante").val(),
-              observacion:$("#txtObservacion").val()
+              observacion:$("#txtObservacion").val(),
+              presencial:presencial
             };
 
             $.ajax({

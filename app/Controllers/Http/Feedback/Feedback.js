@@ -69,8 +69,14 @@
 
             var idOpinante=request.input("idOpinante");
             var observacion=request.input("observacion");
+            var presencial=request.input("presencial");
             
-            var result = await data.execApi(request.hostname(),'/Feedback/Persona/saveFeedback',{idOpinante:idOpinante,observacion:observacion});
+            var result = await data.execApi(request.hostname(),'/Feedback/Persona/saveFeedback',
+            {
+                idOpinante:idOpinante,
+                observacion:observacion,
+                presencial:presencial
+            });
 
             const fb = result.body.data;
 

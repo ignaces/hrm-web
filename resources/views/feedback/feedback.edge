@@ -9,12 +9,16 @@
         <link href="/assets/plugins/ede/infobox/infobox.css" rel="stylesheet" type="text/css" />
         <link href="/assets/plugins/ede/socialWidget/socialWidget.css" rel="stylesheet" type="text/css" />             
         <link href="/assets/plugins/ede/progressbar/progressbar.css" rel="stylesheet" type="text/css" /> 
+        <link rel="stylesheet" href="/assets/plugins/switchery/switchery.min.css">
            
 @endsection
-
+@section('scripts2')
+    <script src="/assets/plugins/switchery/switchery.min.js"></script>
+@endsection
 @section('scripts')
 <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
 <script src=/assets/js/dist/feedbackSave.min.js></script>
+
 @endsection
 @section('content')
 <form id="frmVolver" action="/Feedback/Feedback/index">    
@@ -46,20 +50,59 @@
                                 <div class="panel-body">
                                         <p>A continuación puedes ingresar comentarios respecto a las fortalezas y/o aspectos que pueden ser oportunidades de mejora en el desempeño actual de tu colaborador.</p>
                                         <textarea id="txtObservacion" pattern="\s*(\S\s*){10000,}" class="form-control inputObservacion"  rows="3" ></textarea>
-                                    <div class="row pull-right">
-
-                                        <div class="col-md-12">
-                                     
-                                                <button type="button" id="btnGrabarFinalizar" class="btn btn-success btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-save"></i> Grabar y Finalizar</button>
-                                          
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
                     {{-- //OBSERVACION --}}
-                </div>
+            </div>
+
+            <div class="row">
+                   
+                   
+        
+                    {{-- OBSERVACION --}}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                    <div class="panel-heading bg-primary">
+                                            <h3 class="panel-title text-white">¿Se reunió presencialmente con su colaborador?</h3>
+                                        </div>
+                                <div class="panel-body">
+                                        No <input type="checkbox" id="chkPresencial"  data-plugin="switchery" data-color="#2b3d51" data-size="large"/> Sí
+                                        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- //OBSERVACION --}}
+            </div>
+            <div class="row">
+                   
+                   
+        
+                    {{-- OBSERVACION --}}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                    
+                                <div class="panel-body">
+                                        
+
+                                                <div class="col-md-12 center">
+                                                    
+                                                        <button type="button" id="btnGrabarFinalizar" class="btn btn-success waves-effect w-md waves-light"><i class="fa fa-save"></i> Grabar y Finalizar</button>
+                                                  
+                                                </div>
+                                        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- //OBSERVACION --}}
+            </div>
+
         
         <div class="row">
             <div class="col-lg-12">
