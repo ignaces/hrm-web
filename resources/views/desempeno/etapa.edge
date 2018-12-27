@@ -53,6 +53,36 @@
                 });
                
             });
+            $("#btnConfirmarCalibracion").click(function(){
+                
+                    
+                $.ajax({
+                    type: "GET",
+                    url: "/Desempeno/CalibracionController/updateCalibracionCompleto",
+                    contentType: "application/json; charset=utf-8",
+                    data: {},
+                    dataType: "json",   
+                    success: function (msg) {
+                        swal(
+                            'Exito',
+                            'Datos guardados correctamente',
+                            'success'
+                        );
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                        
+                        swal(
+                            'Error',
+                            'Ocurrió un error intente más tarde',
+                            'error'
+                        );
+
+                        $("#hrm_loadingPanel").hide();
+                    },
+                    timeout: 10000
+                });
+               
+            });
         });
     var comHistoricos = new Vue({
         el: '#mHistoricos',
@@ -281,6 +311,11 @@
                 </form>
             </div>
         </div>
+        <div class="row">
+                <div class="col-lg-12" style="text-align:center">
+                    <button id="btnConfirmarCalibracion" class="btn btn-success">Confirmar Calibración</button>
+                </div>
+            </div>
         @endif
 
         <div class="row">
