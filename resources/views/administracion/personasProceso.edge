@@ -65,6 +65,13 @@
                                     <input type="hidden" name="idEvaluador" value="">
                                 </form>
                                 <button class="btn btn-success pull-right" onclick="$('#formDownload').submit();"><i class="fa fa-excel"></i> Descarga Reporte Avance</button>
+                                <div class="col-lg-6">
+                                    <form action="/Administracion/Administracion/informeCalibracion" method="GET" id="forminformeCalibracion">
+                                        <input type="hidden" name="idProceso" value="{{idProceso}}">
+                                    </form>
+                                    <button class="btn btn-success pull-right" onclick="$('#forminformeCalibracion').submit();"><i class="fa fa-excel"></i> Descargar Informe de Calibracion</button>
+                                </div>
+
                             </div>
                         <br>
                         <br>
