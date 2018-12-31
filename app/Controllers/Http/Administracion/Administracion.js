@@ -419,6 +419,60 @@ class Administracion {
 
     }
 
+    async informeCalibracion({ view, request, response }) {
+        var idProceso = request.input("idProceso")
+
+        try {
+            const result = await api.execApi(request.hostname(),'/Desempeno/Proceso/getInformeAvanceCalibracion',{idProceso});
+            
+            var cabecera = Object.keys(result.body.data[0]);
+
+            var wb = {
+                SheetNames: [],
+                Sheets: {}
+            }
+
+            var registros = result.body.data;
+            var ws_name = "Calibracion";
+
+            /* make worksheet */
+            var ws_data = [ 
+                cabecera
+            ];
+            for (var fila in registros) {
+
+                var registro = [];
+                for (var campo in cabecera) {
+
+                    registro.push(registros[fila][cabecera[campo]]);
+                }
+
+                ws_data.push(registro);
+
+            }
+
+            var ws = XLSX.utils.aoa_to_sheet(ws_data);
+
+            /* Add the sheet name to the list */
+            wb.SheetNames.push(ws_name);
+
+            /* Load the worksheet object */
+            wb.Sheets[ws_name] = ws;
+
+            XLSX.writeFile(wb, 'tmp/informe_calibracion.xlsx');
+
+            response.implicitEnd = false
+
+            response.type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+            response.attachment(
+                Helpers.tmpPath('informe_calibracion.xlsx'),
+                'informe_calibracion.xlsx'
+            )
+        } catch (e) {
+            console.log(e)
+        }
+    }
 
 }
 
