@@ -30,6 +30,7 @@
 
             const colaboradores = result.body.data;
 
+            //var res = await data.execApi(request.hostname(),'/Feedback/Persona/list',{idProceso:idProceso,idPersona:persona.id});
             
             return view.render('feedback/index',  {lista:colaboradores,datosProceso,PersonaEde,etapa});
         
@@ -37,12 +38,13 @@
         async realizar  ({ view,request, response, auth, session }) {
 
             var idOpinante = request.input("idOpinante");
+            var idOpinado = request.input("idOpinado");
             var datosVista = session.get("datosVista");
             var result = await data.execApi(request.hostname(),'/Feedback/Persona/getFeedback',{idOpinante:idOpinante});
 
             const fb = result.body.data;
 
-            return view.render('feedback/feedback',  {feedback:fb,datosVista,idOpinante});
+            return view.render('feedback/feedback',  {feedback:fb,datosVista,idOpinante,idOpinado});
         
         } 
 
