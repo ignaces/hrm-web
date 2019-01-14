@@ -51,7 +51,8 @@ $("#btnGrabarFinalizar").click(function(){
             var obj = { 
               idOpinante:$("#idOpinante").val(),
               observacion:$("#txtObservacion").val(),
-              presencial:presencial
+              presencial:presencial,
+              idOpinado:$("#idOpinado").val()
             };
 
             $.ajax({

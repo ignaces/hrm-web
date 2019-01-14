@@ -1,23 +1,27 @@
 @layout('layouts/horizontal')
 
-
 @section('pluginsCss2')
-
-<link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
-
-
-        <link href="/assets/plugins/ede/infobox/infobox.css" rel="stylesheet" type="text/css" />
-        <link href="/assets/plugins/ede/socialWidget/socialWidget.css" rel="stylesheet" type="text/css" />             
-        <link href="/assets/plugins/ede/progressbar/progressbar.css" rel="stylesheet" type="text/css" />    
+    <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/plugins/ede/infobox/infobox.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/plugins/ede/socialWidget/socialWidget.css" rel="stylesheet" type="text/css" />             
+    <link href="/assets/plugins/ede/progressbar/progressbar.css" rel="stylesheet" type="text/css" />  
+    <link rel="stylesheet" href="/assets/plugins/switchery/switchery.min.css">  
 @endsection
-
+@section('scripts2')
+    <script src="/assets/plugins/switchery/switchery.min.js"></script>
+@endsection
 @section('scripts')
-<script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+    <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+    <script src="/assets/getOrgChart/js/getorgchart.js"></script>
+    <script src="/assets/plugins/moment/moment.js"></script>
+    <script src="/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="/assets/plugins/bootstrap-datepicker/locales/es.js"></script>
+    <script src="/assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src=/assets/js/dist/feedbackConfirm.min.js></script>
 @endsection
 @section('content')
-
+@!component('feedback.components.modalConfirmFeedback')
 {{ csrfField() }}
-
 
 <div class="row" >
     
@@ -29,7 +33,38 @@
         
         {{-- WIDGETS --}}
         
-        {{-- /WIDGETS --}}
+        {{-- /ENCUESTA --}}
+        <div class="row">
+            <div class="portlet">
+                <div class="portlet-heading bg-primary">
+                     <h4 class="portlet-title">
+                        ¿Se reunió presencialmente con su jefatura?
+                    </h4>
+                    <div class="portlet-widgets">
+                        <a data-toggle="collapse" data-parent="#accordion1" href="#auto"><i class="mdi mdi-minus"></i></a>                  
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div id="auto" class="panel-collapse collapse in">
+                     <div class="portlet-body">
+                        <div class="clearfix"></div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel-body">
+                                    <div class="col-lg-10">
+                                        No <input type="checkbox" id="chkPresencial"  data-plugin="switchery" data-color="#2b3d51" data-size="large"/> Sí
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <button type="button" id="btnGrabarFinalizar" class="btn btn-info btn-rounded btn-block"> Confirmar </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+        
 
         {{-- EQUIPO --}}
         
