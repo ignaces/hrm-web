@@ -30,9 +30,13 @@
 
             const colaboradores = result.body.data;
 
+            var rencuesta = await data.execApi(request.hostname(),'/Feedback/Persona/getEncuestaFeedback',{idPersona:persona.id});
+
+            const encuesta = rencuesta.body.data;
+
             //var res = await data.execApi(request.hostname(),'/Feedback/Persona/list',{idProceso:idProceso,idPersona:persona.id});
             
-            return view.render('feedback/index',  {lista:colaboradores,datosProceso,PersonaEde,etapa});
+            return view.render('feedback/index',  {lista:colaboradores,encuesta:encuesta,datosProceso,PersonaEde,etapa});
         
         }
         async realizar  ({ view,request, response, auth, session }) {
