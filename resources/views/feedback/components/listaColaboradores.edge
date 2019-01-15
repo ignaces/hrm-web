@@ -13,6 +13,7 @@
                                     <th>Colaborador</th>
                                     <th>Estado</th>
                                     <th>Informe</th>
+                                    <th>Confirmacion Colaborador</th>
                                     <th>Acción</th>
                                     
                                 </tr>
@@ -48,6 +49,7 @@
                                            <button type="button" class="btn btn-default btn-xs btn-rounded btn-bordered waves-effect w-md" disable><i class="fa fa-ban"></i> No Disponible</button>
                                         @endif
                                     </td>
+                                    <td><h3>-</h3></td>
                                     <td>
                                         @if(persona.codigoEstado=="FINALIZADO") 
                                         <form method="GET" action="/Feedback/Feedback/crearPlan">
