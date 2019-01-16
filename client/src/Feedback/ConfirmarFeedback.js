@@ -74,7 +74,7 @@ $(document).ready(function(){
                     text:'Feedback finalizado correctamente.',
                     type:'success'
                 }).then(function(result){
-                    alert(selectedOptionvalue)
+                    
                     $("#modalAccion").modal("hide");
                 });
             }
