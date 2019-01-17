@@ -35,6 +35,12 @@
             return view.render('feedback/index',  {lista:colaboradores,datosProceso,PersonaEde,etapa});
         
         }
+        async getAccionesPredeterminadas ({ view,request, response, auth, session }){
+            var idCompetencia = request.input("idCompetencia");
+            var result = await data.execApi(request.hostname(),'/Feedback/Accion/predeterminadas',{idCompetencia:idCompetencia});
+            return result.body.data;
+
+        }
         async realizar  ({ view,request, response, auth, session }) {
 
             var idOpinante = request.input("idOpinante");
