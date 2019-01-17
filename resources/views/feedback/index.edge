@@ -20,11 +20,14 @@
     <script src=/assets/js/dist/feedbackConfirm.min.js></script>
 @endsection
 @section('content')
-@!component('feedback.components.modalConfirmFeedback')
+@!component('feedback.components.modalConfirmFeedback',encuesta=encuesta)
+@!component('feedback.components.modalSolicitudFeedback')
 {{ csrfField() }}
 
 <div class="row" >
     
+    <input type="hidden" id="idPersona" name="idPersona" value="{{idPersona}}" />
+
     <div class="col-md-2">
        @!component('components.Desempeno.widgetInfoEtapa',datos=etapa,nombreProceso=dataProceso.nombre)
        @!component('components.Desempeno.widgetUser',datos=data,datamenu=datosMenu,persona=PersonaEde)
@@ -34,36 +37,38 @@
         {{-- WIDGETS --}}
         
         {{-- /ENCUESTA --}}
-        <div class="row">
-            <div class="portlet">
-                <div class="portlet-heading bg-primary">
-                     <h4 class="portlet-title">
-                        ¿Se reunió presencialmente con su jefatura?
-                    </h4>
-                    <div class="portlet-widgets">
-                        <a data-toggle="collapse" data-parent="#accordion1" href="#auto"><i class="mdi mdi-minus"></i></a>                  
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <div id="auto" class="panel-collapse collapse in">
-                     <div class="portlet-body">
+        @if(encuesta.length > 0)
+            <div class="row">
+                <div class="portlet">
+                    <div class="portlet-heading bg-primary">
+                        <h4 class="portlet-title">
+                            ¿Tuviste tu Conversación de Desempeño?
+                        </h4>
+                        <div class="portlet-widgets">
+                            <a data-toggle="collapse" data-parent="#accordion1" href="#auto"><i class="mdi mdi-minus"></i></a>                  
+                        </div>
                         <div class="clearfix"></div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="panel-body">
-                                    <div class="col-lg-10">
-                                        No <input type="checkbox" id="chkPresencial"  data-plugin="switchery" data-color="#2b3d51" data-size="large"/> Sí
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <button type="button" id="btnGrabarFinalizar" class="btn btn-info btn-rounded btn-block"> Confirmar </button>
+                    </div>
+                    <div id="auto" class="panel-collapse collapse in">
+                        <div class="portlet-body">
+                            <div class="clearfix"></div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel-body">
+                                        <div class="col-lg-10">
+                                            No <input type="checkbox" id="chkPresencial"  data-plugin="switchery" data-color="#2b3d51" data-size="large"/> Sí
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <button type="button" id="btnGrabarFinalizar" class="btn btn-info btn-rounded btn-block"> Confirmar </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                     </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        @endif
         
 
         {{-- EQUIPO --}}
