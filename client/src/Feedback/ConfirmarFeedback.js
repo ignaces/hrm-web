@@ -141,7 +141,7 @@ $(document).ready(function(){
                         }).then(function(result){
 
                             var obEst = {
-                                idOpinado:idPersona
+                                idPersona:idPersona
                             }
 
                             $.ajax({
