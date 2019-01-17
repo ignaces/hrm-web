@@ -175,7 +175,7 @@
 @endsection
 @section('content')
     @!component('components.Core.botonera')
-    @!component('feedback.components.modalAccionCrearPlan')
+    @!component('feedback.components.modalAccionCrearPlan',settings=settings)
 
     <form id="frmVolver" action="/Feedback/Feedback/index">    
         <input type="hidden" id="idProceso" name="idProceso" value="{{datosVista.idProceso}}" />
