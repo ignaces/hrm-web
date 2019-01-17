@@ -5,7 +5,27 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h4 class="modal-title" id="myLargeModalLabel">Evaluar Feedback</h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body p-t-0">
+                <p class="text-muted font-13">
+                    <br>
+                    <strong>¿Cómo calificarías tu conversación de desempeño?</strong>
+                    <br>
+                    <br>
+                    Te recordamos que una buena conversación de desempeño debería:
+                    <br>
+                    - Agendarse con anticipación y llevarse a cabo en un lugar cómodo y confidencial.
+                    <br>
+                    - Transmitir tanto las oportunidades de desarrollo como las fortalezas.
+                    <br>
+                    - Focalizarse en las conductas y resultados, no es las características personales.
+                    <br>
+                    - Tener ejemplos consistentes en conductas observadas y/o hechos.
+                    <br>
+                    - Brindar sugerencias y apoyo para mejorar las competencias necesarias y los resultados a alcanzar.
+                    <br>
+                    - Generar el espacio para preguntas, opiniones, y comentarios del colaborador.
+                    <br>
+                </p>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="p-20">
@@ -13,6 +33,7 @@
                                 <div class="form-group row">
                                     <label class="col-3 col-form-label">{{encuesta[0].enunciado}}</label>
                                     <div class="col-9">
+                                        <input type="hidden" id="idPregunta" name="idPregunta" value="{{encuesta[0].IdPregruntaFacsimil}}" />
                                         <select class="form-control r_respAlternativa" >
                                             <option selected disabled value="-1">Seleccione una Respuesta...</option>
                                             @each(alt in encuesta[0].alternativas)
