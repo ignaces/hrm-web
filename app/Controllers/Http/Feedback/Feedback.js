@@ -61,6 +61,18 @@
             };
         
         }
+        async getAccionesPredeterminadas ({ view,request, response, auth, session }){
+            var idCompetencia = request.input("idCompetencia");
+            var result = await data.execApi(request.hostname(),'/Feedback/Accion/predeterminadas',{idCompetencia:idCompetencia});
+            return result.body.data;
+
+        }
+        async settings ({ view,request, response, auth, session }){
+            var param = request.input("param");
+            var result = await data.execApi(request.hostname(),'/Feedback/Settings/getParametro',{param:param});
+            return result.body.data;
+
+        }
 
         async realizar  ({ view,request, response, auth, session }) {
 
