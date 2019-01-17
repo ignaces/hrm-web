@@ -159,6 +159,37 @@
         
         } 
 
+        async setEstadoEncuesta({ view,request, response, auth, session }) {
+            var idPersona = request.input("idPersona");
+
+            var obj = {
+                idPersona:idPersona
+            }
+
+            var result = await data.execApi(request.hostname(),'/Feedback/Persona/setEstadoEncuesta',obj);
+
+            return {
+                mensaje:''
+            };
+        }
+
+        async saveRespColaborador ({ view,request, response, auth, session }) {
+
+            var idOpinado=request.input('idOpinado');
+            var estado =request.input('estado');
+
+            var obj = {
+                idOpinado:idOpinado,
+                estado:estado
+            }
+
+            var result = await data.execApiPost(request.hostname(),'/Feedback/Persona/saveRespColaborador',obj);
+
+            return {
+                mensaje:''
+            };
+        }
+
         async updateAccion ({ view,request, response, auth, session }) {
 
             var idFeedbackOpinante = request.input("idFeedbackOpinante");
