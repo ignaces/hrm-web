@@ -36,9 +36,32 @@
 
             //var res = await data.execApi(request.hostname(),'/Feedback/Persona/list',{idProceso:idProceso,idPersona:persona.id});
             
-            return view.render('feedback/index',  {lista:colaboradores,encuesta:encuesta,datosProceso,PersonaEde,etapa});
+            return view.render('feedback/index',  {lista:colaboradores,encuesta:encuesta,datosProceso,PersonaEde,etapa,idPersona:persona.id});
         
         }
+
+        async putRespuesta  ({ view,request, response, auth, session }) {
+
+            var idPersona = request.input("idPersona");
+            var idPregunta = request.input("idPregunta");
+            var idAlternativa = request.input("idAlternativa");
+            var justificacion = request.get("justificacion");
+
+            var obj = {
+                idPersona:idPersona,
+                idPregunta:idPregunta,
+                idAlternativa:idAlternativa,
+                justificacion:justificacion
+            };
+
+            var result = await data.execApi(request.hostname(),'/Feedback/Persona/putRespuesta',obj);
+
+            return {
+                mensaje:''
+            };
+        
+        }
+
         async realizar  ({ view,request, response, auth, session }) {
 
             var idOpinante = request.input("idOpinante");
@@ -88,12 +111,14 @@
             var idOpinante=request.input("idOpinante");
             var observacion=request.input("observacion");
             var presencial=request.input("presencial");
+            var idOpinado=request.input("idOpinado");
             
             var result = await data.execApi(request.hostname(),'/Feedback/Persona/saveFeedback',
             {
                 idOpinante:idOpinante,
                 observacion:observacion,
-                presencial:presencial
+                presencial:presencial,
+                idOpinado:idOpinado
             });
 
             const fb = result.body.data;

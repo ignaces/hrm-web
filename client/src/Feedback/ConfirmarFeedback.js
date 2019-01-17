@@ -46,6 +46,7 @@ $(document).ready(function(){
                 }).then(function(result){
 
                     $("#modalConfirmar").modal("hide");
+                    
                 });
             }
         });            
@@ -69,13 +70,29 @@ $(document).ready(function(){
                     presencial=true;
                 }
 
-                swal({
-                    title:'Finalizado',
-                    text:'Feedback finalizado correctamente.',
-                    type:'success'
-                }).then(function(result){
-                    
-                    $("#modalAccion").modal("hide");
+                var obj = {
+                    idPersona:$("#idPersona").val(),
+                    idPregunta:$("#idPregunta").val(),
+                    idAlternativa:selectedOptionvalue,
+                    justificacion:''
+                }
+
+                $.ajax({
+                    type: "GET",
+                    url: "/Feedback/Feedback/putRespuesta",
+                    contentType: "application/json; charset=utf-8",
+                    data: obj,
+                    dataType: "json", 
+                    success: function (msg) {
+                        swal({
+                            title:'Finalizado',
+                            text:'Feedback finalizado correctamente.',
+                            type:'success'
+                        }).then(function(result){
+                            $("#modalAccion").modal("hide");
+                            location.reload();
+                        });
+                    },
                 });
             }
         });    
