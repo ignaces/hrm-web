@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-12" id="app">
         <div class="card-box"  v-if="acciones.length==0">
-            <p>No hay aciones creadas.  Para crear una nueva acción haz click en los tres puntos (<i class="mdi mdi-dots-horizontal"></i>) en la esquina derecha de este panel.</p>
+            <p>No hay acciones creadas.  Para crear una nueva acción haz click en los tres puntos (<i class="mdi mdi-dots-horizontal"></i>) en la esquina derecha de este panel.</p>
         </div>
         <div class="card-box" v-for="accion in acciones" v-if="acciones.length>0">
             @if(estado=="INI")
