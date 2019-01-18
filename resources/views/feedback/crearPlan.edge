@@ -101,13 +101,45 @@
                     id:'',
                     accion: '',
                     objetivo:'',
-                    plazo:'',
+                    fechaTermino:'',
                     edit: false,
                     idCompetencia:''
                 }            
             },            
             methods: {
                 saveAccion:function () {
+                    if(cForm.accion.idCompetencia==undefined){
+                        swal(
+                            'No has terminado',
+                            'Debes seleccionar una competencia.',
+                            'warning'
+                        );
+                        return false;
+                    }
+                    if(cForm.accion.accion==""){
+                        swal(
+                            'No has terminado',
+                            'Debes ingresar una acción.',
+                            'warning'
+                        );
+                        return false;
+                    }
+                    if(cForm.accion.objetivo==""){
+                        swal(
+                            'No has terminado',
+                            'Debes ingresar un objetivo.',
+                            'warning'
+                        );
+                        return false;
+                    }
+                    if(cForm.accion.fechaTermino==undefined){
+                        swal(
+                            'No has terminado',
+                            'Debes ingresar una fecha de compromiso.',
+                            'warning'
+                        );
+                        return false;
+                    }
                     var url = "/Feedback/Feedback/addAccion"
                     if(cForm.accion.edit){
                         url="/Feedback/Feedback/updateAccion"
