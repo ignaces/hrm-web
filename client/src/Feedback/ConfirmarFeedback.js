@@ -34,20 +34,52 @@ $(document).ready(function(){
         }).then(function(result)  {
             if (result) {
                 var presencial=false;
-
+                var estado = 0;
                 if($("#chkSolicito").is(':checked')){
                     presencial=true;
+                    estado = 2;
+                }else{
+                    estado = 3;
                 }
 
-                swal({
-                    title:'Finalizado',
-                    text:'Feedback finalizado correctamente.',
-                    type:'success'
-                }).then(function(result){
+                var idPersona=$("#idPersona").val();
+                var objResp = {
+                    idOpinado:idPersona,
+                    estado:estado
+                }
 
-                    $("#modalConfirmar").modal("hide");
-                    
+                $.ajax({
+                    type: "GET",
+                    url: "/Feedback/Feedback/saveRespColaborador",
+                    contentType: "application/json; charset=utf-8",
+                    data: objResp,
+                    dataType: "json", 
+                    success: function (msg) {
+                    },
                 });
+
+                var obEst = {
+                    idPersona:idPersona
+                }
+
+                $.ajax({
+                    type: "GET",
+                    url: "/Feedback/Feedback/setEstadoEncuesta",
+                    contentType: "application/json; charset=utf-8",
+                    data: obEst,
+                    dataType: "json", 
+                    success: function (msg) {
+                        swal({
+                            title:'Finalizado',
+                            text:'Feedback finalizado correctamente.',
+                            type:'success'
+                        }).then(function(result){
+        
+                            $("#modalConfirmar").modal("hide");
+                            location.reload();                            
+                        });
+                    },
+                });                
             }
         });            
     });
@@ -70,8 +102,26 @@ $(document).ready(function(){
                     presencial=true;
                 }
 
+                var objResp = {
+                    idOpinado:$("#idPersona").val(),
+                    estado:1
+                }
+
+                $.ajax({
+                    type: "GET",
+                    url: "/Feedback/Feedback/saveRespColaborador",
+                    contentType: "application/json; charset=utf-8",
+                    data: objResp,
+                    dataType: "json", 
+                    success: function (msg) {
+
+                    },
+                });
+
+                var idPersona=$("#idPersona").val();
+
                 var obj = {
-                    idPersona:$("#idPersona").val(),
+                    idPersona:idPersona,
                     idPregunta:$("#idPregunta").val(),
                     idAlternativa:selectedOptionvalue,
                     justificacion:''
@@ -89,8 +139,22 @@ $(document).ready(function(){
                             text:'Feedback finalizado correctamente.',
                             type:'success'
                         }).then(function(result){
-                            $("#modalAccion").modal("hide");
-                            location.reload();
+
+                            var obEst = {
+                                idPersona:idPersona
+                            }
+
+                            $.ajax({
+                                type: "GET",
+                                url: "/Feedback/Feedback/setEstadoEncuesta",
+                                contentType: "application/json; charset=utf-8",
+                                data: obEst,
+                                dataType: "json", 
+                                success: function (msg) {
+                                    $("#modalAccion").modal("hide");
+                                    location.reload();        
+                                },
+                            });
                         });
                     },
                 });

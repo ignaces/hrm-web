@@ -90,6 +90,7 @@
         async crearPlan  ({ view,request, response, auth, session }) {
 
             var idFeedbackOpinante=request.input("idOpinante");
+            var idEtapaTareaActor=request.input("idEtapaTareaActor");
             var datosVista = session.get("datosVista");
 
             var result = await data.execApi(request.hostname(),'/Feedback/Persona/getAcciones',{idFeedbackOpinante:idFeedbackOpinante});
@@ -101,7 +102,7 @@
             const fbEstado = restado.body.data;
 
             const estado = fbEstado[0].codigo;
-            var resultComp = await data.execApi(request.hostname(),'/Feedback/Persona/getCompetenciasOpinante',{idFeedbackOpinante:idFeedbackOpinante});
+            var resultComp = await data.execApi(request.hostname(),'/Feedback/Persona/getCompetenciasOpinante',{idFeedbackOpinante:idFeedbackOpinante,idEtapaTareaActor:idEtapaTareaActor});
             var competencias = resultComp.body.data;
             
             return view.render('feedback/crearPlan',  {idFeedbackOpinante:idFeedbackOpinante,datosVista,fbAcciones:fbAcciones, estado:estado,competencias:competencias,settings:resultSettings.body.data[0]});
@@ -158,6 +159,37 @@
             return fb;
         
         } 
+
+        async setEstadoEncuesta({ view,request, response, auth, session }) {
+            var idPersona = request.input("idPersona");
+
+            var obj = {
+                idPersona:idPersona
+            }
+
+            var result = await data.execApi(request.hostname(),'/Feedback/Persona/setEstadoEncuesta',obj);
+
+            return {
+                mensaje:''
+            };
+        }
+
+        async saveRespColaborador ({ view,request, response, auth, session }) {
+
+            var idOpinado=request.input('idOpinado');
+            var estado =request.input('estado');
+
+            var obj = {
+                idOpinado:idOpinado,
+                estado:estado
+            }
+
+            var result = await data.execApiPost(request.hostname(),'/Feedback/Persona/saveRespColaborador',obj);
+
+            return {
+                mensaje:''
+            };
+        }
 
         async updateAccion ({ view,request, response, auth, session }) {
 
