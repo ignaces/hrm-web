@@ -54,6 +54,7 @@
                                         @if(persona.codigoEstado=="FINALIZADO") 
                                         <form method="GET" action="/Feedback/Feedback/crearPlan">
                                             <input type="hidden" name="idOpinante" value="{{persona.idOpinante}}">
+                                            <input type="hidden" name="idEtapaTareaActor" value="{{persona.actor_idEtapaTareaActor}}">
                                             <button type="submit" class="btn btn-warning btn-xs btn-rounded btn-bordered waves-effect w-md"><i class="{{tarea.tarea.step_icono}}"></i> PDA</a>   
                                         </form>
                                         @else
