@@ -90,6 +90,7 @@
         async crearPlan  ({ view,request, response, auth, session }) {
 
             var idFeedbackOpinante=request.input("idOpinante");
+            var idEtapaTareaActor=request.input("idEtapaTareaActor");
             var datosVista = session.get("datosVista");
 
             var result = await data.execApi(request.hostname(),'/Feedback/Persona/getAcciones',{idFeedbackOpinante:idFeedbackOpinante});
@@ -101,7 +102,7 @@
             const fbEstado = restado.body.data;
 
             const estado = fbEstado[0].codigo;
-            var resultComp = await data.execApi(request.hostname(),'/Feedback/Persona/getCompetenciasOpinante',{idFeedbackOpinante:idFeedbackOpinante});
+            var resultComp = await data.execApi(request.hostname(),'/Feedback/Persona/getCompetenciasOpinante',{idFeedbackOpinante:idFeedbackOpinante,idEtapaTareaActor:idEtapaTareaActor});
             var competencias = resultComp.body.data;
             
             return view.render('feedback/crearPlan',  {idFeedbackOpinante:idFeedbackOpinante,datosVista,fbAcciones:fbAcciones, estado:estado,competencias:competencias,settings:resultSettings.body.data[0]});
