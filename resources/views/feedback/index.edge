@@ -72,7 +72,35 @@
         
 
         {{-- EQUIPO --}}
-        
+        @if(mostrarAccion>0)
+        <div class="row">
+            <div class="portlet">
+                <div class="portlet-heading bg-primary">
+                    <h4 class="portlet-title">
+                        Mi Plan de Acción
+                    </h4>
+                    <div class="portlet-widgets">
+                        <a data-toggle="collapse" data-parent="#accordion1" href="#pda"><i class="mdi mdi-minus"></i></a>                  
+                    </div>
+                    <div class="clearfix"></div>
+                </div>     
+                <div id="pda" class="panel-collapse collapse in">
+                    <div class="portlet-body">
+                        <div class="col-lg-10">
+                        </div>
+                        <div class="col-md-2">
+                            <form method="GET" action="/Feedback/Feedback/consultaPlan">
+                                <input type="hidden" name="idPersona" value="{{idPersona}}">
+                                <button type="submit" class="btn btn-info btn-rounded btn-block"></i> Consultar</a>   
+                            </form>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
+
         @if(lista.length > 0)
         <div class="row">
             <div class="portlet">

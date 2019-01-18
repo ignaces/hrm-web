@@ -34,9 +34,14 @@
 
             const encuesta = rencuesta.body.data;
 
+            var result = await data.execApi(request.hostname(),'/Feedback/Persona/consultarAcciones',{idPersona:persona.id});
+            const fbAcciones = result.body.data;
+
+            var mostrarAccion = fbAcciones.length;
+
             //var res = await data.execApi(request.hostname(),'/Feedback/Persona/list',{idProceso:idProceso,idPersona:persona.id});
             
-            return view.render('feedback/index',  {lista:colaboradores,encuesta:encuesta,datosProceso,PersonaEde,etapa,idPersona:persona.id});
+            return view.render('feedback/index',  {lista:colaboradores,encuesta:encuesta,datosProceso,PersonaEde,etapa,idPersona:persona.id,mostrarAccion:mostrarAccion});
         
         }
 
@@ -86,6 +91,18 @@
             return view.render('feedback/feedback',  {feedback:fb,datosVista,idOpinante,idOpinado});
         
         } 
+
+        async consultaPlan ({ view,request, response, auth, session }) {
+            var idPersona=request.input("idPersona");
+            var datosVista = session.get("datosVista");
+
+            var result = await data.execApi(request.hostname(),'/Feedback/Persona/consultarAcciones',{idPersona:idPersona});
+            const fbAcciones = result.body.data;
+
+            const estado = 'FIN';
+
+            return view.render('feedback/crearPlan',  {idFeedbackOpinante:idPersona,datosVista,fbAcciones:fbAcciones, estado:estado});
+        }
 
         async crearPlan  ({ view,request, response, auth, session }) {
 
