@@ -127,7 +127,9 @@
 
             var result = await data.execApi(request.hostname(),'/Feedback/Persona/getAcciones',{idFeedbackOpinante:idFeedbackOpinante});
             var restado = await data.execApi(request.hostname(),'/Feedback/Persona/getEstadoPlan',{idFeedbackOpinante:idFeedbackOpinante});
-
+            
+            var resultSettings = await data.execApi(request.hostname(),'/Feedback/Settings/getParametro',{param:"ACCIONESPRED"});
+            
             const fbAcciones = result.body.data;
             const fbEstado = restado.body.data;
 
@@ -135,7 +137,7 @@
             var resultComp = await data.execApi(request.hostname(),'/Feedback/Persona/getCompetenciasOpinante',{idFeedbackOpinante:idFeedbackOpinante,idEtapaTareaActor:idEtapaTareaActor});
             var competencias = resultComp.body.data;
             
-            return view.render('feedback/crearPlan',  {idFeedbackOpinante:idFeedbackOpinante,datosVista,fbAcciones:fbAcciones, estado:estado,competencias:competencias});
+            return view.render('feedback/crearPlan',  {idFeedbackOpinante:idFeedbackOpinante,datosVista,fbAcciones:fbAcciones, estado:estado,competencias:competencias,settings:resultSettings.body.data[0]});
         
         } 
         async confirmar({view,request, response, auth, session}){

@@ -17,7 +17,7 @@ $("#btnGrabarFinalizar").click(function(){
         largo=trimed.length;
     });
     
-    if (vacios) {
+    if (vacios && settings.largo>0) {
         swal(
             'No has terminado',
             'Debes ingresar una observación.',
