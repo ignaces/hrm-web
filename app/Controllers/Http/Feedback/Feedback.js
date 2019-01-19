@@ -73,7 +73,8 @@
         }
         async settings ({ view,request, response, auth, session }){
             var param = request.input("param");
-            var result = await data.execApi(request.hostname(),'/Feedback/Settings/getParametro',{param:param});
+            var idEtapa = request.input("idEtapa");
+            var result = await data.execApi(request.hostname(),'/Feedback/Settings/getParametro',{param:param,idEtapa:idEtapa});
             return result.body.data;
 
         }
