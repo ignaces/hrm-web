@@ -225,7 +225,7 @@
                 <div class="panel-heading">
                         
                     <h2 class="panel-title">Acciones
-                        @if(estado=="INI")
+                        @if(estado=="INI" || (estado=="CON" && mostrarB==1))
                             <div class="dropdown pull-right">
                                 <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
                                     <h3 class="m-0 text-muted"><i class="mdi mdi-dots-horizontal"></i></h3>
@@ -238,7 +238,7 @@
                     </h2>
                 </div>
                 <div class="panel-body">
-                    @!component('feedback.components.accion',persona=persona,estado=estado)
+                    @!component('feedback.components.accion',persona=persona,estado=estado,mostrarB=mostrarB)
                 </div>   
             </div>
         </div>                

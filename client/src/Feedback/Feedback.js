@@ -83,7 +83,7 @@ $(function() {
         type: "GET",
         url: "/Feedback/Feedback/settings",
         contentType: "application/json; charset=utf-8",
-        data: {param:"LNFEEDBACK"},
+        data: {param:"LNFEEDBACK",idEtapa:$("#idEtapa").val()},
         dataType: "json", 
         success: function (msg) {
             settings.largo = msg[0].valor*1;
