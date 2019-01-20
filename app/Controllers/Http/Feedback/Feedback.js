@@ -73,7 +73,8 @@
         }
         async settings ({ view,request, response, auth, session }){
             var param = request.input("param");
-            var result = await data.execApi(request.hostname(),'/Feedback/Settings/getParametro',{param:param});
+            var idEtapa = request.input("idEtapa");
+            var result = await data.execApi(request.hostname(),'/Feedback/Settings/getParametro',{param:param,idEtapa:idEtapa});
             return result.body.data;
 
         }
@@ -123,12 +124,13 @@
 
             var idFeedbackOpinante=request.input("idOpinante");
             var idEtapaTareaActor=request.input("idEtapaTareaActor");
+            var idEtapa=request.input("idEtapa");
             var datosVista = session.get("datosVista");
 
             var result = await data.execApi(request.hostname(),'/Feedback/Persona/getAcciones',{idFeedbackOpinante:idFeedbackOpinante});
             var restado = await data.execApi(request.hostname(),'/Feedback/Persona/getEstadoPlan',{idFeedbackOpinante:idFeedbackOpinante});
             
-            var resultSettings = await data.execApi(request.hostname(),'/Feedback/Settings/getParametro',{param:"ACCIONESPRED"});
+            var resultSettings = await data.execApi(request.hostname(),'/Feedback/Settings/getParametro',{param:"ACCIONESPRED",idEtapa:idEtapa});
             
             const fbAcciones = result.body.data;
             const fbEstado = restado.body.data;
