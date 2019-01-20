@@ -91,6 +91,8 @@
                         <div class="col-md-2">
                             <form method="GET" action="/Feedback/Feedback/consultaPlan">
                                 <input type="hidden" name="idPersona" value="{{idPersona}}">
+                                <input type="hidden" name="idProceso" value="{{idProceso}}">
+                                <input type="hidden" name="idEtapa" value="{{idEtapa}}">
                                 <button type="submit" class="btn btn-info btn-rounded btn-block"></i> Consultar</a>   
                             </form>
                         </div>
@@ -116,7 +118,7 @@
                 <div id="equipo" class="panel-collapse collapse in">
                      <div class="portlet-body">
                         <div class="clearfix"></div>
-                        @!component('feedback.components.listaColaboradores',lista=lista)
+                        @!component('feedback.components.listaColaboradores',lista=lista,idEtapa=idEtapa)
                      </div>
                 </div>
             </div>

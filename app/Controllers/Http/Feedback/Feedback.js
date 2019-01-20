@@ -34,14 +34,13 @@
 
             const encuesta = rencuesta.body.data;
 
-            var result = await data.execApi(request.hostname(),'/Feedback/Persona/consultarAcciones',{idPersona:persona.id});
-            const fbAcciones = result.body.data;
-
-            var mostrarAccion = fbAcciones.length;
+            var rparam = await data.execApi(request.hostname(),'/Feedback/Persona/consultarAcciones',{idPersona:persona.id,idProceso:idProceso});
+            
+            var mostrarAccion = rparam.body.data;
 
             //var res = await data.execApi(request.hostname(),'/Feedback/Persona/list',{idProceso:idProceso,idPersona:persona.id});
             
-            return view.render('feedback/index',  {lista:colaboradores,encuesta:encuesta,datosProceso,PersonaEde,etapa,idPersona:persona.id,mostrarAccion:mostrarAccion});
+            return view.render('feedback/index',  {lista:colaboradores,encuesta:encuesta,datosProceso,PersonaEde,etapa,idPersona:persona.id,mostrarAccion:mostrarAccion.length,idProceso:idProceso,idEtapa:idEtapa});
         
         }
 
@@ -74,7 +73,8 @@
         }
         async settings ({ view,request, response, auth, session }){
             var param = request.input("param");
-            var result = await data.execApi(request.hostname(),'/Feedback/Settings/getParametro',{param:param});
+            var idEtapa = request.input("idEtapa");
+            var result = await data.execApi(request.hostname(),'/Feedback/Settings/getParametro',{param:param,idEtapa:idEtapa});
             return result.body.data;
 
         }
@@ -94,26 +94,43 @@
 
         async consultaPlan ({ view,request, response, auth, session }) {
             var idPersona=request.input("idPersona");
+            var idProceso=request.input("idProceso");
+            var idEtapa=request.input("idEtapa");            
             var datosVista = session.get("datosVista");
 
-            var result = await data.execApi(request.hostname(),'/Feedback/Persona/consultarAcciones',{idPersona:idPersona});
+            var res = await data.execApi(request.hostname(),'/Feedback/Persona/consultarAcciones',{idPersona:idPersona,idProceso:idProceso});
+            const fb = res.body.data;
+
+            var result = await data.execApi(request.hostname(),'/Feedback/Persona/getAcciones',{idFeedbackOpinante:fb[0].id});
+            var restado = await data.execApi(request.hostname(),'/Feedback/Persona/getEstadoPlan',{idFeedbackOpinante:fb[0].id});
+
             const fbAcciones = result.body.data;
+            const fbEstado = restado.body.data;
 
-            const estado = 'FIN';
+            const estado = 'CON';
 
-            return view.render('feedback/crearPlan',  {idFeedbackOpinante:idPersona,datosVista,fbAcciones:fbAcciones, estado:estado});
+            var param = 'MOSTRARACCION';
+            var rparam = await data.execApi(request.hostname(),'/Feedback/Settings/getParametro',{param:param,idEtapa:idEtapa});
+
+            var mostrarB = rparam.body.data;
+
+            var resultComp = await data.execApi(request.hostname(),'/Feedback/Persona/getCompetenciasOpinante',{idFeedbackOpinante:fb[0].id,idEtapaTareaActor:fb[0].actor_idEtapaTareaActor});
+            var competencias = resultComp.body.data;
+
+            return view.render('feedback/crearPlan',  {idFeedbackOpinante:fb[0].id,datosVista,fbAcciones:fbAcciones, estado:estado,competencias:competencias,mostrarB:mostrarB[0].valor});
         }
 
         async crearPlan  ({ view,request, response, auth, session }) {
 
             var idFeedbackOpinante=request.input("idOpinante");
             var idEtapaTareaActor=request.input("idEtapaTareaActor");
+            var idEtapa=request.input("idEtapa");
             var datosVista = session.get("datosVista");
 
             var result = await data.execApi(request.hostname(),'/Feedback/Persona/getAcciones',{idFeedbackOpinante:idFeedbackOpinante});
             var restado = await data.execApi(request.hostname(),'/Feedback/Persona/getEstadoPlan',{idFeedbackOpinante:idFeedbackOpinante});
             
-            var resultSettings = await data.execApi(request.hostname(),'/Feedback/Settings/getParametro',{param:"ACCIONESPRED"});
+            var resultSettings = await data.execApi(request.hostname(),'/Feedback/Settings/getParametro',{param:"ACCIONESPRED",idEtapa:idEtapa});
             
             const fbAcciones = result.body.data;
             const fbEstado = restado.body.data;
