@@ -107,7 +107,14 @@
             const fbAcciones = result.body.data;
             const fbEstado = restado.body.data;
 
-            const estado = 'CON';
+            var estado = ''
+            if (fbEstado[0].codigo == 'INI') {
+                estado = 'CON';
+            }
+            else {
+                estado = fbEstado[0].codigo;
+            }
+            
 
             var param = 'MOSTRARACCION';
             var rparam = await data.execApi(request.hostname(),'/Feedback/Settings/getParametro',{param:param,idEtapa:idEtapa});
