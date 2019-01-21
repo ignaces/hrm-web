@@ -25,6 +25,7 @@ module.exports = {
     //Feedback
     feedbackSave:             ['./client/src/Feedback/Feedback.js'],
     confirmarFeedback:        ['./client/src/Feedback/Confirmacion.js'],
+    feedbackConfirm:          ['./client/src/Feedback/ConfirmarFeedback.js'],
     //participantes:            ['./client/src/ede/participantes.js'],
     //Encuesta
     ingresoEncuesta:          ['./client/src/Encuesta/ingreso.js'],

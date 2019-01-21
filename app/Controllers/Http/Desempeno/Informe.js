@@ -204,8 +204,13 @@ class Accion {
             "idOpinante":idOpinante
         };
         ////////(obj);
+        var objInst = {
+            "idOpinante":idOpinante,
+            "idProceso":idProceso,
+            "idPersona":idPersona
+        };
 
-        var result = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumentoEdeReporteCriterio',obj);
+        var result = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumentoEdeReporteCriterio',objInst);
 
         var instrumento = result.body;
         var result2 = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getEscala',obj);

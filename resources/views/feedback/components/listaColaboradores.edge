@@ -12,8 +12,9 @@
                                 <tr class="bg-gray">                                      
                                     <th>Colaborador</th>
                                     <th>Estado</th>
-                                    <th>Acción</th>
-                                    
+                                    <th>Informe</th>
+                                    <th>Confirmacion Colaborador</th>
+                                    <th>Acción</th>                                    
                                 </tr>
                           </thead>
                           <tbody>
@@ -38,16 +39,27 @@
                                     <td>
                                     <div class="label label-{{persona.color}}"> <i class=""></i> {{persona.estado}}</div>
                                     </td>
-                                    
+                                    <td>
+                                        @if(persona.informe_mostrar=="SI")
+                                            <input type="hidden" name="idOpinante" value="{{persona.actor_idEtapaTareaActor}}">
+                                            <a href="{{persona.informe_vinculo}}&idOpinante={{persona.actor_idEtapaTareaActor}}" class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-bar-chart-o"></i> Ver Informe</a>
+                                            <!--<a href="/Desempeno/Proceso/informeEjecutivos?idProceso=ca95dced-c680-11e8-8771-bc764e100f2b&idEtapa=1f05c0a0-c70e-11e8-8771-bc764e100f2b&idAccionPersona=c007bb5c-d596-11e8-8771-bc764e100f2b&codigoActor=EVAL&codigo=D603A67A&idOpinante=2d15dfea-d597-11e8-8771-bc764e100f2b" class="btn btn-primary btn-xs btn-rounded btn-bordered waves-effect w-md waves-light"><i class="fa fa-bar-chart-o"></i> Ver Informe</a>-->
+                                        @else
+                                           <button type="button" class="btn btn-default btn-xs btn-rounded btn-bordered waves-effect w-md" disable><i class="fa fa-ban"></i> No Disponible</button>
+                                        @endif
+                                    </td>
+                                    <td><h4>{{persona.checkOpinado}}</h4></td>
                                     <td>
                                         @if(persona.codigoEstado=="FINALIZADO") 
                                         <form method="GET" action="/Feedback/Feedback/crearPlan">
                                             <input type="hidden" name="idOpinante" value="{{persona.idOpinante}}">
+                                            <input type="hidden" name="idEtapaTareaActor" value="{{persona.actor_idEtapaTareaActor}}">
+                                            <input type="hidden" name="idEtapa" value="{{idEtapa}}">
                                             <button type="submit" class="btn btn-warning btn-xs btn-rounded btn-bordered waves-effect w-md"><i class="{{tarea.tarea.step_icono}}"></i> PDA</a>   
                                         </form>
                                         @else
                                             <form method="GET" action="/Feedback/Feedback/realizar">
-                                                
+                                                <input type="hidden" name="idOpinado" value="{{persona.idOpinado}}">
                                                 <input type="hidden" name="idOpinante" value="{{persona.idOpinante}}">
                                                 <button type="submit" class="btn btn-warning btn-xs btn-rounded btn-bordered waves-effect w-md"><i class="{{tarea.tarea.step_icono}}"></i> Realizar Feedback</a>   
                                             </form>

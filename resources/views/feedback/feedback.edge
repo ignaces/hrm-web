@@ -25,8 +25,11 @@
     <input type="hidden" id="idProceso" name="idProceso" value="{{datosVista.idProceso}}" />
     <input type="hidden" id="idEtapa" name="idEtapa" value="{{datosVista.idEtapa}}" />
 </form>
+
 {{ csrfField() }}
 <input type="hidden" id="idOpinante" name="idOpinante" value="{{idOpinante}}" />
+<input type="hidden" id="idOpinado" name="idOpinado" value="{{idOpinado}}" />
+<input type="hidden" id="idEtapa" name="idEtapa" value="{{datosVista.idEtapa}}" />
 
 <div class="row" >
     
@@ -45,10 +48,10 @@
                         <div class="col-md-12">
                             <div class="panel panel-default">
                                     <div class="panel-heading bg-primary">
-                                            <h3 class="panel-title text-white">Comentario de retroalimentación:</h3>
+                                            <h3 class="panel-title text-white">Comentario del Feedback:</h3>
                                         </div>
                                 <div class="panel-body">
-                                        <p>A continuación puedes ingresar comentarios respecto a las fortalezas y/o aspectos que pueden ser oportunidades de mejora en el desempeño actual de tu colaborador.</p>
+                                        <p>A continuación puedes ingresar comentarios sobre la conversación de desempeño.</p>
                                         <textarea id="txtObservacion" pattern="\s*(\S\s*){10000,}" class="form-control inputObservacion"  rows="3" ></textarea>
                                     
                                 </div>
@@ -67,7 +70,7 @@
                         <div class="col-md-12">
                             <div class="panel panel-default">
                                     <div class="panel-heading bg-primary">
-                                            <h3 class="panel-title text-white">¿Se reunió presencialmente con su colaborador?</h3>
+                                            <h3 class="panel-title text-white">¿Realizaste la reunion de Feedback con tu colaborador?</h3>
                                         </div>
                                 <div class="panel-body">
                                         No <input type="checkbox" id="chkPresencial"  data-plugin="switchery" data-color="#2b3d51" data-size="large"/> Sí

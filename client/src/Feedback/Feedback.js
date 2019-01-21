@@ -1,4 +1,6 @@
-
+var settings={
+    largo: 100
+};
 $("#btnGrabarFinalizar").click(function(){
 
     var vacios=false;
@@ -15,7 +17,7 @@ $("#btnGrabarFinalizar").click(function(){
         largo=trimed.length;
     });
     
-    if (vacios) {
+    if (vacios && settings.largo>0) {
         swal(
             'No has terminado',
             'Debes ingresar una observación.',
@@ -24,10 +26,10 @@ $("#btnGrabarFinalizar").click(function(){
         return false;
     }
 
-    if (largo<100) {
+    if (largo<settings.largo) {
         swal(
             'No has terminado',
-            'Debes ingresar una observación de al menos 100 caracteres.',
+            'Debes ingresar una observación de al menos '+ settings.largo +' caracteres.',
             'warning'
         );
         return false;
@@ -51,7 +53,8 @@ $("#btnGrabarFinalizar").click(function(){
             var obj = { 
               idOpinante:$("#idOpinante").val(),
               observacion:$("#txtObservacion").val(),
-              presencial:presencial
+              presencial:presencial,
+              idOpinado:$("#idOpinado").val()
             };
 
             $.ajax({
@@ -75,3 +78,17 @@ $("#btnGrabarFinalizar").click(function(){
         }
       });
 }); 
+$(function() {
+    $.ajax({
+        type: "GET",
+        url: "/Feedback/Feedback/settings",
+        contentType: "application/json; charset=utf-8",
+        data: {param:"LNFEEDBACK",idEtapa:$("#idEtapa").val()},
+        dataType: "json", 
+        success: function (msg) {
+            settings.largo = msg[0].valor*1;
+
+
+        }
+    });
+});

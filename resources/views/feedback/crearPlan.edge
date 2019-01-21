@@ -62,7 +62,7 @@
                         confirmButtonColor: '#3085d6',
                         cancelButtonColor: '#d33',
                         confirmButtonText: 'Si, finalizar',
-                        cancelButtonText: 'Cancelar'
+                        cancelButtonText: 'Cancelar',
                     }).then(function(result)  {
                         if (result) {
                             var obj = { 
@@ -95,17 +95,51 @@
             el: '#formulario',
             data: {
                 competencias:{{{toJSON(competencias)}}},
+                accionesPredeterminadas:[],
+                predeterminada:"",
                 accion: {
                     id:'',
                     accion: '',
                     objetivo:'',
-                    plazo:'',
+                    fechaTermino:'',
                     edit: false,
                     idCompetencia:''
                 }            
             },            
             methods: {
                 saveAccion:function () {
+                    if(cForm.accion.idCompetencia==undefined){
+                        swal(
+                            'No has terminado',
+                            'Debes seleccionar una competencia.',
+                            'warning'
+                        );
+                        return false;
+                    }
+                    if(cForm.accion.accion==""){
+                        swal(
+                            'No has terminado',
+                            'Debes ingresar una acción.',
+                            'warning'
+                        );
+                        return false;
+                    }
+                    if(cForm.accion.objetivo==""){
+                        swal(
+                            'No has terminado',
+                            'Debes ingresar un objetivo.',
+                            'warning'
+                        );
+                        return false;
+                    }
+                    if(cForm.accion.fechaTermino==undefined){
+                        swal(
+                            'No has terminado',
+                            'Debes ingresar una fecha de compromiso.',
+                            'warning'
+                        );
+                        return false;
+                    }
                     var url = "/Feedback/Feedback/addAccion"
                     if(cForm.accion.edit){
                         url="/Feedback/Feedback/updateAccion"
@@ -127,6 +161,27 @@
                             $("#modalAccion").modal("hide");
                         }
                     });   
+                },
+                getAccionesPredeterminadas:function(){
+                    
+                    var obj = {
+                        idCompetencia:cForm.accion.idCompetencia
+                    };
+
+                    $.ajax({
+                        type: "GET",
+                        url: "/Feedback/Feedback/getAccionesPredeterminadas",
+                        contentType: "application/json; charset=utf-8",
+                        data: obj,
+                        dataType: "json", 
+                        //async:false,
+                        success: function (msg) {
+                            cForm.accionesPredeterminadas = msg;
+                        }
+                    });   
+                },
+                setPredeterminada:function(){
+                    cForm.accion.accion = cForm.predeterminada;
                 }
             }
         });
@@ -152,7 +207,7 @@
 @endsection
 @section('content')
     @!component('components.Core.botonera')
-    @!component('feedback.components.modalAccionCrearPlan')
+    @!component('feedback.components.modalAccionCrearPlan',settings=settings)
 
     <form id="frmVolver" action="/Feedback/Feedback/index">    
         <input type="hidden" id="idProceso" name="idProceso" value="{{datosVista.idProceso}}" />
@@ -170,7 +225,7 @@
                 <div class="panel-heading">
                         
                     <h2 class="panel-title">Acciones
-                        @if(estado=="INI")
+                        @if(estado=="INI" || (estado=="CON" && mostrarB==1))
                             <div class="dropdown pull-right">
                                 <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
                                     <h3 class="m-0 text-muted"><i class="mdi mdi-dots-horizontal"></i></h3>
@@ -183,7 +238,7 @@
                     </h2>
                 </div>
                 <div class="panel-body">
-                    @!component('feedback.components.accion',persona=persona,estado=estado)
+                    @!component('feedback.components.accion',persona=persona,estado=estado,mostrarB=mostrarB)
                 </div>   
             </div>
         </div>                
