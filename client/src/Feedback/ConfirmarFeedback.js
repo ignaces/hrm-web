@@ -23,13 +23,13 @@ $(document).ready(function(){
 
     $("#btnsaveSolicitud").click(function(){
         swal({
-            title: '¿Esta seguro de finalizar?',
-            text: "No podra volver a editar",
-            type: 'warning',
+            title: '¿Esta seguro de responder?',
+            //text: "No podra volver a editar",
+            type: 'info',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, finalizar',
+            confirmButtonText: 'Si, responder',
             cancelButtonText: 'Cancelar'
         }).then(function(result)  {
             if (result) {
@@ -55,10 +55,12 @@ $(document).ready(function(){
                     data: objResp,
                     dataType: "json", 
                     success: function (msg) {
+                        $("#modalConfirmar").modal("hide");
+                        //location.reload();
                     },
                 });
 
-                var obEst = {
+                /*var obEst = {
                     idPersona:idPersona
                 }
 
@@ -79,7 +81,7 @@ $(document).ready(function(){
                             location.reload();                            
                         });
                     },
-                });                
+                });*/                
             }
         });            
     });
