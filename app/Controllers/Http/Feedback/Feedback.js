@@ -107,17 +107,24 @@
             const fbAcciones = result.body.data;
             const fbEstado = restado.body.data;
 
-            const estado = 'CON';
+            var estado = ''
+            if (fbEstado[0].codigo == 'INI') {
+                estado = 'CON';
+            }
+            else {
+                estado = fbEstado[0].codigo;
+            }
+            
 
             var param = 'MOSTRARACCION';
             var rparam = await data.execApi(request.hostname(),'/Feedback/Settings/getParametro',{param:param,idEtapa:idEtapa});
 
             var mostrarB = rparam.body.data;
-
+            var resultSettings = await data.execApi(request.hostname(),'/Feedback/Settings/getParametro',{param:"ACCIONESPRED",idEtapa:idEtapa});
             var resultComp = await data.execApi(request.hostname(),'/Feedback/Persona/getCompetenciasOpinante',{idFeedbackOpinante:fb[0].id,idEtapaTareaActor:fb[0].actor_idEtapaTareaActor});
             var competencias = resultComp.body.data;
 
-            return view.render('feedback/crearPlan',  {idFeedbackOpinante:fb[0].id,datosVista,fbAcciones:fbAcciones, estado:estado,competencias:competencias,mostrarB:mostrarB[0].valor});
+            return view.render('feedback/crearPlan',  {idFeedbackOpinante:fb[0].id,datosVista,fbAcciones:fbAcciones, estado:estado,competencias:competencias,mostrarB:mostrarB[0].valor,settings:resultSettings.body.data[0]});
         }
 
         async crearPlan  ({ view,request, response, auth, session }) {
