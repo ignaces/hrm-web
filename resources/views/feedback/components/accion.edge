@@ -1,9 +1,21 @@
 <div class="row">
     <div class="col-md-12" id="app">
-        @if(estado=="INI" || (estado=="CON" && mostrarCA==1))
+        @if(estado=="INI")
             <div class="card-box"  v-if="acciones.length==0">
                 <p>No hay acciones creadas.  Para crear una nueva acción haz click en los tres puntos (<i class="mdi mdi-dots-horizontal"></i>) en la esquina derecha de este panel.</p>
             </div>
+        @endif
+        @if(estado=="CON")
+            @if(mostrarCA==1)
+                <div class="card-box"  v-if="acciones.length==0">
+                    <p>No hay acciones creadas.  Para crear una nueva acción haz click en los tres puntos (<i class="mdi mdi-dots-horizontal"></i>) en la esquina derecha de este panel.</p>
+                </div>
+            @endif
+            @if(mostrarCA==0)
+                <div class="card-box"  v-if="acciones.length==0">
+                    <p>No hay acciones creadas.</p>
+                </div>
+            @endif
         @endif
         <div class="card-box" v-for="accion in acciones" v-if="acciones.length>0">
             @if(estado=="INI" || (estado=="CON" && mostrarB==1))
