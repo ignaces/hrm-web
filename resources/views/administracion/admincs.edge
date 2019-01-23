@@ -17,18 +17,122 @@
 
 @section('content')
 @!component('components.Core.botonera')
- <div class="row">
+@each(proceso in datosProcesosActivos) 
+<div class="row">
     <div class="col-lg-12 col-md-12">
         <div class="portlet">
             <div class="portlet-heading bg-primary">
                 <h3 class="portlet-title">
-                    Procesos
+                    <img src='{{proceso.proceso_imagen}}' class="rounded-circle" width="40"> {{proceso.proceso_nombre}}
                 </h3>
                 <div class="clearfix"></div>
             </div>
             <div id="bg-primary" class="panel-collapse collapse in">
                 <div class="portlet-body">
-                    <div class="table-responsive">
+
+                    <div id="bg-default" class="panel-collapse collapse in">
+                        <div class="portlet-body">
+                            <div class="row">
+                                @each(etapa in datosEtapasProcesos)
+                                    
+                                    @if(etapa.etapa_ocultar=="0" && etapa.idProceso == $parent.proceso.idProceso)
+                                    <div class="col-md-2 col-xs-12">
+                                        <div class="text-center card-box  {{etapa.etapa_color}}">
+                                            <div class="clearfix"></div>
+                                            <div class="member-card">
+                                                <div class="thumb-lg member-thumb m-b-10 center-block">
+                                                    <img src="{{etapa.etapa_imagen}}" class="img-circle img-thumbnail" alt="{{etapa.etapa_nombre}}">
+                                                </div>
+
+                                                <div class="" style="height: 50px;">
+                                                    <h5 class="m-b-3">{{etapa.etapa_nombre}}</h5>
+                                                </div>
+
+                                                <a name="#" class="btn btn-{{etapa.estado_color}} m-t-20 btn-rounded waves-effect w-md waves-light btn-xs"><i class='{{etapa.estado_icono}}'></i> {{etapa.estado_texto}}</a>
+                                                
+                                                <div class="m-t-5">
+                                                        <div class="row">
+                                                            <div class="col-xs-12">
+                                                                <div class="m-t-2 m-b-5">
+                                                                    <h6 class="m-b-0 text-muted">Participantes</h6>
+                                                                    <h6 class="m-b-0 text-muted">{{etapa.etapa_numeroEvaluados}}</h6>
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                </div>
+
+                                                <div class="m-t-5">
+                                                    <div class="row">
+                                                        <div class="col-xs-12">
+                                                            <div class="m-t-2 m-b-5">
+                                                                <h6 class="m-b-0 text-muted">Fecha Inicio</h6>
+                                                                <h6 class="m-b-0 text-muted">{{etapa.etapa_fecha_inicio}}</h6>
+                                                                
+                                                                <h6 class="m-b-0 text-muted">Fecha de Cierre</h6>
+                                                                <h6 class="m-b-0 text-muted">{{etapa.etapa_fecha_termino}}</h6>
+                                                            
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                    
+                                                @if(etapa.etapa_numeroEvaluados > 0)
+                                                    <div class="m-t-5">
+                                                        <div class="row">
+                                                            <div class="col-xs-12">
+                                                                <a href="/Administracion/Administracion/verPersonasEtapa?idProceso={{etapa.idProceso}}&idEtapa={{etapa.idEtapa}}" class="btn btn-success btn-bordered btn-rounded waves-effect w-md waves-light btn-xs"><i class="mdi mdi-format-list-bulleted"></i> Ver</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!--div class="m-t-5">
+                                                        <div class="row">
+                                                            <div class="col-xs-12">
+                                                                <a href="/Administracion/Administracion/verPersonasEtapa?idProceso={{etapa.idProceso}}&idEtapa={{etapa.idEtapa}}" class="btn btn-success btn-bordered btn-rounded waves-effect w-md waves-light btn-xs"><i class="mdi mdi-download"></i> Avance</a>
+                                                            </div>
+                                                        </div>
+                                                    </div-->
+                                                @else
+                                                    <div class="m-t-5">
+                                                        <div class="row">
+                                                            <div class="col-xs-12">
+                                                                <a name="" class="btn btn-default btn-bordered btn-rounded waves-effect w-md waves-light btn-xs" disabled><i class="mdi mdi-format-list-bulleted"></i> N/D</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!--div class="m-t-5">
+                                                            <div class="row">
+                                                                <div class="col-xs-12">
+                                                                    <br>
+                                                                </div>
+                                                            </div>
+                                                        </div-->
+                                                @endif
+                                            </div>
+
+                                        </div>
+
+                                    </div> 
+                                    @endif
+                                @endeach
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--
+                        {
+                            id:“ejecutivos_2017”,
+                            periodo:“2017",
+                            identificador:identificador
+                        }*/
+                        // link al reporte
+                            window.location.href=“http://hrmassets.enovum.cl/cs/files/ede/rh/“+archivo.id+“/”+archivo.identificador+“.pdf”
+                    -->
+
+                    <!--div class="table-responsive">
                         <table class="table m-0 table-colored table-primary">
                             <thead>
                             <tr>
@@ -39,20 +143,28 @@
                             </tr>
                             </thead>
                             <tbody>
-                                @each(proceso in datosProcesosActivos)
                                     <tr>
                                         <td style="text-align: center;"><img src='{{proceso.proceso_imagen}}' class="rounded-circle" width="40"></td>
                                         <td>{{proceso.proceso_nombre}}</td>
                                         <td style="text-align: right;"><a class="btn btn-primary" href="/Administracion/Administracion/verPersonasProceso?idProceso={{proceso.idProceso}}" target="_blank"> Ver Participantes</a></td>
                                         <td style="text-align: right;"><a class="btn btn-primary" href="/Administracion/Administracion/evaluadorMasivo?idProceso={{proceso.idProceso}}" target="_blank"> Prueba evaluadorMasivo</a></td>
                                     </tr>
-                                @endeach
+                                
                             </tbody>
                         </table>
-                    </div>
+                    </div-->
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endeach
+
+<div class="row">
+    &nbsp;
+</div>
+<div class="row">
+        &nbsp;
+    </div>
+    
 @endsection  
