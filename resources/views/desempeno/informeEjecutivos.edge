@@ -398,7 +398,6 @@
             });
 
             $("#tblPromedioComp tbody tr").each(function (index) {
-                console.log("sdfsdfs")
                 $(this).children("td").each(function (index2) {
                     var objNiveles = {
                         "idOpinante":"{{idOpinante}}",
@@ -496,22 +495,5 @@
             
           });
           </script>
-            <script>
-        (function() {
-          'use strict';
-  
-          if (!('serviceWorker' in navigator)) {
-            console.log('Service worker not supported');
-            return;
-          }
-          navigator.serviceWorker.register('/assets/js/sw.js')
-          .then(function() {
-            console.log('Registered');
-          })
-          .catch(function(error) {
-            console.log('Registration failed:', error);
-          });
-  
-        })();
-      </script>
+         
 @endsection
