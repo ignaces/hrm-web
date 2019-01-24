@@ -38,9 +38,12 @@
             
             var mostrarAccion = rparam.body.data;
 
+            var rcoconfco = await data.execApi(request.hostname(),'/Feedback/Settings/getParametro',{param:'MOSTRARCONFCO',idEtapa:idEtapa});
+            var mostrarCC = rcoconfco.body.data;
+
             //var res = await data.execApi(request.hostname(),'/Feedback/Persona/list',{idProceso:idProceso,idPersona:persona.id});
             
-            return view.render('feedback/index',  {lista:colaboradores,encuesta:encuesta,datosProceso,PersonaEde,etapa,idPersona:persona.id,mostrarAccion:mostrarAccion.length,idProceso:idProceso,idEtapa:idEtapa});
+            return view.render('feedback/index',  {lista:colaboradores,encuesta:encuesta,datosProceso,PersonaEde,etapa,idPersona:persona.id,mostrarAccion:mostrarAccion.length,idProceso:idProceso,idEtapa:idEtapa,mostrarCC:mostrarCC[0].valor});
         
         }
 
@@ -114,17 +117,20 @@
             else {
                 estado = fbEstado[0].codigo;
             }
-            
 
-            var param = 'MOSTRARACCION';
-            var rparam = await data.execApi(request.hostname(),'/Feedback/Settings/getParametro',{param:param,idEtapa:idEtapa});
+            var rparam = await data.execApi(request.hostname(),'/Feedback/Settings/getParametro',{param:'MOSTRARACCION',idEtapa:idEtapa});
+            var rcomp = await data.execApi(request.hostname(),'/Feedback/Settings/getParametro',{param:'MOSTRARCOMPE',idEtapa:idEtapa});
+            var rcomacc = await data.execApi(request.hostname(),'/Feedback/Settings/getParametro',{param:'MOSTRARCOMACC',idEtapa:idEtapa});
 
+            var mostrarC = rcomp.body.data;
             var mostrarB = rparam.body.data;
+            var mostrarCA = rcomacc.body.data;
+            
             var resultSettings = await data.execApi(request.hostname(),'/Feedback/Settings/getParametro',{param:"ACCIONESPRED",idEtapa:idEtapa});
-            var resultComp = await data.execApi(request.hostname(),'/Feedback/Persona/getCompetenciasOpinante',{idFeedbackOpinante:fb[0].id,idEtapaTareaActor:fb[0].actor_idEtapaTareaActor});
+            var resultComp = await data.execApi(request.hostname(),'/Feedback/Persona/getCompetenciasOpinante',{idFeedbackOpinante:fb[0].id,idEtapaTareaActor:fb[0].actor_idEtapaTareaActor,param:mostrarC[0].valor});
             var competencias = resultComp.body.data;
 
-            return view.render('feedback/crearPlan',  {idFeedbackOpinante:fb[0].id,datosVista,fbAcciones:fbAcciones, estado:estado,competencias:competencias,mostrarB:mostrarB[0].valor,settings:resultSettings.body.data[0]});
+            return view.render('feedback/crearPlan',  {idFeedbackOpinante:fb[0].id,datosVista,fbAcciones:fbAcciones, estado:estado,competencias:competencias,mostrarB:mostrarB[0].valor,mostrarCA:mostrarCA[0].valor,settings:resultSettings.body.data[0]});
         }
 
         async crearPlan  ({ view,request, response, auth, session }) {
@@ -138,12 +144,15 @@
             var restado = await data.execApi(request.hostname(),'/Feedback/Persona/getEstadoPlan',{idFeedbackOpinante:idFeedbackOpinante});
             
             var resultSettings = await data.execApi(request.hostname(),'/Feedback/Settings/getParametro',{param:"ACCIONESPRED",idEtapa:idEtapa});
+            var rcomp = await data.execApi(request.hostname(),'/Feedback/Settings/getParametro',{param:'MOSTRARCOMPE',idEtapa:idEtapa});
+
+            var mostrarC = rcomp.body.data;
             
             const fbAcciones = result.body.data;
             const fbEstado = restado.body.data;
 
             const estado = fbEstado[0].codigo;
-            var resultComp = await data.execApi(request.hostname(),'/Feedback/Persona/getCompetenciasOpinante',{idFeedbackOpinante:idFeedbackOpinante,idEtapaTareaActor:idEtapaTareaActor});
+            var resultComp = await data.execApi(request.hostname(),'/Feedback/Persona/getCompetenciasOpinante',{idFeedbackOpinante:idFeedbackOpinante,idEtapaTareaActor:idEtapaTareaActor,param:mostrarC[0].valor});
             var competencias = resultComp.body.data;
             
             return view.render('feedback/crearPlan',  {idFeedbackOpinante:idFeedbackOpinante,datosVista,fbAcciones:fbAcciones, estado:estado,competencias:competencias,settings:resultSettings.body.data[0]});
