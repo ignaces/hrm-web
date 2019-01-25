@@ -474,7 +474,8 @@
                                     top: -0,
                                     bottom: 0
                                 }
-                            }
+                            },
+                            //onAnimationComplete:putImage()
                         }
                     });
                 }
@@ -507,10 +508,22 @@
                                     top: -0,
                                     bottom: 0
                                 }
-                            }
+                            },
+                            //onAnimationComplete:putImage()
                         }
                     });
                 }
+
+                /*function putImage(){
+                    var canvas = document.getElementById("myRadarChart");        
+                    if (canvas.getContext) {
+                        var ctx = canvas.getContext("2d");                
+                        var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+                    }          
+
+                    console.log(image)
+
+                }*/
             
           });
           </script>
