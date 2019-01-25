@@ -109,8 +109,8 @@ class Accion {
         var codigo     = request.input("codigoActor");
         var idAccionPersona     = request.input("idAccionPersona");
         var idPersona = request.input("idPersona");
-        var img = request.input("img");
-        console.log(idPersona)
+        var img = session.get('imgChar')
+        
         var competenciasSpider = [];
         var valoresSpiderAuto = [];
         var valoresSpiderSup = [];
@@ -311,8 +311,8 @@ class Accion {
 //        server = "csdev.enovum.cl";
         //var result = await got(`http://192.168.3.4:8080?url=${server}/Acreditacion/Informe/pdf?procesoPersona=${idPersona}&cd=${conDetalle}`);
         // var url = `http://192.168.3.4:8080/?url=http%3A%2F%2F${server}%2FAcreditacion%2FInforme%2Fpdf%3FprocesoPersona%3D${idPersona}%26cd%3D${conDetalle}`;
-       
-        var url = `http://192.168.3.4:8080/?url=http%3A%2F%2F${server}%2FDesempeno%2FInforme%2Fpdf%3FidProceso%3D${idProceso}%26idEtapa%3D${idEtapa}%26idAccionPersona%3D${idAccionPersona}%26codigoActor%3D${codigoActor}%26idOpinante%3D${idOpinante}%26idPersona%3D${idPersona}%26img%3D${img}`;
+       session.put('imgChar',img);
+        var url = `http://192.168.3.4:8080/?url=http%3A%2F%2F${server}%2FDesempeno%2FInforme%2Fpdf%3FidProceso%3D${idProceso}%26idEtapa%3D${idEtapa}%26idAccionPersona%3D${idAccionPersona}%26codigoActor%3D${codigoActor}%26idOpinante%3D${idOpinante}%26idPersona%3D${idPersona}`;
         //var url = 'http://localhost:3335/Desempeno/Informe/pdf?idProceso=ca95dced-c680-11e8-8771-bc764e100f2b&idEtapa=1f05c0a0-c70e-11e8-8771-bc764e100f2b&idPersona=e5429228-7efd-11e8-80db-bc764e10787e&idAccionPersona=d6fab867-d596-11e8-8771-bc764e100f2b&codigoActor=EVAL&idOpinante=44fbb013-d597-11e8-8771-bc764e100f2b';
 
         var file = await wget(url, { output: 'tmp/reporte.pdf' });
