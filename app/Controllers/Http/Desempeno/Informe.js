@@ -117,10 +117,15 @@ class Accion {
         var obj = {
             "idOpinante":idOpinante
         };
+        var objInst = {
+            "idOpinante":idOpinante,
+            "idProceso":idProceso,
+            "idPersona":idPersona
+        };
         
         //////console.log(obj);
 
-        var result = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumentoEde',obj);
+        var result = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumentoEde',objInst);
 
         var instrumento = result.body;
         
