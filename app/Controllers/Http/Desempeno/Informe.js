@@ -3,7 +3,6 @@
 const api = use('App/Utils/Data')
 var wget = require('node-wget-promise');
 const Helpers = use('Helpers');
-var phantom = require('phantom');
 class Accion {
 
     //---->> PUBLICAR METAS
@@ -310,17 +309,6 @@ class Accion {
         //var url = 'http://localhost:3335/Desempeno/Informe/pdf?idProceso=ca95dced-c680-11e8-8771-bc764e100f2b&idEtapa=1f05c0a0-c70e-11e8-8771-bc764e100f2b&idPersona=e5429228-7efd-11e8-80db-bc764e10787e&idAccionPersona=d6fab867-d596-11e8-8771-bc764e100f2b&codigoActor=EVAL&idOpinante=44fbb013-d597-11e8-8771-bc764e100f2b';
 
         var file = await wget(url, { output: 'tmp/reporte.pdf' });
-
-        /*phantom.create().then(function(ph) {
-            ph.createPage().then(function(page) {
-                page.open(url).then(function(status) {
-                    page.render('tmp/reporte.pdf').then(function() {
-                        console.log('Page Rendered');
-                        ph.exit();
-                    });
-                });
-            });
-        });*/
 
         response.type = "application/pdf";
 
