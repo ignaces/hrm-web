@@ -458,6 +458,14 @@
                             }*/
                             ]
                             },
+                            plotOptions: {
+                                series: {
+                                    animation: false
+                                },
+                                line: {
+                                    animation: false
+                                }
+                            },
                         options:{
                             layout: {
                                 padding: {
@@ -474,6 +482,9 @@
                 {
                     var myRadarChart = new Chart(ctx, {
                         type: 'radar',
+                        plotOptions:{ 
+                                animation: false
+                            },
                         data: {
                             labels: labelsSpider,
                             datasets: [{
