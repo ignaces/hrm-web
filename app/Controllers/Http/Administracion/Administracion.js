@@ -54,19 +54,36 @@ class Administracion {
         return {mensaje:resultCarga.body.mensaje}
     }
 
-    async admincs  ({ view,request, response, auth }) {
+    async admincs  ({ view,request, response, auth, antl }) {
         
         ////console.log(auth.user.username)
         ////console.log(auth.user.id)
+        antl.switchLocale('es');
+
+        var cliente = request.hostname().split(".")[0]
+        if(cliente=="localhost"){
+            cliente="hrmdev"
+        }
+
+        var etag = `app_${cliente}`
+
         var objDatosProcesoActivos = {
             "idProceso":"",
             "idEstado":"ACTIVO"
         };
         var resultProcesosActivos =await api.execApi(request.hostname(),'/Desempeno/Proceso/getProcesos',objDatosProcesoActivos);
         
-        var datosProcesosActivos =resultProcesosActivos.body.data;
-      
-        return view.render('/administracion/admincs', {datosProcesosActivos});
+        var objDatosProcesoActivos = {
+            "idProceso":"",
+            "idEstado":"ACTIVO"
+        };
+
+        var resultEtapas =await api.execApi(request.hostname(),'/Desempeno/Proceso/getEtapasProcesos', {});
+        
+        var datosProcesosActivos    =   resultProcesosActivos.body.data;
+        var datosEtapasProcesos     =   resultEtapas.body.data;
+        console.log(datosProcesosActivos);
+        return view.render('/administracion/admincs', {datosProcesosActivos, datosEtapasProcesos});
     }
 
     async verPersonasProceso  ({ view,request, response, auth }) {
@@ -86,19 +103,52 @@ class Administracion {
         return view.render('/administracion/personasProceso', {datosPersonasProceso, idProceso});
     }
 
+    async verPersonasEtapa  ({ view,request, response, auth }) {
+        
+        ////console.log(auth.user.username)
+        ////console.log(auth.user.id)
+
+        var idProceso = request.input("idProceso")
+        var idEtapa = request.input("idEtapa")
+
+        var obj = {
+            "idProceso":idProceso,
+            "idEtapa": idEtapa
+        };
+        var resultPersonasProceso =await api.execApi(request.hostname(),'/Desempeno/Proceso/getPersonasProcesos',obj);
+        
+        var resultDatosProcesoEtapa = await api.execApi(request.hostname(), '/Desempeno/Proceso/getDatosProcesoEtapa', obj);
+        
+        var datosProcesoEtapa = resultDatosProcesoEtapa.body.data[0];
+        var datosPersonasProceso =resultPersonasProceso.body.data;
+        console.log(datosProcesoEtapa);
+        return view.render('/administracion/personasEtapa', {datosPersonasProceso, datosProcesoEtapa, idProceso, idEtapa});
+    }
+
     async verDatosPersonaProceso  ({ view,request, response, auth }) {
         
         ////console.log(auth.user.username)
         ////console.log(auth.user.id)
 
         var idProceso = request.input("idProceso");
+        var idEtapa = request.input("idEtapa");
         var idPersona = request.input("idPersona");
         var msgOK = request.input("msgReset");
         
-        var linkVolver = '/administracion/Administracion/verPersonasProceso?idProceso='+idProceso;
+        var linkVolver = '/Administracion/Administracion/verPersonasEtapa?idProceso='+idProceso+'&idEtapa='+idEtapa;
+
+        var obj = {
+            "idProceso":idProceso,
+            "idEtapa":idEtapa
+        };
+
+        var resultDatosProcesoEtapa = await api.execApi(request.hostname(), '/Desempeno/Proceso/getDatosProcesoEtapa', obj);
+        var datosProcesoEtapa = resultDatosProcesoEtapa.body.data[0];
+
         var obj = {
             "idProceso":idProceso,
             "idPersona":idPersona,
+            "idEtapa":idEtapa,
             "tipo": "evaluado"
         };
 
@@ -109,6 +159,7 @@ class Administracion {
         var obj = {
             "idProceso":idProceso,
             "idPersona":idPersona,
+            "idEtapa":idEtapa,
             "tipo": "evaluador"
         };
 
@@ -145,7 +196,9 @@ class Administracion {
         var datosPersonasEvaluadoras = personasEvaluadoras.body.data; 
 
         //console.log(setClasificacionesPersona);
-        return view.render('/administracion/personaProceso', {datosEvaluador,datosPersonasProceso,datosEvaluadorProceso,datosClasificacionesPadres, datosClasificacionesHijos, setClasificacionesPersona, idProceso,linkVolver, datosPersonasEvaluadoras, msgReset:msgOK });
+
+        
+        return view.render('/administracion/personaProceso', {datosEvaluador,datosPersonasProceso,datosEvaluadorProceso,datosClasificacionesPadres, datosClasificacionesHijos, setClasificacionesPersona, idProceso, idEtapa, linkVolver, datosPersonasEvaluadoras, msgReset:msgOK, datosProcesoEtapa });
     }
 
     async resetearPassPorIdPersona ({ view,request, response, auth }) 
@@ -216,7 +269,8 @@ class Administracion {
     {
         var idPersona = request.input("idPersona");
         var idProceso = request.input("idProceso");
-        
+        var idEtapa = request.input("idEtapa");
+
         var nombres = request.input("nombresPersona");
         var apellidoPaterno = request.input("apellidoPaternoPersona");
         var apellidoMaterno = request.input("apellidoMaternoPersona");
@@ -240,7 +294,7 @@ class Administracion {
             console.log(e);
         }
         
-        response.redirect('/Administracion/Administracion/verDatosPersonaProceso?idProceso='+idProceso+'&idPersona='+idPersona);
+        response.redirect('/Administracion/Administracion/verDatosPersonaProceso?idProceso='+idProceso+'&idPersona='+idPersona+'&idEtapa='+idEtapoa);
         
     }
 
@@ -323,6 +377,7 @@ class Administracion {
     {
         var idPersona = request.input("idPersona");
         var idProceso = request.input("idProceso");
+        var idEtapa = request.input("idEtapa");
         var idEvaluacion = request.input("idEvaluacion");
         var idEvaluador = request.input("idEvaluador");
         var idTareaActor = request.input("idTareaActor");
@@ -348,13 +403,13 @@ class Administracion {
         }
         
         
-        response.redirect('/Administracion/Administracion/verDatosPersonaProceso?idProceso='+idProceso+'&idPersona='+idPersona);
+        response.redirect('/Administracion/Administracion/verDatosPersonaProceso?idProceso='+idProceso+'&idPersona='+idPersona+'&idEtapa='+idEtapa);
     }
 
     async sabanaAvanceDownload({ view, request, response }) {
 
 
-        var idProceso = request.input("idProceso")
+        var idProceso = request.input("idProceso");
         var idEvaluador = request.input("idEvaluador");
 
         var obj = {
