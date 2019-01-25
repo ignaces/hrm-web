@@ -696,7 +696,7 @@
                                   }*/
                                   ]
                                   },
-                                  plotOptions: {
+                            plotOptions: {
                                 series: {
                                     animation: false
                                 },
@@ -719,6 +719,14 @@
                       else
                       {
                           var myRadarChart = new Chart(ctx, {
+                            plotOptions: {
+                                series: {
+                                    animation: false
+                                },
+                                line: {
+                                    animation: false
+                                }
+                            },
                               type: 'radar',
                               data: {
                                   labels: labelsSpider,
