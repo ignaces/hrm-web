@@ -250,12 +250,42 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
+                                                        @if(instrumento.resultadoCalibracion.nivel == "No Disponible")
+                                                            <td bgcolor="#F7F7DE" height="20" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                                                Resultado Global</td>
+                                                            <td align="center" bgcolor="#F7F7DE" colspan="2" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0; text-align: center;">
+                                                                <span id="lblGlobal">{{instrumento.resultadoGlobal.nivel}}</span>
+                                                            </td>
+                                                        @else
+                                                            <td class="style25" height="20" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                                                Resultado Global</td>
+                                                            <td align="center" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                                                <span id="lblMetas">{{instrumento.resultadoGlobal.nivel}}</span>
+                                                            </td>
+                                                        @endif
+                                                    </tr>
+                                                    <tr>
+                                                        @if(instrumento.resultadoCalibracion.nivel != "No Disponible")
+                                                            <td bgcolor="#F7F7DE" height="20" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                                                Resultado Calibrado</td>
+                                                            <td align="center" bgcolor="#F7F7DE" colspan="2" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0; text-align: center;">
+                                                                <span id="lblGlobal">{{instrumento.resultadoCalibracion.nivel}}</span>
+                                                            </td>
+                                                        @else
+                                                        <td class="style25" height="20" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                                                Resultado Calibrado</td>
+                                                            <td align="center" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                                                <span id="lblMetas">{{instrumento.resultadoCalibracion.nivel}}</span>
+                                                            </td>
+                                                        @endif
+                                                    </tr>
+                                                    <!--<tr>
                                                         <td bgcolor="#F7F7DE" height="20" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
                                                             Resultado Global</td>
                                                         <td align="center" bgcolor="#F7F7DE" colspan="2" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0; text-align: center;">
                                                             <span id="lblGlobal">{{instrumento.resultadoGlobal.nivel}}</span>
                                                         </td>
-                                                    </tr>
+                                                    </tr>-->
                                                     <!--<tr>
                                                         <td bgcolor="#F7F7DE" height="20" 
                                                             style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
@@ -270,14 +300,19 @@
                                 </div>        
                         </div> 
                         <div style="page-break-before: always"></div>
-                        <div class="col-lg-12">
+                        @if(instrumento.resultadoCalibracion.nivel == "No Disponible" || instrumento.resultadoCalibracion.nivel == undefined || instrumento.resultadoCalibracion.nivel == null)
+                            @!component('components.Desempeno.widgetMatrizComparativaInformeEjecutivos',nivel=instrumento.resultadoGlobal.nivel)
+                        @else
+                            @!component('components.Desempeno.widgetMatrizComparativaInformeEjecutivos',nivel=instrumento.resultadoCalibracion.nivel) 
+                        @endif
+                        <!--<div class="col-lg-12">
                                 <div class="panel panel-default">
                                     <div class="panel-heading bg-warning">
                                             <div class="pull-right">
-                                                    <!--<p class="panel-sub-title text-muted">
+                                                    <p class="panel-sub-title text-muted">
                                                         <div class="badge badge-topbar bg-green"><i class="fa fa-percent"></i> 60% <i class="fa fa-check"></i></div>
                                                         <div class="badge bg-red"><i class="fa fa-flag-checkered"></i> 2<i class="fa fa-exclamation-circle"></i></div>
-                                                    </p>-->
+                                                    </p>
                                                 </div>
                                                 <h3 class="panel-title" style="color: #fff;">Matriz Comparativa</h3>
                                     </div> 
@@ -524,7 +559,7 @@
                                     </div>
                                 </div>           
             
-                        </div> 
+                        </div> -->
                         
                         <div class="col-lg-12">
                                 <div class="panel panel-default">
