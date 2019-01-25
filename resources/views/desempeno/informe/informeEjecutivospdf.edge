@@ -574,6 +574,7 @@
                                     </div> 
                                     <div class="panel-body" style="margin-left:150px; width: 800px !important;height: 100% !important;">
                                             <canvas id="myRadarChart" height="100%"></canvas>
+                                            <img id="chartImg" />
                                     </div>
                                 </div>           
             
@@ -708,6 +709,13 @@
                                   }
                               }
                           });
+                          $('#myRadarChart').hide('fast');
+                          var img = myRadarChart.toBase64Image();
+                          document.getElementById('chartImg')
+                            .setAttribute(
+                                'src', img
+                            );
+                          
                       }
                       else
                       {
@@ -739,6 +747,13 @@
                                   }
                               }
                           });
+                          $('#myRadarChart').hide('fast');
+                          var img = myRadarChart.toBase64Image();
+                          document.getElementById('chartImg')
+                            .setAttribute(
+                                'src', img
+                            );
+
                       }
                   
                 });
