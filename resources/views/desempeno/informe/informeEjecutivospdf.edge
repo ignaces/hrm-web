@@ -615,7 +615,7 @@
           <script src="/assets/plugins/chart.js/chart.min.js" ></script>
   
   
-          <script>
+        <script>
                 $(document).ready(()=>{
       
                   /*$("#tblPromedio tbody tr").each(function (index) {
@@ -712,8 +712,7 @@
                                           top: -0,
                                           bottom: 0
                                       }
-                                  },
-                                  onAnimationComplete: done
+                                  }
                               }
                           });
                       }
@@ -743,31 +742,11 @@
                                           top: -0,
                                           bottom: 0
                                       }
-                                  },
-                                  onAnimationComplete: done
+                                  }
                               }
                           });
                       }
                   
                 });
-                </script>
-                  <script>
-              (function() {
-                'use strict';
-        
-                if (!('serviceWorker' in navigator)) {
-                  console.log('Service worker not supported');
-                  return;
-                }
-                navigator.serviceWorker.register('/assets/js/sw.js')
-                .then(function() {
-                  console.log('Registered');
-                })
-                .catch(function(error) {
-                  console.log('Registration failed:', error);
-                });
-        
-              })();
-            </script>
-       
+        </script>
 @endsection
