@@ -12,7 +12,7 @@
           var codigo = request.input("codigo");
           var referer = session.get("referer");
           var codigoActor = request.input("codigoActor");
-          console.log(codigoActor)
+          
           var obj = {
             idEncuestaAplicacion:idEncuestaAplicacion,
             codigo:codigo
