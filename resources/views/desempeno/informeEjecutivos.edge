@@ -36,13 +36,13 @@
         
 
                 <div class="col-md-10">
-                        <!--@!component('components.Core.botonera',botones=[{showVolver:"0", texto:"PDF", icono:"fa fa-file-pdf-o", link:"/Desempeno/Informe/getPdf?idProceso=" + idProceso + "&idEtapa=" + idEtapa + "&idPersona="+persona[0].id+"&idAccionPersona="+idAccionPersona+"&codigoActor="+codigoActor+"&idOpinante="+idOpinante}] )
-                                                                        {showVolver:"0", texto:"Descarga", icono:"fa fa-file-pdf-o", link:"/Desempeno/Informe/dPdf?idProceso=" + idProceso + "&idEtapa=" + idEtapa + "&idPersona="+persona[0].id+"&idAccionPersona="+idAccionPersona+"&codigoActor="+codigoActor+"&idOpinante="+idOpinante}] ) -->
-                    <div class="row">                                          
+                        @!component('components.Core.botonera',botones=[{showVolver:"0", texto:"PDF", icono:"fa fa-file-pdf-o", link:"/Desempeno/Informe/getPdf?idProceso=" + idProceso + "&idEtapa=" + idEtapa + "&idPersona="+persona[0].id+"&idAccionPersona="+idAccionPersona+"&codigoActor="+codigoActor+"&idOpinante="+idOpinante}] )
+                                                                        <!--{showVolver:"0", texto:"Descarga", icono:"fa fa-file-pdf-o", link:"/Desempeno/Informe/dPdf?idProceso=" + idProceso + "&idEtapa=" + idEtapa + "&idPersona="+persona[0].id+"&idAccionPersona="+idAccionPersona+"&codigoActor="+codigoActor+"&idOpinante="+idOpinante}] ) -->
+                    <!--<div class="row">                                          
                         <div class="panel-body">
                             <i>Para imprimir el informe, presiona <b>CTRL + P</b>, imprimir como PDF</i>
                         </div>                                                                        
-                    </div>                                                                        
+                    </div>-->                                                                        
                     <div class="panel panel-border">
                         <div class="panel-heading">
                             <h3 class="panel-title" style="color: white;">Datos del Evaluado</h3>
@@ -373,7 +373,7 @@
           <script>
           $(document).ready(()=>{
 
-            $("#tblPromedio tbody tr").each(function (index) {
+            /*$("#tblPromedio tbody tr").each(function (index) {
                 console.log("ajaasdas")
                 $(this).children("td").each(function (index2) {
                     var objNiveles = {
@@ -401,9 +401,9 @@
                         $(this).html(nombreNivel)  
                     }
                 });
-            });
+            });*/
 
-            $("#tblPromedioComp tbody tr").each(function (index) {
+            /*$("#tblPromedioComp tbody tr").each(function (index) {
                 console.log("sdfsdfs")
                 $(this).children("td").each(function (index2) {
                     var objNiveles = {
@@ -431,7 +431,7 @@
                         $(this).html(nombreNivel)  
                     }
                 });
-            });
+            });*/
 
 
                 var labelsSpider = "{{competenciasSpider}}".split(",");
