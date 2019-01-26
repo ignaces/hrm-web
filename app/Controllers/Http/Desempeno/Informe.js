@@ -113,7 +113,6 @@ class Accion {
         var idAccionPersona     = request.input("idAccionPersona");
         var idPersona = request.input("idPersona");
         var img = request.input('img')
-        img = fs.readFileSync(`tmp/${img}`, 'utf8');
         var competenciasSpider = [];
         var valoresSpiderAuto = [];
         var valoresSpiderSup = [];
