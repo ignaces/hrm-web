@@ -316,17 +316,16 @@ class Accion {
         // var url = `http://192.168.3.4:8080/?url=http%3A%2F%2F${server}%2FAcreditacion%2FInforme%2Fpdf%3FprocesoPersona%3D${idPersona}%26cd%3D${conDetalle}`;
        
         var name =uuidv4().replace(/-/g,"");
-        var imgName = `${name}.imgx`;
-        fs.writeFile(`tmp/${imgName}`, img, function(err) {
-            if(err) {
-                return console.log(err);
-            }
+        var imgName = `${name}.png`;
 
-            console.log("The file was saved!");
-        }); 
+        var base64Data = img.replace(/^data:image\/png;base64,/, "");
+
+            fs.writeFile(`public/${imgName}`, base64Data, 'base64', function(err) {
+                console.log(err);
+            });
         var url = `http://192.168.3.4:8080/?url=http%3A%2F%2F${server}%2FDesempeno%2FInforme%2Fpdf%3FidProceso%3D${idProceso}%26idEtapa%3D${idEtapa}%26idAccionPersona%3D${idAccionPersona}%26codigoActor%3D${codigoActor}%26idOpinante%3D${idOpinante}%26idPersona%3D${idPersona}%26img%3D${imgName}`;
         //var url = 'http://localhost:3335/Desempeno/Informe/pdf?idProceso=ca95dced-c680-11e8-8771-bc764e100f2b&idEtapa=1f05c0a0-c70e-11e8-8771-bc764e100f2b&idPersona=e5429228-7efd-11e8-80db-bc764e10787e&idAccionPersona=d6fab867-d596-11e8-8771-bc764e100f2b&codigoActor=EVAL&idOpinante=44fbb013-d597-11e8-8771-bc764e100f2b';
-
+        console.log(url)
         var file = await wget(url, { output: 'tmp/reporte.pdf' });
 
         response.type = "application/pdf";
