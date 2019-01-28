@@ -161,7 +161,7 @@
                                                     </div> 
                                             @endeach
                                     
-                                        <div style="page-break-before: always"></div>
+                                        <!--<div style="page-break-before: always"></div>-->
                                 <div class="col-lg-12">
                                         <div class="panel panel-default">
                                             <!--<div class="panel-heading bg-warning">
@@ -202,7 +202,7 @@
                                 </div> 
                             
                             @!component('components.Desempeno.cajaPromedioGeneral',data={promedioGeneral:promedioGeneral, codigoActor: codigoActor})
-                            
+                            <!--<div style="page-break-before: always"></div>-->
                             <div class="col-lg-12">
                                     <div class="panel panel-color panel-primary">
                                         <div class="panel-heading">
@@ -297,7 +297,7 @@
                                         </div>
                                     </div>        
                             </div> 
-                            <div style="page-break-before: always"></div>
+                            <!--<div style="page-break-before: always"></div>-->
                                 @if(instrumento.resultadoCalibracion.nivel == "No Disponible" || instrumento.resultadoCalibracion.nivel == undefined || instrumento.resultadoCalibracion.nivel == null)
                                     @!component('components.Desempeno.widgetMatrizComparativaInformeEjecutivos',nivel=instrumento.resultadoGlobal.nivel)
                                 @else
@@ -310,7 +310,7 @@
                                                 <h3 class="panel-title" style="color: #fff;">Gráfico de Competencias</h3>
                                         </div> 
                                         <div class="panel-body" style="margin-left:150px; width: 800px !important;height: 100% !important;">
-                                                <img id="chartImg" src="/img/{{img}}" width="1000px" />
+                                                <img id="chartImg" src="/tmppdf/{{img}}" width="1000px" />
                                         </div>
                                     </div>           
                             </div> 
