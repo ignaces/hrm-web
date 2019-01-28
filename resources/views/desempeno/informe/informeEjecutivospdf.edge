@@ -28,535 +28,297 @@
 
 @section('content')
 <div class="row" >
-                <div class="col-md-12">
-                        
-                    <div class="panel panel-border">
-                        <div class="panel-heading">
-                            <h3 class="panel-title" style="color: white;">Datos del Evaluado</h3>
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-md-2"><span><b>Nombre</b></span></div>
-                                <div class="col-md-4"><span>{{persona.nombres}} {{persona.apellidoPaterno}} {{persona.apellidoMaterno}}</span></div>
-                                <div class="col-md-2"><span><b>RUT</b></span></div>
-                                <div class="col-md-4"><span>{{persona.identificador}}</span></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-2"><span><b>Email</b></span></div>
-                                <div class="col-md-4"><span>{{persona.email}}</span></div>
-                                <div class="col-md-2"><h5></h5></div>
-                                <div class="col-md-4"></div>
-                            </div>
-                        </div> <!--<div class="panel-body">-->
-                    </div> <!--<div class="panel panel-border panel-primary">-->          
-                </div>
-
-        <div class="col-md-12">
-            <div class="row">
-                    <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title" style="color: white;">Informe Individual Evaluación de Desempeño  : Desempeño Ejecutivos 2018</h3>
-                             </div>
-                            
-                            <div class="panel-body">
-                                <p>
-                              
-                                        @each(competencia in instrumento.competencias)
-                                        
-                                        <div class="col-lg-12">
-                                                <div class="panel panel-default">
-                                                    <div class="panel-heading bg-warning">
-                                                            <div class="pull-right">
-                                                                    <!--<p class="panel-sub-title text-muted">
-                                                                        <div class="badge badge-topbar bg-green"><i class="fa fa-percent"></i> 60% <i class="fa fa-check"></i></div>
-                                                                        <div class="badge bg-red"><i class="fa fa-flag-checkered"></i> 2<i class="fa fa-exclamation-circle"></i></div>
-                                                                    </p>-->
-                                                                </div>
-                                                                <h3 class="panel-title" style="color: #fff;">{{competencia.nombre}}</h3>
-                                                    </div> 
-                                                    <div class="panel-body">
-                                                            <!-- Tabla Metas -->
-                                                            <div class="table-responsive">
-                                                                    <table class="table">
-                                                                    <tbody>
-                                                                            @each(actividadesClave in competencia.actividadesClave)
-                                                                            
-                                                                                @each(criterio in actividadesClave.criterios)
-                                                                                    
-                                                                            
-                                                                                        @each(alternativa in criterio.escala)
-                                                                                        
-
-                                                                                            @if($loop.first)
-                                                                                                <tr>
-                                                                                                    
-                                                                                                    <td colspan="1" style="text-align: justify;">
-                                                                                                            {{alternativa.nombre}}
-                                                                                                    </td>
-                                                                                                    <td rowspan="3">
-                                                                                                            <table class="table m-0 table-colored-bordered table-bordered-warning" id="tblPromedioComp">
-                                                                                                            <thead>
-                                                                                                                <tr>
-                                                                                                                    <th>Autoevaluación</th> 
-                                                                                                                    @if(codigoActor == 'SUPE')
-                                                                                                                        <th>Superior</th>
-                                                                                                                        <th>Funcional</th>
-                                                                                                                    @endif
-                                                                                                                    @if(codigoActor == 'FUNC')
-                                                                                                                        <th>Funcional</th>
-                                                                                                                    @endif
-                                                                                                                </tr>
-                                                                                                            </thead>
-
-                                                                                                            <tbody>
-                                                                                                                    <tr>
-                                                                                                                        @each(p in promedioGeneral)
-                                                                                                                                       
-                                                                                                                            @if(p.id == $parent.$parent.$parent.$parent.competencia.id )
-                                                                                                                                <td style="text-align: center;">{{p.nivelAuto}}</td>
-
-                                                                                                                                @if(codigoActor == 'SUPE')
-                                                                                                                                    <td style="text-align: center;">{{p.nivelSup}}</td>
-                                                                                                                                    <td style="text-align: center;">{{p.nivelFunc}}</td>
-                                                                                                                                @endif
-                                                                                                                                @if(codigoActor == 'FUNC')
-                                                                                                                                    <td style="text-align: center;">{{p.nivelSup}}</td>
-                                                                                                                                @endif
-                                                                                                                            @endif
-
-
-                                                                                                                        @endeach
-                                                                                                                    </tr>
-                                                                                                            </tbody>
-                                                                                                        </table>
-                                                        
-                                                                                                    </td>
-                                                                                                </tr>
-                                                                                            @else
-                                                                                                <tr>
-                                                                                                    <td style="text-align: justify;">
-                                                                                                            {{alternativa.nombre}}
-                                                                                                    </td>
-                                                                                                </tr>
-                                                                                            @endif      
-                                                                                        @endeach 
-                                                                                              
-                                                                                @endeach
-
-                                                                            @endeach
-                                                                    <!--<tr>
-                                                                        <td style="text-align: justify;">
-                                                                                Actuó consistentemente en coherencia con las necesidades del cliente interno y/o externo. Su trabajo tuvo impacto visible y valorado en la experiencia de sus clientes. Comparado con el año anterior, hubo innovación, sorpresa y avances importantes.
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                            <td style="text-align: justify;">
-                                                                                Sus contribuciones lo/la posicionaron dentro del 15-20% de su grupo par en términos de impacto en el cliente interno y/o externo. Su trabajo marcó un “antes y un después” en la experiencia de sus clientes. Se constituyó en rol modelo para la organización en esta competencia.
-                                                                            </td>
-                                                                        </tr>-->
-                                                                </tbody>
-                                                            </table>
-                                                            </div>
-                                                    </div>
-                                                </div>           
-                            
-                                                </div> 
-                                    @endeach
-                                   
-                                    <div style="page-break-before: always"></div>
-                        <div class="col-lg-12">
-                                <div class="panel panel-default">
-                                    <!--<div class="panel-heading bg-warning">
-                                            <div class="pull-right">
-                                                    <p class="panel-sub-title text-muted">
-                                                        <div class="badge badge-topbar bg-green"><i class="fa fa-percent"></i> 60% <i class="fa fa-check"></i></div>
-                                                        <div class="badge bg-red"><i class="fa fa-flag-checkered"></i> 2<i class="fa fa-exclamation-circle"></i></div>
-                                                    </p>
-                                                </div>
-                                                <h3 class="panel-title" style="color: #fff;">Comentario Evaluador</h3>
-                                    </div> -->
-                                    <div class="panel-body">
-                                            <!-- Tabla Metas -->
-                                            <h5>Autoevaluación</h5>
-                                            <div class="form-group">
-                                                    <textarea readonly="" id="observacion" class="form-control" maxlength="225" rows="4" placeholder="">{{instrumento.observacion}}
-                                                        </textarea>
-                                            </div>
-                                            
-                                            <!--<div class="row">&nbsp;</div>
-                                            <h5>Superior</h5>
-                                            <div class="form-group">
-                                                    <textarea readonly="" id="observacion" class="form-control" maxlength="225" rows="4" placeholder="">Comentarios para evaluado superior
-                                                        </textarea>
-                                            </div>
-                                            
-                                            <div class="row">&nbsp;</div>
-                                            <h5>Superior Funcional</h5>
-                                            <div class="form-group">
-                                                    <textarea readonly="" id="observacion" class="form-control" maxlength="225" rows="4" placeholder="">Comentarios para evaluado superior funcional
-                                                        </textarea>
-                                            </div>-->
-
-                                            
-                                    </div>
-                                </div>           
-            
-                        </div> 
-                        
-                        @!component('components.Desempeno.cajaPromedioGeneral',data={promedioGeneral:promedioGeneral, codigoActor: codigoActor})
-                        
-                        <div class="col-lg-12">
-                                <div class="panel panel-color panel-primary">
+            <div class="col-md-12">
+                <div class="row">
+                        <div class="col-md-12">
+                                <div class="panel panel-border">
                                     <div class="panel-heading">
-                                            <div class="pull-right">
-                                                    <!--<p class="panel-sub-title text-muted">
-                                                        <div class="badge badge-topbar bg-green"><i class="fa fa-percent"></i> 60% <i class="fa fa-check"></i></div>
-                                                        <div class="badge bg-red"><i class="fa fa-flag-checkered"></i> 2<i class="fa fa-exclamation-circle"></i></div>
-                                                    </p>-->
-                                                </div>
-                                                <h3 class="panel-title" >Resultados</h3>
-                                    </div> 
-                                    <div class="panel-body">
-                                            <table class="table " style="width: 100%;">
-                                                    <tbody><tr>
-                                                        <td height="30" width="40%">
-                                                            &nbsp;</td>
-                                                        <td bgcolor="#FF8724" style="font-weight: bold; color: #FFFFFF; text-align: center" width="30%">
-                                                            Resultado</td>
-                                                        <!--td bgcolor="#FF8724" 
-                                                            style="font-weight: bold; color: #FFFFFF; text-align: center" width="30%">
-                                                            Clasificación</td-->
-                                                    </tr>
-                                                    <tr>
-                                                        <td height="20" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
-                                                            Evaluación Competencias Conductuales</td>
-                                                        <!--td align="center" 
-                                                            style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
-                                                            <span id="ctl00_Principal_LBPRRC">0.80</span>
-                                                        </td-->
-                                                        <td align="center" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
-                                                            <span id="lblCompetencia">{{instrumento.resultadoCompetencias.nivel}}</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="style25" height="20" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
-                                                            Evaluación de Resultados</td>
-                                                        <!--td align="center" 
-                                                            style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
-                                                            <span id="ctl00_Principal_LBPRRM">0.00</span>
-                                                        </td-->
-                                                        <td align="center" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
-                                                            <span id="lblMetas">{{instrumento.resultadoMetas.nivel}}</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td bgcolor="#F7F7DE" height="20" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
-                                                            Resultado Global</td>
-                                                        <td align="center" bgcolor="#F7F7DE" colspan="2" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0; text-align: center;">
-                                                            <span id="lblGlobal">{{instrumento.resultadoGlobal.nivel}}</span>
-                                                        </td>
-                                                    </tr>
-                                                    <!--<tr>
-                                                        <td bgcolor="#F7F7DE" height="20" 
-                                                            style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
-                                                            Resultado Global Calibrado</td>
-                                                         <td align="center" bgcolor="#F7F7DE" colspan="2" 
-                                                            style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0; text-align: center;">
-                                                            <span id="ctl00_Principal_LBPRGC">CB</span>
-                                                        </td>
-                                                    </tr>-->
-                                                </tbody></table>
+                                        <h3 class="panel-title" style="color: white;">Datos del Evaluado</h3>
                                     </div>
-                                </div>        
-                        </div> 
-                        <div style="page-break-before: always"></div>
-                        <div class="col-lg-12">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading bg-warning">
-                                            <div class="pull-right">
-                                                    <!--<p class="panel-sub-title text-muted">
-                                                        <div class="badge badge-topbar bg-green"><i class="fa fa-percent"></i> 60% <i class="fa fa-check"></i></div>
-                                                        <div class="badge bg-red"><i class="fa fa-flag-checkered"></i> 2<i class="fa fa-exclamation-circle"></i></div>
-                                                    </p>-->
-                                                </div>
-                                                <h3 class="panel-title" style="color: #fff;">Matriz Comparativa</h3>
-                                    </div> 
                                     <div class="panel-body">
-                                            <table style="border: 2px none #C0C0C0; margin-left:12%;" width="60%" align="center">
-                                                    <tbody>
-                                                    <tr>
-                                                        <td align="center">
-                                                            &nbsp;</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td align="center">
-                                                            <table >
-                                                                <tbody><tr>
-                                                                    <td class="style14" rowspan="3" width="20">
-                                                                        <strong><div style="transform: rotate(270deg);">Competencias&nbsp;&nbsp;Conductuales</div></strong>
-                                                                    </td>
-                                                                    <td class="style14" width="40">
-                                                                        A</td>
-                                                                    <td bgcolor="Yellow" class="style14" height="100" width="100">
-                                                                        <table width="100%">
-                                                                            <tbody><tr>
-                                                                                <td class="style15" height="10">
-
-                                                                                    <strong style="margin-left: 5px; margin-top: 5px;">AC</strong></td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td height="60" width="100%" style="text-align: center;">
-                                                                                @if(instrumento.resultadoGlobal.nivel == 'AC')
-                                                                                    <img id="ctl00_Principal_IMGCB" src="/assets/images/users/maleuser.png" class="img-circle img-thumbnail" width="60">
-                                                                                @endif
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td height="10" width="100%">
-                                                                                    <strong style="margin-left: 5px; margin-top: 5px;">
-                                                                                    <span id="ctl00_Principal_LBLAC" class="style21"></span>
-                                                                                    </strong></td>
-                                                                            </tr>
-                                                                        </tbody></table>
-                                                                    </td>
-                                                                    <td bgcolor="#66FF33" class="style14" height="100" width="100">
-                                                                        <table width="100%">
-                                                                            <tbody><tr>
-                                                                                <td class="style15" height="10">
-                                                                                    <strong style="margin-left: 5px; margin-top: 5px;">AB</strong></td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td height="60" width="100%" style="text-align: center;">
-                                                                                        @if(instrumento.resultadoGlobal.nivel == 'AB')
-                                                                                        <img id="ctl00_Principal_IMGCB" src="/assets/images/users/maleuser.png" class="img-circle img-thumbnail" width="60">
-                                                                                    @endif
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td height="10" width="100%">
-                                                                                    <strong style="margin-left: 5px; margin-top: 5px;">
-                                                                                    <span id="ctl00_Principal_LBLAB" class="style21"></span>
-                                                                                    </strong></td>
-                                                                            </tr>
-                                                                        </tbody></table>
-                                                                    </td>
-                                                                    <td bgcolor="#009933" class="style14" height="100" width="100">
-                                                                        <table width="100%">
-                                                                            <tbody><tr>
-                                                                                <td class="style15" height="10" style="color: #fff;">
-                                                                                    <strong style="margin-left: 5px; margin-top: 5px;">AA</strong></td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td height="60" width="100%" style="text-align: center;">
-                                                                                    @if(instrumento.resultadoGlobal.nivel == 'AA')
-                                                                                        <img id="ctl00_Principal_IMGCB" src="/assets/images/users/maleuser.png" class="img-circle img-thumbnail" width="60">
-                                                                                    @endif
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td height="10" width="100%">
-                                                                                    <strong style="margin-left: 5px; margin-top: 5px;">
-                                                                                    <span id="ctl00_Principal_LBLAA" class="style21"></span>
-                                                                                    </strong></td>
-                                                                            </tr>
-                                                                        </tbody></table>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="style14">
-                                                                        B</td>
-                                                                    <td bgcolor="Yellow" class="style14" height="100">
-                                                                        <table width="100%">
-                                                                            <tbody><tr>
-                                                                                <td class="style15" height="10">
-                                                                                    <strong style="margin-left: 5px; margin-top: 5px;">BC</strong></td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td height="60" width="100%" style="text-align: center;">
-                                                                                    @if(instrumento.resultadoGlobal.nivel == 'BC')
-                                                                                        <img id="ctl00_Principal_IMGCB" src="/assets/images/users/maleuser.png" class="img-circle img-thumbnail" width="60">
-                                                                                    @endif
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td height="10" width="100%" class="style21">
-                                                                                    <strong style="margin-left: 5px; margin-top: 5px;">
-                                                                                    <span id="ctl00_Principal_LBLBC" class="style21"></span>
-                                                                                    </strong></td>
-                                                                            </tr>
-                                                                        </tbody></table>
-                                                                    </td>
-                                                                    <td bgcolor="Yellow" class="style14">
-                                                                        <table width="100%">
-                                                                            <tbody><tr>
-                                                                                <td class="style15" height="10">
-                                                                                    <strong style="margin-left: 5px; margin-top: 5px;">BB</strong></td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td height="60" width="100%" style="text-align: center;">
-                                                                                    @if(instrumento.resultadoGlobal.nivel == 'BB')
-                                                                                        <img id="ctl00_Principal_IMGCB" src="/assets/images/users/maleuser.png" class="img-circle img-thumbnail" width="60">
-                                                                                    @endif
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td class="style21" height="10" width="100%">
-                                                                                    <strong style="margin-left: 5px; margin-top: 5px;">
-                                                                                    <span id="ctl00_Principal_LBLBB" class="style21"></span>
-                                                                                    </strong></td>
-                                                                            </tr>
-                                                                        </tbody></table>
-                                                                    </td>
-                                                                    <td bgcolor="#66FF33" class="style14">
-                                                                        <table width="100%">
-                                                                            <tbody>
-                                                                            <tr>
-                                                                                <td class="style15" height="10">
-                                                                                    <strong style="margin-left: 5px; margin-top: 5px;">BA</strong></td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td height="60" width="100%" style="text-align:center;">
-                                                                                    @if(instrumento.resultadoGlobal.nivel == 'BA')
-                                                                                        <img id="ctl00_Principal_IMGCB" src="/assets/images/users/maleuser.png" class="img-circle img-thumbnail" width="60">
-                                                                                    @endif
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td class="style21" height="10" width="100%">
-                                                                                    <strong style="margin-left: 5px; margin-top: 5px;">
-                                                                                    <span id="ctl00_Principal_LBLBA" class="style21"></span>
-                                                                                    </strong></td>
-                                                                            </tr>
-                                                                        </tbody></table>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="style14">
-                                                                        C</td>
-                                                                    <td bgcolor="#CC0000" class="style14" height="100">
-                                                                        <table width="100%">
-                                                                            <tbody><tr>
-                                                                                <td class="style15" height="10" style="color: #fff;">
-                                                                                    <strong style="margin-left: 5px; margin-top: 5px;">CC</strong></td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td height="60" width="100%" style="text-align: center;">
-                                                                                    @if(instrumento.resultadoGlobal.nivel == 'CC')
-                                                                                        <img id="ctl00_Principal_IMGCB" src="/assets/images/users/maleuser.png" class="img-circle img-thumbnail" width="60">
-                                                                                    @endif
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td height="10" width="100%">
-                                                                                    <strong style="margin-left: 5px; margin-top: 5px;">
-                                                                                    <span id="ctl00_Principal_LBLCC" class="style21"></span>
-                                                                                    </strong></td>
-                                                                            </tr>
-                                                                        </tbody></table>
-                                                                    </td>
-                                                                    <td bgcolor="Yellow" class="style14">
-                                                                        <table width="100%">
-                                                                            <tbody><tr>
-                                                                                <td class="style15" height="10">
-                                                                                    <strong style="margin-left: 5px; margin-top: 5px;">CB</strong></td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td height="60" width="100%" style="text-align: center;">
-                                                                                    @if(instrumento.resultadoGlobal.nivel == 'CB')
-                                                                                        <img id="ctl00_Principal_IMGCB" src="/assets/images/users/maleuser.png" class="img-circle img-thumbnail" width="60">
-                                                                                    @endif
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td height="10" width="100%" style="text-align: center;">
+                                        <div class="row">
+                                            <div class="col-md-2"><span><b>Nombre</b></span></div>
+                                            <div class="col-md-4"><span>{{persona.nombres}} {{persona.apellidoPaterno}} {{persona.apellidoMaterno}}</span></div>
+                                            <div class="col-md-2"><span><b>RUT</b></span></div>
+                                            <div class="col-md-4"><span>{{persona.identificador}}</span></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2"><span><b>Email</b></span></div>
+                                            <div class="col-md-4"><span>{{persona.email}}</span></div>
+                                            <div class="col-md-2"><h5></h5></div>
+                                            <div class="col-md-4"></div>
+                                        </div>
+                                    </div> <!--<div class="panel-body">-->
+                                </div> <!--<div class="panel panel-border panel-primary">-->          
+                        </div>
+                </div>
+                <div class="row">
+                        <!--<div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title" >Informe Individual Evaluación de Desempeño  : Desempeño Ejecutivos 2018</h3>
+                                </div>-->
+                                
+                                <div class="panel-body">
+                                            @each(competencia in instrumento.competencias)
+                                            
+                                            <div class="col-lg-12">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading bg-warning">
+                                                                <div class="pull-right">
+                                                                        <!--<p class="panel-sub-title text-muted">
+                                                                            <div class="badge badge-topbar bg-green"><i class="fa fa-percent"></i> 60% <i class="fa fa-check"></i></div>
+                                                                            <div class="badge bg-red"><i class="fa fa-flag-checkered"></i> 2<i class="fa fa-exclamation-circle"></i></div>
+                                                                        </p>-->
+                                                                    </div>
+                                                                    <h3 class="panel-title" style="color: #fff;">{{competencia.nombre}}</h3>
+                                                        </div> 
+                                                        <div class="panel-body">
+                                                                <!-- Tabla Metas -->
+                                                                <div class="table-responsive">
+                                                                        <table class="table">
+                                                                        <tbody>
+                                                                                @each(actividadesClave in competencia.actividadesClave)
                                                                                 
-                                                                                </td>
-                                                                            </tr>
-                                                                        </tbody></table>
-                                                                    </td>
-                                                                    <td bgcolor="Yellow" class="style14">
-                                                                        <table width="100%">
-                                                                            <tbody><tr>
-                                                                                <td class="style15" height="10">
-                                                                                    <strong style="margin-left: 5px; margin-top: 5px;">CA</strong></td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td height="60" width="100%" style="text-align: center;">
-                                                                                    @if(instrumento.resultadoGlobal.nivel == 'CA')
-                                                                                        <img id="ctl00_Principal_IMGCB" src="/assets/images/users/maleuser.png" class="img-circle img-thumbnail" width="60">
-                                                                                    @endif
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td height="10" width="100%">
-                                                                                    <strong style="margin-left: 5px; margin-top: 5px;">
-                                                                                    <span id="ctl00_Principal_LBLCA" class="style21"></span>
-                                                                                    </strong></td>
-                                                                            </tr>
-                                                                        </tbody></table>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="style14">
-                                                                        &nbsp;</td>
-                                                                    <td class="style14">
-                                                                        &nbsp;</td>
-                                                                    <td class="style14" height="40" style="text-align: center;">
-                                                                        C</td>
-                                                                    <td class="style14" style="text-align: center;">
-                                                                        B</td>
-                                                                    <td class="style14" style="text-align: center;">
-                                                                        A</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="style14">
-                                                                        &nbsp;</td>
-                                                                    <td class="style14">
-                                                                        &nbsp;</td>
-                                                                    <td class="style14" colspan="3" height="40" style="text-align: center;">
-                                                                        <strong>Resultados</strong>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody></table>
-                                                        </td>
-                                                    </tr>
-                                                </tbody></table>
-                                    </div>
-                                </div>           
-            
-                        </div> 
-                        
-                        <div class="col-lg-12">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading bg-warning">
-                                            <div class="pull-right">
-                                                    <!--<p class="panel-sub-title text-muted">
-                                                        <div class="badge badge-topbar bg-green"><i class="fa fa-percent"></i> 60% <i class="fa fa-check"></i></div>
-                                                        <div class="badge bg-red"><i class="fa fa-flag-checkered"></i> 2<i class="fa fa-exclamation-circle"></i></div>
-                                                    </p>-->
-                                                </div>
-                                                <h3 class="panel-title" style="color: #fff;">Gráfico de Competencias</h3>
-                                    </div> 
-                                    <div class="panel-body" style="margin-left:150px; width: 800px !important;height: 100% !important;">
-                                            <canvas id="myRadarChart" height="100%"></canvas>
-                                    </div>
-                                </div>           
-            
-                        </div> 
+                                                                                    @each(criterio in actividadesClave.criterios)
+                                                                                        
+                                                                                
+                                                                                            @each(alternativa in criterio.escala)
+                                                                                            
 
-    </div>
-        </div>
-    </div>
-    </div>
-              </div> <!-- container -->
-  
-              
-          </div>
-          <!-- END wrapper -->
-  
-  
-  
-      
+                                                                                                @if($loop.first)
+                                                                                                    <tr>
+                                                                                                        
+                                                                                                        <td colspan="1" style="text-align: justify;">
+                                                                                                                {{alternativa.nombre}}
+                                                                                                        </td>
+                                                                                                        <td rowspan="3">
+                                                                                                                <table class="table m-0 table-colored-bordered table-bordered-warning" id="tblPromedioComp">
+                                                                                                                <thead>
+                                                                                                                    <tr>
+                                                                                                                        <th>Autoevaluación</th> 
+                                                                                                                        @if(codigoActor == 'SUPE')
+                                                                                                                            <th>Superior</th>
+                                                                                                                            <th>Funcional</th>
+                                                                                                                        @endif
+                                                                                                                        @if(codigoActor == 'FUNC')
+                                                                                                                            <th>Funcional</th>
+                                                                                                                        @endif
+                                                                                                                    </tr>
+                                                                                                                </thead>
+
+                                                                                                                <tbody>
+                                                                                                                        <tr>
+                                                                                                                            @each(p in promedioGeneral)
+                                                                                                                                        
+                                                                                                                                @if(p.id == $parent.$parent.$parent.$parent.competencia.id )
+                                                                                                                                    <td style="text-align: center;">{{p.nivelAuto}}</td>
+
+                                                                                                                                    @if(codigoActor == 'SUPE')
+                                                                                                                                        <td style="text-align: center;">{{p.nivelSup}}</td>
+                                                                                                                                        <td style="text-align: center;">{{p.nivelFunc}}</td>
+                                                                                                                                    @endif
+                                                                                                                                    @if(codigoActor == 'FUNC')
+                                                                                                                                        <td style="text-align: center;">{{p.nivelSup}}</td>
+                                                                                                                                    @endif
+                                                                                                                                @endif
+
+
+                                                                                                                            @endeach
+                                                                                                                        </tr>
+                                                                                                                </tbody>
+                                                                                                            </table>
+                                                            
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                @else
+                                                                                                    <tr>
+                                                                                                        <td style="text-align: justify;">
+                                                                                                                {{alternativa.nombre}}
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                @endif      
+                                                                                            @endeach 
+                                                                                                
+                                                                                    @endeach
+
+                                                                                @endeach
+                                                                        <!--<tr>
+                                                                            <td style="text-align: justify;">
+                                                                                    Actuó consistentemente en coherencia con las necesidades del cliente interno y/o externo. Su trabajo tuvo impacto visible y valorado en la experiencia de sus clientes. Comparado con el año anterior, hubo innovación, sorpresa y avances importantes.
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td style="text-align: justify;">
+                                                                                    Sus contribuciones lo/la posicionaron dentro del 15-20% de su grupo par en términos de impacto en el cliente interno y/o externo. Su trabajo marcó un “antes y un después” en la experiencia de sus clientes. Se constituyó en rol modelo para la organización en esta competencia.
+                                                                                </td>
+                                                                            </tr>-->
+                                                                    </tbody>
+                                                                </table>
+                                                                </div>
+                                                        </div>
+                                                    </div>           
+                                
+                                                    </div> 
+                                            @endeach
+                                    
+                                        <!--<div style="page-break-before: always"></div>-->
+                                <div class="col-lg-12">
+                                        <div class="panel panel-default">
+                                            <!--<div class="panel-heading bg-warning">
+                                                    <div class="pull-right">
+                                                            <p class="panel-sub-title text-muted">
+                                                                <div class="badge badge-topbar bg-green"><i class="fa fa-percent"></i> 60% <i class="fa fa-check"></i></div>
+                                                                <div class="badge bg-red"><i class="fa fa-flag-checkered"></i> 2<i class="fa fa-exclamation-circle"></i></div>
+                                                            </p>
+                                                        </div>
+                                                        <h3 class="panel-title" style="color: #fff;">Comentario Evaluador</h3>
+                                            </div> -->
+                                            <div class="panel-body">
+                                                    <!-- Tabla Metas -->
+                                                    <h5>Autoevaluación</h5>
+                                                    <div class="form-group">
+                                                            <textarea readonly="" id="observacion" class="form-control" maxlength="225" rows="4" placeholder="">{{instrumento.observacion}}
+                                                                </textarea>
+                                                    </div>
+                                                    
+                                                    <!--<div class="row">&nbsp;</div>
+                                                    <h5>Superior</h5>
+                                                    <div class="form-group">
+                                                            <textarea readonly="" id="observacion" class="form-control" maxlength="225" rows="4" placeholder="">Comentarios para evaluado superior
+                                                                </textarea>
+                                                    </div>
+                                                    
+                                                    <div class="row">&nbsp;</div>
+                                                    <h5>Superior Funcional</h5>
+                                                    <div class="form-group">
+                                                            <textarea readonly="" id="observacion" class="form-control" maxlength="225" rows="4" placeholder="">Comentarios para evaluado superior funcional
+                                                                </textarea>
+                                                    </div>-->
+
+                                                    
+                                            </div>
+                                        </div>           
+                    
+                                </div> 
+                            
+                            @!component('components.Desempeno.cajaPromedioGeneral',data={promedioGeneral:promedioGeneral, codigoActor: codigoActor})
+                            <!--<div style="page-break-before: always"></div>-->
+                            <div class="col-lg-12">
+                                    <div class="panel panel-color panel-primary">
+                                        <div class="panel-heading">
+                                                <div class="pull-right">
+                                                        <!--<p class="panel-sub-title text-muted">
+                                                            <div class="badge badge-topbar bg-green"><i class="fa fa-percent"></i> 60% <i class="fa fa-check"></i></div>
+                                                            <div class="badge bg-red"><i class="fa fa-flag-checkered"></i> 2<i class="fa fa-exclamation-circle"></i></div>
+                                                        </p>-->
+                                                    </div>
+                                                    <h3 class="panel-title" >Resultados</h3>
+                                        </div> 
+                                        <div class="panel-body">
+                                                <table class="table " style="width: 100%;">
+                                                        <tbody><tr>
+                                                            <td height="30" width="40%">
+                                                                &nbsp;</td>
+                                                            <td bgcolor="#FF8724" style="font-weight: bold; color: #FFFFFF; text-align: center" width="30%">
+                                                                Resultado</td>
+                                                            <!--td bgcolor="#FF8724" 
+                                                                style="font-weight: bold; color: #FFFFFF; text-align: center" width="30%">
+                                                                Clasificación</td-->
+                                                        </tr>
+                                                        <tr>
+                                                            <td height="20" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                                                Evaluación Competencias Conductuales</td>
+                                                            <!--td align="center" 
+                                                                style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                                                <span id="ctl00_Principal_LBPRRC">0.80</span>
+                                                            </td-->
+                                                            <td align="center" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                                                <span id="lblCompetencia">{{instrumento.resultadoCompetencias.nivel}}</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="style25" height="20" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                                                Evaluación de Resultados</td>
+                                                            <!--td align="center" 
+                                                                style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                                                <span id="ctl00_Principal_LBPRRM">0.00</span>
+                                                            </td-->
+                                                            <td align="center" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                                                <span id="lblMetas">{{instrumento.resultadoMetas.nivel}}</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            @if(instrumento.resultadoCalibracion.nivel == "No Disponible")
+                                                                <td bgcolor="#F7F7DE" height="20" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                                                    Resultado Global</td>
+                                                                <td align="center" bgcolor="#F7F7DE" colspan="2" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0; text-align: center;">
+                                                                    <span id="lblGlobal">{{instrumento.resultadoGlobal.nivel}}</span>
+                                                                </td>
+                                                            @else
+                                                                <td class="style25" height="20" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                                                    Resultado Global</td>
+                                                                <td align="center" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                                                    <span id="lblMetas">{{instrumento.resultadoGlobal.nivel}}</span>
+                                                                </td>
+                                                            @endif
+                                                        </tr>
+                                                        <tr>
+                                                            @if(instrumento.resultadoCalibracion.nivel != "No Disponible")
+                                                                <td bgcolor="#F7F7DE" height="20" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                                                    Resultado Calibrado</td>
+                                                                <td align="center" bgcolor="#F7F7DE" colspan="2" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0; text-align: center;">
+                                                                    <span id="lblGlobal">{{instrumento.resultadoCalibracion.nivel}}</span>
+                                                                </td>
+                                                            @else
+                                                            <td class="style25" height="20" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                                                    Resultado Calibrado</td>
+                                                                <td align="center" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                                                    <span id="lblMetas">{{instrumento.resultadoCalibracion.nivel}}</span>
+                                                                </td>
+                                                            @endif
+                                                        </tr>
+                                                        <!--<tr>
+                                                            <td bgcolor="#F7F7DE" height="20" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                                                Resultado Global</td>
+                                                            <td align="center" bgcolor="#F7F7DE" colspan="2" style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0; text-align: center;">
+                                                                <span id="lblGlobal">{{instrumento.resultadoGlobal.nivel}}</span>
+                                                            </td>
+                                                        </tr>-->
+                                                        <!--<tr>
+                                                            <td bgcolor="#F7F7DE" height="20" 
+                                                                style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0">
+                                                                Resultado Global Calibrado</td>
+                                                            <td align="center" bgcolor="#F7F7DE" colspan="2" 
+                                                                style="border-bottom-style: solid; border-width: thin; border-color: #C0C0C0; text-align: center;">
+                                                                <span id="ctl00_Principal_LBPRGC">CB</span>
+                                                            </td>
+                                                        </tr>-->
+                                                    </tbody></table>
+                                        </div>
+                                    </div>        
+                            </div> 
+                            <!--<div style="page-break-before: always"></div>-->
+                                @if(instrumento.resultadoCalibracion.nivel == "No Disponible" || instrumento.resultadoCalibracion.nivel == undefined || instrumento.resultadoCalibracion.nivel == null)
+                                    @!component('components.Desempeno.widgetMatrizComparativaInformeEjecutivos',nivel=instrumento.resultadoGlobal.nivel)
+                                @else
+                                    @!component('components.Desempeno.widgetMatrizComparativaInformeEjecutivos',nivel=instrumento.resultadoCalibracion.nivel) 
+                                @endif
+                            <div class="col-lg-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading bg-warning">
+                                                <div class="pull-right"></div>
+                                                <h3 class="panel-title" style="color: #fff;">Gráfico de Competencias</h3>
+                                        </div> 
+                                        <div class="panel-body" style="margin-left:150px; width: 800px !important;height: 100% !important;">
+                                                <img id="chartImg" src="/tmppdf/{{img}}" width="1000px" />
+                                        </div>
+                                    </div>           
+                            </div> 
+
+                        </div>
+                <!--</div>-->
+            </div>
+</div>
         <script>
               var resizefunc = [];
           </script>
@@ -580,149 +342,5 @@
           <script src="/assets/plugins/chart.js/chart.min.js" ></script>
   
   
-          <script>
-                $(document).ready(()=>{
-      
-                  $("#tblPromedio tbody tr").each(function (index) {
-                  $(this).children("td").each(function (index2) {
-                      var objNiveles = {
-                          "idOpinante":"{{idOpinante}}",
-                          "resultado": $(this).text()
-                      };
-                      var nombreNivel = "";
-                      if(!isNaN($(this).text())){
-                          $.ajax({
-                              async: false,
-                              type: "GET",
-                              url: "/Desempeno/Proceso/getNivelPromedioCompetencia",
-                              contentType: "application/json; charset=utf-8",
-                              data: objNiveles,
-                              dataType: "json",   
-                              success: function (msg) {
-                                  //$(this).html("sdsfsdf")  
-                                  //alert(msg.nivel)
-                                  nombreNivel = msg.nivel;
-                              }
-      
-                          });
-                          $(this).html(nombreNivel)  
-                      }
-                  });
-              });
-      
-              $("#tblPromedioComp tbody tr").each(function (index) {
-                  $(this).children("td").each(function (index2) {
-                      var objNiveles = {
-                          "idOpinante":"{{idOpinante}}",
-                          "resultado": $(this).text()
-                      };
-                      var nombreNivel = "";
-                      if(!isNaN($(this).text())){
-                          $.ajax({
-                              async: false,
-                              type: "GET",
-                              url: "/Desempeno/Proceso/getNivelPromedioCompetencia",
-                              contentType: "application/json; charset=utf-8",
-                              data: objNiveles,
-                              dataType: "json",   
-                              success: function (msg) {
-                                  //$(this).html("sdsfsdf")  
-                                  //alert(msg.nivel)
-                                  nombreNivel = msg.nivel;
-                              }
-      
-                          });
-                          $(this).html(nombreNivel)  
-                      }
-                  });
-              });
-      
-      
-                      var labelsSpider = "{{competenciasSpider}}".split(",");
-                      var dataSpiderAuto = "{{valoresSpiderAuto}}".split(",");
-                      var dataSpiderSup = "{{valoresSpiderSup}}".split(",");
-                      var ctx = document.getElementById('myRadarChart').getContext('2d');
-      
-                      if("{{codigoActor}}" == "EVAL")
-                      {
-                          var myRadarChart = new Chart(ctx, {
-                              type: 'radar',
-                              data: {
-                                  labels: labelsSpider,
-                                  datasets: [{
-                                      label: "Autoevaluacion",
-                                      backgroundColor: "rgba(200,0,0,0.2)",
-                                      data: dataSpiderAuto
-                                  }
-                                  /*, {
-                                      label: "Evaluacion",
-                                      backgroundColor: "rgba(0,0,200,0.2)",
-                                      data: [3, 3, 1, 2, 3, 3]
-                                  }*/
-                                  ]
-                                  },
-                              options:{
-                                  layout: {
-                                      padding: {
-                                          left: 150,
-                                          right: 0,
-                                          top: -0,
-                                          bottom: 0
-                                      }
-                                  }
-                              }
-                          });
-                      }
-                      else
-                      {
-                          var myRadarChart = new Chart(ctx, {
-                              type: 'radar',
-                              data: {
-                                  labels: labelsSpider,
-                                  datasets: [{
-                                                  label: "Autoevaluacion",
-                                                  backgroundColor: "rgba(200,0,0,0.2)",
-                                                  data: dataSpiderAuto
-                                              }
-                                              , {
-                                                  label: "Evaluacion",
-                                                  backgroundColor: "rgba(0,0,200,0.2)",
-                                                  data: dataSpiderSup
-                                              }
-                                  ]
-                                  },
-                              options:{
-                                  layout: {
-                                      padding: {
-                                          left: 150,
-                                          right: 0,
-                                          top: -0,
-                                          bottom: 0
-                                      }
-                                  }
-                              }
-                          });
-                      }
-                  
-                });
-                </script>
-                  <script>
-              (function() {
-                'use strict';
         
-                if (!('serviceWorker' in navigator)) {
-                  console.log('Service worker not supported');
-                  return;
-                }
-                navigator.serviceWorker.register('/assets/js/sw.js')
-                .then(function() {
-                  console.log('Registered');
-                })
-                .catch(function(error) {
-                  console.log('Registration failed:', error);
-                });
-        
-              })();
-            </script>
-       
 @endsection
