@@ -319,7 +319,7 @@ class Accion {
 
         var base64Data = img.replace(/^data:image\/png;base64,/, "");
 
-            fs.writeFile(`public/img/${imgName}`, base64Data, 'base64', function(err) {
+            fs.writeFile(`public/tmppdf/${imgName}`, base64Data, 'base64', function(err) {
                 console.log(err);
             });
         var url = `http://192.168.3.4:8080/?url=http%3A%2F%2F${server}%2FDesempeno%2FInforme%2Fpdf%3FidProceso%3D${idProceso}%26idEtapa%3D${idEtapa}%26idAccionPersona%3D${idAccionPersona}%26codigoActor%3D${codigoActor}%26idOpinante%3D${idOpinante}%26idPersona%3D${idPersona}%26img%3D${imgName}`;
