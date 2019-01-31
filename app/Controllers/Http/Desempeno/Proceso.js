@@ -203,8 +203,12 @@ class Proceso {
             "idPersona":idPersona
         };
 
+      
+
         var resultPersonaEde =await api.execApi(request.hostname(),'/Desempeno/Proceso/getProcesoPersona',objdatosPersona);
         var PersonaEde =resultPersonaEde.body.data;
+
+
 
         //Menu Contextual
         var objMenuContextual = {
@@ -318,20 +322,59 @@ class Proceso {
         {
             var resultParams=await api.execApi(request.hostname(),'/Desempeno/Proceso/getSysParametros',objFunc);
             listaParams = resultParams.body.data;
+            
             ////(listaParams);
         }
         catch(e)
         {
 
         }
+
+        var resultadoCategoria;
+
+        for (let index = 0; index < listaParams.length; index++) {
+            const element = listaParams[index];
+            console.log(element)
+            if(element.codigo == 'VERINDICADOR' && element.valor == 'SI'){
+                var qrresultadoCategoria = await api.execApi(request.hostname(),'/Desempeno/Reporte/getResultadoPorOpinante',objdatosPersona);
+                resultadoCategoria = qrresultadoCategoria.body.data;
+            }
+        }
+/*
+        listaParams.forEach(function(parametro){
+            if(parametro.codigo == 'VERINDICADOR' && parametro.valor == ''){
+                var qrresultadoCategoria = await api.execApi(request.hostname(),'/Desempeno/Reporte/getResultadoPorOpinante',objdatosPersona);
+                resultadoCategoria = qrresultadoCategoria.body.data;
+            }
+        })
+*/
+       
+
+        console.log(resultadoCategoria)
         
 
-        //(listaParams);
+        console.log(listaParams);
         
         return view.render('desempeno/etapa',
-        {etag, datosProceso,PersonaEde,datosMenu,
-            etapa,listaEval,listaSupe,listaAsc,listaFunc,
-            listaCal, idEtapa: idEtapa, params: listaParams, matrizEval:matrizEval,matrizCalib:matrizCalib,selectCalibracion:selectCalibracion,idProceso});
+        {
+            etag, 
+            datosProceso,
+            PersonaEde,
+            datosMenu,
+            etapa,
+            listaEval,
+            listaSupe,
+            listaAsc,
+            listaFunc,
+            listaCal, 
+            idEtapa: idEtapa,
+            params: listaParams, 
+            matrizEval:matrizEval,
+            matrizCalib:matrizCalib,
+            selectCalibracion:selectCalibracion,
+            idProceso,
+            resultadoCategoria
+        });
     }
 
     async evalBrasil ({view,request, response}) {

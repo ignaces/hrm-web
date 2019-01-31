@@ -152,8 +152,25 @@
        @!component('components.Desempeno.widgetUser',datos=data,datamenu=datosMenu,persona=PersonaEde)
     </div>
     <div class="col-md-10">
-        
+        <div class="row">
         {{-- WIDGETS --}}
+
+        @each(parametro in params)
+            @if(parametro.codigo == 'VERINDICADOR' && parametro.valor == 'SI')
+                @each(categoria in resultadoCategoria)
+                <div class="col-dinamico" style="width:{{100 / resultadoCategoria.length}}%">
+                        <div class="card-box widget-box-two widget-two-primary">
+                            <i class="mdi mdi-adjust widget-two-icon" style="top:inherit !important;"></i>
+                            <div class="wigdet-two-content">
+                            <h6 class="m-0 text-uppercase font-bold font-secondary text-overflow" title="Statistics">{{categoria.Categoria}}</h6>
+                                <h2 class=""><span data-plugin="counterup">{{categoria.Cantidad}}</span></h2>
+                            </div>
+                        </div>
+                    </div>
+                @endeach
+            @endif
+        @endeach
+        </div>
         
         {{-- /WIDGETS --}}
 
@@ -331,6 +348,20 @@
             </div>
     </div>
 
+
+    <style>
+        .col-dinamico{
+            padding-left: 10px;padding-right: 10px; float:left;position:relative;min-height:1px;text-align:center;
+        }
+        .col-dinamico *{width:100%;}
+        
+        @media (max-width: 992px) {
+            .col-dinamico{
+                width:100% !important;
+            }
+        }
+            </style>
+   
 @endsection
 
 
