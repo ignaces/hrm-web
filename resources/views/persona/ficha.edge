@@ -3,24 +3,26 @@
 @section('pluginsCss')
     <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
     <link href="/assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
-        <link href="/assets/plugins/datatables/buttons.dataTables.min.css" rel="stylesheet" type="text/css"/>
-        <link href="/assets/plugins/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="/assets/plugins/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="/assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="/assets/plugins/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="/assets/plugins/datatables/dataTables.colVis.css" rel="stylesheet" type="text/css"/>
-        <link href="/assets/plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="/assets/plugins/datatables/fixedColumns.dataTables.min.css" rel="stylesheet" type="text/css"/>
-		<link href="/assets/plugins/c3/c3.min.css" rel="stylesheet" type="text/css"  />
+	<link href="/assets/plugins/datatables/buttons.dataTables.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/assets/plugins/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/assets/plugins/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/assets/plugins/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/assets/plugins/datatables/dataTables.colVis.css" rel="stylesheet" type="text/css"/>
+	<link href="/assets/plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/assets/plugins/datatables/fixedColumns.dataTables.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/assets/plugins/c3/c3.min.css" rel="stylesheet" type="text/css"  />
 
-		<!-- Tooltipster css -->
-        <link rel="stylesheet" href="/assets/plugins/tooltipster/tooltipster.bundle.min.css">
+	<!-- Tooltipster css -->
+	<link rel="stylesheet" href="/assets/plugins/tooltipster/tooltipster.bundle.min.css">
 
-		<!-- Infobox css -->
-        <link rel="stylesheet" href="/assets/plugins/infobox/infobox.css">
-		
-		<!-- socialWidget css -->
-        <link rel="stylesheet" href="/assets/plugins/socialWidget/socialWidget.css">
+	<!-- Infobox css -->
+	<link rel="stylesheet" href="/assets/plugins/infobox/infobox.css">
+	
+	<!-- socialWidget css -->
+	<link rel="stylesheet" href="/assets/plugins/socialWidget/socialWidget.css">
+
+	<script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
 @endsection
 
 @section('scripts')
@@ -28,30 +30,129 @@
   <script src="https://balkangraph.com/js/latest/OrgChart.js"></script>
 <script>
 	window.onload = function () {
-    var chart = new OrgChart(document.getElementById("tree"), {
-        scaleInitial: BALKANGraph.match.boundary,
-        template: "luba",
-        nodeBinding: {
-            field_0: "name",
-            field_1: "title",
-            img_0: "img"
-        },
-        nodes: [
-            { id: 1, name: "Denny Curtis", title: "CEO", img: "https://balkangraph.com/js/img/2.jpg" },
-            { id: 2, pid: 1, name: "Ashley Barnett", title: "Sales Manager", img: "https://balkangraph.com/js/img/3.jpg" },
-            { id: 3, pid: 1, name: "{{persona.nombres}} {{persona.apellidoPaterno}} {{persona.apellidoMaterno}}", title: "Dev Manager", img: "{{persona.imageUser}}" },
-            { id: 4, pid: 2, name: "Elliot Patel", title: "Sales", img: "https://balkangraph.com/js/img/5.jpg" },
-            { id: 5, pid: 2, name: "Lynn Hussain", title: "Sales", img: "https://balkangraph.com/js/img/6.jpg" },
-            { id: 6, pid: 3, name: "Tanner May", title: "Developer", img: "https://balkangraph.com/js/img/7.jpg" },
-            { id: 7, pid: 3, name: "Fran Parsons", title: "Developer", img: "https://balkangraph.com/js/img/8.jpg" }
-        ]
-    });
-   
+		var chart = new OrgChart(document.getElementById("tree"), {
+			scaleInitial: BALKANGraph.match.boundary,
+			template: "luba",
+			nodeBinding: {
+				field_0: "name",
+				field_1: "title",
+				img_0: "img"
+			},
+			nodes: [
+				{ id: 1, name: "Denny Curtis", title: "CEO", img: "https://balkangraph.com/js/img/2.jpg" },
+				{ id: 2, pid: 1, name: "Ashley Barnett", title: "Sales Manager", img: "https://balkangraph.com/js/img/3.jpg" },
+				{ id: 3, pid: 1, name: "{{persona.nombres}} {{persona.apellidoPaterno}} {{persona.apellidoMaterno}}", title: "Dev Manager", img: "{{persona.imageUser}}" },
+				{ id: 4, pid: 2, name: "Elliot Patel", title: "Sales", img: "https://balkangraph.com/js/img/5.jpg" },
+				{ id: 5, pid: 2, name: "Lynn Hussain", title: "Sales", img: "https://balkangraph.com/js/img/6.jpg" },
+				{ id: 6, pid: 3, name: "Tanner May", title: "Developer", img: "https://balkangraph.com/js/img/7.jpg" },
+				{ id: 7, pid: 3, name: "Fran Parsons", title: "Developer", img: "https://balkangraph.com/js/img/8.jpg" }
+			]
+		});
 	}
+
+	var personaCv = {{{toJSON(personaCv)}}};
+
+	var cCurriculum = new Vue({
+		el: '#app',
+		data:{
+			personaCv:personaCv
+		},
+		methods: {
+			editCv: function(cv){
+				cForm.cv = cv;
+            	cForm.cv.edit=true;
+                    
+				$("#modalCv").modal("show");
+			},
+			deleteCv: function(cv){
+				var obj = {
+					cv:cv
+				};
+				
+				$.ajax({
+					type: "GET",
+					url: "/Persona/Ficha/deleteCv",
+					contentType: "application/json; charset=utf-8",
+					data: obj,
+					dataType: "json", 
+					success: function (msg) {
+						cCurriculum.personaCv=msg;
+					}
+				});   
+				
+			},
+			addCv: function(per){
+				cForm.cv={
+					id:'',
+					codigo:per.codigo,
+					titulo:'',
+					desde:'',
+					hasta:'',
+					descripcion:'',
+					ente:'',
+					edit: false
+				}
+				$("#modalCv").modal("show");
+			}
+		}
+	});
+
+	var cForm = new Vue({
+		el: '#formulario',
+		data: {
+			cv: {
+				id:'',
+				codigo: '',
+				titulo:'',
+				desde:'',
+				hasta:'',
+				descripcion:'',
+				ente:'',
+				edit: false
+			}            
+		},            
+		methods: {
+			saveAccion:function () {
+				if(cForm.cv.titulo==""){
+					swal(
+						'No has terminado',
+						'Debes ingresar un titulo.',
+						'warning'
+					);
+					return false;
+				}
+
+				var url = "/Persona/Ficha/addCv"
+				if(cForm.cv.edit){
+					url="/Persona/Ficha/updateCv"
+				}
+
+				var obj = {
+					cv:cForm.cv
+				};
+
+				$.ajax({
+					type: "GET",
+					url: url,
+					contentType: "application/json; charset=utf-8",
+					data: obj,
+					dataType: "json", 
+					//async:false,
+					success: function (msg) {
+						cCurriculum.personaCv=msg;
+						$("#modalCv").modal("hide");
+					}
+				});   
+			}
+		}
+	});
+
 </script>
 @endsection
 
 @section('content')
+@!component('components.Persona.modalCurriculumInfo')
+
 <div class="container">
 
 	<!-- end row -->
@@ -69,8 +170,8 @@
 					<span class="pull-left m-r-15"><img src="{{persona.imageUser}}" alt="" class="thumb-lg img-circle"></span>
 						<div class="media-body">
 							<h4 class="m-t-5 m-b-5 ellipsis">{{persona.nombres}} {{persona.apellidoPaterno}} {{persona.apellidoMaterno}}</h4>
-						<p class="font-13"> {{persona.cargo}}</p>
-							<p class="text-muted m-b-0"><small>Santiago</small></p>
+							<p class="font-13"> {{persona.cargo}}</p>
+							<!--<p class="text-muted m-b-0"><small>{{persona.pais}}</small></p>-->
 						</div>
 					</div>
 					<div class="col-sm-6">
@@ -95,53 +196,27 @@
 					<h3 class="panel-title">Información Personal</h3>
 				</div>
 				<div class="panel-body">
-					<p class="text-muted font-13">
-						Hye, I’m Johnathan Doe residing in this beautiful world. I create websites and mobile apps with great UX and UI design. I have done work with big companies like Nokia, Google and Yahoo. Meet me or Contact me for any queries. One Extra line for filling space. Fill as many you want.
-					</p>
-
-					<hr/>
-
 					<div class="text-left">
 						<p class="text-muted font-13"><strong>Nombre :</strong> <span class="m-l-15">{{persona.nombres}} {{persona.apellidoPaterno}} {{persona.apellidoMaterno}}</span></p>
-
-						<p class="text-muted font-13"><strong>Teléfono :</strong><span class="m-l-15">(+56) 9 9997 7431</span></p>
-
+						<p class="text-muted font-13"><strong>Teléfono :</strong><span class="m-l-15"></span></p>
 					<p class="text-muted font-13"><strong>Email :</strong> <span class="m-l-15">{{persona.email}}</span></p>
-
-						<p class="text-muted font-13"><strong>Ubicación :</strong> <span class="m-l-15">Santiago</span></p>
-
-						<p class="text-muted font-13"><strong>Idiomas :</strong>
-							<span class="m-l-5">
-								<span class="flag-icon flag-icon-us m-r-5 m-t-0" title="us"></span>
-								<span>English</span>
-							</span>
-							<span class="m-l-5">
-								<span class="flag-icon flag-icon-de m-r-5" title="de"></span>
-								<span>German</span>
-							</span>
-							<span class="m-l-5">
-								<span class="flag-icon flag-icon-es m-r-5" title="es"></span>
-								<span>Spanish</span>
-							</span>
-							<span class="m-l-5">
-								<span class="flag-icon flag-icon-fr m-r-5" title="fr"></span>
-								<span>French</span>
-							</span>
+						<p class="text-muted font-13"><strong>Ubicación :</strong> 
+							<span class="flag-icon {{persona.iconoPais}} m-l-15"></span>
+							<span>{{persona.pais}}</span>
 						</p>
-
+						<!--<p class="text-muted font-13"><strong>Idiomas :</strong>
+							@each(idioma in persona.idiomas)
+                                <span class="m-l-5"><span class="flag-icon {{idioma.banderaIdioma}} m-r-5 m-t-0" title="{{idioma.nivelIdioma}}"></span><span>{{idioma.nombre}}</span></span>
+                            @endeach
+						</p>-->
 					</div>
-
-					<ul class="social-links list-inline m-t-20 m-b-0">
-						<li>
-							<a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a>
-						</li>
-						<li>
-							<a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a>
-						</li>
-						<li>
-							<a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a>
-						</li>
-					</ul>
+					<div row="">
+						<div class="pull-right">
+							<ul class="social-links list-inline m-t-20 m-b-0">
+								<li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="https://www.linkedin.com/search/results/index/?keywords={{persona.nombres}}%20{{persona.apellidoPaterno}}%20{{persona.apellidoMaterno}}&origin=GLOBAL_SEARCH_HEADER" data-original-title="Linkedin"><i class="fa  fa-linkedin"></i></a></li>
+							</ul>
+						</div>
+					</div>
 				</div>
 			</div>
 			<!-- Personal-Information -->
@@ -150,7 +225,7 @@
 				<div class="ribbon ribbon-primary">Equipo</div>
 				<div class="clearfix"></div>
 				<div class="inbox-widget">
-					<a href="#">
+					<!--<a href="#">
 						<div class="inbox-item">
 							<div class="inbox-item-img"><img src="/assets/images/users/avatar-2.jpg" class="img-circle" alt=""></div>
 							<p class="inbox-item-author">Tomás</p>
@@ -165,86 +240,74 @@
 							<p class="inbox-item-text">Cargo</p>
 							
 						</div>
-					</a>
+					</a>-->
 					
 				</div>
 			</div>
 
 		</div>
 
-
-		<div class="col-md-8">
-
-			<div class="panel panel-default">
+		<div class="col-md-8" id="app">
+			<div class="panel panel-default" v-for="per in personaCv" v-if="personaCv.length>0">
 				<div class="panel-heading">
-					<h3 class="panel-title">Experiencia</h3>
+					<h3 class="panel-title">@{{per.tipo}}
+						<div class="dropdown pull-right">
+							<a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
+								<h3 class="m-0 text-muted"><i class="mdi mdi-dots-horizontal"></i></h3>
+							</a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="#" v-on:click="addCv(per)">Agregar</a></li>
+							</ul>
+						</div>
+					</h3>
 				</div>
 				<div class="panel-body">
-					<div class="">
-						<h5 class="text-custom m-b-5">Lead designer / Developer</h5>
-						<p class="m-b-0">websitename.com</p>
-						<p><b>2010-2015</b></p>
-
-						<p class="text-muted font-13 m-b-0">Lorem Ipsum is simply dummy text
-							of the printing and typesetting industry. Lorem Ipsum has
-							been the industry's standard dummy text ever since the
-							1500s, when an unknown printer took a galley of type and
-							scrambled it to make a type specimen book.
+					<div v-for="cv in per.registros">
+						<h5 class="text-custom m-b-5">@{{cv.titulo}}
+							<div class="dropdown pull-right">
+								<a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
+									<h3 class="m-0 text-muted"><i class="mdi mdi-dots-horizontal"></i></h3>
+								</a>
+								<ul class="dropdown-menu" role="menu">
+									<li><a href="#" v-on:click="editCv(cv)">Editar</a></li>
+									<li><a href="#" v-on:click="deleteCv(cv)">Eliminar</a></li>
+								</ul>
+							</div>
+						</h5>
+						<p><b>@{{cv.ente}}</b></p>
+						<p>
+							<b v-if="cv.desde!=''">
+								@{{cv.desde}}-@{{cv.hasta}}
+							</b>
+							<b v-if="cv.desde==''">
+								@{{cv.hasta}}
+							</b>
 						</p>
+						<p class="text-muted font-13 m-b-0">@{{cv.descripcion}}</p>
+						<hr>
 					</div>
-
-					<hr>
-
-					<div class="">
-						<h5 class="text-custom m-b-5">Senior Graphic Designer</h5>
-						<p class="m-b-0">coderthemes.com</p>
-						<p><b>2007-2009</b></p>
-
-						<p class="text-muted font-13">Lorem Ipsum is simply dummy text
-							of the printing and typesetting industry. Lorem Ipsum has
-							been the industry's standard dummy text ever since the
-							1500s, when an unknown printer took a galley of type and
-							scrambled it to make a type specimen book.
-						</p>
-					</div>
-
 				</div>
 			</div>
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">Certificaciones</h3>
+			@if(persona.idiomas.length>0)
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Idiomas</h3>
+					</div>
+					<div class="panel-body">
+						@each(idioma in persona.idiomas)
+							<div class="">
+								<span class="m-l-5">
+									<span class="flag-icon {{idioma.banderaIdioma}} m-r-5 m-t-0" title="{{idioma.nivelIdioma}}"></span>
+									<span class="m-l-5">{{idioma.nombre}}</span>
+									<span class="text-muted font-13 m-l-5"> Nivel: {{idioma.nivelIdioma}}</span>
+								</span>
+							</div>
+							<hr>
+						@endeach					
+					</div>
 				</div>
-				<div class="panel-body">
-					
-
-				</div>
-			</div>
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					  <h3 class="panel-title">Títulos y Grados</h3>
-			   </div>
-			   <div class="panel-body">
-					  <div class="">
-							 <h5 class="text-custom m-b-5">Sicología</h5>
-							 <p class="m-b-0">Universidad del Desarrollo</p>
-							 <p><b>2010</b></p>
-
-							
-						 </div>
-
-						 <hr>
-
-						 <div class="">
-							 <h5 class="text-custom m-b-5">Diplomado en Gestión de Organizaciones</h5>
-							 <p class="m-b-0">Universidad de Chile</p>
-							 <p><b>2017</b></p>
-
-							
-						 </div>
-
-			   </div>
-		   </div>
-			<div class="panel panel-default">
+			@endif
+			<!--<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">Organigrama</h3>
 				</div>
@@ -253,17 +316,7 @@
 						<div id="tree"></div>
 
 				</div>
-			</div>
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">Reconocimientos</h3>
-				</div>
-				<div class="panel-body">
-					
-
-				</div>
-			</div>
-
+			</div>-->
 		</div>
 		<!-- end colEX -->
 
