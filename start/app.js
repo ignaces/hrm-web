@@ -78,7 +78,7 @@ edge.global('theme', function (hostname) {
     theme = `/themes/${theme}` 
   }else{
     var company = hostname.split(".")[0]
-    theme = `http://hrmassets.enovum.cl/${company}`
+    theme = `https://hrmassets.enovum.cl/${company}`
   }
   
   
