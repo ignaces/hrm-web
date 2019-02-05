@@ -18,7 +18,23 @@ class Ficha {
         var resultCv =  await data.execApi(request.hostname(),'/Persona/Ficha/getPersonaCurriculum',objExp);
         var personaCv = resultCv.body;
 
-        return view.render('persona/ficha',  {persona:pers[0],personaCv:personaCv});
+        var resultEqui =  await data.execApi(request.hostname(),'/Persona/Ficha/getEquipoPersona',objExp);
+        var equipo = resultEqui.body;
+
+        return view.render('persona/ficha',  {persona:pers[0],personaCv:personaCv,equipo:equipo});
+    }
+
+    async editInfo({view,request, response, auth, session}){
+        var inf = request.input("inf");
+        var persona =  session.get('personaLogueada')
+
+        var result = await data.execApiPost(request.hostname(),'/Persona/Ficha/editInfo',{inf:inf});
+
+        var resultPersona =  await data.execApi(request.hostname(),'/Persona/Ficha/getPersonaDetalle',{idPersona:persona.id});
+        var pers = resultPersona.body;
+
+        return pers[0];
+
     }
 
     async updateCv ({ view,request, response, auth, session }) {

@@ -223,12 +223,55 @@
 		}
 	});
 
+	var cFormInf = new Vue({
+		el: '#formInfoPer',
+		data:{
+			inf:{
+				id:'',
+				telefono: '',
+				email:''
+			}
+		},
+		methods:{
+			editInfo:function(){
+				var obj = {
+					inf:cFormInf.inf
+				};
+
+				$.ajax({
+					type: "GET",
+					url: "/Persona/Ficha/editInfo",
+					contentType: "application/json; charset=utf-8",
+					data: obj,
+					dataType: "json", 
+					//async:false,
+					success: function (msg) {
+						cCurriculum.persona=msg;
+						$("#modalInfPer").modal("hide");
+					}
+				});   
+				
+			}
+		}
+	});
+
+	$(document).ready(function(){
+		$("#btnNewAccion").click(function(){
+			cFormInf.inf={
+				id:persona.idPersona,
+				telefono:persona.telefono,
+				email:persona.email
+			}
+		})
+	});
+
 </script>
 @endsection
 
 @section('content')
 @!component('components.Persona.modalCurriculumInfo')
 @!component('components.Persona.modalCurriculumIdioma')
+@!component('components.Persona.modalInfoPersonal')
 
 <div class="container">
 
@@ -253,9 +296,13 @@
 					</div>
 					<div class="col-sm-6">
 						<div class="text-right">
-							<button type="button" class="btn btn-success waves-effect waves-light">
+							<!--<button type="button" class="btn btn-success waves-effect waves-light">
 								<i class="mdi mdi-account-settings-variant m-r-5"></i> Editar Perfil
-							</button>
+							</button>-->
+							<a href="#" class="btn btn-success waves-effect waves-light" data-toggle="modal" data-target="#modalInfPer" id="btnNewAccion">
+								<i class="mdi mdi-account-settings-variant m-r-5"></i>
+								Editar Perfil
+							</a>
 						</div>
 					</div>
 				</div>
@@ -275,8 +322,10 @@
 				<div class="panel-body">
 					<div class="text-left">
 						<p class="text-muted font-13"><strong>Nombre :</strong> <span class="m-l-15">{{persona.nombres}} {{persona.apellidoPaterno}} {{persona.apellidoMaterno}}</span></p>
-						<p class="text-muted font-13"><strong>Teléfono :</strong><span class="m-l-15"></span></p>
-					<p class="text-muted font-13"><strong>Email :</strong> <span class="m-l-15">{{persona.email}}</span></p>
+						@if(persona.telefono != '')
+							<p class="text-muted font-13"><strong>Teléfono :</strong><span class="m-l-15">{{persona.telefono}}</span></p>
+						@endif
+						<p class="text-muted font-13"><strong>Email :</strong> <span class="m-l-15">{{persona.email}}</span></p>
 						<p class="text-muted font-13"><strong>Ubicación :</strong> 
 							<span class="flag-icon {{persona.iconoPais}} m-l-15"></span>
 							<span>{{persona.pais}}</span>
@@ -302,22 +351,16 @@
 				<div class="ribbon ribbon-primary">Equipo</div>
 				<div class="clearfix"></div>
 				<div class="inbox-widget">
-					<!--<a href="#">
-						<div class="inbox-item">
-							<div class="inbox-item-img"><img src="/assets/images/users/avatar-2.jpg" class="img-circle" alt=""></div>
-							<p class="inbox-item-author">Tomás</p>
-							<p class="inbox-item-text">Cargo</p>
-							
-						</div>
-					</a>
-					<a href="#">
-						<div class="inbox-item">
-							<div class="inbox-item-img"><img src="/assets/images/users/avatar-3.jpg" class="img-circle" alt=""></div>
-							<p class="inbox-item-author">David </p>
-							<p class="inbox-item-text">Cargo</p>
-							
-						</div>
-					</a>-->
+					@each(per in equipo)
+						<a href="#">
+							<div class="inbox-item">
+								<div class="inbox-item-img"><img src="{{per.fotoPersona}}" class="img-circle" alt=""></div>
+								<p class="inbox-item-author">{{per.nombre}}</p>
+								<p class="inbox-item-text">{{per.cargo}}</p>
+								
+							</div>
+						</a>
+					@endeach
 					
 				</div>
 			</div>
