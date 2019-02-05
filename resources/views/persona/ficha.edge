@@ -51,11 +51,13 @@
 	}
 
 	var personaCv = {{{toJSON(personaCv)}}};
+	var persona = {{{toJSON(persona)}}};
 
 	var cCurriculum = new Vue({
 		el: '#app',
 		data:{
-			personaCv:personaCv
+			personaCv:personaCv,
+			persona:persona
 		},
 		methods: {
 			editCv: function(cv){
@@ -93,9 +95,83 @@
 					edit: false
 				}
 				$("#modalCv").modal("show");
+			},
+			addIdioma: function(){
+				cFormIdioma.idioma={
+					idIdiomaPerfil:'',
+					idIdioma:'',
+					idNivel:'',
+					edit: false
+				}
+				$("#modalIdioma").modal("show");
+			},
+			editIdioma: function(idioma){
+				cFormIdioma.idioma={
+					idIdiomaPerfil:idioma.idIdiomaPerfil,
+					idIdioma:idioma.idIdioma,
+					idNivel:idioma.idNivel,
+					edit: true
+				}
+				$("#modalIdioma").modal("show");
+			},
+			deleteIdioma: function(idioma){
+				var obj = {
+					idioma:idioma
+				};
+				
+				$.ajax({
+					type: "GET",
+					url: "/Persona/Ficha/deleteIdioma",
+					contentType: "application/json; charset=utf-8",
+					data: obj,
+					dataType: "json", 
+					success: function (msg) {
+						cCurriculum.persona=msg;
+					}
+				});   
 			}
 		}
 	});
+
+	var cFormIdioma = new Vue({
+		el: "#formIdioma",
+		data:{
+			lisIdiomas:persona.lisIdiomas,
+			listNiveles:persona.listNiveles,
+			idioma:{
+				idIdiomaPerfil:'',
+				idIdioma:'',
+				idNivel:'',
+				edit: false
+			}    
+		},
+		methods:{
+			saveIdioma:function(){
+				
+				var url = "/Persona/Ficha/addIdioma"
+				if(cFormIdioma.idioma.edit){
+					url="/Persona/Ficha/updateIdioma"
+				}
+
+				var obj ={
+					idioma:cFormIdioma.idioma
+				}
+
+				$.ajax({
+					type: "GET",
+					url: url,
+					contentType: "application/json; charset=utf-8",
+					data: obj,
+					dataType: "json", 
+					//async:false,
+					success: function (msg) {
+						cCurriculum.persona=msg;
+						$("#modalIdioma").modal("hide");
+					}
+				});   
+			}
+		}
+	})
 
 	var cForm = new Vue({
 		el: '#formulario',
@@ -109,7 +185,7 @@
 				descripcion:'',
 				ente:'',
 				edit: false
-			}            
+			}			        
 		},            
 		methods: {
 			saveAccion:function () {
@@ -152,6 +228,7 @@
 
 @section('content')
 @!component('components.Persona.modalCurriculumInfo')
+@!component('components.Persona.modalCurriculumIdioma')
 
 <div class="container">
 
@@ -288,25 +365,39 @@
 					</div>
 				</div>
 			</div>
-			@if(persona.idiomas.length>0)
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Idiomas</h3>
-					</div>
-					<div class="panel-body">
-						@each(idioma in persona.idiomas)
-							<div class="">
-								<span class="m-l-5">
-									<span class="flag-icon {{idioma.banderaIdioma}} m-r-5 m-t-0" title="{{idioma.nivelIdioma}}"></span>
-									<span class="m-l-5">{{idioma.nombre}}</span>
-									<span class="text-muted font-13 m-l-5"> Nivel: {{idioma.nivelIdioma}}</span>
-								</span>
-							</div>
-							<hr>
-						@endeach					
-					</div>
+			<div class="panel panel-default" v-if="persona.idiomas.length>0">
+				<div class="panel-heading">
+					<h3 class="panel-title">Idiomas
+						<div class="dropdown pull-right">
+							<a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
+								<h3 class="m-0 text-muted"><i class="mdi mdi-dots-horizontal"></i></h3>
+							</a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="#" v-on:click="addIdioma()">Agregar</a></li>
+							</ul>
+						</div>
+					</h3>
 				</div>
-			@endif
+				<div class="panel-body" v-for="idioma in persona.idiomas">
+					<div class="">
+						<span class="m-l-5">
+							<span :class="['flag-icon',idioma.banderaIdioma,'m-r-5','m-t-0']" :title="idioma.nivelIdioma"></span>
+							<span class="m-l-5">@{{idioma.nombre}}</span>
+							<span class="text-muted font-13 m-l-5"> Nivel: @{{idioma.nivelIdioma}}</span>
+							<div class="dropdown pull-right">
+								<a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
+									<h3 class="m-0 text-muted"><i class="mdi mdi-dots-horizontal"></i></h3>
+								</a>
+								<ul class="dropdown-menu" role="menu">
+									<li><a href="#" v-on:click="editIdioma(idioma)">Editar</a></li>
+									<li><a href="#" v-on:click="deleteIdioma(idioma)">Eliminar</a></li>
+								</ul>
+							</div>
+						</span>
+					</div>
+					<hr>
+				</div>
+			</div>|
 			<!--<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">Organigrama</h3>

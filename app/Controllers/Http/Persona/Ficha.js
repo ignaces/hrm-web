@@ -32,9 +32,46 @@ class Ficha {
 
         var result = await data.execApiPost(request.hostname(),'/Persona/Ficha/updateCv',obj);
 
-        var cv = result.body.data;
+        var objExp = {
+            "idPersona":persona.id
+        };
 
-        return cv;
+        var resultCv =  await data.execApi(request.hostname(),'/Persona/Ficha/getPersonaCurriculum',objExp);
+        var personaCv = resultCv.body;
+
+        return personaCv;
+    } 
+
+    async updateIdioma ({ view,request, response, auth, session }) {
+        var idioma = request.input("idioma");
+        var persona =  session.get('personaLogueada')
+
+        var obj = {
+            idPersona:persona.id,
+            objIdioma:idioma
+        }
+
+        var result = await data.execApiPost(request.hostname(),'/Persona/Ficha/updateIdioma',obj);
+        var resultPersona =  await data.execApi(request.hostname(),'/Persona/Ficha/getPersonaDetalle',{idPersona:persona.id});
+        var pers = resultPersona.body;
+
+        return pers[0];
+    } 
+
+    async addIdioma ({ view,request, response, auth, session }) {
+        var idioma = request.input("idioma");
+        var persona =  session.get('personaLogueada')
+
+        var obj = {
+            idPersona:persona.id,
+            objIdioma:idioma
+        }
+
+        var result = await data.execApiPost(request.hostname(),'/Persona/Ficha/addIdioma',obj);
+        var resultPersona =  await data.execApi(request.hostname(),'/Persona/Ficha/getPersonaDetalle',{idPersona:persona.id});
+        var pers = resultPersona.body;
+
+        return pers[0];
     } 
 
     async addCv ({ view,request, response, auth, session }) {
@@ -48,9 +85,30 @@ class Ficha {
 
         var result = await data.execApiPost(request.hostname(),'/Persona/Ficha/addCv',obj);
 
-        var cv = result.body.data;
+        var objExp = {
+            "idPersona":persona.id
+        };
 
-        return cv;
+        var resultCv =  await data.execApi(request.hostname(),'/Persona/Ficha/getPersonaCurriculum',objExp);
+        var personaCv = resultCv.body;
+
+        return personaCv;
+    } 
+
+    async deleteIdioma ({ view,request, response, auth, session }) {
+        var idioma = request.input("idioma");
+        var persona =  session.get('personaLogueada')
+
+        var obj = {
+            idPersona:persona.id,
+            objIdioma:idioma
+        }
+
+        var result = await data.execApiPost(request.hostname(),'/Persona/Ficha/deleteIdioma',obj);
+        var resultPersona =  await data.execApi(request.hostname(),'/Persona/Ficha/getPersonaDetalle',{idPersona:persona.id});
+        var pers = resultPersona.body;
+
+        return pers[0];
     } 
 
     async deleteCv ({ view,request, response, auth, session }) {
@@ -64,9 +122,14 @@ class Ficha {
 
         var result = await data.execApiPost(request.hostname(),'/Persona/Ficha/deleteCv',obj);
 
-        var cv = result.body.data;
+        var objExp = {
+            "idPersona":persona.id
+        };
 
-        return cv;
+        var resultCv =  await data.execApi(request.hostname(),'/Persona/Ficha/getPersonaCurriculum',objExp);
+        var personaCv = resultCv.body;
+
+        return personaCv;
     } 
 
     /****/
