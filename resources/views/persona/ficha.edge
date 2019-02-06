@@ -238,6 +238,27 @@
 					inf:cFormInf.inf
 				};
 
+				var vTel = EsTelefonoMovil(cFormInf.inf.telefono);
+
+				if (vTel == false){
+					swal(
+						'Error',
+						'Debes ingresar un telefono valido.',
+						'error'
+					);
+					return false;
+				}
+				var vEmail = EsEmail(cFormInf.inf.email);
+
+				if (vEmail == false){
+					swal(
+						'Error',
+						'Debes ingresar un email valido.',
+						'error'
+					);
+					return false;
+				}
+
 				$.ajax({
 					type: "GET",
 					url: "/Persona/Ficha/editInfo",
@@ -248,12 +269,25 @@
 					success: function (msg) {
 						cCurriculum.persona=msg;
 						$("#modalInfPer").modal("hide");
+						location.reload();
 					}
 				});   
 				
 			}
 		}
 	});
+
+	function EsTelefonoMovil(tel) {
+		var test = /^[0-9\-\+]{9,15}$/;
+		var telReg = new RegExp(test);
+		return telReg.test(tel);
+	}
+	function EsEmail(w_email) {
+		var test = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+		var emailReg = new RegExp(test);
+
+		return emailReg.test(w_email);
+	}
 
 	$(document).ready(function(){
 		$("#btnNewAccion").click(function(){
