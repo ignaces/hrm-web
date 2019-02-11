@@ -1,6 +1,9 @@
 'use strict'
 
 const data = use('App/Utils/Data')
+const got = use('got')
+const FormData = require('form-data');
+const fs = require('fs');
 
 class Ficha {
    
@@ -22,6 +25,35 @@ class Ficha {
         var equipo = resultEqui.body;
 
         return view.render('persona/ficha',  {persona:pers[0],personaCv:personaCv,equipo:equipo});
+    }
+
+    async loadFile({view,request, response, auth, session}){
+        var persona = session.get('personaLogueada')
+        var file = request.file("file");
+        var cliente=request.hostname();
+        var form = new FormData();
+
+        try{
+            form.append('file', fs.createReadStream(file._tmpPath));
+            form.append('cliente', cliente);
+
+            var result = await got.post('https://hrmassets.enovum.cl/Files/File/uploadClient', {
+                body: form
+            });
+
+            var obj = {
+                idPersona:persona.id,
+                url:result.body
+            }
+
+            var resultImg = await data.execApi(request.hostname(),'/Persona/Ficha/editBackgroundImg',obj);
+
+            fs.unlink(file._tmpPath)
+            
+        }catch(ex){
+            console.log(ex.message)
+        }
+        return {mesaje:"ok"}
     }
 
     async editInfo({view,request, response, auth, session}){
