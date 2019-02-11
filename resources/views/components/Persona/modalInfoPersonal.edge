@@ -13,13 +13,18 @@
                                 <div class="form-group row">
                                     <div class="col-md-4">
                                         <label>Telefono</label>
-                                        <input name="telefono" class="form-control" type="tel" pattern="[0-9]*" required id="telefono" placeholder="Su telefono de contacto" v-model="inf.telefono">
+                                        <input name="telefono" class="form-control" type="tel" required id="telefono" placeholder="Su telefono de contacto" v-model="inf.telefono">
                                     </div>
                                     <div class="col-md-7">
                                         <label>Email</label>
                                         <input name="email" class="form-control" type="email" required id="email" title="Ingrese su email" placeholder="Su email" v-model="inf.email">
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <label>Fondo</label>
+                                    <input type="file" class="filestyle" data-buttontext="Seleccionar..." accept=".jpg" data-buttonname="btn-primary" id="inputFile1">
+                                </div>
+                                <img id="img1"><br/>
                                 <div style="text-align:right">
                                     <div class="offset-3 col-9">
                                         <button type="button" v-on:click="editInfo" class="btn btn-info waves-effect waves-light">Guardar</button>
