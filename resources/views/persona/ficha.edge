@@ -28,6 +28,7 @@
 @section('scripts')
   <script src="/assets/js/dist/Ficha.min.js"></script>
   <script src="https://balkangraph.com/js/latest/OrgChart.js"></script>
+  <script src="/assets/plugins/bootstrap-filestyle/js/bootstrap-filestyle.min.js" type="text/javascript"></script>
 <script>
 	window.onload = function () {
 		var chart = new OrgChart(document.getElementById("tree"), {
@@ -289,6 +290,43 @@
 		return emailReg.test(w_email);
 	}
 
+	function init() {
+		var inputFile = document.getElementById('inputFile1');
+		inputFile.addEventListener('change', mostrarImagen, false);
+	}
+	function mostrarImagen(event) {
+		var file = event.target.files[0];
+		var reader = new FileReader();
+		
+		var formData = new FormData();
+		formData.append("_csrf",$('input[name=_csrf]').val());
+		formData.append('file', file);
+
+		$.ajax({
+        url: '/Persona/Ficha/loadFile',
+        type: 'POST',
+        contentType: "application/json; charset=utf-8",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(data, textStatus, jqXHR){
+					console.log('EXITO')
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+					console.log('ERRORS: ' + textStatus);
+        }
+    }); 
+
+		reader.onload = function(event) {
+			var img = document.getElementById('img1');
+			img.src= event.target.result;
+			img.style.width = '400px';
+		}
+		reader.readAsDataURL(file);
+	}
+
+	window.addEventListener('load', init, false)
+
 	$(document).ready(function(){
 		$("#btnNewAccion").click(function(){
 			cFormInf.inf={
@@ -311,10 +349,10 @@
 
 	<!-- end row -->
 
-
+	{{ csrfField() }}
 	<div class="row">
 		<div class="col-sm-12">
-			<div class="profile-bg-picture" style="background-image:url('/assets/images/bg-profile.jpg')">
+			<div class="profile-bg-picture" style="background-image:url('{{persona.background_img}}')">
 				<span class="picture-bg-overlay"></span><!-- overlay -->
 			</div>
 			<!-- meta -->
