@@ -91,8 +91,15 @@ class Portada {
             texto = mensajeResult[0].texto;
             mensajeTitulo = mensajeResult[0].titulo;
         }
+
+        var objParam={
+            "idEtapa":'LINKFICHA'
+        }
         
-        return view.render('core/welcome',  {etag,user,procesos,persona,menu,talentos,condicion,procesosEde,mensaje:texto,mensajeTitulo,miperfil:perfilResult});
+        var resultParams=await data.execApi(request.hostname(),'/Desempeno/Proceso/getSysParametros',objParam);
+        var param = resultParams.body.data;
+
+        return view.render('core/welcome',  {etag,user,procesos,persona,menu,talentos,condicion,procesosEde,mensaje:texto,mensajeTitulo,miperfil:perfilResult,linkparam:param});
     }
     
     async cambioIdioma  ({ view,request, response, auth, session ,antl}) {
