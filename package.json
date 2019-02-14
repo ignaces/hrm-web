@@ -53,6 +53,7 @@
   },
   "devDependencies": {
     "browser-sync": "^2.18.13",
+    "cypress": "^3.1.5",
     "gulp": "^3.9.1",
     "gulp-less": "^3.3.2",
     "gulp-shell": "^0.6.3",
