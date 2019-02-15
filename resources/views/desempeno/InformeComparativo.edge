@@ -230,6 +230,7 @@
                                         </tr>
                                         @each(angulo in eval.angulos)
                                             <tr role="row" class="odd">
+                                                    
                                                 <!--@if(angulo.tipo == 'YO' || angulo.tipo == 'MI JEFE' || angulo.tipo == 'MI EQUIPO')-->
                                                     <td style="text-align: left; vertical-align: middle;">{{angulo.tipo}}</td>
                                                 <!--@else
@@ -246,6 +247,12 @@
                                                         @endif
                                                     @endeach
                                                 @endeach
+                                                @if(angulo.feedback.length < 5)
+                                                    <td bgcolor="#F2F2F2"></td>
+                                                    <td bgcolor="#F2F2F2"></td>
+                                                    <td bgcolor="#F2F2F2"></td>
+                                                @endif
+                                                
                                             </tr>    
                                         @endeach
                                     @endif
