@@ -16,9 +16,9 @@ git clone https://github.com/Enovum/hrm.git web && git clone https://github.com/
 ```
 
 ## Crear docker-compose.yml
-El archivo debe crearse en la raiz donde quedaron los 3 repositorios y se veria algo asi  
+El archivo debe crearse en la raiz donde quedaron los 2 repositorios y se veria algo asi  
 -api    
--web
+-web 
 -docker-compose.yml  
 ```yml
 version: "3"
