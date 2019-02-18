@@ -69,7 +69,7 @@ docker-compose build && docker-compose up
 Esto se va a tomar un poco de tiempo por qué tiene que crear y descargar imagenes. Luego solo tenemos que ejecutar docker-compose up para que corra el proyecto.
 
 
-##BD 
+## BD 
 Para cargar bd entrar en localhost:8080 por el browser y se conectan a la bd que corresponda para restaurar las bd que necesiten trabajar
 Si necesitan conectarse con workbench o algo por el estilo:
 host: locathost:33306 
