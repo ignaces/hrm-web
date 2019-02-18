@@ -78,15 +78,6 @@ password: Qwerty123
 
 ### Instalacion Sin Docker
  
-## Aplicacion Web
-La aplicación web se ejecuta en http://localhost:3000 y los assets en http://localhost:3335
-
-## Documentación
-Para generar la documentación ejecuta lo siguiente y ir al index.html de la carpeta documentation
-```bash
-grunt jsdoc
-```
-
   - [Instalar NVM](#instalar-nvm) 
     - [NVM Linux/MAC](#en-linuxmac)
     - [NVM Windows](#en-windows)
