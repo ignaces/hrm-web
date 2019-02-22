@@ -157,6 +157,7 @@
                             <thead>
                                 <tr role="row">
                                     <th class="" tabindex="0" rowspan="2" colspan="1" style="width: 180px; vertical-align: middle;">Nuevas Conductas</th>
+                                    <th class="" tabindex="0" rowspan="2" colspan="1" style="width: 180px; vertical-align: middle;">Angulo</th>
                                     <th class="" tabindex="0" rowspan="2" colspan="1" style="width: 180px; vertical-align: middle;">Nombre</th>
                                     <th class="" tabindex="0" rowspan="1" colspan="3" style="width: 220px; text-align: center; vertical-align: middle; ">
                                         <p>HACE</p>
@@ -230,7 +231,7 @@
                                         </tr>
                                         @each(angulo in eval.angulos)
                                             <tr role="row" class="odd">
-                                                    
+                                                <td style="text-align: left; vertical-align: middle;">{{angulo.codigo}}</td>    
                                                 <!--@if(angulo.tipo == 'YO' || angulo.tipo == 'MI JEFE' || angulo.tipo == 'MI EQUIPO')-->
                                                     <td style="text-align: left; vertical-align: middle;">{{angulo.tipo}}</td>
                                                 <!--@else
