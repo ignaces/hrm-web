@@ -1,9 +1,83 @@
-<p align="center">
-  <a href="http://www.enovum.cl">
-    <img src="http://www.enovum.cl/assets/img/bg/enovum.png">
-  </a>
-</p>
+## Instalación con Docker(recomendado)
 
+Instalar Docker
+
+  Mac  
+    https://docs.docker.com/docker-for-mac/install/  
+  Windows  
+    https://docs.docker.com/docker-for-windows/install/  
+  Ubuntu  
+    https://docs.docker.com/install/linux/docker-ce/ubuntu/  
+
+Clonar repositorios
+
+```bash
+git clone https://github.com/Enovum/hrm.git web && git clone https://github.com/Enovum/api.git
+```
+
+## Crear docker-compose.yml
+El archivo debe crearse en la raiz donde quedaron los 2 repositorios y se veria algo asi  
+-api    
+-web 
+-docker-compose.yml  
+```yml
+version: "3"
+
+services:
+  db:
+    image: mysql:5.7.24
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+     - "33066:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: Qwerty123
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+  api:
+    build: ./api
+    ports:
+     - "3334:3334"
+    volumes:
+     - ./api:/app
+    command: bash -c "npm install && adonis serve --dev"
+    depends_on:
+     - db
+  web:
+    build: ./web
+    ports:
+      - "3335:3335"
+    volumes:
+     - ./web:/app
+    depends_on:
+     - db
+    command: bash -c "npm install && adonis serve --dev"
+    
+```
+## Env
+
+   Tanto para "api" como para "assets" crear el archivo .env en base al codigo existente en .env.example  
+   
+## Ejecutar docker compose
+
+```bash
+docker-compose build && docker-compose up
+```
+Esto se va a tomar un poco de tiempo por qué tiene que crear y descargar imagenes. Luego solo tenemos que ejecutar docker-compose up para que corra el proyecto.
+
+
+## BD 
+Para cargar bd entrar en localhost:8080 por el browser y se conectan a la bd que corresponda para restaurar las bd que necesiten trabajar
+Si necesitan conectarse con workbench o algo por el estilo:
+host: locathost:33306 
+user: root 
+password: Qwerty123
+
+### Instalacion Sin Docker
+ 
   - [Instalar NVM](#instalar-nvm) 
     - [NVM Linux/MAC](#en-linuxmac)
     - [NVM Windows](#en-windows)
