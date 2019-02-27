@@ -104,10 +104,16 @@ class UserController {
         return response.redirect('/')
       }
 
-      loginView({view,request}){
-        return view.render('account/login');
+      async loginView({view,request}){
+
+        var qLoginFederado = await data.execApi(request.hostname(),'/Core/Administracion/getLoginFederado',{cliente:'banmedica'});
+        var loginFederado = qLoginFederado.body.data;
+
+        //console.log(loginFederado);
+
+        return view.render('account/login', {loginFederado});
       }
-      
+    
       profile ({ auth, params }) {
           
         if (auth.user.id !== Number(params.id)) {
