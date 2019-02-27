@@ -99,8 +99,6 @@ class Portada {
         var resultBit=await data.execApi(request.hostname(),'/Desempeno/Proceso/getSysParametros',objParamBitacora);
         var paramb = resultBit.body.data;
 
-        console.log(paramb[0].valor)
-        
         return view.render('core/welcome',  {etag,user,procesos,persona,menu,talentos,condicion,procesosEde,mensaje:texto,mensajeTitulo,miperfil:perfilResult,verBitacora:paramb});
     }
     
