@@ -1,0 +1,246 @@
+@layout('layouts/horizontal')
+
+@section('pluginsCss')
+    <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/plugins/ede/infobox/infobox.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/plugins/ede/socialWidget/socialWidget.css" rel="stylesheet" type="text/css" />             
+    <link href="/assets/plugins/ede/progressbar/progressbar.css" rel="stylesheet" type="text/css" /> 
+@endsection
+
+@section('scripts')
+    <script src="/assets/plugins/bootstrap-filestyle/js/bootstrap-filestyle.min.js" type="text/javascript"></script>
+    
+    <script>
+
+        var idOpinado="{{idOpinado}}";
+
+        var fileName = '';
+        var fileLink = '';
+
+        var cBitacora = new Vue({
+            el: '#app',
+            data: {
+                list: {{{toJSON(bitacora)}}}
+            },
+            methods:{
+                addItem:function(){
+                    cForm.item={
+                        id:'',
+                        idOpinado:idOpinado,
+                        titulo:'',
+                        descripcion:'',
+                        archivo:'',
+                        link:'',
+                        fecha:'',
+                        edit:false
+                    };
+
+                    fileName = '';
+                    fileLink = '';
+
+                    $("#modalBitacora").modal("show");
+                },
+                editItem:function(item){
+                    cForm.item = item;
+                    cForm.item.edit = true;
+                    cForm.item.idOpinado = idOpinado;
+
+                    fileName = item.archivo;
+                    fileLink = item.link;        
+
+                    $("#modalBitacora").modal("show");
+                },
+                downloadfile:function(item){
+
+                    var obj = {
+                        archivo:item.archivo,
+                        link:item.link
+                    }
+
+                    $.ajax({
+                        type: "GET",
+                        url: '/Core/Herramientas/downloadFile',
+                        contentType: "application/json; charset=utf-8",
+                        data: obj,
+                        dataType: "json", 
+                        success: function (msg) {
+                            var link = document.createElement("a");
+                            link.href = "/Core/Herramientas/download?file="+item.archivo
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                            delete link;
+                        }
+                    });   
+                }
+            }
+        });
+        var cForm = new Vue({
+            el:'#formulario',
+            data:{
+                item:{
+                    id:'',
+                    idOpinado:'',
+                    titulo:'',
+                    descripcion:'',
+                    archivo:'',
+                    link:'',
+                    fecha:'',
+                    edit:false
+                }
+            },
+            methods:{
+                saveItem:function(){
+                    var url = "/Core/Herramientas/addItem"
+                    if(cForm.item.edit){
+                        url="/Core/Herramientas/editItem"
+                    };
+
+                    cForm.item.archivo = fileName;
+                    cForm.item.link = fileLink;
+
+                    var obj = cForm.item;
+                    
+                    $.ajax({
+                        type: "GET",
+                        url: url,
+                        contentType: "application/json; charset=utf-8",
+                        data: obj,
+                        dataType: "json", 
+                        //async:false,
+                        success: function (msg) {
+                            cBitacora.list=msg;
+                            $("#modalBitacora").modal("hide");
+                        }
+                    });   
+
+                },
+                deleteItem:function(){
+                    var obj = cForm.item;
+
+                    $.ajax({
+                        type: "GET",
+                        url: "/Core/Herramientas/deleteItem",
+                        contentType: "application/json; charset=utf-8",
+                        data: obj,
+                        dataType: "json", 
+                        //async:false,
+                        success: function (msg) {
+                            cBitacora.list=msg;
+                            $("#modalBitacora").modal("hide");
+                        }
+                    });   
+                }
+            }
+        });
+
+        function init() {
+            var inputFile = document.getElementById('inputFile1');
+            inputFile.addEventListener('change', loadFile, false);
+        }
+        function loadFile(event) {
+            var file = event.target.files[0];
+            var reader = new FileReader();
+            
+            var formData = new FormData();
+            formData.append("_csrf",$('input[name=_csrf]').val());
+            formData.append('file', file);
+
+            $.ajax({
+                url: '/Core/Herramientas/loadFile',
+                type: 'POST',
+                contentType: "application/json; charset=utf-8",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(data){                    
+                    fileName = data.fileName;
+                    fileLink = data.fileLink;
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    console.log('ERRORS: ' + textStatus);
+                }
+            }); 
+
+            reader.readAsDataURL(file);
+        }
+        window.addEventListener('load', init, false)
+    </script>
+@endsection
+
+@section('content')
+@!component('core.components.modalBitacora')
+{{ csrfField() }}
+
+<div class="row" >
+    <div class="portlet">
+        <div class="panel-collapse collapse in" id="app">
+            <div class="portlet-body">
+                <div class="clearfix"></div>
+                <div class="row">
+                    <div class="col-lg-12">    
+                        <a href="#" class="btn btn-success pull-right" v-on:click="addItem()"> Agregar</a>
+                    </div>
+                </div>
+                <div class="row">
+                    &nbsp;
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table table-hover m-0 mails table-actions-bar table-colored table">
+                                        <thead>
+                                            <tr class="bg-gray">  
+                                                <th>Titulo</th>                                    
+                                                <th>Descripcion</th>                                    
+                                                <th>Fecha Creacion</th>                                    
+                                                <th>Fecha Modificacion</th>                                    
+                                                <th>Adjunto</th>                                    
+                                                <th></th>                                    
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="item in list">
+                                                <td>@{{item.titulo}}</td>
+                                                <td>@{{item.descripCorta}}</td>
+                                                <td>@{{item.fechacre}}</td>
+                                                <td>@{{item.fechamod}}</td>
+                                                <td>
+                                                    <a href="#" v-on:click="downloadfile(item)" v-if="item.archivo!=''">
+                                                        <h3 class="m-0 text-muted"><i class="mdi mdi-cloud-download"></i></h3>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a href="#" v-on:click="editItem(item)">
+                                                        <h3 class="m-0 text-muted"><i class="mdi mdi-dots-horizontal"></i></h3>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row">
+                                    &nbsp;
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@endsection
+
+
+
+
+
+
+
+
+
+

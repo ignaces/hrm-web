@@ -92,6 +92,13 @@ class Portada {
             mensajeTitulo = mensajeResult[0].titulo;
         }
 
+        var objParamBitacora={
+            "idEtapa":'VERBITACORA'
+        }
+        
+        var resultBit=await data.execApi(request.hostname(),'/Desempeno/Proceso/getSysParametros',objParamBitacora);
+        var paramb = resultBit.body.data;
+               
         var objParam={
             "idEtapa":'LINKFICHA'
         }
@@ -99,7 +106,8 @@ class Portada {
         var resultParams=await data.execApi(request.hostname(),'/Desempeno/Proceso/getSysParametros',objParam);
         var param = resultParams.body.data;
 
-        return view.render('core/welcome',  {etag,user,procesos,persona,menu,talentos,condicion,procesosEde,mensaje:texto,mensajeTitulo,miperfil:perfilResult,linkparam:param});
+        return view.render('core/welcome',  {etag,user,procesos,persona,menu,talentos,condicion,procesosEde,mensaje:texto,mensajeTitulo,miperfil:perfilResult,linkparam:param,verBitacora:paramb});
+
     }
     
     async cambioIdioma  ({ view,request, response, auth, session ,antl}) {
