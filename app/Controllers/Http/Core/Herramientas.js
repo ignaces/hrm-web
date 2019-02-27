@@ -132,10 +132,11 @@ class Herramientas {
         var cliente=request.hostname();
         var form = new FormData();
         var url = '';
+        var arr = cliente.split('.')
 
         try{
             form.append('file', fs.createReadStream(file._tmpPath));
-            form.append('cliente', cliente);
+            form.append('cliente', arr[0]);
             form.append('subtype', file._clientName.split('.')[1]);
 
             var result = await got.post('https://hrmassets.enovum.cl/Files/File/uploadFile', {
