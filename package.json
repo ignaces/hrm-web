@@ -32,6 +32,7 @@
     "@adonisjs/shield": "^1.0.4",
     "@slack/client": "^4.8.0",
     "chart.js": "^2.7.2",
+    "form-data": "^2.3.3",
     "got": "^7.1.0",
     "hard-source-webpack-plugin": "^0.8.1",
     "html-pdf": "^2.2.0",
@@ -52,6 +53,7 @@
   },
   "devDependencies": {
     "browser-sync": "^2.18.13",
+    "cypress": "^3.1.5",
     "gulp": "^3.9.1",
     "gulp-less": "^3.3.2",
     "gulp-shell": "^0.6.3",
