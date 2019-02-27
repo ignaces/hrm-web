@@ -14,6 +14,9 @@
 
         var idOpinado="{{idOpinado}}";
 
+        var fileName = '';
+        var fileLink = '';
+
         var cBitacora = new Vue({
             el: '#app',
             data: {
@@ -31,11 +34,9 @@
                         fecha:'',
                         edit:false
                     };
-                    var fileName = document.getElementById('fileName');
-                    var fileLink = document.getElementById('fileLink');
 
-                    fileName.value = '';
-                    fileLink.value = '';
+                    fileName = '';
+                    fileLink = '';
 
                     $("#modalBitacora").modal("show");
                 },
@@ -44,16 +45,33 @@
                     cForm.item.edit = true;
                     cForm.item.idOpinado = idOpinado;
 
-                    var fileName = document.getElementById('fileName');
-                    var fileLink = document.getElementById('fileLink');
-
-                    fileName.value = item.archivo;
-                    fileLink.value = item.link;        
+                    fileName = item.archivo;
+                    fileLink = item.link;        
 
                     $("#modalBitacora").modal("show");
                 },
                 downloadfile:function(item){
-                    alert(item.archivo)
+
+                    var obj = {
+                        archivo:item.archivo,
+                        link:item.link
+                    }
+
+                    $.ajax({
+                        type: "GET",
+                        url: '/Core/Herramientas/downloadFile',
+                        contentType: "application/json; charset=utf-8",
+                        data: obj,
+                        dataType: "json", 
+                        success: function (msg) {
+                            var link = document.createElement("a");
+                            link.href = "/Core/Herramientas/download?file="+item.archivo
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                            delete link;
+                        }
+                    });   
                 }
             }
         });
@@ -78,8 +96,8 @@
                         url="/Core/Herramientas/editItem"
                     };
 
-                    cForm.item.archivo = $("#fileName").val();
-                    cForm.item.link = $("#fileLink").val();
+                    cForm.item.archivo = fileName;
+                    cForm.item.link = fileLink;
 
                     var obj = cForm.item;
                     
@@ -136,11 +154,8 @@
                 processData: false,
                 contentType: false,
                 success: function(data){                    
-                    var fileName = document.getElementById('fileName');
-                    var fileLink = document.getElementById('fileLink');
-
-                    fileName.value = data.fileName;
-                    fileLink.value = data.fileLink;
+                    fileName = data.fileName;
+                    fileLink = data.fileLink;
                 },
                 error: function(jqXHR, textStatus, errorThrown){
                     console.log('ERRORS: ' + textStatus);
@@ -180,6 +195,7 @@
                                             <tr class="bg-gray">  
                                                 <th>Titulo</th>                                    
                                                 <th>Descripcion</th>                                    
+                                                <th>Fecha Creacion</th>                                    
                                                 <th>Fecha Modificacion</th>                                    
                                                 <th>Adjunto</th>                                    
                                                 <th></th>                                    
@@ -189,7 +205,8 @@
                                             <tr v-for="item in list">
                                                 <td>@{{item.titulo}}</td>
                                                 <td>@{{item.descripCorta}}</td>
-                                                <td>@{{item.fecha}}</td>
+                                                <td>@{{item.fechacre}}</td>
+                                                <td>@{{item.fechamod}}</td>
                                                 <td>
                                                     <a href="#" v-on:click="downloadfile(item)" v-if="item.archivo!=''">
                                                         <h3 class="m-0 text-muted"><i class="mdi mdi-cloud-download"></i></h3>

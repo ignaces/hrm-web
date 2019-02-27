@@ -4,6 +4,8 @@ const api = use('App/Utils/Data')
 const got = use('got')
 const FormData = require('form-data');
 const fs = require('fs');
+const http = require('http');
+const Helpers = use('Helpers');
   
 class Herramientas {
 
@@ -136,9 +138,7 @@ class Herramientas {
             form.append('cliente', cliente);
             form.append('subtype', file._clientName.split('.')[1]);
 
-            console.log(file._clientName.split('.')[1])
-
-            var result = await got.post('http://127.0.0.1:3333/Files/File/uploadFile', {
+            var result = await got.post('https://hrmassets.enovum.cl/Files/File/uploadFile', {
                 body: form
             });
             url = result.body;
@@ -153,6 +153,26 @@ class Herramientas {
             fileName:file._clientName,
             fileLink:url
         }
+    }
+
+    async downloadFile({ view,request,session, response }) {
+        var archivo = request.input("archivo")  
+        var link = request.input("link")
+        
+        const file = fs.createWriteStream('tmp/' + archivo);
+        const req = http.get(link, function(res) {
+          res.pipe(file);
+        })
+    }
+
+    async download({ view,request,session, response }) {
+        var file = request.input("file")
+
+        response.attachment(
+            Helpers.tmpPath(file),
+            file
+        )
+        
     }
 }
 
