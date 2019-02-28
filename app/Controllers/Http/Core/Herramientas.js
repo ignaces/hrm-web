@@ -159,6 +159,9 @@ class Herramientas {
     async downloadFile({ view,request,session, response }) {
         var archivo = request.input("archivo")  
         var link = request.input("link")
+
+        console.log('archivo: ' +archivo)
+        console.log('url: ' +link)
         
         const file = fs.createWriteStream('tmp/' + archivo);
         const req = http.get(link, function(res) {
