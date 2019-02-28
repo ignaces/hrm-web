@@ -64,12 +64,14 @@
                         data: obj,
                         dataType: "json", 
                         success: function (msg) {
-                            var link = document.createElement("a");
-                            link.href = "/Core/Herramientas/download?file="+item.archivo
-                            document.body.appendChild(link);
-                            link.click();
-                            document.body.removeChild(link);
-                            delete link;
+                            setTimeout(function(){ 
+                                var link = document.createElement("a");
+                                link.href = "/Core/Herramientas/download?file="+item.archivo
+                                document.body.appendChild(link);
+                                link.click();
+                                document.body.removeChild(link);
+                                delete link;
+                            }, 3000);
                         }
                     });   
                 }
