@@ -4,7 +4,7 @@ const api = use('App/Utils/Data')
 const got = use('got')
 const FormData = require('form-data');
 const fs = require('fs');
-const http = require('http');
+const https = require('https');
 const Helpers = use('Helpers');
   
 class Herramientas {
@@ -160,23 +160,26 @@ class Herramientas {
         var archivo = request.input("archivo")  
         var link = request.input("link")
 
-        console.log('archivo: ' +archivo)
-        console.log('url: ' +link)
-        
-        const file = fs.createWriteStream('tmp/' + archivo);
-        const req = http.get(link, function(res) {
-          res.pipe(file);
-        })
+        var url = link.replace("http","https");
+
+        const req = await https.get(url, (res) => {
+            const file = fs.createWriteStream('tmp/' + archivo);
+            res.pipe(file);
+        }).on('error', (e) => {
+            console.log(e);
+        });
+
     }
 
     async download({ view,request,session, response }) {
         var file = request.input("file")
 
-        response.attachment(
-            Helpers.tmpPath(file),
-            file
-        )
-        
+        if (fs.existsSync('tmp/'+file)) {
+            response.attachment(
+                Helpers.tmpPath(file),
+                file
+            )
+        } 
     }
 }
 
