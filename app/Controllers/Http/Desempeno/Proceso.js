@@ -681,7 +681,7 @@ class Proceso {
     async evalEjecutivos ({view,request, response, auth}) {
             
             //var idOpinante = all.idOpinante
-            
+            var idPersona = request.input('idPersona');
             var idOpinante  = request.input("idOpinante");
             var idProceso   = request.input("idProceso");
             var idEtapa     = request.input("idEtapa");
@@ -695,7 +695,13 @@ class Proceso {
             };
             ////////(obj);
 
-            var result = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumentoEde',obj);
+            var objInst = {
+                "idOpinante":idOpinante,
+                "idProceso":idProceso,
+                "idPersona":idPersona
+            };
+
+            var result = await api.execApi(request.hostname(),'/Evaluacion/Instrumento/getInstrumentoEde',objInst);
 
             var instrumento = result.body;
             
