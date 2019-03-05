@@ -307,7 +307,28 @@
 
             return fb;
         
-        }       
+        }  
+        
+        async saveFeedbackDate  ({ view,request, response, auth, session }) {
+            console.log(response);
+            /*var idOpinante=request.input("idOpinante");
+            var observacion=request.input("observacion");
+            var presencial=request.input("presencial");
+            var idOpinado=request.input("idOpinado");
+            
+            var result = await data.execApi(request.hostname(),'/Feedback/Persona/saveFeedback',
+            {
+                idOpinante:idOpinante,
+                observacion:observacion,
+                presencial:presencial,
+                idOpinado:idOpinado
+            });
+
+            const fb = result.body.data;
+
+            return fb;*/
+        
+        }
         
     }
       

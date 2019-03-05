@@ -83,6 +83,8 @@
 <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
 <script src="/assets/plugins/jquery-toastr/jquery.toast.min.js" type="text/javascript"></script>
 <script src="/assets/plugins/tinymce/tinymce.min.js"></script>
+<script src="/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="/assets/plugins/bootstrap-datepicker/locales/es.js"></script>
 
 <script>
     $(document).ready(function(){
@@ -252,12 +254,65 @@
             },
             timeout: 10000
         });
-    };
+    };    
+   
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; 
+    var yyyy = today.getFullYear();
 
-    
+    today = yyyy+'-'+(mm<10) ? '0'+mm : mm+'-'+(dd<10) ? '0'+dd : dd;
+    document.getElementById("feedbackDate").value = today;
+    document.getElementById("feedbackDate").setAttribute("min", today);
 
+    $('.datepicker').datepicker({
+        format: 'dd/mm/yyyy',
+        startDate: '1d',
+        todayHighlight: true,
+        locale: 'es-es',
+        autoclose: true,
+      });
     
-    
+    $( "#saveDate" ).click(function() {
+        var obj = {
+            feedbackDate: $("#feedbackDate").val(),
+            idOpinante: $("#idOpinante").val(),
+            idOpinado: $("#idOpinado").val()
+        };
+        console.log(obj);
+        /*$.ajax({
+            type: "GET",
+            url: "/Desempeno/Feedback/saveFeedbackDate",
+            contentType: "application/json; charset=utf-8",
+            data: obj,
+            dataType: "json",   
+            success: function (msg) {
+                
+                $("#hrm_loadingPanel").hide();
+                swal({
+                    title: 'Guardado',
+                    text:  'Datos guardados correctamente.',
+                    type: 'success'
+                }).then(function(result)  {
+                    if (result) {
+
+                        location.reload();
+                    };
+                })
+            }, 
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                
+                swal(
+                    'Error',
+                    'Hubo un problema al guardar sus datos, inténtelo nuevamente. Si el problema persiste, por favor, comuníquese con la mesa de ayuda.',
+                    'error'
+                  );
+
+                  $("#hrm_loadingPanel").hide();
+            },
+            timeout: 10000
+        });*/
+    });
     $( "#instrumento_btn_guardar" ).click(function() {
         tinymce.triggerSave();
         
@@ -303,7 +358,7 @@
         });
     });
 
-    $( "#instrumento_btn_finalizar" ).click(function() {
+    /*$( "#instrumento_btn_finalizar" ).click(function() {
         tinymce.triggerSave();
 
         var checked;
@@ -426,7 +481,7 @@
                 });
             }
           });
-    });
+    });*/
 
     /*$('.table-responsive').DataTable();*/
 
@@ -626,11 +681,13 @@
                 </div>           
 
         </div> 
-        
+
+        @!component('components.Desempeno.modalFechaFeedback')
+
         <div class="row">
             <div class="col-lg-12" style="text-align:center;">
                     <button type="button" id="instrumento_btn_guardar" class="btn btn-info waves-effect waves-light"> <i class="fa fa-save m-r-5"></i> <span>Guardar</span> </button>
-                    <button type="button" id="instrumento_btn_finalizar" class="btn btn-success waves-effect waves-light"> <i class="fa fa-check m-r-5"></i> <span>Finalizar</span> </button>
+                    <button type="button" id="instrumento_btn_finalizar" class="btn btn-success waves-effect waves-light" data-toggle="modal" data-target="#modalCalendar"> <i class="fa fa-check m-r-5"></i> <span>Finalizar</span> </button>
             </div>
         </div>
 
