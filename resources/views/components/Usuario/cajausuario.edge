@@ -13,16 +13,28 @@
                             <p class="text-muted font-12">{{persona.cargo}}</p>
                         </div>                                                   
                     </a>-->
-                    <div style="margin: 0 auto;">              
-                    <img src='{{persona.imageUser}}' class="img-circle img-thumbnail" alt="colaborador/a" width="88px" >              
+                    <div style="margin: 0 auto;">   
+                    @if(linkparam.length>0)           
+                        <a href="{{linkparam[0].valor}}">
+                            <img src='{{persona.imageUser}}' class="img-circle img-thumbnail" alt="colaborador/a" width="88px" >              
+                        </a>
+                    @else   
+                        <img src='{{persona.imageUser}}' class="img-circle img-thumbnail" alt="colaborador/a" width="88px" >
+                    @endif                                   
                     </div>
                     <div class="">
                         <h5 class="m-b-">{{persona.nombres}} {{persona.apellidoPaterno}} {{persona.apellidoMaterno}}</h5>
                         <p class="text-muted font-12">{{persona.cargo}}</p>
                     </div>     
                 @else
-                <div style="margin: 0 auto;">              
-                  <img src='{{persona.imageUser}}' class="img-circle img-thumbnail" alt="colaborador/a" width="88px" >              
+                <div style="margin: 0 auto;">           
+                    @if(linkparam.length>0)           
+                        <a href="{{linkparam[0].valor}}">
+                            <img src='{{persona.imageUser}}' class="img-circle img-thumbnail" alt="colaborador/a" width="88px" >              
+                        </a>
+                    @else   
+                        <img src='{{persona.imageUser}}' class="img-circle img-thumbnail" alt="colaborador/a" width="88px" >
+                    @endif    
                 </div>
                 <div class="">
                     <h5 class="m-b-">{{persona.nombres}} {{persona.apellidoPaterno}} {{persona.apellidoMaterno}}</h5>

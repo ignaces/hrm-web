@@ -43,7 +43,8 @@
 
             //var res = await data.execApi(request.hostname(),'/Feedback/Persona/list',{idProceso:idProceso,idPersona:persona.id});
             
-            return view.render('feedback/index',  {lista:colaboradores,encuesta:encuesta,datosProceso,PersonaEde,etapa,idPersona:persona.id,mostrarAccion:mostrarAccion.length,idProceso:idProceso,idEtapa:idEtapa,mostrarCC:mostrarCC[0].valor});
+
+            return view.render('feedback/index',  {lista:colaboradores,encuesta:encuesta,datosProceso,PersonaEde,etapa,idOpinante:PersonaEde[0].idOpinante, idAccionPersona:PersonaEde[0].idAccionPersona , idPersona:persona.id,mostrarAccion:mostrarAccion.length,idProceso:idProceso,idEtapa:idEtapa,mostrarCC:mostrarCC[0].valor});
         
         }
 
