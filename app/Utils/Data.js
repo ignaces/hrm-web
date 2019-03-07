@@ -80,6 +80,29 @@ module.exports = {
         })
         ////console.log(obj)
         return result;
+    },
+
+    execApiExterna: async (path,obj)=>{
+        ////console.log(obj); 
+        try{
+            var result = await got(`${path}`,
+            {
+                json:true,
+                query:obj
+            });
+
+        }catch(e){
+            var result ={
+                body:{
+                    data:[]
+                }
+            }
+            
+            Logger.debug(`metodo:${method},datos:${obj},mensaje:${e.message}`)
+            return result;
+        }
+        ////console.log(obj)
+        return result;
     }
 
 }

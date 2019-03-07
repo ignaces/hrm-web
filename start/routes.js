@@ -57,6 +57,8 @@ Route.post('/login', 'Account/UserController.login')
 
 Route.get('/logout', 'Account/UserController.logout')
 
+Route.get('/ad/callback', 'Account/ActiveDirectoryLogin.callback')
+
 Route.get('/Clima/Encuesta/index','Clima/Encuesta.index')
 Route.get('/Encuesta/Encuesta/intro','Encuesta/Encuesta.intro')
 Route.post('/Encuesta/Encuesta/intro','Encuesta/Encuesta.intro')
