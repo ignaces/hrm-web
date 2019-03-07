@@ -31,14 +31,14 @@
                         </thead>
                         <tbody>
                         @each(meta in dimension.metas)
-                        <tr>
-                      
+                        <tr>        
                                     <td>{{{meta.meta.Objetivo}}}</td>
                                     <td>{{{meta.meta.Indicador}}}</td>
                                     <td>{{{meta.meta.Métrica}}}</td>
- 
+                                    <td>{{{meta.meta.Alcanzado}}}</td> 
 
                             <td align="center">{{meta.meta.ponderacion}}%</td>
+                            <td align="center">{{meta.meta.cumplimiento}}%</td>
                            <!-- <td><div class="label label-{{meta.meta.validadaColor}}"> <i class="{{meta.meta.validadaIcono}}"></i> {{meta.meta.validadaTexto}}</div></td>-->
                            <!-- <td>
                                 @if(meta.meta.editable==1)
