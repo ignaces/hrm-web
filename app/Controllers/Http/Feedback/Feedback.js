@@ -314,11 +314,14 @@
             var idOpinante=request.input("idOpinante");
             var feedbackDate=request.input("feedbackDate");
             var feedbackTime=request.input("feedbackTime");
+            var idProceso=request.input("idProceso");
+            
             var result = await data.execApi(request.hostname(),'/Feedback/Persona/saveFeedbackDate',
             {
                 idOpinante:idOpinante,
                 feedbackDate:feedbackDate,
                 feedbackTime:feedbackTime,
+                idProceso:idProceso
             });
 
             return {

@@ -419,6 +419,7 @@
                             'success'
                         ).then(function(result){
                             $("#modalCalendar").modal("show");
+                            console.log( $("#idProceso").val())
                         });
                         $("#hrm_loadingPanel").hide();
 
@@ -427,8 +428,9 @@
                             var obj = {
                                 feedbackDate: $("#feedbackDate").val(),
                                 feedbackTime: $("#feedbackTime").val(),
-                                idOpinante: $("#idOpinante").val()
-                            };
+                                idOpinante: $("#idOpinante").val(),
+                                idProceso: $("#idProceso").val()
+                            };                            
                             
                             $.ajax({
                                 type: "GET",
@@ -570,7 +572,7 @@
     <input type="hidden" name="idOpinante" id="idOpinante" value="{{idOpinante}}">
     
     <form method="GET" action="/Desempeno/Proceso/etapa" id="frmVolver">
-        <input type="hidden" name="idProceso" value="{{idProceso}}">
+        <input type="hidden" name="idProceso" id="idProceso" value="{{idProceso}}">
         <input type="hidden" name="idEtapa" value="{{idEtapa}}">
     </form>
     <!--escala-->
