@@ -310,24 +310,20 @@
         }  
         
         async saveFeedbackDate  ({ view,request, response, auth, session }) {
-            console.log(response);
-            /*var idOpinante=request.input("idOpinante");
-            var observacion=request.input("observacion");
-            var presencial=request.input("presencial");
-            var idOpinado=request.input("idOpinado");
             
-            var result = await data.execApi(request.hostname(),'/Feedback/Persona/saveFeedback',
+            var idOpinante=request.input("idOpinante");
+            var feedbackDate=request.input("feedbackDate");
+            var feedbackTime=request.input("feedbackTime");
+            var result = await data.execApi(request.hostname(),'/Feedback/Persona/saveFeedbackDate',
             {
                 idOpinante:idOpinante,
-                observacion:observacion,
-                presencial:presencial,
-                idOpinado:idOpinado
+                feedbackDate:feedbackDate,
+                feedbackTime:feedbackTime,
             });
 
-            const fb = result.body.data;
-
-            return fb;*/
-        
+            return {
+                mensaje:''
+            };        
         }
         
     }

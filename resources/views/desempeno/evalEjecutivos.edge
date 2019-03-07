@@ -260,59 +260,14 @@
     var dd = today.getDate();
     var mm = today.getMonth()+1; 
     var yyyy = today.getFullYear();
+    mm = (mm<10) ? '0'+mm : mm;
+    dd = (dd<10) ? '0'+dd : dd;
 
-    today = yyyy+'-'+(mm<10) ? '0'+mm : mm+'-'+(dd<10) ? '0'+dd : dd;
+    today = yyyy+'-'+mm+'-'+dd;
     document.getElementById("feedbackDate").value = today;
-    document.getElementById("feedbackDate").setAttribute("min", today);
-
-    $('.datepicker').datepicker({
-        format: 'dd/mm/yyyy',
-        startDate: '1d',
-        todayHighlight: true,
-        locale: 'es-es',
-        autoclose: true,
-      });
+    document.getElementById("feedbackDate").setAttribute("min", today);    
     
-    $( "#saveDate" ).click(function() {
-        var obj = {
-            feedbackDate: $("#feedbackDate").val(),
-            idOpinante: $("#idOpinante").val(),
-            idOpinado: $("#idOpinado").val()
-        };
-        console.log(obj);
-        /*$.ajax({
-            type: "GET",
-            url: "/Desempeno/Feedback/saveFeedbackDate",
-            contentType: "application/json; charset=utf-8",
-            data: obj,
-            dataType: "json",   
-            success: function (msg) {
-                
-                $("#hrm_loadingPanel").hide();
-                swal({
-                    title: 'Guardado',
-                    text:  'Datos guardados correctamente.',
-                    type: 'success'
-                }).then(function(result)  {
-                    if (result) {
-
-                        location.reload();
-                    };
-                })
-            }, 
-            error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                
-                swal(
-                    'Error',
-                    'Hubo un problema al guardar sus datos, inténtelo nuevamente. Si el problema persiste, por favor, comuníquese con la mesa de ayuda.',
-                    'error'
-                  );
-
-                  $("#hrm_loadingPanel").hide();
-            },
-            timeout: 10000
-        });*/
-    });
+    
     $( "#instrumento_btn_guardar" ).click(function() {
         tinymce.triggerSave();
         
@@ -358,7 +313,7 @@
         });
     });
 
-    /*$( "#instrumento_btn_finalizar" ).click(function() {
+    $( "#instrumento_btn_finalizar" ).click(function() {
         tinymce.triggerSave();
 
         var checked;
@@ -463,9 +418,46 @@
                             'Evaluación Finalizada Correctamente.',
                             'success'
                         ).then(function(result){
-                            $('#frmVolver').submit();
+                            $("#modalCalendar").modal("show");
                         });
                         $("#hrm_loadingPanel").hide();
+
+                        
+                        $( "#saveDate" ).click(function() {
+                            var obj = {
+                                feedbackDate: $("#feedbackDate").val(),
+                                feedbackTime: $("#feedbackTime").val(),
+                                idOpinante: $("#idOpinante").val()
+                            };
+                            
+                            $.ajax({
+                                type: "GET",
+                                url: "/Feedback/Feedback/saveFeedbackDate",
+                                contentType: "application/json; charset=utf-8",
+                                data: obj,
+                                dataType: "json",   
+                                success: function (msg) {  
+                                    $("#modalCalendar").modal("hide");
+                                    swal({
+                                        title: 'Guardado',
+                                        text:  'Datos de feedback guardados correctamente.',
+                                        type: 'success'
+                                    }).then(function(result)  {
+                                        $('#frmVolver').submit();
+                                    })
+                                }
+                                , 
+                                error: function(XMLHttpRequest, textStatus, errorThrown) {               
+                                    swal(
+                                        'Error',
+                                        'Hubo un problema al guardar sus datos, inténtelo nuevamente. Si el problema persiste, por favor, comuníquese con la mesa de ayuda.',
+                                        'error'
+                                    );
+                                    $("#hrm_loadingPanel").hide();
+                                },
+                                timeout: 10000
+                            });
+                        });
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown) { 
                         
@@ -481,7 +473,7 @@
                 });
             }
           });
-    });*/
+    });
 
     /*$('.table-responsive').DataTable();*/
 
@@ -687,7 +679,7 @@
         <div class="row">
             <div class="col-lg-12" style="text-align:center;">
                     <button type="button" id="instrumento_btn_guardar" class="btn btn-info waves-effect waves-light"> <i class="fa fa-save m-r-5"></i> <span>Guardar</span> </button>
-                    <button type="button" id="instrumento_btn_finalizar" class="btn btn-success waves-effect waves-light" data-toggle="modal" data-target="#modalCalendar"> <i class="fa fa-check m-r-5"></i> <span>Finalizar</span> </button>
+                    <button type="button" id="instrumento_btn_finalizar" class="btn btn-success waves-effect waves-light"> <i class="fa fa-check m-r-5"></i> <span>Finalizar</span> </button>
             </div>
         </div>
 

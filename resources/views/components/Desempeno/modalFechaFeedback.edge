@@ -8,13 +8,14 @@
             </button>
         </div>
         <form class="form-horizontal" role="form" id="formulario">
-            <input type="hidden" id="idOpinante" name="idOpinante" value="{{idOpinante}}" />
-            <input type="hidden" id="idOpinado" name="idOpinado" value="{{idOpinado}}" />
             <div class="modal-body form-group">
-                <label for="feedbackDate">Seleccione una fecha para el feedback:</label>
+                <label for="feedbackDate">Seleccione la fecha para el feedback:</label>
                 <input type="date" class="form-control" id="feedbackDate" name="feedbackDate"
-                value="" min="" required>
-                <input class="form-control" id="appointment" data-provide="datepicker" class="datepicker">
+                value="" min="" required>                
+            </div>
+            <div class="modal-body form-group">
+                <label for="feedbackTime">Seleccione la hora para el feedback:</label>
+                <input type="time" class="form-control" id="feedbackTime" name="feedbackTime" min="9:00" max="18:00" required>
             </div>
             <div class="modal-footer form-group">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
