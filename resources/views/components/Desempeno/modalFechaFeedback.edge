@@ -1,0 +1,27 @@
+<div class="modal fade" id="modalCalendar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Agendar feedback</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <form class="form-horizontal" role="form" id="formulario">
+            <div class="modal-body form-group">
+                <label for="feedbackDate">Seleccione la fecha para el feedback:</label>
+                <input type="date" class="form-control" id="feedbackDate" name="feedbackDate"
+                value="" min="" required>                
+            </div>
+            <div class="modal-body form-group">
+                <label for="feedbackTime">Seleccione la hora para el feedback:</label>
+                <input type="time" class="form-control" id="feedbackTime" name="feedbackTime" min="9:00" max="18:00" required>
+            </div>
+            <div class="modal-footer form-group">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary" id="saveDate">Guardar</button>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
