@@ -8,6 +8,8 @@
             var idProceso=request.input("idProceso");
             var idEtapa=request.input("idEtapa");
             var persona = session.get('personaLogueada')
+            var idOpinante = 0;
+            var idAccionPersona = 0;
 
             session.put("datosVista",{idProceso:idProceso,idEtapa:idEtapa});
             var objdatosPersona = {
@@ -43,8 +45,25 @@
 
             //var res = await data.execApi(request.hostname(),'/Feedback/Persona/list',{idProceso:idProceso,idPersona:persona.id});
             
+            try
+            {
+                idOpinante = PersonaEde[0].idOpinante;
+            }
+            catch(e)
+            {
+                idOpinante = 0;
+            }
 
-            return view.render('feedback/index',  {lista:colaboradores,encuesta:encuesta,datosProceso,PersonaEde,etapa,idOpinante:PersonaEde[0].idOpinante, idAccionPersona:PersonaEde[0].idAccionPersona , idPersona:persona.id,mostrarAccion:mostrarAccion.length,idProceso:idProceso,idEtapa:idEtapa,mostrarCC:mostrarCC[0].valor});
+            try
+            {
+                idAccionPersona = PersonaEde[0].idAccionPersona;
+            }
+            catch(e)
+            {
+                idAccionPersona = 0;
+            }
+
+            return view.render('feedback/index',  {lista:colaboradores,encuesta:encuesta,datosProceso,PersonaEde,etapa,idOpinante:idOpinante, idAccionPersona:idAccionPersona , idPersona:persona.id,mostrarAccion:mostrarAccion.length,idProceso:idProceso,idEtapa:idEtapa,mostrarCC:mostrarCC[0].valor});
         
         }
 
