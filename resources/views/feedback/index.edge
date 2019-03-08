@@ -56,9 +56,15 @@
             <div class="row">
                 <div class="portlet">
                     <div class="portlet-heading bg-primary">
-                        <h4 class="portlet-title">
-                            ¿Tuviste tu Conversación de Desempeño?
-                        </h4>
+                        @if(tituloAlt.length>0)
+                            <h4 class="portlet-title">
+                                {{tituloAlt[0].valor}}
+                            </h4>
+                        @else
+                            <h4 class="portlet-title">
+                                ¿Tuviste tu Conversación de Desempeño?
+                            </h4>
+                        @endif
                         <div class="portlet-widgets">
                             <a data-toggle="collapse" data-parent="#accordion1" href="#auto"><i class="mdi mdi-minus"></i></a>                  
                         </div>

@@ -63,7 +63,14 @@
                 idAccionPersona = 0;
             }
 
-            return view.render('feedback/index',  {lista:colaboradores,encuesta:encuesta,datosProceso,PersonaEde,etapa,idOpinante:idOpinante, idAccionPersona:idAccionPersona , idPersona:persona.id,mostrarAccion:mostrarAccion.length,idProceso:idProceso,idEtapa:idEtapa,mostrarCC:mostrarCC[0].valor});
+            var objParam={
+                "idEtapa":'FEEDBACKTITULO'
+            }
+            
+            var resultParams=await data.execApi(request.hostname(),'/Desempeno/Proceso/getSysParametros',objParam);
+            var param = resultParams.body.data;
+
+            return view.render('feedback/index',  {lista:colaboradores,encuesta:encuesta,datosProceso,PersonaEde,etapa,idOpinante:idOpinante, idAccionPersona:idAccionPersona , idPersona:persona.id,mostrarAccion:mostrarAccion.length,idProceso:idProceso,idEtapa:idEtapa,mostrarCC:mostrarCC[0].valor,tituloAlt:param});
         
         }
 
