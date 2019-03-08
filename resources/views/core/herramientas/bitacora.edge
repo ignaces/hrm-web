@@ -1,0 +1,48 @@
+@layout('layouts/horizontal')
+
+@section('scripts')
+    
+@endsection
+
+@section('pluginsCss')
+    <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/plugins/ede/infobox/infobox.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/plugins/ede/socialWidget/socialWidget.css" rel="stylesheet" type="text/css" />             
+    <link href="/assets/plugins/ede/progressbar/progressbar.css" rel="stylesheet" type="text/css" /> 
+@endsection
+
+@section('content')
+<div class="row" >
+    <div class="col-md-2">
+        @!component('components.Desempeno.widgetUser',persona=Persona)
+    </div>
+    <div class="col-md-10">
+        <div class="row">
+            <div class="portlet">
+                <div class="portlet-heading bg-primary">
+                    <h4 class="portlet-title">
+                        Equipo
+                    </h4>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="panel-collapse collapse in">
+                    <div class="portlet-body">
+                        <div class="clearfix"></div>
+                        @!component('core.components.listEquipo',lista=equipo)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+
+
+
+
+
+
+
+
+
