@@ -35,6 +35,7 @@
           var idEncuestaAplicacion = request.input("idEncuestaAplicacion")  ;
           var codigo = request.input("codigo");
           var referer = request.input("referer");
+          session.put("referer",referer);
           var codigoActor = request.input("codigoActor");
           
           var obj = {
