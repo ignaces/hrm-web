@@ -30,6 +30,30 @@
           }
           
         }
+
+        async introExt  ({ view,request, response, auth, session }) {
+          var idEncuestaAplicacion = request.input("idEncuestaAplicacion")  ;
+          var codigo = request.input("codigo");
+          var referer = request.input("referer");
+          var codigoActor = request.input("codigoActor");
+          
+          var obj = {
+            idEncuestaAplicacion:idEncuestaAplicacion,
+            codigo:codigo
+          }
+          var result =  await data.execApi(request.hostname(),'/Encuesta/Medicion/validarCodigo',obj);
+          var validacion = result.body;
+         
+          if(validacion.continua){
+            return view.render('encuesta/intro',  {codigoActor: codigoActor,encuestaPersona:validacion.encuestaPersona,referer});
+          }else{
+            var mensaje= validacion.mensaje;
+            
+            
+            return view.render('encuesta/index',  {codigoActor: codigoActor,idEncuestaAplicacion:idEncuestaAplicacion,mensaje:mensaje,referer});
+          }
+          
+        }
      
         async instrumento ({ view,request, response, auth, session}){
           var idEncuestaPersona = request.input("idEncuestaPersona");
