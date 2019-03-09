@@ -62,6 +62,8 @@ Route.get('/ad/callback', 'Account/ActiveDirectoryLogin.callback')
 Route.get('/Clima/Encuesta/index','Clima/Encuesta.index')
 Route.get('/Encuesta/Encuesta/intro','Encuesta/Encuesta.intro')
 Route.post('/Encuesta/Encuesta/intro','Encuesta/Encuesta.intro')
+Route.get('/Encuesta/Encuesta/introExt','Encuesta/Encuesta.introExt')
+Route.post('/Encuesta/Encuesta/introExt','Encuesta/Encuesta.introExt')
 
 Route.get('/Encuesta/Encuesta/index','Encuesta/Encuesta.index')
 Route.get('/Encuesta/Encuesta/instrumento','Encuesta/Encuesta.instrumento')
