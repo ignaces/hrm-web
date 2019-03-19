@@ -4,19 +4,19 @@ var idproducto = 0;
 
 
 $( document ).ready(function() {
-    
+
 
 $("#btnGuardarVenta").click(function()
-{          
+{
     if($(".idProducto") && $(".idProducto").length > 0 )
     {
         var obj = {};
-        
+
         var arr = [];
 
         $(".idProducto").each(function(){
             idProducto = $(this).attr("id");
-            
+
             obj = {
                 "valor": 0,
                 "cantidad": $("#idCantProd_"+idProducto).val(),
@@ -49,14 +49,14 @@ $("#btnGuardarVenta").click(function()
             "apellidoCliente": apellidoCliente,
             "emailCliente": emailCliente,
             "telefonoCliente": telefonoCliente,
-            "productos": productos 
+            "productos": productos
             //"productos": ""
             ,"_csrf": $("#_csrf").val()
         };
 
         //console.log(productos);
-        
-        
+
+
         $.ajax({
                 url: '/Incentivo/Proceso/addVenta',
                 type: "POST",
@@ -107,7 +107,7 @@ $("#btnBuscarProducto").click(function(){
 
             if(data.length == 0)
             {
-                
+
                 swal("Advertencia", "Producto no existe", "error");
 
                 submarca = "";
@@ -120,22 +120,22 @@ $("#btnBuscarProducto").click(function(){
                 $("#modalProductos").modal("show");
             }
 
-           
-                
+
+
                 $("#caja_productos").show();
 
-                
+
                 if($("#prod_"+idproducto))
                 {
                     //  $("#valor_precio").val($("#idPrecioProdUn_"+idproducto).val());
                 }
-            
+
         }
     });
 });
 
 $("#agregar_producto").click(function(){
-    
+
     if($("#valor_cantidad").val()==0 || $("#valor_cantidad").val() == "" || $("#valor_cantidad").val().lengtg == 0)
     {
         swal("Advertencia", "Debes ingresar una cantidad válida.", "error");
@@ -158,9 +158,9 @@ $("#agregar_producto").click(function(){
     $(".productos_ingresados").each(function(){
         n_invoice++;
     });
-    
+
     var existeInvoice = 0;
-    
+
     $(".idProducto").each(function(){
         //console.log($(this).attr("id"));
         if($("#id_producto").val() == $(this).attr("id"))
@@ -168,7 +168,7 @@ $("#agregar_producto").click(function(){
             existeInvoice = $("#id_producto").val();
         }
     });
-    
+
     var cuentaProds = 0;
     var sumaPrecios = 0;
 
@@ -187,7 +187,7 @@ $("#agregar_producto").click(function(){
         cont = cont + "<td align='center' valign='middle' class='remProd' id='rem_prod_"+$("#id_producto").val()+"' style='cursor: pointer;'><i idProducto='"+idProdStr+"' class='fa fa-trash deleteProducto'></i></td>";
 
         cont = cont + "</tr>";
-        
+
     }
     else{
         var cuentaProdsAct = parseInt($("#idCantProd_"+existeInvoice).val())+parseInt($("#valor_cantidad").val());
@@ -200,7 +200,7 @@ $("#agregar_producto").click(function(){
 
         $("#txtCant_"+existeInvoice).html(cuentaProdsAct);
         $("#txtPrecio_"+existeInvoice).html("$"+sumaPreciosAct);
-        
+
     }
 
     $(".cantidadProd").each(function(){
@@ -216,9 +216,9 @@ $("#agregar_producto").click(function(){
     cont = cont + "<td align='right' valign='middle'>"+cuentaProds+"</td>";
     cont = cont + "<td align='right' valign='middle'>$"+sumaPrecios+"</td>";
     cont = cont + "<td align='right' valign='middle'></td>";
-        
+
     cont = cont + "</tr>";
-    
+
     $("#tabla_invoice").append(cont);
     $("#valor_submarca").val("");
     $("#valor_envase").val("");
@@ -231,7 +231,7 @@ $("#agregar_producto").click(function(){
 
 
 $("#btn_camara").click(function(){
-    
+
     startScanner();
     $("#modal-camara").modal("show");
 
@@ -264,7 +264,7 @@ $(".deleteProducto").click(function(){
         cont = cont + "<td align='right' valign='middle'>"+cuentaProds+"</td>";
         cont = cont + "<td align='right' valign='middle'>$"+sumaPrecios+"</td>";
         cont = cont + "<td align='right' valign='middle'></td>";
-            
+
         cont = cont + "</tr>";
 
         $("#tabla_invoice").append(cont);
@@ -295,11 +295,11 @@ var startScanner = function(){
         Instascan.Camera.getCameras().then(function (cameras) {
             if (cameras.length > 0) {
                 if(cameras.length>1){
-                        scanner.start(cameras[1]);  
+                        scanner.start(cameras[1]);
                 }else{
-                    scanner.start(cameras[0]);  
+                    scanner.start(cameras[0]);
                 }
-                
+
             } else {
             console.error('No cameras found.');
             }
@@ -307,8 +307,8 @@ var startScanner = function(){
             console.error(e);
         });
 }
-      
-    
+
+
 
 
 
@@ -319,8 +319,8 @@ var cProductos = new Vue({
     },
     methods: {
         selectProducto: function(producto){
-          cFichaProducto.producto = producto; 
-               $("#modalProductos").modal("hide");    
+          cFichaProducto.producto = producto;
+               $("#modalProductos").modal("hide");
       }
     }
 });

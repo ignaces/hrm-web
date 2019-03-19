@@ -3,10 +3,10 @@
 const data = use('App/Utils/Data')
 
 class Proceso {
-    
+
 
     async colaboradores ({view,request, response, auth, session}) {
-        
+
         var idPersona = session.get('idPersona', 'fail')
         var idPuntoDeVenta = session.get('idPuntoDeVenta', 'fail');
 
@@ -14,35 +14,35 @@ class Proceso {
         var persona = session.get('personaLogueada')
 
         //session.put('idProceso',idProceso);
-        
+
         //var obj = {
         //    "idProceso":idProceso,
         //    "idPersona": idPersona
         //};
-        
+
         //var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getPersonasEvaluaciones',obj);
         //var personas = result.body.data;
-        
+
         var objMet = {
             "idPersona": idPersona,
             "idPuntoDeVenta": idPuntoDeVenta
         };
         console.log(objMet);
-        
+
         var resultMetas = await data.execApi(request.hostname(),'/Incentivos/Incentivos/getValoresMeta',objMet);
         var resultMetasBonoMix = await data.execApi(request.hostname(),'/Incentivos/Incentivos/getValoresMetaBonoMix',objMet);
         //var valoresMetas = "";
         var valoresMetas = resultMetas.body[0];
         //console.log(resultMetas);
-        
+
         var valoresMetasBonoMix = resultMetasBonoMix.body;
         //console.log(valoresMetasBonoMix);
-        
+
         return view.render('incentivo/proceso/colaboradores', {persona, valoresMetas, valoresMetasBonoMix});
     }
 
     async supervisor ({view,request, response, auth, session}) {
-        
+
         //var idPersona = session.get('idPersona', 'fail')
         //var idProceso = request.input("proceso")
 
@@ -55,12 +55,12 @@ class Proceso {
         */
         //var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getPersonasEvaluaciones',obj);
         //var personas = result.body.data;
-        
+
         return view.render('incentivo/proceso/supervisor');
     }
 
     async gestionDeVenta ({view,request, response, auth, session}) {
-        
+
         //var idPersona = session.get('idPersona', 'fail')
         //var idProceso = request.input("proceso")
 
@@ -73,12 +73,12 @@ class Proceso {
         */
         //var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getPersonasEvaluaciones',obj);
         //var personas = result.body.data;
-        
+
         return view.render('incentivo/proceso/gestionDeVenta');
     }
 
     async catalogo ({view,request, response, auth, session}) {
-        
+
         var idPersona = session.get('idPersona', 'fail')
         var idProceso = request.input("proceso")
 
@@ -91,11 +91,11 @@ class Proceso {
         //console.log(obj);
         //var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getPersonasEvaluaciones',obj);
         //var personas = result.body.data;
-        
+
         return view.render('incentivo/proceso/catalogo');
     }
     async cardex ({view,request, response, auth, session}) {
-        
+
         var idPersona = session.get('idPersona', 'fail')
         var idProceso = request.input("proceso")
 
@@ -114,7 +114,7 @@ class Proceso {
         //console.log(obj);
         //var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getPersonasEvaluaciones',obj);
         //var personas = result.body.data;
-        
+
         return view.render('incentivo/proceso/cardex', {persona});
     }
 
@@ -131,7 +131,7 @@ class Proceso {
             "lat":lat,
             "lon":lon
         };
-            
+
         var result = await data.execApi(request.hostname(),'/Incentivos/Incentivos/addCheckIn',obj);
 
         return {mensaje:"OK"};
@@ -141,29 +141,29 @@ class Proceso {
         var idPersona = session.get('idPersona', 'fail');
         var idPuntoDeVenta = session.get('idPuntoDeVenta', 'fail');
         var identificador = request.input("identificador");
-        
+
         var nombres = request.input("nombre");
         var apellido = request.input("apellido");
         var email = request.input("email");
         var telefono = request.input("telefono");
-        
+
         var obj = {
             "idPersona":idPersona,
             "idPuntoDeVenta":idPuntoDeVenta,
             "identificador": identificador,
             "nombres":nombres,
             "apellido":apellido,
-            "email": email, 
+            "email": email,
             "telefono": telefono
         };
-            
+
         var result = await data.execApi(request.hostname(),'/Incentivos/Incentivos/addCliente',obj);
 
         return {mensaje:"OK"};
     }
 
     async addVenta ({request, response, session}) {
-        
+
         //objProds.prods = ventaProds;
         //console.log(objProds);
         var idPersona = session.get("idPersona");
@@ -178,10 +178,10 @@ class Proceso {
         var apellidoCliente = request.input("apellidoCliente");
         var emailCliente = request.input("emailCliente");
         var telefonoCliente = request.input("telefonoCliente");
-        
+
         //console.log(productos);
         //return false;
-        
+
         var objForm = {
             "idPersona": idPersona,
             "idPuntoDeVenta": idPuntoDeVenta,
@@ -194,7 +194,7 @@ class Proceso {
             "apellidoCliente": apellidoCliente,
             "emailCliente": emailCliente,
             "telefonoCliente": telefonoCliente,
-            "productos": productos 
+            "productos": productos
         };
 
         var result = await data.execApiPost(request.hostname(),'/Incentivos/Incentivos/addVenta',objForm);
@@ -204,7 +204,7 @@ class Proceso {
     }
 
     async ingresoVenta ({request, response, session, view, auth}) {
-        
+
         //objProds.prods = ventaProds;
         //console.log(objProds);
         return view.render('incentivo/proceso/ingresoVenta');
@@ -234,9 +234,9 @@ class Proceso {
 
 
     async getProducto ({view,request, response, auth, session}) {
-        
+
         var idProducto = request.input("idProducto")
-        
+
         var obj = {
             "idProducto":idProducto
         };
@@ -248,9 +248,9 @@ class Proceso {
     }
 
     async getCliente ({request, response, session}) {
-        
+
         var identificador = request.input("identificador")
-        
+
         var obj = {
             "identificador":identificador
         };
@@ -262,9 +262,9 @@ class Proceso {
     }
 
     async deleteVenta ({request, response}) {
-        
+
         var idVenta = request.input("idVenta");
-        
+
         var obj = {
             "idVenta": idVenta
         };
@@ -275,11 +275,11 @@ class Proceso {
     }
 
     async getProductoPos ({view,request, response, auth, session}) {
-        
+
         var idProducto = request.input("idProducto");
         var nombre = request.input("nombre");
         var marca = request.input("marca");
-        
+
         var obj = {
             ean:idProducto,
             idPuntoDeVenta: session.get("idPuntoDeVenta"),
@@ -294,9 +294,9 @@ class Proceso {
     }
 
     async getCatalogoProductos ({request, response, session}) {
-        
+
         var idProducto = request.input("idProducto")
-        
+
         var obj = {
             "idProducto":idProducto
         };
