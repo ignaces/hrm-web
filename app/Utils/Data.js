@@ -16,7 +16,7 @@ module.exports = {
             cliente = "localhost";
         }
         obj.cliente = cliente;
-        
+
         var result = await got(`${server}${method}`,
         {
             json:true,
@@ -32,7 +32,7 @@ module.exports = {
 
         var cliente = hostname.split(".")[0]
         obj.cliente = cliente;
-       
+
         var result = await got(`${server}${method}`,
         {
             json:true,
@@ -44,7 +44,7 @@ module.exports = {
     },
 
     execApiPost: async (hostname,method,obj)=>{
-        
+
         var server = Env.get('API_SERVER', 'development')
         var alias = Env.get('HOSTALIAS', 'localhost')
 
@@ -53,7 +53,7 @@ module.exports = {
             cliente = "localhost";
         }
         obj.cliente = cliente;
-        
+
         var result = await got.post(`${server}${method}`,
         {
             json:true,

@@ -50,7 +50,8 @@ class Proceso {
         /*
         var obj = {
             "idProceso":idProceso,
-            "idPersona": idPersona
+            "idPersona": idPersona/
+
         };
         */
         //var result = await data.execApi(request.hostname(),'/Acreditacion/Proceso/getPersonasEvaluaciones',obj);
@@ -94,6 +95,7 @@ class Proceso {
 
         return view.render('incentivo/proceso/catalogo');
     }
+
     async cardex ({view,request, response, auth, session}) {
 
         var idPersona = session.get('idPersona', 'fail')

@@ -4,6 +4,10 @@
   <div class="col-lg">
     <div class="card-box">
       <h4 class="m-t-0 header-title"><b>Catalogo de Productos</b></h4>
+      <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#nuevo-producto" onclick="nuevoProducto()">Crear un nuevo producto</button>
+
+      <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#masivos-producto">Carga masiva de productos</button>
+
 
       <div class="table-responsive">
 
@@ -24,29 +28,154 @@
 </div>
 
 
-<!-- Modal -->
+<!-- Modal para ver productos -->
 <div class="modal fade" id="panel-catalogo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog" role="document" style="width:60vw;">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <h5 class="modal-title" id="exampleModalLongTitle">Editar Producto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <div id="detail_product">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+
+        <div id="table" class="table-editable">
+          <table class="table" id="detail_product">
+          </table>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary">Guardar cambios</button>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
 
+
+<div class="modal fade" id="nuevo-producto" tabindex="-1" role="dialog" aria-labelledby="111" aria-hidden="true">
+  <div class="modal-dialog" role="document" style="width:60vw;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Crear nuevo producto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <!--<form onsubmit='return onSubmit(this)'>-->
+        <form id="form-nuevo-producto">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Nombre</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" name="product-name" placeholder="Producto">
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputEmail1">Código interno</label>
+            <input type="number" class="form-control" id="exampleInputEmail1" name="product-code" placeholder="Producto">
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputPassword1">Precio</label>
+            <input type="number" class="form-control" id="exampleInputPassword1" name="product-price" placeholder="99999">
+          </div>
+
+          <div class="form-group">
+            <label for="sel-fam">Marca:</label>
+            <select class="form-control" name="product-brand" id="sel-mar">
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="sel-fam">Familia:</label>
+            <select class="form-control" name="product-fam" id="sel-fam">
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="sel-env">Envase:</label>
+            <select class="form-control" name="product-env" id="sel-env">
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="sel-rub">Rubro:</label>
+            <select class="form-control" name="product-rub" id="sel-rub">
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="sel-var">Variedad:</label>
+            <select class="form-control" name="product-var" id="sel-var">
+            </select>
+          </div>
+
+          <button class="btn btn-default" type="submit">Crear nuevo producto</button>
+        </form>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="masivos-producto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Carga masiva de productos</h4>
+      </div>
+      <div class="modal-body">
+        <div class="fileinput fileinput-new" data-provides="fileinput">
+            <span class="btn btn-default btn-file"><span>Seleccionar archivo</span><input type="file" /></span>
+            <span class="fileinput-filename"></span><span class="fileinput-new">No hay archivo seleccionado</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary">Cargar archivo</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
+
+
+  function loadNewProductForm() {
+    $('#form-nuevo-producto').on('submit', function(e) {
+
+        e.preventDefault();
+
+        var formData = new FormData(this);
+
+        $.ajax({
+            method:'POST',
+            url: "http://localhost:3335/Incentivos/Incentivos/addProduct_CG",
+            data:formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+                alert(data);
+                location.reload();
+            },
+            error: function(data){
+                alert('bad');
+            }
+        });
+    });
+  }
+
 
   function cleanModal()
   {
@@ -54,6 +183,8 @@
   }
   function muestraDetalle(id)
   {
+
+    var event_data = '';
 
     $.ajax({
       url: "http://localhost:3335/Incentivos/Incentivos/getProductos_CG?idProducto=" + id,
@@ -63,13 +194,13 @@
       success: function(response){
 
         var value = response[0];
-        var event_data = '';
 
-        event_data += '<div class="name">nombre: '+value.nombre+'</div>';
-        event_data += '<div class="code">sku: '+value.sku+'</div>';
-        event_data += '<div class="precio">precio: '+value.precio+'</div>';
+        event_data += '<tr><th>SKU</th><th>Nombre</th><th>Precio</th><th>Envase</th><th>Variedad</th><th>Familia</th><th>Rubro</th></tr>';
 
-        $('#detail_product').html(event_data);
+        event_data += '<tr>';
+        event_data += '<td contenteditable="true">'+value.sku+'</td>';
+        event_data += '<td contenteditable="true">'+value.nombre+'</td>';
+        event_data += '<td contenteditable="true">'+value.precio+'</td>';
 
         $.ajax({
           url: "http://localhost:3335/Incentivos/Incentivos/getAttrProductos_CG?idProducto=" + id,
@@ -78,26 +209,28 @@
           cache: false,
           success: function(response){
 
-            var event_data = '';
-
             $.each(response, function(index, value){
-              event_data += '<div class="name">'+value.clasificacion+': ' + value.categoria +'</div>';
+              event_data += '<td contenteditable="true">'+value.categoria+'</td>';
             });
 
-            $('#detail_product').append(event_data);
+            event_data += '</tr>';
+
+            $('#detail_product').html(event_data);
           },
           error: function(d){
             /*console.log("error");*/
-            alert("404. Please wait until the File is Loaded.");
+            alert("404");
           }
         });
+
+
+
       },
       error: function(d){
         /*console.log("error");*/
-        alert("404. Please wait until the File is Loaded.");
+        alert("404");
       }
     });
-
 
 
     $("#panel-catalogo").modal("show");
@@ -106,7 +239,7 @@
   function cargarProductos()
   {
     $.ajax({
-      url: "http://localhost:3335/Incentivos/Incentivos/getProductos_CG",
+      url: "http://localhost:3335/Incentivos/Incentivos/getProductos2_CG",
       dataType: 'json',
       type: 'get',
       cache: false,
@@ -130,7 +263,115 @@
     });
   }
 
-  window.onload = cargarProductos;
+  function nuevoProducto()
+  {
+    $.ajax({
+      url: "http://localhost:3335/Incentivos/Incentivos/getParams_CG?param=" + "FAM",
+      dataType: 'json',
+      type: 'get',
+      cache: true,
+      success: function(response){
+        var fam_event = '';
+        $.each(response, function(index, value){
+          fam_event += '<option>'+value.nombre+'</option>';
+        });
+        $("#sel-fam").html(fam_event);
+
+
+        $.ajax({
+          url: "http://localhost:3335/Incentivos/Incentivos/getParams_CG?param=" + "VAR",
+          dataType: 'json',
+          type: 'get',
+          cache: true,
+          success: function(response){
+            var var_event = '';
+            $.each(response, function(index, value){
+              var_event += '<option>'+value.nombre+'</option>';
+            });
+            $("#sel-var").html(var_event);
+
+
+            $.ajax({
+              url: "http://localhost:3335/Incentivos/Incentivos/getParams_CG?param=" + "ENV",
+              dataType: 'json',
+              type: 'get',
+              cache: true,
+              success: function(response){
+                var env_event = '';
+                $.each(response, function(index, value){
+                  env_event += '<option>'+value.nombre+'</option>';
+                });
+                $("#sel-env").html(env_event);
+
+
+                $.ajax({
+                  url: "http://localhost:3335/Incentivos/Incentivos/getParams_CG?param=" + "RUB",
+                  dataType: 'json',
+                  type: 'get',
+                  cache: true,
+                  success: function(response){
+                    var rub_event = '';
+                    $.each(response, function(index, value){
+                      rub_event += '<option>'+value.nombre+'</option>';
+                    });
+                    $("#sel-rub").html(rub_event);
+
+
+                    $.ajax({
+                      url: "http://localhost:3335/Incentivos/Incentivos/getParams_CG?param=" + "MAR",
+                      dataType: 'json',
+                      type: 'get',
+                      cache: true,
+                      success: function(response){
+                        var mar_event = '';
+                        $.each(response, function(index, value){
+                          mar_event += '<option>'+value.nombre+'</option>';
+                        });
+                        $("#sel-mar").html(mar_event);
+
+
+                      },
+                      error: function(d){
+                        /*console.log("error");*/
+                        alert("404");
+                      }
+                    });
+
+
+                  },
+                  error: function(d){
+                    /*console.log("error");*/
+                    alert("404");
+                  }
+                });
+              },
+              error: function(d){
+                /*console.log("error");*/
+                alert("404");
+              }
+            });
+          },
+          error: function(d){
+            /*console.log("error");*/
+            alert("404");
+          }
+        });
+
+      },
+      error: function(d){
+        /*console.log("error");*/
+        alert("404");
+      }
+    });
+
+  }
+
+  function init(){
+    cargarProductos();
+    loadNewProductForm();
+  }
+
+  window.onload = init;
 
 </script>
 
