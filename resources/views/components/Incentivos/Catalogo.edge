@@ -6,7 +6,7 @@
       <h4 class="m-t-0 header-title"><b>Catalogo de Productos</b></h4>
       <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#nuevo-producto" onclick="nuevoProducto()">Crear un nuevo producto</button>
 
-      <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#masivos-producto">Carga masiva de productos</button>
+{{--       <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#masivos-producto">Carga masiva de productos</button> --}}
 
 
       <div class="table-responsive">
@@ -33,7 +33,7 @@
   <div class="modal-dialog" role="document" style="width:60vw;">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Editar Producto</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Ver Producto</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -55,7 +55,7 @@
 </div>
 
 
-
+<!-- modal para crear un producto -->
 <div class="modal fade" id="nuevo-producto" tabindex="-1" role="dialog" aria-labelledby="111" aria-hidden="true">
   <div class="modal-dialog" role="document" style="width:60vw;">
     <div class="modal-content">
@@ -126,7 +126,7 @@
 </div>
 
 
-<!-- Modal -->
+<!-- Modal para carga masiva - Integrar con API + Webservice Talend -->
 <div class="modal fade" id="masivos-producto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">

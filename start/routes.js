@@ -52,8 +52,6 @@ Route.get('/Encuesta/Instrumento/putRespuesta','Encuesta/Instrumento.putRespuest
 Route.get('/Encuesta/Instrumento/cerrarInstrumento','Encuesta/Instrumento.cerrarInstrumento')
 Route.get('/Encuesta/Encuesta/fin','Encuesta/Encuesta.fin')
 
-Route.get('/Metas/metas', '/Meta/meta.intro')
-
 Route.any('/:module/:controller/:action',  ({view ,request, response,params,auth, session}) => {
 
     const module = params.module
