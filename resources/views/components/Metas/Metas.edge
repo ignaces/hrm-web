@@ -1,0 +1,206 @@
+<div class="row">
+  <div class="col-lg">
+    <div class="card-box">
+      <h4 class="m-t-3 header-title"><b>Metas</b></h4>
+
+      <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#nuevas-metas" onclick="cargarAtributosMetas()">Cargar planilla de metas</button>
+
+      <div class="table-responsive">
+
+        <table class="table table-responsive table-hover table-bordered" id="list_products">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Meta</th>
+                    <th>Válida hasta</th>
+                </tr>
+            </thead>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="nuevas-metas" tabindex="-1" role="dialog" aria-labelledby="111" aria-hidden="true">
+  <div class="modal-dialog" role="document" style="width:60vw;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Cargar nuevas metas</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form id="form-nuevas-metas">
+          <div class="form-group">
+            <label for="goal-name">Identificador</label>
+            <input type="text" class="form-control" id="goal-name" name="goal-name" placeholder="Producto">
+          </div>
+
+
+          <div class="form-group">
+            <label for="sel-per">Período:</label>
+            <select class="form-control" name="goal-lapse" id="sel-per">
+            </select>
+          </div>
+
+
+          <div class="form-group">
+            <label for="sel-tab">Tabla:</label>
+            <select class="form-control" name="goal-table" id="sel-tab">
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="sel-tip">Tipo:</label>
+            <select class="form-control" name="goal-type" id="sel-tip">
+            </select>
+          </div>
+
+          <div class="fileinput fileinput-new" data-provides="fileinput">
+              <span class="btn btn-default btn-file"><span>Seleccionar archivo de metas</span><input type="file" name="goal-file" /></span>
+              <span class="fileinput-filename"></span><span class="fileinput-new">No hay archivo seleccionado</span>
+          </div>
+
+
+          <button class="btn btn-default m-t-5" type="submit">Cargar planilla de metas</button>
+        </form>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  function cargarMetas()
+  {
+    $.ajax({
+      url: "http://localhost:3335/Incentivos/Incentivos/getMetas_CG",
+      dataType: 'json',
+      type: 'get',
+      cache: false,
+      success: function(data){
+        /*console.log(data);*/
+        var event_data = '';
+        $.each(data, function(index, value){
+          /*console.log(valu e);*/
+          event_data += '<tr onclick=\"cleanModal();muestraDetalle(' + "'" + value.id + "'" + ')\">';
+          event_data += '<td>'+value.nombre+'</td>';
+          event_data += '<td>'+value.metaTotal+'</td>';
+          event_data += '<td>'+value.hasta+'</td>';
+          event_data += '</tr>';
+        });
+        $("#list_products").append(event_data);
+      },
+      error: function(d){
+        /*console.log("error");*/
+        alert("404. Please wait until the File is Loaded.");
+      }
+    });
+  }
+
+  function cargarAtributosMetas()
+  {
+    $.ajax({
+      url: "http://localhost:3335/Incentivos/Incentivos/getMetasAttr_CG?param=" + "PER",
+      dataType: 'json',
+      type: 'get',
+      cache: true,
+      success: function(response){
+        var per_event = '';
+        $.each(response, function(index, value) {
+          per_event += '<option>'+value.nombre+'</option>';
+        });
+        $("#sel-per").html(per_event);
+
+
+        $.ajax({
+          url: "http://localhost:3335/Incentivos/Incentivos/getMetasAttr_CG?param=" + "TAB",
+          dataType: 'json',
+          type: 'get',
+          cache: true,
+          success: function(response){
+            var tab_event = '';
+            $.each(response, function(index, value) {
+              tab_event += '<option>'+value.nombre+'</option>';
+            });
+            $("#sel-tab").html(tab_event);
+
+
+            $.ajax({
+              url: "http://localhost:3335/Incentivos/Incentivos/getMetasAttr_CG?param=" + "TIP",
+              dataType: 'json',
+              type: 'get',
+              cache: true,
+              success: function(response){
+                var tip_event = '';
+                $.each(response, function(index, value) {
+                  tip_event += '<option>'+value.nombre+'</option>';
+                });
+                $("#sel-tip").html(tip_event);
+
+              },
+              error: function(d){
+                /*console.log("error");*/
+                alert("404");
+              }
+            });
+
+          },
+          error: function(d){
+            /*console.log("error");*/
+            alert("404");
+          }
+        });
+
+
+      },
+      error: function(d){
+        /*console.log("error");*/
+        alert("404");
+      }
+    });
+  }
+
+  function precargaEnvioMetas() {
+
+    $('#form-nuevas-metas').on('submit', function(e) {
+
+        e.preventDefault();
+
+        var formData = new FormData(this);
+
+        $.ajax({
+            url: "", /* Agregar servicio de WS Talend aquí*/
+            type: 'POST',
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            enctype: 'multipart/form-data',
+            processData: false,
+            success:function(data){
+                alert(data);
+                location.reload();
+            },
+            error: function(data){
+                alert('bad');
+            }
+        });
+    });
+  }
+
+  function init(){
+    cargarMetas();
+    precargaEnvioMetas();
+  }
+
+  window.onload = init;
+
+</script>

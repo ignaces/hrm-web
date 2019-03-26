@@ -13,8 +13,8 @@
         <!-- App favicon -->
         <link rel="shortcut icon" href="{{theme(request.hostname())}}/assets/images/logo_sm.png">
          @!section('pluginsCss')
-    
-        
+
+
         <link href="{{theme(request.hostname())}}/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="{{theme(request.hostname())}}/assets/css/core.css" rel="stylesheet" type="text/css" />
         <link href="{{theme(request.hostname())}}/assets/css/components.css" rel="stylesheet" type="text/css" />
@@ -29,16 +29,16 @@
   </head>
 
   <body>
-    
+
       <!-- Navigation Bar-->
         <header id="topnav">
             <div class="topbar-main">
                 <div class="container">
 
-                    
 
 
-                    
+
+
 
                 </div> <!-- end container -->
             </div>
@@ -62,38 +62,41 @@
 
                     </div>
                     <!-- End Logo container-->
-                    
+
                     <div id="navigation">
                         <!-- Navigation Menu-->
                         <ul class="navigation-menu">
                             @loggedIn
-                             
+
                             <li class="has-submenu">
                                 <a href="/"><i class="fi-air-play"></i><span>Inicio</span></a>
                             </li>
                             <li class="has-submenu">
                                 <a href="/Incentivo/Proceso/cardex"><i class="fi-head"></i><span>Cardex</span></a>
                             </li>
-                           <!-- <li class="has-submenu">
+                            <li class="has-submenu">
                                 <a href="/Incentivo/Proceso/catalogo"><i class="fi-book"></i><span>Catálogo</span></a>
-                            </li>-->
+                            </li>
+                            <li class="has-submenu">
+                                <a href="/Meta/meta/intro"><i class="fi-book"></i><span>Metas</span></a>
+                            </li>
                             @include('partials/menu')
                              @endloggedIn
                             <!--<li class="has-submenu">
                                 <a href="/Administracion/administracion/administrador"><i class="fi-briefcase"></i><span>Administrador</span></a>
-                                
+
                             </li>-->
 
-                            
+
 
                             <!--<li class="has-submenu">
                                 <a href="/Rrhh/rrhh/reporte"><i class="fi-paper"></i><span>Reportes</span></a>
-                                
+
                             </li>-->
 
-                            
 
-                            
+
+
 
                         </ul>
                         <!-- End navigation menu -->
@@ -109,7 +112,7 @@
                                 </form>
                             </li>-->
 
-                            
+
                             @loggedIn
                              <li class="dropdown navbar-c-items">
                                 <a href="" class="dropdown-toggle waves-effect profile" data-toggle="dropdown" aria-expanded="true"><img src="/assets/images/users/businesswoman.svg" alt="user-img" class="img-circle"> </a>
@@ -121,9 +124,9 @@
 
                             </li>
                             @else
-                             <li><a href="/login">Login</a></li>   
+                             <li><a href="/login">Login</a></li>
                             @endloggedIn
-                            
+
                         </ul>
                         <div class="menu-item">
                             <!-- Mobile menu toggle-->
@@ -146,21 +149,21 @@
 
         <div class="wrapper">
             <div class="container">
-                       
+
                          @!section('content')
-    
-                        
-							
-						
+
+
+
+
 
 
                     </div> <!-- container -->
 
                 </div> <!-- content -->
-                
+
                 <footer class="footer text-left">
                       <img src="{{theme(request.hostname())}}/assets/images/innovum_logo.png" alt="" height="50">
-                       2018 © 
+                       2018 ©
                 </footer>
 
             </div>
@@ -176,7 +179,7 @@
 
 
 
-    
+
       <script>
             var resizefunc = [];
         </script>
@@ -189,7 +192,7 @@
         <script src="/assets/js/jquery.slimscroll.js"></script>
         <script src="/assets/plugins/bootstrap-select/js/bootstrap-select.min.js" type="text/javascript"></script>
         <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
-         
+
         @!section('scripts2')
 
         <!-- App js -->
@@ -198,7 +201,7 @@
         <script src="/assets/plugins/tooltipster/tooltipster.bundle.min.js"></script>
         <script src="/themes/horizontal/assets/js/modernizr.min.js"></script>
 
-        
+
 
         <script>
         $(document).ready(()=>{
@@ -212,4 +215,4 @@
 
 
 
- 
+

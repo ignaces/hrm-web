@@ -1,262 +1,378 @@
+
+
 <div class="row">
-                            <div class="col-lg-6">
-                                <div class="card-box">
-                                    <h4 class="m-t-0 header-title"><b>Catalogo de Productos</b></h4>
-                                    
-                                    <div class="table-responsive">
-                                        <table class="table table-hover m-0 mails table-actions-bar">
+  <div class="col-lg">
+    <div class="card-box">
+      <h4 class="m-t-0 header-title"><b>Catalogo de Productos</b></h4>
+      <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#nuevo-producto" onclick="nuevoProducto()">Crear un nuevo producto</button>
 
-                                            <thead>
-                                            <tr>
-                                                <th>Producto</th>
-                                                <!--th>Punto de Venta</th-->
-                                                <th>Valor</th>
-                                                <th></th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr onclick="muestraDetalle(1);">
-                                                <td>
-                                                    <img src="https://png.pngtree.com/element_origin_min_pic/16/07/05/21577bb0a19eea9.jpg" alt="contact-img" title="contact-img" class="img-circle thumb-sm" />
-                                                </td>
-
-                                                <td>
-                                                    <h5 class="m-b-0 m-t-0">Marca Perfume 1</h5>
-                                                    <p class="m-b-0"><small>Fragancia 1</small></p>
-                                                </td>
-
-                                                <!--td>
-                                                    <i class="mdi mdi-map-marker text-primary"></i> 
-                                                </td-->
-
-                                                <td>
-                                                    <i class="mdi mdi-currency-usd text-warning"></i> 50.000
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-
-                                                    <img src="https://png.pngtree.com/element_origin_min_pic/16/07/05/21577bb0a19eea9.jpg" alt="contact-img" title="contact-img" class="img-circle thumb-sm" />
-                                                </td>
-
-                                                <td>
-                                                    <h5 class="m-b-0 m-t-0">Marca Perfume 2</h5>
-                                                    <p class="m-b-0"><small>Fragancia 2</small></p>
-                                                </td>
-
-                                                <!--td>
-                                                    <i class="mdi mdi-map-marker text-primary"></i> 
-                                                </td-->
-
-                                                <td>
-                                                    <i class="mdi mdi-currency-usd text-warning"></i> 80.000
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <img src="https://png.pngtree.com/element_origin_min_pic/16/07/05/21577bb0a19eea9.jpg" alt="contact-img" title="contact-img" class="img-circle thumb-sm" />
-                                                </td>
-
-                                                <td>
-                                                    <h5 class="m-b-0 m-t-0">Marca Perfume 3</h5>
-                                                    <p class="m-b-0"><small>Fragancia 3</small></p>
-                                                </td>
-
-                                                <!--td>
-                                                    <i class="mdi mdi-map-marker text-primary"></i> 
-                                                </td-->
-
-                                                <td>
-                                                    <i class="mdi mdi-currency-usd text-warning"></i> 20.000
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-
-                                                    <img src="https://png.pngtree.com/element_origin_min_pic/16/07/05/21577bb0a19eea9.jpg" alt="contact-img" title="contact-img" class="img-circle thumb-sm" />
-                                                </td>
-
-                                                <td>
-                                                    <h5 class="m-b-0 m-t-0">Marca Perfume 1</h5>
-                                                    <p class="m-b-0"><small>Fragancia 1</small></p>
-                                                </td>
-
-                                                <!--td>
-                                                    <i class="mdi mdi-map-marker text-primary"></i> 
-                                                </td-->
-
-                                                <td>
-                                                    <i class="mdi mdi-currency-usd text-warning"></i> 50.000
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-
-                                                    <img src="https://png.pngtree.com/element_origin_min_pic/16/07/05/21577bb0a19eea9.jpg" alt="contact-img" title="contact-img" class="img-circle thumb-sm" />
-                                                </td>
-
-                                                <td>
-                                                    <h5 class="m-b-0 m-t-0">Marca Perfume 2</h5>
-                                                    <p class="m-b-0"><small>Fragancia 2</small></p>
-                                                </td>
-
-                                                <!--td>
-                                                    <i class="mdi mdi-map-marker text-primary"></i> 
-                                                </td-->
-
-                                                <td>
-                                                    <i class="mdi mdi-currency-usd text-warning"></i> 80.000
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <img src="https://png.pngtree.com/element_origin_min_pic/16/07/05/21577bb0a19eea9.jpg" alt="contact-img" title="contact-img" class="img-circle thumb-sm" />
-                                                </td>
-
-                                                <td>
-                                                    <h5 class="m-b-0 m-t-0">Marca Perfume 3</h5>
-                                                    <p class="m-b-0"><small>Fragancia 3</small></p>
-                                                </td>
-
-                                                <!--td>
-                                                    <i class="mdi mdi-map-marker text-primary"></i> 
-                                                </td-->
-
-                                                <td>
-                                                    <i class="mdi mdi-currency-usd text-warning"></i> 20.000
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-
-                                                    <img src="https://png.pngtree.com/element_origin_min_pic/16/07/05/21577bb0a19eea9.jpg" alt="contact-img" title="contact-img" class="img-circle thumb-sm" />
-                                                </td>
-
-                                                <td>
-                                                    <h5 class="m-b-0 m-t-0">Marca Perfume 1</h5>
-                                                    <p class="m-b-0"><small>Fragancia 1</small></p>
-                                                </td>
-
-                                                <!--td>
-                                                    <i class="mdi mdi-map-marker text-primary"></i> 
-                                                </td-->
-
-                                                <td>
-                                                    <i class="mdi mdi-currency-usd text-warning"></i> 50.000
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-
-                                                    <img src="https://png.pngtree.com/element_origin_min_pic/16/07/05/21577bb0a19eea9.jpg" alt="contact-img" title="contact-img" class="img-circle thumb-sm" />
-                                                </td>
-
-                                                <td>
-                                                    <h5 class="m-b-0 m-t-0">Marca Perfume 2</h5>
-                                                    <p class="m-b-0"><small>Fragancia 2</small></p>
-                                                </td>
-
-                                                <!--td>
-                                                    <i class="mdi mdi-map-marker text-primary"></i> 
-                                                </td-->
-
-                                                <td>
-                                                    <i class="mdi mdi-currency-usd text-warning"></i> 80.000
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <img src="https://png.pngtree.com/element_origin_min_pic/16/07/05/21577bb0a19eea9.jpg" alt="contact-img" title="contact-img" class="img-circle thumb-sm" />
-                                                </td>
-
-                                                <td>
-                                                    <h5 class="m-b-0 m-t-0">Marca Perfume 3</h5>
-                                                    <p class="m-b-0"><small>Fragancia 3</small></p>
-                                                </td>
-
-                                                <!--td>
-                                                    <i class="mdi mdi-map-marker text-primary"></i> 
-                                                </td-->
-
-                                                <td>
-                                                    <i class="mdi mdi-currency-usd text-warning"></i> 20.000
-                                                </td>
-                                            </tr>
+{{--       <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#masivos-producto">Carga masiva de productos</button> --}}
 
 
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+      <div class="table-responsive">
 
-                            </div>
-                            <!-- end col -->
-                        </div>
+        <table class="table table-responsive table-hover table-bordered" id="list_products">
+            <thead>
+                <tr>
+                    <th>SKU</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                </tr>
+            </thead>
+        </table>
 
-                                    <div id="panel-catalogo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content p-0 b-0">
-                                                <div class="panel panel-color panel-success">
-                                                    <div class="panel-heading">
-                                                        <!--button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button-->
-                                                        <h3 class="panel-title">Perfume X</h3>
-                                                    </div>
-                                                    <div class="panel-body">
-                                                        <div class="col-lg-12">
-                                                            <center>
-                                                                <img src="https://png.pngtree.com/element_origin_min_pic/16/07/05/21577bb0a19eea9.jpg" alt="image" class="img-responsive img-circle align-center" width="120"> 
-                                                            </center>
-                                                        </div>
 
-                                                        <div class="col-lg-12">
-                                                            <p>
-                                                                <h3>Perfume X</h3>
-                                                                <p>
-                                                                    Fragancia Y
-                                                                </p>
-                                                            </p>
-                                                        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-                                                        <div class="col-lg-12">
-                                                            <p>
-                                                                MLs disponibles: 30, 50, 100, 180.
-                                                            </p>
-                                                        </div>
-                                                        
-                                                        <div class="col-lg-12">
-                                                            &nbsp;
-                                                        </div>
 
-                                                        <div class="col-lg-12">
-                                                            <p>
-                                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                                            </p>
-                                                        </div>
+<!-- Modal para ver productos -->
+<div class="modal fade" id="panel-catalogo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document" style="width:60vw;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Ver Producto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
 
-                                                        <div class="col-lg-12">
-                                                            &nbsp;
-                                                        </div>
+        <div id="table" class="table-editable">
+          <table class="table" id="detail_product">
+          </table>
+        </div>
 
-                                                        <div class="inbox-widget">
-                                                            <a class="btn btn-danger btn-rounded btn-block" name="#" data-dismiss="modal"><i class="fa fa-close"></i> <span>Cerrar</span> </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div><!-- /.modal-content -->
-                                            
-                                        </div><!-- /.modal-dialog -->
-                                
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary">Guardar cambios</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
+
+<!-- modal para crear un producto -->
+<div class="modal fade" id="nuevo-producto" tabindex="-1" role="dialog" aria-labelledby="111" aria-hidden="true">
+  <div class="modal-dialog" role="document" style="width:60vw;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Crear nuevo producto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <!--<form onsubmit='return onSubmit(this)'>-->
+        <form id="form-nuevo-producto">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Nombre</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" name="product-name" placeholder="Producto">
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputEmail1">Código interno</label>
+            <input type="number" class="form-control" id="exampleInputEmail1" name="product-code" placeholder="Producto">
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputPassword1">Precio</label>
+            <input type="number" class="form-control" id="exampleInputPassword1" name="product-price" placeholder="99999">
+          </div>
+
+          <div class="form-group">
+            <label for="sel-fam">Marca:</label>
+            <select class="form-control" name="product-brand" id="sel-mar">
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="sel-fam">Familia:</label>
+            <select class="form-control" name="product-fam" id="sel-fam">
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="sel-env">Envase:</label>
+            <select class="form-control" name="product-env" id="sel-env">
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="sel-rub">Rubro:</label>
+            <select class="form-control" name="product-rub" id="sel-rub">
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="sel-var">Variedad:</label>
+            <select class="form-control" name="product-var" id="sel-var">
+            </select>
+          </div>
+
+          <button class="btn btn-default" type="submit">Crear nuevo producto</button>
+        </form>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal para carga masiva - Integrar con API + Webservice Talend -->
+<div class="modal fade" id="masivos-producto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Carga masiva de productos</h4>
+      </div>
+      <div class="modal-body">
+        <div class="fileinput fileinput-new" data-provides="fileinput">
+            <span class="btn btn-default btn-file"><span>Seleccionar archivo</span><input type="file" /></span>
+            <span class="fileinput-filename"></span><span class="fileinput-new">No hay archivo seleccionado</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary">Cargar archivo</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
-    function muestraDetalle(id)
-    {
-        $("#panel-catalogo").modal("show");
-    }
-    
+
+
+  function loadNewProductForm() {
+    $('#form-nuevo-producto').on('submit', function(e) {
+
+        e.preventDefault();
+
+        var formData = new FormData(this);
+
+        $.ajax({
+            method:'POST',
+            url: "http://localhost:3335/Incentivos/Incentivos/addProduct_CG",
+            data:formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+                alert(data);
+                location.reload();
+            },
+            error: function(data){
+                alert('bad');
+            }
+        });
+    });
+  }
+
+
+  function cleanModal()
+  {
+    $('#detail_product').html('<div class="alert">cargando...</div>');
+  }
+  function muestraDetalle(id)
+  {
+
+    var event_data = '';
+
+    $.ajax({
+      url: "http://localhost:3335/Incentivos/Incentivos/getProductos_CG?idProducto=" + id,
+      dataType: 'json',
+      type: 'get',
+      cache: false,
+      success: function(response){
+
+        var value = response[0];
+
+        event_data += '<tr><th>SKU</th><th>Nombre</th><th>Precio</th><th>Envase</th><th>Variedad</th><th>Familia</th><th>Rubro</th></tr>';
+
+        event_data += '<tr>';
+        event_data += '<td contenteditable="true">'+value.sku+'</td>';
+        event_data += '<td contenteditable="true">'+value.nombre+'</td>';
+        event_data += '<td contenteditable="true">'+value.precio+'</td>';
+
+        $.ajax({
+          url: "http://localhost:3335/Incentivos/Incentivos/getAttrProductos_CG?idProducto=" + id,
+          dataType: 'json',
+          type: 'get',
+          cache: false,
+          success: function(response){
+
+            $.each(response, function(index, value){
+              event_data += '<td contenteditable="true">'+value.categoria+'</td>';
+            });
+
+            event_data += '</tr>';
+
+            $('#detail_product').html(event_data);
+          },
+          error: function(d){
+            /*console.log("error");*/
+            alert("404");
+          }
+        });
+
+
+
+      },
+      error: function(d){
+        /*console.log("error");*/
+        alert("404");
+      }
+    });
+
+
+    $("#panel-catalogo").modal("show");
+  }
+
+  function cargarProductos()
+  {
+    $.ajax({
+      url: "http://localhost:3335/Incentivos/Incentivos/getProductos2_CG",
+      dataType: 'json',
+      type: 'get',
+      cache: false,
+      success: function(data){
+        /*console.log(data);*/
+        var event_data = '';
+        $.each(data, function(index, value){
+          /*console.log(valu e);*/
+          event_data += '<tr onclick=\"cleanModal();muestraDetalle(' + "'" + value.id + "'" + ')\">';
+          event_data += '<td>'+value.sku+'</td>';
+          event_data += '<td>'+value.nombre+'</td>';
+          event_data += '<td>'+value.precio+'</td>';
+          event_data += '</tr>';
+        });
+        $("#list_products").append(event_data);
+      },
+      error: function(d){
+        /*console.log("error");*/
+        alert("404. Please wait until the File is Loaded.");
+      }
+    });
+  }
+
+  function nuevoProducto()
+  {
+    $.ajax({
+      url: "http://localhost:3335/Incentivos/Incentivos/getParams_CG?param=" + "FAM",
+      dataType: 'json',
+      type: 'get',
+      cache: true,
+      success: function(response){
+        var fam_event = '';
+        $.each(response, function(index, value){
+          fam_event += '<option>'+value.nombre+'</option>';
+        });
+        $("#sel-fam").html(fam_event);
+
+
+        $.ajax({
+          url: "http://localhost:3335/Incentivos/Incentivos/getParams_CG?param=" + "VAR",
+          dataType: 'json',
+          type: 'get',
+          cache: true,
+          success: function(response){
+            var var_event = '';
+            $.each(response, function(index, value){
+              var_event += '<option>'+value.nombre+'</option>';
+            });
+            $("#sel-var").html(var_event);
+
+
+            $.ajax({
+              url: "http://localhost:3335/Incentivos/Incentivos/getParams_CG?param=" + "ENV",
+              dataType: 'json',
+              type: 'get',
+              cache: true,
+              success: function(response){
+                var env_event = '';
+                $.each(response, function(index, value){
+                  env_event += '<option>'+value.nombre+'</option>';
+                });
+                $("#sel-env").html(env_event);
+
+
+                $.ajax({
+                  url: "http://localhost:3335/Incentivos/Incentivos/getParams_CG?param=" + "RUB",
+                  dataType: 'json',
+                  type: 'get',
+                  cache: true,
+                  success: function(response){
+                    var rub_event = '';
+                    $.each(response, function(index, value){
+                      rub_event += '<option>'+value.nombre+'</option>';
+                    });
+                    $("#sel-rub").html(rub_event);
+
+
+                    $.ajax({
+                      url: "http://localhost:3335/Incentivos/Incentivos/getParams_CG?param=" + "MAR",
+                      dataType: 'json',
+                      type: 'get',
+                      cache: true,
+                      success: function(response){
+                        var mar_event = '';
+                        $.each(response, function(index, value){
+                          mar_event += '<option>'+value.nombre+'</option>';
+                        });
+                        $("#sel-mar").html(mar_event);
+
+
+                      },
+                      error: function(d){
+                        /*console.log("error");*/
+                        alert("404");
+                      }
+                    });
+
+
+                  },
+                  error: function(d){
+                    /*console.log("error");*/
+                    alert("404");
+                  }
+                });
+              },
+              error: function(d){
+                /*console.log("error");*/
+                alert("404");
+              }
+            });
+          },
+          error: function(d){
+            /*console.log("error");*/
+            alert("404");
+          }
+        });
+
+      },
+      error: function(d){
+        /*console.log("error");*/
+        alert("404");
+      }
+    });
+
+  }
+
+  function init(){
+    cargarProductos();
+    loadNewProductForm();
+  }
+
+  window.onload = init;
+
 </script>
+
+
