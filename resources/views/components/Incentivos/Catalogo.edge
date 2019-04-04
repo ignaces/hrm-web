@@ -160,17 +160,17 @@
 
         $.ajax({
             method:'POST',
-            url: "http://localhost:3335/Incentivos/Incentivos/addProduct_CG",
+            url: "/Incentivo/Proceso/Incentivos/addProducto",
             data:formData,
             cache:false,
             contentType: false,
             processData: false,
             success:function(data){
-                alert(data);
+                alert(data.mensaje);
                 location.reload();
             },
             error: function(data){
-                alert('bad');
+                alert(data.mensaje);
             }
         });
     });
@@ -187,7 +187,7 @@
     var event_data = '';
 
     $.ajax({
-      url: "http://localhost:3335/Incentivos/Incentivos/getProductos_CG?idProducto=" + id,
+      url: "/Incentivo/Proceso/getProductoDetalle?idProducto=" + id,
       dataType: 'json',
       type: 'get',
       cache: false,
@@ -203,7 +203,7 @@
         event_data += '<td contenteditable="true">'+value.precio+'</td>';
 
         $.ajax({
-          url: "http://localhost:3335/Incentivos/Incentivos/getAttrProductos_CG?idProducto=" + id,
+          url: "/Incentivo/Proceso/getProductoAttrs?idProducto=" + id,
           dataType: 'json',
           type: 'get',
           cache: false,
@@ -239,7 +239,7 @@
   function cargarProductos()
   {
     $.ajax({
-      url: "http://localhost:3335/Incentivos/Incentivos/getProductos2_CG",
+      url: "/Incentivo/Proceso/getProductos",
       dataType: 'json',
       type: 'get',
       cache: false,
@@ -266,7 +266,7 @@
   function nuevoProducto()
   {
     $.ajax({
-      url: "http://localhost:3335/Incentivos/Incentivos/getParams_CG?param=" + "FAM",
+      url: "/Incentivo/Proceso/getProductosParams?param=" + "FAM",
       dataType: 'json',
       type: 'get',
       cache: true,
@@ -279,7 +279,7 @@
 
 
         $.ajax({
-          url: "http://localhost:3335/Incentivos/Incentivos/getParams_CG?param=" + "VAR",
+          url: "/Incentivo/Proceso/getProductosParams?param=" + "VAR",
           dataType: 'json',
           type: 'get',
           cache: true,
@@ -292,7 +292,7 @@
 
 
             $.ajax({
-              url: "http://localhost:3335/Incentivos/Incentivos/getParams_CG?param=" + "ENV",
+              url: "/Incentivo/Proceso/getProductosParams?param=" + "ENV",
               dataType: 'json',
               type: 'get',
               cache: true,
@@ -305,7 +305,7 @@
 
 
                 $.ajax({
-                  url: "http://localhost:3335/Incentivos/Incentivos/getParams_CG?param=" + "RUB",
+                  url: "/Incentivo/Proceso/getProductosParams?param=" + "RUB",
                   dataType: 'json',
                   type: 'get',
                   cache: true,
@@ -318,7 +318,7 @@
 
 
                     $.ajax({
-                      url: "http://localhost:3335/Incentivos/Incentivos/getParams_CG?param=" + "MAR",
+                      url: "/Incentivo/Proceso/getProductosParams?param=" + "MAR",
                       dataType: 'json',
                       type: 'get',
                       cache: true,
