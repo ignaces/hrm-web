@@ -81,7 +81,7 @@
   function cargarMetas()
   {
     $.ajax({
-      url: "http://localhost:3335/Incentivos/Incentivos/getMetas_CG",
+      url: "/Incentivo/Proceso/getMetas",
       dataType: 'json',
       type: 'get',
       cache: false,
@@ -108,7 +108,7 @@
   function cargarAtributosMetas()
   {
     $.ajax({
-      url: "http://localhost:3335/Incentivos/Incentivos/getMetasAttr_CG?param=" + "PER",
+      url: "/Incentivo/Proceso/getMetasAttrs?param=" + "PER",
       dataType: 'json',
       type: 'get',
       cache: true,
@@ -121,7 +121,7 @@
 
 
         $.ajax({
-          url: "http://localhost:3335/Incentivos/Incentivos/getMetasAttr_CG?param=" + "TAB",
+          url: "/Incentivo/Proceso/getMetasAttrs?param=" + "TAB",
           dataType: 'json',
           type: 'get',
           cache: true,
@@ -134,7 +134,7 @@
 
 
             $.ajax({
-              url: "http://localhost:3335/Incentivos/Incentivos/getMetasAttr_CG?param=" + "TIP",
+              url: "/Incentivo/Proceso/getMetasAttrs?param=" + "TIP",
               dataType: 'json',
               type: 'get',
               cache: true,

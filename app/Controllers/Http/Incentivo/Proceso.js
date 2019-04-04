@@ -308,6 +308,114 @@ class Proceso {
 
         response.json(personas);
     }
+
+    // catálogo productos ->
+    //
+    async getProductos ({request, response, session}) {
+
+      var result = await data.execApi(request.hostname(),'/Incentivos/Incentivos/getProductos2_CG', { });
+
+      var returning = result.body;
+      response.json(returning);
+    }
+
+    async getProductoDetalle ({request, response, session}) {
+
+      var idQS = request.input("idProducto");
+      var obj = {
+        "idProducto": idQS
+      };
+
+      var result = await data.execApi(request.hostname(),'/Incentivos/Incentivos/getProductos_CG', obj);
+
+      var returning = result.body;
+      response.json(returning);
+    }
+
+    async getProductoAttrs ({request, response, session}) {
+
+      var idQS = request.input("idProducto");
+      var obj = {
+        "idProducto": idQS
+      };
+
+      var result = await data.execApi(request.hostname(),'/Incentivos/Incentivos/getAttrProductos_CG', obj);
+
+      var returning = result.body;
+      response.json(returning);
+    }
+
+    async getProductosParams ({request, response, session}) {
+
+      var paramQS = request.input("param");
+      var obj = {
+        "param": paramQS
+      };
+
+      var result = await data.execApi(request.hostname(),'/Incentivos/Incentivos/getParams_CG', obj);
+
+      var returning = result.body;
+      response.json(returning);
+    }
+
+    async addProducto ({request, response, session}) {
+
+      var nombreQS = request.input('product-name');
+      var codigoQS = request.input('product-code');
+      var precioQS = request.input('product-price');
+      var marcaQS = request.input('product-brand');
+      var familiaQS = request.input('product-fam');
+      var envaseQS = request.input('product-env');
+      var rubroQS = request.input('product-rub');
+      var variedadQS = request.input('product-var');
+
+      var obj = {
+          "product-name": nombreQS,
+          "product-code": codigoQS,
+          "product-price": precioQS,
+          "product-brand": marcaQS,
+          "product-fam": familiaQS,
+          "product-env": envaseQS,
+          "product-rub": rubroQS,
+          "product-var": variedadQS
+      };
+
+      try
+        {
+          var result = await data.execApiPost(request.hostname(),'/Incentivos/Incentivos/addProduct_CG', obj);
+
+          return { mensaje: "Producto fue creado exitosamente." }
+        }
+      catch(err)
+        {
+          return { mensaje: "Producto no pudo ser creado. Verifique datos." }
+        }
+    }
+
+    // catalogo metas ->
+    //
+    async getMetas ({request, response, session}) {
+
+      var result = await data.execApi(request.hostname(),'/Incentivos/Incentivos/getMetas_CG', { });
+
+      var returning = result.body;
+      response.json(returning);
+    }
+
+    async getMetasAttrs ({request, response, session}) {
+
+      var paramQS = request.input("param");
+      var obj = {
+        "param": paramQS
+      };
+
+      var result = await data.execApi(request.hostname(),'/Incentivos/Incentivos/getMetasAttr_CG', obj);
+
+      var returning = result.body;
+      response.json(returning);
+
+    }
+
 }
 
 module.exports = Proceso
