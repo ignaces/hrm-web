@@ -90,7 +90,7 @@
                         success: function(data){
                             swal({
                                 title:'Exito',
-                                text:'Metas cargados.',
+                                text:'Metas cargadas.',
                                 type:'success'
                             })
                         },
@@ -217,7 +217,11 @@
                         oTable.fnAddData(data.metaDetalle);
                         oTable.fnDraw();
                     } else {
-                        alert('No hay metas');
+                        swal({
+                            title:'Error',
+                            text:'No existen metas para el periodo seleccionado.',
+                            type:'warning'
+                        })
                     }
                 }
             });      
