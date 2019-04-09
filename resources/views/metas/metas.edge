@@ -174,39 +174,47 @@
             init($("#perSelect").val());
         });
 
+        var oTable = $('#list_products').dataTable( {
+            data : {{{toJSON(metaDetalle)}}},
+            fixedColumns: true,
+            columnDefs: [
+                { "title": "Nombre", "targets": 0 },
+                { "title": "Punto Venta", "targets": 1 },
+                { "title": "Tipo", "targets": 2 },
+                { "title": "Precio", "targets": 3 },
+                { "title": "Marca", "targets": 4 },
+                { "title": "Acciones", "targets": 5 ,"width":"20%"}
+            ],
+            columns: [
+                {data : "nombreMeta"},
+                {data : "pvCodigo"},
+                {data : "tipoMeta"},
+                {data : "marcaNombre"},
+                {data : "valor"}  ,   
+                {data : "idMetaDetalle",
+                render: function ( data, type, full, meta ) {
+                        
+                        var edit ='<a href="#" class="btn btn-icon waves-effect waves-light btn-primary" onclick=\"cleanModal();muestraDetalle(' + "'" + full.idMetaDetalle + "'" + ')\" data-toggle="tooltip" data-placement="top" title data-original-title="Editar"> <i class="fa fa-edit-o"></i>Editar </a>&nbsp;'
+                        return  edit;
+                    }
+                }     
+            ],
+        });      
+
         function init(idPeriodo){
             $.ajax({
                 url: "/Meta/Meta/consulaMetasDetalles?idPeriodo=" + idPeriodo,
                 dataType: 'json',
                 type: 'get',
                 cache: false,
-                success: function(response){
-                    $('#list_products').dataTable( {
-                        data : {{{toJSON(metaDetalle)}}},
-                        fixedColumns: true,
-                        columnDefs: [
-                            { "title": "Nombre", "targets": 0 },
-                            { "title": "Punto Venta", "targets": 1 },
-                            { "title": "Tipo", "targets": 2 },
-                            { "title": "Precio", "targets": 3 },
-                            { "title": "Marca", "targets": 4 },
-                            { "title": "Acciones", "targets": 5 ,"width":"20%"}
-                        ],
-                        columns: [
-                            {data : "nombreMeta"},
-                            {data : "pvCodigo"},
-                            {data : "tipoMeta"},
-                            {data : "marcaNombre"},
-                            {data : "valor"}  ,   
-                            {data : "idMetaDetalle",
-                            render: function ( data, type, full, meta ) {
-                                    
-                                    var edit ='<a href="#" class="btn btn-icon waves-effect waves-light btn-primary" onclick=\"cleanModal();muestraDetalle(' + "'" + full.idMetaDetalle + "'" + ')\" data-toggle="tooltip" data-placement="top" title data-original-title="Editar"> <i class="fa fa-edit-o"></i>Editar </a>&nbsp;'
-                                    return  edit;
-                                }
-                            }     
-                        ],
-                    });      
+                success: function(data){
+                    if(data.metaDetalle.length>0){
+                        oTable.fnClearTable();
+                        oTable.fnAddData(data.metaDetalle);
+                        oTable.fnDraw();
+                    } else {
+                        alert('No hay metas');
+                    }
                 }
             });      
         }
