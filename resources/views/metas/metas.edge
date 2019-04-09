@@ -1,8 +1,134 @@
 @layout('layouts/horizontal')
 
+@section('pluginsCss2')
+    <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+@endsection
 
+@section('scripts')
+
+    <script type="text/javascript" src="/assets/plugins/xlsx/xlsx.full.min.js"></script>
+
+    <script>
+        var oFileIn;
+        var oJSVol;
+        var oJSMix;
+
+        var cForm = new Vue({
+            el: '#formulario',
+            data: {
+                resPER:{{{toJSON(resPER)}}},
+                resTAB:{{{toJSON(resTAB)}}},
+                resTIP:{{{toJSON(resTIP)}}},
+                accion:{
+                    identificador:'',
+                    per:'',
+                    tip:'',
+                    tab:'',
+                    cargaVolumen: [],
+                    cargaMix: []
+                }
+            },
+            methods:{
+                saveMeta:function(){
+                    var csrf = $('input[name=_csrf]').val();
+
+                    var obj = {
+                        accion:cForm.accion,
+                        _csrf:csrf
+                    };
+
+                    $.ajax({
+                        url: '/Meta/Meta/carga',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(obj),
+                        dataType: "json", 
+                        success: function(data){
+                            console.log('EXITO')
+                        },
+                        error: function(){
+                            console.log('ERRORS');
+                        }
+                    }); 
+
+                    $("#nuevas-metas").modal("hide");
+                }
+            }
+        });
+
+        $(function() {
+            oFileIn = document.getElementById('my_file_input');
+            if(oFileIn.addEventListener) {
+                oFileIn.addEventListener('change', filePicked, false);
+            }            
+        });
+
+        function filePicked(oEvent) {
+            var oFile = oEvent.target.files[0];
+            var sFilename = oFile.name;
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                var data = e.target.result;
+                var cfb = XLSX.read(data, {type: 'binary'});
+                var c = [];
+                var d = [];
+
+                oJSVol = XLS.utils.sheet_to_json(cfb.Sheets['Volumen']);   
+                oJSMix = XLS.utils.sheet_to_json(cfb.Sheets['Mix']);   
+                
+                for (var element in oJSVol){
+                    if(oJSVol[element].POS != undefined || oJSVol[element].PERIODO != undefined || oJSVol[element].DIA != undefined || oJSVol[element].VALOR != undefined) {
+                        c.push({
+                            POS:oJSVol[element].POS,
+                            PERIODO:oJSVol[element].PERIODO,
+                            DIA:oJSVol[element].DIA,
+                            VALOR:oJSVol[element].VALOR
+                        });                    
+                    }
+                };
+
+                for (var element in oJSMix){
+                    if(oJSMix[element].POS != undefined || oJSMix[element].PERIODO != undefined || oJSMix[element].MARCA != undefined || oJSMix[element].VALOR != undefined) {
+                        d.push({
+                            POS:oJSMix[element].POS,
+                            PERIODO:oJSMix[element].PERIODO,
+                            MARCA:oJSMix[element].MARCA,
+                            VALOR:oJSMix[element].VALOR
+                        });                    
+                    }
+                };
+
+                if(c.length > 0) {
+                    cForm.accion.cargaVolumen=c;
+                    cForm.accion.cargaMix=d;
+                } else{
+                    cForm.accion.cargaVolumen=[];
+                    cForm.accion.cargaMix=[];
+                }
+            };
+            reader.readAsBinaryString(oFile);
+        }   
+
+        $(document).ready(function(){
+            $("#btnNewMeta").click(function(){
+                cForm.accion={
+                    identificador:'',
+                    per:'',
+                    tip:'',
+                    tab:'',
+                    cargaVolumen: [],
+                    cargaMix: []
+                };
+
+                $("#nuevas-metas").modal("show");
+            });
+        });
+
+    </script>
+@endsection  
 @section('content')
-
+@!component('components.Metas.Metas')
     <!-- Begin page -->
         <div id="wrapper" style="margin-top: -70px; width: 100% !important;">
             <!-- ============================================================== -->
@@ -12,8 +138,29 @@
                 <!-- Start content -->
                 <div class="content">
                     <div class="container">
-
-                      @!component('components.Metas.Metas')
+                        {{ csrfField() }}
+                        <div class="row">
+                            <div class="col-lg">
+                                <div class="card-box">
+                                    <h4 class="m-t-3 header-title"><b>Metas</b></h4>
+                                
+                                    <button type="button" class="btn btn-warning" id="btnNewMeta">Cargar planilla de metas</button>
+                                
+                                    <div class="table-responsive">
+                                
+                                        <table class="table table-responsive table-hover table-bordered" id="list_products">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nombre</th>
+                                                    <th>Meta</th>
+                                                    <th>Válida hasta</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                     </div> <!-- container -->
                 </div> <!-- content -->
