@@ -327,7 +327,7 @@ class Proceso {
       };
 
       var result = await data.execApi(request.hostname(),'/Incentivos/Incentivos/getProductos_CG', obj);
-
+      
       var returning = result.body;
       response.json(returning);
     }
@@ -358,31 +358,16 @@ class Proceso {
       response.json(returning);
     }
 
-    async addProducto ({request, response, session}) {
+    async saveProducto ({request, response, session}) {
 
-      var nombreQS = request.input('product-name');
-      var codigoQS = request.input('product-code');
-      var precioQS = request.input('product-price');
-      var marcaQS = request.input('product-brand');
-      var familiaQS = request.input('product-fam');
-      var envaseQS = request.input('product-env');
-      var rubroQS = request.input('product-rub');
-      var variedadQS = request.input('product-var');
-
-      var obj = {
-          "product-name": nombreQS,
-          "product-code": codigoQS,
-          "product-price": precioQS,
-          "product-brand": marcaQS,
-          "product-fam": familiaQS,
-          "product-env": envaseQS,
-          "product-rub": rubroQS,
-          "product-var": variedadQS
-      };
+      var producto = request.input('producto');
+      var edit = request.input('edit');
+      
+      var obj={producto:producto,edit:edit}
 
       try
         {
-          var result = await data.execApiPost(request.hostname(),'/Incentivos/Incentivos/addProduct_CG', obj);
+          var result = await data.execApiPost(request.hostname(),'/Incentivos/Incentivos/saveProducto', obj);
 
           return { mensaje: "Producto fue creado exitosamente." }
         }
