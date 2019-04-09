@@ -51,9 +51,14 @@
         var resPER = {{{toJSON(resPER)}}};
 
         var cMetasDetalle = new Vue({
-            el: '#app',
+            el: '#formEdit',
             data: {
-                metas:{{{toJSON(metaDetalle)}}}
+                meta:[]
+            },
+            methods:{
+                saveMeta:function(){
+                    alert(1)
+                }
             }
         });
 
@@ -198,7 +203,7 @@
                 {data : "idMetaDetalle",
                 render: function ( data, type, full, meta ) {
                         
-                        var edit ='<a href="#" class="btn btn-icon waves-effect waves-light btn-primary" onclick=\"cleanModal();muestraDetalle(' + "'" + full.idMetaDetalle + "'" + ')\" data-toggle="tooltip" data-placement="top" title data-original-title="Editar"> <i class="fa fa-edit-o"></i>Editar </a>&nbsp;'
+                        var edit ='<a href="#" class="btn btn-icon waves-effect waves-light btn-primary" onclick="muestraDetalle(' + "'" + full.idMetaDetalle + "'" + ')" data-toggle="tooltip" data-placement="top" title data-original-title="Editar"> <i class="fa fa-edit-o"></i>Editar </a>&nbsp;'
                         return  edit;
                     }
                 }     
@@ -227,10 +232,15 @@
             });      
         }
 
+        function muestraDetalle(id){
+            $("#edit-metas").modal("show");
+        }
+
     </script>
 @endsection  
 @section('content')
 @!component('components.Metas.Metas')
+@!component('components.Metas.MetasEdit')
     <!-- Begin page -->
         <div id="wrapper" style="margin-top: -70px; width: 100% !important;">
             <!-- ============================================================== -->
