@@ -41,6 +41,7 @@ class UserController {
           try{
             var rUsuario = await data.execApi(request.hostname(),'/Core/Users/getMenuUser',{idUser:auth.user.id});
             var usuario = rUsuario.body.data;
+            
             session.put('usuario_roles_menu',usuario);
 
             
@@ -52,6 +53,9 @@ class UserController {
 
         }else{
           var persona = {cargo:"admin",nombres:"",apellidoPaterno:"",apellidoMaterno:"",imageUser:"/assets/images/icons/businessman.svg"}
+          var rUsuario = await data.execApi(request.hostname(),'/Core/Users/getMenuUser',{idUser:auth.user.id});
+            var usuario = rUsuario.body.data;
+            session.put('usuario_roles_menu',usuario);
           session.put('personaLogueada',persona);
           session.put('idPersona', "");
         }

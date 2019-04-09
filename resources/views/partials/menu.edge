@@ -1,6 +1,20 @@
 @each(pagina in request.session.get('usuario_roles_menu').menu)
-    
+    @if(pagina.hijos.length>0)
+    <li class="has-submenu">
+        <a href="#"><i class="{{pagina.iconClass}}"></i><span>{{pagina.label}}</span></a>
+        <ul class="submenu">
+        @each(hijo in pagina.hijos)
+            <li>
+            <a href="/{{hijo.modulo}}/{{hijo.controller}}/{{hijo.accion}}"><span>{{hijo.label}}</span></a>
+            </li>
+        @endeach
+            
+        </ul>
+    </li>    
+    @else
     <li class="has-submenu">
         <a href="/{{pagina.modulo}}/{{pagina.controller}}/{{pagina.accion}}"><i class="{{pagina.iconClass}}"></i><span>{{pagina.label}}</span></a>
     </li>
+    @endif
+    
 @endeach
