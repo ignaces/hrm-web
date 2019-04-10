@@ -64,18 +64,48 @@
                     tip:'',
                     tab:'',
                     punto:'',
+                    dia:'',
                     marca:'',
                     valor:''
                 }
             },
             methods:{
                 saveMeta:function(){
-                    console.log(cMetasDetalle.meta)
+                    var obj = {
+                        meta:cMetasDetalle.meta
+                    }
 
+                    $.ajax({
+                        url: '/Meta/Meta/cargaMeta',
+                        type: 'GET',
+                        contentType: "application/json; charset=utf-8",
+                        data: obj,
+                        dataType: "json", 
+                        success: function(data){
+                            if(cMetasDetalle.meta.idMd==''){
+                                swal({
+                                    title:'Exito',
+                                    text:'Meta creada.',
+                                    type:'success'
+                                })
+                            } else {
+                                swal({
+                                    title:'Exito',
+                                    text:'Meta editada.',
+                                    type:'success'
+                                })
+                            }
+                        },
+                        error: function(){
+                            console.log('ERRORS');
+                        }
+                    }); 
 
+                    setTimeout(function(){
+                        init(cMetasDetalle.meta.per);
+                    }, 3000);
 
-
-                    init(cMetasDetalle.meta.per);
+                    
                     $("#edit-metas").modal("hide");
                 }
             }
@@ -124,6 +154,10 @@
                     }); 
 
                     $("#nuevas-metas").modal("hide");
+
+                    setTimeout(function(){
+                        init(cForm.accion.per);
+                    }, 3000);
                 }
             }
         });
@@ -183,7 +217,7 @@
         }   
 
         $(document).ready(function(){
-            $("#btnNewMeta").click(function(){
+            $("#btnNewCarga").click(function(){
                 cForm.accion={
                     identificador:'',
                     per:'',
@@ -194,6 +228,20 @@
                 };
 
                 $("#nuevas-metas").modal("show");
+            });
+
+            $("#btnNewMeta").click(function(){
+                cMetasDetalle.meta = {
+                    idMd:'',
+                    per:'',
+                    tip:'',
+                    tab:'',
+                    punto:'',
+                    dia:'',
+                    marca:'',
+                    valor:''
+                }
+                $("#edit-metas").modal("show");
             });
 
             $.ajax({
@@ -234,14 +282,18 @@
             columnDefs: [
                 { "title": "Nombre", "targets": 0 },
                 { "title": "Punto Venta", "targets": 1 },
-                { "title": "Tipo", "targets": 2 },
-                { "title": "Marca", "targets": 3 },
-                { "title": "Meta", "targets": 4 },
-                { "title": "Acciones", "targets": 5 ,"width":"20%"}
+                { "title": "Deste", "targets": 2 },
+                { "title": "Hasta", "targets": 3 },
+                { "title": "Tipo", "targets": 4 },
+                { "title": "Marca", "targets": 5 },
+                { "title": "Meta", "targets": 6 },
+                { "title": "Acciones", "targets": 7 ,"width":"20%"}
             ],
             columns: [
                 {data : "nombreMeta"},
                 {data : "pvCodigo"},
+                {data : "desde"},
+                {data : "hasta"},
                 {data : "tipoMeta"},
                 {data : "marcaNombre"},
                 {data : "valor"}  ,   
@@ -285,12 +337,13 @@
                 cache: false,
                 success: function(data){
                     cMetasDetalle.meta = {
-                        idMd:data.metaDetalle.idPeriodo,
+                        idMd:data.metaDetalle.idMetaDetalle,
                         per:data.metaDetalle.idPeriodo,
                         tip:data.metaDetalle.idTipoMeta,
                         tab:data.metaDetalle.idTipoTabla,
                         punto:data.metaDetalle.idPuntoVenta,
                         marca:data.metaDetalle.idMarca,
+                        dia:data.metaDetalle.desde,
                         valor:data.metaDetalle.valor
                     }
                     $("#edit-metas").modal("show");
@@ -331,7 +384,9 @@
                                     </div>
 
                                     <div class="form-group ">
-                                        <button type="button" class="btn btn-warning" id="btnNewMeta">Cargar planilla de metas</button>
+                                        <button type="button" class="btn btn-warning" id="btnNewMeta">Crear una nueva meta</button>
+                                        <button type="button" class="btn btn-warning" id="btnNewCarga">Cargar planilla de metas</button>
+                                        <a href="/plantillasCarga/metas.xlsx" class="btn btn-primary" >Descargar plantilla carga</a>
                                     </div>
                                 
                                     <div class="table-responsive">

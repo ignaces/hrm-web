@@ -50,6 +50,14 @@ class Meta {
         };
     }
 
+    async cargaMeta ({ view,request, response, auth }) {
+        var meta = request.input('meta');
+
+        var result = await data.execApiPost(request.hostname(),'/Incentivos/Incentivos/cargaMeta',{meta:meta});
+
+        return {};
+    }
+
     async carga ({ view,request, response, auth }) {
         var accion = request.input('accion');
 

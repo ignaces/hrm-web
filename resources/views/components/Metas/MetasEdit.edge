@@ -1,16 +1,17 @@
 <div class="modal fade bs-example-modal-lg" id="edit-metas" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+        <div class="modal-content" id="formEdit">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="myLargeModalLabel">Cargar nuevas metas</h4>
+                <h4 class="modal-title" id="myLargeModalLabel" v-if="meta.idMd==''">Crear nueva meta</h4>
+                <h4 class="modal-title" id="myLargeModalLabel" v-if="meta.idMd!==''">Editar meta</h4>
             </div>
-            <div class="modal-body" id="formEdit">
+            <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="p-20">
                             <form class="form-horizontal" role="form">
-                                <div class="form-group row">
+                                <div class="form-group row" v-if="meta.idMd==''">
                                 <label>Período:</label>
                                 <select class="form-control" v-model="meta.per">
                                     <option selected disabled value="-1">Seleccione un Periodo...</option>
@@ -28,7 +29,28 @@
                                     </option>
                                 </select>
                                 </div>
+
+                                <div class="form-group row" v-if="meta.idMd==''">
+                                <label>Tabla:</label>
+                                <select class="form-control" v-model="meta.tab">
+                                    <option selected disabled value="-1">Seleccione una Tabla...</option>
+                                    <option v-for="t in resTAB" v-bind:value="t.id">
+                                        @{{t.nombre}}
+                                    </option>
+                                </select>
+                                </div>
+
                                 <div class="form-group row">
+                                <label>Tipo:</label>
+                                <select class="form-control" v-model="meta.tip">
+                                    <option selected disabled value="-1">Seleccione un Tipo...</option>
+                                    <option v-for="t in resTIP" v-bind:value="t.codigo">
+                                        @{{t.nombre}}
+                                    </option>
+                                </select>
+                                </div>
+
+                                <div class="form-group row" v-if="meta.tip=='MIX'">
                                 <label>Marca:</label>
                                 <select class="form-control" v-model="meta.marca">
                                     <option selected disabled value="-1">Seleccione una Marca...</option>
@@ -38,26 +60,10 @@
                                 </select>
                                 </div>
 
-                                <!--<div class="form-group row">
-                                <label>Tabla:</label>
-                                <select class="form-control" v-model="meta.tab">
-                                    <option selected disabled value="-1">Seleccione una Tabla...</option>
-                                    <option v-for="t in resTAB" v-bind:value="t.id">
-                                        @{{t.nombre}}
-                                    </option>
-                                </select>
-                                </div>-->
-
-                                <div class="form-group row">
-                                <label>Tipo:</label>
-                                <select class="form-control" v-model="meta.tip">
-                                    <option selected disabled value="-1">Seleccione un Tipo...</option>
-                                    <option v-for="t in resTIP" v-bind:value="t.id">
-                                        @{{t.nombre}}
-                                    </option>
-                                </select>
+                                <div class="form-group row" v-if="meta.tip=='DIA'">
+                                    <label>Dia:</label>
+                                    <input type="date" class="form-control" id="goal-name" name="goal-name" placeholder="Meta" v-model="meta.dia">
                                 </div>
-
                                 <div class="form-group row">
                                     <label>Meta:</label>
                                     <input type="number" class="form-control" id="goal-name" name="goal-name" placeholder="Meta" v-model="meta.valor">
@@ -65,7 +71,8 @@
                             </form>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                <button type="button" v-on:click="saveMeta" class="btn btn-primary">Guardar cambios</button>
+                                <button type="button" v-on:click="saveMeta" class="btn btn-primary" v-if="meta.idMd!==''">Guardar cambios</button>
+                                <button type="button" v-on:click="saveMeta" class="btn btn-primary" v-if="meta.idMd==''">Crear meta</button>
                             </div>
                         </div>
                     </div>
