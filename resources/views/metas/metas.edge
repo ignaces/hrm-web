@@ -53,11 +53,30 @@
         var cMetasDetalle = new Vue({
             el: '#formEdit',
             data: {
-                meta:[]
+                resPER:resPER,
+                resTAB:{{{toJSON(resTAB)}}},
+                resTIP:{{{toJSON(resTIP)}}},
+                punto:[],
+                marca:[],
+                meta:{
+                    idMd:'',
+                    per:'',
+                    tip:'',
+                    tab:'',
+                    punto:'',
+                    marca:'',
+                    valor:''
+                }
             },
             methods:{
                 saveMeta:function(){
-                    alert(1)
+                    console.log(cMetasDetalle.meta)
+
+
+
+
+                    init(cMetasDetalle.meta.per);
+                    $("#edit-metas").modal("hide");
                 }
             }
         });
@@ -176,6 +195,32 @@
 
                 $("#nuevas-metas").modal("show");
             });
+
+            $.ajax({
+                url: "/Incentivo/Proceso/getProductosParams?param=" + "MAR",
+                dataType: 'json',
+                type: 'get',
+                cache: true,
+                success: function(response){
+                    cMetasDetalle.marca=response;
+                },
+                error: function(d){
+                    alert("404");
+                }
+            });
+            
+            $.ajax({
+                url: "/Meta/Meta/getPuntosDeVenta",
+                dataType: 'json',
+                type: 'get',
+                cache: true,
+                success: function(response){
+                    cMetasDetalle.punto=response;
+                },
+                error: function(d){
+                    alert("404");
+                }
+            });
         });
 
         $(document).on('change','#perSelect',function(){
@@ -233,7 +278,24 @@
         }
 
         function muestraDetalle(id){
-            $("#edit-metas").modal("show");
+            $.ajax({
+                url: "/Meta/Meta/dataMetaDetalle?idMetaDetalle=" + id,
+                dataType: 'json',
+                type: 'get',
+                cache: false,
+                success: function(data){
+                    cMetasDetalle.meta = {
+                        idMd:data.metaDetalle.idPeriodo,
+                        per:data.metaDetalle.idPeriodo,
+                        tip:data.metaDetalle.idTipoMeta,
+                        tab:data.metaDetalle.idTipoTabla,
+                        punto:data.metaDetalle.idPuntoVenta,
+                        marca:data.metaDetalle.idMarca,
+                        valor:data.metaDetalle.valor
+                    }
+                    $("#edit-metas").modal("show");
+                }
+            });     
         }
 
     </script>

@@ -20,6 +20,26 @@ class Meta {
         });
     }
 
+    async getPuntosDeVenta({ view,request, response, auth }) {
+
+        var result = await data.execApi(request.hostname(),'/Incentivos/Incentivos/getPuntosDeVenta',{});
+
+        var returning = result.body;
+        response.json(returning);
+
+    }
+
+    async dataMetaDetalle({ view,request, response, auth }) {
+
+        var idMetaDetalle = request.input('idMetaDetalle');
+
+        var metaDetalle = await data.execApi(request.hostname(),'/Incentivos/Incentivos/getdataMetaDetalle',{idMetaDetalle:idMetaDetalle});
+
+        return {
+            metaDetalle:metaDetalle.body.data[0]
+        };
+    }
+
     async consulaMetasDetalles ({ view,request, response, auth }) {
         var idPeriodo = request.input('idPeriodo');
 
