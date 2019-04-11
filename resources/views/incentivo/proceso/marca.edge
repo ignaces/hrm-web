@@ -1,40 +1,5 @@
 @layout('layouts/horizontal')
 
-
-@section('scripts')
-    <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
-    <!--Echart Chart-->
-    <script src="/assets/plugins/echart/echarts-all.js"></script>
-
-             <!--C3 Chart-->
-        <script type="text/javascript" src="/assets/plugins/d3/d3.min.js"></script>
-        <script type="text/javascript" src="/assets/plugins/c3/c3.min.js"></script>
-
-        <!--Echart Chart-->
-        <script type="text/javascript" src="/assets/plugins/echart/echarts-all.js"></script>
-        <script type="text/javascript" src="/assets/plugins/a.js"></script>
-        <script type="text/javascript" src="/assets/plugins/b.js"></script>
-
-        <script src="/assets/plugins/jquery-toastr/jquery.toast.min.js" type="text/javascript"></script>
-        <script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script>
-        <script src="/assets/plugins/datatables/dataTables.bootstrap.js"></script>
-        <script src="/assets/plugins/datatables/dataTables.buttons.min.js"></script>
-        <script src="/assets/plugins/datatables/buttons.bootstrap.min.js"></script>
-        <script src="/assets/plugins/datatables/jszip.min.js"></script>
-        <script src="/assets/plugins/datatables/pdfmake.min.js"></script>
-        <script src="/assets/plugins/datatables/vfs_fonts.js"></script>
-        <script src="/assets/plugins/datatables/buttons.html5.min.js"></script>
-        <script src="/assets/plugins/datatables/buttons.print.min.js"></script>
-        <script src="/assets/plugins/datatables/dataTables.fixedHeader.min.js"></script>
-        <script src="/assets/plugins/datatables/dataTables.keyTable.min.js"></script>
-        <script src="/assets/plugins/datatables/dataTables.responsive.min.js"></script>
-        <script src="/assets/plugins/datatables/responsive.bootstrap.min.js"></script>
-        <script src="/assets/plugins/datatables/dataTables.scroller.min.js"></script>
-        <script src="/assets/plugins/datatables/dataTables.colVis.js"></script>
-        <script src="/assets/plugins/datatables/dataTables.fixedColumns.min.js"></script>
-
-@endsection
-
 @section('pluginsCss')
     <link href="/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
     <link href="/assets/plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -46,8 +11,174 @@
     <link href="/assets/plugins/datatables/fixedColumns.dataTables.min.css" rel="stylesheet" type="text/css"/>
 @endsection
 
+@section('scripts')
+    <script src="/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+    <!--Echart Chart-->
+    <script src="/assets/plugins/echart/echarts-all.js"></script>
+
+    <!--C3 Chart-->
+    <script type="text/javascript" src="/assets/plugins/d3/d3.min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/c3/c3.min.js"></script>
+
+    <!--Echart Chart-->
+    <script type="text/javascript" src="/assets/plugins/echart/echarts-all.js"></script>
+    <script type="text/javascript" src="/assets/plugins/a.js"></script>
+    <script type="text/javascript" src="/assets/plugins/b.js"></script>
+
+    <script src="/assets/plugins/jquery-toastr/jquery.toast.min.js" type="text/javascript"></script>
+    <script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="/assets/plugins/datatables/dataTables.bootstrap.js"></script>
+    <script src="/assets/plugins/datatables/dataTables.buttons.min.js"></script>
+    <script src="/assets/plugins/datatables/buttons.bootstrap.min.js"></script>
+    <script src="/assets/plugins/datatables/jszip.min.js"></script>
+    <script src="/assets/plugins/datatables/pdfmake.min.js"></script>
+    <script src="/assets/plugins/datatables/vfs_fonts.js"></script>
+    <script src="/assets/plugins/datatables/buttons.html5.min.js"></script>
+    <script src="/assets/plugins/datatables/buttons.print.min.js"></script>
+    <script src="/assets/plugins/datatables/dataTables.fixedHeader.min.js"></script>
+    <script src="/assets/plugins/datatables/dataTables.keyTable.min.js"></script>
+    <script src="/assets/plugins/datatables/dataTables.responsive.min.js"></script>
+    <script src="/assets/plugins/datatables/responsive.bootstrap.min.js"></script>
+    <script src="/assets/plugins/datatables/dataTables.scroller.min.js"></script>
+    <script src="/assets/plugins/datatables/dataTables.colVis.js"></script>
+    <script src="/assets/plugins/datatables/dataTables.fixedColumns.min.js"></script>
+
+    <script>
+
+        var cMarcaDetalle = new Vue({
+            el: '#formEdit',
+            data: {
+                marca:{
+                    id:'',
+                    codigo:'',
+                    nombre:''
+                }
+            },
+            methods:{
+                saveMarca:function(){
+                    var obj = {
+                        marca:cMarcaDetalle.marca
+                    }
+
+                    $.ajax({
+                        url: "/Incentivo/Proceso/saveMarca",
+                        type: 'GET',
+                        contentType: "application/json; charset=utf-8",
+                        data: obj,
+                        dataType: "json", 
+                        success: function(data){
+                            if(cMarcaDetalle.marca.id==''){
+                                swal({
+                                    title:'Exito',
+                                    text:'Marca creada.',
+                                    type:'success'
+                                })
+                            } else {
+                                swal({
+                                    title:'Exito',
+                                    text:'Marca editada.',
+                                    type:'success'
+                                })
+                            }
+                        },
+                        error: function(d){
+                            console.log(d);
+                        }
+                    });      
+
+                    $("#edit-marca").modal("hide");
+                    setTimeout(function(){
+                        init();
+                    }, 3000);
+                }
+            }
+        });
+        
+        var oTable = $('#list_marcas').dataTable( {
+            data : {{{toJSON(marcas)}}},
+            fixedColumns: true,
+            columnDefs: [
+                { "title": "Codigo", "targets": 0 },
+                { "title": "Nombre", "targets": 1 },
+                { "title": "Acciones", "targets": 2 ,"width":"20%"}
+            ],
+            columns: [
+                {data : "codigo"},
+                {data : "nombre"},
+                {data : "id",
+                render: function ( data, type, full, meta ) {
+                        
+                        var edit ='<a href="#" class="btn btn-icon waves-effect waves-light btn-primary" onclick="editMarca(' + "'" + full.id + "'" + ',' + "'" + full.codigo + "'" + ',' + "'" + full.nombre + "'" + ')" data-toggle="tooltip" data-placement="top" title data-original-title="Editar"> <i class="fa fa-edit-o"></i>Editar </a>&nbsp;'
+                        return  edit;
+                    }
+                }     
+            ],
+        });  
+
+        function editMarca(id,codigo,nombre){
+            /*$.ajax({
+                url: "/Meta/Meta/dataMetaDetalle?idMetaDetalle=" + id,
+                dataType: 'json',
+                type: 'get',
+                cache: false,
+                success: function(data){*/
+                    var c = '';
+                    if (codigo !=='null') {
+                        c = codigo;
+                    }
+                    cMarcaDetalle.marca = {
+                        id:id,
+                        codigo:c,
+                        nombre:nombre
+                    }
+                    $("#edit-marca").modal("show");
+            /*});*/     
+        }
+
+        function init(){
+            $.ajax({
+                url: "/Incentivo/Proceso/consultaMarca",
+                type: 'GET',
+                contentType: "application/json; charset=utf-8",
+                data: {},
+                dataType: "json", 
+                success: function(data){
+                    if(data.marcas.length>0){
+                        oTable.fnClearTable();
+                        oTable.fnAddData(data.marcas);
+                        oTable.fnDraw();
+                    } else {
+                        swal({
+                            title:'Error',
+                            text:'No existen marcas.',
+                            type:'warning'
+                        })
+                    }
+                },
+                error: function(d){
+                    console.log(d);
+                }
+            });      
+        }
+
+        $(document).ready(function(){
+            $("#btnNewMarca").click(function(){
+                cMarcaDetalle.marca={
+                    id:'',
+                    codigo:'',
+                    nombre:''
+                };
+
+                $("#edit-marca").modal("show");
+            });
+        });
+        
+    </script>
+
+@endsection
 
 @section('content')
+@!component('components.Incentivos.Marcas')
 {{ csrfField() }}
     <!--form id="formInstrumento" method="POST" action="/Instrumento/Instrumento/index">
     
@@ -56,47 +187,35 @@
     <input type="hidden" id="idPersona" name="idPersona"  />
     </form-->
 
-    <!-- Begin page -->
-        <div id="wrapper" style="margin-top: -70px; width: 100% !important;">
-            <!-- ============================================================== -->
-            <!-- Start right Content here -->
-            <!-- ============================================================== -->
-            <div class="content-page">
-                <!-- Start content -->
-                <div class="content">
-                    <div class="container">
-
-                        <!--@!component('components.Incentivos.Catalogo')-->
-
-                        <!--div class="row">
-                            <div class="col-lg-12">
-                                @*!component('components.Incentivos.RegistrarCliente')*@
-                                <div class="inbox-widget">
-                                    <a class="btn btn-info btn-rounded btn-block" name="#" ><i class="mdi mdi-account-card-details"></i> <span>Guardar Datos Cliente</span> </a>
-                                </div>
-
-                                <div class="col-lg-12">
-                                    &nbsp;
+   <!-- Begin page -->
+   <div id="wrapper" style="margin-top: -70px; width: 100% !important;">
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+                <div class="container">
+                    {{ csrfField() }}
+                    <div class="row">
+                        <div class="col-lg">
+                            <div class="card-box">
+                                    <h4 class="m-t-0 header-title"><b>Catalogo de Marcas</b></h4>
+                                    <div class="form-group">
+                                        <button type="button" class="btn btn-warning" id="btnNewMarca">Crear una nueva Marca</button>
+                                        <!--<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#nuevaCarga" onclick="nuevaCarga()">Carga Productos</button>
+                                        <a href="/plantillasCarga/productos.xlsx" class="btn btn-primary" >Descargar plantilla carga</a>-->
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-responsive table-hover table-bordered" id="list_marcas">
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
-                        </div-->
+                        </div>
                     </div> <!-- container -->
                 </div> <!-- content -->
             </div>
         </div>
-<style>
-    .share_box {
-        position: fixed;
-        display: block;
-        bottom: 10px;
-        left: 34%;
-        cursor: pointer;
-        align-content: center;
-        z-Index: 9999;
-    }
-</style>
-
-
-
 @endsection
 

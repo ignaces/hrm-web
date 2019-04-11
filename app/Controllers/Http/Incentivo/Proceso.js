@@ -98,9 +98,30 @@ class Proceso {
 
     async marca ({view,request, response, auth, session}) {
 
-        
+        var result = await data.execApi(request.hostname(),'/Incentivos/Incentivos/getParams_CG', {param:'MAR'});
 
-        return view.render('incentivo/proceso/marca');
+        var marcas = result.body;
+
+        return view.render('incentivo/proceso/marca',{marcas:marcas});
+    }
+
+    async consultaMarca ({view,request, response, auth, session}) {
+
+        var result = await data.execApi(request.hostname(),'/Incentivos/Incentivos/getParams_CG', {param:'MAR'});
+
+        var marcas = result.body;
+
+        return {marcas:marcas};
+    }
+
+    async saveMarca ({view,request, response, auth, session}) {
+        var marca = request.input("marca")
+
+        console.log(marca)
+
+        var result = await data.execApiPost(request.hostname(),'/Incentivos/Incentivos/saveMarca', {marca:marca});
+
+        return {};
     }
 
     async cardex ({view,request, response, auth, session}) {
