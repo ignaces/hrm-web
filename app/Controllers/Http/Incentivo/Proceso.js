@@ -96,6 +96,13 @@ class Proceso {
         return view.render('incentivo/proceso/catalogo');
     }
 
+    async marca ({view,request, response, auth, session}) {
+
+        
+
+        return view.render('incentivo/proceso/marca');
+    }
+
     async cardex ({view,request, response, auth, session}) {
 
         var idPersona = session.get('idPersona', 'fail')
