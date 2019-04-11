@@ -96,6 +96,11 @@ class Proceso {
         return view.render('incentivo/proceso/catalogo');
     }
 
+    async personas ({view,request, response, auth, session}) {
+
+        return view.render('incentivo/proceso/personas');
+    }
+
     async marca ({view,request, response, auth, session}) {
 
         var result = await data.execApi(request.hostname(),'/Incentivos/Incentivos/getParams_CG', {param:'MAR'});
