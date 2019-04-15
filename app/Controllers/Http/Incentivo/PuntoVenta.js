@@ -67,6 +67,64 @@ class PuntoVenta {
         }
     }
 
+    async getPersonasInPuntoVenta ({request, response, session}) {
+
+      var idPOS = request.input("idPOS");
+      var obj = {
+        "idPOS": idPOS
+      };
+
+      var result = await data.execApi(request.hostname(),'/Incentivos/PuntoVenta/getPersonasInPuntoVenta', obj);
+
+      var returning = result.body;
+      response.json(returning);
+    }
+
+    async updatePuntoVenta ({request, response, session}) {
+
+      var idPOS = request.input("idPOS");
+      var nombre = request.input("nombre");
+      var direccion = request.input("direccion");
+      var activo = request.input("activo");
+      var obj = {
+        "idPOS": idPOS,
+        "nombre": nombre,
+        "direccion": direccion,
+        "activo": activo
+      };
+
+      var result = await data.execApi(request.hostname(),'/Incentivos/PuntoVenta/updatePuntoVenta', obj);
+
+      var returning = result.body;
+      response.json(returning);
+    }
+
+    async deletePuntoVenta ({request, response, session}) {
+
+      var idPOS = request.input("idPOS");
+      var obj = {
+        "idPOS": idPOS
+      };
+
+      var result = await data.execApi(request.hostname(),'/Incentivos/PuntoVenta/deletePuntoVenta', obj);
+
+      var returning = result.body;
+      response.json(returning);
+    }
+
+    async getAPuntoVenta ({request, response, session}) {
+
+      var idPOS = request.input("idPOS");
+      var obj = {
+        "idPOS": idPOS
+      };
+
+      var result = await data.execApi(request.hostname(),'/Incentivos/PuntoVenta/getPuntoVenta', obj);
+
+      var returning = result.body;
+      response.json(returning);
+    }
+
 }
 
 module.exports = PuntoVenta
