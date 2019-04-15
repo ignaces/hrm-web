@@ -360,7 +360,7 @@ class Proceso {
       };
 
       var result = await data.execApi(request.hostname(),'/Incentivos/Incentivos/getProductos_CG', obj);
-      
+
       var returning = result.body;
       response.json(returning);
     }
@@ -395,7 +395,7 @@ class Proceso {
 
       var producto = request.input('producto');
       var edit = request.input('edit');
-      
+
       var obj={producto:producto,edit:edit}
 
       try

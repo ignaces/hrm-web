@@ -26,8 +26,47 @@ class PuntoVenta {
       console.log(productos)
       var envio = await data.execApiPost(request.hostname(),'/Incentivos/PuntoVenta/createBulkPuntoVenta',{productos:productos});
           return {mesaje:"ok"}
-
     }
+
+
+    async index ({view,request, response, auth, session}) {
+
+        return view.render('incentivo/pos/index');
+    }
+
+
+    // REST
+    //
+    async getPuntoVenta ({request, response, session}) {
+
+      var result = await data.execApi(request.hostname(),'/Incentivos/PuntoVenta/getPuntoVenta', { });
+
+      var returning = result.body;
+      response.json(returning);
+    }
+
+    async createPersonaInPuntoVenta ({request, response, session}) {
+
+      var idPOS = request.input('idPOS');
+      var idPersona = request.input('idPersona');
+
+      var obj={
+        idPOS:idPOS,
+        idPersona:idPersona
+      }
+
+      try
+        {
+          var result = await data.execApiPost(request.hostname(),'/Incentivos/PuntoVenta/createPersonaInPuntoVenta', obj);
+
+          return { mensaje: "Relación fue creada exitosamente." }
+        }
+      catch(err)
+        {
+          return { mensaje: "Relación no pudo ser creada. Verifique datos." }
+        }
+    }
+
 }
 
 module.exports = PuntoVenta
