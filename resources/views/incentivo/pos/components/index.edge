@@ -1,0 +1,274 @@
+
+
+
+<div class="row">
+  <div class="col-lg">
+    <div class="card-box">
+      <h4 class="m-t-0 header-title"><b>Puntos de Venta</b></h4>
+
+      <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#nuevo-producto" onclick="nuevaRel()">Crear un nueva relación Persona - POS</button>
+
+      <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#nuevaCarga" onclick="nuevaCarga()">Carga POS</button>
+
+
+
+      <div class="table-responsive">
+
+        <table class="table table-responsive table-hover table-bordered" id="list_pos">
+        </table>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal para relación -->
+<div class="modal fade" id="panel-rel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document" style="width:60vw;" id="divProducto">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Nueva relación persona - punto de venta</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+        <div class="form-group">
+          <label for="sel-fam">Punto de Venta:</label>
+            <select id="cmbMarca" class="form-control" v-model="ppRel.idPOS">
+                <option selected disabled value="-1">Seleccione un punto de venta...</option>
+                <option v-for="pv in puntos" v-bind:value="pv.id">
+                    @{{ pv.nombre }}
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+          <label for="sel-fam">Persona:</label>
+          <select id="cmbFamilia" class="form-control" v-model="ppRel.idPersona">
+            <option selected disabled value="-1">Seleccione una persona...</option>
+            <option v-for="persona in personas" v-bind:value="persona.id">
+                @{{ persona.nombre }}
+            </option>
+        </select>
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+        <button type="button" class="btn btn-primary" v-if="edit==false" v-on:click="save">Crear relación</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para carga masiva -->
+<div class="modal fade" id="masivos-pos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Carga masiva de puntos de venta</h4>
+      </div>
+      <div class="modal-body">
+        <div class="fileinput fileinput-new" data-provides="fileinput">
+            <span class="btn btn-default btn-file"><span>Seleccionar archivo</span><input type="file" id="fExcel"/></span>
+            <span class="fileinput-filename"></span><span class="fileinput-new">No hay archivo seleccionado</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <button type="button" id ="btnUpload" class="btn btn-primary">Cargar archivo</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+var comRel = new Vue({
+        el: '#divPOS',
+        data: {
+            search:'',
+            pos: {},
+            idPOS: "",
+            idPersona:"",
+            personas: [],
+            puntos: []
+        },
+        methods:{
+            save:function(){
+             guardarRel();
+            }
+        }
+    });
+
+
+  function guardarRel() {
+
+        $.ajax({
+            method:'POST',
+            url: "/Incentivo/PuntoVenta/createPersonaInPuntoVenta",
+            dataType:"json",
+            data:{
+              idPOS:comRel.idPOS,
+              idPersona:comRel.idPersona},
+            success:function(data){
+
+                location.reload();
+            },
+            error: function(data){
+                alert(data.mensaje);
+            }
+        });
+  }
+
+
+  function cargarPOS()
+  {
+    $.ajax({
+      url: "/Incentivo/PuntoVenta/getPuntoVenta",
+      dataType: 'json',
+      type: 'get',
+      cache: false,
+      success: function(data){
+
+        var event_data = '';
+        comRel.puntos = data;
+
+        $('#list_pos').dataTable( {
+                data : data,
+                fixedColumns: true,
+                columnDefs: [
+                    { "title": "Nombre", "targets": 0 },
+                    { "title": "Dirección", "targets": 1 },
+                    { "title": "Código", "targets": 2 },
+                    { "title": "Acciones", "targets": 3 ,"width":"20%"}
+                ],
+                columns: [
+                    {data : "nombre"},
+                    {data : "direccion"},
+                    {data : "codigo"},
+                    {data : "precio"}  ,
+                    {data : "id",
+                    render: function ( data, type, full, meta ) {
+
+                            var edit =''
+                            return  edit;
+                        }
+                    }
+                    ],
+                });
+                $.fn.tooltip && $('[data-toggle="tooltip"]').tooltip()
+      },
+      error: function(d){
+        /*console.log("error");*/
+        alert("404. Please wait until the File is Loaded.");
+      }
+    });
+
+    loadPersonas();
+  }
+
+  function nuevaRel(){
+    $("#panel-rel").modal("show");
+    comRel.pos = {};
+  }
+
+  function nuevaCarga(){
+    $("#masivos-pos").modal("show");
+    comRel.pos = {};
+  }
+
+  function loadPersonas()
+  {
+
+    $.ajax({
+    url: "", // reemplazar API get personas
+    dataType: 'json',
+    type: 'get',
+    cache: true,
+    success: function(response){
+
+    comRel.personas=response;
+
+    },
+    error: function(d){
+    /*console.log("error");*/
+    alert("404");
+    }
+    });
+
+  }
+
+  function init(){
+    $("#btnUpload").click(function(){
+            uploadFile();
+        });
+        $('#fExcel').on('change', prepareUpload);
+
+    cargarPOS();
+
+  }
+
+  var files;
+
+ // Grab the files and set them to our variable
+  var prepareUpload =function(event)
+  {
+      files = event.target.files;
+
+  }
+  var uploadFile = function()
+  {
+
+
+    //  START A LOADING SPINNER HERE
+
+    // Create a formdata object and add the files
+    var data = new FormData();
+    $.each(files, function(key, value)
+    {
+        data.append("file", value,value.name);
+    });
+    data.append("_csrf",$('input[name=_csrf]').val());
+
+    $.ajax({
+        url: '/Incentivo/PuntoVenta/import',
+        type: 'POST',
+        contentType: "application/json; charset=utf-8",
+        data: data,
+        processData: false,
+        contentType: false,
+        success: function(data, textStatus, jqXHR)
+        {
+            if(typeof data.error === 'undefined')
+            {
+                // Success so call function to process the form
+                swal({
+                    title:'Exito',
+                    text:'POS cargados.',
+                    type:'success'
+                })
+            }
+            else
+            {
+                // Handle errors here
+                console.log('ERRORS: ' + data.error);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown)
+        {
+            // Handle errors here
+            console.log('ERRORS: ' + textStatus);
+            // STOP LOADING SPINNER
+        }
+    });
+}
+  window.onload = init;
+
+</script>
